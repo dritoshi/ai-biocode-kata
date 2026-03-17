@@ -25,6 +25,8 @@ ai-biocode-kata/
 └── build/              # PDF/EPUB生成
 ```
 
+全体構成の詳細は [roadmap.md](chapters/roadmap.md) を参照。
+
 ## 章の一覧
 
 | 章 | タイトル | ファイル |
@@ -57,13 +59,6 @@ ai-biocode-kata/
 | 付録C | クイックリファレンス対照表 | [§付録C](chapters/roadmap.md#付録c-claude-code-cli--codex-cli-クイックリファレンス対照表) |
 
 > 章ファイルが追加され次第、リンクを更新する。
-> 全体構成の詳細は [roadmap.md](chapters/roadmap.md) を参照。
-
-## 執筆環境
-
-- **Claude Code CLI** — 章の生成・リライト・構成の相談
-- **Zed** — マークダウンプレビュー・手動の文体調整
-- **tmux** — ターミナル分割（Claude Code + シェル）
 
 ## ビルド（予定）
 
