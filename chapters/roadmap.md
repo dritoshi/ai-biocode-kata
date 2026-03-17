@@ -372,6 +372,8 @@ AIコーディングエージェントの性能を調整するには **「どの
 
 ## 1. 設計原則
 
+> 📖 原稿: [01_design.md](./01_design.md)
+
 ### 1-1. コードの設計原則
 - **KISS原則**（Keep It Simple, Stupid）— 不必要な複雑さを避ける
 - **DRY原則**（Don't Repeat Yourself）— 重複コードの排除と関数化

@@ -36,7 +36,7 @@ ai-biocode-kata/
 |----|---------|------|-------------|
 | はじめに | — | [hajimeni.md](chapters/hajimeni.md) | — |
 | 0 | AIコーディングエージェントとの協働 | [00_ai_agent.md](chapters/00_ai_agent.md) | [§0](chapters/roadmap.md#0-aiコーディングエージェントとの協働2026年のベストプラクティス) |
-| 1 | 設計原則 | — | [§1](chapters/roadmap.md#1-設計原則) |
+| 1 | 設計原則 | [01_design.md](chapters/01_design.md) | [§1](chapters/roadmap.md#1-設計原則) |
 | 2 | ターミナル環境 | — | [§2](chapters/roadmap.md#2-ターミナル環境) |
 | 3 | 計算機科学の基礎知識 | — | [§3](chapters/roadmap.md#3-計算機科学の基礎知識) |
 | 4 | データフォーマットの判断力 | — | [§4](chapters/roadmap.md#4-データフォーマットの判断力) |
