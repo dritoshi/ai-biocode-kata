@@ -70,4 +70,4 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 - [7](https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point) O'Laughlin, D., Ontiveros, J. E., Nanos, J., Patel, D., Nishball, D. "Claude Code is the Inflection Point". *SemiAnalysis*. https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point (参照日: 2026-03-17)
 - [8](https://techcrunch.com/2025/07/30/github-copilot-crosses-20-million-all-time-users/) TechCrunch. "GitHub Copilot crosses 20M all-time users". https://techcrunch.com/2025/07/30/github-copilot-crosses-20-million-all-time-users/ (参照日: 2026-03-17)
 
-2026年X月　著者
+2026年X月　二階堂 愛
