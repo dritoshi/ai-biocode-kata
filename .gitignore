@@ -1,0 +1,22 @@
+# Build outputs
+build/*.pdf
+build/*.epub
+build/*.html
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+.zed/
+
+# Temporary
+*.tmp
+*.bak
