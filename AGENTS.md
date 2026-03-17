@@ -9,7 +9,7 @@
 ## ファイル構成
 - `chapters/` — 各章のMarkdownファイル
 - `chapters/roadmap.md` — 全体構成のマスタードキュメント（目次・構成の真実の源）
-- `chapters/00_hajimeni.md` — はじめに
+- `chapters/hajimeni.md` — はじめに（番号なし）
 - `figures/` — 図表
 - `scripts/` — 書籍内のコードサンプル（動作テスト対象）
 - `tests/` — サンプルコードのテスト
