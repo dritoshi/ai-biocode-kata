@@ -9,12 +9,24 @@
 ## ファイル構成
 - `chapters/` — 各章のMarkdownファイル
 - `chapters/roadmap.md` — 全体構成のマスタードキュメント（目次・構成の真実の源）
-- `chapters/00_hajimeni.md` — はじめに
+- `chapters/hajimeni.md` — はじめに（番号なし）
 - `figures/` — 図表
 - `references/` — BibTeXファイル（章ごとの参考文献管理）
 - `scripts/` — 書籍内のコードサンプル（動作テスト対象）
 - `tests/` — サンプルコードのテスト
 - `build/` — PDF/EPUB生成スクリプト
+
+### ファイル命名規則
+ファイル番号はroadmapの章番号と一致させる。「はじめに」は番号なし。
+
+| 対象 | 命名パターン | 例 |
+|------|------------|-----|
+| はじめに 本文 | `chapters/hajimeni.md` | — |
+| はじめに 参考文献 | `references/hajimeni.bib` | — |
+| §N 本文 | `chapters/NN_name.md` | `chapters/00_ai_agent.md`（§0） |
+| §N 参考文献 | `references/chNN.bib` | `references/ch00.bib`（§0） |
+| §N コードサンプル | `scripts/chNN/` | `scripts/ch01/`（§1） |
+| §N テスト | `tests/chNN/` | `tests/ch01/`（§1） |
 
 ## 執筆規約
 
@@ -55,7 +67,7 @@
 - 各章の末尾に「参考文献」セクションを設け、その章で引用した文献を番号順にリストする
 - 引用対象は論文・書籍・Webドキュメント（公式ドキュメント等）のすべてを含む
 - 文献情報は `references/` ディレクトリ内の BibTeX ファイル（`.bib`）で一元管理する
-- 章ごとに `references/chXX.bib` を作成する（例: `references/ch00.bib`）
+- 章ごとに `references/chNN.bib` を作成する（NNはroadmapの章番号。例: `references/ch00.bib` = §0）
 - 参考文献リストの各エントリは以下の形式で記載する:
   - 論文: `[番号] 著者名. "タイトル". *雑誌名*, 巻(号), ページ, 年. DOIリンク`
   - 書籍: `[番号] 著者名. *書名*. 出版社, 年. ISBNまたはリンク`
@@ -65,8 +77,8 @@
 
 ### 相互参照
 - 章間・節間の参照には必ず相対リンクのハイパーリンクを付与する
-- 章への参照: `[§X タイトル](./XX_filename.md)` — 例 `[§0 はじめに](./00_hajimeni.md)`
-- 節への参照: `[§X-Y タイトル](./XX_filename.md#見出しのアンカー)` — 例 `[§0-2 ワークフロー](./00_hajimeni.md#ワークフロー)`
+- 章への参照: `[§X タイトル](./XX_filename.md)` — 例 `[§0 AIコーディングエージェントとの協働](./00_ai_agent.md)`
+- 節への参照: `[§X-Y タイトル](./XX_filename.md#見出しのアンカー)` — 例 `[§0-2 ワークフロー](./00_ai_agent.md#0-2-plan--execute--review-ワークフロー)`
 - リンクは必ず相対パスで記述する（絶対パスやURLは使用しない）
 - roadmap.md の節番号を真実の源とする
 - 章や節に言及するたびにリンクを付ける（初出時のみではなく常に付与する）

@@ -13,10 +13,10 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 ai-biocode-kata/
 ├── CLAUDE.md           # 執筆規約（Claude Code CLI用）
 ├── chapters/
-│   ├── 00_hajimeni.md  # はじめに
+│   ├── hajimeni.md     # はじめに（番号なし）
 │   ├── roadmap.md      # 全体構成マスタードキュメント
-│   ├── 01_ai_agent.md  # §0: AIエージェントとの協働
-│   ├── 02_design.md    # §1: 設計原則
+│   ├── 00_ai_agent.md  # §0: AIエージェントとの協働
+│   ├── 01_design.md    # §1: 設計原則
 │   ├── ...             # （以降、各章を追加）
 │   └── appendix_c.md
 ├── figures/            # 図表
@@ -34,8 +34,8 @@ ai-biocode-kata/
 
 | 章 | タイトル | 原稿 | ロードマップ |
 |----|---------|------|-------------|
-| はじめに | — | [00_hajimeni.md](chapters/00_hajimeni.md) | — |
-| 0 | AIコーディングエージェントとの協働 | [01_ai_agent.md](chapters/01_ai_agent.md) | [§0](chapters/roadmap.md#0-aiコーディングエージェントとの協働2026年のベストプラクティス) |
+| はじめに | — | [hajimeni.md](chapters/hajimeni.md) | — |
+| 0 | AIコーディングエージェントとの協働 | [00_ai_agent.md](chapters/00_ai_agent.md) | [§0](chapters/roadmap.md#0-aiコーディングエージェントとの協働2026年のベストプラクティス) |
 | 1 | 設計原則 | — | [§1](chapters/roadmap.md#1-設計原則) |
 | 2 | ターミナル環境 | — | [§2](chapters/roadmap.md#2-ターミナル環境) |
 | 3 | 計算機科学の基礎知識 | — | [§3](chapters/roadmap.md#3-計算機科学の基礎知識) |
