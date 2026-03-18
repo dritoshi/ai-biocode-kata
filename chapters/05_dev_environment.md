@@ -200,6 +200,18 @@ conda list --revisions  # 変更履歴の確認
 
 環境を分けることは、競合を避ける最も確実な方法である。バイオインフォマティクスでは用途別に環境を作る（`mapping-env`, `rnaseq-env`, `ml-env` 等）のが一般的な実践である。
 
+#### エージェントへの指示例
+
+環境構築はAIコーディングエージェントに一括で依頼できるタスクである。プロジェクトの要件を伝えれば、適切な環境定義ファイルを生成してくれる:
+
+> 「Python 3.11でRNA-seq解析用のconda環境を作成してください。`environment.yml` にnumpy, pandas, scanpy, biopythonを含めてください。チャネルはconda-forgeとbiocondaを使ってください」
+
+> 「このプロジェクトに `pyproject.toml` を作成してください。Python 3.10以上を要求し、依存パッケージはbiopython, numpy, pandasです。開発用の依存には pytest, ruff, mypy を含めてください」
+
+依存関係の競合を解決する場合:
+
+> 「`pip install` で依存関係の競合が発生しています。エラーメッセージを読んで原因を特定し、バージョン制約の緩和または環境の分離で解決してください」
+
 ---
 
 ## 5-2. パッケージマネージャの概念
@@ -283,6 +295,14 @@ channel_priority: strict
 ```
 
 `channel_priority: strict` を設定すると、上位のチャネルが優先される。バイオインフォマティクスでは conda-forge と bioconda を上位に置くのが一般的である。
+
+#### エージェントへの指示例
+
+パッケージの探索やインストール手順の調査はエージェントの得意分野である:
+
+> 「samtools, BWA, fastpをbiocondaからインストールする手順を教えてください。用途別に環境を分ける構成で `environment.yml` を作成してください」
+
+> 「`pip freeze` の出力からロックファイル（`requirements-lock.txt`）を生成してください。また、`uv lock` でより厳密なロックファイルを作る方法も示してください」
 
 > **🧬 コラム: biocondaでのツールセットアップ**
 >
