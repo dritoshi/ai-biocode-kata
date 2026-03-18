@@ -42,7 +42,7 @@ ai-biocode-kata/
 | 4 | データフォーマットの判断力 | [04_data_formats.md](chapters/04_data_formats.md) | [§4](chapters/roadmap.md#4-データフォーマットの判断力) |
 | 5 | 開発環境の構築 | [05_dev_environment.md](chapters/05_dev_environment.md) | [§5](chapters/roadmap.md#5-開発環境の構築) |
 | 6 | バージョン管理（Git / GitHub） | [06_git.md](chapters/06_git.md) | [§6](chapters/roadmap.md#6-バージョン管理git--github) |
-| 7 | テスト・品質管理 | — | [§7](chapters/roadmap.md#7-テスト品質管理) |
+| 7 | テスト・品質管理 | [07_testing.md](chapters/07_testing.md) | [§7](chapters/roadmap.md#7-テスト品質管理) |
 | 8 | 成果物の形式とプロジェクト設計 | — | [§8](chapters/roadmap.md#8-成果物の形式とプロジェクト設計) |
 | 9 | CLIツールの設計 | — | [§9](chapters/roadmap.md#9-cliツールの設計) |
 | 10 | データ処理ライブラリ | — | [§10](chapters/roadmap.md#10-データ処理ライブラリ) |
