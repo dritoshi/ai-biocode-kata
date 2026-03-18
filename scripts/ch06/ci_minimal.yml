@@ -1,0 +1,19 @@
+# =============================================================================
+# 最小限の GitHub Actions ワークフロー
+# .github/workflows/test.yml としてリポジトリに配置する。
+# プッシュまたは PR 作成時に pytest を自動実行する。
+# =============================================================================
+
+name: テスト実行
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: pytest tests/

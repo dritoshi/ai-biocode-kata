@@ -1,0 +1,38 @@
+# =============================================================================
+# CITATION.cff テンプレート
+# リポジトリのルートに CITATION.cff として配置すると、
+# GitHub が「Cite this repository」ボタンを自動生成する。
+# 詳細: https://citation-file-format.github.io/
+# =============================================================================
+
+cff-version: 1.2.0
+message: "このソフトウェアを引用する場合は以下の情報を使用してください。"
+
+# プロジェクト情報
+title: "Your Tool Name"
+type: software
+version: 1.0.0
+date-released: "2026-01-01"
+
+# 著者情報（複数人の場合はリストに追加）
+authors:
+  - family-names: "Yamada"
+    given-names: "Taro"
+    orcid: "https://orcid.org/0000-0001-2345-6789"
+    affiliation: "University of Example"
+
+# リポジトリとDOI
+repository-code: "https://github.com/username/your-tool"
+doi: "10.5281/zenodo.XXXXXXX"
+license: MIT
+
+# 関連論文がある場合（オプション）
+# preferred-citation:
+#   type: article
+#   authors:
+#     - family-names: "Yamada"
+#       given-names: "Taro"
+#   title: "Your Paper Title"
+#   journal: "Journal Name"
+#   year: 2026
+#   doi: "10.xxxx/xxxxxxx"
