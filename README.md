@@ -39,8 +39,8 @@ ai-biocode-kata/
 | 1 | 設計原則 | [01_design.md](chapters/01_design.md) | [§1](chapters/roadmap.md#1-設計原則) |
 | 2 | ターミナル環境 | — | [§2](chapters/roadmap.md#2-ターミナル環境) |
 | 3 | 計算機科学の基礎知識 | [03_cs_basics.md](chapters/03_cs_basics.md) | [§3](chapters/roadmap.md#3-計算機科学の基礎知識) |
-| 4 | データフォーマットの判断力 | — | [§4](chapters/roadmap.md#4-データフォーマットの判断力) |
-| 5 | 開発環境の構築 | — | [§5](chapters/roadmap.md#5-開発環境の構築) |
+| 4 | データフォーマットの判断力 | [04_data_formats.md](chapters/04_data_formats.md) | [§4](chapters/roadmap.md#4-データフォーマットの判断力) |
+| 5 | 開発環境の構築 | [05_dev_environment.md](chapters/05_dev_environment.md) | [§5](chapters/roadmap.md#5-開発環境の構築) |
 | 6 | バージョン管理（Git / GitHub） | — | [§6](chapters/roadmap.md#6-バージョン管理git--github) |
 | 7 | テスト・品質管理 | — | [§7](chapters/roadmap.md#7-テスト品質管理) |
 | 8 | 成果物の形式とプロジェクト設計 | — | [§8](chapters/roadmap.md#8-成果物の形式とプロジェクト設計) |
