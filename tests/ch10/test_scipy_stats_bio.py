@@ -6,6 +6,8 @@ import pytest
 from scripts.ch10.scipy_stats_bio import (
     compare_expression,
     correct_pvalues,
+    correct_pvalues_scipy,
+    distance_matrix_naive,
     expression_distance_matrix,
 )
 
@@ -118,3 +120,50 @@ class TestExpressionDistanceMatrix:
         matrix = np.column_stack([col, col, col])
         dist = expression_distance_matrix(matrix)
         np.testing.assert_allclose(dist, 0.0, atol=1e-10)
+
+
+class TestCorrectPvaluesScipy:
+    """correct_pvalues_scipy のテスト."""
+
+    def test_matches_manual(self) -> None:
+        """SciPy版と手動実装の結果が一致する."""
+        pvalues = np.array([0.005, 0.01, 0.03, 0.04, 0.5])
+        manual = correct_pvalues(pvalues)
+        scipy_result = correct_pvalues_scipy(pvalues)
+        np.testing.assert_allclose(scipy_result, manual, atol=1e-10)
+
+    def test_empty(self) -> None:
+        """空配列の場合は空配列を返す."""
+        result = correct_pvalues_scipy(np.array([]))
+        assert len(result) == 0
+
+    def test_single(self) -> None:
+        """1つのp値の場合、そのまま返る."""
+        result = correct_pvalues_scipy(np.array([0.03]))
+        assert result[0] == pytest.approx(0.03)
+
+
+class TestDistanceMatrixNaive:
+    """distance_matrix_naive のテスト."""
+
+    def test_matches_scipy(self) -> None:
+        """ナイーブ実装とSciPy版の結果が一致する."""
+        rng = np.random.default_rng(42)
+        matrix = rng.random((100, 5))
+        naive = distance_matrix_naive(matrix)
+        scipy_result = expression_distance_matrix(matrix)
+        np.testing.assert_allclose(naive, scipy_result, atol=1e-10)
+
+    def test_symmetric(self) -> None:
+        """距離行列は対称行列."""
+        rng = np.random.default_rng(42)
+        matrix = rng.random((50, 4))
+        dist = distance_matrix_naive(matrix)
+        np.testing.assert_allclose(dist, dist.T)
+
+    def test_diagonal_zero(self) -> None:
+        """対角成分はゼロ."""
+        rng = np.random.default_rng(42)
+        matrix = rng.random((50, 3))
+        dist = distance_matrix_naive(matrix)
+        np.testing.assert_allclose(np.diag(dist), 0.0, atol=1e-10)

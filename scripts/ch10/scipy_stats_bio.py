@@ -1,4 +1,4 @@
-"""SciPyによる統計処理 — 検定と距離行列の計算."""
+"""SciPyライブラリ関数の活用 — AIが再発明しがちな処理をライブラリに任せる."""
 
 import numpy as np
 from scipy import stats
@@ -91,3 +91,52 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
     # 列（サンプル）を観測ベクトルとして扱うため転置
     distances = pdist(matrix.T, metric="correlation")
     return squareform(distances)
+
+
+def correct_pvalues_scipy(pvalues: np.ndarray) -> np.ndarray:
+    """SciPyのライブラリ関数によるBH法の多重検定補正.
+
+    correct_pvalues() の手動実装（約25行）と同じ結果を
+    scipy.stats.false_discovery_control() の2行で得られる。
+
+    Parameters
+    ----------
+    pvalues : np.ndarray
+        補正前のp値の配列（1次元）
+
+    Returns
+    -------
+    np.ndarray
+        BH法で補正されたp値（adjusted p-values）の配列
+    """
+    if len(pvalues) == 0:
+        return np.array([], dtype=np.float64)
+    return stats.false_discovery_control(pvalues, method="bh")
+
+
+def distance_matrix_naive(matrix: np.ndarray) -> np.ndarray:
+    """二重forループによるサンプル間相関距離行列の計算（非推奨）.
+
+    AIが生成しがちなナイーブ実装の例。
+    expression_distance_matrix() のように scipy.spatial.distance.pdist() を
+    使えば、高速かつ簡潔に書ける。
+
+    Parameters
+    ----------
+    matrix : np.ndarray
+        発現量行列（行: 遺伝子、列: サンプル）
+
+    Returns
+    -------
+    np.ndarray
+        サンプル間の相関距離行列（正方行列）
+    """
+    n_samples = matrix.shape[1]
+    dist = np.zeros((n_samples, n_samples))
+    for i in range(n_samples):
+        for j in range(i + 1, n_samples):
+            # ピアソン相関係数を手計算
+            corr = np.corrcoef(matrix[:, i], matrix[:, j])[0, 1]
+            dist[i, j] = 1.0 - corr
+            dist[j, i] = dist[i, j]
+    return dist

@@ -1294,10 +1294,11 @@ my_project/
 - メソッドチェーン — `.pipe()`, `.assign()`
 - **polars** — lazy evaluation、pandas→polars対応表、使い分けの指針
 
-### 10-3. SciPyによる統計処理
-- 統計検定の基本パターン — t検定、Mann-Whitney U検定、多重検定補正（BH法）
-- 距離計算と類似度 — `pdist()` + `squareform()` で相関距離行列
-- 疎行列の扱い — `scipy.sparse`、CSR/CSCフォーマット
+### 10-3. ライブラリ関数の活用 — AIが再発明しがちなパターン
+- 統計検定 — 関数名を指示に含める（`ttest_ind()`, `mannwhitneyu()`）
+- 多重検定補正 — 車輪の再発明の典型例（手動実装 vs `false_discovery_control()`）
+- 距離行列 — forループ vs `pdist()` + `squareform()`
+- SciPyの主要モジュール早見表
 
 > **🧬 コラム：バイオインフォマティクスのPythonライブラリ**
 >
