@@ -8,11 +8,15 @@
 
 これは「AIがプログラマーを補助する」段階をすでに超え、「AIが実装し、人間がレビュー・判断する」という新しい開発パラダイムへの移行を意味する。
 
+Andrej Karpathyはこの新しいプログラミングスタイルを**Vibe coding**（バイブコーディング）と名付けた[9](https://x.com/karpathy/status/1886192184808149383)。ソースコードを直接読み書きせず、自然言語でAIに指示を出し、生成されたコードの差分すら確認せず結果だけを見て判断する——「コードが存在することすら忘れる」手法である。この用語は瞬く間に広まり、2025年11月にはCollins English Dictionaryの「Word of the Year」に選ばれた。
+
 ## 初心者でもコードが書ける——しかし「良いコード」は書けない
 
 AIコーディングエージェントの登場は、プログラミング未経験者にとって福音である。プログラミング言語の文法を一から学ばなくても、自然言語で目的を伝えるだけでプログラムが生成される。この敷居の低さは、とくにバイオインフォマティクスのように、プログラミング教育を体系的に受けていない実験系研究者がコードを必要とする分野において、大きな可能性を秘めている。
 
 しかし、AIが生成したコードは「動く」ことが多い一方で、それが「良い」とは限らない。再現性を欠いた解析パイプライン、テストのない関数、ハードコーディングされたファイルパス、座標系の混同（BEDの0-basedとGFFの1-basedを取り違える等）——こうした問題は、コードが動いてしまうからこそ発見が遅れ、研究の信頼性を損なう原因となる。
+
+こうした問題は印象論ではなく実証的にも裏付けられている。Thorgeirssonらは100名の大学生を対象にVibe codingの能力を測定した[10](https://arxiv.org/abs/2603.14133)。その結果、計算機科学の学業成績と文章力がともにVibe codingの成績を有意に予測し、計算機科学の知識は文章力の約2倍の寄与を示した。この効果は汎用的な推論能力を統制しても消えなかった。つまり「プロンプトの書き方がうまい」だけでは不十分であり、計算機科学の基礎知識こそがAIとの協働の質を左右するのである。
 
 AIに適切な指示を出し、生成されたコードの品質を評価し、プロジェクト全体を設計するには、プログラミングそのものとは異なるレイヤーの知識——ソフトウェア開発の「作法」——が不可欠である。
 
@@ -39,6 +43,8 @@ AIコーディングエージェントの登場以前、この二層構造には
 本書は、AIコーディングエージェントとの協働を前提として、プログラミングの「作法」にまつわる背景知識を体系的に提供するものである。
 
 Pythonの文法は教えない。アラインメントアルゴリズムの理論も扱わない。それらはすでに優れた書籍が数多く存在する。本書が扱うのは、その間にある——しかしAI時代になってむしろ重要性を増した——知識の層である。
+
+前述のVibe coding研究[10](https://arxiv.org/abs/2603.14133)が示すとおり、計算機科学の基礎知識はAIとの協働を成功させるうえで最大の予測因子である。本書はプログラミング初心者に対して、この知識を——文法の暗記ではなく、ソフトウェア開発の「考え方」として——提供する。
 
 具体的には以下の領域をカバーする:
 - AIコーディングエージェントとの効果的な協働ワークフロー（計画→実装→レビュー）
@@ -69,5 +75,7 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 - [6](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/) GitHub. "Octoverse 2025: A new developer joins GitHub every second as AI leads TypeScript to #1". https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/ (参照日: 2026-03-17)
 - [7](https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point) O'Laughlin, D., Ontiveros, J. E., Nanos, J., Patel, D., Nishball, D. "Claude Code is the Inflection Point". *SemiAnalysis*. https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point (参照日: 2026-03-17)
 - [8](https://techcrunch.com/2025/07/30/github-copilot-crosses-20-million-all-time-users/) TechCrunch. "GitHub Copilot crosses 20M all-time users". https://techcrunch.com/2025/07/30/github-copilot-crosses-20-million-all-time-users/ (参照日: 2026-03-17)
+- [9](https://x.com/karpathy/status/1886192184808149383) Karpathy, A. "There's a new kind of coding I call 'vibe coding'...". X (formerly Twitter), 2025-02-02. https://x.com/karpathy/status/1886192184808149383 (参照日: 2026-03-19)
+- [10](https://arxiv.org/abs/2603.14133) Thorgeirsson, S., Weidmann, T. B., Su, Z. "Computer Science Achievement and Writing Skills Predict Vibe Coding Proficiency". *Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI '26)*, 2026. https://arxiv.org/abs/2603.14133
 
 2026年X月　二階堂 愛
