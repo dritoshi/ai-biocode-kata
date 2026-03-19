@@ -1254,6 +1254,14 @@ my_project/
 - `--help`, `--version`, `--verbose` / `--quiet`
 - 入力: ファイル or stdin、出力: ファイル or stdout のUNIX的設計
 
+> **🧬 コラム: バイオインフォCLIツールの設計に学ぶ**
+>
+> samtools/bedtools/seqkitの設計パターン分析。サブコマンド型設計、stdin/stdout対応、ログ/プログレスはstderrの原則。
+
+> **🧬 コラム: パラメータ爆発問題**
+>
+> GATKのHaplotypeCallerは50以上のオプション。「頻繁に変えるものだけCLI引数に」「`--preset` パターン」の対処法。
+
 ### 9-2. プログレス表示とUI
 - **tqdm** / **rich** によるプログレスバー
 - カラー出力とテーブル表示（rich）
@@ -1265,6 +1273,10 @@ my_project/
 - ログの出力先（stderr, ファイル）
 - タイムスタンプの重要性
 - `--log-level` オプションの実装
+
+> **🤖 コラム: 機械学習CLIの設計パターン**
+>
+> Hydraによる YAML設定ベースの引数管理、wandbとの実験追跡統合。
 
 ---
 
