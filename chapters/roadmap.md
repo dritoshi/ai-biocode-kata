@@ -1282,11 +1282,22 @@ my_project/
 
 ## 10. データ処理ライブラリ
 
-### 10-1. 科学計算の基盤
-- **NumPy** — 配列演算、ブロードキャスティング
-- **pandas** — データフレーム操作
-- **SciPy** — 統計検定、距離計算
-- **polars** — 大規模データの高速処理
+### 10-1. NumPyによるベクトル化演算
+- ベクトル化とは何か — forループ vs NumPy演算の速度差
+- バイオインフォでの実践: GC含量の一括計算
+- ブロードキャスティング — CPM正規化
+- ファンシーインデックスとマスク — Quality scoreフィルタ
+
+### 10-2. pandasとpolarsによるテーブルデータ処理
+- **pandas** の基本操作パターン — `read_csv()`, `.query()`, `.groupby().agg()`, `pd.merge()`
+- DEG結果テーブルの処理 — 有意遺伝子フィルタ、メタデータ結合、カテゴリ別集計
+- メソッドチェーン — `.pipe()`, `.assign()`
+- **polars** — lazy evaluation、pandas→polars対応表、使い分けの指針
+
+### 10-3. SciPyによる統計処理
+- 統計検定の基本パターン — t検定、Mann-Whitney U検定、多重検定補正（BH法）
+- 距離計算と類似度 — `pdist()` + `squareform()` で相関距離行列
+- 疎行列の扱い — `scipy.sparse`、CSR/CSCフォーマット
 
 > **🧬 コラム：バイオインフォマティクスのPythonライブラリ**
 >
