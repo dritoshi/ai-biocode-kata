@@ -2,7 +2,7 @@
 
 [§1 設計原則](./01_design.md)では、コードを「どう設計するか」の原則を学んだ。しかし原則を知っていても、コードを実行する場であるターミナルの仕組みを理解していなければ、エージェントが何をしているか把握できない。
 
-AIコーディングエージェントは、シェルを介してコードを実行する。Claude Code や Codex CLI の思考過程を見ると、`grep`、`find`、`ls`、`cat` といったコマンドが頻繁に現れる。エージェントがファイルを読み、検索し、環境を確認する——その一つひとつがシェルコマンドである。エージェントの行動をレビューし、問題が起きたときに原因を特定するためには、シェルの基礎知識が不可欠である。
+AIコーディングエージェントは、シェルを介してコードを実行する。Claude Code や Codex CLI の動作を観察すると、ファイルの検索、パターンマッチング、内容の読み取りといったシェル操作が頻繁に行われている——内部的には `grep` や `find` の高速な代替ツールが使われることもあるが、基本概念は同じである。エージェントの行動をレビューし、問題が起きたときに原因を特定するためには、シェルの基礎知識が不可欠である。
 
 本章では、「Linux入門書の縮小版」ではなく、**Vibe codingでエージェントの動作を理解するために必要なシェル知識**に焦点を絞る。ファイルシステムの構造、パーミッション、環境変数、テキスト処理コマンド、そしてシェルスクリプトの基礎——これらは、エージェントが日常的に操作する対象そのものである。
 
@@ -322,7 +322,7 @@ broken = find_broken_path_entries()
 
 バイオインフォマティクスのデータの多くはテキストファイルである。FASTA、FASTQ、BED、VCF、TSV——これらはすべてテキストとして処理できる。Pythonスクリプトを書く前に、シェルのワンライナーで解決できないか考える習慣は、作業効率を大きく向上させる。
 
-また、AIエージェントの思考過程を読むと、これらのコマンドが頻繁に使われている。エージェントがコードベースを調査するとき、`grep` でパターンを探し、`find` でファイルを列挙し、`wc` でサイズを確認する。コマンドの意味を知っていれば、エージェントの調査が適切かどうかを判断できる。
+また、AIエージェントの動作ログを読むと、これらの操作が頻繁に行われている。エージェントがコードベースを調査するとき、パターン検索（`grep` や高速版の `rg`）、ファイル列挙（`find` や `fd`）、行数カウント（`wc`）を実行する。コマンドの意味を知っていれば、エージェントの調査が適切かどうかを判断できる。
 
 ### コマンド一覧
 
@@ -415,6 +415,32 @@ values = extract_column(Path("expression.tsv"), column=1, delimiter="\t")
 > 「`data/counts.tsv` の1列目にある遺伝子名の一覧を重複なしで取得するシェルコマンドを教えて。同じ処理をPythonで書いた場合との比較も見せて」
 
 > 「エージェントが `grep -r "TODO" --include="*.py"` を実行しているのを見た。このコマンドの意味と、なぜエージェントがこれを実行したのかを説明して」
+
+> **📦 コラム: エージェントの内部で動く高速検索ツール — ripgrepとfd**
+>
+> §2-4で学んだ `grep` や `find` はUNIXの古典的コマンドだが、AIコーディングエージェントはこれらの高速な代替ツールを内部で使っている。
+>
+> **ripgrep**（`rg`）は `grep` のRust実装で、再帰検索が10〜50倍高速である[9]。Claude Codeの検索機能（Grepツール）はripgrepで実装されており、Codex CLIもripgrepに依存している（未インストールだと起動時にエラーになる）。最大の特徴は `.gitignore` を自動で尊重する点で、不要なファイル（`node_modules/` や `.git/` 内のファイル）を検索対象から除外してくれる。
+>
+> ```bash
+> # grep での再帰検索
+> grep -r "import pandas" --include="*.py" .
+>
+> # ripgrep での同等操作（.gitignore を自動尊重）
+> rg "import pandas" --type py
+> ```
+>
+> **fd** は `find` のRust実装で、直感的な構文と高速な検索が特徴である[10]。Claude Codeでも利用が推奨されている。
+>
+> ```bash
+> # find でのファイル検索
+> find . -name "*.fastq.gz" -type f
+>
+> # fd での同等操作
+> fd ".fastq.gz"
+> ```
+>
+> いずれも macOS では `brew install ripgrep fd` でインストールできる。従来コマンドの概念を理解していれば、これらの高速版も自然に使える——`rg` は「賢い `grep -r`」、`fd` は「省略形の `find`」と考えればよい。
 
 ---
 
@@ -622,3 +648,7 @@ done
 [7] "Bash Reference Manual". GNU Project. [https://www.gnu.org/software/bash/manual/](https://www.gnu.org/software/bash/manual/) (参照日: 2026-03-19)
 
 [8] Heng Li. "lh3/seqtk: Toolkit for processing sequences in FASTA/Q formats". GitHub. [https://github.com/lh3/seqtk](https://github.com/lh3/seqtk) (参照日: 2026-03-19)
+
+[9] Gallant, A. "ripgrep is faster than {grep, ag, git grep, ucg, pt, sift}". 2016. [https://blog.burntsushi.net/ripgrep/](https://blog.burntsushi.net/ripgrep/) (参照日: 2026-03-19)
+
+[10] Peterka, D. "sharkdp/fd: A simple, fast and user-friendly alternative to 'find'". GitHub. [https://github.com/sharkdp/fd](https://github.com/sharkdp/fd) (参照日: 2026-03-19)
