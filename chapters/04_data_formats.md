@@ -172,6 +172,96 @@ Markdownが優れている点:
 > - やむを得ずExcelを使う場合は、列を「文字列」として読み込む設定にする
 > - データの受け渡しにExcelファイル（`.xlsx`）を使わず、TSV/CSVをプログラムで処理する
 
+> #### 🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, ファイル名のNFD
+>
+> [§3-3 文字エンコーディング](./03_cs_basics.md#3-3-文字エンコーディング)では、ASCII/UTF-8の基礎と `encoding="utf-8"` を明示する原則を学んだ。ここでは、日本の研究室で特に遭遇しやすい3つの実践的な罠を取り上げる。
+>
+> ---
+>
+> **1. Shift_JIS/CP932 レガシーデータ**
+>
+> Windows版Excelで「CSVとして保存」すると、デフォルトのエンコーディングはShift_JIS(CP932)になる。`open()` で `encoding` を省略すると、macOS/LinuxではUTF-8として読もうとして `UnicodeDecodeError` が発生する。
+>
+> ```python
+> # Shift_JIS(CP932)のCSVを読み込む
+> with open("excel_output.csv", encoding="cp932", newline="") as f:
+>     reader = csv.DictReader(f)
+>     records = list(reader)
+> ```
+>
+> `encoding="utf-8"` で `UnicodeDecodeError` が出たら、まずShift_JIS(CP932)を疑うとよい。
+>
+> ---
+>
+> **2. UTF-8 BOM**（バイトオーダーマーク）
+>
+> Windows版Excelで「UTF-8でCSV保存」を選択すると、ファイル先頭にBOM(`\xef\xbb\xbf`)が付与される。このBOMをPythonの `csv.DictReader` が処理すると、先頭列名に見えない文字 `\ufeff` が紛れ込む。
+>
+> ```python
+> # BOMの罠: 列名が "\ufeffgene" になってしまう
+> with open("excel_utf8.csv", encoding="utf-8") as f:
+>     reader = csv.DictReader(f)
+>     row = next(reader)
+>     print(list(row.keys()))  # ['\ufeffgene', 'value'] — 先頭に不可視文字
+> ```
+>
+> 対処は `encoding="utf-8-sig"` を使うことである。BOMがあれば自動除去し、なければ通常のUTF-8として読み込む:
+>
+> ```python
+> # BOM対応: encoding="utf-8-sig" でBOMを自動除去
+> with open("excel_utf8.csv", encoding="utf-8-sig", newline="") as f:
+>     reader = csv.DictReader(f)
+>     row = next(reader)
+>     print(list(row.keys()))  # ['gene', 'value'] — 正常
+> ```
+>
+> ---
+>
+> **3. macOSのファイル名NFD正規化**
+>
+> macOS(APFS)は日本語ファイル名をNFD（分解形）で格納する。NFDでは濁点・半濁点が独立したコードポイントに分離されるため、「が」は「か」+「゛」の2文字として保存される。Linux/WindowsはNFC（合成形）を使うため、同じファイル名に見えても `==` で比較すると一致しない。
+>
+> ```python
+> import unicodedata
+>
+> # macOSから受け取ったファイル名（NFD）
+> macos_name = "\u304b\u3099"  # か + 濁点（NFD）
+> linux_name = "が"            # が（NFC）
+>
+> print(macos_name == linux_name)  # False — 見た目は同じなのに不一致
+>
+> # NFC正規化で一致させる
+> normalized = unicodedata.normalize("NFC", macos_name)
+> print(normalized == linux_name)  # True
+> ```
+>
+> ---
+>
+> **まとめ**
+>
+> | 罠 | 発生源 | 対処法 |
+> |---|---|---|
+> | Shift_JIS/CP932 | Windows Excelの「CSV保存」 | `encoding="cp932"` で読み込み |
+> | UTF-8 BOM | Windows Excelの「UTF-8 CSV保存」 | `encoding="utf-8-sig"` で自動除去 |
+> | ファイル名NFD | macOSのファイルシステム | `unicodedata.normalize("NFC", name)` |
+>
+> gzip圧縮ファイルでもエンコーディングの問題は同様に発生する。`gzip.open()` でテキストモードを使う場合は `encoding` を明示する:
+>
+> ```python
+> import gzip
+>
+> # gzip + エンコーディング明示
+> with gzip.open("data.csv.gz", "rt", encoding="utf-8") as f:
+>     reader = csv.DictReader(f)
+>     records = list(reader)
+> ```
+>
+> **防衛策**:
+>
+> - ファイル名はASCIIのみにする。日本語のサンプル名はメタデータTSVの列で管理する
+> - `open()` には必ず `encoding="utf-8"` を明示する（[§3-3](./03_cs_basics.md#3-3-文字エンコーディング)の原則）
+> - Windows由来のCSVは `encoding="utf-8-sig"` で開くことを最初に試みる
+
 #### エージェントへの指示例
 
 フォーマット変換やデータ処理をエージェントに依頼する際は、入力と出力の形式を明示する:
