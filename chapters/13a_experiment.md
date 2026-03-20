@@ -74,6 +74,8 @@
 
 wandbは最も手軽に導入できる実験追跡ツールである。無料の個人アカウントで始められ、ブラウザ上でメトリクスの推移グラフやパラメータの比較表を確認できる。
 
+以下は、scRNA-seqデータのクラスタリングにおいて、UMAPの次元削減パラメータ（`n_neighbors`: 近傍点の数、`min_dist`: 点間の最小距離）とクラスタリングの解像度（`resolution`）を変えて最適な細胞クラスタを探索する実験を記録する例である:
+
 ```python
 import wandb
 
@@ -81,19 +83,24 @@ import wandb
 wandb.init(project="rnaseq-clustering", name="umap-exp-01")
 
 # ハイパーパラメータを記録
+# n_neighbors: UMAPが参照する近傍点の数（大きいほど大域構造を重視）
+# min_dist: UMAP上での点間の最小距離（小さいほどクラスタが密になる）
+# resolution: Leidenクラスタリングの解像度（大きいほど細かいクラスタに分割）
 wandb.config.update({
     "n_neighbors": 15,
     "min_dist": 0.1,
     "resolution": 0.5,
 })
 
-# ... 解析実行 ...
+# ... scanpyによるUMAP + クラスタリング実行 ...
 
 # メトリクスを記録
+# silhouette_score: クラスタの分離度（-1〜1、高いほど良い）
+# ari: Adjusted Rand Index（既知の細胞型ラベルとの一致度）
 wandb.log({
     "silhouette_score": 0.72,
     "n_clusters": 5,
-    "ari": 0.65,  # Adjusted Rand Index
+    "ari": 0.65,
 })
 
 # 可視化結果をアーティファクトとして保存
@@ -106,22 +113,28 @@ wandb.finish()
 
 MLflowはオープンソースの実験管理プラットフォームである。クラウドに依存せず、ローカルマシンや研究室のサーバーで完結できる。モデルレジストリ機能により、学習済みモデルのバージョン管理も可能である。
 
+以下は、タンパク質の機能予測モデル（ニューラルネットワーク）を学習する実験で、近傍点の数や点間距離を変えながら分類精度を比較する例である:
+
 ```python
 import mlflow
 
 # 実験を開始
-with mlflow.start_run(run_name="umap-exp-01"):
+with mlflow.start_run(run_name="protein-func-exp-01"):
     # ハイパーパラメータを記録
-    mlflow.log_param("n_neighbors", 15)
-    mlflow.log_param("min_dist", 0.1)
+    mlflow.log_param("learning_rate", 0.001)
+    mlflow.log_param("batch_size", 64)
+    mlflow.log_param("hidden_dim", 256)
+    mlflow.log_param("dropout", 0.3)
 
-    # ... 学習・解析 ...
+    # ... PyTorchによるモデル学習 ...
 
     # メトリクスを記録
+    # accuracy: テストデータでの正解率
+    # f1_score: クラス不均衡を考慮した総合指標
     mlflow.log_metric("accuracy", 0.95)
     mlflow.log_metric("f1_score", 0.88)
 
-    # アーティファクトを保存
+    # アーティファクトを保存（学習済みモデルと混同行列の図）
     mlflow.log_artifact("model.pkl")
     mlflow.log_artifact("confusion_matrix.png")
 ```
@@ -161,26 +174,28 @@ mlflow ui --port 5000
 
 wandbやMLflowを導入する前に、まず最小限のログ記録を自前で実装することを推奨する。これにより、「実験を記録する習慣」を身につけ、ツール導入後も何を記録すべきかの判断力が養われる。
 
-本書のサンプルコード（`scripts/ch13a/experiment_logger.py`）に、JSONL形式の実験ログ記録ツールを用意している:
+本書のサンプルコード（`scripts/ch13a/experiment_logger.py`）に、JSONL形式の実験ログ記録ツールを用意している。
+
+以下は、scRNA-seqデータのクラスタリングで、UMAPパラメータ（`n_neighbors`, `min_dist`）とクラスタリング解像度（`resolution`）の組み合わせを変えながらシルエットスコアで最良の条件を探す例である:
 
 ```python
 from scripts.ch13a.experiment_logger import log_experiment, load_experiments, find_best
 
-# 実験を記録
+# 実験1: 近傍点15、最小距離0.1、解像度0.5 → 5クラスタ、シルエット0.72
 log_experiment(
     params={"n_neighbors": 15, "min_dist": 0.1, "resolution": 0.5},
     metrics={"silhouette": 0.72, "n_clusters": 5},
     output_dir="results/experiments",
 )
 
-# 別のパラメータで再実験
+# 実験2: 近傍点を30に増やし、解像度を上げる → 3クラスタ、シルエット0.68
 log_experiment(
     params={"n_neighbors": 30, "min_dist": 0.2, "resolution": 0.8},
     metrics={"silhouette": 0.68, "n_clusters": 3},
     output_dir="results/experiments",
 )
 
-# ログを読み込んで最良の実験を検索
+# ログを読み込んで、シルエットスコアが最も高い実験を検索
 experiments = load_experiments("results/experiments/experiment_log.jsonl")
 best = find_best(experiments, "silhouette", maximize=True)
 print(f"最良パラメータ: {best.params}")  # {"n_neighbors": 15, ...}
