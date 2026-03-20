@@ -139,6 +139,10 @@ def format_as_tsv(records: list[SequenceRecord]) -> str:
 
 > 完全な実装は `scripts/ch01/seq_filter.py` にあり、テストは `tests/ch01/test_seq_filter.py` で確認できる。
 
+関心の分離の度合いを測る指標として、**凝集度**（cohesion）と**結合度**（coupling）がある。凝集度は「1つのモジュール内の要素がどれだけ関連しているか」を表し、高いほど良い。結合度は「異なるモジュール間がどれだけ依存し合っているか」を表し、低いほど良い。上記の例では、パース・フィルタリング・フォーマットの各関数は凝集度が高く（それぞれが1つの責務に集中）、結合度が低い（関数間の依存は `SequenceRecord` という共通のデータ構造だけ）。
+
+関心の分離を実践するとき、「この分割で凝集度は高いか？ 結合度は低いか？」と自問すると、適切な分割かどうかの判断材料になる。
+
 ### 単一責任原則（Single Responsibility Principle; SRP）
 
 > 関数やクラスは、変更する理由が1つだけであるべきである[6](https://en.wikipedia.org/wiki/Single-responsibility_principle)。
@@ -146,6 +150,8 @@ def format_as_tsv(records: list[SequenceRecord]) -> str:
 関心の分離をさらに厳密にしたのがSRPである。「この関数を変更する理由は何か？」と問いかけ、答えが複数あるなら分割を検討する。
 
 上記の `parse_fasta_string()` は「FASTA形式のパース方法が変わったとき」だけに変更される。`filter_by_length()` は「フィルタリングの条件が変わったとき」だけに変更される。それぞれの変更理由が1つに絞られているので、SRPを満たしている。
+
+SRPはオブジェクト指向設計の5原則**SOLID**の最初の文字（S）にあたる。残りの4原則（Open/Closed、Liskov Substitution、Interface Segregation、Dependency Inversion）は、よいAPIやインターフェースを設計するための指針であり、[§21 ソフトウェアの構成要素](./21_software_components.md#21-4-apiとインターフェース)で概要を学ぶ。初心者はまずSRPと関心の分離を確実に身につけることを優先してほしい。
 
 ### 最小驚き原則（Principle of Least Astonishment; POLA）
 
