@@ -457,7 +457,7 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 > 2. **PyTorch**でカスタムモデルを構築する
 > 3. **Hugging Face**で事前学習モデルのfine-tuningを行う
 >
-> 実験管理の詳細は[§13A 実験管理](./appendix_13a_experiment.md)で扱う。
+> 実験管理の詳細は[§13A 実験管理](./13a_experiment.md)で扱う。
 
 ---
 

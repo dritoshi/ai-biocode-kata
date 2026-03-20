@@ -361,7 +361,7 @@ channel_priority: strict
 > | **PyTorch** / **JAX** | 深層学習フレームワーク |
 > | **scikit-learn** | 古典的機械学習（分類、クラスタリング、前処理） |
 > | **Hugging Face Transformers** | 事前学習済みモデルの利用 |
-> | **wandb** / **MLflow** | 実験追跡（[§13A 実験管理](./13a_experiment_tracking.md)で詳述） |
+> | **wandb** / **MLflow** | 実験追跡（[§13A 実験管理](./13a_experiment.md)で詳述） |
 > | **optuna** | ハイパーパラメータ最適化 |
 
 ---
