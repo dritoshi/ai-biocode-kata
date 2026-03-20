@@ -38,7 +38,7 @@
   NumPy・pandas・SciPy・polars、Biopython等のバイオ専用ライブラリ
 - [11. 可視化](#11-可視化)（[原稿](./11_visualization.md)）
   matplotlib・seaborn・plotly、可視化の原則、バイオ専門ツール
-- [12. ワークフロー管理](#12-ワークフロー管理)
+- [12. ワークフロー管理](#12-ワークフロー管理)（[原稿](./12_workflow.md)）
   Snakemake・Nextflow・makeによる多段階パイプラインの管理
 - [13. コンテナと再現性](#13-コンテナと再現性)
   Docker・Apptainerによる環境の完全固定と研究再現性
@@ -1397,6 +1397,8 @@ my_project/
 ---
 
 ## 12. ワークフロー管理
+
+> 📖 原稿: [12_workflow.md](./12_workflow.md)
 
 ### 12-1. なぜワークフロー言語が必要か
 - シェルスクリプトの限界（多段階パイプラインの再現性）
