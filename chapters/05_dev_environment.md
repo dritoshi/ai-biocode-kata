@@ -120,6 +120,8 @@ uv venv
 uv pip install biopython numpy
 
 # ロックファイルの生成
+# uv lock は pyproject.toml の依存定義を解決し、
+# すべてのパッケージの正確なバージョンを uv.lock ファイルに記録するコマンドである
 uv lock
 
 # ロックファイルからの再現
@@ -264,6 +266,8 @@ pip freeze > requirements-lock.txt
 # pandas==2.2.1
 
 # conda-lock による厳密なロック
+# -p はロックファイルを生成する対象プラットフォームを指定する
+# HPCがLinuxであれば linux-64、macOSであれば osx-64（Intel）または osx-arm64（Apple Silicon）
 conda-lock -f environment.yml -p linux-64
 # 出力: conda-lock.yml（プラットフォーム固有のハッシュ付き）
 
@@ -310,6 +314,8 @@ channel_priority: strict
 >
 > **bioconda**は、8,000以上のバイオインフォマティクスツールを提供するcondaチャネルである[9](https://doi.org/10.1038/s41592-018-0046-7)。BLAST, samtools, BWA, STAR, fastp など、日常的に使うツールの大半がbiocondaからインストールできる:
 >
+> `-c` はチャネル（パッケージの配布元）を指定するオプションである。biocondaはバイオインフォマティクスツール専用、conda-forgeは汎用パッケージのチャネルであり、記述順がパッケージ検索の優先順位になる。
+>
 > ```bash
 > # biocondaからのツールインストール
 > conda install -c bioconda -c conda-forge samtools minimap2 fastp
@@ -338,6 +344,8 @@ channel_priority: strict
 > バイオインフォマティクスと機械学習の融合領域——シングルセル基盤モデル（scFoundation model）、変異の病原性予測、タンパク質構造予測（AlphaFold等）——では、GPU環境の構築が必要になる。
 >
 > **CUDA/PyTorchのインストール（conda推奨）:**
+>
+> `pytorch-cuda=12.1` はGPU対応版PyTorchに必要なCUDAランタイムである。`-c pytorch -c nvidia` はPyTorch公式とNVIDIA公式のチャネルで、これらからGPU対応バイナリが提供される。
 >
 > ```bash
 > # ML用環境の作成

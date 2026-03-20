@@ -88,6 +88,8 @@ my-tool = "my_tool.cli:main"    # CLIコマンドの登録
 
 インストールと実行:
 
+`pip install .`はパッケージを通常インストールする（site-packagesにコピーされる）。`pip install -e .`は**開発モード**（editable install）で、ソースコードへのリンクが作られるため、コードを編集するとすぐに反映される。開発中は`-e`を使い、配布時は通常インストールを使う。
+
 ```bash
 pip install .                     # ローカルインストール
 pip install -e .                  # 開発モード（コード変更が即反映）
@@ -99,6 +101,8 @@ from my_tool.analysis import run_analysis   # ライブラリとして利用
 ```
 
 PyPIへの公開:
+
+`build`はソースコード配布物（sdist）とコンパイル済み配布物（wheel）を`dist/`ディレクトリに生成するツールである。`twine`は生成したパッケージをPyPIにアップロードするツールで、実行時にPyPIのAPIトークンによる認証が必要である。
 
 ```bash
 pip install build twine

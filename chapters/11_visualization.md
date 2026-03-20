@@ -97,6 +97,9 @@ def volcano_plot(
     is_down = (df["padj"] < padj_threshold) & (
         df["log2FoldChange"] <= -log2fc_threshold
     )
+    # np.select()は複数の条件に対応する値を一括で選択する関数である。
+    # 第1引数に条件リスト、第2引数に対応する値リストを渡し、
+    # どの条件にも当てはまらない場合はdefaultの値（"ns" = not significant）が使われる。
     df["category"] = np.select(
         [is_up, is_down], ["up", "down"], default="ns"
     )
@@ -216,6 +219,8 @@ def expression_violin(
 
     return fig
 ```
+
+seabornの多くのプロット関数は**tidy data**（整然データ）形式——1行が1つの観測値、1列が1つの変数——を前提としている。ワイド形式（列=サンプル、行=遺伝子）のデータは `pd.melt()` でtidy形式に変換する必要がある。
 
 入力の `expression_df` は以下のようなtidy formatのDataFrameを想定している:
 

@@ -79,9 +79,11 @@ otool -L $(which samtools)
 #   ...
 ```
 
+出力の各行は「ライブラリ名 => 実際のファイルパス（メモリアドレス）」の形式で、`=>` の右側がOSが見つけたライブラリの実体パスを示す。ライブラリが見つからない場合は `not found` と表示される。
+
 この出力を見ると、samtools は libhts（HTSlibライブラリ）に依存し、libhts はさらに libz（圧縮ライブラリ）に依存していることがわかる。この連鎖のどこか1つが欠けても、samtools は起動できない。
 
-本書のサンプルコード `scripts/ch21/module_demo.py` の `check_shared_libs()` 関数でも、この依存確認を体験できる:
+本書のサンプルコード `scripts/ch21/module_demo.py` の `check_shared_libs()` 関数でも、この依存確認を体験できる。`shutil.which()` は[§2](./02_terminal.md)で学んだ `which` コマンドのPython版で、`PATH` 環境変数を検索して指定した実行ファイルの絶対パスを返す。見つからなければ `None` を返す:
 
 ```python
 from scripts.ch21.module_demo import check_shared_libs
@@ -179,6 +181,8 @@ print(sys.path)
 3. **標準ライブラリ**のディレクトリ
 4. **site-packages**（`pip install` でインストールされたパッケージの格納先）
 
+この検索順序は「より具体的（プロジェクト固有）なものが優先される」という設計である。カレントディレクトリが最優先なのは開発中のコードをすぐにimportできるようにするためであり、site-packagesが最後なのはインストール済みパッケージよりローカルのコードを優先するためである。
+
 `import numpy` が失敗するとき、この検索パスのどこにも `numpy` が見つからないということである。本書のサンプルコード `scripts/ch21/module_demo.py` で `sys.path` を確認できる:
 
 ```python
@@ -230,6 +234,8 @@ from scripts.ch21.mylib.core import gc_content
 from .core import gc_content       # 同じパッケージ内
 from ..utils import some_function  # 親パッケージ内
 ```
+
+`.`（ドット1つ）は現在のパッケージ内を意味し、`..`（ドット2つ）は1つ上の階層のパッケージを意味する。たとえば `scripts/ch21/mylib/core.py` から `from ..module_demo import show_sys_path` と書くと、1つ上の `scripts/ch21/` にある `module_demo.py` を参照する。
 
 絶対インポートはパスが明確で読みやすい。相対インポートはパッケージの内部構造が変わっても影響を受けにくい。Pythonのスタイルガイド（PEP 8）は、一般的に絶対インポートを推奨している。
 

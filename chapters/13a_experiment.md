@@ -199,7 +199,7 @@ best = find_best(experiments, "silhouette", maximize=True)
 print(f"最良パラメータ: {best.params}")  # {"n_neighbors": 15, ...}
 ```
 
-生成されるJSONLファイル（1行1レコード）:
+以下は生成されるJSONLファイルの内容例である。JSONL（JSON Lines）は1行に1つのJSONオブジェクトを記録する形式で、ファイルへの追記が容易であり、`pandas.read_json(path, lines=True)` で直接DataFrameに読み込める。
 
 ```json
 {"timestamp": "2026-03-20T10:30:00+00:00", "git_hash": "a1b2c3d", "params": {"n_neighbors": 15, "min_dist": 0.1}, "metrics": {"silhouette": 0.72}}

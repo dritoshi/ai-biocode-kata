@@ -249,6 +249,8 @@ def test_single_base() -> None:
 
 テストがコードのどの程度をカバーしているかを数値で把握するには、**pytest-cov**を使う[3](https://pytest-cov.readthedocs.io/en/latest/):
 
+`--cov=scripts`はカバレッジ計測の対象ディレクトリを指定する（ここでは`scripts/`以下のコード）。`--cov-report=term-missing`はカバレッジ結果をターミナルに表示し、テストされていない行番号も併せて出力する。
+
 ```bash
 # pytest-covのインストール
 pip install pytest-cov
@@ -337,7 +339,7 @@ ruff check scripts/ --fix
 
 #### pyproject.toml での設定
 
-ruffの設定はプロジェクトルートの `pyproject.toml` に記述する:
+ruffの設定はプロジェクトルートの `pyproject.toml` に記述する。`target-version`は対象とするPythonの最低バージョンを指定する。`line-length = 88`はBlack（Pythonフォーマッタ）のデフォルト値に合わせた設定であり、PEP 8の79文字より長いが、現代のワイドスクリーン環境では実用的な長さである。
 
 ```toml
 [tool.ruff]
@@ -358,6 +360,8 @@ select = [
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
 ```
+
+各ルールプレフィクスの意味は次のとおりである。Eはpycodestyleのスタイルエラー、Wはpycodestyleの警告、FはPyflakesによる論理エラー検出、Iはisortによるimport順序の整理、Nはpep8-namingによる命名規則チェック、Dはpydocstyleによるdocstringの書式検証、UPはpyupgradeによる古い記法の自動更新である。
 
 `select` で有効にするルールセットを指定する。すべてを一度に有効にすると大量の警告が出て圧倒されるため、まずは基本的なルール（`E`, `W`, `F`, `I`）から始め、慣れたらルールを追加するのがよい。
 
@@ -443,7 +447,7 @@ pip install pre-commit
 pre-commit install
 ```
 
-設定ファイル `.pre-commit-config.yaml` をプロジェクトルートに置く:
+設定ファイル `.pre-commit-config.yaml` をプロジェクトルートに置く。`rev`はフックのバージョンを固定するフィールドで、実行のたびに異なるバージョンが使われることを防ぐ。`additional_dependencies`はフックの実行に追加で必要なパッケージを指定する（mypyの場合、型スタブが必要になることがある）。
 
 ```yaml
 # .pre-commit-config.yaml
@@ -578,6 +582,8 @@ jobs:
       - name: pytest によるテスト
         run: pytest tests/ --cov=scripts --cov-report=term-missing
 ```
+
+GitHub Actionsでは、`--cov-report=term-missing`の出力はジョブのログに記録され、Actions画面の「Run tests」ステップで確認できる。
 
 このワークフローは以下のタイミングで実行される:
 

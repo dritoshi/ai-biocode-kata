@@ -100,7 +100,7 @@ Snakemake[1](https://doi.org/10.12688/f1000research.29032.2)[4](https://snakemak
 
 #### ruleの基本構造
 
-Snakemakeのワークフローは**rule**（ルール）の集合として定義する。各ルールは `input`（入力）、`output`（出力）、`shell`（実行コマンド）の3要素で構成される:
+Snakemakeのワークフローは**rule**（ルール）の集合として定義する。各ルールは `input`（入力）、`output`（出力）、`shell`（実行コマンド）の3要素で構成される。以下のルールで使われている `{sample}` は**wildcard**（ワイルドカード）と呼ばれ、Snakemakeが出力ファイル名のパターンから自動的に値を推定する変数である（詳細は後述）:
 
 ```python
 rule fastqc:
