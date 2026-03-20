@@ -46,8 +46,8 @@ ai-biocode-kata/
 | 8 | 成果物の形式とプロジェクト設計 | [08_deliverables.md](chapters/08_deliverables.md) | [§8](chapters/roadmap.md#8-成果物の形式とプロジェクト設計) |
 | 9 | CLIツールの設計 | [09_cli.md](chapters/09_cli.md) | [§9](chapters/roadmap.md#9-cliツールの設計) |
 | 10 | データ処理ライブラリ | [10_data_processing.md](chapters/10_data_processing.md) | [§10](chapters/roadmap.md#10-データ処理ライブラリ) |
-| 11 | 可視化 | — | [§11](chapters/roadmap.md#11-可視化) |
-| 12 | ワークフロー管理 | — | [§12](chapters/roadmap.md#12-ワークフロー管理) |
+| 11 | 可視化 | [11_visualization.md](chapters/11_visualization.md) | [§11](chapters/roadmap.md#11-可視化) |
+| 12 | ワークフロー管理 | [12_workflow.md](chapters/12_workflow.md) | [§12](chapters/roadmap.md#12-ワークフロー管理) |
 | 13 | コンテナと再現性 | — | [§13](chapters/roadmap.md#13-コンテナと再現性) |
 | 13A | 実験管理（ML/計算実験の追跡） | — | [§13A](chapters/roadmap.md#13a-実験管理ml計算実験の追跡) |
 | 14 | HPC | — | [§14](chapters/roadmap.md#14-hpc) |
