@@ -1,0 +1,98 @@
+# RNA-seq最小ワークフロー例
+# QC → トリミング → マッピング → 定量 の4ステップ
+
+configfile: "config.yaml"
+
+SAMPLES = config["samples"]
+
+
+rule all:
+    input:
+        # 最終出力: カウント行列
+        expand("results/counts/{sample}_counts.txt", sample=SAMPLES),
+        # QCレポート
+        expand("results/qc/{sample}_fastqc.html", sample=SAMPLES),
+
+
+rule fastqc:
+    input:
+        "data/raw/{sample}.fastq.gz",
+    output:
+        html="results/qc/{sample}_fastqc.html",
+        zip="results/qc/{sample}_fastqc.zip",
+    log:
+        "logs/fastqc/{sample}.log",
+    threads: config["params"]["fastqc"]["threads"]
+    shell:
+        "fastqc {input} --outdir results/qc --threads {threads} 2> {log}"
+
+
+rule trimmomatic:
+    input:
+        "data/raw/{sample}.fastq.gz",
+    output:
+        trimmed=temp("results/trimmed/{sample}_trimmed.fastq.gz"),
+    log:
+        "logs/trimmomatic/{sample}.log",
+    params:
+        adapter=config["params"]["trimmomatic"]["adapter"],
+        leading=config["params"]["trimmomatic"]["leading"],
+        trailing=config["params"]["trimmomatic"]["trailing"],
+        slidingwindow=config["params"]["trimmomatic"]["slidingwindow"],
+        minlen=config["params"]["trimmomatic"]["minlen"],
+    shell:
+        """
+        trimmomatic SE {input} {output.trimmed} \
+            ILLUMINACLIP:{params.adapter}:2:30:10 \
+            LEADING:{params.leading} \
+            TRAILING:{params.trailing} \
+            SLIDINGWINDOW:{params.slidingwindow} \
+            MINLEN:{params.minlen} \
+            2> {log}
+        """
+
+
+rule star_align:
+    input:
+        fastq="results/trimmed/{sample}_trimmed.fastq.gz",
+        index=config["genome"]["index"],
+    output:
+        bam=temp("results/aligned/{sample}_Aligned.sortedByCoord.out.bam"),
+    log:
+        "logs/star/{sample}.log",
+    threads: config["params"]["star"]["threads"]
+    shell:
+        """
+        STAR --runThreadN {threads} \
+             --genomeDir {input.index} \
+             --readFilesIn {input.fastq} \
+             --readFilesCommand zcat \
+             --outSAMtype BAM SortedByCoordinate \
+             --outFileNamePrefix results/aligned/{wildcards.sample}_ \
+             2> {log}
+        """
+
+
+rule featurecounts:
+    input:
+        bam="results/aligned/{sample}_Aligned.sortedByCoord.out.bam",
+        gtf=config["genome"]["gtf"],
+    output:
+        counts="results/counts/{sample}_counts.txt",
+    log:
+        "logs/featurecounts/{sample}.log",
+    params:
+        feature_type=config["params"]["featurecounts"]["feature_type"],
+        attribute=config["params"]["featurecounts"]["attribute"],
+        strandedness=config["params"]["featurecounts"]["strandedness"],
+    shell:
+        """
+        featureCounts -T 4 \
+            -t {params.feature_type} \
+            -g {params.attribute} \
+            -s {params.strandedness} \
+            -a {input.gtf} \
+            -o {output.counts} \
+            {input.bam} \
+            2> {log}
+        """

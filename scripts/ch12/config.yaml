@@ -1,0 +1,40 @@
+# RNA-seqパイプライン設定ファイル
+# Snakefileから configfile: "config.yaml" で読み込む
+
+samples:
+  - SRR1234501
+  - SRR1234502
+  - SRR1234503
+
+# リファレンスゲノム
+genome:
+  fasta: "data/raw/genome/GRCh38.fa"
+  gtf: "data/raw/genome/GRCh38.gtf"
+  index: "data/raw/genome/star_index"
+
+# ツールパラメータ
+params:
+  fastqc:
+    threads: 4
+  trimmomatic:
+    adapter: "TruSeq3-PE.fa"
+    leading: 3
+    trailing: 3
+    slidingwindow: "4:15"
+    minlen: 36
+  star:
+    threads: 8
+    overhang: 100
+  featurecounts:
+    feature_type: "exon"
+    attribute: "gene_id"
+    strandedness: 2  # 0=unstranded, 1=forward, 2=reverse
+
+# 出力ディレクトリ
+dirs:
+  results: "results"
+  logs: "logs"
+  qc: "results/qc"
+  trimmed: "results/trimmed"
+  aligned: "results/aligned"
+  counts: "results/counts"
