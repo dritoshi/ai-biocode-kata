@@ -1,0 +1,494 @@
+# §11 可視化
+
+[§10 データ処理ライブラリ](./10_data_processing.md)では、NumPyのベクトル化演算、pandasによるテーブル操作、SciPyのライブラリ関数で効率的にデータを処理する方法を学んだ。しかし、処理結果が数値の羅列のままでは、生物学的な意味を読み取ることは難しい。データを「人間が解釈できる形」に変換するのが可視化の役割である。
+
+AIエージェントにプロットコードの生成を依頼すると、動作するコードは得られる。しかし、**グラフの種類が適切か**、**色覚多様性に配慮しているか**、**軸ラベルや凡例が正しいか**——これらの判断は人間の仕事である。エージェントが `plt.plot()` で折れ線グラフを生成しても、データの性質上バイオリンプロットが適切なら、それを見抜いて修正を指示する力が必要になる。
+
+本章では、Pythonの3つの主要な可視化ライブラリ（matplotlib[1](https://doi.org/10.1109/MCSE.2007.55)[2](https://matplotlib.org/stable/)、seaborn[3](https://doi.org/10.21105/joss.03021)[4](https://seaborn.pydata.org/)、plotly[5](https://plotly.com/python/)）の使い方と、科学的可視化の原則を学ぶ。
+
+---
+
+## 11-1. Python可視化ライブラリ
+
+### matplotlibの基礎 — Figure/Axesのオブジェクト指向API
+
+matplotlibにはプロットを作成する方法が2つある。**暗黙的API**（`plt.plot()`, `plt.hist()` など）と**明示的API**（`fig, ax = plt.subplots()` でFigure/Axesオブジェクトを取得して操作する方法）である。
+
+```python
+# 暗黙的API — エージェントが生成しがちなパターン
+import matplotlib.pyplot as plt
+
+plt.hist(gc_values, bins=30)
+plt.xlabel("GC content")
+plt.ylabel("Frequency")
+plt.title("Distribution of GC Content")
+plt.savefig("gc_hist.png")
+plt.show()
+```
+
+暗黙的APIは短くて手軽だが、グローバルな状態に依存するため、複数のグラフを扱うときに混乱しやすい。再現可能なスクリプトには、明示的APIを推奨する:
+
+```python
+# 明示的API — 推奨パターン
+import matplotlib
+matplotlib.use("Agg")  # ヘッドレス環境対応
+
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.figure import Figure
+from pathlib import Path
+
+def gc_histogram(
+    gc_values: np.ndarray,
+    bins: int = 30,
+    output_path: Path | None = None,
+) -> Figure:
+    """GC含量のヒストグラムを作成する."""
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.hist(gc_values, bins=bins, edgecolor="black", alpha=0.7)
+    ax.set_xlabel("GC content")
+    ax.set_ylabel("Frequency")
+    ax.set_title("Distribution of GC Content")
+
+    if output_path is not None:
+        fig.savefig(output_path, dpi=300, bbox_inches="tight")
+
+    return fig
+```
+
+このパターンのポイントは3つある:
+
+1. **`fig, ax = plt.subplots()`** で明示的にFigure/Axesを取得する。`ax.set_xlabel()` のように、操作対象のAxesが常に明確になる
+2. **`matplotlib.use("Agg")`** をインポート直後に呼ぶ。GUIバックエンドがない環境（リモートサーバー、CI）でもエラーにならない
+3. **`plt.show()` を呼ばず `Figure` を返す**。呼び出し側が表示・保存を判断できる設計で、テストも容易になる
+
+エージェントが暗黙的APIで生成したコードをレビューするとき、「`plt.subplots()` を使って明示的APIに書き換えて」と指示するだけで、保守性の高いコードに変換できる。
+
+### バイオインフォの定番プロット
+
+バイオインフォマティクスでは、特定の解析結果に対応した定番の可視化パターンがある。ここでは、[§10](./10_data_processing.md)で処理したデータを入力として、2つの代表的なプロットを作成する。
+
+#### Volcano plot
+
+Volcano plotは、DEG（差次的発現遺伝子）解析の結果を一覧するための散布図である。x軸に発現変化量($\log_2$ Fold Change)、y軸に統計的有意性($-\log_{10}$ adjusted p-value)をとり、有意に発現が変動した遺伝子を色分けする:
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.figure import Figure
+
+def volcano_plot(
+    deg_df: pd.DataFrame,
+    padj_threshold: float = 0.05,
+    log2fc_threshold: float = 1.0,
+    output_path: Path | None = None,
+) -> Figure:
+    """Volcano plotを作成する."""
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    df = deg_df.copy()
+    df["-log10_padj"] = -np.log10(df["padj"].clip(lower=1e-300))
+
+    # 分類: up-regulated, down-regulated, not significant
+    is_up = (df["padj"] < padj_threshold) & (
+        df["log2FoldChange"] >= log2fc_threshold
+    )
+    is_down = (df["padj"] < padj_threshold) & (
+        df["log2FoldChange"] <= -log2fc_threshold
+    )
+    df["category"] = np.select(
+        [is_up, is_down], ["up", "down"], default="ns"
+    )
+
+    colors = {"up": "tab:red", "down": "tab:blue", "ns": "tab:gray"}
+    labels = {
+        "up": "Up-regulated",
+        "down": "Down-regulated",
+        "ns": "Not significant",
+    }
+
+    for cat in ["ns", "up", "down"]:
+        subset = df[df["category"] == cat]
+        if subset.empty:
+            continue
+        ax.scatter(
+            subset["log2FoldChange"],
+            subset["-log10_padj"],
+            c=colors[cat],
+            label=labels[cat],
+            alpha=0.6,
+            s=10,
+        )
+
+    # 閾値線
+    ax.axhline(
+        -np.log10(padj_threshold),
+        color="gray", linestyle="--", linewidth=0.5,
+    )
+    ax.axvline(log2fc_threshold, color="gray", linestyle="--", linewidth=0.5)
+    ax.axvline(-log2fc_threshold, color="gray", linestyle="--", linewidth=0.5)
+
+    ax.set_xlabel("$\\log_2$(Fold Change)")
+    ax.set_ylabel("$-\\log_{10}$(adjusted p-value)")
+    ax.set_title("Volcano Plot")
+    ax.legend()
+
+    if output_path is not None:
+        fig.savefig(output_path, dpi=300, bbox_inches="tight")
+
+    return fig
+```
+
+入力は[§10-2](./10_data_processing.md#10-2-pandasとpolarsによるテーブルデータ処理)で扱った `filter_significant_genes()` と同じDEGテーブル（カラム: `gene`, `log2FoldChange`, `padj`）である。`np.select()` で3カテゴリに分類し、カテゴリごとに色を変えて `ax.scatter()` でプロットする。`ax.axhline()` と `ax.axvline()` で閾値線を引くことで、どの遺伝子が有意かを視覚的に判別できる。
+
+`df["padj"].clip(lower=1e-300)` は、$p$ = 0 のときに $-\log_{10}(0) = \infty$ となるのを防ぐ処理である。
+
+#### ヒートマップと階層クラスタリング
+
+[§10-3](./10_data_processing.md#10-3-ライブラリ関数の活用--aiが再発明しがちなパターン)で作成した `expression_distance_matrix()` の出力（サンプル間の相関距離行列）を、ヒートマップとして可視化する。seabornの `clustermap()` を使えば、ヒートマップと階層クラスタリングのデンドログラムを同時に描画できる:
+
+```python
+import seaborn as sns
+
+def expression_heatmap(
+    distance_matrix: np.ndarray,
+    sample_labels: list[str] | None = None,
+) -> sns.matrix.ClusterGrid:
+    """距離行列のヒートマップと階層クラスタリングを作成する."""
+    if sample_labels is not None:
+        df = pd.DataFrame(
+            distance_matrix,
+            index=sample_labels,
+            columns=sample_labels,
+        )
+    else:
+        df = pd.DataFrame(distance_matrix)
+
+    g = sns.clustermap(
+        df,
+        cmap="viridis",
+        figsize=(8, 8),
+        linewidths=0.5,
+    )
+    g.ax_heatmap.set_xlabel("Sample")
+    g.ax_heatmap.set_ylabel("Sample")
+    g.figure.suptitle("Expression Distance Heatmap", y=1.02)
+
+    return g
+```
+
+`clustermap()` は内部で `scipy.cluster.hierarchy.linkage()` を呼び出し、行と列を類似度に基づいて並べ替える。戻り値は `ClusterGrid` オブジェクトで、通常の `Figure` とは異なる点に注意する。`g.figure` で `Figure` にアクセスし、`g.ax_heatmap` でヒートマップ部分の `Axes` にアクセスできる。
+
+カラーマップには `"viridis"` を指定している。この選択の根拠は[§11-2](#11-2-可視化の原則)で解説する。
+
+### seabornによる統計的可視化
+
+seabornはmatplotlib上に構築された統計的可視化ライブラリである。最大の特徴は**tidy data**（long form）を前提としている点で、[§4 データフォーマットの判断力](./04_data_formats.md)で学んだ `melt()` によるlong form変換が、そのままseabornの入力になる。
+
+バイオリンプロットは、カテゴリ別の分布形状を比較するのに適している。ボックスプロットでは見えない分布の「形」（双峰性、裾の長さなど）を可視化できる:
+
+```python
+import seaborn as sns
+
+def expression_violin(
+    expression_df: pd.DataFrame,
+    category_col: str = "category",
+    value_col: str = "expression",
+) -> Figure:
+    """カテゴリ別発現量のバイオリンプロットを作成する."""
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    sns.violinplot(
+        data=expression_df,
+        x=category_col,
+        y=value_col,
+        hue=category_col,
+        ax=ax,
+        palette="cividis",
+        inner="box",
+        legend=False,
+    )
+
+    ax.set_xlabel(category_col.replace("_", " ").title())
+    ax.set_ylabel(value_col.replace("_", " ").title())
+    ax.set_title("Expression Distribution by Category")
+
+    return fig
+```
+
+入力の `expression_df` は以下のようなtidy formatのDataFrameを想定している:
+
+| category | expression |
+|----------|-----------|
+| control | 10.2 |
+| control | 9.8 |
+| treatment | 15.1 |
+| treatment | 14.5 |
+
+`inner="box"` を指定すると、バイオリン内部にボックスプロット（中央値と四分位範囲）が表示され、分布の要約統計量も読み取れる。`palette="cividis"` は色覚多様性に配慮したカラーパレットである。
+
+### plotlyによるインタラクティブグラフ
+
+論文投稿には静的なグラフ（PNG/SVG/PDF）が必要だが、探索的データ解析（EDA）では**インタラクティブグラフ**が威力を発揮する。plotly[5](https://plotly.com/python/)を使えば、マウスホバーで個々のデータ点の情報を表示できる。
+
+Volcano plotにplotlyを適用すると、ホバーで遺伝子名を確認できる。数千の遺伝子の中から注目すべき点を探索的に調べる場面で有用である:
+
+```python
+import plotly.express as px
+
+def volcano_plot_interactive(deg_df: pd.DataFrame) -> None:
+    """インタラクティブなVolcano plotを作成する."""
+    df = deg_df.copy()
+    df["-log10_padj"] = -np.log10(df["padj"].clip(lower=1e-300))
+
+    fig = px.scatter(
+        df,
+        x="log2FoldChange",
+        y="-log10_padj",
+        hover_data=["gene", "padj"],  # ホバーで遺伝子名を表示
+        color_discrete_sequence=["gray"],
+    )
+    fig.show()
+```
+
+静的グラフとインタラクティブグラフの使い分け:
+
+| 用途 | 形式 | ライブラリ |
+|------|------|-----------|
+| 論文・プレゼン投稿 | 静的（PNG/SVG/PDF） | matplotlib, seaborn |
+| 探索的データ解析 | インタラクティブ（HTML） | plotly |
+| ダッシュボード | インタラクティブ | plotly + Dash, Streamlit |
+| Jupyter Notebook | 両方 | いずれも対応 |
+
+plotlyのコードは本書のスクリプト集には含めていない。plotly未インストールの環境でもmatplotlib/seabornのコードがすべて動作するようにするためである。
+
+#### エージェントへの指示例
+
+可視化コードをエージェントに依頼するときは、「何を描きたいか」だけでなく、「どの形式で」「どのライブラリで」を明示すると、期待どおりのコードが得られやすい:
+
+> 「DEG結果のDataFrame（カラム: gene, log2FoldChange, padj）からVolcano plotを作成する関数を書いて。matplotlibの明示的API（fig, ax = plt.subplots()）を使い、Figureを返す設計にすること。有意遺伝子（padj < 0.05, |log2FC| > 1）を赤と青で色分けして」
+
+> 「6サンプルの相関距離行列（NumPy配列）からヒートマップを作成して。seaborn.clustermap()を使い、カラーマップはviridisを指定すること」
+
+> 「control群とtreatment群の発現量分布をバイオリンプロットで比較したい。入力はtidy format（category列、expression列）のDataFrame。seabornを使い、palette='cividis'を指定して」
+
+エージェントが暗黙的API（`plt.plot()`, `plt.show()`）でコードを生成した場合は、以下のように修正を指示する:
+
+> 「plt.hist()ではなくfig, ax = plt.subplots()を使って書き換えて。plt.show()は削除し、Figureオブジェクトを返すようにして」
+
+---
+
+## 11-2. 可視化の原則
+
+コードが動くかどうかだけでなく、図が「正しく伝わるか」を判断する力が必要である。本節では、エージェントが生成したプロットをレビューする際のチェックポイントを学ぶ。
+
+### 適切なグラフ種類の選択
+
+データの性質に応じたグラフ種類の選択は、可視化の最も基本的な判断である:
+
+| データの性質 | 推奨グラフ | 非推奨 |
+|-------------|----------|--------|
+| 1変数の分布 | ヒストグラム、密度プロット、バイオリンプロット | 円グラフ、棒グラフ |
+| 2変数の関係 | 散布図 | 折れ線グラフ（連続でないデータ） |
+| カテゴリ別の分布比較 | バイオリンプロット、ボックスプロット | 棒グラフ（平均値のみ） |
+| 行列データの全体像 | ヒートマップ | 3Dサーフェス |
+| 時系列データ | 折れ線グラフ | 散布図 |
+| DEG解析結果 | Volcano plot | 棒グラフ |
+| サンプル間の距離 | ヒートマップ + デンドログラム | 数値テーブル |
+
+エージェントは「グラフを描いて」という指示に対して、データの性質を考慮せずに `plt.plot()` で折れ線グラフを生成することがある。データの性質を理解した上で「バイオリンプロットで描いて」のように具体的に指示することが重要である。
+
+棒グラフで平均値だけを示す「dynamite plot」は、分布の形状（外れ値、双峰性）を隠してしまうため、科学論文では避けるべきとされている[8](https://doi.org/10.1371/journal.pcbi.1003833)。バイオリンプロットやボックスプロットに個々のデータ点を重ねた表現（strip plot + box plot）のほうが情報量が多い。
+
+### 色覚多様性への配慮
+
+**色覚多様性**（Color Vision Deficiency; CVD）への配慮は、科学的可視化において不可欠である。日本人男性の約5%、世界的には約8%が赤緑色覚異常を持つとされており、赤と緑を区別するカラーマップは一部の読者にとって解読不能になる[6](https://doi.org/10.1038/s41467-020-19160-7)。
+
+#### 推奨するカラーマップ
+
+| カラーマップ | 特性 | 用途 |
+|------------|------|------|
+| `viridis` | 知覚的に均一、色覚バリアフリー | 連続値（デフォルト推奨） |
+| `cividis` | 色覚バリアフリー最適化 | 連続値 |
+| `inferno` | 暗い背景で視認性が高い | 連続値 |
+| `coolwarm` | 正負の対比（青→白→赤） | 発散データ（log2FC等） |
+
+#### 避けるべきカラーマップ
+
+| カラーマップ | 問題 |
+|------------|------|
+| `jet` / `rainbow` | 知覚的に不均一、色覚バリアフリーでない |
+| `hot` | 低値域が暗くて見えにくい |
+| 赤-緑の2色対比 | 色覚異常者に区別できない |
+
+Volcano plotで有意遺伝子を色分けする際、赤（up-regulated）と青（down-regulated）の組み合わせは色覚異常の影響を受けにくい。一方、赤と緑の組み合わせは避けるべきである。
+
+エージェントが `cmap="jet"` や `cmap="rainbow"` を含むコードを生成した場合は、`cmap="viridis"` に置き換えるよう指示する。
+
+### 軸ラベル・凡例・タイトルの必須化
+
+エージェントが生成するプロットコードでは、軸ラベルや凡例が欠落していることが多い。以下のチェックリストでレビューする:
+
+- [ ] **x軸ラベル** — 変数名と単位（例: `"GC content"`, `"log2(Fold Change)"`）
+- [ ] **y軸ラベル** — 変数名と単位（例: `"Frequency"`, `"-log10(adjusted p-value)"`）
+- [ ] **タイトル** — グラフの内容を端的に表す（探索的解析では省略可）
+- [ ] **凡例** — 複数系列がある場合は必須。凡例の位置がデータと重ならないか
+- [ ] **フォントサイズ** — 論文掲載時の縮小を考慮して十分な大きさか
+- [ ] **軸の範囲** — 自動設定で問題ないか、データが見切れていないか
+
+matplotlibでは、軸ラベルが設定されているかをプログラムで検証できる。テストコードに `assert ax.get_xlabel() != ""` を含めておけば、ラベルの欠落を自動的に検出できる。
+
+### 出力形式の使い分け
+
+科学論文では、図の出力形式が投稿規定で指定されることが多い:
+
+| 形式 | 種類 | 特徴 | 用途 |
+|------|------|------|------|
+| PNG | ラスタ | ピクセルデータ、ファイルサイズ小 | Webページ、プレゼン |
+| SVG | ベクタ | 拡大しても劣化しない、テキスト編集可 | 論文投稿（一部ジャーナル） |
+| PDF | ベクタ | 拡大しても劣化しない | 論文投稿（LaTeX組版） |
+| TIFF | ラスタ | 非圧縮、高品質 | 一部ジャーナルの投稿規定 |
+
+`savefig()` のベストプラクティス:
+
+```python
+# PNG（プレゼン・Web用）
+fig.savefig("plot.png", dpi=150, bbox_inches="tight")
+
+# SVG（論文投稿用ベクタ）
+fig.savefig("plot.svg", bbox_inches="tight")
+
+# PDF（LaTeX組版用）
+fig.savefig("plot.pdf", bbox_inches="tight")
+
+# 高解像度PNG（論文投稿用ラスタ、300 dpi以上）
+fig.savefig("plot.png", dpi=300, bbox_inches="tight")
+```
+
+`bbox_inches="tight"` は、ラベルが切れないように余白を自動調整するオプションである。これを指定しないと、長い軸ラベルが画像の外にはみ出すことがある。`dpi` はラスタ形式（PNG/TIFF）でのみ意味を持ち、ベクタ形式（SVG/PDF）では無視される。
+
+### 再現可能なプロットスクリプト化
+
+Excelやアプリケーション上で手作業で作成したグラフは、データが更新されるたびに同じ操作を繰り返す必要がある。プロットをPythonスクリプトとして記述すれば、データを差し替えるだけで同じ体裁のグラフを再生成できる。
+
+#### スクリプト化のポイント
+
+1. **データの読み込みからグラフ保存まで**を1つのスクリプトにまとめる
+2. **スクリプトはGitで管理**する（[§6 バージョン管理](./06_git.md)参照）
+3. **生成された画像は `.gitignore` に追加**する（スクリプトから再生成できるため）
+4. **スタイル設定を統一**する（`rcParams` やスタイルシート）
+
+プロジェクト全体でグラフのスタイルを統一するには、`matplotlib.rcParams` を設定ファイルとして管理する。[§8 成果物の形式とプロジェクト設計](./08_deliverables.md)で学んだプロジェクト構造の中に `viz.py` や `plot_config.py` のようなモジュールを置く設計が有効である:
+
+```python
+# plot_config.py — プロジェクト共通のスタイル設定
+import matplotlib.pyplot as plt
+
+def apply_project_style() -> None:
+    """プロジェクト共通のmatplotlibスタイルを適用する."""
+    plt.rcParams.update({
+        "font.size": 12,
+        "axes.labelsize": 14,
+        "axes.titlesize": 16,
+        "figure.dpi": 150,
+        "savefig.dpi": 300,
+        "savefig.bbox": "tight",
+    })
+```
+
+#### エージェントへの指示例
+
+可視化の原則は、エージェントに「何を描くか」だけでなく「どう描くか」を指示する際に役立つ:
+
+> 「このヒートマップのカラーマップを jet から viridis に変更して。色覚多様性に配慮するため」
+
+> 「このグラフに軸ラベル、タイトル、凡例を追加して。x軸は 'log2(Fold Change)'、y軸は '-log10(adjusted p-value)' にすること」
+
+> 「このプロットをPNGとSVGの両形式で保存するようにして。PNGは300 dpi、SVGはそのまま。bbox_inches='tight' を指定すること」
+
+> 「プロジェクトのmatplotlib設定を統一するplot_config.pyを作成して。フォントサイズ12pt、軸ラベル14pt、保存時300 dpiを設定すること」
+
+> 「このExcelで作った棒グラフをPythonスクリプトに書き換えて。seabornのbarplot()を使い、matplotlibの明示的APIでFigureを返す設計にして」
+
+---
+
+> ### 🧬 コラム: バイオインフォの専門可視化ツール
+>
+> matplotlib/seabornは汎用的な可視化ライブラリだが、バイオインフォマティクスには専門的な可視化が必要な場面がある。以下のツールはPythonスクリプトからは生成しにくい、または専用ツールのほうがはるかに効率的な可視化に使われる。
+>
+> **ゲノムブラウザ**（リードマッピングや変異の確認）
+> - **IGV** — デスクトップ定番。BAM, VCF, BED, BigWig対応。バッチスクリプトで自動スクリーンショットも可能
+> - **UCSC Genome Browser** — ウェブベース。カスタムトラックのアップロードに対応
+> - **JBrowse 2** — 次世代ウェブブラウザ。構造変異の可視化に強い
+>
+> **アラインメントビューア**（MSAの確認・編集）
+> - **Jalview** — MSA閲覧・編集の定番GUI。カラースキーム、保存度表示、系統樹連動
+> - **AliView** — 大規模MSAの高速ビューア。数万配列でも動作する
+> - **Seaview** — MSA編集と系統樹構築の統合環境
+>
+> **系統樹**
+> - **FigTree** — Newick/Nexus系統樹のGUIビューア。論文用の出力に対応
+> - **iTOL** — ウェブベース。注釈・装飾が豊富で、メタデータの重ね合わせが容易
+> - **ETE Toolkit** — Pythonからプログラマティックに操作可能。自動化に適する
+>
+> **ゲノムトラック描画**（論文用の図）
+> - **pyGenomeTracks** — マルチトラック図をINI設定ファイルで生成
+> - **deepTools** — BAM/BigWigのシグナルヒートマップ。ChIP-seqの定番
+
+---
+
+> ### 🤖 コラム: 機械学習の可視化ツール
+>
+> 機械学習プロジェクトでは、学習過程やモデル性能の可視化が不可欠である。
+>
+> | 場面 | ツール | 用途 |
+> |------|--------|------|
+> | 学習曲線の追跡 | **wandb** / **TensorBoard** | loss, accuracyなどのリアルタイム可視化 |
+> | モデル性能評価 | **scikit-learn** metrics + matplotlib | confusion matrix, ROC曲線, precision-recall |
+> | 次元削減の可視化 | **UMAP** / **t-SNE**（scanpy, sklearn） | 埋め込み空間のクラスタ構造の確認 |
+> | attention可視化 | **bertviz** / カスタム描画 | Transformerモデルの注意機構の解釈 |
+>
+> 次元削減（UMAP, t-SNE）の可視化では、[§3 計算機科学の基礎知識](./03_cs_basics.md)で学んだ**乱数シードの固定**が特に重要である。t-SNEは確率的アルゴリズムであり、シードが異なると配置が大きく変わる。「同じデータなのに図が違う」という混乱を避けるため、`random_state=42` のようにシードを明示する。
+>
+> wandbやTensorBoardはリモートHPC上の学習をローカルのブラウザから監視できる（[§2-5](./02_terminal.md#2-5-リモートサーバー操作)のポートフォワーディングを使う）。
+
+---
+
+## まとめ
+
+本章で学んだ可視化の要素を整理する:
+
+| 概念 | ツール/手法 | 目的 |
+|------|-----------|------|
+| 明示的API | matplotlib（Figure/Axes） | 再現可能で保守性の高いプロットコード |
+| 定番プロット | Volcano plot、ヒートマップ、バイオリンプロット | バイオインフォのデータを適切に表現 |
+| 統計的可視化 | seaborn（tidy data前提） | 分布の形状を含む豊かな可視化 |
+| インタラクティブ | plotly | 探索的データ解析での効率化 |
+| カラーマップ選択 | viridis, cividis | 色覚多様性への配慮 |
+| 出力形式 | PNG/SVG/PDF | 用途に応じた形式選択 |
+| スクリプト化 | Git管理 + rcParams統一 | 再現可能なグラフ生成 |
+
+可視化は「データを正しく見せる」ための技術であると同時に、「データの誤った印象を与えない」ための倫理でもある[7](https://www.edwardtufte.com/tufte/books_vdqi)。カラーマップの選択、グラフ種類の判断、軸ラベルの確認——これらはエージェントに任せきりにできない、人間のレビューが不可欠な領域である。
+
+次章の[§12 ワークフロー管理](./12_workflow.md)では、本章までに学んだデータ処理と可視化のスクリプトを、再現可能な多段階パイプラインとして管理する方法を学ぶ。
+
+---
+
+## 参考文献
+
+[1] Matplotlib Development Team. "Matplotlib Documentation". [https://matplotlib.org/stable/](https://matplotlib.org/stable/) (参照日: 2026-03-19)
+
+[2] Hunter, J. D. "Matplotlib: A 2D Graphics Environment". *Computing in Science & Engineering*, 9(3), 90–95, 2007. [https://doi.org/10.1109/MCSE.2007.55](https://doi.org/10.1109/MCSE.2007.55)
+
+[3] seaborn Development Team. "seaborn Documentation". [https://seaborn.pydata.org/](https://seaborn.pydata.org/) (参照日: 2026-03-19)
+
+[4] Waskom, M. L. "seaborn: statistical data visualization". *Journal of Open Source Software*, 6(60), 3021, 2021. [https://doi.org/10.21105/joss.03021](https://doi.org/10.21105/joss.03021)
+
+[5] Plotly Technologies Inc. "Plotly Python Documentation". [https://plotly.com/python/](https://plotly.com/python/) (参照日: 2026-03-19)
+
+[6] Crameri, F., Shephard, G. E. & Heron, P. J. "The misuse of colour in science communication". *Nature Communications*, 11(1), 5444, 2020. [https://doi.org/10.1038/s41467-020-19160-7](https://doi.org/10.1038/s41467-020-19160-7)
+
+[7] Tufte, E. R. *The Visual Display of Quantitative Information*. 2nd ed., Graphics Press, 2001. ISBN: 978-0961392147
+
+[8] Rougier, N. P., Droettboom, M. & Bourne, P. E. "Ten Simple Rules for Better Figures". *PLOS Computational Biology*, 10(9), e1003833, 2014. [https://doi.org/10.1371/journal.pcbi.1003833](https://doi.org/10.1371/journal.pcbi.1003833)

@@ -36,7 +36,7 @@
   argparse/click/typer、プログレス表示、ロギング設計
 - [10. データ処理ライブラリ](#10-データ処理ライブラリ)（[原稿](./10_data_processing.md)）
   NumPy・pandas・SciPy・polars、Biopython等のバイオ専用ライブラリ
-- [11. 可視化](#11-可視化)
+- [11. 可視化](#11-可視化)（[原稿](./11_visualization.md)）
   matplotlib・seaborn・plotly、可視化の原則、バイオ専門ツール
 - [12. ワークフロー管理](#12-ワークフロー管理)
   Snakemake・Nextflow・makeによる多段階パイプラインの管理
