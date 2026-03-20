@@ -102,7 +102,7 @@
 - 入力データ: `scripts/ch00/data/ecoli_k12_fragment.fasta`（GenBank U00096.3、1–20,000 bp）
 - Step 1: 全ORF検出（コード例・出力例あり）→ 279個の結果 → 生物学の知識で一部は判断できるが、コード設計の判断力が足りないと気づく
 - Step 2: HMM + Viterbiで絞り込み（コード抜粋・出力例・ORFマップ図あり）→ 19個に → HMMパラメータの妥当性は判断できないと気づく
-- 可視化: `figures/ch00_orf_comparison.png`（全ORF vs HMM予測の比較図）
+- 可視化: `figures/ch00_orf_comparison.png`（全ORF vs HMM予測 vs GenBankアノテーションの3パネル比較図）
 - 体験のまとめ: コードを1行も書かずに完成、判断力の必要性、結果→改善のサイクル、§0-2ワークフローへの伏線
 
 #### 基本コマンド

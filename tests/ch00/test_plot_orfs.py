@@ -9,7 +9,7 @@ import pytest
 from matplotlib.figure import Figure
 
 from scripts.ch00.find_orfs import ORF
-from scripts.ch00.plot_orfs import plot_orf_comparison
+from scripts.ch00.plot_orfs import KnownGene, plot_orf_comparison
 
 
 @pytest.fixture()
@@ -68,4 +68,56 @@ class TestPlotOrfComparison:
         assert ax1.get_title() != ""
         assert ax2.get_title() != ""
         assert ax2.get_xlabel() != ""
+        plt.close(fig)
+
+
+@pytest.fixture()
+def sample_known_genes() -> list[KnownGene]:
+    """テスト用GenBankアノテーション."""
+    return [
+        KnownGene("geneA", 100, 400, +1),
+        KnownGene("geneB", 500, 900, -2),
+    ]
+
+
+class TestThreePanelPlot:
+    """3パネル表示（GenBankアノテーション付き）のテスト."""
+
+    def test_three_panels_with_known_genes(
+        self, sample_orfs, predicted_orfs, sample_known_genes,
+    ) -> None:
+        """known_genesを渡すと3つのサブプロットが存在する."""
+        fig = plot_orf_comparison(
+            sample_orfs, predicted_orfs, 1000,
+            known_genes=sample_known_genes,
+        )
+        assert len(fig.axes) == 3
+        plt.close(fig)
+
+    def test_known_gene_labels(
+        self, sample_orfs, predicted_orfs, sample_known_genes,
+    ) -> None:
+        """3パネル時に下段にテキスト要素（遺伝子名）が存在する."""
+        fig = plot_orf_comparison(
+            sample_orfs, predicted_orfs, 1000,
+            known_genes=sample_known_genes,
+        )
+        ax3 = fig.axes[2]
+        texts = [t.get_text() for t in ax3.texts]
+        assert "geneA" in texts
+        assert "geneB" in texts
+        plt.close(fig)
+
+    def test_savefig_three_panels(
+        self, sample_orfs, predicted_orfs, sample_known_genes, tmp_path,
+    ) -> None:
+        """3パネル図のファイル保存ができる."""
+        output = tmp_path / "test_three_panel.png"
+        fig = plot_orf_comparison(
+            sample_orfs, predicted_orfs, 1000,
+            output_path=output,
+            known_genes=sample_known_genes,
+        )
+        assert output.exists()
+        assert output.stat().st_size > 0
         plt.close(fig)
