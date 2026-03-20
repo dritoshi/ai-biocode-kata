@@ -1,0 +1,19 @@
+# docker composeによるRNA-seq解析環境の定義
+# 使い方: docker compose run --rm rnaseq snakemake --cores 4
+
+services:
+  rnaseq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # 生データをマウント（読み取り専用）
+      - ./data/raw:/workspace/data/raw:ro
+      # 結果ディレクトリをマウント（書き込み可能）
+      - ./results:/workspace/results
+      # ログディレクトリをマウント
+      - ./logs:/workspace/logs
+    working_dir: /workspace
+    entrypoint: ["snakemake"]
+    # デフォルトでドライランを実行（安全のため）
+    command: ["--dry-run", "--cores", "4"]

@@ -1,0 +1,39 @@
+# マルチステージビルドによるイメージサイズの最適化
+# ステージ1: ビルド環境（コンパイルツール含む）
+# ステージ2: 実行環境（ランタイムのみ）
+
+# --- ステージ1: ビルド ---
+FROM condaforge/mambaforge:24.3.0-0 AS builder
+
+COPY environment.yml /tmp/environment.yml
+
+# conda-packでポータブルな環境を作成
+RUN mamba install -y conda-pack && \
+    mamba env create -f /tmp/environment.yml && \
+    conda-pack -n rnaseq -o /tmp/env.tar.gz && \
+    mamba clean --all --yes
+
+# --- ステージ2: 実行環境 ---
+FROM debian:bookworm-slim AS runtime
+
+# 最小限のランタイム依存のみインストール
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libgomp1 \
+        procps \
+    && rm -rf /var/lib/apt/lists/*
+
+# ビルドステージからconda環境を展開
+COPY --from=builder /tmp/env.tar.gz /tmp/env.tar.gz
+RUN mkdir -p /opt/env && \
+    tar -xzf /tmp/env.tar.gz -C /opt/env && \
+    rm /tmp/env.tar.gz && \
+    /opt/env/bin/conda-unpack
+
+ENV PATH="/opt/env/bin:$PATH"
+
+WORKDIR /workspace
+COPY . /workspace
+
+ENTRYPOINT ["snakemake"]
+CMD ["--help"]

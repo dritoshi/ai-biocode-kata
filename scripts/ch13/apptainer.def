@@ -1,0 +1,29 @@
+Bootstrap: docker
+From: condaforge/mambaforge:24.3.0-0
+
+%labels
+    Author yourname@example.com
+    Description RNA-seq解析パイプライン環境（Apptainer）
+
+%files
+    environment.yml /tmp/environment.yml
+
+%post
+    # conda環境の作成
+    mamba env create -f /tmp/environment.yml
+    mamba clean --all --yes
+
+    # 環境をデフォルトに設定するためのスクリプト
+    echo ". /opt/conda/etc/profile.d/conda.sh && conda activate rnaseq" >> /etc/bash.bashrc
+
+%environment
+    export PATH="/opt/conda/envs/rnaseq/bin:$PATH"
+
+%runscript
+    exec snakemake "$@"
+
+%help
+    RNA-seq解析パイプラインのApptainerコンテナ。
+    使い方:
+      apptainer run rnaseq.sif --cores 4
+      apptainer exec rnaseq.sif fastqc --version

@@ -1,0 +1,17 @@
+# RNA-seq解析環境のconda定義ファイル
+# Dockerfile内でconda env create -f environment.ymlとして使用する
+name: rnaseq
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - fastqc=0.12.1
+  - trimmomatic=0.39
+  - star=2.7.11b
+  - samtools=1.20
+  - subread=2.0.6    # featureCounts
+  - multiqc=1.22
+  - pandas=2.2
+  - numpy=1.26
