@@ -54,8 +54,8 @@ ai-biocode-kata/
 | 15 | パフォーマンスと最適化 | [15_performance.md](chapters/15_performance.md) | [§15](chapters/roadmap.md#15-パフォーマンスと最適化) |
 | 16 | デバッグの技術 | [16_debug.md](chapters/16_debug.md) | [§16](chapters/roadmap.md#16-デバッグの技術) |
 | 17 | ドキュメント化 | [17_documentation.md](chapters/17_documentation.md) | [§17](chapters/roadmap.md#17-ドキュメント化) |
-| 18 | データベースとAPI | — | [§18](chapters/roadmap.md#18-データベースとapi) |
-| 19 | セキュリティと倫理 | — | [§19](chapters/roadmap.md#19-セキュリティと倫理) |
+| 18 | データベースとAPI | [18_database_api.md](chapters/18_database_api.md) | [§18](chapters/roadmap.md#18-データベースとapi) |
+| 19 | セキュリティと倫理 | [19_security_ethics.md](chapters/19_security_ethics.md) | [§19](chapters/roadmap.md#19-セキュリティと倫理) |
 | 20 | コラボレーション | — | [§20](chapters/roadmap.md#20-コラボレーション) |
 | 21 | ソフトウェアの構成要素 | [21_software_components.md](chapters/21_software_components.md) | [§21](chapters/roadmap.md#21-ソフトウェアの構成要素) |
 | 付録A | 学習順序の推奨 | — | [§付録A](chapters/roadmap.md#付録a-学習順序の推奨) |
