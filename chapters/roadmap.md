@@ -54,8 +54,8 @@
   tracebackの読み方、最小再現例、デバッガ活用
 - [17. ドキュメント化](#17-ドキュメント化)（[原稿](./17_documentation.md)）
   Markdown、文芸的プログラミング、README、docstring、Sphinxによるドキュメント整備
-- [18. データベースとAPI](#18-データベースとapi)
-  公開データベースの利用と登録、REST APIによるデータ取得
+- [18. データベースとAPI](#18-データベースとapi)（[原稿](./18_database_api.md)）
+  DB一般知識（SQL/RDF/SPARQL）、バイオ系DB、APIによるデータ取得、ローカル管理
 - [19. セキュリティと倫理](#19-セキュリティと倫理)
   APIキー管理、データ倫理、患者データの取り扱い
 - [20. コラボレーション](#20-コラボレーション)
@@ -1679,18 +1679,28 @@ def log_experiment(params: dict, metrics: dict, output_dir: str):
 
 ## 18. データベースとAPI
 
-### 18-0. データベース用語の整理
-- データベース、データマート、データストア、データレイクなどの用語整理
-- 一次データベース vs 二次データベース
+### 18-0. データベースの基礎知識 — エージェントと「同じ言語」で話すために
+- **DB種類と用語**: リレーショナルDB(RDB)とSQL（テーブル・SELECT/JOINの概念）、NoSQL（キーバリュー/ドキュメント/グラフ型の概要）、一次DB vs 二次DB、データベース/データマート/データストア/データレイクの整理
+- **オントロジーとセマンティックWeb**: オントロジーの概念、RDF（主語-述語-目的語のトリプル）、Linked Data（URIでDB間を接続）、SPARQL（RDFへの問い合わせ言語、SQLとの対比）
+- **Vibe codingとの接続**: SQLかSPARQLかREST APIかを指定する語彙、エージェント生成クエリの検証力（JOINの方向、フィルタ条件の妥当性）
 
-### 18-1. 公開データベースの利用と登録
-- NCBI（GenBank, SRA, GEO）、Ensembl、UCSC、UniProt、DDBJ
-- データベースの利用（取得）と登録（寄託）は表裏一体 — 自分が使っているデータも誰かが登録したもの
+> **🧬 コラム：Gene OntologyとKEGG**
+>
+> - **Gene Ontology (GO)** — DAG構造、エンリッチメント解析での利用
+> - **KEGG** — パスウェイDB、API、ライセンス注意
+> - **その他のオントロジー** — Sequence Ontology (SO)、Disease Ontology (DO)、Cell Ontology (CL)
 
-### 18-2. データの取得
-- REST API の基礎（HTTP GET/POST, JSON）
-- `wget`, `curl` によるダウンロード
-- チェックサム（`md5sum`）による整合性検証
+### 18-1. バイオインフォマティクスの主要データベース
+- **主要DBの全体像**: NCBI系(GenBank/SRA/GEO/PubMed/dbSNP)、欧州系(Ensembl/UniProt/EBI)、日本系(DDBJ/PDBj)、ゲノムブラウザ(UCSC/Ensembl/IGV)、統合系(TogoWS)
+- **DB選択の判断力**: 配列→GenBank、生リード→SRA、発現行列→GEO、タンパク質→UniProt。エージェントに指示する前に人間が適切なDBを選ぶ
+- **IDの体系**: アクセッション番号の読み方(GSE/GSM/SRR/NM_/ENSG...)、ID変換ツール(biomaRt/MyGene.info/UniProt ID mapping)、エージェントにID変換を依頼する際の注意点
+
+### 18-2. APIによるデータ取得
+- **API firstの原則**: スクレイピングや全データDL前に公式APIの有無を確認する習慣。エージェントへの指示と公式ドキュメントでの裏付け
+- **REST APIの基礎**: HTTP GET/POST、エンドポイント、レスポンス形式(JSON/XML/FASTA/TSV)、レート制限とAPIキー(→§8参照)
+- **NCBI Entrez API**: esearch→efetch→elinkフロー、Biopython `Entrez`モジュール
+- **SPARQLエンドポイント**: UniProt SPARQL、TogoStanza。エージェントにSPARQLクエリを生成させる実例
+- **Pythonライブラリ**: `requests`+`json`、`Biopython`(Entrez/SeqIO)、`bioservices`
 
 > **🧬 コラム：NCBI系コマンドラインツール**
 >
@@ -1700,23 +1710,26 @@ def log_experiment(params: dict, metrics: dict, output_dir: str):
 > - **NCBI Datasets CLI** — ゲノム・遺伝子の一括ダウンロード
 > - **BLAST+** — `makeblastdb` でローカルDB作成、`blastn`/`blastp` で検索
 
-### 18-3. 公開データベースへの登録
-- **GEO登録の実務フロー**
-  - NCBIアカウント作成 → メタデータ入力（サンプル情報、プロトコル） → ファイルアップロード（FASTQ/処理済みデータ） → 公開設定
-  - メタデータの設計は§4-0で事前に行っておく
-- **SRA登録**（生リードデータ）
-  - GEOからのリンクで登録することが多い
-  - 大容量ファイルのアップロード方法（FTP, Aspera）
-- **論文投稿〜公開のタイムライン**
-  - 投稿前にデータを登録 → アクセッション番号を取得 → 論文に記載
-  - embargo期間の設定（論文アクセプトまで非公開にできる）
-  - アクセプト後にembargo解除 → データ公開
-- **DOI付きデータセット・コードの登録**
-  - Zenodo: コード・データ・ドキュメントにDOIを発行。GitHub連携あり（§6-2参照）
-  - figshare: 図表・データセット・ポスター等にDOI発行
-  - コードはGitHub + Zenodo、データはGEO/SRA + Zenodo/figshare と使い分ける
+> **🧬 コラム：Entrez以外の主要バイオインフォマティクスAPI**
+>
+> - **Ensembl REST API** — ゲノムアノテーション・バリアント情報をJSONで取得。認証不要
+> - **Ensembl BioMart** — 大量IDの一括取得・変換に特化。`pybiomart`/`biomaRt`
+> - **UCSC Genome Browser REST API** — トラックデータへのプログラムアクセス
+> - **TogoWS** — 複数DBへの統一RESTゲートウェイ(`/entry/DB名/ID`)
+> - **MyGene.info** — 遺伝子情報検索・ID変換のREST API
 
-> → 投稿前の最終確認は[付録D](#付録d-論文投稿前チェックリスト)を参照
+### 18-3. データのダウンロードとローカル管理
+- **大規模データのダウンロード**: wget/curl（リトライ・帯域制限）、SRA Toolkit(prefetch+fasterq-dump)、Aspera(ascp)、エージェントにダウンロードスクリプトの一括生成を依頼
+- **チェックサム検証**: md5sum/sha256sum、自動検証スクリプト
+- **ローカルDB構築**: BLASTデータベース(makeblastdb)、ゲノムインデックス(BWA/STAR/HISAT2)、SQLiteによるメタデータ管理(→§4接続)
+
+> **🧬 コラム：データベースへの登録 — Vibe codingで登録準備を効率化する**
+>
+> - **登録全体フロー**: DB選択→メタデータ整備→ファイル準備→アップロード→公開設定
+> - **エージェントに依頼できること**: GEOテンプレート変換スクリプト、ファイル名-メタデータ整合性チェック、FTPアップロードスクリプト
+> - **人間が判断すること**: メタデータの科学的正確性、公開範囲・タイミング、利用規約
+> - **DOI付き登録**: Zenodo(GitHub連携→§6-2)、figshare、使い分け
+> - → メタデータ設計は§4-0参照、投稿前チェックは[付録D](#付録d-論文投稿前チェックリスト)参照
 
 ---
 
@@ -1942,10 +1955,10 @@ def log_experiment(params: dict, metrics: dict, output_dir: str):
 
 ### 2. データ
 
-- [ ] 生データがGEO/SRAに登録されている（アクセッション番号を取得済み） — [§18-3](#18-3-公開データベースへの登録)
+- [ ] 生データがGEO/SRAに登録されている（アクセッション番号を取得済み） — [§18-3 コラム](#18-3-データのダウンロードとローカル管理)
 - [ ] メタデータが機械可読形式（TSV/CSV）で整備されている — [§4-0](./04_data_formats.md)
-- [ ] 中間・最終データがZenodo/figshareに登録されている（必要に応じて） — [§18-3](#18-3-公開データベースへの登録)
-- [ ] embargo期間が適切に設定されている — [§18-3](#18-3-公開データベースへの登録)
+- [ ] 中間・最終データがZenodo/figshareに登録されている（必要に応じて） — [§18-3 コラム](#18-3-データのダウンロードとローカル管理)
+- [ ] embargo期間が適切に設定されている — [§18-3 コラム](#18-3-データのダウンロードとローカル管理)
 
 ### 3. 再現性
 
