@@ -52,8 +52,8 @@ ai-biocode-kata/
 | 13A | 実験管理（ML/計算実験の追跡） | [13a_experiment.md](chapters/13a_experiment.md) | [§13A](chapters/roadmap.md#13a-実験管理ml計算実験の追跡) |
 | 14 | HPC | [14_hpc.md](chapters/14_hpc.md) | [§14](chapters/roadmap.md#14-hpc) |
 | 15 | パフォーマンスと最適化 | [15_performance.md](chapters/15_performance.md) | [§15](chapters/roadmap.md#15-パフォーマンスと最適化) |
-| 16 | デバッグの技術 | — | [§16](chapters/roadmap.md#16-デバッグの技術) |
-| 17 | ドキュメント化 | — | [§17](chapters/roadmap.md#17-ドキュメント化) |
+| 16 | デバッグの技術 | [16_debug.md](chapters/16_debug.md) | [§16](chapters/roadmap.md#16-デバッグの技術) |
+| 17 | ドキュメント化 | [17_documentation.md](chapters/17_documentation.md) | [§17](chapters/roadmap.md#17-ドキュメント化) |
 | 18 | データベースとAPI | — | [§18](chapters/roadmap.md#18-データベースとapi) |
 | 19 | セキュリティと倫理 | — | [§19](chapters/roadmap.md#19-セキュリティと倫理) |
 | 20 | コラボレーション | — | [§20](chapters/roadmap.md#20-コラボレーション) |

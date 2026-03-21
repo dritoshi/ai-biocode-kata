@@ -298,6 +298,8 @@ configはconfig/config.yamlで管理する。
 
 Notebookの中に複雑な関数定義やデータ処理ロジックを書き始めたら、それはライブラリ化のサインである。
 
+> このロジック分離原則の思想的背景——文芸的プログラミング（Literate Programming）——については[§17-1 Markdownの習得](./17_documentation.md#17-1-markdownの習得)で詳しく解説する。
+
 ---
 
 ### パターン8: Webアプリ（Streamlit / Gradio）
