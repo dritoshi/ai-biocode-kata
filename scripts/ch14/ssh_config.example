@@ -1,0 +1,46 @@
+# ~/.ssh/config の設定例
+# このファイルを ~/.ssh/config にコピーまたは追記して使用する
+
+# --- 基本的なHPC接続 ---
+# 「ssh hpc」で接続できるようになる
+Host hpc
+    HostName login.hpc.example.ac.jp
+    User your_username
+    IdentityFile ~/.ssh/id_ed25519
+    # 接続維持（60秒ごとにキープアライブを送信）
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+# --- 踏み台（ProxyJump）経由の接続 ---
+# 学内ネットワーク外からVPN不要でHPCに接続する構成
+# 「ssh hpc-via-bastion」で踏み台を経由して自動接続
+Host bastion
+    HostName gateway.example.ac.jp
+    User your_username
+    IdentityFile ~/.ssh/id_ed25519
+
+Host hpc-via-bastion
+    HostName login.hpc.internal
+    User your_username
+    IdentityFile ~/.ssh/id_ed25519
+    ProxyJump bastion
+    ServerAliveInterval 60
+
+# --- ポートフォワーディング ---
+# ローカルの8888番ポートをHPC上のJupyterに転送
+# 「ssh hpc-jupyter」で接続後、ブラウザで http://localhost:8888 を開く
+Host hpc-jupyter
+    HostName login.hpc.example.ac.jp
+    User your_username
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 8888 localhost:8888
+    ServerAliveInterval 60
+
+# --- TensorBoard用ポートフォワーディング ---
+# 「ssh hpc-tensorboard」で接続後、http://localhost:6006 を開く
+Host hpc-tensorboard
+    HostName login.hpc.example.ac.jp
+    User your_username
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 6006 localhost:6006
+    ServerAliveInterval 60
