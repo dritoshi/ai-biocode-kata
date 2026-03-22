@@ -1,78 +1,155 @@
-% §15 パフォーマンスと最適化 — 参考文献
-
-@article{knuth1974structured,
-  author  = {Knuth, Donald E.},
-  title   = {Structured Programming with go to Statements},
-  journal = {Computing Surveys},
-  volume  = {6},
-  number  = {4},
-  pages   = {261--301},
-  year    = {1974},
-  doi     = {10.1145/356635.356640}
+@article{baker2016reproducibility,
+  author  = {Baker, Monya},
+  title   = {1,500 scientists lift the lid on reproducibility},
+  journal = {Nature},
+  volume  = {533},
+  number  = {7604},
+  pages   = {452--454},
+  year    = {2016},
+  doi     = {10.1038/533452a},
 }
 
-@inproceedings{amdahl1967validity,
-  author    = {Amdahl, Gene M.},
-  title     = {Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities},
-  booktitle = {AFIPS Conference Proceedings},
-  volume    = {30},
-  pages     = {483--485},
-  year      = {1967},
-  doi       = {10.1145/1465482.1465560}
+@article{kurtzer2017singularity,
+  author  = {Kurtzer, Gregory M. and Sochat, Vanessa and Bauer, Michael W.},
+  title   = {Singularity: Scientific containers for mobility of compute},
+  journal = {PLoS ONE},
+  volume  = {12},
+  number  = {5},
+  pages   = {e0177459},
+  year    = {2017},
+  doi     = {10.1371/journal.pone.0177459},
 }
 
-@misc{python_profilers,
-  author = {{Python Software Foundation}},
-  title  = {The {Python} Profilers},
-  url    = {https://docs.python.org/3/library/profile.html},
-  note   = {参照日: 2026-03-21}
+@article{daveiga2017biocontainers,
+  author  = {da Veiga Leprevost, Felipe and Gr{\"u}ning, Bj{\"o}rn A. and Alber{\'\i}n, Saulo and Boekel, Hannes and Peltzer, Alexander and Ternent, Tobias and Gober, Julianus and Barsnes, Harald and Vaudel, Marc and Sachsenberg, Timo and Perez-Riverol, Yasset},
+  title   = {BioContainers: an open-source and community-driven framework for software standardization},
+  journal = {Bioinformatics},
+  volume  = {33},
+  number  = {16},
+  pages   = {2580--2582},
+  year    = {2017},
+  doi     = {10.1093/bioinformatics/btx192},
 }
 
-@misc{line_profiler,
-  author = {Robert Kern and others},
-  title  = {line\_profiler},
-  url    = {https://github.com/pyutils/line_profiler},
-  note   = {参照日: 2026-03-21}
+@article{gruning2018bioconda,
+  author  = {Gr{\"u}ning, Bj{\"o}rn and Dale, Ryan and Sj{\"o}din, Andreas and Chapman, Brad A. and Rowe, Jillian and Tomkins-Tinch, Christopher H. and Valieris, Renan and K{\"o}ster, Johannes},
+  title   = {Bioconda: sustainable and comprehensive software distribution for the life sciences},
+  journal = {Nature Methods},
+  volume  = {15},
+  number  = {7},
+  pages   = {475--476},
+  year    = {2018},
+  doi     = {10.1038/s41592-018-0046-7},
 }
 
-@misc{memory_profiler,
-  author = {Fabian Pedregosa and others},
-  title  = {memory\_profiler},
-  url    = {https://github.com/pythonprofilers/memory-profiler},
-  note   = {参照日: 2026-03-21}
+@article{merkel2014docker,
+  author  = {Merkel, Dirk},
+  title   = {Docker: lightweight {Linux} containers for consistent development and deployment},
+  journal = {Linux Journal},
+  volume  = {2014},
+  number  = {239},
+  pages   = {2},
+  year    = {2014},
 }
 
-@misc{concurrent_futures,
-  author = {{Python Software Foundation}},
-  title  = {concurrent.futures --- Launching parallel tasks},
-  url    = {https://docs.python.org/3/library/concurrent.futures.html},
-  note   = {参照日: 2026-03-21}
+@article{boettiger2015docker,
+  author  = {Boettiger, Carl},
+  title   = {An introduction to {Docker} for reproducible research},
+  journal = {ACM SIGOPS Operating Systems Review},
+  volume  = {49},
+  number  = {1},
+  pages   = {71--79},
+  year    = {2015},
+  doi     = {10.1145/2723872.2723882},
 }
 
-@misc{apache_parquet,
-  author = {{Apache Software Foundation}},
-  title  = {Apache {Parquet}},
-  url    = {https://parquet.apache.org/},
-  note   = {参照日: 2026-03-21}
+@article{nust2020dockerfiles,
+  author  = {N{\"u}st, Daniel and Sochat, Vanessa and Marwick, Ben and Eglen, Stephen J. and Head, Tim and Hirst, Tony and Evans, Benjamin D.},
+  title   = {Ten simple rules for writing {Dockerfiles} for reproducible data science},
+  journal = {PLoS Computational Biology},
+  volume  = {16},
+  number  = {11},
+  pages   = {e1008316},
+  year    = {2020},
+  doi     = {10.1371/journal.pcbi.1008316},
 }
 
-@misc{cram_spec,
-  author = {{Samtools/Hts-specs}},
-  title  = {{CRAM} format specification (v3.1)},
-  url    = {https://samtools.github.io/hts-specs/CRAMv3.pdf},
-  note   = {参照日: 2026-03-21}
+@misc{docker_docs,
+  author       = {{Docker, Inc.}},
+  title        = {Docker Documentation},
+  howpublished = {\url{https://docs.docker.com/}},
+  year         = {2026},
+  note         = {参照日: 2026-03-20},
 }
 
-@misc{numba,
-  author = {{Numba Development Team}},
-  title  = {Numba: A High Performance {Python} Compiler},
-  url    = {https://numba.readthedocs.io/},
-  note   = {参照日: 2026-03-21}
+@misc{apptainer_docs,
+  author       = {{Apptainer Contributors}},
+  title        = {Apptainer Documentation},
+  howpublished = {\url{https://apptainer.org/docs/}},
+  year         = {2026},
+  note         = {参照日: 2026-03-20},
 }
 
-@misc{pandas_chunking,
-  author = {{pandas Development Team}},
-  title  = {{IO} tools: Chunking},
-  url    = {https://pandas.pydata.org/docs/user_guide/io.html#iterating-through-files-chunk-by-chunk},
-  note   = {参照日: 2026-03-21}
+@misc{ghcr_docs,
+  author       = {{GitHub}},
+  title        = {Working with the Container registry},
+  howpublished = {\url{https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry}},
+  year         = {2026},
+  note         = {参照日: 2026-03-20},
+}
+@misc{biewald2020wandb,
+  author       = {Biewald, Lukas},
+  title        = {Experiment Tracking with Weights and Biases},
+  year         = {2020},
+  howpublished = {\url{https://www.wandb.com/}},
+  note         = {参照日: 2026-03-20},
+}
+
+@inproceedings{zaharia2018mlflow,
+  author    = {Zaharia, Matei and Chen, Andrew and Davidson, Aaron and Ghodsi, Ali and Hong, Sue Ann and Konwinski, Andy and Murching, Siddharth and Nykodym, Tomas and Ogilvie, Paul and Parkhe, Mani and others},
+  title     = {Accelerating the Machine Learning Lifecycle with {MLflow}},
+  journal   = {IEEE Data Engineering Bulletin},
+  volume    = {41},
+  number    = {4},
+  pages     = {39--45},
+  year      = {2018},
+}
+
+@misc{yadan2019hydra,
+  author       = {Yadan, Omry},
+  title        = {Hydra --- A framework for elegantly configuring complex applications},
+  year         = {2019},
+  howpublished = {\url{https://hydra.cc/}},
+  note         = {参照日: 2026-03-20},
+}
+
+@misc{iterative2020dvc,
+  author       = {{Iterative}},
+  title        = {{DVC}: Data Version Control --- Git for Data},
+  howpublished = {\url{https://dvc.org/}},
+  year         = {2020},
+  note         = {参照日: 2026-03-20},
+}
+
+@inproceedings{tatman2018taxonomy,
+  author    = {Tatman, Rachael and VanderPlas, Jake and Dane, Sohier},
+  title     = {A Practical Taxonomy of Reproducibility for Machine Learning Research},
+  booktitle = {Reproducibility in ML Workshop at ICML},
+  year      = {2018},
+}
+
+@misc{wandb_docs,
+  author       = {{Weights \& Biases}},
+  title        = {W\&B Documentation},
+  howpublished = {\url{https://docs.wandb.ai/}},
+  year         = {2026},
+  note         = {参照日: 2026-03-20},
+}
+
+@misc{mlflow_docs,
+  author       = {{MLflow Contributors}},
+  title        = {MLflow Documentation},
+  howpublished = {\url{https://mlflow.org/docs/latest/}},
+  year         = {2026},
+  note         = {参照日: 2026-03-20},
 }

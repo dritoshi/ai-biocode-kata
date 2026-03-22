@@ -1,108 +1,78 @@
-@misc{gfm2024,
-  title   = {GitHub Flavored Markdown Spec},
-  author  = {{GitHub}},
-  url     = {https://github.github.com/gfm/},
-  note    = {参照日: 2026-03-21}
-}
+% §15 パフォーマンスと最適化 — 参考文献
 
-@misc{mermaid2024,
-  title   = {Mermaid --- Diagramming and charting tool},
-  author  = {{Mermaid}},
-  url     = {https://mermaid.js.org/},
-  note    = {参照日: 2026-03-21}
-}
-
-@article{knuth1984literate,
+@article{knuth1974structured,
   author  = {Knuth, Donald E.},
-  title   = {Literate Programming},
-  journal = {The Computer Journal},
-  volume  = {27},
-  number  = {2},
-  pages   = {97--111},
-  year    = {1984},
-  doi     = {10.1093/comjnl/27.2.97}
-}
-
-@misc{quarto2024,
-  title   = {Quarto --- An open-source scientific and technical publishing system},
-  author  = {{Quarto}},
-  url     = {https://quarto.org/},
-  note    = {参照日: 2026-03-21}
-}
-
-@misc{keepachangelog2024,
-  title   = {Keep a Changelog},
-  author  = {{Keep a Changelog}},
-  url     = {https://keepachangelog.com/},
-  note    = {参照日: 2026-03-21}
-}
-
-@misc{mkdocs2024,
-  title   = {MkDocs --- Project documentation with Markdown},
-  author  = {{MkDocs}},
-  url     = {https://www.mkdocs.org/},
-  note    = {参照日: 2026-03-21}
-}
-
-@misc{mkdocstrings2024,
-  title   = {mkdocstrings --- Automatic documentation from sources, for MkDocs},
-  author  = {{mkdocstrings}},
-  url     = {https://mkdocstrings.github.io/},
-  note    = {参照日: 2026-03-21}
-}
-
-@misc{sphinx2024,
-  title   = {Sphinx --- Python Documentation Generator},
-  author  = {{Sphinx}},
-  url     = {https://www.sphinx-doc.org/},
-  note    = {参照日: 2026-03-21}
-}
-
-@inproceedings{mitchell2019model,
-  author    = {Mitchell, Margaret and Wu, Simone and Zaldivar, Andrew and Barnes, Parker and Vasserman, Lucy and Hutchinson, Ben and Spitzer, Elena and Raji, Inioluwa Deborah and Gebru, Timnit},
-  title     = {Model Cards for Model Reporting},
-  booktitle = {Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT* '19)},
-  pages     = {220--229},
-  year      = {2019},
-  doi       = {10.1145/3287560.3287596}
-}
-
-@misc{nbstripout2024,
-  title   = {nbstripout --- strip output from Jupyter and IPython notebooks},
-  author  = {{nbstripout}},
-  url     = {https://github.com/kynan/nbstripout},
-  note    = {参照日: 2026-03-21}
-}
-
-@article{brazma2001miame,
-  author  = {Brazma, Alvis and Hingamp, Pascal and Quackenbush, John and Sherlock, Gavin and Spellman, Paul and Stoeckert, Chris and Aach, John and Ansorge, Wilhelm and Ball, Catherine A. and Causton, Helen C. and others},
-  title   = {Minimum information about a microarray experiment ({MIAME})---toward standards for microarray data},
-  journal = {Nature Genetics},
-  volume  = {29},
+  title   = {Structured Programming with go to Statements},
+  journal = {Computing Surveys},
+  volume  = {6},
   number  = {4},
-  pages   = {365--371},
-  year    = {2001},
-  doi     = {10.1038/ng1201-365}
+  pages   = {261--301},
+  year    = {1974},
+  doi     = {10.1145/356635.356640}
 }
 
-@article{rule2019ten,
-  author  = {Rule, Adam and Birmingham, Amanda and Zuniga, Cristal and Altintas, Ilkay and Huang, Shih-Cheng and Knight, Rob and Moshiri, Niema and Nguyen, Mai H. and Romine, Sara Brin and Sandoval, Fernando and others},
-  title   = {Ten Simple Rules for Writing and Sharing Computational Analyses in Jupyter Notebooks},
-  journal = {PLOS Computational Biology},
-  volume  = {15},
-  number  = {7},
-  pages   = {e1007007},
-  year    = {2019},
-  doi     = {10.1371/journal.pcbi.1007007}
+@inproceedings{amdahl1967validity,
+  author    = {Amdahl, Gene M.},
+  title     = {Validity of the Single Processor Approach to Achieving Large Scale Computing Capabilities},
+  booktitle = {AFIPS Conference Proceedings},
+  volume    = {30},
+  pages     = {483--485},
+  year      = {1967},
+  doi       = {10.1145/1465482.1465560}
 }
 
-@article{wilson2017good,
-  author  = {Wilson, Greg and Bryan, Jennifer and Cranston, Karen and Kitzes, Justin and Nederbragt, Lex and Teal, Tracy K.},
-  title   = {Good Enough Practices in Scientific Computing},
-  journal = {PLOS Computational Biology},
-  volume  = {13},
-  number  = {6},
-  pages   = {e1005510},
-  year    = {2017},
-  doi     = {10.1371/journal.pcbi.1005510}
+@misc{python_profilers,
+  author = {{Python Software Foundation}},
+  title  = {The {Python} Profilers},
+  url    = {https://docs.python.org/3/library/profile.html},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{line_profiler,
+  author = {Robert Kern and others},
+  title  = {line\_profiler},
+  url    = {https://github.com/pyutils/line_profiler},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{memory_profiler,
+  author = {Fabian Pedregosa and others},
+  title  = {memory\_profiler},
+  url    = {https://github.com/pythonprofilers/memory-profiler},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{concurrent_futures,
+  author = {{Python Software Foundation}},
+  title  = {concurrent.futures --- Launching parallel tasks},
+  url    = {https://docs.python.org/3/library/concurrent.futures.html},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{apache_parquet,
+  author = {{Apache Software Foundation}},
+  title  = {Apache {Parquet}},
+  url    = {https://parquet.apache.org/},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{cram_spec,
+  author = {{Samtools/Hts-specs}},
+  title  = {{CRAM} format specification (v3.1)},
+  url    = {https://samtools.github.io/hts-specs/CRAMv3.pdf},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{numba,
+  author = {{Numba Development Team}},
+  title  = {Numba: A High Performance {Python} Compiler},
+  url    = {https://numba.readthedocs.io/},
+  note   = {参照日: 2026-03-21}
+}
+
+@misc{pandas_chunking,
+  author = {{pandas Development Team}},
+  title  = {{IO} tools: Chunking},
+  url    = {https://pandas.pydata.org/docs/user_guide/io.html#iterating-through-files-chunk-by-chunk},
+  note   = {参照日: 2026-03-21}
 }

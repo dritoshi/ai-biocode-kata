@@ -1,68 +1,124 @@
-% §20 コミュニティと貢献 — 参考文献
+% §19 セキュリティと倫理 — 参考文献
 
-@misc{so-how-to-ask,
-  author       = {{Stack Overflow}},
-  title        = {How do I ask a good question?},
-  url          = {https://stackoverflow.com/help/how-to-ask},
-  note         = {参照日: 2026-03-22}
-}
-
-@misc{biostars,
-  author       = {{Biostars}},
-  title        = {Biostars: Bioinformatics Answers},
-  url          = {https://www.biostars.org/},
-  note         = {参照日: 2026-03-22}
-}
-
-@misc{gh-pr-reviews,
-  author       = {{GitHub}},
-  title        = {About pull request reviews},
-  url          = {https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews},
-  note         = {参照日: 2026-03-22}
-}
-
-@misc{bioconda-contrib,
-  author       = {{Bioconda}},
-  title        = {Contributing to Bioconda},
-  url          = {https://bioconda.github.io/contributor/index.html},
-  note         = {参照日: 2026-03-22}
-}
-
-@book{fogel2017,
-  author       = {Fogel, Karl},
-  title        = {Producing Open Source Software: How to Run a Successful Free Software Project},
-  publisher    = {O'Reilly Media},
+@misc{twelve-factor,
+  author       = {Adam Wiggins},
+  title        = {The Twelve-Factor App},
   year         = {2017},
-  edition      = {2nd},
-  url          = {https://producingoss.com/}
+  url          = {https://12factor.net/},
+  note         = {参照日: 2026-03-21}
 }
 
-@article{wilson2017,
-  author       = {Wilson, Greg and Bryan, Jennifer and Cranston, Karen and Kitzes, Justin and Nederbragt, Lex and Teal, Tracy K.},
-  title        = {Good enough practices in scientific computing},
-  journal      = {PLOS Computational Biology},
-  volume       = {13},
+@misc{git-secrets,
+  author       = {{AWS Labs}},
+  title        = {git-secrets: Prevents you from committing secrets and credentials into git repositories},
+  year         = {2024},
+  url          = {https://github.com/awslabs/git-secrets},
+  note         = {参照日: 2026-03-21}
+}
+
+@article{gymrek2013,
+  author       = {Gymrek, Melissa and McGuire, Amy L. and Golan, David and Halperin, Eran and Erlich, Yaniv},
+  title        = {Identifying Personal Genomes by Surname Inference},
+  journal      = {Science},
+  volume       = {339},
+  number       = {6117},
+  pages        = {321--324},
+  year         = {2013},
+  doi          = {10.1126/science.1229566}
+}
+
+@article{erlich2014,
+  author       = {Erlich, Yaniv and Narayanan, Arvind},
+  title        = {Routes for breaching and protecting genetic privacy},
+  journal      = {Nature Reviews Genetics},
+  volume       = {15},
   number       = {6},
-  pages        = {e1005510},
-  year         = {2017},
-  doi          = {10.1371/journal.pcbi.1005510}
+  pages        = {409--421},
+  year         = {2014},
+  doi          = {10.1038/nrg3723}
 }
 
-@misc{so-genai-ban,
-  author       = {{Stack Overflow Meta}},
-  title        = {Temporary policy: Generative AI (e.g., ChatGPT) is banned},
-  year         = {2022},
-  url          = {https://meta.stackoverflow.com/questions/421831},
+@misc{dbgap,
+  author       = {{National Institutes of Health}},
+  title        = {dbGaP: The database of Genotypes and Phenotypes},
+  url          = {https://www.ncbi.nlm.nih.gov/gap/},
+  note         = {参照日: 2026-03-21}
+}
+
+@misc{jga,
+  author       = {{DDBJ}},
+  title        = {Japanese Genotype-phenotype Archive (JGA)},
+  url          = {https://www.ddbj.nig.ac.jp/jga/},
+  note         = {参照日: 2026-03-21}
+}
+
+@misc{ega,
+  author       = {{European Bioinformatics Institute}},
+  title        = {European Genome-phenome Archive (EGA)},
+  url          = {https://ega-archive.org/},
+  note         = {参照日: 2026-03-21}
+}
+
+@misc{pip-audit,
+  author       = {{Python Packaging Authority}},
+  title        = {pip-audit: Auditing Python environments and dependency trees for known vulnerabilities},
+  year         = {2024},
+  url          = {https://github.com/pypa/pip-audit},
+  note         = {参照日: 2026-03-21}
+}
+
+@misc{owasp-llm,
+  author       = {{OWASP}},
+  title        = {OWASP Top 10 for Large Language Model Applications},
+  year         = {2025},
+  url          = {https://owasp.org/www-project-top-10-for-large-language-model-applications/},
+  note         = {参照日: 2026-03-21}
+}
+
+@article{sweeney2002,
+  author       = {Sweeney, Latanya},
+  title        = {k-Anonymity: A Model for Protecting Privacy},
+  journal      = {International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems},
+  volume       = {10},
+  number       = {5},
+  pages        = {557--570},
+  year         = {2002},
+  doi          = {10.1142/S0218488502001648}
+}
+
+@misc{ppc-gentec,
+  author       = {{個人情報保護委員会}},
+  title        = {経済産業分野のうち個人遺伝情報を用いた事業分野における個人情報保護ガイドライン},
+  url          = {https://www.ppc.go.jp/personalinfo/legal/gentec_data_guideline/},
   note         = {参照日: 2026-03-22}
 }
 
-@article{prlic2012,
-  author       = {Prli\'{c}, Andreas and Procter, James B.},
-  title        = {Ten Simple Rules for the Open Development of Scientific Software},
-  journal      = {PLOS Computational Biology},
-  volume       = {8},
-  number       = {12},
-  pages        = {e1002802},
-  year         = {2012},
-  doi          = {10.1371/journal.pcbi.1002802}
+@misc{cao-jisedai,
+  author       = {{内閣府}},
+  title        = {改正次世代医療基盤法について},
+  url          = {https://www8.cao.go.jp/iryou/kouhou/pdf/kaisei_jisedaiiryou_rikatsuyou.pdf},
+  note         = {参照日: 2026-03-22}
+}
+
+@misc{jsps-dmp,
+  author       = {{JSPS}},
+  title        = {科研費における研究データの管理・利活用について},
+  url          = {https://www.jsps.go.jp/j-grantsinaid/01_seido/10_datamanagement/index.html},
+  note         = {参照日: 2026-03-22}
+}
+
+@misc{hipaa-2025,
+  author       = {{Federal Register}},
+  title        = {HIPAA Security Rule To Strengthen the Cybersecurity of Electronic Protected Health Information},
+  year         = {2025},
+  url          = {https://www.federalregister.gov/documents/2025/01/06/2024-30983/hipaa-security-rule-to-strengthen-the-cybersecurity-of-electronic-protected-health-information},
+  note         = {参照日: 2026-03-22}
+}
+
+@misc{eu-ai-act,
+  author       = {{European Parliament}},
+  title        = {EU Artificial Intelligence Act},
+  year         = {2024},
+  url          = {https://artificialintelligenceact.eu/},
+  note         = {参照日: 2026-03-22}
 }
