@@ -172,9 +172,9 @@ Markdownが優れている点:
 > - やむを得ずExcelを使う場合は、列を「文字列」として読み込む設定にする
 > - データの受け渡しにExcelファイル（`.xlsx`）を使わず、TSV/CSVをプログラムで処理する
 
-> #### 🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, ファイル名のNFD
+> #### 🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字
 >
-> [§3-3 文字エンコーディング](./03_cs_basics.md#3-3-文字エンコーディング)では、ASCII/UTF-8の基礎と `encoding="utf-8"` を明示する原則を学んだ。ここでは、日本の研究室で特に遭遇しやすい3つの実践的な罠を取り上げる。
+> [§3-3 文字エンコーディング](./03_cs_basics.md#3-3-文字エンコーディング)では、ASCII/UTF-8の基礎と `encoding="utf-8"` を明示する原則を学んだ。ここでは、日本の研究室で特に遭遇しやすい4つの実践的な罠を取り上げる。
 >
 > ---
 >
@@ -237,6 +237,46 @@ Markdownが優れている点:
 >
 > ---
 >
+> **4. マルチバイト文字の混入**（全角スペース・全角数字等）
+>
+> Excelや日本語ドキュメントからのコピー＆ペーストで、全角スペース(U+3000)・全角数字(０〜９)・全角英字(Ａ〜Ｚ)がデータファイルに紛れ込むことがある。これらの文字は見た目では気づきにくいが、プログラムの動作を静かに壊す。
+>
+> - `split()` や `awk` は全角スペースを区切り文字と認識しない → カラムがずれる
+> - `int()` は全角数字をパースできない → サンプルIDの名寄せが失敗する
+> - FASTAヘッダーに全角文字が入ると、BLASTなどのツールが予期しない挙動を示す
+>
+> 最大の問題は、**エラーにならずサイレントに失敗する**ケースが多いことである。カラムが1つずれたまま下流の解析が進み、結果がおかしいと気づくまで原因がわからない。
+>
+> ```python
+> # 全角スペースが混入したTSV行
+> line = "gene1\t\u3000100\t200"  # 見た目は正常だが…
+> fields = line.split("\t")
+> print(fields)  # ['gene1', '\u3000100', '200'] — 全角スペースが値に含まれる
+> # int(fields[1]) → ValueError: invalid literal for int()
+> ```
+>
+> 検出には `grep` が使える。以下のコマンドはファイル内の全角スペース・全角英数字を検出する:
+>
+> ```bash
+> # 全角スペース(U+3000)と全角英数記号(U+FF01-FF5E)を検出
+> grep -P '[\x{3000}\x{FF01}-\x{FF5E}]' data.tsv
+> ```
+>
+> Pythonで対処するには、`unicodedata.normalize("NFKC", text)` が有効である。NFKC正規化は互換分解と合成を行い、全角英数字を対応する半角文字に変換する:
+>
+> ```python
+> import unicodedata
+>
+> text = "\u3000\uff33\uff41\uff4d\uff50\uff4c\uff45\uff10\uff11"  # 全角スペース＋全角英数字
+> normalized = unicodedata.normalize("NFKC", text)
+> print(normalized)  # " Sample01" — 半角に正規化される
+> print(repr(normalized))  # ' Sample01' — 全角スペースも半角に
+> ```
+>
+> 罠3のNFC正規化（濁点の合成）とは目的が異なる点に注意する。NFKCは「互換性のある文字を統一する」正規化であり、全角→半角の変換を含む。
+>
+> ---
+>
 > **まとめ**
 >
 > | 罠 | 発生源 | 対処法 |
@@ -244,6 +284,7 @@ Markdownが優れている点:
 > | Shift_JIS/CP932 | Windows Excelの「CSV保存」 | `encoding="cp932"` で読み込み |
 > | UTF-8 BOM | Windows Excelの「UTF-8 CSV保存」 | `encoding="utf-8-sig"` で自動除去 |
 > | ファイル名NFD | macOSのファイルシステム | `unicodedata.normalize("NFC", name)` |
+> | マルチバイト文字混入 | Excelや日本語文書からのコピペ | `unicodedata.normalize("NFKC", text)` で正規化 |
 >
 > gzip圧縮ファイルでもエンコーディングの問題は同様に発生する。`gzip.open()` でテキストモードを使う場合は `encoding` を明示する:
 >
@@ -261,6 +302,7 @@ Markdownが優れている点:
 > - ファイル名はASCIIのみにする。日本語のサンプル名はメタデータTSVの列で管理する
 > - `open()` には必ず `encoding="utf-8"` を明示する（[§3-3](./03_cs_basics.md#3-3-文字エンコーディング)の原則）
 > - Windows由来のCSVは `encoding="utf-8-sig"` で開くことを最初に試みる
+> - データファイル（TSV/CSV/FASTA）は非ASCII文字の混入を `grep -P '[\x{3000}\x{FF01}-\x{FF5E}]'` で定期的にチェックする
 
 #### エージェントへの指示例
 
