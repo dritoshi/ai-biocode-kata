@@ -20,3 +20,6 @@ __pycache__/
 # Temporary
 *.tmp
 *.bak
+
+# Private (non-public analysis, notes)
+private/
