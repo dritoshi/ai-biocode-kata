@@ -590,6 +590,103 @@ NaN混入箇所の特定を依頼するとき:
 
 > 「このパイプラインの出力DataFrameに NaN が混入している。各処理ステップの後に `df.isna().sum()` を挿入して、どのステップで NaN が発生するか特定するデバッグコードを書いて」
 
+### Python固有の落とし穴
+
+ここまで紹介したバグパターンはバイオインフォマティクス固有のものが多かったが、Python言語自体にも初心者が陥りやすい落とし穴がある。AIエージェントが生成するコードにもこれらのパターンが紛れ込むことがあるため、レビュー時に見抜けるようにしておきたい。
+
+**ミュータブルデフォルト引数**: 関数のデフォルト引数にリストや辞書を使うと、関数呼び出しをまたいで共有される。
+
+```python
+# ❌ 誤り: デフォルト引数のリストが全呼び出しで共有される
+def add_gene(name: str, gene_list: list[str] = []) -> list[str]:
+    gene_list.append(name)
+    return gene_list
+
+# ✅ 修正: None をデフォルトにし、関数内で新しいリストを作る
+def add_gene(name: str, gene_list: list[str] | None = None) -> list[str]:
+    if gene_list is None:
+        gene_list = []
+    gene_list.append(name)
+    return gene_list
+```
+
+**浅いコピーvs深いコピー**: `list.copy()` や `dict.copy()` は最上位の要素だけをコピーする（浅いコピー）。ネストされたリストや辞書は元のオブジェクトと共有されたままである。
+
+```python
+import copy
+
+original = {"genes": ["BRCA1", "TP53"]}
+shallow = original.copy()          # 浅いコピー
+shallow["genes"].append("EGFR")    # original["genes"] にも EGFR が追加される
+
+deep = copy.deepcopy(original)     # 深いコピー
+deep["genes"].append("MYC")        # original は変更されない
+```
+
+**`is` vs `==`**: `is` はオブジェクトの同一性（メモリ上の同じオブジェクトか）を、`==` は値の等価性を比較する。Pythonは小さい整数（-5〜256）をキャッシュするため、`is` が偶然動いてしまうことがある。
+
+```python
+# ❌ 危険: 小さい整数ではたまたま動くが、大きい値では壊れる
+a = 256
+b = 256
+a is b     # True（キャッシュされている）
+
+a = 257
+b = 257
+a is b     # False（別オブジェクト）
+
+# ✅ 値の比較には常に == を使う。is は None との比較にだけ使う
+if value is None: ...      # ✅ None との比較は is
+if count == 257: ...       # ✅ 値の比較は ==
+```
+
+**文字列の不変性**: Pythonの文字列は不変（immutable）である。`str.replace()` や `str.upper()` は元の文字列を変更せず、新しい文字列を返す。
+
+```python
+sequence = "ATGCN"
+sequence.replace("N", "")   # "ATGC" を返すが、sequence は変わらない
+# ✅ 戻り値を変数に代入する
+sequence = sequence.replace("N", "")  # sequence が "ATGC" に更新される
+```
+
+**pandasの`SettingWithCopyWarning`**: DataFrameのスライスに対して値を代入すると、元のDataFrameが変更されるかコピーが変更されるかが曖昧になる。
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({"gene": ["BRCA1", "TP53"], "score": [0.9, 0.3]})
+
+# ❌ 警告が出る: チェーンインデックスによる代入
+df[df["score"] > 0.5]["gene"] = "HIGH"
+
+# ✅ .loc[] を使って明示的にアクセスする
+df.loc[df["score"] > 0.5, "gene"] = "HIGH"
+```
+
+**NumPyのビューvsコピー**: NumPy配列のスライス（`a[::2]`）は元の配列のデータを共有する**ビュー**を返す。ファンシーインデックス（`a[[0, 2, 4]]`）は独立した**コピー**を返す。どちらが返るかを意識しないと、元の配列が意図せず変更される。
+
+```python
+import numpy as np
+
+arr = np.array([10, 20, 30, 40, 50])
+
+view = arr[::2]      # ビュー: arr とデータを共有
+view[0] = 999        # arr[0] も 999 に変わる
+
+copy = arr[[0, 2, 4]]  # コピー: 独立したデータ
+copy[0] = 888          # arr は変わらない
+```
+
+#### エージェントへの指示例
+
+Python固有の落とし穴を知っていると、エージェントが生成したコードのレビューでバグを見つけやすくなる:
+
+> 「この関数のデフォルト引数に `results: dict = {}` が使われている。ミュータブルデフォルト引数のバグがないか確認して、必要なら修正して」
+
+> 「エージェントが生成したコードで `df[df['padj'] < 0.05]['log2FC']` というチェーンインデックスが使われている。`SettingWithCopyWarning` が出ないように `.loc[]` に書き換えて」
+
+> 「このNumPy配列操作がビューを返すかコピーを返すか判断がつかない。`np.shares_memory()` で確認するアサーションを追加して」
+
 ---
 
 ## まとめ
