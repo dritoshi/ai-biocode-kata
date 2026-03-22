@@ -86,3 +86,7 @@ ai-biocode-kata/
 - 全体構成の詳細は [roadmap.md](chapters/roadmap.md) を参照。
 - [用語集](chapters/glossary.md)
 - [執筆 TODO](TODO.md)
+
+## ライセンス
+
+この書籍の内容は [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ja)（表示 - 非営利 - 改変禁止 4.0 国際）ライセンスの下で提供されている。
