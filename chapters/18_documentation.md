@@ -340,7 +340,7 @@ MIT License
 
 引用方法には、[§7-2](./07_git.md#7-2-githubの活用)で紹介したCITATION.cffへのリンクを含めるのが望ましい。
 
-> → 投稿前の最終確認は[付録D](./roadmap.md#付録d-論文投稿前チェックリスト)を参照
+> → 投稿前の最終確認は[付録C 論文投稿前チェックリスト](./appendix_c_checklist.md)を参照
 
 ### CHANGELOG.md
 

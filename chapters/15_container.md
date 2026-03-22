@@ -742,7 +742,7 @@ Nüst et al. (2020)[7](https://doi.org/10.1371/journal.pcbi.1008316)の「Docker
 
 > 「conda-lock.ymlをDockerfile内で使用する構成に変更してください。ベースイメージのダイジェストも固定してください」
 
-論文投稿前の最終確認は[付録D 論文投稿前チェックリスト](./appendix_d.md)を参照。
+論文投稿前の最終確認は[付録C 論文投稿前チェックリスト](./appendix_c_checklist.md)を参照。
 
 ---
 
