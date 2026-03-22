@@ -56,7 +56,7 @@ ai-biocode-kata/
 | 17 | ドキュメント化 | [17_documentation.md](chapters/17_documentation.md) | [§17](chapters/roadmap.md#17-ドキュメント化) |
 | 18 | データベースとAPI | [18_database_api.md](chapters/18_database_api.md) | [§18](chapters/roadmap.md#18-データベースとapi) |
 | 19 | セキュリティと倫理 | [19_security_ethics.md](chapters/19_security_ethics.md) | [§19](chapters/roadmap.md#19-セキュリティと倫理) |
-| 20 | コラボレーション | — | [§20](chapters/roadmap.md#20-コラボレーション) |
+| 20 | コラボレーション | [20_collaboration.md](chapters/20_collaboration.md) | [§20](chapters/roadmap.md#20-コラボレーション) |
 | 21 | ソフトウェアの構成要素 | [21_software_components.md](chapters/21_software_components.md) | [§21](chapters/roadmap.md#21-ソフトウェアの構成要素) |
 | 付録A | 学習順序の推奨 | — | [§付録A](chapters/roadmap.md#付録a-学習順序の推奨) |
 | 付録B | AIコーディングエージェントとの効果的な学習パターン | — | [§付録B](chapters/roadmap.md#付録b-aiコーディングエージェントとの効果的な学習パターン) |
