@@ -1,8 +1,8 @@
-# §12 データ処理ライブラリ
+# §12 データ処理の実践 — NumPy・pandas・polars
 
-[§11 CLIツールの設計](./11_cli.md)では、コマンドラインの引数設計、stdin/stdout対応、プログレス表示、ロギングを学んだ。CLIはツールの「外側」のインターフェースである。本章では「内側」——ツールの中で実際にデータを処理するライブラリの実践的な使い方を学ぶ。
+[§11 コマンドラインツールの設計と実装](./11_cli.md)では、コマンドラインの引数設計、stdin/stdout対応、プログレス表示、ロギングを学んだ。CLIはツールの「外側」のインターフェースである。本章では「内側」——ツールの中で実際にデータを処理するライブラリの実践的な使い方を学ぶ。
 
-[§3 計算機科学の基礎知識](./03_cs_basics.md)ではNumPyの数値型の罠（int32オーバーフロー、浮動小数点精度）を、[§4 データフォーマットの判断力](./04_data_formats.md)ではpandasによるtidy data変換（`melt()` / `pivot_table()`）を学んだ。本章ではそれらの知識を前提に、バイオインフォマティクスのデータを**効率的に処理するパターン**を扱う。具体的には、NumPyのベクトル化演算による高速化、pandasとpolarsによるテーブルデータの集計・フィルタリング、そしてSciPyをはじめとするライブラリ関数の活用——AIが再発明しがちな処理をライブラリに任せる判断力である。
+[§3 コーディングに必要な計算機科学](./03_cs_basics.md)ではNumPyの数値型の罠（int32オーバーフロー、浮動小数点精度）を、[§4 データフォーマットの選び方](./04_data_formats.md)ではpandasによるtidy data変換（`melt()` / `pivot_table()`）を学んだ。本章ではそれらの知識を前提に、バイオインフォマティクスのデータを**効率的に処理するパターン**を扱う。具体的には、NumPyのベクトル化演算による高速化、pandasとpolarsによるテーブルデータの集計・フィルタリング、そしてSciPyをはじめとするライブラリ関数の活用——AIが再発明しがちな処理をライブラリに任せる判断力である。
 
 ---
 
@@ -33,7 +33,7 @@ def gc_contents_loop(sequences: list[str]) -> list[float]:
 
 ### バイオインフォでの実践: GC含量の一括計算
 
-[§8 テスト・品質管理](./08_testing.md)で作成した `gc_content()` 関数は1配列ずつ処理する設計だった。NumPyを使えば、複数配列をまとめて処理できる:
+[§8 テスト技法](./08_testing.md)で作成した `gc_content()` 関数は1配列ずつ処理する設計だった。NumPyを使えば、複数配列をまとめて処理できる:
 
 ```python
 import numpy as np
@@ -439,7 +439,7 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
     return squareform(distances)
 ```
 
-`pdist()` は condensed distance matrix（上三角行列を1次元に圧縮した形式）を返し、`squareform()` がそれを正方行列に変換する。AIが二重forループで距離を計算するコードを生成したら、「`pdist()` がある」と指示できることが重要である。この距離行列は、[§13 可視化](./13_visualization.md)で学ぶヒートマップや階層クラスタリングの入力として使う。
+`pdist()` は condensed distance matrix（上三角行列を1次元に圧縮した形式）を返し、`squareform()` がそれを正方行列に変換する。AIが二重forループで距離を計算するコードを生成したら、「`pdist()` がある」と指示できることが重要である。この距離行列は、[§13 可視化の実践](./13_visualization.md)で学ぶヒートマップや階層クラスタリングの入力として使う。
 
 `metric` パラメータで距離の種類を変更できる:
 
@@ -496,7 +496,7 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 > 2. **PyTorch**でカスタムモデルを構築する
 > 3. **Hugging Face**で事前学習モデルのfine-tuningを行う
 >
-> 実験管理の詳細は[§15 実験管理](./15_container.md)で扱う。
+> 実験管理の詳細は[§15 コンテナによるソフトウェア環境の再現](./15_container.md)で扱う。
 
 ---
 
@@ -515,7 +515,7 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 
 すべてに共通する原則は、**Pythonレベルのforループを避け、ライブラリのAPIで処理を記述する**ことである。ベクトル化演算、ブロードキャスティング、メソッドチェーン、lazy evaluationはいずれもこの原則の表れである。
 
-次章の[§13 可視化](./13_visualization.md)では、本章で処理したデータを可視化する方法を学ぶ。距離行列のヒートマップ、DEG結果のVolcano plot、発現量分布のバイオリンプロットなど、バイオインフォマティクスで定番の可視化を取り上げる。
+次章の[§13 可視化の実践](./13_visualization.md)では、本章で処理したデータを可視化する方法を学ぶ。距離行列のヒートマップ、DEG結果のVolcano plot、発現量分布のバイオリンプロットなど、バイオインフォマティクスで定番の可視化を取り上げる。
 
 ---
 
