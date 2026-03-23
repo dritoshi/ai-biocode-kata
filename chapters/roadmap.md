@@ -1530,6 +1530,13 @@ my_project/
 > - **pyGenomeTracks** — マルチトラック図をINI設定で生成
 > - **deepTools** — BAM/BigWigのシグナルヒートマップ
 
+> **🧬 コラム：ゲノムトラックの作成とブラウザでの可視化**
+>
+> トラックファイルの種類（BigWig, BED, BAM, VCF等）と作成方法（deepTools bamCoverage等）。
+> ゲノムブラウザ3種（UCSC / Ensembl / IGV）の特徴とカスタムトラック表示手順。
+> Track Hubによる大規模データ公開。pyGenomeTracksのINI設定ファイルによる
+> 論文用トラック図の宣言的生成。
+
 > **🤖 コラム：機械学習の可視化ツール**
 >
 > MLプロジェクトでは学習過程やモデル性能の可視化が必要になる。

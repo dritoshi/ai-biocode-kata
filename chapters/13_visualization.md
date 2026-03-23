@@ -443,6 +443,107 @@ def apply_project_style() -> None:
 
 ---
 
+> ### 🧬 コラム: ゲノムトラックの作成とブラウザでの可視化
+>
+> #### ゲノムトラックとは
+>
+> ゲノムブラウザは、染色体座標を横軸にとり、複数の情報レイヤーを縦に重ねて表示する。この情報レイヤーの1つ1つを**トラック**と呼ぶ。matplotlibの `subplots()` で複数の `Axes` を縦に並べるイメージに近い。各トラックが1つの情報種別（リードカバレッジ、ピーク領域、遺伝子アノテーション等）を表現し、同じゲノム領域について複数の実験データやアノテーションを同時に比較できる。
+>
+> #### トラックファイルの種類と作成
+>
+> トラック表示に使われる主要なファイル形式と、その作成方法を以下にまとめる。各形式の詳細な仕様や座標系（0-based vs 1-based）については[§4 データの形式](./04_data_formats.md)を参照。
+>
+> | データの種類 | トラック形式 | 作成ツール | 用途 |
+> |---|---|---|---|
+> | リードカバレッジ | BigWig | `deepTools bamCoverage` | RNA-seq/ChIP-seqシグナル |
+> | ピーク領域 | BED / narrowPeak | MACS2等の出力 | ChIP-seq/ATAC-seqピーク |
+> | カバレッジ値 | BedGraph → BigWig | `bedtools genomecov` + `bedGraphToBigWig` | 汎用カバレッジ |
+> | アラインメント | BAM + BAI | `samtools sort` + `samtools index` | 個々のリード確認 |
+> | 変異 | VCF | GATK/bcftools等 | SNP/Indelの位置 |
+>
+> BAMファイルからBigWigトラックを作成する典型的なコマンドを示す:
+>
+> ```bash
+> # BAMからBigWigを生成（RPKMで正規化、ビンサイズ10 bp）
+> deepTools bamCoverage \
+>     --bam aligned.bam \
+>     --outFileName coverage.bw \
+>     --normalizeUsing RPKM \
+>     --binSize 10 \
+>     --numberOfProcessors 4
+> ```
+>
+> `bamCoverage` はBAM内のリードカバレッジを計算し、指定したビンサイズで集約してBigWig形式で出力するコマンドである[10](https://doi.org/10.1093/nar/gkw257)。`--normalizeUsing` でRPKM、CPM、BPM等の正規化方法を選択できる。
+>
+> BigWigが推奨される理由は、バイナリ形式かつ内部にインデックスを持つため、ゲノムブラウザが任意の領域を高速にランダムアクセスできる点にある。テキスト形式のBedGraphでは、ファイル全体を読み込む必要があり大規模データでは実用的でない。インデックス付きフォーマットの利点は[§4-2 フォーマット選択の判断基準](./04_data_formats.md#4-2-フォーマット選択の判断基準)で詳しく述べている。
+>
+> #### ゲノムブラウザでの表示
+>
+> 作成したトラックファイルをゲノムブラウザで表示する。主要な3つのブラウザの特徴を比較する:
+>
+> | ブラウザ | 種類 | カスタムトラックの方法 | 適した場面 |
+> |---|---|---|---|
+> | **UCSC Genome Browser** | ウェブ | URLまたはファイルアップロード | 公共データとの重ね合わせ、Track Hub |
+> | **Ensembl Genome Browser** | ウェブ | "Custom tracks" メニューからURL/ファイル指定 | ヒト・モデル生物のアノテーション参照 |
+> | **IGV** | デスクトップ | ファイルをドラッグ&ドロップ | 個々のリードレベルの確認、ローカルデータ |
+>
+> **UCSC Genome Browser**[9](https://genome.ucsc.edu/goldenPath/help/customTrack.html)でカスタムトラックを表示する手順は3ステップである:
+>
+> 1. トラックファイル（BigWig等）をウェブアクセス可能なサーバーに配置する
+> 2. "My Data" → "Custom Tracks" からトラックヘッダ行（`track type=bigWig name="..." bigDataUrl=https://...`）を入力する
+> 3. "Go" で表示。表示位置は `position=chr1:1000-2000` のようにゲノム座標で指定する
+>
+> **Ensembl Genome Browser**[12](https://www.ensembl.org/info/docs/index.html)では、対象生物種のページから "Custom tracks" を選択し、ファイルURLまたはローカルファイルを指定する。EnsemblはGRC（Genome Reference Consortium）名（例: GRCh38）をリファレンス名に使う。UCSCはhg38のような独自名を使うため、同じリファレンスゲノムでも名前が異なる点に注意が必要である（[§4 データの形式](./04_data_formats.md)）。
+>
+> 大規模プロジェクトで多数のトラックを公開・共有する場合は、UCSC **Track Hub** の利用を検討する。Track Hubはディレクトリ構造と設定ファイル（`hub.txt`, `genomes.txt`, `trackDb.txt`）でトラックのメタデータを管理する仕組みで、ENCODEやRoadmap Epigenomicsなどの大規模コンソーシアムもこの形式でデータを公開している。
+>
+> #### 論文用トラック図の作成
+>
+> ゲノムブラウザのスクリーンショットは手軽だが、解像度が不足する、表示設定の再現が困難、図の体裁を統一できないといった問題がある。論文用のトラック図には**pyGenomeTracks**[11](https://doi.org/10.1093/bioinformatics/btaa692)が適している。INI設定ファイルでトラックの種類・色・高さを宣言的に定義し、コマンド1つでベクタ形式の図を生成できる:
+>
+> ```ini
+> # tracks.ini — pyGenomeTracks設定ファイル
+> [coverage]
+> file = coverage.bw
+> title = RNA-seq coverage
+> height = 4
+> color = #2171b5
+> min_value = 0
+>
+> [peaks]
+> file = peaks.bed
+> title = MACS2 peaks
+> height = 1
+> color = #e34a33
+>
+> [genes]
+> file = genes.gtf
+> title = Gene annotation
+> height = 3
+> fontsize = 8
+> ```
+>
+> ```bash
+> # INI設定ファイルからトラック図を生成
+> pyGenomeTracks --tracks tracks.ini \
+>     --region chr1:1000000-1500000 \
+>     --outFileName tracks.pdf
+> ```
+>
+> deepToolsの `plotHeatmap` も、ChIP-seqやATAC-seqのシグナルをTSS（転写開始点）周辺で集約したヒートマップの作成に広く使われる[10](https://doi.org/10.1093/nar/gkw257)。トラック図もヒートマップも、設定ファイルやコマンドをGit管理すれば、[§14 解析パイプラインの自動化](./14_workflow.md)で学ぶワークフローに組み込んで再現可能にできる。
+>
+> #### エージェントへの指示例
+>
+> トラックファイルの作成やブラウザ設定は定型的なコマンド操作が多く、エージェントとの協働に適している:
+>
+> > 「このBAMファイルからRPKM正規化のBigWigファイルを生成するdeepTools bamCoverageコマンドを書いて。ビンサイズは10 bp、4スレッドで実行すること」
+>
+> > 「UCSC Genome Browserにカスタムトラックとして表示するためのトラックヘッダ行を作成して。BigWigファイルのURLは https://example.com/data/coverage.bw、トラック名は 'RNA-seq Rep1'、色は青にすること」
+>
+> > 「pyGenomeTracksのINI設定ファイルを作成して。coverage.bw（カバレッジ、青）、peaks.bed（ピーク、赤）、genes.gtf（遺伝子アノテーション）の3トラックを含めること。出力はPDF形式」
+
+---
+
 > ### 🤖 コラム: 機械学習の可視化ツール
 >
 > 機械学習プロジェクトでは、学習過程やモデル性能の可視化が不可欠である。
@@ -497,3 +598,11 @@ def apply_project_style() -> None:
 [7] Tufte, E. R. *The Visual Display of Quantitative Information*. 2nd ed., Graphics Press, 2001. ISBN: 978-0961392147
 
 [8] Rougier, N. P., Droettboom, M. & Bourne, P. E. "Ten Simple Rules for Better Figures". *PLOS Computational Biology*, 10(9), e1003833, 2014. [https://doi.org/10.1371/journal.pcbi.1003833](https://doi.org/10.1371/journal.pcbi.1003833)
+
+[9] UCSC Genome Browser. "Custom Tracks". [https://genome.ucsc.edu/goldenPath/help/customTrack.html](https://genome.ucsc.edu/goldenPath/help/customTrack.html) (参照日: 2026-03-23)
+
+[10] Ramírez, F. et al. "deepTools2: a next generation web server for deep-sequencing data analysis". *Nucleic Acids Research*, 44(W1), W160–W165, 2016. [https://doi.org/10.1093/nar/gkw257](https://doi.org/10.1093/nar/gkw257)
+
+[11] Lopez-Delisle, L. et al. "pyGenomeTracks: reproducible plots for multivariate genomic datasets". *Bioinformatics*, 37(3), 422–423, 2021. [https://doi.org/10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692)
+
+[12] Ensembl. "Ensembl Genome Browser Documentation". [https://www.ensembl.org/info/docs/index.html](https://www.ensembl.org/info/docs/index.html) (参照日: 2026-03-23)

@@ -4,7 +4,7 @@
 - [ ] §0-8: 🤖コラム「AI生成コードのアンチパターン集」（カリキュラム分析由来、§0執筆時に対応）。付録DのAIエージェント定番フレーズ・用語集へリンクする
 
 ## 可視化
-- [ ] genome trackとゲノムブラウザ(Ensembl, UCSC Genome)での表示 → `13_visualization.md` でUCSC Genome Browserへの言及はあるが、trackの作成方法は未詳述
+- [x] genome trackとゲノムブラウザ(Ensembl, UCSC Genome)での表示 → `13_visualization.md` に🧬コラム「ゲノムトラックの作成とブラウザでの可視化」を追加済
 
 ## データベース
 - [ ] オントロジーの節が記載が中途半端なのでどうにか修正する → `19_database_api.md`「オントロジーとセマンティックWeb」＋コラム完備
