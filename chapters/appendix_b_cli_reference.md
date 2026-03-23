@@ -56,12 +56,14 @@
 
 ## カスタマイズ
 
-| | Claude Code | Codex CLI |
-|--|-------------|-----------|
-| カスタムコマンド | `.claude/commands/` にMDファイル | `$skill-name`（SKILL.mdベース） |
-| フック | `.claude/hooks/` | hooks in config.toml |
-| MCP統合 | `claude mcp add` | `codex mcp add` |
-| プロファイル | — | `--profile dev` (config.tomlの`[profiles]`) |
+| | Claude Code | Codex CLI | 本書での解説 |
+|--|-------------|-----------|-------------|
+| カスタムコマンド | `.claude/commands/` にMDファイル | `$skill-name`（SKILL.mdベース） | [§11-1](./11_cli.md#カスタムコマンドagent-skills--エージェント向けのテンプレート) |
+| フック | `.claude/settings.json` の `hooks` | hooks in config.toml | [§8-3](./08_testing.md#エージェントフック--ツール実行前後の自動チェック) |
+| MCP統合 | `claude mcp add` | `codex mcp add` | [§5-5](./05_software_components.md#5-5-mcpmodel-context-protocolエージェントの能力を拡張する) |
+| 階層設定 | ディレクトリごとに `CLAUDE.md` | ディレクトリごとに `AGENTS.md` | [§10-3](./10_deliverables.md#設定ファイルの階層構造--ディレクトリ単位のルール設定) |
+| プロファイル | — | `--profile dev` (config.tomlの`[profiles]`) | — |
+| バイオ向けMCP | PubMed MCP, bioomni等 | 同左 | [§19-2](./19_database_api.md) |
 
 ## 参考文献
 
