@@ -1,0 +1,48 @@
+<mxfile host="app.diagrams.net" modified="2026-03-24" type="device">
+  <diagram name="Git Three Stages" id="git3">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Working Directory -->
+        <mxCell id="2" value="Working Directory&#xa;（作業ディレクトリ）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalAlign=middle;spacingTop=5;spacingBottom=5;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="160" width="220" height="80" as="geometry" />
+        </mxCell>
+        <!-- Staging Area -->
+        <mxCell id="3" value="Staging Area&#xa;（ステージングエリア）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;verticalAlign=middle;spacingTop=5;spacingBottom=5;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="420" y="160" width="220" height="80" as="geometry" />
+        </mxCell>
+        <!-- Repository -->
+        <mxCell id="4" value="Repository&#xa;（リポジトリ / .git）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;verticalAlign=middle;spacingTop=5;spacingBottom=5;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="780" y="160" width="220" height="80" as="geometry" />
+        </mxCell>
+        <!-- Arrow: git add -->
+        <mxCell id="5" value="git add" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=13;fontStyle=1;strokeWidth=2;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Arrow: git commit -->
+        <mxCell id="6" value="git commit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=13;fontStyle=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Description labels -->
+        <mxCell id="7" value="ファイルを編集する" style="text;html=1;fontSize=11;align=center;verticalAlign=top;fillColor=none;strokeColor=none;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="100" y="250" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="コミット対象を選ぶ" style="text;html=1;fontSize=11;align=center;verticalAlign=top;fillColor=none;strokeColor=none;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="460" y="250" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="履歴として記録する" style="text;html=1;fontSize=11;align=center;verticalAlign=top;fillColor=none;strokeColor=none;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="820" y="250" width="140" height="30" as="geometry" />
+        </mxCell>
+        <!-- Remote -->
+        <mxCell id="10" value="Remote&#xa;（GitHub等）" style="shape=cloud;whiteSpace=wrap;html=1;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="820" y="30" width="180" height="90" as="geometry" />
+        </mxCell>
+        <!-- Arrow: git push -->
+        <mxCell id="11" value="git push" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=12;fontStyle=1;strokeWidth=2;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" source="4" target="10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

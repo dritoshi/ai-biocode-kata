@@ -1,0 +1,72 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="HPC Architecture" id="hpc">
+    <mxGraphModel dx="1187" dy="715" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.laptop;html=1;whiteSpace=wrap;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" value="ローカル PC" vertex="1">
+          <mxGeometry height="60" width="80" x="60" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="3" edge="1" parent="1" source="2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeWidth=3;fontSize=13;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" value="SSH">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;dashed=1;strokeWidth=2;arcSize=8;" value="" vertex="1">
+          <mxGeometry height="560" width="740" x="270" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4a" parent="1" style="text;html=1;fontSize=16;align=left;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#666666;" value="HPC クラスタ" vertex="1">
+          <mxGeometry height="30" width="200" x="290" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="ログインノード&#xa;（コンパイル・ジョブ投入）" vertex="1">
+          <mxGeometry height="70" width="200" x="300" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="6" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeWidth=2;fontSize=12;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="7" value="sbatch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="スケジューラ&#xa;（SLURM）" vertex="1">
+          <mxGeometry height="70" width="160" x="580" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=0;" value="" vertex="1">
+          <mxGeometry height="300" width="170" x="810" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8a" parent="1" style="text;html=1;fontSize=14;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#82b366;" value="計算ノード群" vertex="1">
+          <mxGeometry height="25" width="170" x="810" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" value="node001&#xa;CPU×64 / 256GB" vertex="1">
+          <mxGeometry height="40" width="130" x="830" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" value="node002&#xa;CPU×64 / 256GB" vertex="1">
+          <mxGeometry height="40" width="130" x="830" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" value="node003&#xa;CPU×64 / 256GB" vertex="1">
+          <mxGeometry height="40" width="130" x="830" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;" value="gpu-node001&#xa;GPU×4 / 512GB" vertex="1">
+          <mxGeometry height="40" width="130" x="830" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" parent="1" style="text;html=1;fontSize=14;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#82b366;" value="…" vertex="1">
+          <mxGeometry height="30" width="50" x="870" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="9" edge="1" parent="1" source="7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;strokeWidth=2;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="8" value="ジョブ&#xa;割り当て">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fontSize=13;fillColor=#f5f5f5;strokeColor=#666666;boundedLbl=1;backgroundOutline=1;size=12;fontStyle=1;" value="共有ファイルシステム（Lustre / GPFS / NFS）" vertex="1">
+          <mxGeometry height="70" width="500" x="380" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="5" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#999999;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.15;entryY=0;entryDx=0;entryDy=0;" target="10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="8" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#999999;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" parent="1" style="text;html=1;fontSize=10;align=center;fillColor=none;strokeColor=none;fontColor=#999999;" value="全ノードから&#xa;同一パスでアクセス" vertex="1">
+          <mxGeometry height="30" width="120" x="530" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="eHIxBYIBScxOWD-HLuCL-10" edge="1" parent="1" source="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

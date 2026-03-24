@@ -1,0 +1,44 @@
+<mxfile host="app.diagrams.net" modified="2026-03-24" type="device">
+  <diagram name="TDD Cycle" id="tdd">
+    <mxGraphModel dx="900" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Red: テストを書く（失敗する） -->
+        <mxCell id="2" value="Red&#xa;テストを書く&#xa;（失敗する）" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;verticalAlign=middle;spacingTop=0;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="270" y="60" width="160" height="160" as="geometry" />
+        </mxCell>
+        <!-- Green: コードを書く（通る） -->
+        <mxCell id="3" value="Green&#xa;最小限のコードで&#xa;テストを通す" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;verticalAlign=middle;spacingTop=0;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="100" y="330" width="160" height="160" as="geometry" />
+        </mxCell>
+        <!-- Refactor: リファクタリング -->
+        <mxCell id="4" value="Refactor&#xa;コードを&#xa;きれいにする" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalAlign=middle;spacingTop=0;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="440" y="330" width="160" height="160" as="geometry" />
+        </mxCell>
+        <!-- Arrow: Red → Green -->
+        <mxCell id="5" value="" style="edgeStyle=none;curved=1;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.15;exitY=0.85;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=#b85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="2" target="3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Arrow: Green → Refactor -->
+        <mxCell id="6" value="" style="edgeStyle=none;curved=1;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=#82b366;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="3" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Arrow: Refactor → Red -->
+        <mxCell id="7" value="" style="edgeStyle=none;curved=1;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.85;entryY=0.85;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=#6c8ebf;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="4" target="2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Step labels on arrows -->
+        <mxCell id="8" value="①" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="150" y="200" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="②" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="310" y="420" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="③" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="510" y="200" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
