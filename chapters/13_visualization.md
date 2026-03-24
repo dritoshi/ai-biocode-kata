@@ -339,6 +339,8 @@ plotlyのコードは本書のスクリプト集には含めていない。plotl
 
 Volcano plotで有意遺伝子を色分けする際、赤（up-regulated）と青（down-regulated）の組み合わせは色覚異常の影響を受けにくい。一方、赤と緑の組み合わせは避けるべきである。
 
+![カラーマップ比較: viridis/cividisは知覚的に均一で色覚多様性に配慮、jet/rainbowは非推奨](../figures/ch13_colormap_comparison.png)
+
 エージェントが `cmap="jet"` や `cmap="rainbow"` を含むコードを生成した場合は、`cmap="viridis"` に置き換えるよう指示する。
 
 ### 軸ラベル・凡例・タイトルの必須化

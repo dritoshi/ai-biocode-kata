@@ -31,6 +31,8 @@ def gc_contents_loop(sequences: list[str]) -> list[float]:
 1. **C言語レベルのループ**: NumPyの内部はCで実装されており、Pythonのインタプリタオーバーヘッドがない
 2. **連続メモリアクセス**: NumPy配列はメモリ上に連続して配置される（[§3-5](./03_cs_basics.md#3-5-メモリとストレージの階層)で学んだC orderのメモリレイアウト）ため、CPUキャッシュを効率的に利用できる
 
+![ベクトル化 vs forループの性能比較: NumPyベクトル化はforループより桁違いに高速](../figures/ch12_vectorize_bench.png)
+
 ### バイオインフォでの実践: GC含量の一括計算
 
 [§8 テスト技法](./08_testing.md)で作成した `gc_content()` 関数は1配列ずつ処理する設計だった。NumPyを使えば、複数配列をまとめて処理できる:

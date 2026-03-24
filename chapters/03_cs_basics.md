@@ -78,6 +78,8 @@ for name, elapsed in results.items():
  dict: 0.0001 秒
 ```
 
+![list vs set vs dict の検索性能比較: setとdictはlistより桁違いに高速](../figures/ch03_list_vs_set_bench.png)
+
 listが1秒以上かかるのに対し、setとdictは0.1ミリ秒未満で完了する。10万件程度でこの差なので、ヒトゲノムの数万遺伝子、メタゲノムの数百万配列といった規模では、データ構造の選択がスクリプトの実用性そのものを左右する。
 
 ### 使い分けの指針
