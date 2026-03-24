@@ -46,7 +46,7 @@ def plot_amdahl(output_path: Path | None = None) -> plt.Figure:
     ax.annotate(
         "p=50% → max 2x\nregardless of cores",
         xy=(50, 2.0),
-        xytext=(35, 8),
+        xytext=(35, 6),
         fontsize=9,
         arrowprops=dict(arrowstyle="->", color="#e74c3c"),
         color="#e74c3c",

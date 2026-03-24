@@ -57,7 +57,7 @@ def plot_profiling_result(output_path: Path | None = None) -> plt.Figure:
 
     # ボトルネックにラベル
     ax.annotate(
-        "← Bottleneck!\n   Optimize here first",
+        "Bottleneck!\nOptimize here first",
         xy=(times[0], 0),
         xytext=(times[0] + 10, 1.5),
         fontsize=10,
