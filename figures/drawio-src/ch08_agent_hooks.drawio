@@ -1,0 +1,37 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Agent Hooks" id="hooks1">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="700" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="エージェントが&#xa;「ファイルを編集する」" vertex="1">
+          <mxGeometry height="50" width="220" x="210" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="Before Hook&#xa;ruff check で構文チェック" vertex="1">
+          <mxGeometry height="50" width="250" x="195" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" value="ファイル編集を実行" vertex="1">
+          <mxGeometry height="50" width="250" x="195" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="After Hook&#xa;pytest で影響範囲テスト" vertex="1">
+          <mxGeometry height="50" width="250" x="195" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="6" edge="1" parent="1" source="2" style="strokeWidth=2;endArrow=blockThin;endFill=1;" target="3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7" edge="1" parent="1" source="3" style="strokeWidth=2;endArrow=blockThin;endFill=1;" target="4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8" edge="1" parent="1" source="4" style="strokeWidth=2;endArrow=blockThin;endFill=1;" target="5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9" parent="1" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#d6b656;fontStyle=1;" value="✓ 通過 → 続行&#xa;✗ 失敗 → 編集中止" vertex="1">
+          <mxGeometry height="30" width="130" x="460" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="1" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="✓ 通過 → 完了&#xa;✗ 失敗 → 自動修正" vertex="1">
+          <mxGeometry height="30" width="130" x="460" y="350" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
