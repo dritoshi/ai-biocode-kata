@@ -974,7 +974,7 @@ def run_pipeline(config: dict) -> None:
 
 ### リファクタリング
 
-- **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** — スクリプトからパッケージへの「成長」の過程で必要になるリファクタリングの技法書。コードの「臭い」を体系化し、改善パターンをカタログ化している。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
+- **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** https://www.amazon.co.jp/dp/0134757599 — スクリプトからパッケージへの「成長」の過程で必要になるリファクタリングの技法書。コードの「臭い」を体系化し、改善パターンをカタログ化している。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
 
 ---
 

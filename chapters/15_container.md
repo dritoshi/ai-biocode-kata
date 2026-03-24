@@ -1030,12 +1030,12 @@ print(f"最良パラメータ: {best.params}")  # {"n_neighbors": 15, ...}
 
 ### 研究再現性とコンテナ
 
-- **Boettiger, C. "An introduction to Docker for reproducible research." *ACM SIGOPS Operating Systems Review*, 49(1), 71–79, 2015.** — 研究再現性の観点からDockerを導入した先駆的論文。なぜコンテナが科学研究に必要かの理論的基盤を示す。
-- **Nüst, D. et al. "Ten simple rules for writing Dockerfiles for reproducible data science." *PLOS Computational Biology*, 16(11), e1008316, 2020.** — 再現可能なDockerfileの書き方を10のルールで整理。本章で扱ったDockerfile設計のベストプラクティスの詳細版。
+- **Boettiger, C. "An introduction to Docker for reproducible research." *ACM SIGOPS Operating Systems Review*, 49(1), 71–79, 2015.** https://doi.org/10.1145/2723872.2723882 — 研究再現性の観点からDockerを導入した先駆的論文。なぜコンテナが科学研究に必要かの理論的基盤を示す。
+- **Nüst, D. et al. "Ten simple rules for writing Dockerfiles for reproducible data science." *PLOS Computational Biology*, 16(11), e1008316, 2020.** https://doi.org/10.1371/journal.pcbi.1008316 — 再現可能なDockerfileの書き方を10のルールで整理。本章で扱ったDockerfile設計のベストプラクティスの詳細版。
 
 ### バイオインフォマティクスのコンテナ化
 
-- **Gruening, B. et al. "Recommendations for the packaging and containerizing of bioinformatics software." *F1000Research*, 7, 742, 2018.** — バイオインフォソフトウェアのコンテナ化とパッケージングの推奨事項をまとめた論文。BioContainersの設計思想を理解できる。
+- **Gruening, B. et al. "Recommendations for the packaging and containerizing of bioinformatics software." *F1000Research*, 7, 742, 2018.** https://doi.org/10.12688/f1000research.15140.2 — バイオインフォソフトウェアのコンテナ化とパッケージングの推奨事項をまとめた論文。BioContainersの設計思想を理解できる。
 
 ### 公式ドキュメント
 

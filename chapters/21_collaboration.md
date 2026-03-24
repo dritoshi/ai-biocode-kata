@@ -800,11 +800,11 @@ def validate_metadata(csv_text: str) -> IntakeResult:
 
 ### コードレビュー
 
-- **Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 2013 International Conference on Software Engineering (ICSE '13)*, 712–721, 2013.** — コードレビューの効果と課題に関する実証研究。レビューの目的が「バグ発見」だけでなく、知識共有やコード品質向上にもあることを示す。
+- **Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 2013 International Conference on Software Engineering (ICSE '13)*, 712–721, 2013.** https://doi.org/10.1109/ICSE.2013.6606617 — コードレビューの効果と課題に関する実証研究。レビューの目的が「バグ発見」だけでなく、知識共有やコード品質向上にもあることを示す。
 
 ### 科学研究の共同作業
 
-- **Wilson, G. et al. "Good Enough Practices in Scientific Computing". *PLOS Computational Biology*, 13(6), e1005510, 2017.** — 科学研究における共同作業のベストプラクティス。特にコード共有とデータ共有の節が本章と直結する。
+- **Wilson, G. et al. "Good Enough Practices in Scientific Computing". *PLOS Computational Biology*, 13(6), e1005510, 2017.** https://doi.org/10.1371/journal.pcbi.1005510 — 科学研究における共同作業のベストプラクティス。特にコード共有とデータ共有の節が本章と直結する。
 
 ### 質問の技術
 

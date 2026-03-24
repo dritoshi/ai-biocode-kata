@@ -613,12 +613,12 @@ for item in result.warnings:
 
 ### ワークフローツールの原論文
 
-- **Mölder, F. et al. "Sustainable data analysis with Snakemake." *F1000Research*, 10, 33, 2021.** — 本章の参考文献 [1] で引用。Snakemakeの設計哲学、DAGベースの実行モデル、再現性確保の仕組みが詳述されている。
-- **Di Tommaso, P. et al. "Nextflow enables reproducible computational workflows." *Nature Biotechnology*, 35(4), 316–319, 2017.** — 本章の参考文献 [2] で引用。NextflowのDSL2データフロープログラミングモデルの設計思想を理解できる。
+- **Mölder, F. et al. "Sustainable data analysis with Snakemake." *F1000Research*, 10, 33, 2021.** https://doi.org/10.12688/f1000research.29032.2 — 本章の参考文献 [1] で引用。Snakemakeの設計哲学、DAGベースの実行モデル、再現性確保の仕組みが詳述されている。
+- **Di Tommaso, P. et al. "Nextflow enables reproducible computational workflows." *Nature Biotechnology*, 35(4), 316–319, 2017.** https://doi.org/10.1038/nbt.3820 — 本章の参考文献 [2] で引用。NextflowのDSL2データフロープログラミングモデルの設計思想を理解できる。
 
 ### パイプラインフレームワークの比較
 
-- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
+- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** https://doi.org/10.1093/bib/bbw020 — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
 
 ### 公式チュートリアル
 

@@ -731,8 +731,8 @@ done
 
 ### バイオインフォマティクスのコマンドライン実践
 
-- **Buffalo, V. *Bioinformatics Data Skills*. O'Reilly, 2015.** — バイオインフォマティクス研究者のための計算スキルの教科書。特に Part I（Ideology: Data Skills for Robust and Reproducible Bioinformatics）と Part II（Prerequisites: Essential Skills for Getting Started with a Bioinformatics Project）が本章と直結する。awk/sed の実践例が豊富。
-- **Haddock, S. H. D., Dunn, C. W. *Practical Computing for Biologists*. Sinauer Associates, 2011.** — 正規表現の解説が特に手厚い教科書。本章で概要を扱った正規表現をFASTAヘッダーのパースやパターンマッチングに実践的に応用する際に最適である。
+- **Buffalo, V. *Bioinformatics Data Skills*. O'Reilly, 2015.** https://www.amazon.co.jp/dp/1449367372 — バイオインフォマティクス研究者のための計算スキルの教科書。特に Part I（Ideology: Data Skills for Robust and Reproducible Bioinformatics）と Part II（Prerequisites: Essential Skills for Getting Started with a Bioinformatics Project）が本章と直結する。awk/sed の実践例が豊富。
+- **Haddock, S. H. D., Dunn, C. W. *Practical Computing for Biologists*. Sinauer Associates, 2011.** https://www.amazon.co.jp/dp/0878933913 — 正規表現の解説が特に手厚い教科書。本章で概要を扱った正規表現をFASTAヘッダーのパースやパターンマッチングに実践的に応用する際に最適である。
 
 ### オンライン講義
 

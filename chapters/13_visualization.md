@@ -587,7 +587,7 @@ def apply_project_style() -> None:
 
 ### 可視化の原則
 
-- **Tufte, E. R. *The Visual Display of Quantitative Information* (2nd ed.). Graphics Press, 2001.** — データ可視化の古典。Data-ink ratio（データインク比）の概念など、本章で紹介した可視化原則の原典である。
+- **Tufte, E. R. *The Visual Display of Quantitative Information* (2nd ed.). Graphics Press, 2001.** https://www.amazon.co.jp/dp/1930824130 — データ可視化の古典。Data-ink ratio（データインク比）の概念など、本章で紹介した可視化原則の原典である。
 - **Wilke, C. O. *Fundamentals of Data Visualization*. O'Reilly, 2019.** — 可視化のタイプ選択（いつ散布図を使い、いつヒストグラムを使うか）を体系的に解説する実践書。全文がオンラインで無料公開されている（https://clauswilke.com/dataviz/）。
 - **Rougier, N. P., Droettboom, M., Bourne, P. E. "Ten Simple Rules for Better Figures". *PLOS Computational Biology*, 10(9), e1003833, 2014.** — 科学論文の図表作成の10のルール。本章で扱った可視化原則を簡潔に要約した必読論文。
 

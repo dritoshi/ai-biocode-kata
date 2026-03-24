@@ -337,13 +337,13 @@ AIコーディングエージェントに [§0-2 Plan → Execute → Review ワ
 
 ### ソフトウェア設計・クリーンコード
 
-- **Hunt, A., Thomas, D. *The Pragmatic Programmer* (20th Anniversary Edition). Addison-Wesley, 2019.** — 本章の参考文献 [2] で引用した初版（1999）の改訂版。DRY原則に加え、ETC（Easier to Change）原則が大幅に加筆されている。「達人プログラマー」として広く知られる定番書。邦訳: 村上雅章訳『達人プログラマー 熟達に向けたあなたの旅（第2版）』オーム社, 2020.
-- **Martin, R. C. *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall, 2008.** — 本章の参考文献 [6] で引用。KISS・命名規則・関数設計の実践を、豊富なJavaコード例で詳細に展開する。特に第1〜6章が初学者に適している。邦訳: 花井志生訳『Clean Code アジャイルソフトウェア達人の技』KADOKAWA, 2017.
-- **McConnell, S. *Code Complete* (2nd ed.). Microsoft Press, 2004.** — ソフトウェアコンストラクション（構築）の百科事典。変数の命名、関数の分割、防御的プログラミングなど、本章で概要を扱ったトピックを網羅的に深掘りする。邦訳: クイープ訳『CODE COMPLETE 第2版（上・下）』日経BP, 2005.
+- **Hunt, A., Thomas, D. *The Pragmatic Programmer* (20th Anniversary Edition). Addison-Wesley, 2019.** https://www.amazon.co.jp/dp/0135957052 — 本章の参考文献 [2] で引用した初版（1999）の改訂版。DRY原則に加え、ETC（Easier to Change）原則が大幅に加筆されている。「達人プログラマー」として広く知られる定番書。邦訳: 村上雅章訳『達人プログラマー 熟達に向けたあなたの旅（第2版）』オーム社, 2020.
+- **Martin, R. C. *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall, 2008.** https://www.amazon.co.jp/dp/0132350882 — 本章の参考文献 [6] で引用。KISS・命名規則・関数設計の実践を、豊富なJavaコード例で詳細に展開する。特に第1〜6章が初学者に適している。邦訳: 花井志生訳『Clean Code アジャイルソフトウェア達人の技』KADOKAWA, 2017.
+- **McConnell, S. *Code Complete* (2nd ed.). Microsoft Press, 2004.** https://www.amazon.co.jp/dp/0735619670 — ソフトウェアコンストラクション（構築）の百科事典。変数の命名、関数の分割、防御的プログラミングなど、本章で概要を扱ったトピックを網羅的に深掘りする。邦訳: クイープ訳『CODE COMPLETE 第2版（上・下）』日経BP, 2005.
 
 ### リファクタリング
 
-- **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** — コードの「臭い」（bad smells）を体系化し、改善パターンをカタログ化した名著。AI生成コードをレビューする際に「何を、なぜ改善すべきか」の語彙が身につく。第2版はJavaScript例で書かれている。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
+- **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** https://www.amazon.co.jp/dp/0134757599 — コードの「臭い」（bad smells）を体系化し、改善パターンをカタログ化した名著。AI生成コードをレビューする際に「何を、なぜ改善すべきか」の語彙が身につく。第2版はJavaScript例で書かれている。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
 
 ### UNIX哲学
 

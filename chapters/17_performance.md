@@ -950,7 +950,7 @@ tabix variants.vcf.gz chr1:1000000-2000000
 
 ### Pythonの高速化
 
-- **Gorelick, M., Ozsvald, I. *High Performance Python* (2nd ed.). O'Reilly, 2020.** — Pythonの高速化に特化した実践書。プロファイリング、NumPyの最適化、Cython、multiprocessing、asyncioを包括的に扱う。邦訳: 相川愛三訳『ハイパフォーマンスPython 第2版』オライリー・ジャパン, 2021.
+- **Gorelick, M., Ozsvald, I. *High Performance Python* (2nd ed.). O'Reilly, 2020.** https://www.amazon.co.jp/dp/1492055026 — Pythonの高速化に特化した実践書。プロファイリング、NumPyの最適化、Cython、multiprocessing、asyncioを包括的に扱う。邦訳: 相川愛三訳『ハイパフォーマンスPython 第2版』オライリー・ジャパン, 2021.
 
 ### 最適化の原則
 
@@ -958,7 +958,7 @@ tabix variants.vcf.gz chr1:1000000-2000000
 
 ### コンピュータシステムの理解
 
-- **Bryant, R. E., O'Hallaron, D. R. *Computer Systems: A Programmer's Perspective* (3rd ed.). Pearson, 2015.** — メモリ階層、キャッシュ、パイプラインの仕組みを解説する教科書（通称 CSAPP）。「なぜNumPyが高速なのか」「なぜ行優先・列優先のメモリレイアウトが重要なのか」の背景知識が得られる。邦訳: 鹿野桂一郎訳『コンピュータシステム 基礎から応用まで プログラマの視点で学ぶ（第3版）』東京化学同人, 2025.
+- **Bryant, R. E., O'Hallaron, D. R. *Computer Systems: A Programmer's Perspective* (3rd ed.). Pearson, 2015.** https://www.amazon.co.jp/dp/013409266X — メモリ階層、キャッシュ、パイプラインの仕組みを解説する教科書（通称 CSAPP）。「なぜNumPyが高速なのか」「なぜ行優先・列優先のメモリレイアウトが重要なのか」の背景知識が得られる。邦訳: 鹿野桂一郎訳『コンピュータシステム 基礎から応用まで プログラマの視点で学ぶ（第3版）』東京化学同人, 2025.
 
 ### プロファイリングツール
 

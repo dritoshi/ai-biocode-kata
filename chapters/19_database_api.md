@@ -884,8 +884,8 @@ project/
 
 ### バイオデータベースの全体像
 
-- **Sayers, E. W. et al. "Database resources of the National Center for Biotechnology Information". *Nucleic Acids Research*, 52(D1), D33–D43, 2024.** — NCBIのデータベースリソース全体を概説する年次レビュー。毎年更新されるため、最新の機能やデータベースの変更を把握できる。
-- **Manzoni, C. et al. "Genome, transcriptome and proteome: the rise of omics data and their integration in biomedical sciences". *Briefings in Bioinformatics*, 19(2), 286–302, 2018.** — オミクスデータとデータベースの全体像を俯瞰するレビュー。各データベースの位置づけと統合の方向性を理解できる。
+- **Sayers, E. W. et al. "Database resources of the National Center for Biotechnology Information". *Nucleic Acids Research*, 52(D1), D33–D43, 2024.** https://doi.org/10.1093/nar/gkad1044 — NCBIのデータベースリソース全体を概説する年次レビュー。毎年更新されるため、最新の機能やデータベースの変更を把握できる。
+- **Manzoni, C. et al. "Genome, transcriptome and proteome: the rise of omics data and their integration in biomedical sciences". *Briefings in Bioinformatics*, 19(2), 286–302, 2018.** https://doi.org/10.1093/bib/bbw114 — オミクスデータとデータベースの全体像を俯瞰するレビュー。各データベースの位置づけと統合の方向性を理解できる。
 
 ### APIの公式リファレンス
 

@@ -525,7 +525,7 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 
 ### データ分析の教科書
 
-- **McKinney, W. *Python for Data Analysis* (3rd ed.). O'Reilly, 2022.** — pandas作者自身による教科書。本章で扱ったDataFrame操作の背景にあるデータモデルと設計思想が詳しく解説されている。邦訳: 瀬戸山雅人ほか訳『Pythonによるデータ分析入門 第3版』オライリー・ジャパン, 2023.
+- **McKinney, W. *Python for Data Analysis* (3rd ed.). O'Reilly, 2022.** https://www.amazon.co.jp/dp/109810403X — pandas作者自身による教科書。本章で扱ったDataFrame操作の背景にあるデータモデルと設計思想が詳しく解説されている。邦訳: 瀬戸山雅人ほか訳『Pythonによるデータ分析入門 第3版』オライリー・ジャパン, 2023.
 - **VanderPlas, J. *Python Data Science Handbook* (2nd ed.). O'Reilly, 2023.** — NumPy、pandas、matplotlib、scikit-learnの包括的な実践ガイド。全文がオンラインで無料公開されている（https://jakevdp.github.io/PythonDataScienceHandbook/）。邦訳: 菊池彰訳『Pythonデータサイエンスハンドブック 第2版』オライリー・ジャパン, 2024.
 
 ### ライブラリの設計思想
