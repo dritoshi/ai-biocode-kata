@@ -1,0 +1,49 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Separation of Concerns" id="soc">
+    <mxGraphModel dx="1195" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f5f5f5;strokeColor=#666666;backgroundOutline=1;size=15;fontStyle=1;" value="FASTA&#xa;ファイル" vertex="1">
+          <mxGeometry height="60" width="100" x="60" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" value="入力（パース）&#xa;parse_fasta()" vertex="1">
+          <mxGeometry height="70" width="180" x="190" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="s1d" parent="1" style="text;html=1;fontSize=10;align=center;fillColor=none;strokeColor=none;fontColor=#666666;" value="ファイル→データ構造" vertex="1">
+          <mxGeometry height="20" width="140" x="210" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="処理（変換）&#xa;filter_by_gc()" vertex="1">
+          <mxGeometry height="70" width="180" x="400" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="s2d" parent="1" style="text;html=1;fontSize=10;align=center;fillColor=none;strokeColor=none;fontColor=#666666;" value="計算・フィルタリング" vertex="1">
+          <mxGeometry height="20" width="140" x="420" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="出力（フォーマット）&#xa;write_tsv()" vertex="1">
+          <mxGeometry height="70" width="180" x="610" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="s3d" parent="1" style="text;html=1;fontSize=10;align=center;fillColor=none;strokeColor=none;fontColor=#666666;" value="データ構造→ファイル" vertex="1">
+          <mxGeometry height="20" width="140" x="630" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" parent="1" style="shape=note;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f5f5f5;strokeColor=#666666;backgroundOutline=1;size=15;fontStyle=1;" value="TSV&#xa;ファイル" vertex="1">
+          <mxGeometry height="60" width="100" x="820" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="f1" style="strokeWidth=2;" target="s1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="s1" style="strokeWidth=2;" target="s2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="s2" style="strokeWidth=2;" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="s3" style="strokeWidth=2;" target="f2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="km" parent="1" style="text;html=1;fontSize=11;align=center;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="各関数が1つの責務だけを持つ → テスト・再利用・差し替えが容易" vertex="1">
+          <mxGeometry height="25" width="600" x="180" y="230" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

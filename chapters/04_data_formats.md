@@ -506,6 +506,8 @@ assert errors == [], f"バリデーションエラー: {errors}"
 | BRCA1 | sample_B | 8.1 |
 | BRCA1 | sample_C | 6.7 |
 
+![tidy data変換: Wide形式（横持ち）からLong形式（縦持ち）への pd.melt() による変換](../figures/ch04_tidy_data.png)
+
 pandasの `melt()` と `pivot_table()` で相互変換できる:
 
 ```python

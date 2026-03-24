@@ -127,6 +127,8 @@ def filter_by_quality(scores: np.ndarray, threshold: int = 20) -> np.ndarray:
 
 pandasはテーブルデータ操作のデファクトスタンダードである。[§4](./04_data_formats.md)では `melt()` と `pivot_table()` によるtidy data変換を学んだが、実際のデータ処理ではさらに多くの操作が必要になる。
 
+![pd.melt()によるデータ変換: Wide形式からTidy形式への変換](../figures/ch12_tidy_melt.png)
+
 DEG（差次的発現遺伝子; Differentially Expressed Gene）解析の結果テーブルを例に、実践的なパターンを見ていく。DESeq2やedgeRが出力する典型的なテーブルは以下のようなカラムを持つ:
 
 | カラム | 意味 |

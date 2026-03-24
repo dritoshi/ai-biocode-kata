@@ -1,0 +1,58 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="CI CD Pipeline" id="cicd">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="git push /&#xa;Pull Request" vertex="1">
+          <mxGeometry height="50" width="120" x="30" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ga" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" value="" vertex="1">
+          <mxGeometry height="230" width="620" x="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gal" parent="1" style="text;html=1;fontSize=13;align=left;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#666666;" value="GitHub Actions（自動実行）" vertex="1">
+          <mxGeometry height="25" width="250" x="215" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" value="ruff check&#xa;（リンター）" vertex="1">
+          <mxGeometry height="50" width="120" x="230" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" value="mypy&#xa;（型チェック）" vertex="1">
+          <mxGeometry height="50" width="120" x="390" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" value="pytest&#xa;（テスト実行）" vertex="1">
+          <mxGeometry height="50" width="120" x="550" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mx" parent="1" style="text;html=1;fontSize=10;align=center;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" value="Python 3.10 / 3.11 / 3.12&#xa;（マトリクスビルド）" vertex="1">
+          <mxGeometry height="35" width="200" x="340" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="✅ 全通過" vertex="1">
+          <mxGeometry height="40" width="100" x="700" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="ng" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" value="❌ 失敗" vertex="1">
+          <mxGeometry height="40" width="100" x="700" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="t1" style="strokeWidth=2;" target="s1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="s1" style="strokeWidth=2;" target="s2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="s2" style="strokeWidth=2;" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="s3" style="strokeWidth=1.5;strokeColor=#82b366;" target="ok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="s3" style="strokeWidth=1.5;strokeColor=#b85450;" target="ng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ml" parent="1" style="text;html=1;fontSize=11;align=center;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="マージ可能" vertex="1">
+          <mxGeometry height="25" width="80" x="821" y="217.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ml2" parent="1" style="text;html=1;fontSize=11;align=center;fillColor=none;strokeColor=none;fontColor=#b85450;fontStyle=1;" value="修正が必要" vertex="1">
+          <mxGeometry height="25" width="80" x="821" y="67.5" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

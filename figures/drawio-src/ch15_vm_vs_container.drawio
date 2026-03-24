@@ -1,120 +1,104 @@
-<mxfile host="app.diagrams.net" modified="2026-03-24" type="device">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
   <diagram name="VM vs Container" id="vmcont">
-    <mxGraphModel dx="1100" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="600" math="0" shadow="0">
+    <mxGraphModel dx="1217" dy="719" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="600" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <!-- VM Side Title -->
-        <mxCell id="t1" value="仮想マシン（VM）" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="100" y="30" width="200" height="30" as="geometry" />
+        <mxCell id="t1" parent="1" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;" value="仮想マシン（VM）" vertex="1">
+          <mxGeometry height="30" width="200" x="120" y="30" as="geometry" />
         </mxCell>
-        <!-- Container Side Title -->
-        <mxCell id="t2" value="コンテナ" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="690" y="30" width="200" height="30" as="geometry" />
+        <mxCell id="t2" parent="1" style="text;html=1;fontSize=16;align=center;fillColor=none;strokeColor=none;fontStyle=1;" value="コンテナ" vertex="1">
+          <mxGeometry height="30" width="200" x="580" y="30" as="geometry" />
         </mxCell>
-        <!-- === VM Side === -->
-        <!-- Hardware -->
-        <mxCell id="v1" value="ハードウェア" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="490" width="350" height="40" as="geometry" />
+        <mxCell id="v1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="ハードウェア" vertex="1">
+          <mxGeometry height="40" width="350" x="50" y="490" as="geometry" />
         </mxCell>
-        <!-- Host OS -->
-        <mxCell id="v2" value="ホスト OS" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="440" width="350" height="40" as="geometry" />
+        <mxCell id="v2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="ホスト OS" vertex="1">
+          <mxGeometry height="40" width="350" x="50" y="440" as="geometry" />
         </mxCell>
-        <!-- Hypervisor -->
-        <mxCell id="v3" value="ハイパーバイザ" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="390" width="350" height="40" as="geometry" />
+        <mxCell id="v3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="ハイパーバイザ" vertex="1">
+          <mxGeometry height="40" width="350" x="50" y="390" as="geometry" />
         </mxCell>
-        <!-- VM 1 -->
-        <mxCell id="v4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="60" y="80" width="150" height="300" as="geometry" />
+        <mxCell id="v4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="300" width="150" x="60" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="v5" value="アプリ A" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="75" y="95" width="120" height="40" as="geometry" />
+        <mxCell id="v5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="アプリ A" vertex="1">
+          <mxGeometry height="40" width="120" x="75" y="95" as="geometry" />
         </mxCell>
-        <mxCell id="v6" value="ライブラリ" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="75" y="145" width="120" height="35" as="geometry" />
+        <mxCell id="v6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" value="ライブラリ" vertex="1">
+          <mxGeometry height="35" width="120" x="75" y="145" as="geometry" />
         </mxCell>
-        <mxCell id="v7" value="ゲスト OS&#xa;（Ubuntu等）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="75" y="190" width="120" height="70" as="geometry" />
+        <mxCell id="v7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="ゲスト OS&#xa;（Ubuntu等）" vertex="1">
+          <mxGeometry height="70" width="120" x="75" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="v7a" value="カーネル" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e6d0b8;strokeColor=#ae4132;" vertex="1" parent="1">
-          <mxGeometry x="75" y="270" width="120" height="35" as="geometry" />
+        <mxCell id="v7a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e6d0b8;strokeColor=#ae4132;" value="カーネル" vertex="1">
+          <mxGeometry height="35" width="120" x="75" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="v7b" value="仮想HW" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="75" y="315" width="120" height="35" as="geometry" />
+        <mxCell id="v7b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" value="仮想HW" vertex="1">
+          <mxGeometry height="35" width="120" x="75" y="315" as="geometry" />
         </mxCell>
-        <!-- VM 2 -->
-        <mxCell id="v8" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="240" y="80" width="150" height="300" as="geometry" />
+        <mxCell id="v8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="300" width="150" x="240" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="v9" value="アプリ B" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="95" width="120" height="40" as="geometry" />
+        <mxCell id="v9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="アプリ B" vertex="1">
+          <mxGeometry height="40" width="120" x="255" y="95" as="geometry" />
         </mxCell>
-        <mxCell id="v10" value="ライブラリ" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="255" y="145" width="120" height="35" as="geometry" />
+        <mxCell id="v10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" value="ライブラリ" vertex="1">
+          <mxGeometry height="35" width="120" x="255" y="145" as="geometry" />
         </mxCell>
-        <mxCell id="v11" value="ゲスト OS&#xa;（CentOS等）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="255" y="190" width="120" height="70" as="geometry" />
+        <mxCell id="v11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="ゲスト OS&#xa;（CentOS等）" vertex="1">
+          <mxGeometry height="70" width="120" x="255" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="v11a" value="カーネル" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e6d0b8;strokeColor=#ae4132;" vertex="1" parent="1">
-          <mxGeometry x="255" y="270" width="120" height="35" as="geometry" />
+        <mxCell id="v11a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e6d0b8;strokeColor=#ae4132;" value="カーネル" vertex="1">
+          <mxGeometry height="35" width="120" x="255" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="v11b" value="仮想HW" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="255" y="315" width="120" height="35" as="geometry" />
+        <mxCell id="v11b" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;" value="仮想HW" vertex="1">
+          <mxGeometry height="35" width="120" x="255" y="315" as="geometry" />
         </mxCell>
-        <!-- === Container Side === -->
-        <!-- Hardware -->
-        <mxCell id="c1" value="ハードウェア" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="620" y="490" width="350" height="40" as="geometry" />
+        <mxCell id="c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" value="ハードウェア" vertex="1">
+          <mxGeometry height="40" width="350" x="510" y="490" as="geometry" />
         </mxCell>
-        <!-- Host OS -->
-        <mxCell id="c2" value="ホスト OS（カーネル共有）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="620" y="390" width="350" height="90" as="geometry" />
+        <mxCell id="c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" value="ホスト OS（カーネル共有）" vertex="1">
+          <mxGeometry height="90" width="350" x="510" y="390" as="geometry" />
         </mxCell>
-        <!-- Container Engine -->
-        <mxCell id="c3" value="コンテナエンジン（Docker）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="620" y="300" width="350" height="40" as="geometry" />
+        <mxCell id="c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="コンテナエンジン（Docker）" vertex="1">
+          <mxGeometry height="40" width="350" x="510" y="300" as="geometry" />
         </mxCell>
-        <!-- Container 1 -->
-        <mxCell id="c4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="630" y="80" width="150" height="210" as="geometry" />
+        <mxCell id="c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="210" width="150" x="520" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="c5" value="アプリ A" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="645" y="95" width="120" height="40" as="geometry" />
+        <mxCell id="c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="アプリ A" vertex="1">
+          <mxGeometry height="40" width="120" x="535" y="95" as="geometry" />
         </mxCell>
-        <mxCell id="c6" value="ライブラリ" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="645" y="145" width="120" height="35" as="geometry" />
+        <mxCell id="c6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" value="ライブラリ" vertex="1">
+          <mxGeometry height="35" width="120" x="535" y="145" as="geometry" />
         </mxCell>
-        <mxCell id="c6a" value="最小限のFS&#xa;(ゲストOS不要)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f0f0f0;strokeColor=#999999;fontColor=#999999;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="645" y="190" width="120" height="50" as="geometry" />
+        <mxCell id="c6a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f0f0f0;strokeColor=#999999;fontColor=#999999;dashed=1;" value="最小限のFS&#xa;(ゲストOS不要)" vertex="1">
+          <mxGeometry height="50" width="120" x="535" y="190" as="geometry" />
         </mxCell>
-        <!-- Container 2 -->
-        <mxCell id="c7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="810" y="80" width="150" height="210" as="geometry" />
+        <mxCell id="c7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="210" width="150" x="700" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="c8" value="アプリ B" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="825" y="95" width="120" height="40" as="geometry" />
+        <mxCell id="c8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="アプリ B" vertex="1">
+          <mxGeometry height="40" width="120" x="715" y="95" as="geometry" />
         </mxCell>
-        <mxCell id="c9" value="ライブラリ" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="825" y="145" width="120" height="35" as="geometry" />
+        <mxCell id="c9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" value="ライブラリ" vertex="1">
+          <mxGeometry height="35" width="120" x="715" y="145" as="geometry" />
         </mxCell>
-        <mxCell id="c9a" value="最小限のFS&#xa;(ゲストOS不要)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f0f0f0;strokeColor=#999999;fontColor=#999999;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="825" y="190" width="120" height="50" as="geometry" />
+        <mxCell id="c9a" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f0f0f0;strokeColor=#999999;fontColor=#999999;dashed=1;" value="最小限のFS&#xa;(ゲストOS不要)" vertex="1">
+          <mxGeometry height="50" width="120" x="715" y="190" as="geometry" />
         </mxCell>
-        <!-- Divider -->
-        <mxCell id="d1" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=2;strokeColor=#999999;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="500" y="550" as="sourcePoint" />
-            <mxPoint x="500" y="30" as="targetPoint" />
+        <mxCell id="d1" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;strokeWidth=2;strokeColor=#999999;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="460" y="587" as="sourcePoint" />
+            <mxPoint x="460" y="37" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <!-- Key differences -->
-        <mxCell id="k1" value="✓ ゲストOS不要 → 軽量&#xa;✓ カーネル共有 → 高速起動&#xa;✓ イメージ数十MB〜" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="620" y="540" width="200" height="50" as="geometry" />
+        <mxCell id="k1" parent="1" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="✓ ゲストOS不要 → 軽量&#xa;✓ カーネル共有 → 高速起動&#xa;✓ イメージ数十MB〜" vertex="1">
+          <mxGeometry height="50" width="200" x="510" y="540" as="geometry" />
         </mxCell>
-        <mxCell id="k2" value="✗ 各VMにOS → 重い&#xa;✗ 起動に分単位&#xa;✗ イメージ数GB〜" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#b85450;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="50" y="540" width="200" height="50" as="geometry" />
+        <mxCell id="k2" parent="1" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#b85450;fontStyle=1;" value="✗ 各VMにOS → 重い&#xa;✗ 起動に分単位&#xa;✗ イメージ数GB〜" vertex="1">
+          <mxGeometry height="50" width="200" x="50" y="540" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

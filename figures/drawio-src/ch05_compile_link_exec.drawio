@@ -1,0 +1,52 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Compile Link Exec" id="cle">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;backgroundOutline=1;size=15;fontStyle=1;" value="ソースコード&#xa;(.c / .cpp)" vertex="1">
+          <mxGeometry height="60" width="130" x="60" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="コンパイル&#xa;(gcc / clang)" vertex="1">
+          <mxGeometry height="60" width="140" x="220" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="o1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f5f5f5;strokeColor=#666666;backgroundOutline=1;size=15;fontStyle=1;" value="オブジェクト&#xa;(.o)" vertex="1">
+          <mxGeometry height="60" width="120" x="390" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" value="リンク&#xa;(ld)" vertex="1">
+          <mxGeometry height="60" width="120" x="540" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ex" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" value="実行ファイル&#xa;(samtools等)" vertex="1">
+          <mxGeometry height="60" width="140" x="690" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="lib1" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;boundedLbl=1;backgroundOutline=1;size=8;fontStyle=1;" value="共有ライブラリ&#xa;libhts.so" vertex="1">
+          <mxGeometry height="55" width="120" x="455" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="lib2" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;boundedLbl=1;backgroundOutline=1;size=8;fontStyle=1;" value="共有ライブラリ&#xa;libz.so" vertex="1">
+          <mxGeometry height="55" width="120" x="625" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="s1" style="strokeWidth=2;" target="c1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="c1" style="strokeWidth=2;" target="o1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="o1" style="strokeWidth=2;" target="l1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="l1" style="strokeWidth=2;" target="ex">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="lib1" style="strokeWidth=1.5;dashed=1;strokeColor=#9673a6;" target="l1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="lib2" style="strokeWidth=1.5;dashed=1;strokeColor=#9673a6;" target="l1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" parent="1" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#666666;" value="Pythonからは import で&#xa;間接的にこの仕組みを利用" vertex="1">
+          <mxGeometry height="30" width="200" x="60" y="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Layer Cache" id="lc">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bt" parent="1" style="text;html=1;fontSize=13;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#b85450;" value="❌ キャッシュ効率の悪い順序" vertex="1">
+          <mxGeometry height="25" width="250" x="50" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Courier New;" value="FROM mambaforge" vertex="1">
+          <mxGeometry height="30" width="250" x="50" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Courier New;fontStyle=1;" value="COPY . /workspace" vertex="1">
+          <mxGeometry height="30" width="250" x="50" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Courier New;fontStyle=1;" value="RUN mamba env create ..." vertex="1">
+          <mxGeometry height="30" width="250" x="50" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Courier New;fontStyle=1;" value="RUN pip install ..." vertex="1">
+          <mxGeometry height="30" width="250" x="50" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ba" parent="1" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#b85450;fontStyle=1;" value="コード変更のたびに&#xa;以降すべて再ビルド&#xa;（数十分かかる）" vertex="1">
+          <mxGeometry height="50" width="140" x="330" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="bar" edge="1" parent="1" style="endArrow=blockThin;endFill=1;strokeWidth=2;strokeColor=#b85450;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="115" as="sourcePoint" />
+            <mxPoint x="305" y="115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;strokeWidth=1;strokeColor=#999999;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="40" as="sourcePoint" />
+            <mxPoint x="450" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gt" parent="1" style="text;html=1;fontSize=13;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#82b366;" value="✅ キャッシュ効率の良い順序" vertex="1">
+          <mxGeometry height="25" width="260" x="490" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Courier New;" value="FROM mambaforge" vertex="1">
+          <mxGeometry height="30" width="260" x="490" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;" value="COPY environment.yml ..." vertex="1">
+          <mxGeometry height="30" width="260" x="490" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;" value="RUN mamba env create ..." vertex="1">
+          <mxGeometry height="30" width="260" x="490" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Courier New;fontStyle=1;" value="COPY . /workspace" vertex="1">
+          <mxGeometry height="30" width="260" x="490" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ga1" parent="1" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="キャッシュ再利用&#xa;（変更なし→スキップ）" vertex="1">
+          <mxGeometry height="35" width="140" x="760" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ga2" parent="1" style="text;html=1;fontSize=10;align=left;fillColor=none;strokeColor=none;fontColor=#d6b656;fontStyle=1;" value="ここだけ再ビルド&#xa;（数秒）" vertex="1">
+          <mxGeometry height="35" width="130" x="760" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="pr" parent="1" style="text;html=1;fontSize=11;align=center;fillColor=none;strokeColor=none;fontColor=#666666;fontStyle=1;" value="原則: 変更頻度が低い操作を先に、高い操作を後に置く" vertex="1">
+          <mxGeometry height="25" width="500" x="200" y="238" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

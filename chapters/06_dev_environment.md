@@ -243,6 +243,8 @@ conda list --revisions  # 変更履歴の確認
 | **brew** | macOS/Linuxアプリ | Homebrew | 開発ツール（git, node等） |
 | **apt** | Debian/Ubuntu | OSリポジトリ | システムライブラリ |
 
+![Python環境管理ツールの責務範囲: pyenv・venv・pip・conda・uvの担当領域](../figures/ch06_env_tools.png)
+
 基本原則は「**Python関連はcondaまたはpip/uvで、OS関連はbrew/aptで**」という使い分けである。conda環境内でpipを使うことも可能だが、condaとpipを混在させるとパッケージの追跡が困難になるため、可能な限りどちらかに統一するのが望ましい。
 
 ### ロックファイル — 再現性の鍵

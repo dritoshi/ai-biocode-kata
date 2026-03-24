@@ -144,6 +144,8 @@ SAMPLES = config["samples"]  # ["SRR1234501", "SRR1234502", "SRR1234503"]
 expand("results/counts/{sample}_counts.txt", sample=SAMPLES)
 ```
 
+![Snakemakeのwildcard展開: config.yamlのサンプルリストからexpand()で全出力パスを生成](../figures/ch14_wildcard_expand.png)
+
 シェルスクリプトのforループと異なり、wildcardの利点は:
 
 - サンプルの追加は `config.yaml` を編集するだけでよい

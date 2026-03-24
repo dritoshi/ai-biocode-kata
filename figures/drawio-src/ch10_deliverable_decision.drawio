@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net" modified="2026-03-24" type="device">
+  <diagram name="Deliverable Decision" id="dd">
+    <mxGraphModel dx="1100" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Start -->
+        <mxCell id="q1" value="自分だけが&#xa;使うか？" style="rhombus;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;aspect=auto;" vertex="1" parent="1">
+          <mxGeometry x="420" y="30" width="150" height="80" as="geometry" />
+        </mxCell>
+        <!-- Yes: single use -->
+        <mxCell id="q2" value="一回きりの&#xa;解析か？" style="rhombus;whiteSpace=wrap;html=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;aspect=auto;" vertex="1" parent="1">
+          <mxGeometry x="120" y="170" width="150" height="80" as="geometry" />
+        </mxCell>
+        <!-- No: shared -->
+        <mxCell id="q3" value="コマンドライン&#xa;ツールとして&#xa;配布するか？" style="rhombus;whiteSpace=wrap;html=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;aspect=auto;" vertex="1" parent="1">
+          <mxGeometry x="620" y="170" width="160" height="90" as="geometry" />
+        </mxCell>
+        <!-- Answers -->
+        <mxCell id="a1" value="スタンドアロン&#xa;スクリプト&#xa;（パターン1）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="320" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="pip パッケージ&#xa;（パターン2）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="320" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="PyPI / bioconda&#xa;公開ライブラリ&#xa;（パターン3）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="320" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="ワークフロー&#xa;Snakemake等&#xa;（パターン5）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="710" y="320" width="140" height="60" as="geometry" />
+        </mxCell>
+        <!-- Additional -->
+        <mxCell id="q4" value="再現性の&#xa;保証が必要か？" style="rhombus;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;aspect=auto;" vertex="1" parent="1">
+          <mxGeometry x="550" y="440" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="Docker コンテナ&#xa;（パターン6）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="Web UI&#xa;Streamlit等&#xa;（パターン7）" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+        <!-- Edges -->
+        <mxCell id="e1" value="Yes" style="strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" parent="1" source="q1" target="q2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" value="No" style="strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" parent="1" source="q1" target="q3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" value="Yes" style="strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="q2" target="a1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" value="No" style="strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="q2" target="a2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" value="Yes" style="strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="q3" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" value="No" style="strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="q3" target="a4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="strokeWidth=1.5;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="a3" target="q4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="strokeWidth=1.5;strokeColor=#999999;dashed=1;" edge="1" parent="1" source="a4" target="q4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e9" value="Yes" style="strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="q4" target="a5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e10" value="GUI?" style="strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="q4" target="a6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Note -->
+        <mxCell id="n1" value="パターンは組み合わせ可能&#xa;（例: パッケージ + Dockerfile + ワークフロー）" style="text;html=1;fontSize=10;align=center;fillColor=none;strokeColor=none;fontColor=#666666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="650" width="350" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

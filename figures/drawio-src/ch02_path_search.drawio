@@ -1,0 +1,55 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="PATH Search" id="path">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontFamily=Courier New;" value="$ python3" vertex="1">
+          <mxGeometry height="40" width="140" x="50" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sh" parent="1" style="text;html=1;fontSize=12;align=left;fillColor=none;strokeColor=none;fontStyle=1;" value="シェルが PATH を左から順に検索" vertex="1">
+          <mxGeometry height="25" width="300" x="50" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;fontStyle=1;" value="/home/user/.local/bin/" vertex="1">
+          <mxGeometry height="40" width="220" x="50" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="d1c" parent="1" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="python3 ✓ 発見！" vertex="1">
+          <mxGeometry height="30" width="140" x="290" y="148" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#cccccc;fontFamily=Courier New;fontColor=#999999;" value="/usr/local/bin/" vertex="1">
+          <mxGeometry height="40" width="220" x="50" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="d2c" parent="1" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#999999;" value="（検索されない）" vertex="1">
+          <mxGeometry height="30" width="120" x="290" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#cccccc;fontFamily=Courier New;fontColor=#999999;" value="/usr/bin/" vertex="1">
+          <mxGeometry height="40" width="220" x="50" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="d3c" parent="1" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#999999;" value="（検索されない）" vertex="1">
+          <mxGeometry height="30" width="120" x="290" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="ra" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;fontStyle=1;fontSize=11;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" value="この python3 が実行される">
+          <mxGeometry relative="1" x="-0.0233" y="10" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="700" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ex" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;" value="/home/user/.local/bin/python3&#xa;Python 3.12.3" vertex="1">
+          <mxGeometry height="50" width="280" x="550" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="w1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;backgroundOutline=1;size=15;verticalAlign=middle;" value="⚠ PATH の順序が重要: 同名のコマンドが複数ディレクトリにある場合、&#xa;　 先に見つかった方が実行される（意図しないバージョンが動く原因）" vertex="1">
+          <mxGeometry height="55" width="500" x="50" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="so" edge="1" parent="1" style="endArrow=blockThin;endFill=1;strokeWidth=2;strokeColor=#6c8ebf;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="155" as="sourcePoint" />
+            <mxPoint x="30" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sol" parent="1" style="text;html=1;fontSize=10;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#6c8ebf;rotation=-90;" value="検索順" vertex="1">
+          <mxGeometry height="20" width="50" x="-5" y="205" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

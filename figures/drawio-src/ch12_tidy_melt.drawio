@@ -1,0 +1,35 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Tidy Melt" id="melt">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" parent="1" style="text;html=1;fontSize=14;align=center;fillColor=none;strokeColor=none;fontStyle=1;" value="pd.melt() によるデータ変換" vertex="1">
+          <mxGeometry height="25" width="300" x="250" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="w1" parent="1" style="text;html=1;fontSize=12;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#6c8ebf;" value="Wide DataFrame" vertex="1">
+          <mxGeometry height="20" width="250" x="50" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wt" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Courier New;align=left;spacingLeft=10;verticalAlign=top;spacingTop=8;" value="gene | Ctrl_1 | Ctrl_2 | Treat_1 | Treat_2&#xa;TP53 |  10.5  |  11.2  |  20.3   |  19.8&#xa;BRCA1|   5.2  |   4.8  |   8.1   |   7.9" vertex="1">
+          <mxGeometry height="70" width="300" x="30" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="ar" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#82b366;fontStyle=1;fontSize=11;fontFamily=Courier New;" value="pd.melt(id_vars=&#39;gene&#39;)">
+          <mxGeometry relative="1" x="0.0667" y="-20" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="340" y="130" as="sourcePoint" />
+            <mxPoint x="490" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="l1" parent="1" style="text;html=1;fontSize=12;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#82b366;" value="Tidy DataFrame" vertex="1">
+          <mxGeometry height="20" width="250" x="475" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lt" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Courier New;align=left;spacingLeft=10;verticalAlign=top;spacingTop=8;" value="gene  | sample  | expression&#xa;TP53  | Ctrl_1  | 10.5&#xa;TP53  | Ctrl_2  | 11.2&#xa;TP53  | Treat_1 | 20.3&#xa;TP53  | Treat_2 | 19.8&#xa;BRCA1 | Ctrl_1  |  5.2&#xa;..." vertex="1">
+          <mxGeometry height="130" width="200" x="500" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="un" parent="1" style="text;html=1;fontSize=11;align=center;fillColor=none;strokeColor=none;fontColor=#666666;fontStyle=1;" value="→ seaborn の violinplot(), boxplot() に直接渡せる形式" vertex="1">
+          <mxGeometry height="25" width="450" x="200" y="250" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

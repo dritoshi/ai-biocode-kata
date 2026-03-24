@@ -1,0 +1,113 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Tidy Data" id="tidy">
+    <mxGraphModel dx="1017" dy="709" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="550" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t1" parent="1" style="text;html=1;fontSize=14;align=center;fillColor=none;strokeColor=none;fontStyle=1;" value="Wide 形式（横持ち）" vertex="1">
+          <mxGeometry height="25" width="300" x="130" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wh" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontFamily=Courier New;" value="gene" vertex="1">
+          <mxGeometry height="30" width="80" x="130" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wh2" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontFamily=Courier New;" value="sample_A" vertex="1">
+          <mxGeometry height="30" width="80" x="210" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wh3" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontFamily=Courier New;" value="sample_B" vertex="1">
+          <mxGeometry height="30" width="80" x="290" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wh4" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontFamily=Courier New;" value="sample_C" vertex="1">
+          <mxGeometry height="30" width="80" x="370" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="w11" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#f5f5f5;fontFamily=Courier New;" value="TP53" vertex="1">
+          <mxGeometry height="30" width="80" x="130" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="w12" parent="1" style="rounded=0;html=1;fontSize=11;fontFamily=Courier New;" value="10.5" vertex="1">
+          <mxGeometry height="30" width="80" x="210" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="w13" parent="1" style="rounded=0;html=1;fontSize=11;fontFamily=Courier New;" value="20.3" vertex="1">
+          <mxGeometry height="30" width="80" x="290" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="w14" parent="1" style="rounded=0;html=1;fontSize=11;fontFamily=Courier New;" value="15.1" vertex="1">
+          <mxGeometry height="30" width="80" x="370" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="w21" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#f5f5f5;fontFamily=Courier New;" value="BRCA1" vertex="1">
+          <mxGeometry height="30" width="80" x="130" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="w22" parent="1" style="rounded=0;html=1;fontSize=11;fontFamily=Courier New;" value="5.2" vertex="1">
+          <mxGeometry height="30" width="80" x="210" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="w23" parent="1" style="rounded=0;html=1;fontSize=11;fontFamily=Courier New;" value="8.1" vertex="1">
+          <mxGeometry height="30" width="80" x="290" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="w24" parent="1" style="rounded=0;html=1;fontSize=11;fontFamily=Courier New;" value="6.7" vertex="1">
+          <mxGeometry height="30" width="80" x="370" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="am" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=3;strokeColor=#82b366;fontStyle=1;fontSize=13;fontFamily=Courier New;" value="pd.melt()">
+          <mxGeometry relative="1" y="-15" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="460" y="115" as="sourcePoint" />
+            <mxPoint x="580" y="115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t2" parent="1" style="text;html=1;fontSize=14;align=center;fillColor=none;strokeColor=none;fontStyle=1;" value="Tidy 形式（縦持ち / Long）" vertex="1">
+          <mxGeometry height="25" width="300" x="560" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lh1" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontFamily=Courier New;" value="gene" vertex="1">
+          <mxGeometry height="30" width="80" x="590" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lh2" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontFamily=Courier New;" value="sample" vertex="1">
+          <mxGeometry height="30" width="90" x="670" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lh3" parent="1" style="rounded=0;html=1;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontFamily=Courier New;" value="expression" vertex="1">
+          <mxGeometry height="30" width="90" x="760" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="l11" parent="1" style="rounded=0;html=1;fontSize=10;fillColor=#f5f5f5;fontFamily=Courier New;" value="TP53" vertex="1">
+          <mxGeometry height="25" width="80" x="590" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l12" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="sample_A" vertex="1">
+          <mxGeometry height="25" width="90" x="670" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l13" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="10.5" vertex="1">
+          <mxGeometry height="25" width="90" x="760" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="l21" parent="1" style="rounded=0;html=1;fontSize=10;fillColor=#f5f5f5;fontFamily=Courier New;" value="TP53" vertex="1">
+          <mxGeometry height="25" width="80" x="590" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="l22" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="sample_B" vertex="1">
+          <mxGeometry height="25" width="90" x="670" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="l23" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="20.3" vertex="1">
+          <mxGeometry height="25" width="90" x="760" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="l31" parent="1" style="rounded=0;html=1;fontSize=10;fillColor=#f5f5f5;fontFamily=Courier New;" value="TP53" vertex="1">
+          <mxGeometry height="25" width="80" x="590" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="l32" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="sample_C" vertex="1">
+          <mxGeometry height="25" width="90" x="670" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="l33" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="15.1" vertex="1">
+          <mxGeometry height="25" width="90" x="760" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="l41" parent="1" style="rounded=0;html=1;fontSize=10;fillColor=#f5f5f5;fontFamily=Courier New;" value="BRCA1" vertex="1">
+          <mxGeometry height="25" width="80" x="590" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="l42" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="sample_A" vertex="1">
+          <mxGeometry height="25" width="90" x="670" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="l43" parent="1" style="rounded=0;html=1;fontSize=10;fontFamily=Courier New;" value="5.2" vertex="1">
+          <mxGeometry height="25" width="90" x="760" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="ldots" parent="1" style="text;html=1;fontSize=12;align=center;fillColor=none;strokeColor=none;" value="..." vertex="1">
+          <mxGeometry height="20" width="60" x="680" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="an1" parent="1" style="text;html=1;fontSize=11;align=center;fillColor=none;strokeColor=none;fontColor=#82b366;fontStyle=1;" value="列名が変数として&#xa;行に展開される" vertex="1">
+          <mxGeometry height="35" width="140" x="450" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="an2" parent="1" style="text;html=1;fontSize=11;align=left;fillColor=none;strokeColor=none;fontColor=#9673a6;fontStyle=1;" value="1行 = 1観測値&#xa;→ seaborn/ggplot2 が前提とする形式" vertex="1">
+          <mxGeometry height="35" width="280" x="590" y="230" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

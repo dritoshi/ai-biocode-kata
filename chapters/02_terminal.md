@@ -219,14 +219,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 PATHの仕組みを図示すると:
 
-```
-ユーザーが "python3" と入力
-      ↓
-シェルが PATH を左から順に検索:
-  /home/user/.local/bin/python3  → ある！ → これを実行
-  /usr/local/bin/python3         → （検索されない）
-  /usr/bin/python3               → （検索されない）
-```
+![PATHの検索順序: シェルがディレクトリを左から順に探索し、最初にマッチした実行ファイルを使う](../figures/ch02_path_search.png)
 
 ### 環境変数の設定と永続化
 
@@ -366,6 +359,8 @@ zcat reads.fastq.gz | awk 'NR%4==1' | wc -l
 # パターン5: 全サンプルのBAMファイルにインデックスを作成
 find results/ -name "*.bam" | xargs -I{} samtools index {}
 ```
+
+![パイプチェーンのデータ変換: 各コマンドが1つの処理に特化し、パイプで連結して複雑な処理を実現](../figures/ch02_pipe_chain.png)
 
 ### 「シェルで済む？」と聞く習慣
 
