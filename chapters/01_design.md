@@ -331,6 +331,70 @@ AIコーディングエージェントに [§0-2 Plan → Execute → Review ワ
 
 ---
 
+## 演習問題
+
+本章の内容を、エージェントとの協働を通じて実践する課題である。
+
+### 演習 1-1: コードに潜む設計原則違反を見つけよ **[レビュー]**
+
+エージェントが以下のFASTQ品質フィルタリングコードを生成した。少なくとも2つの設計原則違反を指摘し、それぞれどの原則に反しているか説明せよ。
+
+```python
+def process_fastq(file_path):
+    # R1の処理
+    good_r1 = []
+    with open("/home/user/data/sample1_R1.fastq") as f:
+        for line in f:
+            header = line.strip()
+            seq = next(f).strip()
+            plus = next(f).strip()
+            qual = next(f).strip()
+            avg_qual = sum(ord(c) - 33 for c in qual) / len(qual)
+            if avg_qual >= 20:
+                good_r1.append((header, seq, plus, qual))
+
+    # R2の処理
+    good_r2 = []
+    with open("/home/user/data/sample1_R2.fastq") as f:
+        for line in f:
+            header = line.strip()
+            seq = next(f).strip()
+            plus = next(f).strip()
+            qual = next(f).strip()
+            avg_qual = sum(ord(c) - 33 for c in qual) / len(qual)
+            if avg_qual >= 20:
+                good_r2.append((header, seq, plus, qual))
+
+    print(f"R1: {len(good_r1)} reads passed")
+    print(f"R2: {len(good_r2)} reads passed")
+    return good_r1, good_r2
+```
+
+（ヒント）R1とR2の処理ブロックを見比べてみよ。また、ファイルパスや品質閾値の指定方法にも注目せよ。
+
+### 演習 1-2: 設計原則の名前を使ってリファクタリングを指示せよ **[指示設計]**
+
+あなたの解析スクリプトが500行の1ファイルに肥大化してしまった。本章で学んだ設計原則の名前を明示的に使って、エージェントにリファクタリングを指示する文章を3つ書け。指示文には「なぜその原則を適用すべきか」の理由も1文で添えよ。
+
+（ヒント）「関心の分離に従って分割して」のように原則名を含めると、エージェントの理解が正確になる。「KISS」「DRY」「関心の分離」「SRP」など、本章で学んだ原則名を活用せよ。
+
+### 演習 1-3: UNIX哲学に合致するのはどちらか **[概念]**
+
+以下の2つのアプローチのうち、UNIX哲学により合致するのはどちらか。理由を述べよ。
+
+- **アプローチA**: FASTQ品質フィルタ、アダプタ除去、リファレンスへのマッピングを1つのスクリプトで行う。引数でモードを切り替える。
+- **アプローチB**: 各処理を独立したコマンドにして、パイプラインで連結する（`filter_qual | trim_adapter | map_ref`）。
+
+（ヒント）「一つのことをうまくやる」「テキストストリームを共通インターフェースとする」の2原則を適用せよ。
+
+### 演習 1-4: YAGNIの判断 **[設計判断]**
+
+研究室でRNA-seq解析スクリプトを作っている。共同研究者から「将来ChIP-seqもやるかもしれないから、最初からChIP-seq対応の設計にしておこう」と提案された。この提案をYAGNI原則の観点からどう評価するか。賛成・反対の立場を明確にし、理由を述べよ。
+
+（ヒント）現時点で確定しているユースケースと、将来の仮定を区別せよ。「将来の拡張に備える」ことと「将来の機能を今実装する」ことは異なる。
+
+---
+
 ## さらに学びたい読者へ
 
 本章で紹介した設計原則やソフトウェア開発手法の背景をさらに深く学びたい読者に向けて、古典的な教科書を紹介する。

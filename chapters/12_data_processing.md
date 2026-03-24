@@ -519,6 +519,75 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 
 ---
 
+## 演習問題
+
+本章の内容を、エージェントとの協働を通じて実践する課題である。
+
+### 演習 12-1: アンチパターンの発見 **[レビュー]**
+
+エージェントが生成した以下のコードの問題点を説明し、ベクトル化による改善案を提案せよ。
+
+```python
+for i, row in df.iterrows():
+    if row["log2fc"] > 1 and row["padj"] < 0.05:
+        df.at[i, "significant"] = True
+    else:
+        df.at[i, "significant"] = False
+```
+
+具体的に、以下の観点でレビューせよ。
+
+1. `iterrows()`の性能上の問題
+2. ベクトル化による書き換え方法
+3. 大規模データ（10万行以上）での影響
+
+（ヒント）pandasの`iterrows()`は内部的にPythonループであり、行ごとにSeriesオブジェクトを生成するため大規模データで極めて遅い。条件判定はpandasのブールインデックスで一括処理できる。
+
+### 演習 12-2: pandas vs polars **[設計判断]**
+
+以下の3つのシナリオについて、pandasとpolarsのどちらを選択すべきか判断し、理由を述べよ。
+
+- **(a)** 既存のscRNA-seqパイプライン（scanpyベース）にフィルタリング処理を追加する
+- **(b)** 新規プロジェクトで100GBのゲノムバリアントデータを処理する。処理速度が最優先
+- **(c)** DESeq2の出力をpandasで読み込み、下流でscanpyのAnnDataに渡す
+
+（ヒント）既存エコシステムとの互換性とプロジェクト規模で判断する。scanpyはpandasのDataFrameを前提としているため、scanpyと連携する場合はpandasが自然である。一方、大規模データの新規処理ではpolarsの遅延評価とRustバックエンドが有利である。
+
+### 演習 12-3: ライブラリ関数の活用指示 **[指示設計]**
+
+エージェントに「遺伝子発現行列のサンプル間コサイン距離を計算して」と指示したところ、以下のようなforループによる実装が生成された。
+
+```python
+import numpy as np
+
+n_samples = expression_matrix.shape[1]
+distances = np.zeros((n_samples, n_samples))
+for i in range(n_samples):
+    for j in range(i + 1, n_samples):
+        dot = np.dot(expression_matrix[:, i], expression_matrix[:, j])
+        norm_i = np.linalg.norm(expression_matrix[:, i])
+        norm_j = np.linalg.norm(expression_matrix[:, j])
+        distances[i, j] = 1 - dot / (norm_i * norm_j)
+        distances[j, i] = distances[i, j]
+```
+
+SciPyのライブラリ関数を使うよう修正させるための指示文を書け。
+
+（ヒント）`scipy.spatial.distance.pdist`と`cosine`メトリクスを具体的に指定する。さらに`squareform`で距離行列に変換できることも伝えると、エージェントは一発で正しいコードを生成できる。
+
+### 演習 12-4: ベクトル化の効果測定 **[実践]**
+
+エージェントに以下の2つの実装を生成させ、100万要素の配列で実行時間を比較せよ。
+
+- **実装A**: Pythonのforループで配列の各要素を2乗し合計する
+- **実装B**: NumPyのベクトル化演算で同じ計算を行う
+
+`%%timeit`（Jupyter）または`timeit`モジュールを使って計測し、速度差を報告せよ。
+
+（ヒント）NumPyのベクトル化は通常10〜100倍の高速化をもたらす。`np.sum(arr ** 2)`のような1行のベクトル化演算と、`sum(x**2 for x in arr)`のようなPythonループの比較が典型的である。
+
+---
+
 ## さらに学びたい読者へ
 
 本章で扱ったNumPy・pandas・polarsによるデータ処理をさらに深く学びたい読者に向けて、定番の教科書とリソースを紹介する。
