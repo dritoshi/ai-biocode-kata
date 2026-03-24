@@ -456,6 +456,8 @@ for record in tqdm(SeqIO.parse("large.fasta", "fasta"),
     process(record)
 ```
 
+![プログレスバーとロギング出力: tqdmの進捗表示とloggingのレベル別メッセージ](../figures/ch11_progress_logging.png)
+
 **重要**: tqdmのプログレスバーはデフォルトでstderrに出力される。これはUNIX哲学に合致しており、stdoutの結果データを汚さない。明示的にするなら `tqdm(..., file=sys.stderr)` とする。
 
 ### rich — リッチなターミナルUI

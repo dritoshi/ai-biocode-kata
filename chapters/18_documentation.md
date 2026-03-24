@@ -100,14 +100,7 @@ flowchart TD
 
 上のコードをGitHubで表示すると、以下のような図になる。
 
-```mermaid
-flowchart TD
-    A[入力データ] --> B[前処理]
-    B --> C{品質OK?}
-    C -->|Yes| D[解析実行]
-    C -->|No| E[フィルタリング]
-    E --> B
-```
+![Mermaidフローチャートのレンダリング結果: Markdownのテキストから図が自動生成される](../figures/ch18_mermaid_rendered.png)
 
 上の例では、`A[入力データ]` が四角形のノード、`C{品質OK?}` が菱形（判断分岐）のノードである。`-->|Yes|` のようにエッジにラベルを付けられる。
 
