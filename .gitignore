@@ -21,5 +21,8 @@ __pycache__/
 *.tmp
 *.bak
 
+# draw.io backup files
+.*.drawio.bkp
+
 # Private (non-public analysis, notes)
 private/
