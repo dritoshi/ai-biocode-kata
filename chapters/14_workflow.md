@@ -58,11 +58,7 @@ done
 
 ワークフロー言語は、処理を**DAG**（Directed Acyclic Graph; 有向非巡回グラフ）として定義する。各処理ステップ（ノード）は入力と出力を宣言し、ワークフローエンジンがファイルの依存関係を自動的に解決する。
 
-```
-fastqc ──────────────────────────────────┐
-                                         ├─→ all
-trimmomatic ──→ star_align ──→ featurecounts ─┘
-```
+![RNA-seqパイプラインのDAG: 各処理ステップの依存関係を有向非巡回グラフで表現](../figures/ch14_workflow_dag.png)
 
 この構造には3つの利点がある:
 

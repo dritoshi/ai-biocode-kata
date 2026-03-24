@@ -56,6 +56,8 @@ def gc_histogram(
     return fig
 ```
 
+![GC含量のヒストグラム: 大腸菌ゲノム断片のGC含量分布](../figures/ch13_gc_histogram.png)
+
 このパターンのポイントは3つある:
 
 1. **`fig, ax = plt.subplots()`** で明示的にFigure/Axesを取得する。`ax.set_xlabel()` のように、操作対象のAxesが常に明確になる
@@ -143,6 +145,8 @@ def volcano_plot(
     return fig
 ```
 
+![Volcano plot: 赤が上昇発現、青が減少発現、灰が非有意の遺伝子](../figures/ch13_volcano_plot.png)
+
 入力は[§12-2](./12_data_processing.md#12-2-pandasとpolarsによるテーブルデータ処理)で扱った `filter_significant_genes()` と同じDEGテーブル（カラム: `gene`, `log2FoldChange`, `padj`）である。`np.select()` で3カテゴリに分類し、カテゴリごとに色を変えて `ax.scatter()` でプロットする。`ax.axhline()` と `ax.axvline()` で閾値線を引くことで、どの遺伝子が有意かを視覚的に判別できる。
 
 `df["padj"].clip(lower=1e-300)` は、$p$ = 0 のときに $-\log_{10}(0) = \infty$ となるのを防ぐ処理である。
@@ -180,6 +184,8 @@ def expression_heatmap(
 
     return g
 ```
+
+![発現距離ヒートマップ: サンプル間の距離行列と階層クラスタリング](../figures/ch13_expression_heatmap.png)
 
 `clustermap()` は内部で `scipy.cluster.hierarchy.linkage()` を呼び出し、行と列を類似度に基づいて並べ替える。戻り値は `ClusterGrid` オブジェクトで、通常の `Figure` とは異なる点に注意する。`g.figure` で `Figure` にアクセスし、`g.ax_heatmap` でヒートマップ部分の `Axes` にアクセスできる。
 
@@ -219,6 +225,8 @@ def expression_violin(
 
     return fig
 ```
+
+![バイオリンプロット: Control群とTreatment群の発現量分布を比較](../figures/ch13_violin_plot.png)
 
 seabornの多くのプロット関数は**tidy data**（整然データ）形式——1行が1つの観測値、1列が1つの変数——を前提としている。ワイド形式（列=サンプル、行=遺伝子）のデータは `pd.melt()` でtidy形式に変換する必要がある。
 
@@ -301,6 +309,8 @@ plotlyのコードは本書のスクリプト集には含めていない。plotl
 | 時系列データ | 折れ線グラフ | 散布図 |
 | DEG解析結果 | Volcano plot | 棒グラフ |
 | サンプル間の距離 | ヒートマップ + デンドログラム | 数値テーブル |
+
+![グラフ種類選択フローチャート: データの特性に応じた最適な可視化手法](../figures/ch13_graph_type_decision.png)
 
 エージェントは「グラフを描いて」という指示に対して、データの性質を考慮せずに `plt.plot()` で折れ線グラフを生成することがある。データの性質を理解した上で「バイオリンプロットで描いて」のように具体的に指示することが重要である。
 
