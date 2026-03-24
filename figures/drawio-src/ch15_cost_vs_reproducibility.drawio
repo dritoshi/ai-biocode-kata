@@ -32,7 +32,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="10" parent="1" style="text;html=1;fontSize=12;align=center;fillColor=none;strokeColor=none;fontStyle=1;fontColor=#666666;rotation=-90;" value="再現性" vertex="1">
-          <mxGeometry height="20" width="80" y="230" as="geometry" />
+          <mxGeometry height="20" width="80" x="-10" y="230" as="geometry" />
         </mxCell>
         <mxCell id="11" edge="1" parent="1" style="endArrow=blockThin;endFill=1;strokeWidth=2;strokeColor=#666666;" value="">
           <mxGeometry relative="1" as="geometry">
