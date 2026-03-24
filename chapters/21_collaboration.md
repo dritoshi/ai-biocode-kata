@@ -796,7 +796,7 @@ def validate_metadata(csv_text: str) -> IntakeResult:
 
 ### OSSプロジェクトの運営
 
-- **Fogel, K. *Producing Open Source Software: How to Run a Successful Free Software Project* (2nd ed.). O'Reilly, 2017.** — OSSプロジェクトの立ち上げと運営の教科書。全文がオンラインで無料公開されている（https://producingoss.com/）。コードレビュー文化、Issue/PRの作法、コミュニティ運営が詳しい。
+- **Fogel, K. *Producing Open Source Software: How to Run a Successful Free Software Project* (2nd ed.). O'Reilly, 2017.** — OSSプロジェクトの立ち上げと運営の教科書。全文がオンラインで無料公開されている: https://producingoss.com/ 。コードレビュー文化、Issue/PRの作法、コミュニティ運営が詳しい。
 
 ### コードレビュー
 

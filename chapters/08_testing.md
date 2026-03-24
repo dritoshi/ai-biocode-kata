@@ -749,7 +749,7 @@ CIが失敗したときの調査を依頼する場合:
 ### テスト駆動開発
 
 - **Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002.** https://www.amazon.co.jp/dp/0321146530 — 本章の参考文献 [1] で引用したTDDの原典。Red-Green-Refactorサイクルの思想と実践を2つの長い例題で示す。薄い本なので通読を推奨する。邦訳: 和田卓人訳『テスト駆動開発』オーム社, 2017.
-- **Percival, H., Gregory, B. *Architecture Patterns with Python*. O'Reilly, 2020.** — テストを軸にしたPythonアプリケーションの設計パターン。TDDを超えて「テスト可能な設計とは何か」を学べる。全文がオンラインで無料公開されている（https://www.cosmicpython.com/）。
+- **Percival, H., Gregory, B. *Architecture Patterns with Python*. O'Reilly, 2020.** — テストを軸にしたPythonアプリケーションの設計パターン。TDDを超えて「テスト可能な設計とは何か」を学べる。全文がオンラインで無料公開されている: https://www.cosmicpython.com/ 。
 
 ### pytestの実践
 

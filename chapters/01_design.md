@@ -347,7 +347,7 @@ AIコーディングエージェントに [§0-2 Plan → Execute → Review ワ
 
 ### UNIX哲学
 
-- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — 本章の参考文献 [7] で引用したUNIX哲学の原典。全文がオンラインで公開されている（http://www.catb.org/esr/writings/taoup/html/）。特に Rule of Modularity、Rule of Composition の章が本章の内容と直結する。
+- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — 本章の参考文献 [7] で引用したUNIX哲学の原典。全文がオンラインで公開されている: http://www.catb.org/esr/writings/taoup/html/ 。特に Rule of Modularity、Rule of Composition の章が本章の内容と直結する。
 
 ---
 

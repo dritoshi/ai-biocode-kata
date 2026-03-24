@@ -965,7 +965,7 @@ def run_pipeline(config: dict) -> None:
 
 ### 設計原則
 
-- **Wiggins, A. "The Twelve-Factor App".** https://12factor.net/ — ソフトウェア成果物の設計原則として広く参照されるマニフェスト。設定の外部化、ログのストリーム化、依存関係の明示的宣言など、本章で扱った設計方針の理論的背景を理解できる。日本語訳あり（https://12factor.net/ja/）。
+- **Wiggins, A. "The Twelve-Factor App".** https://12factor.net/ — ソフトウェア成果物の設計原則として広く参照されるマニフェスト。設定の外部化、ログのストリーム化、依存関係の明示的宣言など、本章で扱った設計方針の理論的背景を理解できる。日本語訳あり: https://12factor.net/ja/ 。
 
 ### パッケージングの実践
 

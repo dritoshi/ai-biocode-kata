@@ -721,12 +721,12 @@ AIが生成するコードや、ライブラリのドキュメントで見かけ
 ### アルゴリズムとデータ構造
 
 - **Cormen, T. H., Leiserson, C. E., Rivest, R. L., Stein, C. *Introduction to Algorithms* (4th ed.). MIT Press, 2022.** https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/ — 本章の参考文献 [2] で引用。アルゴリズムの教科書の定番（通称 CLRS）。全体を読む必要はなく、Part I（Foundations）と Part III（Data Structures）が本章の内容と直結する。邦訳: 浅野哲夫ほか訳『アルゴリズムイントロダクション 第4版（総合版）』近代科学社, 2024.
-- **Sedgewick, R., Wayne, K. *Algorithms* (4th ed.). Addison-Wesley, 2011.** https://www.amazon.co.jp/dp/032157351X — CLRSより実装寄りの教科書。Javaで書かれているが、アルゴリズムの可視化サイト（https://algs4.cs.princeton.edu/）が秀逸で、データ構造の動作を視覚的に理解できる。
+- **Sedgewick, R., Wayne, K. *Algorithms* (4th ed.). Addison-Wesley, 2011.** https://www.amazon.co.jp/dp/032157351X — CLRSより実装寄りの教科書。Javaで書かれているが、アルゴリズムの可視化サイト(https://algs4.cs.princeton.edu/)が秀逸で、データ構造の動作を視覚的に理解できる。
 - **Skiena, S. S. *The Algorithm Design Manual* (3rd ed.). Springer, 2020.** https://www.amazon.co.jp/dp/3030542556 — 前半は教科書、後半は「困ったときの辞典」として使える実践的なアルゴリズム設計ガイド。「この問題にはどのアルゴリズムを使うべきか」を判断する力が身につく。邦訳: 平田富夫訳『アルゴリズム設計マニュアル（上・下）』丸善出版, 2012（第2版の訳）.
 
 ### バイオインフォマティクスのアルゴリズム
 
-- **Compeau, P., Pevzner, P. *Bioinformatics Algorithms: An Active Learning Approach* (3rd ed.). Active Learning Publishers, 2015.** https://www.bioinformaticsalgorithms.org/ — バイオインフォマティクスの問題を題材にアルゴリズムを学ぶ教科書。本章で紹介したBLASTの計算量、動的計画法によるアラインメントの背景理論を詳しく扱う。Rosalind.info（https://rosalind.info/）と連動した演習問題で手を動かしながら学べる。
+- **Compeau, P., Pevzner, P. *Bioinformatics Algorithms: An Active Learning Approach* (3rd ed.). Active Learning Publishers, 2015.** https://www.bioinformaticsalgorithms.org/ — バイオインフォマティクスの問題を題材にアルゴリズムを学ぶ教科書。本章で紹介したBLASTの計算量、動的計画法によるアラインメントの背景理論を詳しく扱う。Rosalind.info(https://rosalind.info/)と連動した演習問題で手を動かしながら学べる。
 - **Durbin, R., Eddy, S. R., Krogh, A., Mitchison, G. *Biological Sequence Analysis: Probabilistic Models of Proteins and Nucleic Acids*. Cambridge University Press, 1998.** https://www.amazon.co.jp/dp/0521629713 — 配列解析の数理的基礎（隠れマルコフモデル、確率モデル、アラインメントスコアリング）の古典。本章で触れたSmith-WatermanやBLASTの理論的背景を深く扱う。
 
 ### 浮動小数点演算

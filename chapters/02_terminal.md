@@ -726,8 +726,8 @@ done
 
 ### シェル・コマンドラインの教科書
 
-- **Shotts, W. E. *The Linux Command Line: A Complete Introduction* (5th Internet Edition). 2019.** — 本章の参考文献 [1] で引用。全文が無料公開されている（https://linuxcommand.org/tlcl.php）。本章で扱ったコマンドの背景知識（パーミッション、プロセス管理、シェルスクリプト）を体系的に学べる。
-- **Janssens, J. *Data Science at the Command Line* (2nd ed.). O'Reilly, 2021.** — 本章の参考文献 [2] で引用。コマンドラインをデータ分析ツールとして使い倒す手法を紹介する。全文がオンラインで無料公開されている（https://jeroenjanssens.com/dsatcl/）。
+- **Shotts, W. E. *The Linux Command Line: A Complete Introduction* (5th Internet Edition). 2019.** — 本章の参考文献 [1] で引用。全文が無料公開されている: https://linuxcommand.org/tlcl.php 。本章で扱ったコマンドの背景知識（パーミッション、プロセス管理、シェルスクリプト）を体系的に学べる。
+- **Janssens, J. *Data Science at the Command Line* (2nd ed.). O'Reilly, 2021.** — 本章の参考文献 [2] で引用。コマンドラインをデータ分析ツールとして使い倒す手法を紹介する。全文がオンラインで無料公開されている: https://jeroenjanssens.com/dsatcl/ 。
 
 ### バイオインフォマティクスのコマンドライン実践
 
