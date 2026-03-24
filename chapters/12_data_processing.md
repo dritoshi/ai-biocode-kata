@@ -535,7 +535,7 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 
 ### バイオインフォマティクスのデータ処理
 
-- **Cock, P. J. A. et al. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009.** — Biopythonの原論文。バイオインフォ固有のデータ処理（SeqIO、AlignIO等）の設計思想を理解できる。Biopython Tutorial(https://biopython.org/wiki/Documentation)も併せて参照。
+- **Cock, P. J. A. et al. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009.** — Biopythonの原論文。バイオインフォ固有のデータ処理（SeqIO、AlignIO等）の設計思想を理解できる。Biopython Tutorial: https://biopython.org/wiki/Documentation も併せて参照。
 
 ---
 
