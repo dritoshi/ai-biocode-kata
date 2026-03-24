@@ -720,6 +720,26 @@ done
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったターミナル操作やシェルの仕組みをさらに深く学びたい読者に向けて、定番の教科書とオンラインリソースを紹介する。
+
+### シェル・コマンドラインの教科書
+
+- **Shotts, W. E. *The Linux Command Line: A Complete Introduction* (5th Internet Edition). 2019.** — 本章の参考文献 [1] で引用。全文が無料公開されている（https://linuxcommand.org/tlcl.php）。本章で扱ったコマンドの背景知識（パーミッション、プロセス管理、シェルスクリプト）を体系的に学べる。
+- **Janssens, J. *Data Science at the Command Line* (2nd ed.). O'Reilly, 2021.** — 本章の参考文献 [2] で引用。コマンドラインをデータ分析ツールとして使い倒す手法を紹介する。全文がオンラインで無料公開されている（https://jeroenjanssens.com/dsatcl/）。
+
+### バイオインフォマティクスのコマンドライン実践
+
+- **Buffalo, V. *Bioinformatics Data Skills*. O'Reilly, 2015.** — バイオインフォマティクス研究者のための計算スキルの教科書。特に Part I（Ideology: Data Skills for Robust and Reproducible Bioinformatics）と Part II（Prerequisites: Essential Skills for Getting Started with a Bioinformatics Project）が本章と直結する。awk/sed の実践例が豊富。
+- **Haddock, S. H. D., Dunn, C. W. *Practical Computing for Biologists*. Sinauer Associates, 2011.** — 正規表現の解説が特に手厚い教科書。本章で概要を扱った正規表現をFASTAヘッダーのパースやパターンマッチングに実践的に応用する際に最適である。
+
+### オンライン講義
+
+- **MIT. "The Missing Semester of Your CS Education".** https://missing.csail.mit.edu/ — シェル、エディタ、データ加工（Data Wrangling）、コマンドライン環境に関する講義動画と演習問題がすべて無料公開されている。
+
+---
+
 ## 参考文献
 
 [1] Shotts, W. E. *The Linux Command Line: A Complete Introduction*. 5th Internet Edition, 2019. [https://linuxcommand.org/tlcl.php](https://linuxcommand.org/tlcl.php)

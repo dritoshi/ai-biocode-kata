@@ -331,6 +331,26 @@ AIコーディングエージェントに [§0-2 Plan → Execute → Review ワ
 
 ---
 
+## さらに学びたい読者へ
+
+本章で紹介した設計原則やソフトウェア開発手法の背景をさらに深く学びたい読者に向けて、古典的な教科書を紹介する。
+
+### ソフトウェア設計・クリーンコード
+
+- **Hunt, A., Thomas, D. *The Pragmatic Programmer* (20th Anniversary Edition). Addison-Wesley, 2019.** — 本章の参考文献 [2] で引用した初版（1999）の改訂版。DRY原則に加え、ETC（Easier to Change）原則が大幅に加筆されている。「達人プログラマー」として広く知られる定番書。邦訳: 村上雅章訳『達人プログラマー 熟達に向けたあなたの旅（第2版）』オーム社, 2020.
+- **Martin, R. C. *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall, 2008.** — 本章の参考文献 [6] で引用。KISS・命名規則・関数設計の実践を、豊富なJavaコード例で詳細に展開する。特に第1〜6章が初学者に適している。邦訳: 花井志生訳『Clean Code アジャイルソフトウェア達人の技』KADOKAWA, 2017.
+- **McConnell, S. *Code Complete* (2nd ed.). Microsoft Press, 2004.** — ソフトウェアコンストラクション（構築）の百科事典。変数の命名、関数の分割、防御的プログラミングなど、本章で概要を扱ったトピックを網羅的に深掘りする。邦訳: クイープ訳『CODE COMPLETE 第2版（上・下）』日経BP, 2005.
+
+### リファクタリング
+
+- **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** — コードの「臭い」（bad smells）を体系化し、改善パターンをカタログ化した名著。AI生成コードをレビューする際に「何を、なぜ改善すべきか」の語彙が身につく。第2版はJavaScript例で書かれている。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
+
+### UNIX哲学
+
+- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — 本章の参考文献 [7] で引用したUNIX哲学の原典。全文がオンラインで公開されている（http://www.catb.org/esr/writings/taoup/html/）。特に Rule of Modularity、Rule of Composition の章が本章の内容と直結する。
+
+---
+
 ## 参考文献
 
 [1] McIlroy, M. D., Pinson, E. N., Tague, B. A. "UNIX Time-Sharing System: Foreword". *The Bell System Technical Journal*, 57(6), 1899–1904, 1978. [https://doi.org/10.1002/j.1538-7305.1978.tb02135.x](https://doi.org/10.1002/j.1538-7305.1978.tb02135.x)

@@ -790,6 +790,32 @@ def validate_metadata(csv_text: str) -> IntakeResult:
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱った共同開発・OSS参加・質問の技術をさらに深く学びたい読者に向けて、定番の教科書とリソースを紹介する。
+
+### OSSプロジェクトの運営
+
+- **Fogel, K. *Producing Open Source Software: How to Run a Successful Free Software Project* (2nd ed.). O'Reilly, 2017.** — OSSプロジェクトの立ち上げと運営の教科書。全文がオンラインで無料公開されている（https://producingoss.com/）。コードレビュー文化、Issue/PRの作法、コミュニティ運営が詳しい。
+
+### コードレビュー
+
+- **Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 2013 International Conference on Software Engineering (ICSE '13)*, 712–721, 2013.** — コードレビューの効果と課題に関する実証研究。レビューの目的が「バグ発見」だけでなく、知識共有やコード品質向上にもあることを示す。
+
+### 科学研究の共同作業
+
+- **Wilson, G. et al. "Good Enough Practices in Scientific Computing". *PLOS Computational Biology*, 13(6), e1005510, 2017.** — 科学研究における共同作業のベストプラクティス。特にコード共有とデータ共有の節が本章と直結する。
+
+### 質問の技術
+
+- **Raymond, E. S. "How To Ask Questions The Smart Way". 2014.** http://www.catb.org/esr/faqs/smart-questions.html — 技術コミュニティでの質問の作法の原典。本章で扱った「良い質問の構造」の背景にある考え方を学べる。日本語訳も公開されている。
+
+### GitHubでのコントリビューション
+
+- **GitHub Docs. "Contributing to projects".** https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project — GitHubでのOSSコントリビューション（Fork、Pull Request、レビュー）の公式ガイド。
+
+---
+
 ## 参考文献
 
 [1] Stack Overflow. "How do I ask a good question?". https://stackoverflow.com/help/how-to-ask (参照日: 2026-03-22)

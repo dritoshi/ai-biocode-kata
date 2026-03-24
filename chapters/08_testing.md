@@ -742,6 +742,25 @@ CIが失敗したときの調査を依頼する場合:
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったテスト駆動開発やコード品質管理をさらに深く学びたい読者に向けて、定番の教科書と公式ドキュメントを紹介する。
+
+### テスト駆動開発
+
+- **Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002.** — 本章の参考文献 [1] で引用したTDDの原典。Red-Green-Refactorサイクルの思想と実践を2つの長い例題で示す。薄い本なので通読を推奨する。邦訳: 和田卓人訳『テスト駆動開発』オーム社, 2017.
+- **Percival, H., Gregory, B. *Architecture Patterns with Python*. O'Reilly, 2020.** — テストを軸にしたPythonアプリケーションの設計パターン。TDDを超えて「テスト可能な設計とは何か」を学べる。全文がオンラインで無料公開されている（https://www.cosmicpython.com/）。
+
+### pytestの実践
+
+- **Okken, B. *Python Testing with pytest* (2nd ed.). Pragmatic Bookshelf, 2022.** — pytestの包括的ガイド。フィクスチャ、パラメタライズ、プラグインシステム等、本章で概要を扱った機能の詳細な使い方が解説されている。
+
+### 静的解析
+
+- **mypy Documentation.** https://mypy.readthedocs.io/ — 静的型チェックの公式ドキュメント。本章で扱ったmypyの設定方法や型エラーの解消手順の完全なリファレンス。
+
+---
+
 ## 参考文献
 
 [1] Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002. [https://doi.org/10.5281/zenodo.9882](https://doi.org/10.5281/zenodo.9882)

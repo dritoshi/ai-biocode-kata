@@ -64,6 +64,7 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 | 付録A | AIコーディングエージェントとの効果的な学習パターン | [appendix_a_learning_patterns.md](chapters/appendix_a_learning_patterns.md) | [§付録A](chapters/roadmap.md#付録a-aiコーディングエージェントとの効果的な学習パターン) |
 | 付録B | クイックリファレンス対照表 | [appendix_b_cli_reference.md](chapters/appendix_b_cli_reference.md) | [§付録B](chapters/roadmap.md#付録b-claude-code-cli--codex-cli-クイックリファレンス対照表) |
 | 付録C | 論文投稿前チェックリスト | [appendix_c_checklist.md](chapters/appendix_c_checklist.md) | [§付録C](chapters/roadmap.md#付録c-論文投稿前チェックリスト) |
+| 付録D | AIコーディングエージェント頻出用語・フレーズ集 | [appendix_d_agent_vocabulary.md](chapters/appendix_d_agent_vocabulary.md) | [§付録D](chapters/roadmap.md#付録d-aiコーディングエージェント頻出用語フレーズ集) |
 
 ## ディレクトリ構成
 

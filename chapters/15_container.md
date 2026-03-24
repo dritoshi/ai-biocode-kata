@@ -1024,6 +1024,26 @@ print(f"最良パラメータ: {best.params}")  # {"n_neighbors": 15, ...}
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったコンテナ技術と研究再現性をさらに深く学びたい読者に向けて、原論文と公式ドキュメントを紹介する。
+
+### 研究再現性とコンテナ
+
+- **Boettiger, C. "An introduction to Docker for reproducible research." *ACM SIGOPS Operating Systems Review*, 49(1), 71–79, 2015.** — 研究再現性の観点からDockerを導入した先駆的論文。なぜコンテナが科学研究に必要かの理論的基盤を示す。
+- **Nüst, D. et al. "Ten simple rules for writing Dockerfiles for reproducible data science." *PLOS Computational Biology*, 16(11), e1008316, 2020.** — 再現可能なDockerfileの書き方を10のルールで整理。本章で扱ったDockerfile設計のベストプラクティスの詳細版。
+
+### バイオインフォマティクスのコンテナ化
+
+- **Gruening, B. et al. "Recommendations for the packaging and containerizing of bioinformatics software." *F1000Research*, 7, 742, 2018.** — バイオインフォソフトウェアのコンテナ化とパッケージングの推奨事項をまとめた論文。BioContainersの設計思想を理解できる。
+
+### 公式ドキュメント
+
+- **Docker Documentation.** https://docs.docker.com/ — Dockerの公式ドキュメント。マルチステージビルド、BuildKit、Docker Compose等の詳細な機能解説。
+- **Apptainer Documentation.** https://apptainer.org/docs/ — HPC環境向けコンテナランタイムの公式ドキュメント。Dockerイメージからの変換方法やHPC固有の設定が詳しい。
+
+---
+
 ## 参考文献
 
 [1] Baker, M. "1,500 scientists lift the lid on reproducibility." *Nature*, 533(7604), 452–454, 2016. [https://doi.org/10.1038/533452a](https://doi.org/10.1038/533452a)

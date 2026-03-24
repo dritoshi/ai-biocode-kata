@@ -944,6 +944,28 @@ tabix variants.vcf.gz chr1:1000000-2000000
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったパフォーマンス最適化の原則と手法をさらに深く学びたい読者に向けて、教科書と原典を紹介する。
+
+### Pythonの高速化
+
+- **Gorelick, M., Ozsvald, I. *High Performance Python* (2nd ed.). O'Reilly, 2020.** — Pythonの高速化に特化した実践書。プロファイリング、NumPyの最適化、Cython、multiprocessing、asyncioを包括的に扱う。邦訳: 相川愛三訳『ハイパフォーマンスPython 第2版』オライリー・ジャパン, 2021.
+
+### 最適化の原則
+
+- **Knuth, D. E. "Structured Programming with go to Statements". *Computing Surveys*, 6(4), 261–301, 1974.** — 本章の参考文献 [1] で引用。「早すぎる最適化は諸悪の根源である（premature optimization is the root of all evil）」の出典。最適化の前にプロファイリングする本章の哲学の原典である。
+
+### コンピュータシステムの理解
+
+- **Bryant, R. E., O'Hallaron, D. R. *Computer Systems: A Programmer's Perspective* (3rd ed.). Pearson, 2015.** — メモリ階層、キャッシュ、パイプラインの仕組みを解説する教科書（通称 CSAPP）。「なぜNumPyが高速なのか」「なぜ行優先・列優先のメモリレイアウトが重要なのか」の背景知識が得られる。邦訳: 鹿野桂一郎訳『コンピュータシステム 基礎から応用まで プログラマの視点で学ぶ（第3版）』東京化学同人, 2025.
+
+### プロファイリングツール
+
+- **Python Documentation. "The Python Profilers".** https://docs.python.org/3/library/profile.html — cProfile/profileモジュールの公式ドキュメント。本章で扱ったプロファイリングツールの詳細なAPIリファレンス。
+
+---
+
 ## 参考文献
 
 [1] Knuth, D. E. "Structured Programming with go to Statements". *Computing Surveys*, 6(4), 261-301, 1974. https://doi.org/10.1145/356635.356640

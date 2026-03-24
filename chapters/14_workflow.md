@@ -607,6 +607,26 @@ for item in result.warnings:
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったワークフロー管理ツールをさらに深く学びたい読者に向けて、原論文と公式リソースを紹介する。
+
+### ワークフローツールの原論文
+
+- **Mölder, F. et al. "Sustainable data analysis with Snakemake." *F1000Research*, 10, 33, 2021.** — 本章の参考文献 [1] で引用。Snakemakeの設計哲学、DAGベースの実行モデル、再現性確保の仕組みが詳述されている。
+- **Di Tommaso, P. et al. "Nextflow enables reproducible computational workflows." *Nature Biotechnology*, 35(4), 316–319, 2017.** — 本章の参考文献 [2] で引用。NextflowのDSL2データフロープログラミングモデルの設計思想を理解できる。
+
+### パイプラインフレームワークの比較
+
+- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
+
+### 公式チュートリアル
+
+- **Snakemake Documentation. "Tutorial".** https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html — 公式チュートリアル。本章で概要を扱ったSnakemakeの機能（wildcard、configfile、conda integration等）を段階的に学べる。
+- **nf-core Community.** https://nf-co.re/ — コミュニティ管理のNextflowパイプライン集。ベストプラクティスに従ったパイプライン設計の参考例として活用できる。特にDeveloper Tutorialsが自作パイプラインの学習に有用。
+
+---
+
 ## 参考文献
 
 [1] Mölder, F. et al. "Sustainable data analysis with Snakemake." *F1000Research*, 10, 33, 2021. [https://doi.org/10.12688/f1000research.29032.2](https://doi.org/10.12688/f1000research.29032.2)

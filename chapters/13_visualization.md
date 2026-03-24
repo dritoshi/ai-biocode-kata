@@ -581,6 +581,30 @@ def apply_project_style() -> None:
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったデータ可視化の原則とツールをさらに深く学びたい読者に向けて、可視化の古典と実践書を紹介する。
+
+### 可視化の原則
+
+- **Tufte, E. R. *The Visual Display of Quantitative Information* (2nd ed.). Graphics Press, 2001.** — データ可視化の古典。Data-ink ratio（データインク比）の概念など、本章で紹介した可視化原則の原典である。
+- **Wilke, C. O. *Fundamentals of Data Visualization*. O'Reilly, 2019.** — 可視化のタイプ選択（いつ散布図を使い、いつヒストグラムを使うか）を体系的に解説する実践書。全文がオンラインで無料公開されている（https://clauswilke.com/dataviz/）。
+- **Rougier, N. P., Droettboom, M., Bourne, P. E. "Ten Simple Rules for Better Figures". *PLOS Computational Biology*, 10(9), e1003833, 2014.** — 科学論文の図表作成の10のルール。本章で扱った可視化原則を簡潔に要約した必読論文。
+
+### 色の使い方
+
+- **Crameri, F., Shephard, G. E., Heron, P. J. "The misuse of colour in science communication". *Nature Communications*, 11, 5444, 2020.** — カラーマップの誤用（rainbow/jetの問題）に関する重要論文。色覚多様性への配慮と、知覚的に均一なカラーマップの選択基準が解説されている。
+
+### matplotlibの実践
+
+- **VanderPlas, J. *Python Data Science Handbook* (2nd ed.). O'Reilly, 2023.** — 第4章 "Visualization with Matplotlib" がmatplotlibの包括的ガイドとなっている。全文がオンラインで無料公開されている（https://jakevdp.github.io/PythonDataScienceHandbook/）。
+
+### ゲノムブラウザ
+
+- **Robinson, J. T. et al. "Integrative genomics viewer". *Nature Biotechnology*, 29(1), 24–26, 2011.** — IGV（Integrative Genomics Viewer）の原論文。ゲノムブラウザでの可視化の基本を理解するための参照。
+
+---
+
 ## 参考文献
 
 [1] Matplotlib Development Team. "Matplotlib Documentation". [https://matplotlib.org/stable/](https://matplotlib.org/stable/) (参照日: 2026-03-19)

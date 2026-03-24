@@ -406,6 +406,16 @@ channel_priority: strict
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったPython環境管理ツールの最新情報や、バイオインフォマティクスにおけるパッケージ管理の背景を知りたい読者に向けて、公式ドキュメントと関連論文を紹介する。
+
+- **Astral. "uv Documentation".** https://docs.astral.sh/uv/ — 本章で紹介したuvの公式ドキュメント。ツールの進化が速いため、最新の機能やベストプラクティスはここを参照するのが最善である。
+- **Conda Documentation.** https://docs.conda.io/ — conda/miniforge/micromambaの包括的リファレンス。environment.ymlの詳細な仕様や、チャネル優先度の制御など高度な環境管理テクニックが記載されている。
+- **Grüning, B. et al. "Bioconda: sustainable and comprehensive software distribution for the life sciences". *Nature Methods*, 15, 475–476, 2018.** — バイオインフォツールのcondaパッケージ基盤であるBiocondaの原論文。なぜcondaがバイオインフォマティクスの標準的なパッケージマネージャになったかの歴史的背景を理解できる。
+
+---
+
 ## 参考文献
 
 [1] pyenv contributors. "pyenv — Simple Python version management". [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv) (参照日: 2026-03-18)

@@ -959,6 +959,25 @@ def run_pipeline(config: dict) -> None:
 
 ---
 
+## さらに学びたい読者へ
+
+本章で扱ったソフトウェア成果物の設計やプロジェクト構造をさらに深く学びたい読者に向けて、設計思想の原典と実践的なリソースを紹介する。
+
+### 設計原則
+
+- **Wiggins, A. "The Twelve-Factor App".** https://12factor.net/ — ソフトウェア成果物の設計原則として広く参照されるマニフェスト。設定の外部化、ログのストリーム化、依存関係の明示的宣言など、本章で扱った設計方針の理論的背景を理解できる。日本語訳あり（https://12factor.net/ja/）。
+
+### パッケージングの実践
+
+- **Python Packaging Authority. "Python Packaging User Guide".** https://packaging.python.org/ — pyproject.toml、src-layout、エントリポイントの公式ガイド。本章で扱ったパッケージ構造の最新のベストプラクティスが常に更新されている。
+- **Schlawack, H. "Testing & Packaging".** https://hynek.me/articles/testing-packaging/ — Pythonパッケージングの実践的なベストプラクティスを解説した記事。src-layoutの推奨理由やCI/CDとの統合を具体的に説明している。
+
+### リファクタリング
+
+- **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** — スクリプトからパッケージへの「成長」の過程で必要になるリファクタリングの技法書。コードの「臭い」を体系化し、改善パターンをカタログ化している。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
+
+---
+
 ## 参考文献
 
 [1] Python Packaging Authority. "Python Packaging User Guide". [https://packaging.python.org/](https://packaging.python.org/) (参照日: 2026-03-19)
