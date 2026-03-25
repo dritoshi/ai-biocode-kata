@@ -6,9 +6,10 @@ chapters/ ディレクトリ内の全Markdownファイルを対象に:
 - #anchor 付きリンクのアンカー照合 (GitHub形式)
 - ../figures/ 参照の画像ファイル存在確認
 
-結果を review_results/xref_check.json に保存する。
+結果を JSON に保存する。既定の出力先は docs/review/xref_check.json。
 """
 
+import argparse
 import json
 import re
 import unicodedata
@@ -18,64 +19,60 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 FIGURES_DIR = PROJECT_ROOT / "figures"
-OUTPUT_DIR = PROJECT_ROOT / "review_results"
+DEFAULT_OUTPUT = PROJECT_ROOT / "docs" / "review" / "xref_check.json"
 
 
 def github_anchor(heading_text: str) -> str:
-    """Markdownの見出しテキストからGitHub形式のアンカーを生成する。
-
-    GitHubのルール:
-    - 小文字化
-    - スペースを '-' に置換
-    - 英数字、'-'、'_'、日本語文字以外を除去
-    - 連続する '-' は1つにまとめない（GitHubの実際の挙動に準拠）
-    """
-    # Markdown記法を除去
+    """build_review_artifacts.py と同じ規則でアンカーを生成する。"""
     text = heading_text.strip()
-    # 太字 **...** を除去
-    text = re.sub(r'\*\*([^*]*)\*\*', r'\1', text)
-    # イタリック *...* を除去
-    text = re.sub(r'\*([^*]*)\*', r'\1', text)
-    # インラインコード `...` を除去
-    text = re.sub(r'`([^`]*)`', r'\1', text)
-    # リンク [text](url) → text
-    text = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', text)
-    # 画像 ![alt](url) → alt
-    text = re.sub(r'!\[([^\]]*)\]\([^)]*\)', r'\1', text)
-    # 絵文字ショートコード :emoji: を除去
-    text = re.sub(r':[a-zA-Z0-9_+-]+:', '', text)
+    text = re.sub(r"`([^`]*)`", r"\1", text)
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    text = re.sub(r"[*_~]", "", text)
+    text = unicodedata.normalize("NFKC", text).lower()
 
-    # 小文字化
-    text = text.lower()
-
-    # GitHub anchor生成: 許可文字以外を除去
-    # 許可: 英数字、ハイフン、アンダースコア、CJK文字、ひらがな、カタカナ、その他日本語記号
     result = []
     for ch in text:
-        if ch == ' ' or ch == '\t':
+        category = unicodedata.category(ch)
+        if ch.isspace() or ch == "-":
             result.append('-')
-        elif ch in ('-', '_'):
-            result.append(ch)
-        elif ch.isascii() and ch.isalnum():
-            result.append(ch)
-        elif not ch.isascii():
-            # CJK、ひらがな、カタカナ、その他非ASCII文字を保持
-            cat = unicodedata.category(ch)
-            if cat.startswith(('L', 'N', 'M')):
-                result.append(ch)
-            elif ch in ('（', '）', '「', '」', '・', '、', '。', '：', '＝', '—', '──'):
-                # GitHubは全角記号も除去する
-                pass
-            else:
-                # その他の非ASCII文字は保持を試みる
-                result.append(ch)
-        # ASCII特殊文字（:, (, ), ., /, etc.）は除去
+            continue
+        if category.startswith(("P", "S")):
+            continue
+        result.append(ch)
 
     anchor = ''.join(result)
-    # 先頭・末尾のハイフンを除去
     anchor = anchor.strip('-')
 
     return anchor
+
+
+def find_inline_code_spans(line: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    stack: tuple[str, int] | None = None
+    index = 0
+
+    while index < len(line):
+        if line[index] != "`":
+            index += 1
+            continue
+
+        end = index
+        while end < len(line) and line[end] == "`":
+            end += 1
+
+        fence = line[index:end]
+        if stack is None:
+            stack = (fence, index)
+        elif stack[0] == fence:
+            spans.append((stack[1], end))
+            stack = None
+        index = end
+
+    return spans
+
+
+def is_inside_spans(index: int, spans: list[tuple[int, int]]) -> bool:
+    return any(start <= index < end for start, end in spans)
 
 
 def extract_headings(filepath: Path) -> dict[str, int]:
@@ -152,9 +149,13 @@ def extract_links(filepath: Path) -> list[dict]:
         if in_code_block:
             continue
 
+        inline_code_spans = find_inline_code_spans(line)
+
         # Markdown リンクパターン: [text](url)
         # 画像も含む: ![alt](url)
         for match in re.finditer(r'!?\[([^\]]*)\]\(([^)]+)\)', line):
+            if is_inside_spans(match.start(), inline_code_spans):
+                continue
             url = match.group(2)
             col = match.start() + 1
 
@@ -260,7 +261,16 @@ def check_figure_link(source_file: Path, link_info: dict) -> dict | None:
 
 
 def main() -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT,
+        help="JSON 出力先。既定は docs/review/xref_check.json",
+    )
+    args = parser.parse_args()
+
+    args.output.parent.mkdir(parents=True, exist_ok=True)
 
     md_files = sorted(CHAPTERS_DIR.glob("*.md"))
     heading_cache: dict[str, dict[str, int]] = {}
@@ -307,7 +317,7 @@ def main() -> None:
         "issues": issues,
     }
 
-    output_path = OUTPUT_DIR / "xref_check.json"
+    output_path = args.output
     output_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # コンソール出力

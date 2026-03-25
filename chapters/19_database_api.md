@@ -266,6 +266,7 @@ GenBank（NCBI）、ENA（EBI）、DDBJ（日本）は**国際塩基配列デー
 - **biomaRt**（R）: Ensembl BioMartへのプログラムインタフェース
 - **MyGene.info**: 遺伝子情報のREST API。Pythonからは `mygene` パッケージで利用
 - **UniProt ID mapping**: UniProtの公式ID変換サービス
+- **TogoID**: 日本のライフサイエンス統合データベースセンター (DBCLS) が提供するID変換サービス。複数DB間の対応関係を Web UI や API 経由で確認できる (https://togoid.dbcls.jp/)
 
 エージェントにID変換を依頼する際は、以下の点に注意する。
 

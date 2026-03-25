@@ -14,6 +14,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CHAPTER_DIR = REPO_ROOT / "chapters"
+REFERENCE_DIR = REPO_ROOT / "references"
 REVIEW_DIR = REPO_ROOT / "docs" / "review"
 MANUAL_CHAPTER_FIELDS = (
     "manual_status",
@@ -30,12 +31,18 @@ HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)]+)\)")
 RAW_URL_RE = re.compile(r"https?://[^\s<>)]+")
 BACKTICK_PATH_RE = re.compile(r"(?:scripts|tests|figures)/[A-Za-z0-9_./-]+/?")
+BIB_URL_RE = re.compile(r"(?:url|howpublished)\s*=\s*\{?(https?://[^\s\},]+)\}?", re.IGNORECASE)
+BIB_DOI_RE = re.compile(r"doi\s*=\s*\{([^\}]+)\}", re.IGNORECASE)
 PYTEST_ERROR_RE = re.compile(r"^ERROR\s+(tests/\S+)", re.MULTILINE)
 PYTEST_MISSING_MODULE_RE = re.compile(r"No module named '([^']+)'")
 
 
 def iter_markdown_files() -> list[Path]:
     return sorted(CHAPTER_DIR.glob("*.md"))
+
+
+def iter_reference_files() -> list[Path]:
+    return sorted(REFERENCE_DIR.glob("*.bib"))
 
 
 def strip_markdown(text: str) -> str:
@@ -417,6 +424,60 @@ def scan_manuscript(paths: list[Path], anchors_by_path: dict[Path, set[str]]) ->
     return reference_rows, issue_rows, chapter_rows
 
 
+def scan_reference_files(paths: list[Path]) -> list[dict[str, Any]]:
+    reference_rows: list[dict[str, Any]] = []
+
+    for path in paths:
+        lines = path.read_text(encoding="utf-8").splitlines()
+        rel_path = str(path.relative_to(REPO_ROOT))
+
+        for line_number, line in enumerate(lines, start=1):
+            for match in BIB_URL_RE.finditer(line):
+                raw_url = match.group(1).strip()
+                normalized = normalize_url(raw_url)
+                reference_rows.append(
+                    {
+                        "chapter_file": rel_path,
+                        "line": line_number,
+                        "source_kind": "bib_url",
+                        "label": "",
+                        "target_type": "external",
+                        "raw_target": raw_url,
+                        "normalized_target": normalized,
+                        "domain": normalized.split("/")[2] if "://" in normalized else "",
+                        "exists": "",
+                        "anchor_target": "",
+                        "anchor_status": "",
+                        "syntax_status": classify_url(raw_url),
+                        "context": line.strip(),
+                    }
+                )
+
+            for match in BIB_DOI_RE.finditer(line):
+                doi = match.group(1).strip()
+                raw_url = doi if doi.startswith("http") else f"https://doi.org/{doi}"
+                normalized = normalize_url(raw_url)
+                reference_rows.append(
+                    {
+                        "chapter_file": rel_path,
+                        "line": line_number,
+                        "source_kind": "bib_doi",
+                        "label": "",
+                        "target_type": "external",
+                        "raw_target": raw_url,
+                        "normalized_target": normalized,
+                        "domain": normalized.split("/")[2] if "://" in normalized else "",
+                        "exists": "",
+                        "anchor_target": "",
+                        "anchor_status": "",
+                        "syntax_status": classify_url(raw_url),
+                        "context": line.strip(),
+                    }
+                )
+
+    return reference_rows
+
+
 def parse_pytest_log(path: Path | None, existing_issue_count: int) -> list[dict[str, Any]]:
     if path is None or not path.exists():
         return []
@@ -535,7 +596,7 @@ def build_summary(
         "",
         f"- 対象ファイル数: {len(chapter_rows)}",
         f"- 参照レジストリ件数: {len(reference_rows)}",
-        f"- 自動検出された指摘件数: {total_issues}",
+        f"- 現在の指摘件数: {total_issues}",
         f"- 重大度内訳: S={severity_counts.get('S', 0)}, A={severity_counts.get('A', 0)}, B={severity_counts.get('B', 0)}, C={severity_counts.get('C', 0)}",
         "",
         "## 指摘カテゴリ内訳",
@@ -594,8 +655,10 @@ def main() -> None:
     existing_chapter_rows = read_csv_rows(REVIEW_DIR / "chapter_review_sheet.csv")
 
     markdown_files = iter_markdown_files()
+    reference_files = iter_reference_files()
     anchors_by_path, section_rows = build_anchor_map(markdown_files)
     reference_rows, issue_rows, chapter_rows = scan_manuscript(markdown_files, anchors_by_path)
+    reference_rows.extend(scan_reference_files(reference_files))
     issue_rows.extend(parse_pytest_log(args.pytest_log, len(issue_rows)))
     issue_rows = merge_manual_issue_rows(issue_rows, existing_issue_rows)
     chapter_rows = merge_chapter_manual_fields(chapter_rows, existing_chapter_rows)

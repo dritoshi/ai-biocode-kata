@@ -23,8 +23,8 @@
 
 ## 3. 再現性
 
-- [ ] Dockerfile / environment.yml がリポジトリに含まれている — [§15 コンテナによるソフトウェア環境の再現](./15_container.md)
-- [ ] 依存パッケージのバージョンが固定されている（lockファイル） — [§6 Python環境の構築](./06_dev_environment.md)
+- [ ] コンテナ定義（`Dockerfile` / `compose.yaml`）または環境定義（`environment.yml`）がリポジトリに含まれている — [§15 コンテナによるソフトウェア環境の再現](./15_container.md)
+- [ ] 依存パッケージのバージョンが lock ファイル（`uv.lock`, `conda-lock.yml` など）で固定されている — [§6 Python環境の構築](./06_dev_environment.md)
 - [ ] ワークフローが自動実行可能（Snakemake/Nextflow/make） — [§14 解析パイプラインの自動化](./14_workflow.md)
 - [ ] シード値がコードとメソッドに記載されている — [§3-4](./03_cs_basics.md)
 - [ ] 使用したツールのバージョンが記録されている — [§6 Python環境の構築](./06_dev_environment.md)

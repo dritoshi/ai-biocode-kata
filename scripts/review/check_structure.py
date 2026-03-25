@@ -8,9 +8,10 @@ CLAUDE.md の執筆規約に基づき、各章ファイルを対象に:
 - $...$ 直前/直後の全角カッコチェック
 - 演習問題の形式チェック
 
-結果を review_results/structure_check.json に保存する。
+結果を JSON に保存する。既定の出力先は docs/review/structure_check.json。
 """
 
+import argparse
 import json
 import re
 from pathlib import Path
@@ -18,7 +19,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
-OUTPUT_DIR = PROJECT_ROOT / "review_results"
+DEFAULT_OUTPUT = PROJECT_ROOT / "docs" / "review" / "structure_check.json"
 
 # 通常の章ファイル（必須セクションチェック対象）
 # hajimeni.md、付録、glossary.md、roadmap.md は除外
@@ -307,7 +308,16 @@ def check_exercises(filepath: Path, lines: list[str]) -> list[dict]:
 
 
 def main() -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT,
+        help="JSON 出力先。既定は docs/review/structure_check.json",
+    )
+    args = parser.parse_args()
+
+    args.output.parent.mkdir(parents=True, exist_ok=True)
 
     md_files = sorted(CHAPTERS_DIR.glob("*.md"))
     all_issues: list[dict] = []
@@ -367,7 +377,7 @@ def main() -> None:
         "issues": all_issues,
     }
 
-    output_path = OUTPUT_DIR / "structure_check.json"
+    output_path = args.output
     output_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # コンソール出力

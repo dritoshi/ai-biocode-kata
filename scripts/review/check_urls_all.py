@@ -3,11 +3,12 @@
 
 chapters/*.md と references/*.bib から URL を抽出し、
 HTTP HEAD/GET でアクセス可能かを確認する。
-結果は review_results/url_check.json に保存される。
+結果は JSON に保存される。既定の出力先は docs/review/url_check.json。
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -27,8 +28,7 @@ from urllib.parse import urlparse
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 REFERENCES_DIR = PROJECT_ROOT / "references"
-OUTPUT_DIR = PROJECT_ROOT / "review_results"
-OUTPUT_FILE = OUTPUT_DIR / "url_check.json"
+DEFAULT_OUTPUT_FILE = PROJECT_ROOT / "docs" / "review" / "url_check.json"
 
 TIMEOUT = 15
 MAX_WORKERS = 8
@@ -307,6 +307,15 @@ def check_urls_with_rate_limit(
 
 def main() -> None:
     """メイン処理."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT_FILE,
+        help="JSON 出力先。既定は docs/review/url_check.json",
+    )
+    args = parser.parse_args()
+
     print(f"Project root: {PROJECT_ROOT}")
     print(f"Scanning chapters in: {CHAPTERS_DIR}")
     print(f"Scanning references in: {REFERENCES_DIR}")
@@ -356,11 +365,12 @@ def main() -> None:
     output["summary"] = dict(category_counts)
 
     # 出力
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+    output_file = args.output
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
-    print(f"Results saved to: {OUTPUT_FILE}")
+    print(f"Results saved to: {output_file}")
     print()
 
     # サマリー表示

@@ -25,6 +25,8 @@
 | `chapters/15_container.md` Docker Compose / Apptainer | 修正済み | Compose の正規ファイル名は `compose.yaml` が推奨で、`docker-compose.yml` は後方互換。Apptainer の定義ファイルビルドは `fakeroot` や施設設定に依存する点を追記した。 | https://docs.docker.com/guides/docker-compose/ ; https://docs.docker.com/compose/reference/ ; https://apptainer.org/docs/user/latest/cli/apptainer_build.html ; https://apptainer.org/docs/user/1.4/fakeroot.html |
 | `chapters/10_deliverables.md` Bioconda パッケージ公開手順 | 修正済み | Bioconda recipe では、安定した source archive、ハッシュ、ライセンス、テストが重要で、PyPI 公開自体は必須ではない。本文は「PyPI を先に公開するのが必須」と読める流れを修正した。 | https://bioconda.github.io/contributor/index.html ; https://bioconda.github.io/contributor/guidelines.html ; https://bioconda.github.io/contributor/linting.html |
 | `chapters/18_documentation.md` MkDocs + mkdocstrings の設定例 | 修正済み | mkdocstrings 公式 docs では `mkdocstrings[python]` または `mkdocstrings-python` の導入が案内されており、handler ごとの設定も `mkdocs.yml` で行える。`src layout` と整合するよう、Python handler の `paths: [src]` を明示した。 | https://mkdocstrings.github.io/ ; https://www.mkdocs.org/ |
+| `chapters/appendix_b_cli_reference.md` CLI 比較表 | 修正済み | Claude Code setup / overview と Codex CLI README を確認し、Claude Code の導入方法は native install 推奨・Homebrew 利用可・npm は非推奨、Codex 側は npm または Homebrew に同期した。認証表現は「契約種別」ではなく「アカウントでのサインイン or API キー」に統一した。 | https://docs.anthropic.com/en/docs/claude-code/setup ; https://code.claude.com/docs ; https://github.com/openai/codex |
+| `chapters/00_ai_agent.md` / `chapters/08_testing.md` / `chapters/appendix_b_cli_reference.md` Codex hooks | 修正済み | ローカルで `codex features list` を確認すると `codex_hooks` は `under development` かつ `false` であり、2026-03-25 時点では一般ユーザー向け安定機能として扱えない。本文では Codex 側の hooks 記述を外し、Claude Code の hooks 実例に限定した。 | ローカル確認: `codex features list` |
 
 ## 使い方
 

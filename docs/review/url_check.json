@@ -1,0 +1,5242 @@
+{
+  "metadata": {
+    "total_unique_urls": 266,
+    "total_occurrences": 709,
+    "timestamp": "2026-03-25T19:03:31+0900"
+  },
+  "summary": {
+    "connection_error": 266
+  },
+  "urls": [
+    {
+      "url": "http://purl.uniprot.org/core/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 121
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/core/organism",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/go/0005739",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 427
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/taxonomy/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 122
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 421
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/taxonomy/9606",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/uniprot/P53_HUMAN",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "http://togows.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 519
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "url": "http://www.catb.org/esr/writings/taoup/html/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 188
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 436
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 867
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 23
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 84
+        }
+      ]
+    },
+    {
+      "url": "https://12factor.net/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 586
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 651
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1043
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 27
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 51
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "url": "https://agilemanifesto.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 277
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 442
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "url": "https://apptainer.org/docs/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1095
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2302.06590",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 607
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 785
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 9
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 115
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2310.06770",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 84
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2310.13548",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 472
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 783
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 35
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2401.05566",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 776
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2507.09089",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.14133",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 23
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 51
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 95
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 43
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "url": "https://australianbiocommons.github.io/how-to-guides/hpc_guide",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "url": "https://bioconda.github.io/contributor/index.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 445
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://biopython.org/wiki/Documentation",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 379
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 468
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "url": "https://blog.burntsushi.net/ripgrep/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 833
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "url": "https://choosealicense.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 314
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 608
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "url": "https://citation-file-format.github.io/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 294
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 604
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://cli.github.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 223
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 598
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "url": "https://click.palletsprojects.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 97
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 849
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/2600239.2600241",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1087
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/about-claude/models",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 524
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 778
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 590
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 779
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 825
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 562
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 784
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/claude-code",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 374
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 773
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://docs.astral.sh/ruff/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 321
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 811
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://docs.astral.sh/uv/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 112
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 484
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "url": "https://docs.conda.io/projects/conda/en/latest/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 85
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 478
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://docs.docker.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1093
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/actions/about-github-actions/understanding-github-actions",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 238
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 600
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 594
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 821
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 46
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1097
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 269
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/ja/billing/concepts/product-billing/git-lfs",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 414
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 622
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "url": "https://docs.pola.rs/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 234
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 631
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://docs.pytest.org/en/stable/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 110
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 173
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 807
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/howto/logging.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 581
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 857
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/argparse.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 69
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 853
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/concurrent.futures.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 496
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/csv.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 76
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 806
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/json.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 124
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 808
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/logging.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 301
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 563
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 855
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 70
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/math.html#math.fsum",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 301
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 825
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/math.html#math.isclose",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 352
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 827
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/pdb.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 219
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/profile.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 234
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/sys.html#sys.breakpointhook",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 203
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/tomllib.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 160
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 810
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/traceback.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch09.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/typing.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 384
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 813
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/venv.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 42
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 476
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/warnings.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 267
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/reference/import.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 162
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 673
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/datastructures.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 22
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 819
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/errors.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 696
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1045
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/modules.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 113
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 675
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/ja/3.13/whatsnew/3.1.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 305
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 843
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 118
+        }
+      ]
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 635
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "url": "https://docs.wandb.ai/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1109
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1002/0471448354",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 832
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 142
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1002/j.1538-7305.1978.tb02135.x",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 186
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 424
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 34
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/0022-2836%2870%2990057-4",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 229
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 847
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/0022-2836%2881%2990087-5",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 229
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 849
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/0022-2836(70)90057-4",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch03.bib",
+          "line": 154
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 155
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/0022-2836(81)90087-5",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch03.bib",
+          "line": 142
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/S0022-2836%2805%2980360-2",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 228
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 845
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/S0022-2836(05)80360-2",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch03.bib",
+          "line": 130
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 131
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/533452a",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 47
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1079
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/75556",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 200
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/nbt.3820",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 203
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1039
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 284
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 693
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 36
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/ng1201-365",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 557
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/nrg3723",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 384
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41467-020-19160-7",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 320
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 687
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41586-020-2649-2",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 623
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41587-020-0439-x",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 333
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 367
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 695
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41592-018-0046-7",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 297
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 323
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 490
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 125
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 149
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1035
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 701
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 347
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1085
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 73
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 74
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 16
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 57
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41592-019-0686-2",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 358
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 633
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/sdata.2016.18",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 39
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 836
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 822
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 161
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 162
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bib/bbw020",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 381
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 703
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btaa692",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 513
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 697
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btae230",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 72
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btp163",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 663
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 780
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 300
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 637
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 68
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 69
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btp324",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 230
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 851
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 166
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btp352",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 190
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 438
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 568
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 820
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 306
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 863
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 78
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 79
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 45
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 46
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btq033",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 190
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 440
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 312
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 865
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 90
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 91
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btr330",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 570
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 826
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 57
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btr539",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 665
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 781
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 80
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btx192",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 347
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1083
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/comjnl/27.2.97",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 187
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/28.1.27",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 204
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkac1052",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch19.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkac1072",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 517
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkac958",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 513
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 112
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkad1044",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 235
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkw257",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 487
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 544
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 695
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/oxfordjournals.molbev.a040454",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 239
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 853
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 178
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 179
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1101/2025.05.30.656746",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 555
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 166
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1101/gr.229102",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 830
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 69
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1109/DSAA.2018.00006",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1101
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1109/ICSE.2013.6606617",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 449
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 782
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 26
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 27
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 90
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1109/MCSE.2007.55",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 679
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1126/science.1229566",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 483
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1142/S0218488502001648",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 388
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/103162.103163",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 267
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 823
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 26
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/1465482.1465560",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 24
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/2643130",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/2723872.2723882",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1089
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/272991.272995",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 462
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 831
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 62
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/3287560.3287596",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 422
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/3544548.3580919",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 81
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/356635.356640",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 20
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1162/tacl_a_00638",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 526
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 777
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 40
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1186/s13059-016-1044-7",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 191
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 812
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 9
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1186/s13059-017-1382-0",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 303
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 639
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.12688/f1000research.29032.2",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 203
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1037
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 95
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 691
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 26
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pbio.1001745",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 58
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 428
+        },
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 823
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 500
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 835
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 110
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 111
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 34
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 82
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1002802",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch21.bib",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1003833",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 316
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 691
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1004947",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 518
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 614
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 106
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1005510",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 548
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 107
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1007007",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch18.bib",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1008316",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 708
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1091
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1008984",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 198
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 814
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 21
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pone.0177459",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 392
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1081
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.18637/jss.v059.i10",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 503
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 818
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 33
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.21105/joss.03021",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 683
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.48550/arXiv.1802.03426",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 237
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 523
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 837
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 92
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.5281/zenodo.9882",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch08.bib",
+          "line": 6
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "url": "https://dvc.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1105
+        }
+      ]
+    },
+    {
+      "url": "https://ega-archive.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 288
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Single-responsibility_principle",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 533
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 841
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 111
+        }
+      ]
+    },
+    {
+      "url": "https://genome.ucsc.edu/FAQ/FAQformat.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 418
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "url": "https://genome.ucsc.edu/FAQ/FAQformat.html#format1",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 569
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 822
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "url": "https://genome.ucsc.edu/goldenPath/help/customTrack.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 501
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 693
+        }
+      ]
+    },
+    {
+      "url": "https://git-lfs.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 393
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 612
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "url": "https://git-scm.com/book/ja/v2",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 590
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "url": "https://git-scm.com/doc",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 592
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "url": "https://github.blog/2023-02-14-github-copilot-now-has-a-better-ai-model-and-new-capabilities/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "url": "https://github.blog/ai-and-ml/github-copilot/gartner-positions-github-as-a-leader-in-the-2025-magic-quadrant-for-ai-code-assistants-for-the-second-year-in-a-row/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "url": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 89
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "url": "https://github.com",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/Augmented-Nature/Augmented-Nature-UniProt-MCP-Server",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 549
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/JackKuo666/PubMed-MCP-Server",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 542
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 136
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/MCPmed/GEOmcp",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 549
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 569
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 824
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 117
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/awslabs/git-secrets",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 63
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/bioconda/bioconda-recipes",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 152
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/conda-forge/miniforge",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 87
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 480
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/conda/conda-lock",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 258
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 488
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/genomoncology/biomcp",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 527
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/github/gitignore",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 185
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 596
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/gotcha/ipdb",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 248
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/kynan/nbstripout",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 493
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/lh3/seqtk",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 831
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/longevity-genie/gget-mcp",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 549
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 157
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/ncbi/sra-tools",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 495
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 598
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/openai/codex",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 374
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 774
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pyenv/pyenv",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 21
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 474
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pypa/pip-audit",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 244
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pythonprofilers/memory-profiler",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch17.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pyutils/line_profiler",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 306
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/sharkdp/fd",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 835
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/tqdm/tqdm",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 436
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 859
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "url": "https://github.github.com/gfm/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 54
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "url": "https://help.zenodo.org/docs/deposit/manage-files/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 424
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 624
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 146
+        }
+      ]
+    },
+    {
+      "url": "https://hpc.nih.gov/docs/userguide.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 422
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 620
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "url": "https://hydra.cc/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 734
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 869
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1103
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "url": "https://hynek.me/articles/testing-packaging/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 465
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1041
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "url": "https://jeroenjanssens.com/dsatcl/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 819
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "url": "https://jmlr.org/papers/v9/vandermaaten08a.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 236
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 523
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 839
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "url": "https://keepachangelog.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 478
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 618
+        },
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 340
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 122
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "url": "https://linker.iecc.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 679
+        }
+      ]
+    },
+    {
+      "url": "https://linuxcommand.org/tlcl.php",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 817
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 108
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 482
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://matplotlib.org/stable/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 677
+        }
+      ]
+    },
+    {
+      "url": "https://mermaid.js.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 86
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://meta.stackoverflow.com/questions/421831",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 259
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 25
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 821
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "url": "https://mkdocstrings.github.io/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 356
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "url": "https://mlflow.org/docs/latest/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1111
+        }
+      ]
+    },
+    {
+      "url": "https://mypy.readthedocs.io/en/stable/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 384
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 815
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "url": "https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 90
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://nf-co.re/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 333
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 367
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 705
+        }
+      ]
+    },
+    {
+      "url": "https://numba.readthedocs.io/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 674
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "url": "https://numpy.org/doc/stable/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 625
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/random/generator.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 468
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 833
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "url": "https://numpydoc.readthedocs.io/en/latest/format.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 480
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 819
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://openai.com/index/introducing-gpt-5-2/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 87
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://openai.com/index/introducing-swe-bench-verified/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 85
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 192
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "url": "https://packaging.python.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 319
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 683
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 72
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 441
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1033
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 182
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 486
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://pandas.pydata.org/docs/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 627
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "url": "https://pandas.pydata.org/docs/user_guide/io.html#iterating-through-files-chunk-by-chunk",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 751
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://parquet.apache.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch17.bib",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "url": "https://plotly.com/python/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 245
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 685
+        }
+      ]
+    },
+    {
+      "url": "https://pre-commit.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 437
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 817
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "url": "https://producingoss.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 369
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://pypi.org/project/memory-profiler/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 340
+        }
+      ]
+    },
+    {
+      "url": "https://pytest-cov.readthedocs.io/en/latest/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 247
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 809
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://quarto.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 207
+        },
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 510
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://rich.readthedocs.io/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 470
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 861
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://rsync.samba.org/tech_report/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://samtools.github.io/hts-specs/CRAMv3.pdf",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 855
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://samtools.github.io/hts-specs/SAMv1.pdf",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 828
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 109
+        }
+      ]
+    },
+    {
+      "url": "https://scrumguides.org/scrum-guide.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 279
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 444
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "url": "https://seaborn.pydata.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 681
+        }
+      ]
+    },
+    {
+      "url": "https://semver.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 458
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 616
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 114
+        }
+      ]
+    },
+    {
+      "url": "https://slurm.schedmd.com/documentation.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://slurm.schedmd.com/sacct.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://slurm.schedmd.com/sbatch.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://snakemake.readthedocs.io/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 95
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 329
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 697
+        }
+      ]
+    },
+    {
+      "url": "https://sparql.uniprot.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 411
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/help/gen-ai-policy",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 259
+        }
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/help/how-to-ask",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 15
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 154
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/help/minimal-reproducible-example",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 108
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "url": "https://techcrunch.com/2025/07/30/github-copilot-crosses-20-million-all-time-users/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/hajimeni.bib",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "url": "https://typer.tiangolo.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 130
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 851
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://visit.figure-eight.com/data-science-report.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch04.bib",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 441
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 681
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/AI-resistant-technical-evaluations",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 88
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 238
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 248
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 775
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 16
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-opus-4-5",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 86
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://www.biostars.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 146
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 165
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 248
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://www.cisa.gov/news-events/alerts",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "url": "https://www.collinsdictionary.com/us/woty/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 15
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "url": "https://www.conventionalcommits.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 355
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 610
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "url": "https://www.cs.utexas.edu/~EWD/transcriptions/EWD04xx/EWD447.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 93
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 432
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "url": "https://www.ddbj.nig.ac.jp/jga/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 287
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "url": "https://www.edpb.europa.eu/our-work-tools/documents/our-documents/opinion-282024-certain-data-protection-aspects-related_en",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 305
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "url": "https://www.edwardtufte.com/tufte/books_vdqi",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 589
+        }
+      ]
+    },
+    {
+      "url": "https://www.ensembl.org/info/docs/index.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 507
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 699
+        }
+      ]
+    },
+    {
+      "url": "https://www.federalregister.gov/documents/2025/01/06/2024-30983/hipaa-security-rule-to-strengthen-the-cybersecurity-of-electronic-protected-health-information",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 306
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 114
+        }
+      ]
+    },
+    {
+      "url": "https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 834
+        }
+      ]
+    },
+    {
+      "url": "https://www.genenames.org/about/guidelines/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 200
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 816
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "url": "https://www.gnu.org/software/bash/manual/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 829
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "url": "https://www.gnu.org/software/coreutils/manual/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 827
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "url": "https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 306
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "url": "https://www.informit.com/store/test-driven-development-by-example-9780321146533",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 28
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 805
+        }
+      ]
+    },
+    {
+      "url": "https://www.jsps.go.jp/j-grantsinaid/01_seido/10_datamanagement/index.html",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 505
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "url": "https://www.mkdocs.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 356
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK179288/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 486
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK25501/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 350
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 369
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/datasets/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 503
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/gap/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 286
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/nuccore/U00096.3",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "url": "https://www.nextflow.io/docs/latest/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 284
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 699
+        }
+      ]
+    },
+    {
+      "url": "https://www.oreilly.com/library/view/python-cookbook-3rd/9781449357337/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 385
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 677
+        }
+      ]
+    },
+    {
+      "url": "https://www.ppc.go.jp/personalinfo/legal/gentec_data_guideline/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 303
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "url": "https://www.refactoring.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 292
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 446
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc4180",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 66
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 804
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "url": "https://www.sphinx-doc.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 400
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "url": "https://www.toptal.com/developers/gitignore",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 185
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 594
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://www.unicode.org/versions/Unicode16.0.0/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 410
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 829
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "url": "https://www.wandb.com/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1099
+        }
+      ]
+    },
+    {
+      "url": "https://www8.cao.go.jp/iryou/kouhou/pdf/kaisei_jisedaiiryou_rikatsuyou.pdf",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 304
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "https://x.com/karpathy/status/1886192184808149383",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 15
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 93
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 50
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "url": "https://xyproblem.info/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 219
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://zenodo.org/",
+      "status_code": null,
+      "category": "connection_error",
+      "error": "[Errno 8] nodename nor servname provided, or not known",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 288
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 602
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 54
+        }
+      ]
+    }
+  ]
+}

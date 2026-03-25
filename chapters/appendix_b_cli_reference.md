@@ -9,16 +9,16 @@
 
 | ツール | 公式ドキュメント |
 |-------|----------------|
-| Claude Code CLI | https://docs.anthropic.com/en/docs/claude-code [1] |
+| Claude Code CLI | https://code.claude.com/docs [1] |
 | Codex CLI | https://github.com/openai/codex [2] |
 
 ## セットアップ
 
 | | Claude Code CLI | Codex CLI |
 |--|----------------|-----------|
-| インストール | `npm install -g @anthropic-ai/claude-code` またはネイティブインストーラ | `npm install -g @openai/codex` |
+| インストール | native install（推奨; `curl -fsSL https://claude.ai/install.sh | bash`）、`brew install --cask claude-code`、または非推奨の `npm install -g @anthropic-ai/claude-code` | `npm install -g @openai/codex` または `brew install --cask codex` |
 | 起動 | `claude` | `codex` |
-| 認証 | Claude Pro/Max or APIキー | ChatGPT契約（Plus/Pro等）or APIキー |
+| 認証 | Claude アカウントでのサインイン または Anthropic APIキー | ChatGPT アカウントでのサインイン または OpenAI APIキー |
 | プロジェクト設定 | `CLAUDE.md` | `AGENTS.md` |
 | ユーザー設定 | `~/.claude/` | `~/.codex/config.toml` |
 
@@ -26,7 +26,7 @@
 
 | 目的 / 設定軸 | Claude Code | Codex CLI |
 |----------------|-------------|-----------|
-| 調査と計画に限定 | Plan Mode (`Shift+Tab`×2 / `/plan`) | `-s read-only` |
+| 調査と計画に限定 | Plan Mode (`Shift+Tab` or `/plan`) | `-s read-only` |
 | 人が確認しながら編集 | Normal Mode | `-s workspace-write -a untrusted` または `-a on-request` |
 | サンドボックス内で自動実行 | Auto-Accept Mode (`Shift+Tab`) | `--full-auto` |
 | 危険な完全無保護 | — | `--dangerously-bypass-approvals-and-sandbox` |
@@ -60,7 +60,7 @@
 | | Claude Code | Codex CLI | 本書での解説 |
 |--|-------------|-----------|-------------|
 | カスタムコマンド | `.claude/commands/` にMDファイル | `$skill-name`（SKILL.mdベース） | [§11-1](./11_cli.md#カスタムコマンドagent-skills--エージェント向けのテンプレート) |
-| フック | `.claude/settings.json` の `hooks` | hooks in config.toml | [§8-3](./08_testing.md#エージェントフック--ツール実行前後の自動チェック) |
+| フック | `.claude/settings.json` の `hooks` | —（2026年3月時点では一般向け安定機能として扱わない） | [§8-3](./08_testing.md#エージェントフック--ツール実行前後の自動チェック) |
 | MCP統合 | `claude mcp add` | `codex mcp add` | [§5-5](./05_software_components.md#5-5-mcpmodel-context-protocol-エージェントの能力を拡張する) |
 | 階層設定 | ディレクトリごとに `CLAUDE.md` | ディレクトリごとに `AGENTS.md` | [§10-3](./10_deliverables.md#設定ファイルの階層構造--ディレクトリ単位のルール設定) |
 | プロファイル | — | `--profile dev` (config.tomlの`[profiles]`) | — |
@@ -68,9 +68,9 @@
 
 ## 参考文献
 
-[1] Anthropic. "Claude Code documentation". https://docs.anthropic.com/en/docs/claude-code (参照日: 2026-03-17)
+[1] Anthropic. "Claude Code overview". https://code.claude.com/docs (参照日: 2026-03-25)
 
-[2] OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-17)
+[2] OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-25)
 
 ---
 
