@@ -447,11 +447,11 @@ From: condaforge/miniforge3:24.3.0-0
 
 ```bash
 # 定義ファイルからSIFイメージを構築
-# 多くの環境では --fakeroot が使えるが、施設設定によっては管理者構築が必要
+# --fakeroot が使える環境もあるが、共用計算機では無効なことが多い
 apptainer build --fakeroot rnaseq.sif apptainer.def
 ```
 
-定義ファイルからのビルドは、Dockerイメージの pull より施設依存性が強い。ユーザー名前空間や fakeroot が無効なクラスタでは、ローカルPCや別環境でSIFを作成して持ち込む運用になることもある。
+定義ファイルからのビルドは、Dockerイメージの pull より施設依存性が強い。共用クラスタではユーザー名前空間や `fakeroot` が無効なことが多く、その場合はローカルPCや別環境でSIFを作成して持ち込むか、管理者が提供したイメージを使う運用になることが多い。
 
 ### Docker vs. Apptainer コマンド対照表
 
