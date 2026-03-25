@@ -4,7 +4,8 @@
 
 実験科学者にとって、これはポジティブコントロールとネガティブコントロールの概念に近い。既知の結果が得られるサンプルを実験に含めることで、実験系全体が正しく機能していることを確認する。ソフトウェアにおけるテストも同じ発想である——既知の入力に対して期待どおりの出力が得られるかを自動で検証する。
 
-本章では、**テスト駆動開発**（Test-Driven Development; TDD）の考え方、**pytest**によるテストの書き方、そして**ruff**・**mypy**・**pre-commit**によるコード品質の自動管理を学ぶ。さらに、[§7](./07_git.md)で触れたGitHub Actionsを活用して、テストとリンターをプッシュのたびに自動実行するCI/CDパイプラインを構築する。
+本章では、**テスト駆動開発**（Test-Driven Development; TDD）の考え方、**pytest**によるテストの書き方、そして**Ruff**・**mypy**・**pre-commit**によるコード品質の自動管理を学ぶ。さらに、[§7](./07_git.md)で触れたGitHub Actionsを活用して、テストとリンターをプッシュのたびに自動実行するCI/CDパイプラインを構築する。
+
 
 ---
 
@@ -24,7 +25,7 @@
 
 ### Red → Green → Refactor サイクル
 
-テスト駆動開発（TDD）は、コードを書く前にテストを書く開発手法である[1](https://doi.org/10.5281/zenodo.9882)。TDDは3つのステップを繰り返すサイクルで進む。
+テスト駆動開発（TDD）は、コードを書く前にテストを書く開発手法である[1](https://www.informit.com/store/test-driven-development-by-example-9780321146533)。TDDは3つのステップを繰り返すサイクルで進む。
 
 ![TDDサイクル: Red（失敗するテストを書く）→ Green（最小限のコードで通す）→ Refactor（きれいにする）](../figures/ch08_tdd_cycle.png)
 
@@ -37,7 +38,7 @@
 **Step 1: Red — 失敗するテストを書く**
 
 ```python
-# tests/ch07/test_reverse_complement.py
+# tests/ch08/test_reverse_complement.py
 from scripts.ch08.reverse_complement import reverse_complement
 
 def test_simple_sequence() -> None:
@@ -121,10 +122,10 @@ pytest tests/
 pytest tests/ -v
 
 # 特定のファイルだけ実行
-pytest tests/ch07/test_reverse_complement.py
+pytest tests/ch08/test_reverse_complement.py
 
 # 特定のテスト関数だけ実行
-pytest tests/ch07/test_reverse_complement.py::test_simple_sequence
+pytest tests/ch08/test_reverse_complement.py::test_simple_sequence
 ```
 
 pytestは `test_` で始まるファイルと関数を自動的にテストとして認識する。テスト関数内で `assert` 文を使い、期待する条件を記述する。
@@ -199,7 +200,7 @@ def test_filter_all(sample_sequences: dict[str, str]) -> None:
 複数のテストファイルで同じフィクスチャを使いたい場合は、`conftest.py` に定義する:
 
 ```python
-# tests/ch07/conftest.py
+# tests/ch08/conftest.py
 import pytest
 from pathlib import Path
 
@@ -303,7 +304,7 @@ def test_fasta_filter_pipeline(tmp_path: Path) -> None:
 
 テストカバレッジの改善を依頼する場合:
 
-> 「`pytest --cov=scripts/ch07 --cov-report=term-missing` を実行して、カバレッジが低いモジュールを特定してください。Missing行に対するテストケースを追加して、カバレッジ80%以上を目指してください」
+> 「`pytest --cov=scripts/ch08 --cov-report=term-missing` を実行して、カバレッジが低いモジュールを特定してください。Missing行に対するテストケースを追加して、カバレッジ80%以上を目指してください」
 
 統合テストの作成を依頼する場合は、入出力の全体像を伝えると精度が上がる:
 
@@ -801,7 +802,7 @@ VCF ファイルから QUAL 値が閾値以上の行を抽出する関数 `filte
 
 ## 参考文献
 
-[1] Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002. [https://doi.org/10.5281/zenodo.9882](https://doi.org/10.5281/zenodo.9882)
+[1] Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002. ISBN 978-0-321-14653-3. [https://www.informit.com/store/test-driven-development-by-example-9780321146533](https://www.informit.com/store/test-driven-development-by-example-9780321146533)
 
 [2] pytest. "pytest: helps you write better programs". [https://docs.pytest.org/en/stable/](https://docs.pytest.org/en/stable/) (参照日: 2026-03-18)
 

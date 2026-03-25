@@ -1,0 +1,1254 @@
+chapter_file,line,heading_level,heading_text,anchor_slug
+00_ai_agent.md,1,1,§0 AIエージェントにコードを書かせる（2026年のベストプラクティス）,0-aiエージェントにコードを書かせる2026年のベストプラクティス
+00_ai_agent.md,11,2,0-1. セットアップと基本操作,0-1-セットアップと基本操作
+00_ai_agent.md,13,3,なぜCLIを使うのか — ブラウザチャットとの違い,なぜcliを使うのか--ブラウザチャットとの違い
+00_ai_agent.md,30,4,エージェントへの指示例,エージェントへの指示例
+00_ai_agent.md,40,3,インストール,インストール
+00_ai_agent.md,53,3,承認ポリシーとサンドボックス — 安全性の調整,承認ポリシーとサンドボックス--安全性の調整
+00_ai_agent.md,73,3,はじめてのVibe coding体験 — 遺伝子予測を題材に,はじめてのvibe-coding体験--遺伝子予測を題材に
+00_ai_agent.md,79,4,Step 1: 最初の指示 — 全ORFを検出する,step-1-最初の指示--全orfを検出する
+00_ai_agent.md,143,4,Step 2: 結果を見て戦略を練り直す — HMMで本物の遺伝子を選別する,step-2-結果を見て戦略を練り直す--hmmで本物の遺伝子を選別する
+00_ai_agent.md,211,4,このチュートリアルで体験したこと,このチュートリアルで体験したこと
+00_ai_agent.md,218,3,基本コマンド,基本コマンド
+00_ai_agent.md,236,2,0-2. Plan → Execute → Review ワークフロー,0-2-plan--execute--review-ワークフロー
+00_ai_agent.md,246,3,なぜ読み取り専用モード（Plan Mode）から始めるのか,なぜ読み取り専用モードplan-modeから始めるのか
+00_ai_agent.md,255,3,初心者が特に意識すべきこと,初心者が特に意識すべきこと
+00_ai_agent.md,261,3,「インタビューしてもらう」パターン — 要件が曖昧なときの最強テクニック,インタビューしてもらうパターン--要件が曖昧なときの最強テクニック
+00_ai_agent.md,296,3,非テキスト資料を使った計画 — 画像・データ・文書をエージェントに読ませる,非テキスト資料を使った計画--画像データ文書をエージェントに読ませる
+00_ai_agent.md,317,4,入力データの構造を分析させる,入力データの構造を分析させる
+00_ai_agent.md,327,4,実験デザインの画像・文書を構造化データに変換する,実験デザインの画像文書を構造化データに変換する
+00_ai_agent.md,339,4,論文の図から解析計画を立てる,論文の図から解析計画を立てる
+00_ai_agent.md,345,4,エージェントへの指示例,エージェントへの指示例
+00_ai_agent.md,372,2,0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）,0-3-プロジェクト設定ファイルclaudemd--agentsmd
+00_ai_agent.md,408,3,設定ファイルのコツ,設定ファイルのコツ
+00_ai_agent.md,417,3,エージェントの拡張機能 — MCP・フック・カスタムコマンド,エージェントの拡張機能--mcpフックカスタムコマンド
+00_ai_agent.md,443,2,0-4. エージェントにレビューさせる,0-4-エージェントにレビューさせる
+00_ai_agent.md,451,3,実装後のセルフレビュー,実装後のセルフレビュー
+00_ai_agent.md,462,3,「別人格」レビュー,別人格レビュー
+00_ai_agent.md,472,3,テスト生成によるレビュー,テスト生成によるレビュー
+00_ai_agent.md,482,3,レビューのベストプラクティス,レビューのベストプラクティス
+00_ai_agent.md,490,2,0-5. サブエージェントとタスク委譲,0-5-サブエージェントとタスク委譲
+00_ai_agent.md,500,3,初心者が知っておくべきこと,初心者が知っておくべきこと
+00_ai_agent.md,506,3,具体的な活用場面,具体的な活用場面
+00_ai_agent.md,518,2,0-6. コンテキスト管理,0-6-コンテキスト管理
+00_ai_agent.md,526,3,対策,対策
+00_ai_agent.md,541,2,0-7. モデル選択・推論の深さ・コスト意識,0-7-モデル選択推論の深さコスト意識
+00_ai_agent.md,545,3,モデルの階層,モデルの階層
+00_ai_agent.md,554,3,推論の深さ（Reasoning Depth）— 2つ目の調整軸,推論の深さreasoning-depth-2つ目の調整軸
+00_ai_agent.md,566,3,使い分けの指針,使い分けの指針
+00_ai_agent.md,585,3,コスト意識,コスト意識
+00_ai_agent.md,601,2,0-8. AIに頼るべきこと・自分で判断すべきこと,0-8-aiに頼るべきこと自分で判断すべきこと
+00_ai_agent.md,615,3,「動くコード」と「良いコード」の違い,動くコードと良いコードの違い
+00_ai_agent.md,647,2,0-9. 車輪の再発明を防ぐ,0-9-車輪の再発明を防ぐ
+00_ai_agent.md,670,2,0-10. セキュリティと権限管理,0-10-セキュリティと権限管理
+00_ai_agent.md,680,3,守るべき原則,守るべき原則
+00_ai_agent.md,690,2,まとめ,まとめ
+00_ai_agent.md,705,2,演習問題,演習問題
+00_ai_agent.md,709,3,演習 0-1: Plan-Execute-Reviewの各フェーズで行うべきこと [概念],演習-0-1-plan-execute-reviewの各フェーズで行うべきこと-概念
+00_ai_agent.md,715,3,演習 0-2: エージェントの操作提案の承認判断 [レビュー],演習-0-2-エージェントの操作提案の承認判断-レビュー
+00_ai_agent.md,726,3,演習 0-3: 自分の研究プロジェクト用のCLAUDE.mdを設計せよ [指示設計],演習-0-3-自分の研究プロジェクト用のclaudemdを設計せよ-指示設計
+00_ai_agent.md,738,3,演習 0-4: Writer/Reviewerパターン [実践],演習-0-4-writerreviewerパターン-実践
+00_ai_agent.md,750,2,さらに学びたい読者へ,さらに学びたい読者へ
+00_ai_agent.md,754,3,AIエージェントの公式ドキュメント,aiエージェントの公式ドキュメント
+00_ai_agent.md,759,3,コンピュータサイエンスの基礎スキル,コンピュータサイエンスの基礎スキル
+00_ai_agent.md,763,3,LLMの振る舞いの理解,llmの振る舞いの理解
+00_ai_agent.md,769,2,参考文献,参考文献
+01_design.md,1,1,§1 設計原則 — 良いコードとは何か,1-設計原則--良いコードとは何か
+01_design.md,11,2,1-1. コードの設計原則,1-1-コードの設計原則
+01_design.md,15,3,"KISS原則（Keep It Simple, Stupid）",kiss原則keep-it-simple-stupid
+01_design.md,54,3,DRY原則（Don't Repeat Yourself）,dry原則dont-repeat-yourself
+01_design.md,81,3,YAGNI原則（You Aren't Gonna Need It）,yagni原則you-arent-gonna-need-it
+01_design.md,91,3,関心の分離（Separation of Concerns）,関心の分離separation-of-concerns
+01_design.md,148,3,単一責任原則（Single Responsibility Principle; SRP）,単一責任原則single-responsibility-principle-srp
+01_design.md,158,3,最小驚き原則（Principle of Least Astonishment; POLA）,最小驚き原則principle-of-least-astonishment-pola
+01_design.md,170,4,エージェントへの指示例,エージェントへの指示例
+01_design.md,184,2,1-2. UNIX哲学,1-2-unix哲学
+01_design.md,192,3,テキストストリームとパイプ,テキストストリームとパイプ
+01_design.md,213,3,リダイレクション,リダイレクション
+01_design.md,230,3,終了ステータス（Exit Code）,終了ステータスexit-code
+01_design.md,244,3,🧬 バイオインフォマティクスとUNIX哲学,バイオインフォマティクスとunix哲学
+01_design.md,257,4,エージェントへの指示例,エージェントへの指示例
+01_design.md,267,2,1-3. ソフトウェア開発手法の用語 — AIエージェントと会話するための語彙,1-3-ソフトウェア開発手法の用語--aiエージェントと会話するための語彙
+01_design.md,273,3,開発プロセスモデル,開発プロセスモデル
+01_design.md,286,3,よく出てくる開発プラクティスの用語,よく出てくる開発プラクティスの用語
+01_design.md,303,3,🤖 AIエージェントとの会話で使うと効果的なフレーズ集,aiエージェントとの会話で使うと効果的なフレーズ集
+01_design.md,320,2,まとめ,まとめ
+01_design.md,338,2,演習問題,演習問題
+01_design.md,342,3,演習 1-1: コードに潜む設計原則違反を見つけよ [レビュー],演習-1-1-コードに潜む設計原則違反を見つけよ-レビュー
+01_design.md,379,3,演習 1-2: 設計原則の名前を使ってリファクタリングを指示せよ [指示設計],演習-1-2-設計原則の名前を使ってリファクタリングを指示せよ-指示設計
+01_design.md,385,3,演習 1-3: UNIX哲学に合致するのはどちらか [概念],演習-1-3-unix哲学に合致するのはどちらか-概念
+01_design.md,394,3,演習 1-4: YAGNIの判断 [設計判断],演習-1-4-yagniの判断-設計判断
+01_design.md,402,2,さらに学びたい読者へ,さらに学びたい読者へ
+01_design.md,406,3,ソフトウェア設計・クリーンコード,ソフトウェア設計クリーンコード
+01_design.md,412,3,リファクタリング,リファクタリング
+01_design.md,416,3,UNIX哲学,unix哲学
+01_design.md,422,2,参考文献,参考文献
+02_terminal.md,1,1,§2 ターミナルとシェルの基本操作,2-ターミナルとシェルの基本操作
+02_terminal.md,11,2,2-1. なぜVibe codingにシェルの知識が必要か,2-1-なぜvibe-codingにシェルの知識が必要か
+02_terminal.md,25,3,シェルを知ることの3つの利点,シェルを知ることの3つの利点
+02_terminal.md,31,3,ターミナル、シェル、コマンドライン,ターミナルシェルコマンドライン
+02_terminal.md,41,4,エージェントへの指示例,エージェントへの指示例
+02_terminal.md,53,2,2-2. ファイルシステムとパーミッション,2-2-ファイルシステムとパーミッション
+02_terminal.md,55,3,ディレクトリ構造,ディレクトリ構造
+02_terminal.md,74,3,絶対パスと相対パス,絶対パスと相対パス
+02_terminal.md,91,3,パーミッションと実行権限,パーミッションと実行権限
+02_terminal.md,133,3,プロセスの基本,プロセスの基本
+02_terminal.md,148,3,圧縮と展開,圧縮と展開
+02_terminal.md,191,4,エージェントへの指示例,エージェントへの指示例
+02_terminal.md,203,2,2-3. 環境変数とパス,2-3-環境変数とパス
+02_terminal.md,205,3,PATHが壊れるとエージェントがツールを見つけられない,pathが壊れるとエージェントがツールを見つけられない
+02_terminal.md,226,3,環境変数の設定と永続化,環境変数の設定と永続化
+02_terminal.md,252,3,.envファイルによるプロジェクト固有の設定,envファイルによるプロジェクト固有の設定
+02_terminal.md,278,3,whichコマンド — 「どの」コマンドが使われているか,whichコマンド--どのコマンドが使われているか
+02_terminal.md,304,4,エージェントへの指示例,エージェントへの指示例
+02_terminal.md,316,2,2-4. テキスト処理コマンド,2-4-テキスト処理コマンド
+02_terminal.md,322,3,コマンド一覧,コマンド一覧
+02_terminal.md,336,3,パイプによるコマンドの連結,パイプによるコマンドの連結
+02_terminal.md,367,3,「シェルで済む？」と聞く習慣,シェルで済むと聞く習慣
+02_terminal.md,406,3,正規表現の基礎 — パターンで文字列を操る,正規表現の基礎--パターンで文字列を操る
+02_terminal.md,410,4,リテラルマッチとメタ文字,リテラルマッチとメタ文字
+02_terminal.md,430,4,キャプチャグループ,キャプチャグループ
+02_terminal.md,456,4,Pythonのreモジュール — 最低限の3関数,pythonのreモジュール--最低限の3関数
+02_terminal.md,483,4,エージェントへの指示例,エージェントへの指示例
+02_terminal.md,495,4,エージェントへの指示例,エージェントへの指示例
+02_terminal.md,533,2,2-5. シェルスクリプティングの基礎,2-5-シェルスクリプティングの基礎
+02_terminal.md,539,3,set -euo pipefail — 安全なスクリプトの第一行,set--euo-pipefail--安全なスクリプトの第一行
+02_terminal.md,558,3,シェルスクリプトの基本構造,シェルスクリプトの基本構造
+02_terminal.md,581,3,変数,変数
+02_terminal.md,597,3,条件分岐,条件分岐
+02_terminal.md,614,3,ループ,ループ
+02_terminal.md,629,3,シェルスクリプトとPythonの使い分け,シェルスクリプトとpythonの使い分け
+02_terminal.md,641,4,エージェントへの指示例,エージェントへの指示例
+02_terminal.md,720,2,まとめ,まとめ
+02_terminal.md,730,2,演習問題,演習問題
+02_terminal.md,734,3,演習 2-1: コマンドの読解 [概念],演習-2-1-コマンドの読解-概念
+02_terminal.md,744,3,演習 2-2: パーミッションの問題 [レビュー],演習-2-2-パーミッションの問題-レビュー
+02_terminal.md,756,3,演習 2-3: ファイル整理の指示 [指示設計],演習-2-3-ファイル整理の指示-指示設計
+02_terminal.md,773,3,演習 2-4: 環境変数の確認 [実践],演習-2-4-環境変数の確認-実践
+02_terminal.md,787,2,さらに学びたい読者へ,さらに学びたい読者へ
+02_terminal.md,791,3,シェル・コマンドラインの教科書,シェルコマンドラインの教科書
+02_terminal.md,796,3,バイオインフォマティクスのコマンドライン実践,バイオインフォマティクスのコマンドライン実践
+02_terminal.md,801,3,オンライン講義,オンライン講義
+02_terminal.md,807,2,参考文献,参考文献
+03_cs_basics.md,1,1,§3 コーディングに必要な計算機科学,3-コーディングに必要な計算機科学
+03_cs_basics.md,11,2,3-1. データ構造と計算量,3-1-データ構造と計算量
+03_cs_basics.md,13,3,データ構造の選択が性能を決める,データ構造の選択が性能を決める
+03_cs_basics.md,47,3,遺伝子ID検索: list vs set の決定的な違い,遺伝子id検索-list-vs-set-の決定的な違い
+03_cs_basics.md,85,3,使い分けの指針,使い分けの指針
+03_cs_basics.md,93,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,105,3,collectionsの便利なデータ構造,collectionsの便利なデータ構造
+03_cs_basics.md,109,4,Counter — 出現回数を数える,counter--出現回数を数える
+03_cs_basics.md,130,4,defaultdict — グループ化を簡潔に,defaultdict--グループ化を簡潔に
+03_cs_basics.md,150,3,ソートと二分探索,ソートと二分探索
+03_cs_basics.md,152,4,sorted() と heapq — 効率的なソートと上位k件の抽出,sorted-と-heapq--効率的なソートと上位k件の抽出
+03_cs_basics.md,171,4,bisect — ソート済みデータへの高速アクセス,bisect--ソート済みデータへの高速アクセス
+03_cs_basics.md,195,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,245,2,3-2. 数値表現と浮動小数点,3-2-数値表現と浮動小数点
+03_cs_basics.md,247,3,整数型のビット幅,整数型のビット幅
+03_cs_basics.md,265,3,IEEE 754 浮動小数点 — 0.1 + 0.2 != 0.3 問題,ieee-754-浮動小数点--01--02--03-問題
+03_cs_basics.md,279,3,丸め誤差の蓄積,丸め誤差の蓄積
+03_cs_basics.md,303,3,CSV round-trip による丸め誤差の蓄積,csv-round-trip-による丸め誤差の蓄積
+03_cs_basics.md,329,3,浮動小数点の比較,浮動小数点の比較
+03_cs_basics.md,345,3,特殊な値: inf と NaN,特殊な値-inf-と-nan
+03_cs_basics.md,365,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,382,2,3-3. 文字エンコーディング,3-3-文字エンコーディング
+03_cs_basics.md,384,3,ASCII と UTF-8,ascii-と-utf-8
+03_cs_basics.md,399,3,改行コードの罠 — LF vs CR+LF,改行コードの罠--lf-vs-crlf
+03_cs_basics.md,431,3,バイトオーダー（エンディアン）,バイトオーダーエンディアン
+03_cs_basics.md,437,2,3-4. 乱数と再現性,3-4-乱数と再現性
+03_cs_basics.md,439,3,擬似乱数生成器（PRNG）,擬似乱数生成器prng
+03_cs_basics.md,445,3,シード固定の実践,シード固定の実践
+03_cs_basics.md,477,3,論文にシード値を記録する,論文にシード値を記録する
+03_cs_basics.md,492,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,518,2,3-5. 計算機アーキテクチャの基礎,3-5-計算機アーキテクチャの基礎
+03_cs_basics.md,520,3,メモリ階層,メモリ階層
+03_cs_basics.md,534,3,行優先（C order）vs 列優先（Fortran order）,行優先c-ordervs-列優先fortran-order
+03_cs_basics.md,550,3,CPU vs GPU,cpu-vs-gpu
+03_cs_basics.md,561,3,I/Oバウンド vs コンピュートバウンド,ioバウンド-vs-コンピュートバウンド
+03_cs_basics.md,570,3,ネットワークファイルシステム,ネットワークファイルシステム
+03_cs_basics.md,606,2,3-6. Pythonの型ヒント — 動的言語に静的解析の恩恵を持ち込む,3-6-pythonの型ヒント--動的言語に静的解析の恩恵を持ち込む
+03_cs_basics.md,612,3,基本型と関数シグネチャ,基本型と関数シグネチャ
+03_cs_basics.md,651,3,コレクション型,コレクション型
+03_cs_basics.md,662,3,OptionalとUnion — 値がないかもしれない場合,optionalとunion--値がないかもしれない場合
+03_cs_basics.md,682,3,よく見るジェネリック型,よく見るジェネリック型
+03_cs_basics.md,696,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,708,2,まとめ,まとめ
+03_cs_basics.md,728,2,演習問題,演習問題
+03_cs_basics.md,732,3,演習 3-1: データ構造の選択ミス [レビュー],演習-3-1-データ構造の選択ミス-レビュー
+03_cs_basics.md,748,3,演習 3-2: 浮動小数点の罠 [概念],演習-3-2-浮動小数点の罠-概念
+03_cs_basics.md,761,3,演習 3-3: 乱数シードの管理 [設計判断],演習-3-3-乱数シードの管理-設計判断
+03_cs_basics.md,767,3,演習 3-4: 計算量を意識した指示 [指示設計],演習-3-4-計算量を意識した指示-指示設計
+03_cs_basics.md,775,2,さらに学びたい読者へ,さらに学びたい読者へ
+03_cs_basics.md,779,3,アルゴリズムとデータ構造,アルゴリズムとデータ構造
+03_cs_basics.md,785,3,バイオインフォマティクスのアルゴリズム,バイオインフォマティクスのアルゴリズム
+03_cs_basics.md,790,3,浮動小数点演算,浮動小数点演算
+03_cs_basics.md,796,2,参考文献,参考文献
+04_data_formats.md,1,1,§4 データフォーマットの選び方,4-データフォーマットの選び方
+04_data_formats.md,11,2,4-0. データとメタデータ,4-0-データとメタデータ
+04_data_formats.md,13,3,データとメタデータの定義,データとメタデータの定義
+04_data_formats.md,24,3,バイオインフォマティクスでの具体例,バイオインフォマティクスでの具体例
+04_data_formats.md,37,3,FAIR原則 — データ管理の指導原理,fair原則--データ管理の指導原理
+04_data_formats.md,60,2,4-1. 汎用フォーマット,4-1-汎用フォーマット
+04_data_formats.md,64,3,TSV / CSV — 表形式データの基本,tsv--csv--表形式データの基本
+04_data_formats.md,104,3,JSON — 構造化データ,json--構造化データ
+04_data_formats.md,125,3,YAML / TOML — 設定ファイル,yaml--toml--設定ファイル
+04_data_formats.md,160,3,Markdown — ドキュメント記述,markdown--ドキュメント記述
+04_data_formats.md,328,4,エージェントへの指示例,エージェントへの指示例
+04_data_formats.md,342,2,4-2. フォーマット選択の判断基準,4-2-フォーマット選択の判断基準
+04_data_formats.md,344,3,テキスト vs バイナリ,テキスト-vs-バイナリ
+04_data_formats.md,363,3,圧縮の選択,圧縮の選択
+04_data_formats.md,375,3,インデックス付きフォーマットの利点,インデックス付きフォーマットの利点
+04_data_formats.md,397,3,下流ツールから逆算する,下流ツールから逆算する
+04_data_formats.md,410,3,機械可読なデータ形式の条件,機械可読なデータ形式の条件
+04_data_formats.md,429,3,AIコーディングエージェントで機械可読形式に変換する,aiコーディングエージェントで機械可読形式に変換する
+04_data_formats.md,481,3,tidy data,tidy-data
+04_data_formats.md,636,4,エージェントへの指示例,エージェントへの指示例
+04_data_formats.md,681,2,まとめ,まとめ
+04_data_formats.md,703,2,演習問題,演習問題
+04_data_formats.md,707,3,演習 4-1: 中間データの保存形式 [設計判断],演習-4-1-中間データの保存形式-設計判断
+04_data_formats.md,713,3,演習 4-2: tidy dataへの変換判断 [レビュー],演習-4-2-tidy-dataへの変換判断-レビュー
+04_data_formats.md,727,3,演習 4-3: エンコーディングの罠 [レビュー],演習-4-3-エンコーディングの罠-レビュー
+04_data_formats.md,739,3,演習 4-4: BAMの部分取得 [実践],演習-4-4-bamの部分取得-実践
+04_data_formats.md,751,2,さらに学びたい読者へ,さらに学びたい読者へ
+04_data_formats.md,755,3,データ管理の原則,データ管理の原則
+04_data_formats.md,760,3,バイオインフォマティクスのファイル形式,バイオインフォマティクスのファイル形式
+04_data_formats.md,765,3,データ処理の実践書,データ処理の実践書
+04_data_formats.md,771,2,参考文献,参考文献
+05_software_components.md,1,1,§5 ソフトウェアの構成要素 — importからpipまで,5-ソフトウェアの構成要素--importからpipまで
+05_software_components.md,11,2,5-1. プログラムはどう動くか,5-1-プログラムはどう動くか
+05_software_components.md,13,3,インタプリタ言語とコンパイル言語,インタプリタ言語とコンパイル言語
+05_software_components.md,23,3,コンパイル・リンク・実行の流れ,コンパイルリンク実行の流れ
+05_software_components.md,34,3,静的リンクと動的リンク,静的リンクと動的リンク
+05_software_components.md,48,3,共有ライブラリとその管理,共有ライブラリとその管理
+05_software_components.md,97,4,エージェントへの指示例,エージェントへの指示例
+05_software_components.md,109,2,5-2. Pythonのモジュールシステム,5-2-pythonのモジュールシステム
+05_software_components.md,111,3,モジュール・パッケージ・ライブラリ,モジュールパッケージライブラリ
+05_software_components.md,134,3,init.py の役割,initpy-の役割
+05_software_components.md,160,3,importの仕組み,importの仕組み
+05_software_components.md,197,3,site-packages — サードパーティパッケージの格納先,site-packages--サードパーティパッケージの格納先
+05_software_components.md,209,3,PYTHONPATH環境変数,pythonpath環境変数
+05_software_components.md,222,3,絶対インポートと相対インポート,絶対インポートと相対インポート
+05_software_components.md,239,3,よくあるエラーと対処法,よくあるエラーと対処法
+05_software_components.md,268,4,エージェントへの指示例,エージェントへの指示例
+05_software_components.md,280,2,5-3. 依存関係の問題,5-3-依存関係の問題
+05_software_components.md,282,3,依存関係の連鎖,依存関係の連鎖
+05_software_components.md,317,3,依存関係地獄,依存関係地獄
+05_software_components.md,333,3,環境隔離で解決できること・できないこと,環境隔離で解決できることできないこと
+05_software_components.md,349,3,依存関係の可視化,依存関係の可視化
+05_software_components.md,369,4,エージェントへの指示例,エージェントへの指示例
+05_software_components.md,381,2,5-4. APIとインターフェース,5-4-apiとインターフェース
+05_software_components.md,383,3,APIとは何か,apiとは何か
+05_software_components.md,389,3,3つのレベルのAPI,3つのレベルのapi
+05_software_components.md,429,3,APIの変更がコードを壊す,apiの変更がコードを壊す
+05_software_components.md,439,3,よいAPI設計の原則 — SOLID,よいapi設計の原則--solid
+05_software_components.md,501,4,エージェントへの指示例,エージェントへの指示例
+05_software_components.md,513,2,5-5. MCP（Model Context Protocol）— エージェントの能力を拡張する,5-5-mcpmodel-context-protocol-エージェントの能力を拡張する
+05_software_components.md,517,3,pip install のアナロジーで理解する,pip-install-のアナロジーで理解する
+05_software_components.md,528,3,MCPの仕組み,mcpの仕組み
+05_software_components.md,536,3,汎用MCPサーバーの例,汎用mcpサーバーの例
+05_software_components.md,548,3,MCPサーバーの追加方法,mcpサーバーの追加方法
+05_software_components.md,571,3,MCPとAPIの違い,mcpとapiの違い
+05_software_components.md,580,4,エージェントへの指示例,エージェントへの指示例
+05_software_components.md,592,2,まとめ,まとめ
+05_software_components.md,613,2,演習問題,演習問題
+05_software_components.md,617,3,演習 5-1: エラーメッセージの切り分け [概念],演習-5-1-エラーメッセージの切り分け-概念
+05_software_components.md,629,3,演習 5-2: API設計の評価 [設計判断],演習-5-2-api設計の評価-設計判断
+05_software_components.md,642,3,演習 5-3: 依存関係の指示 [指示設計],演習-5-3-依存関係の指示-指示設計
+05_software_components.md,655,2,さらに学びたい読者へ,さらに学びたい読者へ
+05_software_components.md,659,3,コンパイル・リンクの仕組み,コンパイルリンクの仕組み
+05_software_components.md,664,3,Pythonのモジュールとパッケージ,pythonのモジュールとパッケージ
+05_software_components.md,671,2,参考文献,参考文献
+06_dev_environment.md,1,1,§6 Python環境の構築 — pyenv・venv・conda・uv,6-python環境の構築--pyenvvenvcondauv
+06_dev_environment.md,11,2,6-1. Pythonの環境管理,6-1-pythonの環境管理
+06_dev_environment.md,13,3,なぜ環境管理が必要か,なぜ環境管理が必要か
+06_dev_environment.md,19,3,pyenv — Pythonバージョンの管理,pyenv--pythonバージョンの管理
+06_dev_environment.md,40,3,venv — 標準ライブラリの仮想環境,venv--標準ライブラリの仮想環境
+06_dev_environment.md,60,4,仮想環境の仕組み,仮想環境の仕組み
+06_dev_environment.md,83,3,Miniforge3 / Micromamba — conda環境,miniforge3--micromamba--conda環境
+06_dev_environment.md,110,3,uv — 高速な新世代パッケージマネージャ,uv--高速な新世代パッケージマネージャ
+06_dev_environment.md,137,3,依存関係定義ファイルの比較,依存関係定義ファイルの比較
+06_dev_environment.md,184,3,依存関係の競合と解決,依存関係の競合と解決
+06_dev_environment.md,211,4,エージェントへの指示例,エージェントへの指示例
+06_dev_environment.md,225,2,6-2. パッケージマネージャの概念,6-2-パッケージマネージャの概念
+06_dev_environment.md,227,3,パッケージマネージャが解決する問題,パッケージマネージャが解決する問題
+06_dev_environment.md,238,3,パッケージマネージャの使い分け,パッケージマネージャの使い分け
+06_dev_environment.md,254,3,ロックファイル — 再現性の鍵,ロックファイル--再現性の鍵
+06_dev_environment.md,287,3,チャネルとレジストリ,チャネルとレジストリ
+06_dev_environment.md,311,4,エージェントへの指示例,エージェントへの指示例
+06_dev_environment.md,393,2,まとめ,まとめ
+06_dev_environment.md,415,2,演習問題,演習問題
+06_dev_environment.md,419,3,演習 6-1: 環境管理ツールの選択 [設計判断],演習-6-1-環境管理ツールの選択-設計判断
+06_dev_environment.md,431,3,演習 6-2: requirements.txtの問題 [レビュー],演習-6-2-requirementstxtの問題-レビュー
+06_dev_environment.md,447,3,演習 6-3: 環境の隔離テスト [実践],演習-6-3-環境の隔離テスト-実践
+06_dev_environment.md,460,2,さらに学びたい読者へ,さらに学びたい読者へ
+06_dev_environment.md,470,2,参考文献,参考文献
+07_git.md,1,1,§7 Git入門 — コードのバージョン管理,7-git入門--コードのバージョン管理
+07_git.md,13,2,7-1. Gitの基礎,7-1-gitの基礎
+07_git.md,15,3,なぜバージョン管理か,なぜバージョン管理か
+07_git.md,29,3,リポジトリの作成と初期設定,リポジトリの作成と初期設定
+07_git.md,51,3,ステージング → コミット → プッシュ,ステージング--コミット--プッシュ
+07_git.md,76,3,ブランチと切り替え,ブランチと切り替え
+07_git.md,100,3,コンフリクトの解決,コンフリクトの解決
+07_git.md,124,3,"便利なコマンド: log, diff, stash",便利なコマンド-log-diff-stash
+07_git.md,149,3,.gitignore — 管理すべきでないファイルの除外,gitignore--管理すべきでないファイルの除外
+07_git.md,187,4,エージェントへの指示例,エージェントへの指示例
+07_git.md,199,2,7-2. GitHubの活用,7-2-githubの活用
+07_git.md,201,3,リモートリポジトリ,リモートリポジトリ
+07_git.md,213,3,Pull RequestとIssue管理,pull-requestとissue管理
+07_git.md,221,3,GitHub CLI（ghコマンド）,github-clighコマンド
+07_git.md,236,3,GitHub Actions（CI/CDの入口）,github-actionscicdの入口
+07_git.md,261,4,エージェントへの指示例,エージェントへの指示例
+07_git.md,273,3,README.mdの書き方,readmemdの書き方
+07_git.md,282,3,コードの公開と引用可能性,コードの公開と引用可能性
+07_git.md,312,3,ライセンスの選択,ライセンスの選択
+07_git.md,337,2,7-3. コミットの作法,7-3-コミットの作法
+07_git.md,339,3,意味のあるコミットメッセージ,意味のあるコミットメッセージ
+07_git.md,369,4,エージェントへの指示例,エージェントへの指示例
+07_git.md,381,3,1コミット = 1つの論理的変更,1コミット--1つの論理的変更
+07_git.md,389,3,大きなファイルの扱い — Git LFS,大きなファイルの扱い--git-lfs
+07_git.md,412,3,大規模データの共有 — Git LFS を超える選択肢,大規模データの共有--git-lfs-を超える選択肢
+07_git.md,454,2,7-4. セマンティックバージョニング,7-4-セマンティックバージョニング
+07_git.md,456,3,MAJOR.MINOR.PATCH,majorminorpatch
+07_git.md,476,3,CHANGELOGの書き方,changelogの書き方
+07_git.md,502,2,まとめ,まとめ
+07_git.md,524,2,演習問題,演習問題
+07_git.md,528,3,演習 7-1: コミットメッセージの改善 [概念],演習-7-1-コミットメッセージの改善-概念
+07_git.md,538,3,演習 7-2: .gitignore の確認 [レビュー],演習-7-2-gitignore-の確認-レビュー
+07_git.md,550,3,演習 7-3: ライセンスの選択 [設計判断],演習-7-3-ライセンスの選択-設計判断
+07_git.md,556,3,演習 7-4: CITATION.cff の生成 [実践],演習-7-4-citationcff-の生成-実践
+07_git.md,569,2,さらに学びたい読者へ,さらに学びたい読者へ
+07_git.md,573,3,Gitの包括的な教科書,gitの包括的な教科書
+07_git.md,577,3,科学研究でのGit活用,科学研究でのgit活用
+07_git.md,582,3,インタラクティブな学習,インタラクティブな学習
+07_git.md,588,2,参考文献,参考文献
+08_testing.md,1,1,§8 コードの正しさを守るテスト技法,8-コードの正しさを守るテスト技法
+08_testing.md,12,2,8-1. テスト駆動開発（TDD）,8-1-テスト駆動開発tdd
+08_testing.md,14,3,なぜテストを書くのか,なぜテストを書くのか
+08_testing.md,26,3,Red → Green → Refactor サイクル,red--green--refactor-サイクル
+08_testing.md,34,4,具体例: 配列の逆相補鎖を求める関数,具体例-配列の逆相補鎖を求める関数
+08_testing.md,82,3,「テストが通る最小限のコード」を書く規律,テストが通る最小限のコードを書く規律
+08_testing.md,90,4,エージェントへの指示例,エージェントへの指示例
+08_testing.md,106,2,8-2. テストの実践,8-2-テストの実践
+08_testing.md,108,3,pytestによるユニットテスト,pytestによるユニットテスト
+08_testing.md,112,4,インストールと基本的な使い方,インストールと基本的な使い方
+08_testing.md,133,4,テストの書き方の基本,テストの書き方の基本
+08_testing.md,152,4,テストクラスによるグループ化,テストクラスによるグループ化
+08_testing.md,171,3,テストデータの準備（fixture）,テストデータの準備fixture
+08_testing.md,198,4,conftest.py — フィクスチャの共有,conftestpy--フィクスチャの共有
+08_testing.md,220,3,エッジケースを意識する,エッジケースを意識する
+08_testing.md,245,3,テストカバレッジの計測,テストカバレッジの計測
+08_testing.md,273,3,統合テスト・回帰テスト,統合テスト回帰テスト
+08_testing.md,299,4,エージェントへの指示例,エージェントへの指示例
+08_testing.md,315,2,8-3. コード品質ツール,8-3-コード品質ツール
+08_testing.md,319,3,ruff — リント＋フォーマット,ruff--リントフォーマット
+08_testing.md,337,4,pyproject.toml での設定,pyprojecttoml-での設定
+08_testing.md,365,4,ruffが検出する問題の例,ruffが検出する問題の例
+08_testing.md,382,3,mypy — 型チェック,mypy--型チェック
+08_testing.md,423,4,pyproject.toml でのmypy設定,pyprojecttoml-でのmypy設定
+08_testing.md,435,3,pre-commit — コミット前の自動チェック,pre-commit--コミット前の自動チェック
+08_testing.md,478,3,docstringの書き方,docstringの書き方
+08_testing.md,515,4,エージェントへの指示例,エージェントへの指示例
+08_testing.md,529,3,エージェントフック — ツール実行前後の自動チェック,エージェントフック--ツール実行前後の自動チェック
+08_testing.md,537,4,pre-commit hook との使い分け,pre-commit-hook-との使い分け
+08_testing.md,547,4,設定例,設定例
+08_testing.md,570,4,バイオインフォマティクスでの活用例,バイオインフォマティクスでの活用例
+08_testing.md,576,4,エージェントへの指示例,エージェントへの指示例
+08_testing.md,588,2,8-4. CI/CD,8-4-cicd
+08_testing.md,590,3,GitHub Actionsの基礎,github-actionsの基礎
+08_testing.md,598,3,ワークフローYAMLの書き方,ワークフローyamlの書き方
+08_testing.md,651,3,ワークフローの拡張,ワークフローの拡張
+08_testing.md,672,4,エージェントへの指示例,エージェントへの指示例
+08_testing.md,715,2,まとめ,まとめ
+08_testing.md,734,2,演習問題,演習問題
+08_testing.md,738,3,演習 8-1: テストの品質評価 [レビュー],演習-8-1-テストの品質評価-レビュー
+08_testing.md,749,3,演習 8-2: TDD での指示 [指示設計],演習-8-2-tdd-での指示-指示設計
+08_testing.md,759,3,演習 8-3: テストデータの選択 [設計判断],演習-8-3-テストデータの選択-設計判断
+08_testing.md,771,3,演習 8-4: CI/CD の構築 [実践],演習-8-4-cicd-の構築-実践
+08_testing.md,784,2,さらに学びたい読者へ,さらに学びたい読者へ
+08_testing.md,788,3,テスト駆動開発,テスト駆動開発
+08_testing.md,793,3,pytestの実践,pytestの実践
+08_testing.md,797,3,静的解析,静的解析
+08_testing.md,803,2,参考文献,参考文献
+09_debug.md,1,1,§9 デバッグの技術 — tracebackから最小再現例まで,9-デバッグの技術--tracebackから最小再現例まで
+09_debug.md,13,2,9-1. デバッグの心構え,9-1-デバッグの心構え
+09_debug.md,17,3,tracebackを読む,tracebackを読む
+09_debug.md,94,3,「何を期待して何が違ったか」を言語化する,何を期待して何が違ったかを言語化する
+09_debug.md,106,3,最小再現例（MRE）を作る,最小再現例mreを作る
+09_debug.md,121,3,二分探索デバッグ,二分探索デバッグ
+09_debug.md,135,4,エージェントへの指示例,エージェントへの指示例
+09_debug.md,153,2,9-2. デバッグツール,9-2-デバッグツール
+09_debug.md,155,3,print()デバッグの作法,printデバッグの作法
+09_debug.md,201,3,pdb / breakpoint() / ipdb,pdb--breakpoint--ipdb
+09_debug.md,265,3,warningsモジュール,warningsモジュール
+09_debug.md,297,3,デバッグ時のlogger活用,デバッグ時のlogger活用
+09_debug.md,346,4,エージェントへの指示例,エージェントへの指示例
+09_debug.md,364,2,9-3. よくあるバグのパターン,9-3-よくあるバグのパターン
+09_debug.md,368,3,Off-by-one: 0-based vs 1-based,off-by-one-0-based-vs-1-based
+09_debug.md,430,3,パス関連のバグ,パス関連のバグ
+09_debug.md,465,3,エンコーディングの問題,エンコーディングの問題
+09_debug.md,489,3,型の不一致,型の不一致
+09_debug.md,540,3,メモリ不足（OOM）,メモリ不足oom
+09_debug.md,558,3,並列処理のバグ,並列処理のバグ
+09_debug.md,579,4,エージェントへの指示例,エージェントへの指示例
+09_debug.md,595,3,Python固有の落とし穴,python固有の落とし穴
+09_debug.md,682,4,エージェントへの指示例,エージェントへの指示例
+09_debug.md,694,2,まとめ,まとめ
+09_debug.md,715,2,演習問題,演習問題
+09_debug.md,719,3,演習 9-1: traceback の読解 [概念],演習-9-1-traceback-の読解-概念
+09_debug.md,738,3,演習 9-2: 最小再現例の作成 [指示設計],演習-9-2-最小再現例の作成-指示設計
+09_debug.md,748,3,演習 9-3: 座標変換の検証 [レビュー],演習-9-3-座標変換の検証-レビュー
+09_debug.md,761,3,演習 9-4: 二分探索デバッグ [実践],演習-9-4-二分探索デバッグ-実践
+09_debug.md,773,2,さらに学びたい読者へ,さらに学びたい読者へ
+09_debug.md,783,2,参考文献,参考文献
+10_deliverables.md,1,1,§10 ソフトウェア成果物の設計 — スクリプトからパッケージまで,10-ソフトウェア成果物の設計--スクリプトからパッケージまで
+10_deliverables.md,11,2,10-1. 成果物の形式の選択,10-1-成果物の形式の選択
+10_deliverables.md,15,3,パターン1: スタンドアロンスクリプト,パターン1-スタンドアロンスクリプト
+10_deliverables.md,45,3,パターン2: pipインストール可能なPythonパッケージ,パターン2-pipインストール可能なpythonパッケージ
+10_deliverables.md,123,3,パターン3: Condaパッケージ（Bioconda）,パターン3-condaパッケージbioconda
+10_deliverables.md,160,3,パターン4: シェルスクリプトパイプライン,パターン4-シェルスクリプトパイプライン
+10_deliverables.md,200,3,パターン5: ワークフロー言語（Snakemake / Nextflow）,パターン5-ワークフロー言語snakemake--nextflow
+10_deliverables.md,249,3,パターン6: Dockerコンテナ / Apptainerイメージ,パターン6-dockerコンテナ--apptainerイメージ
+10_deliverables.md,275,3,パターン7: Jupyter Notebook（解析レポート）,パターン7-jupyter-notebook解析レポート
+10_deliverables.md,305,3,パターン8: Webアプリ（Streamlit / Gradio）,パターン8-webアプリstreamlit--gradio
+10_deliverables.md,345,3,パターン9: コンパイル済みバイナリ,パターン9-コンパイル済みバイナリ
+10_deliverables.md,375,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,391,2,10-2. どのパターンを選ぶか — 判断フローチャート,10-2-どのパターンを選ぶか--判断フローチャート
+10_deliverables.md,397,3,よくある組み合わせパターン,よくある組み合わせパターン
+10_deliverables.md,408,3,エージェントへの最初の指示に含めるべきこと,エージェントへの最初の指示に含めるべきこと
+10_deliverables.md,422,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,434,2,10-3. ディレクトリ構成 — pipパッケージの標準レイアウト,10-3-ディレクトリ構成--pipパッケージの標準レイアウト
+10_deliverables.md,438,3,src layout,src-layout
+10_deliverables.md,466,3,各ファイル・ディレクトリの役割,各ファイルディレクトリの役割
+10_deliverables.md,498,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,508,3,設定ファイルの階層構造 — ディレクトリ単位のルール設定,設定ファイルの階層構造--ディレクトリ単位のルール設定
+10_deliverables.md,512,4,ディレクトリごとの設定ファイル,ディレクトリごとの設定ファイル
+10_deliverables.md,538,4,設定のスコープ,設定のスコープ
+10_deliverables.md,546,4,メモリ機能,メモリ機能
+10_deliverables.md,550,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,558,2,10-4. 設定管理,10-4-設定管理
+10_deliverables.md,562,3,ハードコーディングの問題,ハードコーディングの問題
+10_deliverables.md,581,3,設定ファイルによる外部化,設定ファイルによる外部化
+10_deliverables.md,636,3,コマンドライン引数による上書き,コマンドライン引数による上書き
+10_deliverables.md,646,3,環境変数による秘密情報の管理,環境変数による秘密情報の管理
+10_deliverables.md,665,3,デフォルト値の設計,デフォルト値の設計
+10_deliverables.md,673,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,687,2,10-5. エラーハンドリング,10-5-エラーハンドリング
+10_deliverables.md,691,3,例外の使い分け,例外の使い分け
+10_deliverables.md,738,3,早期リターン（ガード節）パターン,早期リターンガード節パターン
+10_deliverables.md,798,3,ユーザーに分かりやすいエラーメッセージ,ユーザーに分かりやすいエラーメッセージ
+10_deliverables.md,820,3,fail-fastの原則,fail-fastの原則
+10_deliverables.md,852,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,868,2,10-6. 段階的な成長パス — スクリプトから育てる,10-6-段階的な成長パス--スクリプトから育てる
+10_deliverables.md,874,3,成長のタイミングの目安,成長のタイミングの目安
+10_deliverables.md,887,3,AIエージェントとの連携によるリファクタリング,aiエージェントとの連携によるリファクタリング
+10_deliverables.md,891,4,エージェントへの指示例,エージェントへの指示例
+10_deliverables.md,907,2,まとめ,まとめ
+10_deliverables.md,928,2,演習問題,演習問題
+10_deliverables.md,932,3,演習 10-1: 成果物パターンの選択 [設計判断],演習-10-1-成果物パターンの選択-設計判断
+10_deliverables.md,942,3,演習 10-2: プロジェクト構造の評価 [レビュー],演習-10-2-プロジェクト構造の評価-レビュー
+10_deliverables.md,966,3,演習 10-3: スクリプトからパッケージへの移行指示 [指示設計],演習-10-3-スクリプトからパッケージへの移行指示-指示設計
+10_deliverables.md,977,3,演習 10-4: pyproject.tomlの読解 [概念],演習-10-4-pyprojecttomlの読解-概念
+10_deliverables.md,1009,2,さらに学びたい読者へ,さらに学びたい読者へ
+10_deliverables.md,1013,3,設計原則,設計原則
+10_deliverables.md,1017,3,パッケージングの実践,パッケージングの実践
+10_deliverables.md,1022,3,リファクタリング,リファクタリング
+10_deliverables.md,1028,2,参考文献,参考文献
+11_cli.md,1,1,§11 コマンドラインツールの設計と実装,11-コマンドラインツールの設計と実装
+11_cli.md,9,2,11-1. コマンドラインインターフェースの作法,11-1-コマンドラインインターフェースの作法
+11_cli.md,11,3,良いCLIとは何か,良いcliとは何か
+11_cli.md,23,3,3ライブラリのコード対比,3ライブラリのコード対比
+11_cli.md,35,4,Argparse版,argparse版
+11_cli.md,69,4,Click版（推奨）,click版推奨
+11_cli.md,95,4,Typer版,typer版
+11_cli.md,128,3,ClickによるCLI設計の実践,clickによるcli設計の実践
+11_cli.md,133,4,@click.argument vs @click.option,clickargument-vs-clickoption
+11_cli.md,147,4,型変換とバリデーション,型変換とバリデーション
+11_cli.md,164,4,--help と --version,help-と---version
+11_cli.md,180,3,サブコマンド設計,サブコマンド設計
+11_cli.md,214,3,stdin/stdout対応の実装,stdinstdout対応の実装
+11_cli.md,243,3,設定の3層構造の実装,設定の3層構造の実装
+11_cli.md,284,4,エージェントへの指示例,エージェントへの指示例
+11_cli.md,340,3,カスタムコマンド（Agent Skills） — エージェント向けのテンプレート,カスタムコマンドagent-skills--エージェント向けのテンプレート
+11_cli.md,344,4,問題: 同じ指示を何度も繰り返す,問題-同じ指示を何度も繰り返す
+11_cli.md,354,4,カスタムコマンドの作り方,カスタムコマンドの作り方
+11_cli.md,378,4,実用的なカスタムコマンドの例,実用的なカスタムコマンドの例
+11_cli.md,401,4,CLIコマンドとカスタムコマンドの対比,cliコマンドとカスタムコマンドの対比
+11_cli.md,412,4,エージェントへの指示例,エージェントへの指示例
+11_cli.md,424,2,11-2. プログレス表示とUI,11-2-プログレス表示とui
+11_cli.md,426,3,なぜプログレス表示が必要か,なぜプログレス表示が必要か
+11_cli.md,430,3,tqdm — 最も手軽なプログレスバー,tqdm--最も手軽なプログレスバー
+11_cli.md,464,3,Rich — リッチなターミナルUI,rich--リッチなターミナルui
+11_cli.md,497,3,ステータスメッセージ,ステータスメッセージ
+11_cli.md,513,3,stdoutとプログレスの棲み分け,stdoutとプログレスの棲み分け
+11_cli.md,538,4,エージェントへの指示例,エージェントへの指示例
+11_cli.md,548,2,11-3. ロギング,11-3-ロギング
+11_cli.md,550,3,print() vs logging,print-vs-logging
+11_cli.md,575,3,ログレベルの使い分け,ログレベルの使い分け
+11_cli.md,589,3,ログの出力先,ログの出力先
+11_cli.md,616,3,タイムスタンプとフォーマット,タイムスタンプとフォーマット
+11_cli.md,636,3,--log-level の実装,log-level-の実装
+11_cli.md,664,3,setuplogging() パターン,setuplogging-パターン
+11_cli.md,714,4,エージェントへの指示例,エージェントへの指示例
+11_cli.md,744,2,まとめ,まとめ
+11_cli.md,764,2,演習問題,演習問題
+11_cli.md,768,3,演習 11-1: stdout/stderrの使い分け [設計判断],演習-11-1-stdoutstderrの使い分け-設計判断
+11_cli.md,779,3,演習 11-2: CLIインターフェースの評価 [レビュー],演習-11-2-cliインターフェースの評価-レビュー
+11_cli.md,795,3,演習 11-3: ロギングの設計指示 [指示設計],演習-11-3-ロギングの設計指示-指示設計
+11_cli.md,805,3,演習 11-4: stdin対応CLIツールの検証 [実践],演習-11-4-stdin対応cliツールの検証-実践
+11_cli.md,824,2,さらに学びたい読者へ,さらに学びたい読者へ
+11_cli.md,828,3,CLI設計の原則,cli設計の原則
+11_cli.md,833,3,コマンドラインでのデータ処理,コマンドラインでのデータ処理
+11_cli.md,837,3,CLIフレームワークの公式ドキュメント,cliフレームワークの公式ドキュメント
+11_cli.md,843,2,参考文献,参考文献
+12_data_processing.md,1,1,§12 データ処理の実践 — NumPy・pandas・Polars,12-データ処理の実践--numpypandaspolars
+12_data_processing.md,9,2,12-1. NumPyによるベクトル化演算,12-1-numpyによるベクトル化演算
+12_data_processing.md,11,3,forループの限界,forループの限界
+12_data_processing.md,27,3,ベクトル化とは何か,ベクトル化とは何か
+12_data_processing.md,36,3,バイオインフォでの実践: GC含量の一括計算,バイオインフォでの実践-gc含量の一括計算
+12_data_processing.md,61,3,ブロードキャスティング,ブロードキャスティング
+12_data_processing.md,97,3,ファンシーインデックスとマスク,ファンシーインデックスとマスク
+12_data_processing.md,112,4,エージェントへの指示例,エージェントへの指示例
+12_data_processing.md,126,2,12-2. pandasとPolarsによるテーブルデータ処理,12-2-pandasとpolarsによるテーブルデータ処理
+12_data_processing.md,128,3,pandasの基本操作パターン,pandasの基本操作パターン
+12_data_processing.md,144,4,読み込み: 型とNA値の指定,読み込み-型とna値の指定
+12_data_processing.md,162,4,フィルタリング: .query() メソッド,フィルタリング-query-メソッド
+12_data_processing.md,180,4,結合: pd.merge(),結合-pdmerge
+12_data_processing.md,196,4,集計: .groupby().agg(),集計-groupbyagg
+12_data_processing.md,216,3,メソッドチェーン,メソッドチェーン
+12_data_processing.md,232,3,Polars: 大規模データの高速処理,polars-大規模データの高速処理
+12_data_processing.md,258,4,pandas→Polars 対応表,pandaspolars-対応表
+12_data_processing.md,270,4,使い分けの指針,使い分けの指針
+12_data_processing.md,278,4,エージェントへの指示例,エージェントへの指示例
+12_data_processing.md,352,2,12-3. ライブラリ関数の活用 — AIが再発明しがちなパターン,12-3-ライブラリ関数の活用--aiが再発明しがちなパターン
+12_data_processing.md,358,3,統計検定 — 関数名を指示に含める,統計検定--関数名を指示に含める
+12_data_processing.md,378,3,多重検定補正 — 車輪の再発明の典型例,多重検定補正--車輪の再発明の典型例
+12_data_processing.md,418,3,距離行列 — forループ vs ライブラリ,距離行列--forループ-vs-ライブラリ
+12_data_processing.md,456,3,SciPyの主要モジュール早見表,scipyの主要モジュール早見表
+12_data_processing.md,471,4,エージェントへの指示例,エージェントへの指示例
+12_data_processing.md,507,2,まとめ,まとめ
+12_data_processing.md,526,2,演習問題,演習問題
+12_data_processing.md,530,3,演習 12-1: アンチパターンの発見 [レビュー],演習-12-1-アンチパターンの発見-レビュー
+12_data_processing.md,550,3,演習 12-2: pandas vs Polars [設計判断],演習-12-2-pandas-vs-polars-設計判断
+12_data_processing.md,560,3,演習 12-3: ライブラリ関数の活用指示 [指示設計],演習-12-3-ライブラリ関数の活用指示-指示設計
+12_data_processing.md,582,3,演習 12-4: ベクトル化の効果測定 [実践],演習-12-4-ベクトル化の効果測定-実践
+12_data_processing.md,595,2,さらに学びたい読者へ,さらに学びたい読者へ
+12_data_processing.md,599,3,データ分析の教科書,データ分析の教科書
+12_data_processing.md,604,3,ライブラリの設計思想,ライブラリの設計思想
+12_data_processing.md,609,3,バイオインフォマティクスのデータ処理,バイオインフォマティクスのデータ処理
+12_data_processing.md,615,2,参考文献,参考文献
+13_visualization.md,1,1,§13 可視化の実践 — Matplotlib・Seaborn・Plotly,13-可視化の実践--matplotlibseabornplotly
+13_visualization.md,11,2,13-1. Python可視化ライブラリ,13-1-python可視化ライブラリ
+13_visualization.md,13,3,Matplotlibの基礎 — Figure/Axesのオブジェクト指向API,matplotlibの基礎--figureaxesのオブジェクト指向api
+13_visualization.md,69,3,バイオインフォの定番プロット,バイオインフォの定番プロット
+13_visualization.md,73,4,Volcano plot,volcano-plot
+13_visualization.md,154,4,ヒートマップと階層クラスタリング,ヒートマップと階層クラスタリング
+13_visualization.md,194,3,Seabornによる統計的可視化,seabornによる統計的可視化
+13_visualization.md,244,3,Plotlyによるインタラクティブグラフ,plotlyによるインタラクティブグラフ
+13_visualization.md,279,4,エージェントへの指示例,エージェントへの指示例
+13_visualization.md,295,2,13-2. 可視化の原則,13-2-可視化の原則
+13_visualization.md,299,3,適切なグラフ種類の選択,適切なグラフ種類の選択
+13_visualization.md,319,3,色覚多様性への配慮,色覚多様性への配慮
+13_visualization.md,323,4,推奨するカラーマップ,推奨するカラーマップ
+13_visualization.md,332,4,避けるべきカラーマップ,避けるべきカラーマップ
+13_visualization.md,346,3,軸ラベル・凡例・タイトルの必須化,軸ラベル凡例タイトルの必須化
+13_visualization.md,359,3,出力形式の使い分け,出力形式の使い分け
+13_visualization.md,388,3,再現可能なプロットスクリプト化,再現可能なプロットスクリプト化
+13_visualization.md,392,4,スクリプト化のポイント,スクリプト化のポイント
+13_visualization.md,417,4,エージェントへの指示例,エージェントへの指示例
+13_visualization.md,576,2,まとめ,まとめ
+13_visualization.md,596,2,演習問題,演習問題
+13_visualization.md,600,3,演習 13-1: Volcano plotのレビュー [レビュー],演習-13-1-volcano-plotのレビュー-レビュー
+13_visualization.md,613,3,演習 13-2: グラフ種類の選択 [設計判断],演習-13-2-グラフ種類の選択-設計判断
+13_visualization.md,623,3,演習 13-3: 論文品質の図の指示 [指示設計],演習-13-3-論文品質の図の指示-指示設計
+13_visualization.md,635,3,演習 13-4: 暗黙的API vs 明示的API [実践],演習-13-4-暗黙的api-vs-明示的api-実践
+13_visualization.md,652,2,さらに学びたい読者へ,さらに学びたい読者へ
+13_visualization.md,656,3,可視化の原則,可視化の原則
+13_visualization.md,662,3,色の使い方,色の使い方
+13_visualization.md,666,3,Matplotlibの実践,matplotlibの実践
+13_visualization.md,670,3,ゲノムブラウザ,ゲノムブラウザ
+13_visualization.md,676,2,参考文献,参考文献
+14_workflow.md,1,1,§14 解析パイプラインの自動化 — Snakemake・Nextflow,14-解析パイプラインの自動化--snakemakenextflow
+14_workflow.md,13,2,14-1. なぜワークフロー言語が必要か,14-1-なぜワークフロー言語が必要か
+14_workflow.md,15,3,シェルスクリプトの限界,シェルスクリプトの限界
+14_workflow.md,57,3,依存関係の自動解決 — DAGとしてのワークフロー,依存関係の自動解決--dagとしてのワークフロー
+14_workflow.md,69,3,導入タイミング,導入タイミング
+14_workflow.md,79,4,エージェントへの指示例,エージェントへの指示例
+14_workflow.md,91,2,14-2. ワークフロー言語,14-2-ワークフロー言語
+14_workflow.md,93,3,Snakemake — Pythonベースのワークフロー言語,snakemake--pythonベースのワークフロー言語
+14_workflow.md,97,4,ruleの基本構造,ruleの基本構造
+14_workflow.md,131,4,wildcards — サンプル展開の自動化,wildcards--サンプル展開の自動化
+14_workflow.md,155,4,設定ファイル — パラメータの外出し,設定ファイル--パラメータの外出し
+14_workflow.md,181,4,conda / container統合,conda--container統合
+14_workflow.md,201,4,Snakefileの完全な例,snakefileの完全な例
+14_workflow.md,268,4,QCツールとトリミングパラメータの選択,qcツールとトリミングパラメータの選択
+14_workflow.md,282,3,Nextflow — チャネルベースのワークフロー言語,nextflow--チャネルベースのワークフロー言語
+14_workflow.md,286,4,DSL2の基本構文,dsl2の基本構文
+14_workflow.md,331,4,nf-core — 既存パイプライン群の活用,nf-core--既存パイプライン群の活用
+14_workflow.md,379,3,make — 古典的だが今も有用,make--古典的だが今も有用
+14_workflow.md,410,3,ツール選択の判断基準,ツール選択の判断基準
+14_workflow.md,423,4,エージェントへの指示例,エージェントへの指示例
+14_workflow.md,435,2,14-3. ワークフローのベストプラクティス,14-3-ワークフローのベストプラクティス
+14_workflow.md,439,3,入力データは読み取り専用,入力データは読み取り専用
+14_workflow.md,459,3,中間ファイルと最終出力の分離,中間ファイルと最終出力の分離
+14_workflow.md,483,3,パラメータの設定ファイル化,パラメータの設定ファイル化
+14_workflow.md,501,3,ログの保存,ログの保存
+14_workflow.md,515,3,--dry-run / --dag による事前確認,dry-run----dag-による事前確認
+14_workflow.md,529,3,テスト用の小規模データ,テスト用の小規模データ
+14_workflow.md,543,3,ベストプラクティスの自動チェック,ベストプラクティスの自動チェック
+14_workflow.md,566,4,エージェントへの指示例,エージェントへの指示例
+14_workflow.md,594,2,まとめ,まとめ
+14_workflow.md,612,2,演習問題,演習問題
+14_workflow.md,616,3,演習 14-1: パイプライン化の判断 [設計判断],演習-14-1-パイプライン化の判断-設計判断
+14_workflow.md,626,3,演習 14-2: Snakefile のレビュー [レビュー],演習-14-2-snakefile-のレビュー-レビュー
+14_workflow.md,647,3,演習 14-3: パイプラインの指示設計 [指示設計],演習-14-3-パイプラインの指示設計-指示設計
+14_workflow.md,658,3,演習 14-4: DAG の理解 [概念],演習-14-4-dag-の理解-概念
+14_workflow.md,669,2,さらに学びたい読者へ,さらに学びたい読者へ
+14_workflow.md,673,3,ワークフローツールの原論文,ワークフローツールの原論文
+14_workflow.md,678,3,パイプラインフレームワークの比較,パイプラインフレームワークの比較
+14_workflow.md,682,3,公式チュートリアル,公式チュートリアル
+14_workflow.md,689,2,参考文献,参考文献
+15_container.md,1,1,§15 コンテナによるソフトウェア環境の再現 — Docker・Apptainer,15-コンテナによるソフトウェア環境の再現--dockerapptainer
+15_container.md,15,2,15-1. なぜコンテナが必要か,15-1-なぜコンテナが必要か
+15_container.md,17,3,「自分の環境では動く」問題,自分の環境では動く問題
+15_container.md,31,3,Pythonパッケージの隔離 vs. OSレベルの隔離,pythonパッケージの隔離-vs-osレベルの隔離
+15_container.md,45,3,再現性危機とコンテナ,再現性危機とコンテナ
+15_container.md,51,3,コンテナを使うべきタイミング,コンテナを使うべきタイミング
+15_container.md,65,3,コンテナの仕組み — 仮想マシンとの違い,コンテナの仕組み--仮想マシンとの違い
+15_container.md,79,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,91,2,15-2. Docker,15-2-docker
+15_container.md,93,3,イメージとコンテナの違い,イメージとコンテナの違い
+15_container.md,104,3,Dockerfileの書き方,dockerfileの書き方
+15_container.md,155,4,ベースイメージの選択,ベースイメージの選択
+15_container.md,181,3,レイヤーキャッシュの仕組みと最適化,レイヤーキャッシュの仕組みと最適化
+15_container.md,216,3,マルチステージビルド,マルチステージビルド
+15_container.md,248,3,ボリュームマウント — 大規模データの扱い,ボリュームマウント--大規模データの扱い
+15_container.md,264,3,docker compose,docker-compose
+15_container.md,298,3,エージェントとDockerの連携,エージェントとdockerの連携
+15_container.md,300,4,セキュリティ制約,セキュリティ制約
+15_container.md,322,4,承認ありモードでDockerfileを反復構築する,承認ありモードでdockerfileを反復構築する
+15_container.md,372,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,386,2,15-3. Apptainer / Singularity,15-3-apptainer--singularity
+15_container.md,388,3,HPCでDockerが使えない理由,hpcでdockerが使えない理由
+15_container.md,399,3,Dockerイメージからの変換,dockerイメージからの変換
+15_container.md,414,3,Apptainer定義ファイル,apptainer定義ファイル
+15_container.md,453,3,Docker vs. Apptainer コマンド対照表,docker-vs-apptainer-コマンド対照表
+15_container.md,475,3,GPUコンテナ,gpuコンテナ
+15_container.md,506,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,518,2,15-4. 再現性のレベル,15-4-再現性のレベル
+15_container.md,522,3,4段階のスペクトラム,4段階のスペクトラム
+15_container.md,531,3,コスト vs. 再現性の比較,コスト-vs-再現性の比較
+15_container.md,537,3,両方を併用する戦略,両方を併用する戦略
+15_container.md,560,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,572,2,15-5. 論文投稿時の再現性パッケージング,15-5-論文投稿時の再現性パッケージング
+15_container.md,574,3,三点セットの原則,三点セットの原則
+15_container.md,584,3,コンテナイメージの公開,コンテナイメージの公開
+15_container.md,609,3,バージョン固定の実践,バージョン固定の実践
+15_container.md,631,3,論文レビュー対応,論文レビュー対応
+15_container.md,662,3,再現性パッケージのディレクトリ構成例,再現性パッケージのディレクトリ構成例
+15_container.md,680,3,Dockerfileのベストプラクティス検証,dockerfileのベストプラクティス検証
+15_container.md,707,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,723,2,15-6. 🤖 実験管理（ML/計算実験の追跡）,15-6--実験管理ml計算実験の追跡
+15_container.md,731,3,なぜ実験管理が必要か,なぜ実験管理が必要か
+15_container.md,733,4,「先週のあの結果」問題,先週のあの結果問題
+15_container.md,743,4,管理すべき3つの要素,管理すべき3つの要素
+15_container.md,753,4,Gitとの違い,gitとの違い
+15_container.md,766,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,776,3,実験追跡ツール,実験追跡ツール
+15_container.md,778,4,ツールの比較,ツールの比較
+15_container.md,789,4,wandb — クラウドベースの実験追跡,wandb--クラウドベースの実験追跡
+15_container.md,828,4,MLflow — オンプレミス対応の実験追跡,mlflow--オンプレミス対応の実験追跡
+15_container.md,863,4,ツール選択の判断基準,ツール選択の判断基準
+15_container.md,875,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,885,3,最小限の実験管理パターン,最小限の実験管理パターン
+15_container.md,887,4,ツール導入前に始められる自前実装,ツール導入前に始められる自前実装
+15_container.md,925,4,段階的な導入パス,段階的な導入パス
+15_container.md,956,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,968,2,まとめ,まとめ
+15_container.md,1001,2,演習問題,演習問題
+15_container.md,1005,3,演習 15-1: Dockerfile のレビュー [レビュー],演習-15-1-dockerfile-のレビュー-レビュー
+15_container.md,1025,3,演習 15-2: 再現性レベルの選択 [設計判断],演習-15-2-再現性レベルの選択-設計判断
+15_container.md,1036,3,演習 15-3: Docker と Apptainer の使い分け [概念],演習-15-3-docker-と-apptainer-の使い分け-概念
+15_container.md,1042,3,演習 15-4: コンテナの動作確認 [実践],演習-15-4-コンテナの動作確認-実践
+15_container.md,1054,2,さらに学びたい読者へ,さらに学びたい読者へ
+15_container.md,1058,3,研究再現性とコンテナ,研究再現性とコンテナ
+15_container.md,1063,3,バイオインフォマティクスのコンテナ化,バイオインフォマティクスのコンテナ化
+15_container.md,1067,3,公式ドキュメント,公式ドキュメント
+15_container.md,1074,2,参考文献,参考文献
+16_hpc.md,1,1,§16 スパコン・クラスタでの大規模計算,16-スパコンクラスタでの大規模計算
+16_hpc.md,11,2,16-1. HPCの基本,16-1-hpcの基本
+16_hpc.md,13,3,HPCクラスタの構成,hpcクラスタの構成
+16_hpc.md,25,3,キューとパーティション,キューとパーティション
+16_hpc.md,39,3,リソース申請の考え方,リソース申請の考え方
+16_hpc.md,64,4,エージェントへの指示例,エージェントへの指示例
+16_hpc.md,76,2,16-2. Slurm,16-2-slurm
+16_hpc.md,80,3,Slurmの基本コマンド,slurmの基本コマンド
+16_hpc.md,104,3,ジョブスクリプトの書き方,ジョブスクリプトの書き方
+16_hpc.md,137,3,アレイジョブ,アレイジョブ
+16_hpc.md,190,3,依存ジョブ,依存ジョブ
+16_hpc.md,246,3,インタラクティブジョブ,インタラクティブジョブ
+16_hpc.md,265,3,GPU申請,gpu申請
+16_hpc.md,344,4,エージェントへの指示例,エージェントへの指示例
+16_hpc.md,356,2,16-3. リモート接続とファイル転送,16-3-リモート接続とファイル転送
+16_hpc.md,360,3,rsyncによるファイル転送,rsyncによるファイル転送
+16_hpc.md,395,3,ポートフォワーディング,ポートフォワーディング
+16_hpc.md,423,3,多段SSH（ProxyJump）,多段sshproxyjump
+16_hpc.md,457,4,エージェントへの指示例,エージェントへの指示例
+16_hpc.md,469,2,16-4. データ管理・バックアップ・共有,16-4-データ管理バックアップ共有
+16_hpc.md,473,3,ホーム vs スクラッチ,ホーム-vs-スクラッチ
+16_hpc.md,507,3,モジュールシステム,モジュールシステム
+16_hpc.md,533,3,共有ファイルシステムの注意,共有ファイルシステムの注意
+16_hpc.md,551,3,3-2-1バックアップルール,3-2-1バックアップルール
+16_hpc.md,559,3,ストレージの使い分け,ストレージの使い分け
+16_hpc.md,571,3,将来のグループメンバーがアクセスできる設計,将来のグループメンバーがアクセスできる設計
+16_hpc.md,611,4,エージェントへの指示例,エージェントへの指示例
+16_hpc.md,623,2,まとめ,まとめ
+16_hpc.md,644,2,演習問題,演習問題
+16_hpc.md,648,3,演習 16-1: Slurm リソース申請 [概念],演習-16-1-slurm-リソース申請-概念
+16_hpc.md,666,3,演習 16-2: アレイジョブの指示 [指示設計],演習-16-2-アレイジョブの指示-指示設計
+16_hpc.md,677,3,演習 16-3: データ転送戦略 [設計判断],演習-16-3-データ転送戦略-設計判断
+16_hpc.md,689,2,さらに学びたい読者へ,さらに学びたい読者へ
+16_hpc.md,693,3,ジョブスケジューラ,ジョブスケジューラ
+16_hpc.md,697,3,バイオインフォマティクスのHPC実践,バイオインフォマティクスのhpc実践
+16_hpc.md,702,3,HPCの教科書,hpcの教科書
+16_hpc.md,708,2,参考文献,参考文献
+17_performance.md,1,1,§17 コードのパフォーマンス改善 — プロファイリングと高速化,17-コードのパフォーマンス改善--プロファイリングと高速化
+17_performance.md,11,2,17-1. プロファイリング,17-1-プロファイリング
+17_performance.md,13,3,最適化の第一原則: 計測してから改善する,最適化の第一原則-計測してから改善する
+17_performance.md,34,3,実行環境の把握,実行環境の把握
+17_performance.md,38,4,CPU の確認,cpu-の確認
+17_performance.md,65,4,メモリの確認,メモリの確認
+17_performance.md,86,4,ストレージの確認,ストレージの確認
+17_performance.md,114,4,リアルタイムモニタリング,リアルタイムモニタリング
+17_performance.md,163,4,Pythonから実行環境を取得する,pythonから実行環境を取得する
+17_performance.md,192,4,エージェントへの指示例,エージェントへの指示例
+17_performance.md,202,3,timeコマンドによる全体計測,timeコマンドによる全体計測
+17_performance.md,232,3,cProfileによる関数レベルのプロファイリング,cprofileによる関数レベルのプロファイリング
+17_performance.md,304,3,lineprofilerによる行レベルのプロファイリング,lineprofilerによる行レベルのプロファイリング
+17_performance.md,338,3,memoryprofilerによるメモリプロファイリング,memoryprofilerによるメモリプロファイリング
+17_performance.md,412,3,ボトルネックの特定と分類,ボトルネックの特定と分類
+17_performance.md,432,4,エージェントへの指示例,エージェントへの指示例
+17_performance.md,444,2,17-2. 高速化テクニック,17-2-高速化テクニック
+17_performance.md,446,3,ベクトル化 — forループを避ける,ベクトル化--forループを避ける
+17_performance.md,473,3,並列処理: multiprocessingとconcurrent.futures,並列処理-multiprocessingとconcurrentfutures
+17_performance.md,477,4,プロセスとスレッド — 2つの並列実行単位,プロセスとスレッド--2つの並列実行単位
+17_performance.md,492,4,GIL（Global Interpreter Lock）の制約,gilglobal-interpreter-lockの制約
+17_performance.md,498,4,ProcessPoolExecutorの実践例,processpoolexecutorの実践例
+17_performance.md,533,4,並列処理の注意点,並列処理の注意点
+17_performance.md,555,3,ジェネレータによるメモリ効率化,ジェネレータによるメモリ効率化
+17_performance.md,559,4,リスト版 vs ジェネレータ版,リスト版-vs-ジェネレータ版
+17_performance.md,583,4,ジェネレータチェーン,ジェネレータチェーン
+17_performance.md,626,4,itertools活用,itertools活用
+17_performance.md,645,3,適切なデータ構造の選択,適切なデータ構造の選択
+17_performance.md,672,3,Cython・Numbaによる高速化（上級）,cythonnumbaによる高速化上級
+17_performance.md,709,4,エージェントへの指示例,エージェントへの指示例
+17_performance.md,721,2,17-3. 大規模データの扱い,17-3-大規模データの扱い
+17_performance.md,723,3,ストリーミング処理 — 全データをメモリに載せない,ストリーミング処理--全データをメモリに載せない
+17_performance.md,749,3,チャンク処理: pandasのchunksize,チャンク処理-pandasのchunksize
+17_performance.md,804,3,適切なファイル形式の選択,適切なファイル形式の選択
+17_performance.md,808,4,CSV vs Parquet,csv-vs-parquet
+17_performance.md,843,4,BAM vs CRAM,bam-vs-cram
+17_performance.md,871,3,圧縮ファイルの直接読み込み,圧縮ファイルの直接読み込み
+17_performance.md,904,4,bgzip + tabix — インデックス付き圧縮,bgzip--tabix--インデックス付き圧縮
+17_performance.md,923,4,エージェントへの指示例,エージェントへの指示例
+17_performance.md,935,2,まとめ,まとめ
+17_performance.md,958,2,演習問題,演習問題
+17_performance.md,962,3,演習 17-1: 最適化の優先順位 [設計判断],演習-17-1-最適化の優先順位-設計判断
+17_performance.md,975,3,演習 17-2: 不適切な並列化の検出 [レビュー],演習-17-2-不適切な並列化の検出-レビュー
+17_performance.md,993,3,演習 17-3: プロファイリングの指示 [指示設計],演習-17-3-プロファイリングの指示-指示設計
+17_performance.md,1002,3,演習 17-4: メモリ最適化の検証 [実践],演習-17-4-メモリ最適化の検証-実践
+17_performance.md,1015,2,さらに学びたい読者へ,さらに学びたい読者へ
+17_performance.md,1019,3,Pythonの高速化,pythonの高速化
+17_performance.md,1023,3,最適化の原則,最適化の原則
+17_performance.md,1027,3,コンピュータシステムの理解,コンピュータシステムの理解
+17_performance.md,1031,3,プロファイリングツール,プロファイリングツール
+17_performance.md,1037,2,参考文献,参考文献
+18_documentation.md,1,1,§18 コードのドキュメント化,18-コードのドキュメント化
+18_documentation.md,13,2,18-1. Markdownの習得,18-1-markdownの習得
+18_documentation.md,17,3,Markdownの基本記法,markdownの基本記法
+18_documentation.md,37,1,言語名を指定するとコードに色が付く,言語名を指定するとコードに色が付く
+18_documentation.md,52,3,GitHub Flavored Markdown,github-flavored-markdown
+18_documentation.md,84,3,Mermaid記法による図の埋め込み,mermaid記法による図の埋め込み
+18_documentation.md,185,3,文芸的プログラミング,文芸的プログラミング
+18_documentation.md,215,4,エージェントへの指示例,エージェントへの指示例
+18_documentation.md,229,2,18-2. プロジェクトドキュメント,18-2-プロジェクトドキュメント
+18_documentation.md,233,3,README.mdの構造,readmemdの構造
+18_documentation.md,293,3,公開リポジトリのドキュメント,公開リポジトリのドキュメント
+18_documentation.md,338,3,CHANGELOG.md,changelogmd
+18_documentation.md,348,3,docstringからのAPI自動生成,docstringからのapi自動生成
+18_documentation.md,431,4,エージェントへの指示例,エージェントへの指示例
+18_documentation.md,446,2,18-3. 研究ノート,18-3-研究ノート
+18_documentation.md,450,3,解析の再現に必要な情報の記録,解析の再現に必要な情報の記録
+18_documentation.md,473,3,Jupyter Notebookの利点と限界,jupyter-notebookの利点と限界
+18_documentation.md,500,3,テキストベースの研究ノート代替,テキストベースの研究ノート代替
+18_documentation.md,519,1,FastQCの結果を読み込んで可視化する,fastqcの結果を読み込んで可視化する
+18_documentation.md,559,4,エージェントへの指示例,エージェントへの指示例
+18_documentation.md,571,2,まとめ,まとめ
+18_documentation.md,593,2,演習問題,演習問題
+18_documentation.md,597,3,演習 18-1: READMEの品質評価 [レビュー],演習-18-1-readmeの品質評価-レビュー
+18_documentation.md,610,3,演習 18-2: docstring生成の指示 [指示設計],演習-18-2-docstring生成の指示-指示設計
+18_documentation.md,621,3,演習 18-3: Notebook vs Quartoの選択 [設計判断],演習-18-3-notebook-vs-quartoの選択-設計判断
+18_documentation.md,630,3,演習 18-4: ドキュメント自動生成 [実践],演習-18-4-ドキュメント自動生成-実践
+18_documentation.md,642,2,さらに学びたい読者へ,さらに学びたい読者へ
+18_documentation.md,646,3,ドキュメントの思想,ドキュメントの思想
+18_documentation.md,651,3,科学計算のドキュメント実践,科学計算のドキュメント実践
+18_documentation.md,656,3,ドキュメント生成ツール,ドキュメント生成ツール
+18_documentation.md,662,2,参考文献,参考文献
+19_database_api.md,1,1,§19 公共データベースとAPI — データ取得の実践,19-公共データベースとapi--データ取得の実践
+19_database_api.md,11,2,19-0. データベースの基礎知識 — エージェントと「同じ言語」で話すために,19-0-データベースの基礎知識--エージェントと同じ言語で話すために
+19_database_api.md,15,3,DB種類と用語,db種類と用語
+19_database_api.md,17,4,リレーショナルデータベース（RDB）とSQL,リレーショナルデータベースrdbとsql
+19_database_api.md,36,4,NoSQL,nosql
+19_database_api.md,46,4,フラットファイルデータベース,フラットファイルデータベース
+19_database_api.md,59,4,用語整理,用語整理
+19_database_api.md,72,3,オントロジーとセマンティックWeb,オントロジーとセマンティックweb
+19_database_api.md,80,4,セマンティックWebとは,セマンティックwebとは
+19_database_api.md,94,4,RDF,rdf
+19_database_api.md,106,4,オントロジー,オントロジー
+19_database_api.md,116,4,SPARQL,sparql
+19_database_api.md,146,3,データアクセスの2つのアプローチ,データアクセスの2つのアプローチ
+19_database_api.md,162,3,Vibe codingとの接続,vibe-codingとの接続
+19_database_api.md,182,4,エージェントへの指示例,エージェントへの指示例
+19_database_api.md,213,2,19-1. バイオインフォマティクスの主要データベース,19-1-バイオインフォマティクスの主要データベース
+19_database_api.md,217,3,主要DBの全体像,主要dbの全体像
+19_database_api.md,237,3,DB選択の判断力,db選択の判断力
+19_database_api.md,245,3,IDの体系,idの体系
+19_database_api.md,276,4,エージェントへの指示例,エージェントへの指示例
+19_database_api.md,288,2,19-2. APIによるデータ取得,19-2-apiによるデータ取得
+19_database_api.md,296,3,HTTPの仕組み — API利用に必要な最低限,httpの仕組み--api利用に必要な最低限
+19_database_api.md,327,3,REST APIの基礎,rest-apiの基礎
+19_database_api.md,347,4,レート制限とAPIキー,レート制限とapiキー
+19_database_api.md,353,4,エラーハンドリング,エラーハンドリング
+19_database_api.md,366,3,NCBI Entrez API,ncbi-entrez-api
+19_database_api.md,408,3,SPARQLエンドポイント,sparqlエンドポイント
+19_database_api.md,457,3,Pythonライブラリ,pythonライブラリ
+19_database_api.md,469,4,エージェントへの指示例,エージェントへの指示例
+19_database_api.md,574,2,19-3. データのダウンロードとローカル管理,19-3-データのダウンロードとローカル管理
+19_database_api.md,578,3,大規模データのダウンロード,大規模データのダウンロード
+19_database_api.md,580,4,wget / curl,wget--curl
+19_database_api.md,595,4,SRA Toolkit,sra-toolkit
+19_database_api.md,609,4,Aspera,aspera
+19_database_api.md,623,3,チェックサム検証,チェックサム検証
+19_database_api.md,649,3,フラットファイルのパース,フラットファイルのパース
+19_database_api.md,685,4,エージェントへの指示例,エージェントへの指示例
+19_database_api.md,695,3,ローカルDB構築,ローカルdb構築
+19_database_api.md,699,4,BLASTデータベース,blastデータベース
+19_database_api.md,714,4,ゲノムインデックス,ゲノムインデックス
+19_database_api.md,735,4,SQLiteによるメタデータ管理,sqliteによるメタデータ管理
+19_database_api.md,783,4,ディレクトリ構成のベストプラクティス,ディレクトリ構成のベストプラクティス
+19_database_api.md,807,4,エージェントへの指示例,エージェントへの指示例
+19_database_api.md,846,2,まとめ,まとめ
+19_database_api.md,871,2,演習問題,演習問題
+19_database_api.md,875,3,演習 19-1: データベースの使い分け [概念],演習-19-1-データベースの使い分け-概念
+19_database_api.md,885,3,演習 19-2: API利用コードのレビュー [レビュー],演習-19-2-api利用コードのレビュー-レビュー
+19_database_api.md,911,3,演習 19-3: データ取得戦略の選択 [設計判断],演習-19-3-データ取得戦略の選択-設計判断
+19_database_api.md,921,3,演習 19-4: チェックサム検証 [実践],演習-19-4-チェックサム検証-実践
+19_database_api.md,934,2,さらに学びたい読者へ,さらに学びたい読者へ
+19_database_api.md,938,3,バイオデータベースの全体像,バイオデータベースの全体像
+19_database_api.md,943,3,APIの公式リファレンス,apiの公式リファレンス
+19_database_api.md,948,3,プログラムからのデータアクセス,プログラムからのデータアクセス
+19_database_api.md,954,2,参考文献,参考文献
+20_security_ethics.md,1,1,§20 コードとデータのセキュリティ・倫理,20-コードとデータのセキュリティ倫理
+20_security_ethics.md,11,2,20-1. セキュリティの基礎,20-1-セキュリティの基礎
+20_security_ethics.md,13,3,20-1-1. シークレット管理の原則,20-1-1-シークレット管理の原則
+20_security_ethics.md,17,4,シークレットのライフサイクル,シークレットのライフサイクル
+20_security_ethics.md,29,4,.env + python-dotenv のパターン,env--python-dotenv-のパターン
+20_security_ethics.md,61,4,git-secretsによるコミット前検出,git-secretsによるコミット前検出
+20_security_ethics.md,123,4,SSH鍵のパスフレーズ設定,ssh鍵のパスフレーズ設定
+20_security_ethics.md,135,4,エージェントへの指示例,エージェントへの指示例
+20_security_ethics.md,147,3,20-1-2. AIエージェントのセキュリティとハーネス,20-1-2-aiエージェントのセキュリティとハーネス
+20_security_ethics.md,151,4,最小権限の原則,最小権限の原則
+20_security_ethics.md,165,4,エージェントハーネスの概念,エージェントハーネスの概念
+20_security_ethics.md,190,4,プロンプトインジェクション対策,プロンプトインジェクション対策
+20_security_ethics.md,206,4,監査ログの確認,監査ログの確認
+20_security_ethics.md,210,4,エージェントへの指示例,エージェントへの指示例
+20_security_ethics.md,228,3,20-1-3. 依存パッケージのセキュリティ,20-1-3-依存パッケージのセキュリティ
+20_security_ethics.md,232,4,タイポスクワッティング,タイポスクワッティング
+20_security_ethics.md,242,4,pip-auditによる脆弱性スキャン,pip-auditによる脆弱性スキャン
+20_security_ethics.md,262,4,エージェントへの指示例,エージェントへの指示例
+20_security_ethics.md,272,2,20-2. データの倫理,20-2-データの倫理
+20_security_ethics.md,274,3,20-2-1. ヒトデータの法規制と利用規約,20-2-1-ヒトデータの法規制と利用規約
+20_security_ethics.md,280,4,制限付きデータベース,制限付きデータベース
+20_security_ethics.md,297,4,法規制の概要,法規制の概要
+20_security_ethics.md,308,4,DUA（Data Use Agreement）の読み方,duadata-use-agreementの読み方
+20_security_ethics.md,319,4,AIエージェントにヒトデータを渡してよいか,aiエージェントにヒトデータを渡してよいか
+20_security_ethics.md,329,4,ローカルLLMエージェントの活用,ローカルllmエージェントの活用
+20_security_ethics.md,360,4,エージェントへの指示例,エージェントへの指示例
+20_security_ethics.md,380,3,20-2-2. 匿名化と再識別リスク,20-2-2-匿名化と再識別リスク
+20_security_ethics.md,382,4,ゲノムデータの特殊性,ゲノムデータの特殊性
+20_security_ethics.md,386,4,k-匿名性の概念,k-匿名性の概念
+20_security_ethics.md,397,4,実務上の対策,実務上の対策
+20_security_ethics.md,471,4,エージェントへの指示例,エージェントへの指示例
+20_security_ethics.md,491,3,20-2-3. 研究倫理とデータ管理計画,20-2-3-研究倫理とデータ管理計画
+20_security_ethics.md,493,4,IRB（倫理審査委員会）,irb倫理審査委員会
+20_security_ethics.md,503,4,データ管理計画（DMP）,データ管理計画dmp
+20_security_ethics.md,518,4,オープンサイエンスと個人情報保護のバランス,オープンサイエンスと個人情報保護のバランス
+20_security_ethics.md,524,4,エージェントへの指示例,エージェントへの指示例
+20_security_ethics.md,532,2,まとめ,まとめ
+20_security_ethics.md,550,2,演習問題,演習問題
+20_security_ethics.md,554,3,演習 20-1: シークレット漏洩のチェック [レビュー],演習-20-1-シークレット漏洩のチェック-レビュー
+20_security_ethics.md,572,3,演習 20-2: クラウドAI vs ローカルLLMの判断 [設計判断],演習-20-2-クラウドai-vs-ローカルllmの判断-設計判断
+20_security_ethics.md,583,3,演習 20-3: ゲノムデータ匿名化の限界 [概念],演習-20-3-ゲノムデータ匿名化の限界-概念
+20_security_ethics.md,589,3,演習 20-4: APIキー安全管理の指示 [指示設計],演習-20-4-apiキー安全管理の指示-指示設計
+20_security_ethics.md,602,2,さらに学びたい読者へ,さらに学びたい読者へ
+20_security_ethics.md,606,3,ゲノムプライバシー,ゲノムプライバシー
+20_security_ethics.md,610,3,AIとセキュリティ,aiとセキュリティ
+20_security_ethics.md,614,3,研究倫理,研究倫理
+20_security_ethics.md,618,3,日本のガイドライン,日本のガイドライン
+20_security_ethics.md,624,2,参考文献,参考文献
+21_collaboration.md,1,1,§21 共同開発の実践 — レビュー・質問・OSS参加,21-共同開発の実践--レビュー質問oss参加
+21_collaboration.md,11,2,21-1. 質問の技術 — 正しく助けを求める,21-1-質問の技術--正しく助けを求める
+21_collaboration.md,13,3,21-1-1. 良い質問の構成要素,21-1-1-良い質問の構成要素
+21_collaboration.md,19,4,環境情報の明示,環境情報の明示
+21_collaboration.md,32,4,最小再現例（MRE）の作成,最小再現例mreの作成
+21_collaboration.md,66,4,期待する結果と実際の結果の差分,期待する結果と実際の結果の差分
+21_collaboration.md,82,4,環境情報の自動収集,環境情報の自動収集
+21_collaboration.md,127,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,139,3,21-1-2. 質問先の使い分け,21-1-2-質問先の使い分け
+21_collaboration.md,152,4,Stack Overflow,stack-overflow
+21_collaboration.md,163,4,Biostars,biostars
+21_collaboration.md,173,4,GitHub Issues,github-issues
+21_collaboration.md,181,4,研究室Slack/Teams,研究室slackteams
+21_collaboration.md,185,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,197,3,21-1-3. エラーメッセージでの検索習慣とXY問題の回避,21-1-3-エラーメッセージでの検索習慣とxy問題の回避
+21_collaboration.md,199,4,エラーメッセージをそのまま検索する,エラーメッセージをそのまま検索する
+21_collaboration.md,217,4,XY問題の回避,xy問題の回避
+21_collaboration.md,234,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,265,2,21-2. コードレビューとOSSコミュニティへの参加,21-2-コードレビューとossコミュニティへの参加
+21_collaboration.md,267,3,21-2-1. コードレビューのコミュニケーション,21-2-1-コードレビューのコミュニケーション
+21_collaboration.md,271,4,レビューコメントを書く側の作法,レビューコメントを書く側の作法
+21_collaboration.md,288,4,レビューコメントを受ける側の作法,レビューコメントを受ける側の作法
+21_collaboration.md,296,4,PR説明文の書き方,pr説明文の書き方
+21_collaboration.md,355,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,367,3,21-2-2. OSSコミュニティへの最初の貢献,21-2-2-ossコミュニティへの最初の貢献
+21_collaboration.md,371,4,最初の貢献の例,最初の貢献の例
+21_collaboration.md,378,4,バグ報告Issueの書き方,バグ報告issueの書き方
+21_collaboration.md,407,4,CONTRIBUTING.mdとCode of Conductの読み方,contributingmdとcode-of-conductの読み方
+21_collaboration.md,419,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,431,3,21-2-3. バイオインフォOSSの特徴,21-2-3-バイオインフォossの特徴
+21_collaboration.md,435,4,アカデミア主導のプロジェクト,アカデミア主導のプロジェクト
+21_collaboration.md,443,4,Biocondaレシピ貢献,biocondaレシピ貢献
+21_collaboration.md,475,4,Bioconductorのレビュープロセス,bioconductorのレビュープロセス
+21_collaboration.md,479,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,490,3,21-2-4. 貢献時のライセンス,21-2-4-貢献時のライセンス
+21_collaboration.md,494,4,CLA（Contributor License Agreement）,clacontributor-license-agreement
+21_collaboration.md,506,4,ライセンス互換性,ライセンス互換性
+21_collaboration.md,520,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,528,2,21-3. 共同研究のコミュニケーション — PIと共同研究者への共有,21-3-共同研究のコミュニケーション--piと共同研究者への共有
+21_collaboration.md,530,3,21-3-1. 進捗共有の資料作成,21-3-1-進捗共有の資料作成
+21_collaboration.md,534,4,git logからの進捗要約,git-logからの進捗要約
+21_collaboration.md,546,4,週次報告テンプレート,週次報告テンプレート
+21_collaboration.md,569,4,コードサンプル,コードサンプル
+21_collaboration.md,611,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,623,3,21-3-2. 実験系研究者との橋渡し,21-3-2-実験系研究者との橋渡し
+21_collaboration.md,627,4,ウェット研究者が求める情報,ウェット研究者が求める情報
+21_collaboration.md,640,4,パラメータ選択根拠の記録,パラメータ選択根拠の記録
+21_collaboration.md,652,4,生物学的解釈の添え方,生物学的解釈の添え方
+21_collaboration.md,660,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,672,3,21-3-3. 解析依頼の受け取り方,21-3-3-解析依頼の受け取り方
+21_collaboration.md,676,4,必要情報のチェックリスト,必要情報のチェックリスト
+21_collaboration.md,689,4,「解析前インタビュー」パターン,解析前インタビューパターン
+21_collaboration.md,701,4,コードサンプル,コードサンプル
+21_collaboration.md,744,4,エージェントへの指示例,エージェントへの指示例
+21_collaboration.md,776,2,まとめ,まとめ
+21_collaboration.md,794,2,演習問題,演習問題
+21_collaboration.md,798,3,演習 21-1: 質問文の作成 [指示設計],演習-21-1-質問文の作成-指示設計
+21_collaboration.md,809,3,演習 21-2: PRレビューコメントの改善 [レビュー],演習-21-2-prレビューコメントの改善-レビュー
+21_collaboration.md,821,3,演習 21-3: OSSライセンスの互換性 [概念],演習-21-3-ossライセンスの互換性-概念
+21_collaboration.md,831,3,演習 21-4: コントリビューションの実践 [実践],演習-21-4-コントリビューションの実践-実践
+21_collaboration.md,845,2,さらに学びたい読者へ,さらに学びたい読者へ
+21_collaboration.md,849,3,OSSプロジェクトの運営,ossプロジェクトの運営
+21_collaboration.md,853,3,コードレビュー,コードレビュー
+21_collaboration.md,857,3,科学研究の共同作業,科学研究の共同作業
+21_collaboration.md,861,3,質問の技術,質問の技術
+21_collaboration.md,865,3,GitHubでのコントリビューション,githubでのコントリビューション
+21_collaboration.md,871,2,参考文献,参考文献
+appendix_a_learning_patterns.md,1,1,付録A. AIコーディングエージェントとの効果的な学習パターン,付録a-aiコーディングエージェントとの効果的な学習パターン
+appendix_a_learning_patterns.md,9,2,A-1. なぜ役割を分けるのか,a-1-なぜ役割を分けるのか
+appendix_a_learning_patterns.md,13,3,A-1-1. 生産性と品質のトレードオフ,a-1-1-生産性と品質のトレードオフ
+appendix_a_learning_patterns.md,23,3,A-1-2. ドメイン知識の壁,a-1-2-ドメイン知識の壁
+appendix_a_learning_patterns.md,31,3,A-1-3. 認知的オフローディングと学習効果,a-1-3-認知的オフローディングと学習効果
+appendix_a_learning_patterns.md,39,2,A-2. 役割分担の3つの軸,a-2-役割分担の3つの軸
+appendix_a_learning_patterns.md,51,2,A-3. 学習パターン一覧,a-3-学習パターン一覧
+appendix_a_learning_patterns.md,73,2,参考文献,参考文献
+appendix_b_cli_reference.md,1,1,付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表,付録b-claude-code-cli--codex-cli-クイックリファレンス対照表
+appendix_b_cli_reference.md,15,2,セットアップ,セットアップ
+appendix_b_cli_reference.md,25,2,権限制御,権限制御
+appendix_b_cli_reference.md,35,2,モデルと推論,モデルと推論
+appendix_b_cli_reference.md,47,2,セッション管理,セッション管理
+appendix_b_cli_reference.md,58,2,カスタマイズ,カスタマイズ
+appendix_b_cli_reference.md,69,2,参考文献,参考文献
+appendix_c_checklist.md,1,1,付録C. 論文投稿前チェックリスト,付録c-論文投稿前チェックリスト
+appendix_c_checklist.md,6,2,1. コード,1-コード
+appendix_c_checklist.md,15,2,2. データ,2-データ
+appendix_c_checklist.md,24,2,3. 再現性,3-再現性
+appendix_c_checklist.md,34,2,4. バックアップ・共有,4-バックアップ共有
+appendix_c_checklist.md,40,2,5. テスト・コード品質,5-テストコード品質
+appendix_c_checklist.md,46,2,6. セキュリティ・倫理,6-セキュリティ倫理
+appendix_d_agent_vocabulary.md,1,1,付録D. AIコーディングエージェント頻出用語・フレーズ集,付録d-aiコーディングエージェント頻出用語フレーズ集
+appendix_d_agent_vocabulary.md,9,2,D-1. エージェントの定番フレーズ「翻訳」辞典,d-1-エージェントの定番フレーズ翻訳辞典
+appendix_d_agent_vocabulary.md,13,3,提案・推奨,提案推奨
+appendix_d_agent_vocabulary.md,26,3,自信度の読み方,自信度の読み方
+appendix_d_agent_vocabulary.md,38,3,コード提示の前後,コード提示の前後
+appendix_d_agent_vocabulary.md,47,3,Claude特有の傾向,claude特有の傾向
+appendix_d_agent_vocabulary.md,57,3,ChatGPT/Codex特有の傾向,chatgptcodex特有の傾向
+appendix_d_agent_vocabulary.md,68,2,D-2. カタカナ動詞,d-2-カタカナ動詞
+appendix_d_agent_vocabulary.md,93,2,D-3. カタカナ名詞,d-3-カタカナ名詞
+appendix_d_agent_vocabulary.md,97,3,コード構造・設計,コード構造設計
+appendix_d_agent_vocabulary.md,114,3,状態・性質,状態性質
+appendix_d_agent_vocabulary.md,126,3,開発プロセス,開発プロセス
+appendix_d_agent_vocabulary.md,139,2,D-4. 頻出略語,d-4-頻出略語
+appendix_d_agent_vocabulary.md,143,3,設計原則,設計原則
+appendix_d_agent_vocabulary.md,154,3,開発プロセス,開発プロセス
+appendix_d_agent_vocabulary.md,166,3,技術用語,技術用語
+glossary.md,1,1,用語集,用語集
+glossary.md,7,2,あ行,あ行
+glossary.md,9,3,アクセッション番号（Accession Number）,アクセッション番号accession-number
+glossary.md,17,3,アジャイル開発（Agile）,アジャイル開発agile
+glossary.md,25,3,API（Application Programming Interface）,apiapplication-programming-interface
+glossary.md,33,3,イメージ（Image）,イメージimage
+glossary.md,41,3,インデックス（Index）,インデックスindex
+glossary.md,49,3,依存関係（Dependency）,依存関係dependency
+glossary.md,57,3,オントロジー（Ontology）,オントロジーontology
+glossary.md,65,2,か行,か行
+glossary.md,67,3,仮想環境（Virtual Environment）,仮想環境virtual-environment
+glossary.md,75,3,環境変数（Environment Variable）,環境変数environment-variable
+glossary.md,83,3,関心の分離（Separation of Concerns）,関心の分離separation-of-concerns
+glossary.md,91,3,機械可読（Machine-Readable）,機械可読machine-readable
+glossary.md,99,3,擬似乱数生成器（Pseudorandom Number Generator; PRNG）,擬似乱数生成器pseudorandom-number-generator-prng
+glossary.md,107,3,GIL（Global Interpreter Lock）,gilglobal-interpreter-lock
+glossary.md,115,3,共有ライブラリ（Shared Library）,共有ライブラリshared-library
+glossary.md,123,3,計算量（Computational Complexity）,計算量computational-complexity
+glossary.md,131,3,"KISS原則（Keep It Simple, Stupid）",kiss原則keep-it-simple-stupid
+glossary.md,139,3,コンテキストウィンドウ（Context Window）,コンテキストウィンドウcontext-window
+glossary.md,147,3,コンテナ（Container）,コンテナcontainer
+glossary.md,155,3,CSV（Comma-Separated Values）,csvcomma-separated-values
+glossary.md,163,3,DRY（Don't Repeat Yourself）,drydont-repeat-yourself
+glossary.md,171,2,さ行,さ行
+glossary.md,173,3,最小権限の原則（Principle of Least Privilege）,最小権限の原則principle-of-least-privilege
+glossary.md,181,3,最小再現例（Minimal Reproducible Example; MRE）,最小再現例minimal-reproducible-example-mre
+glossary.md,189,3,座標系（Coordinate System）,座標系coordinate-system
+glossary.md,197,3,CI/CD（Continuous Integration / Continuous Deployment）,cicdcontinuous-integration--continuous-deployment
+glossary.md,205,3,色覚多様性（Color Vision Deficiency; CVD）,色覚多様性color-vision-deficiency-cvd
+glossary.md,213,3,ジョブスケジューラ（Job Scheduler）,ジョブスケジューラjob-scheduler
+glossary.md,221,3,JSON（JavaScript Object Notation）,jsonjavascript-object-notation
+glossary.md,229,3,推論（Reasoning）,推論reasoning
+glossary.md,237,3,正規表現（Regular Expression; regex）,正規表現regular-expression-regex
+glossary.md,245,3,整然データ（Tidy Data）,整然データtidy-data
+glossary.md,253,3,スタックトレース（Stack Trace / Traceback）,スタックトレースstack-trace--traceback
+glossary.md,261,3,単一責任原則（Single Responsibility Principle; SRP）,単一責任原則single-responsibility-principle-srp
+glossary.md,269,3,セッション（Session）,セッションsession
+glossary.md,277,2,た行,た行
+glossary.md,279,3,大規模言語モデル（Large Language Model; LLM）,大規模言語モデルlarge-language-model-llm
+glossary.md,287,3,DAG（Directed Acyclic Graph; 有向非巡回グラフ）,dagdirected-acyclic-graph-有向非巡回グラフ
+glossary.md,295,3,TSV（Tab-Separated Values）,tsvtab-separated-values
+glossary.md,303,3,テスト駆動開発（Test-Driven Development; TDD）,テスト駆動開発test-driven-development-tdd
+glossary.md,311,3,TOML（Tom's Obvious Minimal Language）,tomltoms-obvious-minimal-language
+glossary.md,319,3,トークン（Token）,トークンtoken
+glossary.md,327,3,docstring,docstring
+glossary.md,335,3,ハッシュテーブル（Hash Table）,ハッシュテーブルhash-table
+glossary.md,343,2,は行,は行
+glossary.md,345,3,ハルシネーション（Hallucination）,ハルシネーションhallucination
+glossary.md,353,3,浮動小数点数（Floating-Point Number）,浮動小数点数floating-point-number
+glossary.md,361,3,Vibe coding（バイブコーディング）,vibe-codingバイブコーディング
+glossary.md,369,3,標準入出力（stdin / stdout / stderr）,標準入出力stdin--stdout--stderr
+glossary.md,377,3,"FAIR原則（Findable, Accessible, Interoperable, Reusable）",fair原則findable-accessible-interoperable-reusable
+glossary.md,385,3,ブランチ（Branch）,ブランチbranch
+glossary.md,393,3,ブロードキャスティング（Broadcasting）,ブロードキャスティングbroadcasting
+glossary.md,401,3,文芸的プログラミング（Literate Programming）,文芸的プログラミングliterate-programming
+glossary.md,409,3,プルリクエスト（Pull Request; PR）,プルリクエストpull-request-pr
+glossary.md,417,3,プロファイリング（Profiling）,プロファイリングprofiling
+glossary.md,425,3,プロンプト（Prompt）,プロンプトprompt
+glossary.md,433,3,プロンプトインジェクション（Prompt Injection）,プロンプトインジェクションprompt-injection
+glossary.md,441,3,ベクトル化（Vectorization）,ベクトル化vectorization
+glossary.md,449,2,ま行,ま行
+glossary.md,451,3,メタデータ（Metadata）,メタデータmetadata
+glossary.md,459,2,や行,や行
+glossary.md,461,3,YAML（YAML Ain't Markup Language）,yamlyaml-aint-markup-language
+glossary.md,469,3,YAGNI原則（You Aren't Gonna Need It）,yagni原則you-arent-gonna-need-it
+glossary.md,477,3,ユニットテスト（Unit Test）,ユニットテストunit-test
+glossary.md,485,2,ら行,ら行
+glossary.md,487,3,リフレーミング（Reframing）,リフレーミングreframing
+glossary.md,495,3,リファクタリング（Refactoring）,リファクタリングrefactoring
+glossary.md,503,3,リポジトリ（Repository）,リポジトリrepository
+glossary.md,511,3,リレーショナルデータベース（Relational Database; RDB）,リレーショナルデータベースrelational-database-rdb
+glossary.md,519,3,リント（Lint / Linting）,リントlint--linting
+glossary.md,527,3,ロギング（Logging）,ロギングlogging
+glossary.md,535,3,ロックファイル（Lock File）,ロックファイルlock-file
+glossary.md,543,2,わ行,わ行
+glossary.md,545,3,ワークフロー言語（Workflow Language）,ワークフロー言語workflow-language
+hajimeni.md,1,1,はじめに,はじめに
+hajimeni.md,3,2,コードを書かないプログラミングの時代,コードを書かないプログラミングの時代
+hajimeni.md,17,2,初心者でもコードが書ける——しかし「良いコード」は書けない,初心者でもコードが書けるしかし良いコードは書けない
+hajimeni.md,27,2,既存の書籍が埋められなかったギャップ,既存の書籍が埋められなかったギャップ
+hajimeni.md,37,2,生命科学——「プログラミング教育を受けていない人がプログラミングをする」分野,生命科学プログラミング教育を受けていない人がプログラミングをする分野
+hajimeni.md,45,2,本書の目的——AIプログラミング時代に不可欠な背景知識を届ける,本書の目的aiプログラミング時代に不可欠な背景知識を届ける
+hajimeni.md,74,2,本書が目指すもの,本書が目指すもの
+hajimeni.md,82,2,参考文献,参考文献
+roadmap.md,1,1,AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法,aiエージェントと学ぶ-バイオインフォマティクスプログラミングの作法
+roadmap.md,16,2,目次と概要,目次と概要
+roadmap.md,20,3,Phase I: AIと始めるプログラミングの基礎,phase-i-aiと始めるプログラミングの基礎
+roadmap.md,37,3,Phase II: 信頼できるコードを育てる技術,phase-ii-信頼できるコードを育てる技術
+roadmap.md,50,3,Phase III: データを扱うコードを書く,phase-iii-データを扱うコードを書く
+roadmap.md,59,3,Phase IV: ソフトウェア再現性と大規模計算,phase-iv-ソフトウェア再現性と大規模計算
+roadmap.md,68,3,Phase V: 共有のためのコード整備,phase-v-共有のためのコード整備
+roadmap.md,79,3,付録,付録
+roadmap.md,92,2,0. AIエージェントにコードを書かせる（2026年のベストプラクティス）,0-aiエージェントにコードを書かせる2026年のベストプラクティス
+roadmap.md,96,3,0-1. セットアップと基本操作,0-1-セットアップと基本操作
+roadmap.md,98,4,なぜCLIを使うのか — ブラウザチャットとの違い,なぜcliを使うのか--ブラウザチャットとの違い
+roadmap.md,100,4,インストール,インストール
+roadmap.md,109,4,承認ポリシーとサンドボックス — 安全性の調整,承認ポリシーとサンドボックス--安全性の調整
+roadmap.md,121,4,はじめてのVibe coding体験 — 遺伝子予測を題材に,はじめてのvibe-coding体験--遺伝子予測を題材に
+roadmap.md,130,4,基本コマンド,基本コマンド
+roadmap.md,144,3,0-2. Plan → Execute → Review ワークフロー,0-2-plan--execute--review-ワークフロー
+roadmap.md,183,4,「インタビューしてもらう」パターン — 要件が曖昧なときの最強テクニック,インタビューしてもらうパターン--要件が曖昧なときの最強テクニック
+roadmap.md,216,3,0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）,0-3-プロジェクト設定ファイルclaudemd--agentsmd
+roadmap.md,258,4,エージェントの拡張機能 — MCP・フック・カスタムコマンド,エージェントの拡張機能--mcpフックカスタムコマンド
+roadmap.md,268,3,0-4. エージェントにレビューさせる,0-4-エージェントにレビューさせる
+roadmap.md,273,4,実装後のセルフレビュー,実装後のセルフレビュー
+roadmap.md,283,4,「別人格」レビュー,別人格レビュー
+roadmap.md,290,4,テスト生成によるレビュー,テスト生成によるレビュー
+roadmap.md,302,3,0-5. サブエージェントとタスク委譲,0-5-サブエージェントとタスク委譲
+roadmap.md,317,3,0-6. コンテキスト管理,0-6-コンテキスト管理
+roadmap.md,329,3,0-7. モデル選択・推論の深さ・コスト意識,0-7-モデル選択推論の深さコスト意識
+roadmap.md,333,4,モデルの階層,モデルの階層
+roadmap.md,342,4,推論の深さ（Reasoning Depth）— 2つ目の調整軸,推論の深さreasoning-depth-2つ目の調整軸
+roadmap.md,355,4,使い分けの指針,使い分けの指針
+roadmap.md,379,3,0-8. AIに頼るべきこと・自分で判断すべきこと,0-8-aiに頼るべきこと自分で判断すべきこと
+roadmap.md,399,3,0-9. 車輪の再発明を防ぐ,0-9-車輪の再発明を防ぐ
+roadmap.md,406,3,0-10. セキュリティと権限管理,0-10-セキュリティと権限管理
+roadmap.md,420,2,1. 設計原則 — 良いコードとは何か,1-設計原則--良いコードとは何か
+roadmap.md,424,3,1-1. コードの設計原則,1-1-コードの設計原則
+roadmap.md,432,3,1-2. UNIX哲学,1-2-unix哲学
+roadmap.md,440,3,1-3. ソフトウェア開発手法の用語 — AIエージェントと会話するための語彙,1-3-ソフトウェア開発手法の用語--aiエージェントと会話するための語彙
+roadmap.md,445,4,開発プロセスモデル,開発プロセスモデル
+roadmap.md,463,4,よく出てくる開発プラクティスの用語,よく出てくる開発プラクティスの用語
+roadmap.md,480,4,一人開発で実際に使うもの,一人開発で実際に使うもの
+roadmap.md,496,2,2. ターミナルとシェルの基本操作,2-ターミナルとシェルの基本操作
+roadmap.md,500,3,2-1. なぜVibe codingにシェルの知識が必要か,2-1-なぜvibe-codingにシェルの知識が必要か
+roadmap.md,505,3,2-2. ファイルシステムとパーミッション,2-2-ファイルシステムとパーミッション
+roadmap.md,511,3,2-3. 環境変数とパス,2-3-環境変数とパス
+roadmap.md,517,3,2-4. テキスト処理コマンド,2-4-テキスト処理コマンド
+roadmap.md,525,3,2-5. シェルスクリプティングの基礎,2-5-シェルスクリプティングの基礎
+roadmap.md,540,2,3. コーディングに必要な計算機科学,3-コーディングに必要な計算機科学
+roadmap.md,544,3,3-1. データ構造と計算量,3-1-データ構造と計算量
+roadmap.md,560,3,3-2. 数値表現と浮動小数点,3-2-数値表現と浮動小数点
+roadmap.md,575,3,3-3. 文字エンコーディング,3-3-文字エンコーディング
+roadmap.md,581,3,3-4. 乱数と再現性,3-4-乱数と再現性
+roadmap.md,592,3,3-5. 計算機アーキテクチャの基礎,3-5-計算機アーキテクチャの基礎
+roadmap.md,599,3,3-6. Pythonの型ヒント,3-6-pythonの型ヒント
+roadmap.md,610,2,4. データフォーマットの選び方,4-データフォーマットの選び方
+roadmap.md,614,3,4-0. データとメタデータ,4-0-データとメタデータ
+roadmap.md,619,3,4-1. 汎用フォーマット,4-1-汎用フォーマット
+roadmap.md,638,3,4-2. フォーマット選択の判断基準,4-2-フォーマット選択の判断基準
+roadmap.md,717,2,5. ソフトウェアの構成要素 — importからpipまで,5-ソフトウェアの構成要素--importからpipまで
+roadmap.md,723,3,5-1. プログラムはどう動くか,5-1-プログラムはどう動くか
+roadmap.md,732,3,5-2. Pythonのモジュールシステム,5-2-pythonのモジュールシステム
+roadmap.md,739,3,5-3. 依存関係の問題,5-3-依存関係の問題
+roadmap.md,745,3,5-4. APIとインターフェース,5-4-apiとインターフェース
+roadmap.md,750,3,5-5. MCP（Model Context Protocol）— エージェントの能力を拡張する,5-5-mcpmodel-context-protocol-エージェントの能力を拡張する
+roadmap.md,759,2,6. Python環境の構築 — pyenv・venv・conda・uv,6-python環境の構築--pyenvvenvcondauv
+roadmap.md,761,3,6-1. Pythonの環境管理,6-1-pythonの環境管理
+roadmap.md,770,3,6-2. パッケージマネージャの概念,6-2-パッケージマネージャの概念
+roadmap.md,848,2,7. Git入門 — コードのバージョン管理,7-git入門--コードのバージョン管理
+roadmap.md,850,3,7-1. Gitの基礎,7-1-gitの基礎
+roadmap.md,856,3,7-2. GitHubの活用,7-2-githubの活用
+roadmap.md,863,4,コードの公開と引用可能性,コードの公開と引用可能性
+roadmap.md,891,3,7-3. コミットの作法,7-3-コミットの作法
+roadmap.md,898,3,7-4. セマンティックバージョニング,7-4-セマンティックバージョニング
+roadmap.md,905,2,8. コードの正しさを守るテスト技法,8-コードの正しさを守るテスト技法
+roadmap.md,907,3,8-1. テスト駆動開発（TDD）,8-1-テスト駆動開発tdd
+roadmap.md,912,3,8-2. テストの実践,8-2-テストの実践
+roadmap.md,919,3,8-3. コード品質ツール,8-3-コード品質ツール
+roadmap.md,926,3,8-4. CI/CD,8-4-cicd
+roadmap.md,940,2,9. デバッグの技術 — tracebackから最小再現例まで,9-デバッグの技術--tracebackから最小再現例まで
+roadmap.md,942,3,9-1. デバッグの心構え,9-1-デバッグの心構え
+roadmap.md,948,3,9-2. デバッグツール,9-2-デバッグツール
+roadmap.md,952,3,9-3. よくあるバグのパターン,9-3-よくあるバグのパターン
+roadmap.md,963,2,10. ソフトウェア成果物の設計 — スクリプトからパッケージまで,10-ソフトウェア成果物の設計--スクリプトからパッケージまで
+roadmap.md,970,3,10-1. 成果物の形式の選択,10-1-成果物の形式の選択
+roadmap.md,975,4,パターン1: スタンドアロンスクリプト,パターン1-スタンドアロンスクリプト
+roadmap.md,1002,4,パターン2: pipインストール可能なPythonパッケージ,パターン2-pipインストール可能なpythonパッケージ
+roadmap.md,1071,4,パターン3: condaパッケージ,パターン3-condaパッケージ
+roadmap.md,1093,4,パターン4: シェルスクリプトで繋いだパイプライン,パターン4-シェルスクリプトで繋いだパイプライン
+roadmap.md,1129,4,パターン5: ワークフロー言語（Snakemake / Nextflow）,パターン5-ワークフロー言語snakemake--nextflow
+roadmap.md,1172,4,パターン6: Dockerコンテナ / Apptainerイメージ,パターン6-dockerコンテナ--apptainerイメージ
+roadmap.md,1193,4,パターン7: Jupyter Notebook（解析レポート）,パターン7-jupyter-notebook解析レポート
+roadmap.md,1216,4,パターン8: Webアプリ（Streamlit / Gradio）,パターン8-webアプリstreamlit--gradio
+roadmap.md,1254,4,パターン9: コンパイル済みバイナリ,パターン9-コンパイル済みバイナリ
+roadmap.md,1282,3,10-2. どのパターンを選ぶか — 判断フローチャート,10-2-どのパターンを選ぶか--判断フローチャート
+roadmap.md,1324,3,10-3. ディレクトリ構成（パターン2: pipパッケージの標準レイアウト）,10-3-ディレクトリ構成パターン2-pipパッケージの標準レイアウト
+roadmap.md,1328,4,設定ファイルの階層構造 — ディレクトリ単位のルール設定,設定ファイルの階層構造--ディレクトリ単位のルール設定
+roadmap.md,1351,3,10-4. 設定管理,10-4-設定管理
+roadmap.md,1358,3,10-5. エラーハンドリング,10-5-エラーハンドリング
+roadmap.md,1364,3,10-6. 段階的な成長パス — スクリプトから育てる,10-6-段階的な成長パス--スクリプトから育てる
+roadmap.md,1404,2,11. コマンドラインツールの設計と実装,11-コマンドラインツールの設計と実装
+roadmap.md,1406,3,11-1. コマンドラインインターフェースの作法,11-1-コマンドラインインターフェースの作法
+roadmap.md,1421,4,カスタムコマンド（Agent Skills） — エージェント向けのテンプレート,カスタムコマンドagent-skills--エージェント向けのテンプレート
+roadmap.md,1427,3,11-2. プログレス表示とUI,11-2-プログレス表示とui
+roadmap.md,1432,3,11-3. ロギング,11-3-ロギング
+roadmap.md,1445,2,12. データ処理の実践 — NumPy・pandas・polars,12-データ処理の実践--numpypandaspolars
+roadmap.md,1447,3,12-1. NumPyによるベクトル化演算,12-1-numpyによるベクトル化演算
+roadmap.md,1454,3,12-2. pandasとpolarsによるテーブルデータ処理,12-2-pandasとpolarsによるテーブルデータ処理
+roadmap.md,1460,3,12-3. ライブラリ関数の活用 — AIが再発明しがちなパターン,12-3-ライブラリ関数の活用--aiが再発明しがちなパターン
+roadmap.md,1504,2,13. 可視化の実践 — matplotlib・seaborn・plotly,13-可視化の実践--matplotlibseabornplotly
+roadmap.md,1506,3,13-1. Python可視化,13-1-python可視化
+roadmap.md,1511,3,13-2. 可視化の原則,13-2-可視化の原則
+roadmap.md,1562,2,14. 解析パイプラインの自動化 — Snakemake・Nextflow,14-解析パイプラインの自動化--snakemakenextflow
+roadmap.md,1566,3,14-1. なぜワークフロー言語が必要か,14-1-なぜワークフロー言語が必要か
+roadmap.md,1573,3,14-2. ワークフロー言語,14-2-ワークフロー言語
+roadmap.md,1579,3,14-3. ワークフローのベストプラクティス,14-3-ワークフローのベストプラクティス
+roadmap.md,1590,2,15. コンテナによるソフトウェア環境の再現 — Docker・Apptainer,15-コンテナによるソフトウェア環境の再現--dockerapptainer
+roadmap.md,1594,3,15-1. なぜコンテナが必要か,15-1-なぜコンテナが必要か
+roadmap.md,1602,3,15-2. Docker,15-2-docker
+roadmap.md,1613,3,15-3. Apptainer / Singularity（HPC向け）,15-3-apptainer--singularityhpc向け
+roadmap.md,1621,3,15-4. 再現性のレベル,15-4-再現性のレベル
+roadmap.md,1626,3,15-5. 論文投稿時の再現性パッケージング,15-5-論文投稿時の再現性パッケージング
+roadmap.md,1636,3,15-6. 🤖 実験管理（ML/計算実験の追跡）,15-6--実験管理ml計算実験の追跡
+roadmap.md,1643,2,16. スパコン・クラスタでの大規模計算,16-スパコンクラスタでの大規模計算
+roadmap.md,1645,3,16-1. HPCの基本,16-1-hpcの基本
+roadmap.md,1650,3,16-2. SLURM,16-2-slurm
+roadmap.md,1657,3,16-3. リモート接続とファイル転送,16-3-リモート接続とファイル転送
+roadmap.md,1663,3,16-4. データ管理・バックアップ・共有,16-4-データ管理バックアップ共有
+roadmap.md,1718,2,17. コードのパフォーマンス改善 — プロファイリングと高速化,17-コードのパフォーマンス改善--プロファイリングと高速化
+roadmap.md,1720,3,17-1. プロファイリング,17-1-プロファイリング
+roadmap.md,1727,3,17-2. 高速化テクニック,17-2-高速化テクニック
+roadmap.md,1735,3,17-3. 大規模データの扱い,17-3-大規模データの扱い
+roadmap.md,1743,2,18. コードのドキュメント化,18-コードのドキュメント化
+roadmap.md,1745,3,18-1. Markdownの習得,18-1-markdownの習得
+roadmap.md,1754,3,18-2. プロジェクトドキュメント,18-2-プロジェクトドキュメント
+roadmap.md,1759,4,公開リポジトリのドキュメント,公開リポジトリのドキュメント
+roadmap.md,1770,3,18-3. 研究ノート,18-3-研究ノート
+roadmap.md,1776,2,19. 公共データベースとAPI — データ取得の実践,19-公共データベースとapi--データ取得の実践
+roadmap.md,1778,3,19-0. データベースの基礎知識 — エージェントと「同じ言語」で話すために,19-0-データベースの基礎知識--エージェントと同じ言語で話すために
+roadmap.md,1789,3,19-1. バイオインフォマティクスの主要データベース,19-1-バイオインフォマティクスの主要データベース
+roadmap.md,1794,3,19-2. APIによるデータ取得,19-2-apiによるデータ取得
+roadmap.md,1823,3,19-3. データのダウンロードとローカル管理,19-3-データのダウンロードとローカル管理
+roadmap.md,1838,2,20. コードとデータのセキュリティ・倫理,20-コードとデータのセキュリティ倫理
+roadmap.md,1840,3,20-1. セキュリティの基礎,20-1-セキュリティの基礎
+roadmap.md,1846,3,20-2. データの倫理,20-2-データの倫理
+roadmap.md,1855,2,21. 共同開発の実践 — レビュー・質問・OSS参加,21-共同開発の実践--レビュー質問oss参加
+roadmap.md,1859,3,21-1. 質問の技術 — 正しく助けを求める,21-1-質問の技術--正しく助けを求める
+roadmap.md,1865,3,21-2. コードレビューとOSSコミュニティへの参加,21-2-コードレビューとossコミュニティへの参加
+roadmap.md,1871,3,21-3. 共同研究のコミュニケーション — PIと共同研究者への共有,21-3-共同研究のコミュニケーション--piと共同研究者への共有
+roadmap.md,1879,2,付録A. AIコーディングエージェントとの効果的な学習パターン,付録a-aiコーディングエージェントとの効果的な学習パターン
+roadmap.md,1883,3,A-1. なぜ役割を分けるのか,a-1-なぜ役割を分けるのか
+roadmap.md,1888,3,A-2. 役割分担の3つの軸,a-2-役割分担の3つの軸
+roadmap.md,1891,3,A-3. 学習パターン一覧（14パターン）,a-3-学習パターン一覧14パターン
+roadmap.md,1896,2,付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表,付録b-claude-code-cli--codex-cli-クイックリファレンス対照表
+roadmap.md,1902,3,セットアップ,セットアップ
+roadmap.md,1912,3,権限制御,権限制御
+roadmap.md,1922,3,モデルと推論,モデルと推論
+roadmap.md,1934,3,セッション管理,セッション管理
+roadmap.md,1945,3,カスタマイズ,カスタマイズ
+roadmap.md,1956,2,付録C. 論文投稿前チェックリスト,付録c-論文投稿前チェックリスト
+roadmap.md,1961,3,1. コード,1-コード
+roadmap.md,1970,3,2. データ,2-データ
+roadmap.md,1979,3,3. 再現性,3-再現性
+roadmap.md,1989,3,4. バックアップ・共有,4-バックアップ共有
+roadmap.md,1995,3,5. テスト・コード品質,5-テストコード品質
+roadmap.md,2001,3,6. セキュリティ・倫理,6-セキュリティ倫理
+roadmap.md,2009,2,付録D. AIコーディングエージェント頻出用語・フレーズ集,付録d-aiコーディングエージェント頻出用語フレーズ集
+roadmap.md,2015,3,D-1. エージェントの定番フレーズ「翻訳」辞典,d-1-エージェントの定番フレーズ翻訳辞典
+roadmap.md,2019,3,D-2. カタカナ動詞,d-2-カタカナ動詞
+roadmap.md,2022,3,D-3. カタカナ名詞,d-3-カタカナ名詞
+roadmap.md,2025,3,D-4. 頻出略語,d-4-頻出略語

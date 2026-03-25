@@ -35,6 +35,8 @@ python --version       # Python 3.11.9
 
 `pyenv local` を実行すると、そのディレクトリに `.python-version` というファイルが作られる。以後、このディレクトリ内では指定したバージョンのPythonが自動的に使われる。このファイルをGitリポジトリに含めておけば、共同研究者も同じバージョンを使える（Gitについては[§7 Git入門](./07_git.md)で学ぶ）。
 
+pyenv が実際に行っているのは、Python本体を置き換えることではない。`PATH` の先頭に **shims** ディレクトリを置き、`python` や `pip` の呼び出しを shim が受けて、`.python-version`、`PYENV_VERSION`、グローバル設定の順に参照して実体のPythonを選ぶ。この仕組みにより、同じ `python` コマンドでもディレクトリごとに別のバージョンへ切り替えられる。
+
 ### venv — 標準ライブラリの仮想環境
 
 **venv**はPython標準ライブラリに含まれる仮想環境ツールである[2](https://docs.python.org/3/library/venv.html)。追加のインストールなしに使えるため、最もシンプルな選択肢である。
@@ -60,8 +62,10 @@ deactivate
 `activate` スクリプトが行っていることは、実はシンプルである:
 
 1. 環境変数 `PATH` の先頭に `.venv/bin/` を追加する
-2. `python` コマンドが `.venv/bin/python` を指すようになる
-3. `pip install` の宛先が `.venv/lib/` 以下に変わる
+2. その結果として `python` と `pip` が `.venv/bin/python` と `.venv/bin/pip` を指すようになる
+3. 以後に起動される Python は `.venv/lib/` 以下の site-packages を使う
+
+なお、`activate` は必須ではない。`.venv/bin/python` や `.venv/bin/pip` を直接呼んでも同じ環境を使える。CIやスクリプトではこの方法のほうが明示的である。
 
 Pythonスクリプト内からは `sys.prefix` で現在の仮想環境のパスを確認できる:
 
@@ -76,14 +80,14 @@ print(sys.base_prefix)  # /path/to/python3.11（システム側）
 in_venv: bool = sys.prefix != sys.base_prefix
 ```
 
-### miniforge / micromamba — conda環境
+### Miniforge3 / Micromamba — conda環境
 
-バイオインフォマティクスでは**conda**が事実上の標準（de facto standard）として広く使われている。condaはPythonパッケージだけでなく、C/C++で書かれたバイナリツール（samtools, BWA等）もまとめて管理できる点が最大の強みである[3](https://docs.conda.io/projects/conda/en/latest/)。
+バイオインフォマティクスでは**conda**が事実上の標準（de facto standard）として広く使われている。condaはPythonパッケージだけでなく、C/C++で書かれたバイナリツール（Samtools, BWA等）もまとめて管理できる点が最大の強みである[3](https://docs.conda.io/projects/conda/en/latest/)。
 
-condaを使い始めるには、**miniforge**または**micromamba**をインストールする[4](https://github.com/conda-forge/miniforge)。かつてはAnacondaやMinicondaが広く使われていたが、Anacondaのライセンス変更（商用利用の有償化）により、オープンソースのminiforgeが推奨される。
+condaを使い始めるには、**Miniforge3**または**Micromamba**をインストールする[4](https://github.com/conda-forge/miniforge)。Miniforgeの公式FAQでも、Mambaforge は 2024 年半ばに非推奨となり、Miniforge3 への移行が推奨されている。かつてはAnacondaやMinicondaが広く使われていたが、Anacondaのライセンス変更（商用利用の有償化）により、オープンソースのMiniforge系が実務上の第一候補になっている。
 
 ```bash
-# miniforgeのインストール後の基本操作
+# Miniforgeのインストール後の基本操作
 
 # 新しい環境の作成
 conda create -n rnaseq-env python=3.11 numpy pandas biopython
@@ -101,34 +105,34 @@ conda env list
 conda deactivate
 ```
 
-**micromamba**はcondaの高速な代替実装であり、同じ操作体系で動作する[5](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)。大量のパッケージを扱うバイオインフォ環境では、依存解決の速度差が顕著になるため、micromambaの採用も検討に値する。
+**Micromamba**はcondaの高速な代替実装であり、同じ操作体系で動作する[5](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)。大量のパッケージを扱うバイオインフォ環境では、依存解決の速度差が顕著になるため、Micromambaの採用も検討に値する。
 
 ### uv — 高速な新世代パッケージマネージャ
 
-**uv**はRust製の高速Pythonパッケージマネージャであり、pip, venv, pyenvの機能を統合的に提供する[6](https://docs.astral.sh/uv/)。2024年にリリースされて以降、急速に普及が進んでいる。
+**uv**はRust製の高速Pythonパッケージマネージャであり、pip, venv, pyenvの機能を統合的に提供する[6](https://docs.astral.sh/uv/)。2024年にリリースされて以降、その速度と利便性から急速に普及している。
 
 ```bash
 # uvのインストール
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
+# Pythonバージョンの管理 (pyenvの代わり)
+uv python install 3.12
+
 # プロジェクトの初期化
 uv init my-project
 cd my-project
 
-# 仮想環境の作成とパッケージインストール
-uv venv
-uv pip install biopython numpy
+# パッケージの追加 (自動的に仮想環境が作成され、pyproject.tomlが更新される)
+uv add biopython numpy
 
-# ロックファイルの生成
-# uv lock は pyproject.toml の依存定義を解決し、
-# すべてのパッケージの正確なバージョンを uv.lock ファイルに記録するコマンドである
-uv lock
+# スクリプトの実行 (環境を意識せずに実行可能)
+uv run main.py
 
-# ロックファイルからの再現
+# ロックファイルからの同期
 uv sync
 ```
 
-uvの特徴は速度である。pipと比較して10〜100倍の速度でパッケージを解決・インストールする。ただし、condaのようにC/C++バイナリを直接管理する機能は持たないため、バイオインフォマティクスではcondaとの併用が現実的な選択肢となる。
+uvの特徴は、パッケージ解決の速さだけでなく、Pythonのバージョン管理から仮想環境の構築、パッケージのインストールまでを一つのツールで完結できる点にある。特に `uv add` を使うと、`pyproject.toml` への追記と仮想環境へのインストール、`uv.lock` の更新を一度に行えるため、手動での管理ミスが激減する。ただし、condaのようにC/C++バイナリを直接管理する機能は持たないため、バイオインフォマティクスではCondaとの併用、あるいはコンテナとの組み合わせが現実的な選択肢となる。
 
 ### 依存関係定義ファイルの比較
 
@@ -238,14 +242,14 @@ conda list --revisions  # 変更履歴の確認
 | パッケージマネージャ | 対象 | 管理単位 | バイオでの主な用途 |
 |-------------------|------|---------|-------------------|
 | **pip** | Pythonパッケージ | PyPIレジストリ | Pythonライブラリのインストール |
-| **conda** | 言語非依存 | conda-forge, bioconda等 | バイナリツール＋Pythonの統合管理 |
+| **Conda** | 言語非依存 | conda-forge, Bioconda等 | バイナリツール＋Pythonの統合管理 |
 | **uv** | Pythonパッケージ | PyPIレジストリ | pipの高速代替 |
-| **brew** | macOS/Linuxアプリ | Homebrew | 開発ツール（git, node等） |
+| **brew** | macOS/Linuxアプリ | Homebrew | 開発ツール（Git, Node等） |
 | **apt** | Debian/Ubuntu | OSリポジトリ | システムライブラリ |
 
-![Python環境管理ツールの責務範囲: pyenv・venv・pip・conda・uvの担当領域](../figures/ch06_env_tools.png)
+![Python環境管理ツールの責務範囲: pyenv・venv・pip・Conda・uvの担当領域](../figures/ch06_env_tools.png)
 
-基本原則は「**Python関連はcondaまたはpip/uvで、OS関連はbrew/aptで**」という使い分けである。conda環境内でpipを使うことも可能だが、condaとpipを混在させるとパッケージの追跡が困難になるため、可能な限りどちらかに統一するのが望ましい。
+基本原則は「**Python関連はCondaまたはpip/uvで、OS関連はbrew/aptで**」という使い分けである。Conda環境内でpipを使うことも可能だが、Condaとpipを混在させるとパッケージの追跡が困難になるため、可能な限りどちらかに統一するのが望ましい。
 
 ### ロックファイル — 再現性の鍵
 
@@ -287,11 +291,11 @@ uv lock
 | レジストリ/チャネル | 対象ツール | 特徴 |
 |-------------------|-----------|------|
 | **PyPI** | pip, uv | Pythonパッケージの公式レジストリ。誰でも公開可能 |
-| **conda-forge** | conda | コミュニティ運営の最大のcondaチャネル |
-| **bioconda** | conda | バイオインフォマティクスに特化したチャネル[9](https://doi.org/10.1038/s41592-018-0046-7) |
-| **defaults** | conda | Anaconda社が管理するチャネル（ライセンスに注意） |
+| **conda-forge** | Conda | コミュニティ運営の最大のCondaチャネル |
+| **Bioconda** | Conda | バイオインフォマティクスに特化したチャネル[9](https://doi.org/10.1038/s41592-018-0046-7) |
+| **defaults** | Conda | Anaconda社が管理するチャネル（ライセンスに注意） |
 
-condaでは、チャネルの優先順位を `.condarc` ファイルで設定する:
+Condaでは、チャネルの優先順位を `.condarc` ファイルで設定する:
 
 ```yaml
 # ~/.condarc
@@ -312,14 +316,14 @@ channel_priority: strict
 
 > 「`pip freeze` の出力からロックファイル（`requirements-lock.txt`）を生成してください。また、`uv lock` でより厳密なロックファイルを作る方法も示してください」
 
-> **🧬 コラム: biocondaでのツールセットアップ**
+> **🧬 コラム: Biocondaでのツールセットアップ**
 >
-> **bioconda**は、8,000以上のバイオインフォマティクスツールを提供するcondaチャネルである[9](https://doi.org/10.1038/s41592-018-0046-7)。BLAST, samtools, BWA, STAR, fastp など、日常的に使うツールの大半がbiocondaからインストールできる:
+> **Bioconda**は、8,000以上のバイオインフォマティクスツールを提供するCondaチャネルである[9](https://doi.org/10.1038/s41592-018-0046-7)。BLAST, Samtools, BWA, STAR, fastp など、日常的に使うツールの大半がBiocondaからインストールできる:
 >
-> `-c` はチャネル（パッケージの配布元）を指定するオプションである。biocondaはバイオインフォマティクスツール専用、conda-forgeは汎用パッケージのチャネルであり、記述順がパッケージ検索の優先順位になる。
+> `-c` はチャネル（パッケージの配布元）を指定するオプションである。Biocondaはバイオインフォマティクスツール専用、conda-forgeは汎用パッケージのチャネルであり、記述順がパッケージ検索の優先順位になる。
 >
 > ```bash
-> # biocondaからのツールインストール
+> # Biocondaからのツールインストール
 > conda install -c bioconda -c conda-forge samtools minimap2 fastp
 > ```
 >
@@ -355,7 +359,7 @@ channel_priority: strict
 >
 > バイオインフォマティクスと機械学習の融合領域——シングルセル基盤モデル（scFoundation model）、変異の病原性予測、タンパク質構造予測（AlphaFold等）——では、GPU環境の構築が必要になる。
 >
-> **CUDA/PyTorchのインストール（conda推奨）:**
+> **CUDA/PyTorchのインストール**（conda推奨）:
 >
 > `pytorch-cuda=12.1` はGPU対応版PyTorchに必要なCUDAランタイムである。`-c pytorch -c nvidia` はPyTorch公式とNVIDIA公式のチャネルで、これらからGPU対応バイナリが提供される。
 >
@@ -394,7 +398,7 @@ channel_priority: strict
 |---------|------|------|
 | Pythonバージョン管理 | pyenv | プロジェクトごとに `.python-version` で固定 |
 | Python仮想環境（シンプル） | venv | 標準ライブラリ、追加インストール不要 |
-| バイナリツールを含む環境 | conda（miniforge） | samtools等のC/C++ツールも管理可能 |
+| バイナリツールを含む環境 | conda（Miniforge3） | samtools等のC/C++ツールも管理可能 |
 | 高速なパッケージ管理 | uv | pip互換で10〜100倍高速 |
 | 依存関係ファイル（新規） | pyproject.toml | Pythonプロジェクトの標準 |
 | 依存関係ファイル（バイオ） | environment.yml | バイナリ＋Python＋チャネル指定 |
@@ -414,7 +418,7 @@ channel_priority: strict
 
 ### 演習 6-1: 環境管理ツールの選択 **[設計判断]**
 
-以下の3つのプロジェクトに対して、venv、conda（miniforge）、uvのいずれを使うべきか。それぞれ選択理由を述べよ。
+以下の3つのプロジェクトに対して、venv、conda（Miniforge3）、uvのいずれを使うべきか。それぞれ選択理由を述べよ。
 
 (a) PythonのみでCSVを処理する小規模なデータ整形スクリプト（依存: pandas, numpy）
 

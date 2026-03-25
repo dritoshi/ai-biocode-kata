@@ -4,7 +4,7 @@
 
 プロファイリングの知識があれば、エージェントが生成したコードの性能ボトルネックを自分で診断し、「この関数が全体の80%の時間を消費している。$O(n^2)$ のループを$O(n)$ に改善して」と具体的に指示できる。この知識がなければ「遅いから速くして」という曖昧な指示しか出せず、エージェントが的外れな箇所を最適化してしまうリスクがある。エージェントは高速化コードの生成が得意だが、「どこを最適化すべきか」の優先順位づけ——寄与率の大きさ、メモリ制約とのトレードオフ、可読性の維持——は計測データを見て人間が判断する必要がある。
 
-本章では、プロファイリングによるボトルネック特定（15-1）、高速化テクニック（15-2）、大規模データのメモリ効率的な処理（15-3）を学ぶ。
+本章では、プロファイリングによるボトルネック特定（17-1）、高速化テクニック（17-2）、大規模データのメモリ効率的な処理（17-3）を学ぶ。
 
 ---
 
@@ -337,7 +337,7 @@ kernprof -l -v profiling_target.py
 
 ### memory_profilerによるメモリプロファイリング
 
-実行時間だけでなく、メモリ使用量の計測も重要である。とくにゲノムデータのように大きなデータを扱う場合、メモリ不足（`MemoryError`）でプログラムが落ちることがある。`memory_profiler` はPythonの関数の行ごとのメモリ使用量を計測する[5](https://github.com/pythonprofilers/memory-profiler)。
+実行時間だけでなく、メモリ使用量の計測も重要である。とくにゲノムデータのように大きなデータを扱う場合、メモリ不足（`MemoryError`）でプログラムが落ちることがある。`memory_profiler` はPythonの関数の行ごとのメモリ使用量を計測する[5](https://pypi.org/project/memory-profiler/)。
 
 ```bash
 # memory_profiler のインストール
@@ -445,7 +445,7 @@ mprof plot
 
 ### ベクトル化 — forループを避ける
 
-[§12-1](./12_data_processing.md#12-1-numpyによるベクトル化演算)で学んだNumPyのベクトル化は、Pythonの高速化で最も効果的な手法の一つである。ここでは、15-1でプロファイルしたTPM正規化を実際に改善する。
+[§12-1](./12_data_processing.md#12-1-numpyによるベクトル化演算)で学んだNumPyのベクトル化は、Pythonの高速化で最も効果的な手法の一つである。ここでは、17-1でプロファイルしたTPM正規化を実際に改善する。
 
 forループ版の `normalize_tpm_slow` をベクトル化した `normalize_tpm_fast` は以下のようになる。ブロードキャスティングを活用し、ループを完全に排除する:
 
@@ -516,10 +516,16 @@ def gc_content_parallel(
     sequences: list[str], n_workers: int = 2
 ) -> list[float]:
     """ProcessPoolExecutorで並列GC含量計算."""
-    with ProcessPoolExecutor(max_workers=n_workers) as executor:
-        # executor.map() は入力順序を保持して結果を返す
-        results = list(executor.map(gc_content_single, sequences))
-    return results
+    if not sequences or n_workers <= 1:
+        return [gc_content_single(seq) for seq in sequences]
+
+    try:
+        with ProcessPoolExecutor(max_workers=n_workers) as executor:
+            # executor.map() は入力順序を保持して結果を返す
+            return list(executor.map(gc_content_single, sequences))
+    except (NotImplementedError, OSError, PermissionError):
+        # 制限付き環境では process pool を作れないことがある。
+        return [gc_content_single(seq) for seq in sequences]
 ```
 
 `executor.map()` は組み込みの `map()` と同じインターフェースで、各要素を並列に処理する。結果は入力順序が保持されるため、安心して使える。
@@ -529,21 +535,22 @@ def gc_content_parallel(
 - **pickle可能性**: `ProcessPoolExecutor` はデータをプロセス間で受け渡すためにpickleシリアライゼーションを使う。ラムダ式やネストした関数は pickle できないため、トップレベル関数として定義する必要がある
 - **オーバーヘッド**: プロセス起動とデータ転送にはオーバーヘッドがある。処理が軽すぎるとオーバーヘッドが支配的になり、逐次版より遅くなる
 - **`if __name__ == "__main__":` ガード**: スクリプトとして実行する場合、`multiprocessing` はモジュールを再インポートするため、このガードがないと無限にプロセスが生成される
+- **実行環境の制約**: サンドボックスや一部のCI環境では named semaphore や process pool の生成が制限される。教育用コードでは逐次版へのフォールバックを用意しておくと、環境依存で落ちにくい
 
 > ### 🧬 コラム: バイオインフォでの並列処理パターン
 >
 > バイオインフォマティクスでは、並列処理のパターンが大きく3つに分かれる:
 >
-> 1. **サンプル並列**: 各サンプルを独立に処理する。RNA-seqのアライメント、GC含量計算など。最も実装が容易で、[§16](./16_hpc.md)で学んだSLURMアレイジョブとの相性がよい
+> 1. **サンプル並列**: 各サンプルを独立に処理する。RNA-seqのアライメント、GC含量計算など。最も実装が容易で、[§16](./16_hpc.md)で学んだSlurmアレイジョブとの相性がよい
 > 2. **チャンク並列**: 1つの大きなファイルを分割して並列処理する。大規模VCFの変異フィルタリングなど
 > 3. **パイプライン並列**: 処理ステージをパイプラインとして連結し、ステージ間でデータを流す。Snakemakeのワークフローが典型例
 >
-> Python内の `ProcessPoolExecutor` はサンプル並列やチャンク並列に適している。パイプライン並列はワークフローエンジン（Snakemakeなど）やSLURMの依存ジョブ（`--dependency`）で実現するほうが堅牢である。
+> Python内の `ProcessPoolExecutor` はサンプル並列やチャンク並列に適している。パイプライン並列はワークフローエンジン（Snakemakeなど）やSlurmの依存ジョブ（`--dependency`）で実現するほうが堅牢である。
 >
 > 使い分けの目安:
-> - 数十〜数百タスクのサンプル並列 → SLURMアレイジョブ（[§16](./16_hpc.md)）
+> - 数十〜数百タスクのサンプル並列 → Slurmアレイジョブ（[§16](./16_hpc.md)）
 > - 1スクリプト内の軽い並列化 → `ProcessPoolExecutor`
-> - 複数ステップの依存関係 → SLURMの依存ジョブまたはワークフローエンジン
+> - 複数ステップの依存関係 → Slurmの依存ジョブまたはワークフローエンジン
 
 ### ジェネレータによるメモリ効率化
 
@@ -956,14 +963,14 @@ tabix variants.vcf.gz chr1:1000000-2000000
 
 プロファイリングの結果、解析スクリプトの実行時間の内訳が以下のとおりであった。
 
-- **(a)** ファイル読み込み: 60%
-- **(b)** 距離計算: 25%
-- **(c)** 結果出力: 5%
+- (a) ファイル読み込み: 60%
+- (b) 距離計算: 25%
+- (c) 結果出力: 5%
 - その他: 10%
 
 Amdahl の法則に基づき、最適化すべき箇所の優先順位を決定せよ。仮に (a) を10倍高速化した場合と (b) を10倍高速化した場合、全体の速度向上はそれぞれ何倍になるか計算せよ。
 
-（ヒント）Amdahl の法則により、全体の高速化率は $1 / (1 - p + p/s)$（$p$: 対象部分の比率、$s$: その部分の高速化率）で求まる。全体比率が最大の箇所を最初に改善するのが原則である。
+（ヒント）Amdahl の法則により、全体の高速化率は $1 / (1 - p + p/s)$ ($p$: 対象部分の比率, $s$: その部分の高速化率) で求まる。全体比率が最大の箇所を最初に改善するのが原則である。
 
 ### 演習 17-2: 不適切な並列化の検出 **[レビュー]**
 
@@ -1037,7 +1044,7 @@ def calc_edit_distances(seq_pairs: list[tuple[str, str]]) -> list[int]:
 
 [4] Robert Kern and others. "line_profiler". https://github.com/pyutils/line_profiler (参照日: 2026-03-21)
 
-[5] Fabian Pedregosa and others. "memory_profiler". https://github.com/pythonprofilers/memory-profiler (参照日: 2026-03-21)
+[5] Fabian Pedregosa and others. "memory_profiler". https://pypi.org/project/memory-profiler/ (参照日: 2026-03-21)
 
 [6] Python Software Foundation. "concurrent.futures — Launching parallel tasks". https://docs.python.org/3/library/concurrent.futures.html (参照日: 2026-03-21)
 

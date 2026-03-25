@@ -82,10 +82,10 @@ Linux/macOSのファイルシステムはツリー構造をしている。すべ
 
 ```bash
 # 絶対パス — 自分のマシン固有
-python /home/user/projects/rna_seq/run_analysis.py
+python3 /home/user/projects/rna_seq/run_analysis.py
 
 # 相対パス — プロジェクト内で完結（推奨）
-python ./run_analysis.py
+python3 ./run_analysis.py
 ```
 
 ### パーミッションと実行権限
@@ -124,8 +124,8 @@ chmod +x run_analysis.py
 # 直接実行（shebang行でPython3が呼ばれる）
 ./run_analysis.py
 
-# 実行権限がなくても python コマンド経由なら動く
-python run_analysis.py
+# 実行権限がなくても python3 コマンド経由なら動く
+python3 run_analysis.py
 ```
 
 `#!/usr/bin/env python3` は「PATHの中から `python3` を探して実行せよ」という意味である。`#!/usr/bin/python3` と直接パスを書く方法もあるが、`env` 経由のほうが環境の違いに対応しやすい（[§6 Python環境の構築 — pyenv・venv・conda・uv](./06_dev_environment.md)で詳しく扱う）。
@@ -137,7 +137,7 @@ python run_analysis.py
 ```bash
 # 実行中のプロセスを強制終了: Ctrl+C
 # バックグラウンドプロセスの確認
-ps aux | grep python
+ps aux | grep python3
 
 # 特定のプロセスを終了（PID: プロセスID）
 kill 12345
@@ -158,9 +158,11 @@ gzip -k reads.fastq       # → reads.fastq.gz（元ファイルを残す）
 gunzip reads.fastq.gz     # → reads.fastq
 
 # 展開せずに中身を確認
-zcat reads.fastq.gz | head -4    # 先頭4行（= 1リード分）を表示
-zless reads.fastq.gz             # ページャで閲覧
+gzip -dc reads.fastq.gz | head -4    # 先頭4行（= 1リード分）を表示
+zless reads.fastq.gz                 # ページャで閲覧
 ```
+
+`zcat` は GNU 系と BSD/macOS 系で挙動が揃わないことがある。可搬性を優先するなら `gzip -dc` を使うのが安全で、macOS では `gzcat` も同様に使える。
 
 `tar`（tape archive）は複数のファイルをまとめるコマンドで、`gzip` と組み合わせて使う:
 
@@ -353,7 +355,7 @@ awk '{print $1}' regions.bed | sort | uniq -c | sort -rn
 # →  ...
 
 # パターン4: gzip圧縮されたFASTQのリード数をカウント
-zcat reads.fastq.gz | awk 'NR%4==1' | wc -l
+gzip -dc reads.fastq.gz | awk 'NR%4==1' | wc -l
 # → 5000000
 
 # パターン5: 全サンプルのBAMファイルにインデックスを作成
@@ -589,7 +591,7 @@ echo "スレッド数: ${N_THREADS}"
 
 # コマンド置換 — コマンドの結果を変数に格納
 TODAY=$(date +%Y%m%d)
-N_READS=$(zcat reads.fastq.gz | awk 'NR%4==1' | wc -l)
+N_READS=$(gzip -dc reads.fastq.gz | awk 'NR%4==1' | wc -l)
 ```
 
 ### 条件分岐
@@ -715,6 +717,16 @@ done
 
 ---
 
+## まとめ
+
+本章では、エージェントが日常的に使うシェル操作の基礎を学んだ。要点は以下のとおりである。
+
+- ファイル探索、パイプ、リダイレクション、環境変数を理解すると、エージェントの行動をレビューできる
+- 実行権限、圧縮ファイル、PATHの仕組みを知っていると、初歩的な環境トラブルを自力で切り分けられる
+- 長い処理の自動化にはシェルスクリプトが有効だが、複雑なロジックはPythonに逃がすべきである
+
+---
+
 ## 演習問題
 
 本章の内容を、エージェントとの協働を通じて実践する課題である。
@@ -768,7 +780,7 @@ sampleC_R2.fastq.gz
 
 確認結果をもとに、環境が正しく設定されているか判断せよ。
 
-（ヒント）`$PATH` の先頭にあるディレクトリのコマンドが優先される。`which python` で実際に使われるPythonのパスも確認するとよい。
+（ヒント）`$PATH` の先頭にあるディレクトリのコマンドが優先される。`which python3` で実際に使われるPythonのパスも確認するとよい。
 
 ---
 
