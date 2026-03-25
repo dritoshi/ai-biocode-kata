@@ -9,15 +9,15 @@ chapter_file,chapter_title,headings,code_fences,external_refs,local_links,broken
 07_git.md,§7 Git入門 — コードのバージョン管理,39,21,38,13,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Git LFS 初期設定の粒度と Zenodo / CITATION.cff 周辺の運用説明を再確認
 08_testing.md,§8 コードの正しさを守るテスト技法,48,27,23,16,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: TDD / pytest / Ruff / mypy の説明を再確認し大きな修正なし
 09_debug.md,§9 デバッグの技術 — tracebackから最小再現例まで,31,33,18,15,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: max_workers=1 を逐次実行と誤解させる説明を修正
-10_deliverables.md,§10 ソフトウェア成果物の設計 — スクリプトからパッケージまで,53,31,23,17,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Bioconda 公開で PyPI 必須と読める説明を修正
-11_cli.md,§11 コマンドラインツールの設計と実装,47,29,25,11,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: argparse / Click / Typer の使い分けを実務寄りに補足
-12_data_processing.md,§12 データ処理の実践 — NumPy・pandas・Polars,36,17,16,14,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Polars lazy API の利点と collect のメモリ特性を補足
-13_visualization.md,§13 可視化の実践 — Matplotlib・Seaborn・Plotly,31,8,29,21,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Matplotlib backend と投稿用フォーマット説明を厳密化
+10_deliverables.md,§10 ソフトウェア成果物の設計 — スクリプトからパッケージまで,53,31,23,17,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Bioconda 公開で PyPI 必須と読める説明を修正; 2026-03-25 フィクスチャの説明を src layout 節に補足
+11_cli.md,§11 コマンドラインツールの設計と実装,47,29,25,11,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: argparse / Click / Typer の使い分けを実務寄りに補足; 2026-03-25 デコレータとステータスメッセージの定義を補足
+12_data_processing.md,§12 データ処理の実践 — NumPy・pandas・Polars,36,17,16,14,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Polars lazy API の利点と collect のメモリ特性を補足; 2026-03-25 ブーリアン変数/マスク/エコシステム/ライブラリ関数の定義を補足
+13_visualization.md,§13 可視化の実践 — Matplotlib・Seaborn・Plotly,31,8,29,21,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Matplotlib backend と投稿用フォーマット説明を厳密化; 2026-03-25 オブジェクト指向の説明を追加
 14_workflow.md,§14 解析パイプラインの自動化 — Snakemake・Nextflow,40,19,23,11,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Snakemake の再実行モデルと nf-core の説明を版差分に配慮した表現へ修正
 15_container.md,§15 コンテナによるソフトウェア環境の再現 — Docker・Apptainer,67,27,26,33,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Compose v2 の正規ファイル名と Apptainer build の施設依存性を追記
 16_hpc.md,§16 スパコン・クラスタでの大規模計算,37,23,12,14,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: sacct / interactive job / GPU 申請の施設依存性を明示
 17_performance.md,§17 コードのパフォーマンス改善 — プロファイリングと高速化,51,37,22,16,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: nproc と GIL の説明を HPC 配下と CPython の実情に合わせて厳密化
-18_documentation.md,§18 コードのドキュメント化,31,27,29,21,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: mkdocstrings の handler 設定例を src layout と整合させた
+18_documentation.md,§18 コードのドキュメント化,31,27,29,21,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: mkdocstrings の handler 設定例を src layout と整合させた; 2026-03-25 スタティックサイトの説明を追加
 19_database_api.md,§19 公共データベースとAPI — データ取得の実践,54,18,49,23,0,0,0,0,0,reviewed,,,,,,2026-03-25 内容査読: SPARQL と REST API の分類を修正
 20_security_ethics.md,§20 コードとデータのセキュリティ・倫理,48,11,36,13,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: JSPS DMP の運用表現と保存期間の断定を修正; 2026-03-25 Llama-3.1/gpt-oss のモデル属性誤記を修正; 2026-03-25 Llama-3.1 を実務推奨一覧から除外
 21_collaboration.md,§21 共同開発の実践 — レビュー・質問・OSS参加,67,14,26,17,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Stack Overflow/Biostars の運用に合わせて質問支援の記述を修正; 2026-03-25 `$p$値` のレンダリング問題を FDR / adjusted p-value への整理で解消

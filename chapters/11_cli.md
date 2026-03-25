@@ -92,6 +92,8 @@ def gc_filter(input_file, output, min_gc, max_gc, verbose):
     ...
 ```
 
+**デコレータ**とは、`@名前` の構文で関数やクラス定義に機能を付加するPythonの仕組みである。Click では `@click.command()` や `@click.option()` がデコレータで、関数をCLIコマンドとして登録し、引数やオプションの定義を追加している。
+
 Click はデコレータで引数とオプションを宣言するため、関数シグネチャがそのままインターフェース定義になる[1](https://click.palletsprojects.com/)。`click.FloatRange` による範囲バリデーション、`show_default=True` によるヘルプへのデフォルト値表示など、Argparse では追加実装が必要な機能が組み込みで提供される。[§10](./10_deliverables.md)で `pyproject.toml` に `click>=8.0` を追加済みであるため、本書では Click を一貫して使用する。
 
 #### Typer版
@@ -498,7 +500,7 @@ with Progress(console=Console(stderr=True)) as progress:
 
 ### ステータスメッセージ
 
-長時間処理の各段階を伝えるには `rich.status` のスピナーが便利である:
+**ステータスメッセージ**は、「インデックスを構築中」「フィルタリング中」のように、現在どの処理段階にいるかを短く伝える進捗用メッセージである。プログレスバーが量的な進捗を示し、ログが永続的な記録を残すのに対し、ステータスメッセージは「今何をしているか」を簡潔に伝える用途に向いている。長時間処理の各段階を伝えるには `rich.status` のスピナーが便利である:
 
 ```python
 from rich.console import Console

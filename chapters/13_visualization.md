@@ -14,6 +14,8 @@ AIエージェントにプロットコードの生成を依頼すると、動作
 
 Matplotlibにはプロットを作成する方法が2つある。**暗黙的API**（`plt.plot()`, `plt.hist()` など）と**明示的API**（`fig, ax = plt.subplots()` でFigure/Axesオブジェクトを取得して操作する方法）である。
 
+ここでいう**オブジェクト指向**とは、データとその操作をオブジェクトとしてまとめ、`ax.set_xlabel()` のように「対象.操作」の形で扱う考え方である。Matplotlib の Figure と Axes はそのオブジェクトにあたり、明示的APIではこれらを直接受け取って操作する。
+
 ```python
 # 暗黙的API — エージェントが生成しがちなパターン
 import matplotlib.pyplot as plt
