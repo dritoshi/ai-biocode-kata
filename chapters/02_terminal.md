@@ -215,6 +215,10 @@ echo $PATH
 which python3
 # 出力例: /home/user/.local/bin/python3
 
+# 可搬性を重視するなら shell builtin の command -v も使える
+command -v python3
+# 出力例: /home/user/.local/bin/python3
+
 # PATHにディレクトリを追加
 export PATH="$HOME/.local/bin:$PATH"
 ```
@@ -277,7 +281,7 @@ api_key = os.getenv("NCBI_API_KEY")
 
 ### whichコマンド — 「どの」コマンドが使われているか
 
-複数のPythonがインストールされている環境では、`which` で確認する習慣が重要である:
+複数のPythonがインストールされている環境では、`which` で確認する習慣が重要である。LinuxやmacOSの対話的な確認では `which` が広く使われる。一方、シェルスクリプトや可搬性を意識した説明では、shell builtin の `command -v` もよく使われる:
 
 ```bash
 $ which python3
@@ -285,9 +289,12 @@ $ which python3
 
 $ which samtools
 /usr/local/bin/samtools
+
+$ command -v python3
+/home/user/miniconda3/envs/rnaseq/bin/python3
 ```
 
-エージェントが予期しないバージョンのツールを使っている場合、`which` で原因を特定できる。
+エージェントが予期しないバージョンのツールを使っている場合、`which` や `command -v` で原因を特定できる。
 
 ```python
 from scripts.ch02.env_check import check_command_available, find_broken_path_entries
@@ -331,7 +338,7 @@ broken = find_broken_path_entries()
 | `cut` | 列の抽出（区切り文字指定） | TSVの特定列: `cut -f1,3 expression.tsv` |
 | `wc` | 行数・単語数・バイト数のカウント | ファイルの行数: `wc -l reads.fastq` |
 | `find` | 条件に合うファイルを再帰的に検索 | 特定の拡張子: `find data/ -name "*.fastq.gz"` |
-| `xargs` | 標準入力を引数として渡す | 一括処理: `find . -name "*.bam" \| xargs samtools index` |
+| `xargs` | 標準入力を引数として渡す | 一括処理: `find . -name "*.bam" -print0 \| xargs -0 -n1 samtools index` |
 
 ### パイプによるコマンドの連結
 
@@ -359,7 +366,8 @@ gzip -dc reads.fastq.gz | awk 'NR%4==1' | wc -l
 # → 5000000
 
 # パターン5: 全サンプルのBAMファイルにインデックスを作成
-find results/ -name "*.bam" | xargs -I{} samtools index {}
+# -print0 と -0 を使うと、空白を含むファイル名でも安全
+find results/ -name "*.bam" -print0 | xargs -0 -n1 samtools index
 ```
 
 ![パイプチェーンのデータ変換: 各コマンドが1つの処理に特化し、パイプで連結して複雑な処理を実現](../figures/ch02_pipe_chain.png)
@@ -780,7 +788,7 @@ sampleC_R2.fastq.gz
 
 確認結果をもとに、環境が正しく設定されているか判断せよ。
 
-（ヒント）`$PATH` の先頭にあるディレクトリのコマンドが優先される。`which python3` で実際に使われるPythonのパスも確認するとよい。
+（ヒント）`$PATH` の先頭にあるディレクトリのコマンドが優先される。`which python3` や `command -v python3` で実際に使われるPythonのパスも確認するとよい。
 
 ---
 

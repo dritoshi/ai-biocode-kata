@@ -3,7 +3,7 @@
 ## 概要
 
 - 対象ファイル数: 29
-- 参照レジストリ件数: 1242
+- 参照レジストリ件数: 1251
 - 自動検出された指摘件数: 0
 - 重大度内訳: S=0, A=0, B=0, C=0
 
@@ -42,7 +42,7 @@
 | appendix_b_cli_reference.md | 4 | 5 | 0 | 0 | 0 | 0 |
 | appendix_c_checklist.md | 0 | 27 | 0 | 0 | 0 | 0 |
 | appendix_d_agent_vocabulary.md | 0 | 1 | 0 | 0 | 0 | 0 |
-| glossary.md | 0 | 67 | 0 | 0 | 0 | 0 |
+| glossary.md | 0 | 76 | 0 | 0 | 0 | 0 |
 | hajimeni.md | 37 | 2 | 0 | 0 | 0 | 0 |
 | roadmap.md | 1 | 101 | 0 | 0 | 0 | 0 |
 

@@ -133,27 +133,28 @@ pyproject.tomlで依存関係を管理する。
 **追加で必要なもの:**
 
 - `meta.yaml`（Conda ビルドレシピ）
+- 安定したソースアーカイブのURL（PyPIのsdistやGitHub Releasesのtar.gz等）
 - bioconda-recipes リポジトリへのPR
 
 **実装ステップ:**
 
-1. まずパターン2（pipパッケージ）を完成させる
-2. PyPIに公開する
-3. `meta.yaml` を書いて bioconda-recipes にPRを出す
+1. まずパターン2（pipパッケージ）またはGitHub Releasesで、配布可能なソースアーカイブを用意する
+2. `meta.yaml` を書いて bioconda-recipes にPRを出す
+3. BiocondaのCIとレビューを通して公開する
 
-Conda パッケージ化はパターン2の上に成り立つ。いきなり Conda だけを目指さず、まず pip パッケージとして動く状態を作ることが重要である。
+Conda パッケージ化では、**安定した取得URLとハッシュ、ライセンス、テスト**が重要である。PyPI公開はレシピ作成を楽にするが必須ではなく、GitHub Releases のソースアーカイブから recipe を作ることも多い。
 
 > **🧬 コラム: Biocondaへのパッケージ公開**
 >
 > Bioconda はバイオインフォマティクスソフトウェアの最大のパッケージリポジトリであり、1万以上のパッケージが登録されている[2](https://doi.org/10.1038/s41592-018-0046-7)。公開の手順は以下のとおりである:
 >
-> 1. PyPIに自作ツールを公開する（パターン2）
+> 1. タグ付きリリースやPyPIのsdistなど、安定したソースアーカイブを用意する
 > 2. [bioconda-recipes](https://github.com/bioconda/bioconda-recipes) リポジトリをフォークする
 > 3. `recipes/my-tool/meta.yaml` を作成する
 > 4. PRを出し、Bioconda のボットとレビュアーの指摘に対応する
 > 5. マージされると `conda install -c bioconda my-tool` で世界中から利用可能になる
 >
-> `meta.yaml` のテンプレートは Bioconda のドキュメントに用意されている。AIエージェントに「Bioconda用のmeta.yamlを書いて」と指示すれば、`pyproject.toml` の情報をもとに雛形を生成してくれる。ただし、ライセンス情報やテストコマンドの記述は自分で確認すること。
+> PyPI に公開済みの pure Python パッケージなら雛形を作りやすいが、Bioconda では PyPI 公開自体は必須ではない。AIエージェントに「Bioconda用のmeta.yamlを書いて」と指示するときは、source URL、ハッシュ、ライセンス、テストコマンドを必ず人手で確認すること。
 
 ---
 

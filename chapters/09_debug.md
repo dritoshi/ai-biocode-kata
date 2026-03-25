@@ -567,11 +567,15 @@ def safe_mean(values: list[float | None]) -> float | None:
 
 並列処理のバグに遭遇したら、まず**逐次版で動かす**ことを試みる。逐次版で正しく動くなら、バグは並列化のロジックにある。逐次版でも動かないなら、並列化以前の問題である。
 
+`ProcessPoolExecutor(max_workers=1)` は並列度を1に落とすだけで、**別プロセス起動や pickle の制約は残る**。そのため、まずは通常の `for` ループで純粋な逐次版を確認し、その後で process pool 固有の問題を切り分ける。
+
 ```python
 from concurrent.futures import ProcessPoolExecutor
 
-# 並列処理のデバッグでは、まず逐次版で動作確認する
-# max_workers=1 に設定すると、逐次実行になる（デバッグ用）
+# まず純粋な逐次版で動作確認する
+results = [process_record(record) for record in records]
+
+# その後で、process pool 固有の問題があるかを見る
 with ProcessPoolExecutor(max_workers=1) as executor:
     results = list(executor.map(process_record, records))
 ```
