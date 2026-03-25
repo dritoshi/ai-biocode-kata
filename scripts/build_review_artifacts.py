@@ -628,14 +628,25 @@ def build_summary(
         location = f"{row['chapter_file']}:{row['line']}" if row["line"] else row["chapter_file"]
         lines.append(f"- `{row['issue_id']}` [{row['severity']}] {location} `{row['category']}`: {row['subject']}")
 
+    if severity_counts.get("A", 0) > 0:
+        next_actions = [
+            "- `master_issue_log.csv` の A 指摘から順に修正する。",
+            "- `reference_registry.csv` を使い、外部URLと固有名詞の一次情報確認を進める。",
+            "- 生命科学・情報科学・計算機科学・バイオインフォ・実装実務の各観点で `chapter_review_sheet.csv` を埋める。",
+        ]
+    else:
+        next_actions = [
+            "- 残件は B/C 指摘のみである。warning 対応とテスト方針の確定を優先する。",
+            "- `master_issue_log.csv` の残件を閉じるため、必要ならテスト追加または受容理由の明文化を行う。",
+            "- `chapter_review_sheet.csv` の手動レビュー状態を維持しつつ、残件クローズ後に再確認する。",
+        ]
+
     lines.extend(
         [
             "",
             "## 次のアクション",
             "",
-            "- `master_issue_log.csv` の A 指摘から順に修正する。",
-            "- `reference_registry.csv` を使い、外部URLと固有名詞の一次情報確認を進める。",
-            "- 生命科学・情報科学・計算機科学・バイオインフォ・実装実務の各観点で `chapter_review_sheet.csv` を埋める。",
+            *next_actions,
         ]
     )
     return "\n".join(lines) + "\n"

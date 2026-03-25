@@ -12,15 +12,15 @@
 * Codexが作成した docs/results と claude code が作成した review_results をマージし、それぞれの終了タスクを docs/archive に退避した
 * 以上の結果、review_results が作成したタスクのうち残ったものを docs/reviewで管理することとし、ファイル整理をした
 * ここまでの変更をcodex-gemini-reviewブランチにすべて更新した
-* 残ったタスクはネットワークアクセスが必要であるが Codex でネットワークが利用できないため、Claude Codeか手動での実行が必要となる
-* 今後の未達成レビューや未完了修正、未完了修正の計画書はここで管理する
+* 2026-03-25 にネットワーク制限のない環境で URL 到達性チェックを再実行し、`error` / `timeout` / `connection_error` が 0 件であることを確認した
+* 現在の残課題は、B/C の手作業修正とテスト方針の判断のみである
 
 ## 本ディレクトリのコンテンツ
 
 本ディレクトリには、未達成レビューと未完了修正に直接関わる現行正本だけを残す。
 
 - [未達成レビューと未完了修正](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_review_items.md)
-- [未達成 URL レビュー実行メモ](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_url_review.md)
+- [URL 到達性レビュー実行メモ](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_url_review.md)
 - [参照台帳](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/reference_registry.csv)
 - [未完了修正一覧](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/master_issue_log.csv)
 - [URL 到達性チェック結果](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json)

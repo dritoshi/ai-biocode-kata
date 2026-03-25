@@ -504,7 +504,7 @@ def apply_project_style() -> None:
 > 2. "My Data" → "Custom Tracks" からトラックヘッダ行（`track type=bigWig name="..." bigDataUrl=https://...`）を入力する
 > 3. "Go" で表示。表示位置は `position=chr1:1000-2000` のようにゲノム座標で指定する
 >
-> **Ensembl Genome Browser**[12](https://www.ensembl.org/info/docs/index.html)では、対象生物種のページから "Custom tracks" を選択し、ファイルURLまたはローカルファイルを指定する。EnsemblはGRC（Genome Reference Consortium）名（例: GRCh38）をリファレンス名に使う。UCSCはhg38のような独自名を使うため、同じリファレンスゲノムでも名前が異なる点に注意が必要である（[§4 データの形式](./04_data_formats.md)）。
+> **Ensembl Genome Browser**[12](https://www.ebi.ac.uk/training/online/courses/ensembl-quick-tour/searching-and-visualising-data/submitting-and-managing-your-own-data/)では、対象生物種のページから "Custom tracks" を選択し、ファイルURLまたはローカルファイルを指定する。EnsemblはGRC（Genome Reference Consortium）名（例: GRCh38）をリファレンス名に使う。UCSCはhg38のような独自名を使うため、同じリファレンスゲノムでも名前が異なる点に注意が必要である（[§4 データの形式](./04_data_formats.md)）。
 >
 > 大規模プロジェクトで多数のトラックを公開・共有する場合は、UCSC **Track Hub** の利用を検討する。Track Hubはディレクトリ構造と設定ファイル（`hub.txt`, `genomes.txt`, `trackDb.txt`）でトラックのメタデータを管理する仕組みで、ENCODEやRoadmap Epigenomicsなどの大規模コンソーシアムもこの形式でデータを公開している。
 >
@@ -696,4 +696,4 @@ def apply_project_style() -> None:
 
 [11] Lopez-Delisle, L. et al. "pyGenomeTracks: reproducible plots for multivariate genomic datasets". *Bioinformatics*, 37(3), 422–423, 2021. [https://doi.org/10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692)
 
-[12] Ensembl. "Ensembl Genome Browser Documentation". [https://www.ensembl.org/info/docs/index.html](https://www.ensembl.org/info/docs/index.html) (参照日: 2026-03-23)
+[12] Ensembl. "Submitting and managing your own data". [https://www.ebi.ac.uk/training/online/courses/ensembl-quick-tour/searching-and-visualising-data/submitting-and-managing-your-own-data/](https://www.ebi.ac.uk/training/online/courses/ensembl-quick-tour/searching-and-visualising-data/submitting-and-managing-your-own-data/) (参照日: 2026-03-25)

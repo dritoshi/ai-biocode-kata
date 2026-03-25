@@ -676,7 +676,7 @@ def process(data, mode, output_format, verbose, log_file, overwrite):
 
 [3] Beazley, D. & Jones, B. K. *Python Cookbook* (3rd ed.). O'Reilly Media, 2013. [https://www.oreilly.com/library/view/python-cookbook-3rd/9781449357337/](https://www.oreilly.com/library/view/python-cookbook-3rd/9781449357337/)
 
-[4] Levine, J. R. *Linkers and Loaders*. Morgan Kaufmann, 1999. [https://linker.iecc.com/](https://linker.iecc.com/)
+[4] Levine, J. R. *Linkers and Loaders*. Morgan Kaufmann, 1999. [https://shop.elsevier.com/books/linkers-and-loaders/levine/978-0-08-051031-6](https://shop.elsevier.com/books/linkers-and-loaders/levine/978-0-08-051031-6)
 
 [5] Martin, R. C. "Design Principles and Design Patterns". 2000. [https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf](https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf)
 

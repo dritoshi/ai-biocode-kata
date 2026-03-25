@@ -697,7 +697,7 @@ python simple_filter.py input.vcf > output.vcf
 ### バイオインフォマティクスのHPC実践
 
 - **NIH HPC. "Biowulf User Guide".** https://hpc.nih.gov/docs/userguide.html — NIHのバイオインフォHPCクラスタの利用ガイド。大規模BAMファイルの処理やメモリ管理など、バイオインフォ固有のHPC利用パターンの具体例が豊富。
-- **Australian BioCommons. "Introduction to HPC for Bioinformatics".** https://australianbiocommons.github.io/how-to-guides/hpc_guide — バイオインフォ研究者向けのHPC入門ガイド。本章の内容を別の視点から補完する。
+- **Australian BioCommons. "What are HPC and cloud computers?".** https://support.biocommons.org.au/support/solutions/articles/6000248145-what-are-hpc-and-cloud-computers- — HPCとクラウド計算の基礎を整理したサポート記事。施設利用前に押さえたい前提知識を補える。
 
 ### HPCの教科書
 
@@ -719,6 +719,6 @@ python simple_filter.py input.vcf > output.vcf
 
 [6] Peter Bailis and Kyle Kingsbury. "The Network is Reliable". *Communications of the ACM*, 57(9), 48-55, 2014. https://doi.org/10.1145/2643130
 
-[7] US-CERT. "Securing Network Infrastructure Devices". https://www.cisa.gov/news-events/alerts (参照日: 2026-03-21)
+[7] Cybersecurity and Infrastructure Security Agency. "Securing Network Infrastructure Devices". https://www.cisa.gov/news-events/news/securing-network-infrastructure-devices (参照日: 2026-03-25)
 
-[8] Australian BioCommons. "Introduction to HPC for Bioinformatics". https://australianbiocommons.github.io/how-to-guides/hpc_guide (参照日: 2026-03-21)
+[8] Australian BioCommons. "What are HPC and cloud computers?". https://support.biocommons.org.au/support/solutions/articles/6000248145-what-are-hpc-and-cloud-computers- (参照日: 2026-03-25)

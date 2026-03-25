@@ -1,26 +1,14 @@
 # 未達成レビューと未完了修正
 
-2026-03-25 時点で本文レビューと主要修正は完了したが、以下は未達成または未完了のまま残している。
+2026-03-25 時点で本文レビュー、URL 到達性レビュー、出版前優先の外部参照修正は完了した。以下は未完了のまま残している。
 
 ## 未達成レビュー
 
-### URL 到達性の最終確認
-
-- 現行の URL チェック結果は [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) にある。
-- 詳細な目的、実行方法、判定基準、完了条件は [pending_url_review.md](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_url_review.md) を参照する。
-- ただし、実行環境のネットワーク制限により `connection_error = 266` となっており、外部 URL の最終到達性確認としては未完了である。
+- なし。2026-03-25 にネットワーク制限のない環境で URL チェックを再実行し、現行 [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) で `error` / `timeout` / `connection_error` が 0 件であることを確認した。`anti-bot = 39` はサイト側制限として扱い、追加 issue は起票していない。
 
 ## 未完了修正
 
 未完了項目の正本は [master_issue_log.csv](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/master_issue_log.csv) である。要点は次のとおり。
-
-### A: 出版前に修正したい項目
-
-- `MANUAL-0001` [references/ch04.bib](/Users/itoshi/Projects/writing/ai-biocode-kata/references/ch04.bib): CrowdFlower 2016 Data Science Report の旧 Figure Eight URL を現行参照先へ差し替える
-- `MANUAL-0002` [16_hpc.md](/Users/itoshi/Projects/writing/ai-biocode-kata/chapters/16_hpc.md): Australian BioCommons HPC ガイドの旧 URL を現行ページまたは代替資料へ差し替える
-- `MANUAL-0003` [references/ch16.bib](/Users/itoshi/Projects/writing/ai-biocode-kata/references/ch16.bib): CISA 参考文献を個別ページ URL に差し替える
-- `MANUAL-0004` [references/ch16.bib](/Users/itoshi/Projects/writing/ai-biocode-kata/references/ch16.bib): Australian BioCommons の旧 URL を本文と合わせて更新する
-- `MANUAL-0005` [references/ch17.bib](/Users/itoshi/Projects/writing/ai-biocode-kata/references/ch17.bib): `memory_profiler` の旧 GitHub URL を現行公開先へ差し替える
 
 ### B: 品質維持のために対応したい項目
 
@@ -34,5 +22,6 @@
 
 ## 関連資料
 
+- URL 到達性レビュー実行メモ: [pending_url_review.md](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_url_review.md)
 - アーカイブ済みレビュー台帳: [docs_review](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/archive/review-2026-03-25/docs_review/README.md)
 - 旧スナップショット: [review_results](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/archive/review-2026-03-25/review_results)
