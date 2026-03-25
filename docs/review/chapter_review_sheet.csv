@@ -2,8 +2,8 @@ chapter_file,chapter_title,headings,code_fences,external_refs,local_links,broken
 00_ai_agent.md,§0 AIエージェントにコードを書かせる（2026年のベストプラクティス）,54,10,46,39,0,0,0,0,0,reviewed,,,,,,2026-03-25 内容査読: CLI の認証説明をアカウントサインイン/API キーに一般化
 01_design.md,§1 設計原則 — 良いコードとは何か,30,9,24,9,0,0,0,0,0,,,,,,,
 02_terminal.md,§2 ターミナルとシェルの基本操作,47,30,14,10,0,0,0,0,0,,,,,,,
-03_cs_basics.md,§3 コーディングに必要な計算機科学,53,25,44,8,0,0,0,0,0,,,,,,,
-04_data_formats.md,§4 データフォーマットの選び方,31,11,38,13,0,0,0,0,0,reviewed,,,,,,2026-03-25 内容査読: CrowdFlower 調査の出典を実在URL付きの二次資料へ修正
+03_cs_basics.md,§3 コーディングに必要な計算機科学,53,26,46,8,0,0,0,0,0,rechecked,,,,,,2026-03-25 ターゲット修正: CSVと浮動小数点の説明を現代Pythonと実務運用に合わせて再設計し Python内部の問題から外部ツール由来の丸めへ論点を修正
+04_data_formats.md,§4 データフォーマットの選び方,31,11,38,12,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: CrowdFlower 調査の出典を実在URL付きの二次資料へ修正; 2026-03-25 CSV例を標準ライブラリ中心に再設計し scripts/ch04 依存を後景化
 05_software_components.md,§5 ソフトウェアの構成要素 — importからpipまで,44,23,14,36,0,0,0,0,0,,,,,,,
 06_dev_environment.md,§6 Python環境の構築 — pyenv・venv・conda・uv,24,13,22,8,0,0,0,0,0,,,,,,,
 07_git.md,§7 Git入門 — コードのバージョン管理,39,21,38,13,0,0,0,0,0,,,,,,,
@@ -19,8 +19,8 @@ chapter_file,chapter_title,headings,code_fences,external_refs,local_links,broken
 17_performance.md,§17 コードのパフォーマンス改善 — プロファイリングと高速化,51,37,22,16,0,0,0,0,0,,,,,,,
 18_documentation.md,§18 コードのドキュメント化,31,27,29,21,0,0,0,0,0,,,,,,,
 19_database_api.md,§19 公共データベースとAPI — データ取得の実践,54,18,49,23,0,0,0,0,0,reviewed,,,,,,2026-03-25 内容査読: SPARQL と REST API の分類を修正
-20_security_ethics.md,§20 コードとデータのセキュリティ・倫理,48,11,35,13,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: JSPS DMP の運用表現と保存期間の断定を修正; 2026-03-25 Llama-3.1/gpt-oss のモデル属性誤記を修正; 2026-03-25 Llama-3.1 を実務推奨一覧から除外
-21_collaboration.md,§21 共同開発の実践 — レビュー・質問・OSS参加,67,14,26,17,0,0,0,0,0,reviewed,,,,,,2026-03-25 内容査読: Stack Overflow/Biostars の運用に合わせて質問支援の記述を修正
+20_security_ethics.md,§20 コードとデータのセキュリティ・倫理,48,11,36,13,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: JSPS DMP の運用表現と保存期間の断定を修正; 2026-03-25 Llama-3.1/gpt-oss のモデル属性誤記を修正; 2026-03-25 Llama-3.1 を実務推奨一覧から除外
+21_collaboration.md,§21 共同開発の実践 — レビュー・質問・OSS参加,67,14,26,17,0,0,0,0,0,rechecked,,,,,,2026-03-25 内容査読: Stack Overflow/Biostars の運用に合わせて質問支援の記述を修正; 2026-03-25 `$p$値` のレンダリング問題を FDR / adjusted p-value への整理で解消
 appendix_a_learning_patterns.md,付録A. AIコーディングエージェントとの効果的な学習パターン,8,0,9,12,0,0,0,0,0,,,,,,,
 appendix_b_cli_reference.md,付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表,7,0,4,5,0,0,0,0,0,,,,,,,
 appendix_c_checklist.md,付録C. 論文投稿前チェックリスト,7,0,0,27,0,0,0,0,0,,,,,,,

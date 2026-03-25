@@ -300,19 +300,40 @@ print(math.fsum(values))  # → 1.0（正確）
 
 発現量（TPM, FPKM）の正規化計算や、大量のスコアの合計など、精度が重要な集計では `math.fsum()` を使うとよい[4](https://docs.python.org/3/library/math.html#math.fsum)。古いPythonでは `sum()` でも同様の誤差が見えることがある。
 
-### CSV round-trip による丸め誤差の蓄積
+### テキスト化と外部ツールによる丸め誤差
 
-丸め誤差が蓄積するもう一つの典型的な経路が、**CSVファイルを介したデータの受け渡し**である。浮動小数点数をCSVに書き出すとき、テキスト表現に変換される際に桁数が制限される。そのCSVを読み込んで計算し、再びCSVに書き出す——このround-tripを繰り返すたびに、微小な精度の劣化が蓄積していく。
+丸め誤差が混入する典型的な経路の一つが、**浮動小数点数を人間向けのテキストへ変換する処理**である。重要なのは、現代の Python 標準ライブラリ既定挙動では、float をそのまま CSV に書いて読み戻すだけなら通常は値が保たれることだ。Python 3.1 以降、`repr(float)` は値を変えずに復元できる最短表現を選ぶようになった[13](https://docs.python.org/ja/3.13/whatsnew/3.1.html)。
 
-バイオインフォマティクスのパイプラインでは、この問題が実際に起こりやすい。たとえば遺伝子発現解析で:
+問題になるのは、表示用に桁数を丸めて保存する場合や、Excel・R・別のツールが有限桁で保存し直す場合である。次の例では、CSVそのものではなく**保存前の丸め**によって情報が失われる。
 
-1. 正規化した発現量行列をCSVに出力
-2. 別のスクリプトでCSVを読み込み、フィルタリングしてCSVに出力
-3. さらに別のスクリプトでCSVを読み込み、差異解析を実行
+```python
+import csv
+import io
+import math
 
-というように、ステップごとにCSVを介してデータを受け渡す多段パイプラインを組むと、各ステップでわずかな精度劣化が生じ、最終結果に無視できない誤差が混入することがある。
+x = math.pi
 
-**対策**: 中間データはバイナリ形式で保存する。NumPy配列なら `.npy`、シングルセル解析なら `.h5ad`（AnnData形式）、表形式データなら `.parquet` が適している。CSVは最終的に人間が確認するための出力や、他のツールとの受け渡しにのみ使う。
+# 表示用に小数点以下6桁へ丸めて保存
+buf = io.StringIO()
+csv.writer(buf).writerow([format(x, ".6f")])
+
+# 読み戻す
+y = float(next(csv.reader(io.StringIO(buf.getvalue())))[0])
+
+print(x)       # 3.141592653589793
+print(y)       # 3.141593
+print(y == x)  # False
+```
+
+これは「CSVが壊した」のではなく、**有限桁のテキストとして保存した時点で元の情報が落ちた**ためである。`pandas.to_csv(float_format="%.6f")`、Excel での再保存、報告用に小数点以下を丸めた TSV/CSV も、同じ種類の問題を引き起こす。
+
+バイオインフォマティクスの実務では、この問題はたとえば次のような経路で起こる。
+
+1. Python で正規化した発現量行列を計算する
+2. 人手確認のために Excel や報告用 CSV へ出力する
+3. そのファイルを別スクリプトが再び読み込んで解析を続ける
+
+**対策**: 中間データはバイナリ形式で保存し、表示用の CSV/TSV を解析パイプラインへ戻さない。NumPy配列なら `.npy`、シングルセル解析なら `.h5ad`（AnnData形式）、表形式データなら `.parquet` が適している。CSVは最終的に人間が確認するための出力や、他のツールとの受け渡しにのみ使う。
 
 ```python
 import numpy as np
@@ -714,7 +735,7 @@ AIが生成するコードや、ライブラリのドキュメントで見かけ
 | データ構造 | 検索には set/dict($O(1)$)を使う | listの `in` で10万件検索 → 遅い |
 | 浮動小数点 | `==` ではなく `math.isclose()` で比較 | TPM値が「一致しない」 |
 | 丸め誤差 | `math.fsum()` で高精度に合計 | sum()で0.1を10回足すと1.0にならない |
-| CSV round-trip | 中間データはバイナリ形式で保存 | CSV出力→読込の繰返しで精度劣化 |
+| CSV/テキスト出力 | 中間データはバイナリ形式で保存 | Excelや有限桁出力を介すと丸め誤差 |
 | NaN | `math.isnan()` で判定する | `NaN == NaN` は `False` |
 | 文字エンコーディング | UTF-8を明示、改行コードに注意 | Windows由来ファイルの `\r` 混入 |
 | 乱数 | `default_rng(seed)` でシード固定 | UMAPの結果が毎回変わる |
@@ -818,6 +839,8 @@ print(sum(tpm_values) == 1.0)       # False
 [11] van der Maaten, L., Hinton, G. "Visualizing Data using t-SNE". *Journal of Machine Learning Research*, 9, 2579–2605, 2008. [https://jmlr.org/papers/v9/vandermaaten08a.html](https://jmlr.org/papers/v9/vandermaaten08a.html)
 
 [12] Adams, D. *The Hitchhiker's Guide to the Galaxy*. Pan Books, 1979. [https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy)
+
+[13] Python Software Foundation. "What’s New In Python 3.1". *Python 3 Documentation*. [https://docs.python.org/ja/3.13/whatsnew/3.1.html](https://docs.python.org/ja/3.13/whatsnew/3.1.html) (参照日: 2026-03-25)
 
 [13] Altschul, S. F. et al. "Basic local alignment search tool". *J. Mol. Biol.*, 215(3), 403–410, 1990. [https://doi.org/10.1016/S0022-2836%2805%2980360-2](https://doi.org/10.1016/S0022-2836%2805%2980360-2)
 

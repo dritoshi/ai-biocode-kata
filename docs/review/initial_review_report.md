@@ -3,7 +3,7 @@
 ## 概要
 
 - 対象ファイル数: 29
-- 参照レジストリ件数: 1240
+- 参照レジストリ件数: 1242
 - 自動検出された指摘件数: 0
 - 重大度内訳: S=0, A=0, B=0, C=0
 
@@ -19,8 +19,8 @@
 | 00_ai_agent.md | 46 | 39 | 0 | 0 | 0 | 0 |
 | 01_design.md | 24 | 9 | 0 | 0 | 0 | 0 |
 | 02_terminal.md | 14 | 10 | 0 | 0 | 0 | 0 |
-| 03_cs_basics.md | 44 | 8 | 0 | 0 | 0 | 0 |
-| 04_data_formats.md | 38 | 13 | 0 | 0 | 0 | 0 |
+| 03_cs_basics.md | 46 | 8 | 0 | 0 | 0 | 0 |
+| 04_data_formats.md | 38 | 12 | 0 | 0 | 0 | 0 |
 | 05_software_components.md | 14 | 36 | 0 | 0 | 0 | 0 |
 | 06_dev_environment.md | 22 | 8 | 0 | 0 | 0 | 0 |
 | 07_git.md | 38 | 13 | 0 | 0 | 0 | 0 |
@@ -36,7 +36,7 @@
 | 17_performance.md | 22 | 16 | 0 | 0 | 0 | 0 |
 | 18_documentation.md | 29 | 21 | 0 | 0 | 0 | 0 |
 | 19_database_api.md | 49 | 23 | 0 | 0 | 0 | 0 |
-| 20_security_ethics.md | 35 | 13 | 0 | 0 | 0 | 0 |
+| 20_security_ethics.md | 36 | 13 | 0 | 0 | 0 | 0 |
 | 21_collaboration.md | 26 | 17 | 0 | 0 | 0 | 0 |
 | appendix_a_learning_patterns.md | 9 | 12 | 0 | 0 | 0 | 0 |
 | appendix_b_cli_reference.md | 4 | 5 | 0 | 0 | 0 | 0 |

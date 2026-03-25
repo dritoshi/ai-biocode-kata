@@ -147,42 +147,42 @@ chapter_file,line,heading_level,heading_text,anchor_slug
 03_cs_basics.md,247,3,整数型のビット幅,整数型のビット幅
 03_cs_basics.md,265,3,IEEE 754 浮動小数点 — 0.1 + 0.2 != 0.3 問題,ieee-754-浮動小数点--01--02--03-問題
 03_cs_basics.md,279,3,丸め誤差の蓄積,丸め誤差の蓄積
-03_cs_basics.md,303,3,CSV round-trip による丸め誤差の蓄積,csv-round-trip-による丸め誤差の蓄積
-03_cs_basics.md,329,3,浮動小数点の比較,浮動小数点の比較
-03_cs_basics.md,345,3,特殊な値: inf と NaN,特殊な値-inf-と-nan
-03_cs_basics.md,365,4,エージェントへの指示例,エージェントへの指示例
-03_cs_basics.md,382,2,3-3. 文字エンコーディング,3-3-文字エンコーディング
-03_cs_basics.md,384,3,ASCII と UTF-8,ascii-と-utf-8
-03_cs_basics.md,399,3,改行コードの罠 — LF vs CR+LF,改行コードの罠--lf-vs-crlf
-03_cs_basics.md,431,3,バイトオーダー（エンディアン）,バイトオーダーエンディアン
-03_cs_basics.md,437,2,3-4. 乱数と再現性,3-4-乱数と再現性
-03_cs_basics.md,439,3,擬似乱数生成器（PRNG）,擬似乱数生成器prng
-03_cs_basics.md,445,3,シード固定の実践,シード固定の実践
-03_cs_basics.md,477,3,論文にシード値を記録する,論文にシード値を記録する
-03_cs_basics.md,492,4,エージェントへの指示例,エージェントへの指示例
-03_cs_basics.md,518,2,3-5. 計算機アーキテクチャの基礎,3-5-計算機アーキテクチャの基礎
-03_cs_basics.md,520,3,メモリ階層,メモリ階層
-03_cs_basics.md,534,3,行優先（C order）vs 列優先（Fortran order）,行優先c-ordervs-列優先fortran-order
-03_cs_basics.md,550,3,CPU vs GPU,cpu-vs-gpu
-03_cs_basics.md,561,3,I/Oバウンド vs コンピュートバウンド,ioバウンド-vs-コンピュートバウンド
-03_cs_basics.md,570,3,ネットワークファイルシステム,ネットワークファイルシステム
-03_cs_basics.md,606,2,3-6. Pythonの型ヒント — 動的言語に静的解析の恩恵を持ち込む,3-6-pythonの型ヒント--動的言語に静的解析の恩恵を持ち込む
-03_cs_basics.md,612,3,基本型と関数シグネチャ,基本型と関数シグネチャ
-03_cs_basics.md,651,3,コレクション型,コレクション型
-03_cs_basics.md,662,3,OptionalとUnion — 値がないかもしれない場合,optionalとunion--値がないかもしれない場合
-03_cs_basics.md,682,3,よく見るジェネリック型,よく見るジェネリック型
-03_cs_basics.md,696,4,エージェントへの指示例,エージェントへの指示例
-03_cs_basics.md,708,2,まとめ,まとめ
-03_cs_basics.md,728,2,演習問題,演習問題
-03_cs_basics.md,732,3,演習 3-1: データ構造の選択ミス [レビュー],演習-3-1-データ構造の選択ミス-レビュー
-03_cs_basics.md,748,3,演習 3-2: 浮動小数点の罠 [概念],演習-3-2-浮動小数点の罠-概念
-03_cs_basics.md,761,3,演習 3-3: 乱数シードの管理 [設計判断],演習-3-3-乱数シードの管理-設計判断
-03_cs_basics.md,767,3,演習 3-4: 計算量を意識した指示 [指示設計],演習-3-4-計算量を意識した指示-指示設計
-03_cs_basics.md,775,2,さらに学びたい読者へ,さらに学びたい読者へ
-03_cs_basics.md,779,3,アルゴリズムとデータ構造,アルゴリズムとデータ構造
-03_cs_basics.md,785,3,バイオインフォマティクスのアルゴリズム,バイオインフォマティクスのアルゴリズム
-03_cs_basics.md,790,3,浮動小数点演算,浮動小数点演算
-03_cs_basics.md,796,2,参考文献,参考文献
+03_cs_basics.md,303,3,テキスト化と外部ツールによる丸め誤差,テキスト化と外部ツールによる丸め誤差
+03_cs_basics.md,350,3,浮動小数点の比較,浮動小数点の比較
+03_cs_basics.md,366,3,特殊な値: inf と NaN,特殊な値-inf-と-nan
+03_cs_basics.md,386,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,403,2,3-3. 文字エンコーディング,3-3-文字エンコーディング
+03_cs_basics.md,405,3,ASCII と UTF-8,ascii-と-utf-8
+03_cs_basics.md,420,3,改行コードの罠 — LF vs CR+LF,改行コードの罠--lf-vs-crlf
+03_cs_basics.md,452,3,バイトオーダー（エンディアン）,バイトオーダーエンディアン
+03_cs_basics.md,458,2,3-4. 乱数と再現性,3-4-乱数と再現性
+03_cs_basics.md,460,3,擬似乱数生成器（PRNG）,擬似乱数生成器prng
+03_cs_basics.md,466,3,シード固定の実践,シード固定の実践
+03_cs_basics.md,498,3,論文にシード値を記録する,論文にシード値を記録する
+03_cs_basics.md,513,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,539,2,3-5. 計算機アーキテクチャの基礎,3-5-計算機アーキテクチャの基礎
+03_cs_basics.md,541,3,メモリ階層,メモリ階層
+03_cs_basics.md,555,3,行優先（C order）vs 列優先（Fortran order）,行優先c-ordervs-列優先fortran-order
+03_cs_basics.md,571,3,CPU vs GPU,cpu-vs-gpu
+03_cs_basics.md,582,3,I/Oバウンド vs コンピュートバウンド,ioバウンド-vs-コンピュートバウンド
+03_cs_basics.md,591,3,ネットワークファイルシステム,ネットワークファイルシステム
+03_cs_basics.md,627,2,3-6. Pythonの型ヒント — 動的言語に静的解析の恩恵を持ち込む,3-6-pythonの型ヒント--動的言語に静的解析の恩恵を持ち込む
+03_cs_basics.md,633,3,基本型と関数シグネチャ,基本型と関数シグネチャ
+03_cs_basics.md,672,3,コレクション型,コレクション型
+03_cs_basics.md,683,3,OptionalとUnion — 値がないかもしれない場合,optionalとunion--値がないかもしれない場合
+03_cs_basics.md,703,3,よく見るジェネリック型,よく見るジェネリック型
+03_cs_basics.md,717,4,エージェントへの指示例,エージェントへの指示例
+03_cs_basics.md,729,2,まとめ,まとめ
+03_cs_basics.md,749,2,演習問題,演習問題
+03_cs_basics.md,753,3,演習 3-1: データ構造の選択ミス [レビュー],演習-3-1-データ構造の選択ミス-レビュー
+03_cs_basics.md,769,3,演習 3-2: 浮動小数点の罠 [概念],演習-3-2-浮動小数点の罠-概念
+03_cs_basics.md,782,3,演習 3-3: 乱数シードの管理 [設計判断],演習-3-3-乱数シードの管理-設計判断
+03_cs_basics.md,788,3,演習 3-4: 計算量を意識した指示 [指示設計],演習-3-4-計算量を意識した指示-指示設計
+03_cs_basics.md,796,2,さらに学びたい読者へ,さらに学びたい読者へ
+03_cs_basics.md,800,3,アルゴリズムとデータ構造,アルゴリズムとデータ構造
+03_cs_basics.md,806,3,バイオインフォマティクスのアルゴリズム,バイオインフォマティクスのアルゴリズム
+03_cs_basics.md,811,3,浮動小数点演算,浮動小数点演算
+03_cs_basics.md,817,2,参考文献,参考文献
 04_data_formats.md,1,1,§4 データフォーマットの選び方,4-データフォーマットの選び方
 04_data_formats.md,11,2,4-0. データとメタデータ,4-0-データとメタデータ
 04_data_formats.md,13,3,データとメタデータの定義,データとメタデータの定義
@@ -190,30 +190,30 @@ chapter_file,line,heading_level,heading_text,anchor_slug
 04_data_formats.md,37,3,FAIR原則 — データ管理の指導原理,fair原則--データ管理の指導原理
 04_data_formats.md,60,2,4-1. 汎用フォーマット,4-1-汎用フォーマット
 04_data_formats.md,64,3,TSV / CSV — 表形式データの基本,tsv--csv--表形式データの基本
-04_data_formats.md,104,3,JSON — 構造化データ,json--構造化データ
-04_data_formats.md,125,3,YAML / TOML — 設定ファイル,yaml--toml--設定ファイル
-04_data_formats.md,160,3,Markdown — ドキュメント記述,markdown--ドキュメント記述
-04_data_formats.md,328,4,エージェントへの指示例,エージェントへの指示例
-04_data_formats.md,342,2,4-2. フォーマット選択の判断基準,4-2-フォーマット選択の判断基準
-04_data_formats.md,344,3,テキスト vs バイナリ,テキスト-vs-バイナリ
-04_data_formats.md,363,3,圧縮の選択,圧縮の選択
-04_data_formats.md,375,3,インデックス付きフォーマットの利点,インデックス付きフォーマットの利点
-04_data_formats.md,397,3,下流ツールから逆算する,下流ツールから逆算する
-04_data_formats.md,410,3,機械可読なデータ形式の条件,機械可読なデータ形式の条件
-04_data_formats.md,429,3,AIコーディングエージェントで機械可読形式に変換する,aiコーディングエージェントで機械可読形式に変換する
-04_data_formats.md,481,3,tidy data,tidy-data
-04_data_formats.md,636,4,エージェントへの指示例,エージェントへの指示例
-04_data_formats.md,681,2,まとめ,まとめ
-04_data_formats.md,703,2,演習問題,演習問題
-04_data_formats.md,707,3,演習 4-1: 中間データの保存形式 [設計判断],演習-4-1-中間データの保存形式-設計判断
-04_data_formats.md,713,3,演習 4-2: tidy dataへの変換判断 [レビュー],演習-4-2-tidy-dataへの変換判断-レビュー
-04_data_formats.md,727,3,演習 4-3: エンコーディングの罠 [レビュー],演習-4-3-エンコーディングの罠-レビュー
-04_data_formats.md,739,3,演習 4-4: BAMの部分取得 [実践],演習-4-4-bamの部分取得-実践
-04_data_formats.md,751,2,さらに学びたい読者へ,さらに学びたい読者へ
-04_data_formats.md,755,3,データ管理の原則,データ管理の原則
-04_data_formats.md,760,3,バイオインフォマティクスのファイル形式,バイオインフォマティクスのファイル形式
-04_data_formats.md,765,3,データ処理の実践書,データ処理の実践書
-04_data_formats.md,771,2,参考文献,参考文献
+04_data_formats.md,122,3,JSON — 構造化データ,json--構造化データ
+04_data_formats.md,143,3,YAML / TOML — 設定ファイル,yaml--toml--設定ファイル
+04_data_formats.md,178,3,Markdown — ドキュメント記述,markdown--ドキュメント記述
+04_data_formats.md,346,4,エージェントへの指示例,エージェントへの指示例
+04_data_formats.md,360,2,4-2. フォーマット選択の判断基準,4-2-フォーマット選択の判断基準
+04_data_formats.md,362,3,テキスト vs バイナリ,テキスト-vs-バイナリ
+04_data_formats.md,381,3,圧縮の選択,圧縮の選択
+04_data_formats.md,393,3,インデックス付きフォーマットの利点,インデックス付きフォーマットの利点
+04_data_formats.md,415,3,下流ツールから逆算する,下流ツールから逆算する
+04_data_formats.md,428,3,機械可読なデータ形式の条件,機械可読なデータ形式の条件
+04_data_formats.md,447,3,AIコーディングエージェントで機械可読形式に変換する,aiコーディングエージェントで機械可読形式に変換する
+04_data_formats.md,501,3,tidy data,tidy-data
+04_data_formats.md,667,4,エージェントへの指示例,エージェントへの指示例
+04_data_formats.md,712,2,まとめ,まとめ
+04_data_formats.md,734,2,演習問題,演習問題
+04_data_formats.md,738,3,演習 4-1: 中間データの保存形式 [設計判断],演習-4-1-中間データの保存形式-設計判断
+04_data_formats.md,744,3,演習 4-2: tidy dataへの変換判断 [レビュー],演習-4-2-tidy-dataへの変換判断-レビュー
+04_data_formats.md,758,3,演習 4-3: エンコーディングの罠 [レビュー],演習-4-3-エンコーディングの罠-レビュー
+04_data_formats.md,770,3,演習 4-4: BAMの部分取得 [実践],演習-4-4-bamの部分取得-実践
+04_data_formats.md,782,2,さらに学びたい読者へ,さらに学びたい読者へ
+04_data_formats.md,786,3,データ管理の原則,データ管理の原則
+04_data_formats.md,791,3,バイオインフォマティクスのファイル形式,バイオインフォマティクスのファイル形式
+04_data_formats.md,796,3,データ処理の実践書,データ処理の実践書
+04_data_formats.md,802,2,参考文献,参考文献
 05_software_components.md,1,1,§5 ソフトウェアの構成要素 — importからpipまで,5-ソフトウェアの構成要素--importからpipまで
 05_software_components.md,11,2,5-1. プログラムはどう動くか,5-1-プログラムはどう動くか
 05_software_components.md,13,3,インタプリタ言語とコンパイル言語,インタプリタ言語とコンパイル言語
