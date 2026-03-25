@@ -273,15 +273,15 @@ chapter_file,line,heading_level,heading_text,anchor_slug
 06_dev_environment.md,227,3,パッケージマネージャが解決する問題,パッケージマネージャが解決する問題
 06_dev_environment.md,238,3,パッケージマネージャの使い分け,パッケージマネージャの使い分け
 06_dev_environment.md,254,3,ロックファイル — 再現性の鍵,ロックファイル--再現性の鍵
-06_dev_environment.md,287,3,チャネルとレジストリ,チャネルとレジストリ
-06_dev_environment.md,311,4,エージェントへの指示例,エージェントへの指示例
-06_dev_environment.md,393,2,まとめ,まとめ
-06_dev_environment.md,415,2,演習問題,演習問題
-06_dev_environment.md,419,3,演習 6-1: 環境管理ツールの選択 [設計判断],演習-6-1-環境管理ツールの選択-設計判断
-06_dev_environment.md,431,3,演習 6-2: requirements.txtの問題 [レビュー],演習-6-2-requirementstxtの問題-レビュー
-06_dev_environment.md,447,3,演習 6-3: 環境の隔離テスト [実践],演習-6-3-環境の隔離テスト-実践
-06_dev_environment.md,460,2,さらに学びたい読者へ,さらに学びたい読者へ
-06_dev_environment.md,470,2,参考文献,参考文献
+06_dev_environment.md,289,3,チャネルとレジストリ,チャネルとレジストリ
+06_dev_environment.md,313,4,エージェントへの指示例,エージェントへの指示例
+06_dev_environment.md,395,2,まとめ,まとめ
+06_dev_environment.md,417,2,演習問題,演習問題
+06_dev_environment.md,421,3,演習 6-1: 環境管理ツールの選択 [設計判断],演習-6-1-環境管理ツールの選択-設計判断
+06_dev_environment.md,433,3,演習 6-2: requirements.txtの問題 [レビュー],演習-6-2-requirementstxtの問題-レビュー
+06_dev_environment.md,449,3,演習 6-3: 環境の隔離テスト [実践],演習-6-3-環境の隔離テスト-実践
+06_dev_environment.md,462,2,さらに学びたい読者へ,さらに学びたい読者へ
+06_dev_environment.md,472,2,参考文献,参考文献
 07_git.md,1,1,§7 Git入門 — コードのバージョン管理,7-git入門--コードのバージョン管理
 07_git.md,13,2,7-1. Gitの基礎,7-1-gitの基礎
 07_git.md,15,3,なぜバージョン管理か,なぜバージョン管理か
@@ -622,7 +622,7 @@ chapter_file,line,heading_level,heading_text,anchor_slug
 15_container.md,181,3,レイヤーキャッシュの仕組みと最適化,レイヤーキャッシュの仕組みと最適化
 15_container.md,216,3,マルチステージビルド,マルチステージビルド
 15_container.md,248,3,ボリュームマウント — 大規模データの扱い,ボリュームマウント--大規模データの扱い
-15_container.md,264,3,docker compose,docker-compose
+15_container.md,264,3,Docker Compose,docker-compose
 15_container.md,298,3,エージェントとDockerの連携,エージェントとdockerの連携
 15_container.md,300,4,セキュリティ制約,セキュリティ制約
 15_container.md,322,4,承認ありモードでDockerfileを反復構築する,承認ありモードでdockerfileを反復構築する
@@ -631,49 +631,49 @@ chapter_file,line,heading_level,heading_text,anchor_slug
 15_container.md,388,3,HPCでDockerが使えない理由,hpcでdockerが使えない理由
 15_container.md,399,3,Dockerイメージからの変換,dockerイメージからの変換
 15_container.md,414,3,Apptainer定義ファイル,apptainer定義ファイル
-15_container.md,453,3,Docker vs. Apptainer コマンド対照表,docker-vs-apptainer-コマンド対照表
-15_container.md,475,3,GPUコンテナ,gpuコンテナ
-15_container.md,506,4,エージェントへの指示例,エージェントへの指示例
-15_container.md,518,2,15-4. 再現性のレベル,15-4-再現性のレベル
-15_container.md,522,3,4段階のスペクトラム,4段階のスペクトラム
-15_container.md,531,3,コスト vs. 再現性の比較,コスト-vs-再現性の比較
-15_container.md,537,3,両方を併用する戦略,両方を併用する戦略
-15_container.md,560,4,エージェントへの指示例,エージェントへの指示例
-15_container.md,572,2,15-5. 論文投稿時の再現性パッケージング,15-5-論文投稿時の再現性パッケージング
-15_container.md,574,3,三点セットの原則,三点セットの原則
-15_container.md,584,3,コンテナイメージの公開,コンテナイメージの公開
-15_container.md,609,3,バージョン固定の実践,バージョン固定の実践
-15_container.md,631,3,論文レビュー対応,論文レビュー対応
-15_container.md,662,3,再現性パッケージのディレクトリ構成例,再現性パッケージのディレクトリ構成例
-15_container.md,680,3,Dockerfileのベストプラクティス検証,dockerfileのベストプラクティス検証
-15_container.md,707,4,エージェントへの指示例,エージェントへの指示例
-15_container.md,723,2,15-6. 🤖 実験管理（ML/計算実験の追跡）,15-6--実験管理ml計算実験の追跡
-15_container.md,731,3,なぜ実験管理が必要か,なぜ実験管理が必要か
-15_container.md,733,4,「先週のあの結果」問題,先週のあの結果問題
-15_container.md,743,4,管理すべき3つの要素,管理すべき3つの要素
-15_container.md,753,4,Gitとの違い,gitとの違い
-15_container.md,766,4,エージェントへの指示例,エージェントへの指示例
-15_container.md,776,3,実験追跡ツール,実験追跡ツール
-15_container.md,778,4,ツールの比較,ツールの比較
-15_container.md,789,4,wandb — クラウドベースの実験追跡,wandb--クラウドベースの実験追跡
-15_container.md,828,4,MLflow — オンプレミス対応の実験追跡,mlflow--オンプレミス対応の実験追跡
-15_container.md,863,4,ツール選択の判断基準,ツール選択の判断基準
-15_container.md,875,4,エージェントへの指示例,エージェントへの指示例
-15_container.md,885,3,最小限の実験管理パターン,最小限の実験管理パターン
-15_container.md,887,4,ツール導入前に始められる自前実装,ツール導入前に始められる自前実装
-15_container.md,925,4,段階的な導入パス,段階的な導入パス
-15_container.md,956,4,エージェントへの指示例,エージェントへの指示例
-15_container.md,968,2,まとめ,まとめ
-15_container.md,1001,2,演習問題,演習問題
-15_container.md,1005,3,演習 15-1: Dockerfile のレビュー [レビュー],演習-15-1-dockerfile-のレビュー-レビュー
-15_container.md,1025,3,演習 15-2: 再現性レベルの選択 [設計判断],演習-15-2-再現性レベルの選択-設計判断
-15_container.md,1036,3,演習 15-3: Docker と Apptainer の使い分け [概念],演習-15-3-docker-と-apptainer-の使い分け-概念
-15_container.md,1042,3,演習 15-4: コンテナの動作確認 [実践],演習-15-4-コンテナの動作確認-実践
-15_container.md,1054,2,さらに学びたい読者へ,さらに学びたい読者へ
-15_container.md,1058,3,研究再現性とコンテナ,研究再現性とコンテナ
-15_container.md,1063,3,バイオインフォマティクスのコンテナ化,バイオインフォマティクスのコンテナ化
-15_container.md,1067,3,公式ドキュメント,公式ドキュメント
-15_container.md,1074,2,参考文献,参考文献
+15_container.md,456,3,Docker vs. Apptainer コマンド対照表,docker-vs-apptainer-コマンド対照表
+15_container.md,478,3,GPUコンテナ,gpuコンテナ
+15_container.md,509,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,521,2,15-4. 再現性のレベル,15-4-再現性のレベル
+15_container.md,525,3,4段階のスペクトラム,4段階のスペクトラム
+15_container.md,534,3,コスト vs. 再現性の比較,コスト-vs-再現性の比較
+15_container.md,540,3,両方を併用する戦略,両方を併用する戦略
+15_container.md,563,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,575,2,15-5. 論文投稿時の再現性パッケージング,15-5-論文投稿時の再現性パッケージング
+15_container.md,577,3,三点セットの原則,三点セットの原則
+15_container.md,587,3,コンテナイメージの公開,コンテナイメージの公開
+15_container.md,612,3,バージョン固定の実践,バージョン固定の実践
+15_container.md,634,3,論文レビュー対応,論文レビュー対応
+15_container.md,665,3,再現性パッケージのディレクトリ構成例,再現性パッケージのディレクトリ構成例
+15_container.md,683,3,Dockerfileのベストプラクティス検証,dockerfileのベストプラクティス検証
+15_container.md,710,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,726,2,15-6. 🤖 実験管理（ML/計算実験の追跡）,15-6--実験管理ml計算実験の追跡
+15_container.md,734,3,なぜ実験管理が必要か,なぜ実験管理が必要か
+15_container.md,736,4,「先週のあの結果」問題,先週のあの結果問題
+15_container.md,746,4,管理すべき3つの要素,管理すべき3つの要素
+15_container.md,756,4,Gitとの違い,gitとの違い
+15_container.md,769,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,779,3,実験追跡ツール,実験追跡ツール
+15_container.md,781,4,ツールの比較,ツールの比較
+15_container.md,792,4,wandb — クラウドベースの実験追跡,wandb--クラウドベースの実験追跡
+15_container.md,831,4,MLflow — オンプレミス対応の実験追跡,mlflow--オンプレミス対応の実験追跡
+15_container.md,866,4,ツール選択の判断基準,ツール選択の判断基準
+15_container.md,878,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,888,3,最小限の実験管理パターン,最小限の実験管理パターン
+15_container.md,890,4,ツール導入前に始められる自前実装,ツール導入前に始められる自前実装
+15_container.md,928,4,段階的な導入パス,段階的な導入パス
+15_container.md,959,4,エージェントへの指示例,エージェントへの指示例
+15_container.md,971,2,まとめ,まとめ
+15_container.md,1004,2,演習問題,演習問題
+15_container.md,1008,3,演習 15-1: Dockerfile のレビュー [レビュー],演習-15-1-dockerfile-のレビュー-レビュー
+15_container.md,1028,3,演習 15-2: 再現性レベルの選択 [設計判断],演習-15-2-再現性レベルの選択-設計判断
+15_container.md,1039,3,演習 15-3: Docker と Apptainer の使い分け [概念],演習-15-3-docker-と-apptainer-の使い分け-概念
+15_container.md,1045,3,演習 15-4: コンテナの動作確認 [実践],演習-15-4-コンテナの動作確認-実践
+15_container.md,1057,2,さらに学びたい読者へ,さらに学びたい読者へ
+15_container.md,1061,3,研究再現性とコンテナ,研究再現性とコンテナ
+15_container.md,1066,3,バイオインフォマティクスのコンテナ化,バイオインフォマティクスのコンテナ化
+15_container.md,1070,3,公式ドキュメント,公式ドキュメント
+15_container.md,1077,2,参考文献,参考文献
 16_hpc.md,1,1,§16 スパコン・クラスタでの大規模計算,16-スパコンクラスタでの大規模計算
 16_hpc.md,11,2,16-1. HPCの基本,16-1-hpcの基本
 16_hpc.md,13,3,HPCクラスタの構成,hpcクラスタの構成

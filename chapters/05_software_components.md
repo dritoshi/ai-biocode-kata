@@ -51,10 +51,10 @@ C/C++プログラムがソースコードから実行ファイルになるまで
 
 [§2 ターミナルとシェルの基本操作](./02_terminal.md#2-3-環境変数とパス)で学んだPATH環境変数は「実行ファイルの検索パス」だった。共有ライブラリにも同様の仕組みがある:
 
-| 対象 | 環境変数 | 用途 |
-|------|---------|------|
+| 対象 | 代表的な仕組み | 用途 |
+|------|----------------|------|
 | 実行ファイル | `PATH` | コマンドの検索 |
-| 共有ライブラリ | `LD_LIBRARY_PATH`（Linux） / `DYLD_LIBRARY_PATH`（macOS） | ライブラリの検索 |
+| 共有ライブラリ | `LD_LIBRARY_PATH`（Linux）, `DYLD_LIBRARY_PATH` や `rpath`（macOS） | ライブラリの検索・解決 |
 
 実行ファイルがどの共有ライブラリに依存しているかは、以下のコマンドで確認できる:
 
@@ -73,7 +73,7 @@ otool -L $(which samtools)
 #   ...
 ```
 
-出力の各行は「ライブラリ名 => 実際のファイルパス（メモリアドレス）」の形式で、`=>` の右側がOSが見つけたライブラリの実体パスを示す。ライブラリが見つからない場合は `not found` と表示される。
+Linux の `ldd` 出力では `=>` の右側が OS が見つけたライブラリの実体パスを示す。ライブラリが見つからない場合は `not found` と表示される。macOS の `otool -L` はライブラリのパスと互換バージョン情報を表示する。なお、macOS では System Integrity Protection (SIP) の影響で `DYLD_LIBRARY_PATH` が常に期待どおり働くとは限らないため、日常運用では package manager やコンテナで依存を揃えるほうが堅実である。
 
 この出力を見ると、samtools は libhts（HTSlibライブラリ）に依存し、libhts はさらに libz（圧縮ライブラリ）に依存していることがわかる。この連鎖のどこか1つが欠けても、samtools は起動できない。
 
@@ -202,7 +202,7 @@ print(f"site-packages: {site_pkg}")
 |------|---------------------|
 | venv | `.venv/lib/python3.x/site-packages/` |
 | conda | `envs/<名前>/lib/python3.x/site-packages/` |
-| システム | `/usr/lib/python3.x/site-packages/`（Linux） |
+| システム | 配布形態により異なる（例: `/usr/lib/python3.x/site-packages/`, `/usr/lib/python3/dist-packages/`） |
 
 仮想環境をアクティベートすると、まず `PATH` の先頭が切り替わり、その結果として仮想環境内の `python` が起動する。起動された `python` が自分の `site-packages` を `sys.path` に設定するため、プロジェクトごとに異なるバージョンのパッケージを使い分けられる。詳しくは[§6 Python環境の構築 — pyenv・venv・conda・uv](./06_dev_environment.md#6-1-pythonの環境管理)を参照。
 
@@ -217,7 +217,7 @@ export PYTHONPATH="/home/user/my_project/src:$PYTHONPATH"
 
 これにより、`/home/user/my_project/src/` 配下のモジュールをどこからでもインポートできるようになる。ただし、PYTHONPATHの手動設定はプロジェクトの可搬性を下げる。他の人がコードを使うとき、同じPYTHONPATHを設定する必要があるからである。
 
-推奨されるのは、[§10 ソフトウェア成果物の設計 — スクリプトからパッケージまで](./10_deliverables.md)で学ぶ `pip install -e .`（開発モードインストール）である。`pyproject.toml` にパッケージ情報を記述し、`pip install -e .` でsite-packagesにリンクを作成すれば、PYTHONPATHを操作せずに自作モジュールをインポートできる。
+推奨されるのは、[§10 ソフトウェア成果物の設計 — スクリプトからパッケージまで](./10_deliverables.md)で学ぶ `pip install -e .`（開発モードインストール）である。`pyproject.toml` にパッケージ情報を記述し、`pip install -e .` で site-packages 側に参照を追加すれば、PYTHONPATHを操作せずに自作モジュールをインポートできる。
 
 ### 絶対インポートと相対インポート
 

@@ -6,7 +6,7 @@
 
 この壁を超えるのが**コンテナ**（container）である。コンテナはアプリケーションとその依存関係（OS、ライブラリ、ツール）を丸ごとパッケージングし、どの計算機でも同一の実行環境を再現する技術である。
 
-AIエージェントはDockerfileや`docker-compose.yml`を生成できる。しかし、ベースイメージの選択（Miniforge3系かUbuntuか）、レイヤー構成の効率、HPCでのApptainer互換性、セキュリティ上のベストプラクティス——これらの設計判断は、実行環境とデータの特性を理解している人間がレビューしなければならない。
+AIエージェントはDockerfileや`compose.yaml`を生成できる。しかし、ベースイメージの選択（Miniforge3系かUbuntuか）、レイヤー構成の効率、HPCでのApptainer互換性、セキュリティ上のベストプラクティス——これらの設計判断は、実行環境とデータの特性を理解している人間がレビューしなければならない。
 
 本章では、コンテナの仕組みから、Docker・Apptainerの実践、論文投稿時の再現性パッケージングまでを学ぶ。
 
@@ -20,7 +20,7 @@ AIエージェントはDockerfileや`docker-compose.yml`を生成できる。し
 
 **場面1: 共同研究者への引き継ぎ。** 自分のMacBookで動いていたRNA-seqパイプラインを、共同研究者のLinuxサーバーに移したところ、STARが「shared library not found」エラーで起動しない。原因はlibhts.soのバージョン違いだった。
 
-ここで登場した`libhts.so`は**共有ライブラリ**（shared library）と呼ばれるファイルである。共有ライブラリとは、複数のプログラムが共通して使う機能をまとめたファイルのことで、samtools や STAR のようなC/C++製バイオツールが実行時に読み込む。[§2 ターミナルとシェルの基本操作](./02_terminal.md#2-3-環境変数とパス)で学んだ`PATH`が「実行ファイルの検索場所」であるように、共有ライブラリにも検索場所がある——Linuxでは`LD_LIBRARY_PATH`、macOSでは`DYLD_LIBRARY_PATH`という環境変数で指定する。condaはsamtools等をインストールするとき、対応するバージョンの`libhts`も一緒に環境内にインストールしてくれる。しかし、conda環境の外では、OSが`libhts.so`を見つけられず「shared library not found」エラーになる。共有ライブラリの仕組みの詳細は[§5 ソフトウェアの構成要素 — importからpipまで](./05_software_components.md#共有ライブラリとその管理)を参照してほしい。
+ここで登場した`libhts.so`は**共有ライブラリ**（shared library）と呼ばれるファイルである。共有ライブラリとは、複数のプログラムが共通して使う機能をまとめたファイルのことで、samtools や STAR のようなC/C++製バイオツールが実行時に読み込む。[§2 ターミナルとシェルの基本操作](./02_terminal.md#2-3-環境変数とパス)で学んだ`PATH`が「実行ファイルの検索場所」であるように、共有ライブラリにも検索と解決の仕組みがある。Linuxでは`LD_LIBRARY_PATH`が代表例だが、macOSでは`DYLD_LIBRARY_PATH`が常に期待どおり使えるとは限らない。condaはsamtools等をインストールするとき、対応するバージョンの`libhts`も一緒に環境内にインストールしてくれる。しかし、conda環境の外では、OSが`libhts.so`を見つけられず「shared library not found」エラーになる。共有ライブラリの仕組みの詳細は[§5 ソフトウェアの構成要素 — importからpipまで](./05_software_components.md#共有ライブラリとその管理)を参照してほしい。
 
 **場面2: 論文査読への対応。** 査読者から「Table 2の結果を再現できなかった」とコメントが来た。半年前に自分が解析したときのsamtoolsのバージョンを思い出せず、`conda list` の出力も残していなかった。
 
@@ -261,12 +261,12 @@ docker run -v $(pwd)/data/raw:/workspace/data/raw:ro \
 
 これは[§14 解析パイプラインの自動化](./14_workflow.md#入力データは読み取り専用)で学んだ「入力データは読み取り専用」の原則と同じである。
 
-### docker compose
+### Docker Compose
 
-複数のマウントやオプションを毎回コマンドラインで指定するのは煩雑である。`docker-compose.yml`でこれらを宣言的に定義できる:
+複数のマウントやオプションを毎回コマンドラインで指定するのは煩雑である。`docker compose` では `compose.yaml`（推奨。`docker-compose.yml` も後方互換で利用可）にこれらを宣言的に定義できる:
 
 ```yaml
-# docker-compose.yml
+# compose.yaml
 services:
   rnaseq:
     build:
@@ -293,7 +293,7 @@ docker compose run --rm rnaseq snakemake --cores 4
 docker compose up
 ```
 
-`docker compose`を使うことで、チームメンバーは`docker-compose.yml`を見るだけで実行に必要なマウント構成を理解できる。
+`docker compose`を使うことで、チームメンバーは `compose.yaml` を見るだけで実行に必要なマウント構成を理解できる。
 
 ### エージェントとDockerの連携
 
@@ -311,7 +311,7 @@ Dockerfileの生成はエージェントの得意分野であるが、`docker bu
 
 | パターン | 方法 | 適している場面 |
 |---------|------|--------------|
-| 読み取り専用で生成 | エージェントにDockerfile・docker-compose.ymlを生成させ、`docker build/run`は自分で実行 | 初めてのDockerfile作成、セキュリティを重視 |
+| 読み取り専用で生成 | エージェントにDockerfile・`compose.yaml` を生成させ、`docker build/run`は自分で実行 | 初めてのDockerfile作成、セキュリティを重視 |
 | 承認ありで実行 | `docker build`のたびに承認しながら反復 | Dockerfileのデバッグ（デフォルト動作） |
 | 権限を許可 | エージェントの権限設定でdockerコマンドを許可リストに追加 | 信頼できるプロジェクト内での反復作業 |
 
@@ -377,7 +377,7 @@ Dockerfileの作成や改善をエージェントに依頼する場合:
 
 > 「このDockerfileのイメージサイズを削減したい。マルチステージビルドに変換して、最終イメージにビルドツールが含まれないようにしてください」
 
-> 「docker-compose.ymlを作成して、データディレクトリのマウント設定を含めてください。生データは読み取り専用、結果ディレクトリは書き込み可能にしてください」
+> 「`compose.yaml` を作成して、データディレクトリのマウント設定を含めてください。生データは読み取り専用、結果ディレクトリは書き込み可能にしてください」
 
 > 「BioContainersでsamtools 1.20のイメージ名を調べてください。Snakefileの`container:`ディレクティブで指定する形式で教えてください」
 
@@ -447,8 +447,11 @@ From: condaforge/miniforge3:24.3.0-0
 
 ```bash
 # 定義ファイルからSIFイメージを構築
-apptainer build rnaseq.sif apptainer.def
+# 多くの環境では --fakeroot が使えるが、施設設定によっては管理者構築が必要
+apptainer build --fakeroot rnaseq.sif apptainer.def
 ```
+
+定義ファイルからのビルドは、Dockerイメージの pull より施設依存性が強い。ユーザー名前空間や fakeroot が無効なクラスタでは、ローカルPCや別環境でSIFを作成して持ち込む運用になることもある。
 
 ### Docker vs. Apptainer コマンド対照表
 
@@ -664,7 +667,7 @@ docker run --rm -v $(pwd)/results:/workspace/results \
 ```
 reproducibility-package/
 ├── Dockerfile                  # コンテナ定義
-├── docker-compose.yml          # 実行設定
+├── compose.yaml                # 実行設定
 ├── Snakefile                   # ワークフロー（§14）
 ├── config.yaml                 # パイプライン設定
 ├── environment.yml             # conda環境定義
@@ -708,7 +711,7 @@ Nüst et al. (2020)[7](https://doi.org/10.1371/journal.pcbi.1008316)の「Docker
 
 論文投稿の再現性パッケージングをエージェントに依頼する場合:
 
-> 「この解析プロジェクトを論文投稿用の再現性パッケージとして整備してください。Dockerfile、docker-compose.yml、テストデータでの再現手順READMEを作成してください」
+> 「この解析プロジェクトを論文投稿用の再現性パッケージとして整備してください。Dockerfile、`compose.yaml`、テストデータでの再現手順READMEを作成してください」
 
 > 「このDockerfileに対して`validate_dockerfile.py`を実行して、ベストプラクティスに違反している箇所を修正してください」
 

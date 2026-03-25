@@ -45,7 +45,7 @@ $$
 lscpu
 ```
 
-`nproc` は利用可能な論理プロセッサ数だけを返す。`ProcessPoolExecutor` の `max_workers` 設定に直結する値である:
+`nproc` は利用可能な論理プロセッサ数だけを返す。並列ワーカー数の上限を見積もる目安にはなるが、HPC のジョブ内では `SLURM_CPUS_PER_TASK` や cpuset 制約を優先して解釈する:
 
 ```bash
 # nproc: 利用可能な論理プロセッサ数を表示
@@ -60,7 +60,7 @@ nproc
 cat /proc/cpuinfo | head -20
 ```
 
-実用的な読み方の例: `lscpu` で「Core(s) per socket: 8」「Thread(s) per core: 2」と表示されたら、物理8コア、論理16コアである。`ProcessPoolExecutor(max_workers=物理コア数)` が並列処理の目安になる。
+実用的な読み方の例: `lscpu` で「Core(s) per socket: 8」「Thread(s) per core: 2」と表示されたら、物理8コア、論理16コアである。ローカル実行なら `ProcessPoolExecutor(max_workers=物理コア数)` が目安になるが、ジョブスケジューラ配下では「マシン全体のコア数」ではなく「自分に割り当てられたコア数」を上限にする。
 
 #### メモリの確認
 
@@ -491,9 +491,9 @@ def normalize_tpm_fast(
 
 #### GIL（Global Interpreter Lock）の制約
 
-Pythonには**GIL**（Global Interpreter Lock）と呼ばれるロック機構があり、同一プロセス内では一度に1つのスレッドしかPythonバイトコードを実行できない。つまり、`threading` モジュールによるスレッド並列は、CPUバウンドな処理では高速化に寄与しない。
+CPythonには**GIL**（Global Interpreter Lock）と呼ばれるロック機構があり、同一プロセス内では一度に1つのスレッドしかPythonバイトコードを実行できない。つまり、純粋なPythonコードが支配的なCPUバウンド処理では、`threading` モジュールによるスレッド並列は高速化に寄与しにくい。
 
-CPUバウンドな処理を並列化するには、`multiprocessing` モジュールまたは `concurrent.futures` モジュールの `ProcessPoolExecutor` を使い、**別プロセス**を起動する必要がある[6](https://docs.python.org/3/library/concurrent.futures.html)。各プロセスは独自のGILを持つため、真の並列実行が可能になる。
+CPUバウンドな処理を並列化するには、`multiprocessing` モジュールまたは `concurrent.futures` モジュールの `ProcessPoolExecutor` を使い、**別プロセス**を起動するのが基本である[6](https://docs.python.org/3/library/concurrent.futures.html)。各プロセスは独自のGILを持つため、真の並列実行が可能になる。ただし、NumPy などのC拡張が内部でGILを解放する場合は、スレッドでも効果が出ることがある。
 
 #### ProcessPoolExecutorの実践例
 
@@ -712,7 +712,7 @@ Numbaは初回呼び出し時にコンパイルが走るため最初だけ遅い
 
 > 「この遺伝子発現量正規化関数のforループをNumPyのブロードキャスティングに書き換えて。`gene_lengths` を `[:, np.newaxis]` で列ベクトルにしてから除算する方針で」
 
-> 「100サンプルのFASTQファイルそれぞれのGC含量を計算するスクリプトを書いて。`concurrent.futures.ProcessPoolExecutor` を使い、ワーカー数は `os.cpu_count() - 1` にして」
+> 「100サンプルのFASTQファイルそれぞれのGC含量を計算するスクリプトを書いて。`concurrent.futures.ProcessPoolExecutor` を使い、ワーカー数は `SLURM_CPUS_PER_TASK` があればそれを優先し、なければ `os.cpu_count() - 1` を上限にして」
 
 > 「このFASTQフィルタリング関数をジェネレータに書き換えて。`list()` で全件読み込んでいる箇所を `yield` に変更し、メモリ使用量をファイルサイズに依存しないようにして」
 
@@ -988,7 +988,7 @@ def calc_edit_distances(seq_pairs: list[tuple[str, str]]) -> list[int]:
     return results
 ```
 
-（ヒント）Python の GIL（Global Interpreter Lock）により、CPU バウンドなタスクは `ThreadPoolExecutor` では並列実行されない。CPU バウンドには `ProcessPoolExecutor`、I/O バウンドには `ThreadPoolExecutor` が適切である。
+（ヒント）CPython の GIL（Global Interpreter Lock）により、純粋なPythonコードが支配的な CPU バウンドタスクは `ThreadPoolExecutor` では高速化しにくい。CPU バウンドには `ProcessPoolExecutor`、I/O バウンドには `ThreadPoolExecutor` が適切である。
 
 ### 演習 17-3: プロファイリングの指示 **[指示設計]**
 

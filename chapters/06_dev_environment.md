@@ -109,7 +109,7 @@ conda deactivate
 
 ### uv — 高速な新世代パッケージマネージャ
 
-**uv**はRust製の高速Pythonパッケージマネージャであり、pip, venv, pyenvの機能を統合的に提供する[6](https://docs.astral.sh/uv/)。2024年にリリースされて以降、その速度と利便性から急速に普及している。
+**uv**はRust製の高速Pythonパッケージマネージャであり、pip, venv, pyenv相当の機能を統合的に提供する[6](https://docs.astral.sh/uv/)。2024年にリリースされて以降、その速度と利便性から急速に普及している。
 
 ```bash
 # uvのインストール
@@ -132,7 +132,7 @@ uv run main.py
 uv sync
 ```
 
-uvの特徴は、パッケージ解決の速さだけでなく、Pythonのバージョン管理から仮想環境の構築、パッケージのインストールまでを一つのツールで完結できる点にある。特に `uv add` を使うと、`pyproject.toml` への追記と仮想環境へのインストール、`uv.lock` の更新を一度に行えるため、手動での管理ミスが激減する。ただし、condaのようにC/C++バイナリを直接管理する機能は持たないため、バイオインフォマティクスではCondaとの併用、あるいはコンテナとの組み合わせが現実的な選択肢となる。
+uvの特徴は、パッケージ解決の速さだけでなく、Pythonのダウンロード、仮想環境の構築、パッケージのインストールまでを一つのツールで完結できる点にある。特に `uv add` を使うと、`pyproject.toml` への追記と仮想環境へのインストール、`uv.lock` の更新を一度に行えるため、手動での管理ミスが激減する。ただし、condaのようにC/C++バイナリや外部コマンド群をまとめて管理する機能は持たないため、バイオインフォマティクスではCondaとの併用、あるいはコンテナとの組み合わせが現実的な選択肢となる。
 
 ### 依存関係定義ファイルの比較
 
@@ -249,7 +249,7 @@ conda list --revisions  # 変更履歴の確認
 
 ![Python環境管理ツールの責務範囲: pyenv・venv・pip・Conda・uvの担当領域](../figures/ch06_env_tools.png)
 
-基本原則は「**Python関連はCondaまたはpip/uvで、OS関連はbrew/aptで**」という使い分けである。Conda環境内でpipを使うことも可能だが、Condaとpipを混在させるとパッケージの追跡が困難になるため、可能な限りどちらかに統一するのが望ましい。
+基本原則は「**Python関連はCondaまたはpip/uvで、OS関連はbrew/aptで**」という使い分けである。Conda環境内でpipを使うことも可能だが、Condaとpipを混在させるとパッケージの追跡が困難になるため、可能な限りどちらかに統一するのが望ましい。やむを得ず混在させる場合は、Condaで入れられるものを先に固定し、pipは最後に追加する。
 
 ### ロックファイル — 再現性の鍵
 
@@ -259,7 +259,7 @@ conda list --revisions  # 変更履歴の確認
 
 | ツール | ロックの方法 | 生成されるファイル |
 |--------|------------|-------------------|
-| pip | `pip freeze > requirements-lock.txt` | バージョン固定のrequirements |
+| pip | `pip freeze > requirements-lock.txt` | 現在環境のスナップショット |
 | conda-lock | `conda-lock -f environment.yml` | `conda-lock.yml` |
 | uv | `uv lock` | `uv.lock` |
 
@@ -282,7 +282,9 @@ uv lock
 # 出力: uv.lock（依存ツリー全体のバージョン固定）
 ```
 
-ロックファイルを[§7 Git入門](./07_git.md)で学ぶGitリポジトリにコミットしておけば、共同研究者が `pip install -r requirements-lock.txt` や `conda-lock install` で同一の環境を再現できる。
+`pip freeze` は「今この環境に入っているもの」の記録としては有用だが、依存解決の過程やプラットフォーム差までは表現しない。そのため、再現性をより強く求めるなら `uv.lock` や `conda-lock.yml` のような solver-native なロックファイルを優先する。
+
+ロックファイルを[§7 Git入門](./07_git.md)で学ぶGitリポジトリにコミットしておけば、共同研究者が `pip install -r requirements-lock.txt` や `conda-lock install -n rnaseq conda-lock.yml` で同一の環境を再現しやすくなる。
 
 ### チャネルとレジストリ
 
