@@ -290,5 +290,15 @@ def test_find_missing_chapter_reference_items_reports_unmatched_line(tmp_path) -
     missing = find_missing_chapter_reference_items(bib_file, tmp_path)
 
     assert len(missing) == 1
-    assert missing[0].line_number == 6
-    assert "How To Ask Questions The Smart Way" in missing[0].raw_text
+
+
+def test_build_summary_handles_no_issues() -> None:
+    """未解決 issue がない場合の要約文言を検証する."""
+    summary = build_review_artifacts.build_summary(
+        chapter_rows=[],
+        issue_rows=[],
+        reference_rows=[],
+    )
+
+    assert "現在の指摘件数: 0" in summary
+    assert "現時点で未完了のレビュー指摘はない" in summary

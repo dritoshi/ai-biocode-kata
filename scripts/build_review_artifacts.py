@@ -667,7 +667,13 @@ def build_summary(
         location = f"{row['chapter_file']}:{row['line']}" if row["line"] else row["chapter_file"]
         lines.append(f"- `{row['issue_id']}` [{row['severity']}] {location} `{row['category']}`: {row['subject']}")
 
-    if severity_counts.get("A", 0) > 0:
+    if total_issues == 0:
+        next_actions = [
+            "- 現時点で未完了のレビュー指摘はない。",
+            "- 原稿更新後に再レビューする場合は `build_review_artifacts.py` と URL チェックを再実行する。",
+            "- `chapter_review_sheet.csv` の手動レビュー状態を維持しつつ、必要な更新時のみ再監査する。",
+        ]
+    elif severity_counts.get("A", 0) > 0:
         next_actions = [
             "- `master_issue_log.csv` の A 指摘から順に修正する。",
             "- `reference_registry.csv` を使い、外部URLと固有名詞の一次情報確認を進める。",

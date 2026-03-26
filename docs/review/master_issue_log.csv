@@ -1,5 +1,1 @@
 issue_id,severity,chapter_file,line,category,subject,evidence,proposed_action,source
-MANUAL-0006,B,tests/ch10/test_error_handling.py,58,test_warning_future_breakage,BiopythonDeprecationWarning による将来破壊の可能性,現行 `pytest -q` で、コメント行を含む FASTA 入力に対する `BiopythonDeprecationWarning` が継続している。将来は `ValueError` 化の予告あり。,テスト用 FASTA 入力かパーサ指定を見直し、warning を解消または受容理由を明文化する,manual_audit
-MANUAL-0007,C,scripts/ch05/mylib/core.py,1,test_coverage_gap,ch05 ライブラリ内部モジュールの未カバー,`docs/review/code_check.md` で `scripts/ch05/mylib/core.py` が未テストと判定される見込み。間接利用の可能性はあるが個別テストはない。,個別テストを追加するか「module_demo 経由の間接カバーで十分」と判断して issue を閉じる,manual_audit
-MANUAL-0008,C,scripts/ch05/mylib/utils.py,1,test_coverage_gap,ch05 ライブラリ内部モジュールの未カバー,`docs/review/code_check.md` で `scripts/ch05/mylib/utils.py` が未テストと判定される見込み。間接利用の可能性はあるが個別テストはない。,個別テストを追加するか「module_demo 経由の間接カバーで十分」と判断して issue を閉じる,manual_audit
-MANUAL-0009,C,scripts/ch11/cli_argparse.py,1,test_coverage_gap,argparse 版 CLI デモの未カバー,`docs/review/code_check.md` で `scripts/ch11/cli_argparse.py` が未テストと判定される見込み。Click 版や seqtool にはテストがあるため一貫性の観点で候補。,argparse 版にも最小テストを追加するか、教育用デモとして対象外と明記して閉じる,manual_audit

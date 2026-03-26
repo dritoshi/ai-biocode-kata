@@ -20,7 +20,8 @@
 * 非 DOI 系 `anti-bot` 8 件は 2026-03-26 にユーザーが手動ブラウザ確認し、レビュー上 `manual_confirmed` として閉じた
 * 2026-03-26 に URL レビュー方針を更新し、原稿に出てこない URL は `unused_in_manuscript` として除外し、PubMed に変換できない DOI 系 `anti-bot` は `manual_review_required` として手動確認へ回すことにした
 * 同日、手動確認リストは URL だけでなく、引用されているコンテキストと対応づけて出力する方針を追加した
-* 現在の残課題は、B/C の手作業修正およびテスト方針の判断である
+* 2026-03-26 に `MANUAL-0006` 〜 `MANUAL-0009` を解消した。`validate_fasta()` の warning を除去し、`mylib.core`, `mylib.utils`, `cli_argparse` の個別テストを追加した
+* 現在、`docs/review` 上の残課題はない
 
 ## 本ディレクトリのコンテンツ
 
@@ -37,4 +38,4 @@
 - `docs/review/url_check_browser.json`
   - 任意生成物。ブラウザ再確認結果を保存する
 
-将来レビューを再開する場合は、この `docs/review/` に対して各チェック用スクリプトを再実行して成果物を再生成する。運用ポリシーは `pending_url_review.md` を正本とし、原稿にない URL は除外し、PubMed に変換できない DOI 系 `anti-bot` は手動確認へ回す。現時点では URL 到達性レビューとしての手動確認待ちはない。
+将来レビューを再開する場合は、この `docs/review/` に対して各チェック用スクリプトを再実行して成果物を再生成する。運用ポリシーは `pending_url_review.md` を正本とし、原稿にない URL は除外し、PubMed に変換できない DOI 系 `anti-bot` は手動確認へ回す。現時点では URL 到達性レビューとしての手動確認待ちも、未完了修正もない。

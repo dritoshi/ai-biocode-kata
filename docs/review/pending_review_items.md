@@ -1,6 +1,6 @@
 # 未達成レビューと未完了修正
 
-2026-03-26 時点で本文レビューと機械的な URL 到達性チェックは完了した。以下は未完了のまま残している。
+2026-03-26 時点で本文レビュー、URL 到達性チェック、統合後に残っていた manual issue の修正は完了した。現時点で未完了のレビュー・修正はない。
 
 ## 未達成レビュー
 
@@ -8,17 +8,11 @@
 
 ## 未完了修正
 
-未完了項目の正本は [master_issue_log.csv](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/master_issue_log.csv) である。要点は次のとおり。
-
-### B: 品質維持のために対応したい項目
-
-- `MANUAL-0006` [test_error_handling.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch10/test_error_handling.py): `BiopythonDeprecationWarning` を解消するか、受容理由を明文化する
-
-### C: テスト方針を決めて閉じたい項目
-
-- `MANUAL-0007` [core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/core.py): 個別テストを追加するか、間接カバーで十分と判断して閉じる
-- `MANUAL-0008` [utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/utils.py): 個別テストを追加するか、間接カバーで十分と判断して閉じる
-- `MANUAL-0009` [cli_argparse.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch11/cli_argparse.py): 最小テストを追加するか、教育用デモとして対象外と明記して閉じる
+- なし。`MANUAL-0006` 〜 `MANUAL-0009` は次の対応で解消した。
+- [error_handling.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch10/error_handling.py) の FASTA 事前検証を追加し、`BiopythonDeprecationWarning` を解消した
+- [test_mylib_core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch05/test_mylib_core.py) を追加し、[core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/core.py) の個別テストを整備した
+- [test_mylib_utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch05/test_mylib_utils.py) を追加し、[utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/utils.py) の個別テストを整備した
+- [test_cli_argparse.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch11/test_cli_argparse.py) を追加し、[cli_argparse.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch11/cli_argparse.py) の個別テストを整備した
 
 ## 関連資料
 
