@@ -438,7 +438,7 @@ URLの構造、HTTPメソッド、パラメータ、レスポンス形式が、W
 
 ### よいAPI設計の原則 — SOLID
 
-[§1 設計原則 — 良いコードとは何か](./01_design.md#単一責任原則single-responsibility-principle-srp)ではSOLIDの最初の文字であるSRP（単一責任原則）を学んだ。SOLIDとは、Robert C. Martinが提唱した5つの設計原則の頭文字であり [5](https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf)、よいAPIやソフトウェア構造を設計するための指針である。ここでは残りの4原則の概要を紹介する。
+[§1 設計原則 — 良いコードとは何か](./01_design.md#単一責任原則single-responsibility-principle-srp)ではSOLIDの最初の文字であるSRP（単一責任原則）を学んだ。SOLIDとは、Robert C. Martinが提唱した5つの設計原則の頭文字であり [5](https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445)、よいAPIやソフトウェア構造を設計するための指針である。ここでは残りの4原則の概要を紹介する。
 
 **S — 単一責任原則**（Single Responsibility Principle; SRP）: [§1 設計原則 — 良いコードとは何か](./01_design.md#単一責任原則single-responsibility-principle-srp)で学んだとおり、関数やクラスの変更理由は1つだけであるべきである。
 
@@ -678,6 +678,6 @@ def process(data, mode, output_format, verbose, log_file, overwrite):
 
 [4] Levine, J. R. *Linkers and Loaders*. Morgan Kaufmann, 1999. [https://shop.elsevier.com/books/linkers-and-loaders/levine/978-0-08-051031-6](https://shop.elsevier.com/books/linkers-and-loaders/levine/978-0-08-051031-6)
 
-[5] Martin, R. C. "Design Principles and Design Patterns". 2000. [https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf](https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf)
+[5] Martin, R. C. *Agile Software Development, Principles, Patterns, and Practices*. Prentice Hall, 2002. [https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445](https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445)
 
 [6] Python Packaging Authority. "Python Packaging User Guide". [https://packaging.python.org/](https://packaging.python.org/) (参照日: 2026-03-20)

@@ -26,6 +26,11 @@ from urllib.parse import urlparse
 
 # --- 定数 ---
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from scripts.reference_usage import extract_doi, extract_explicit_url, iter_used_bib_entries
+
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 REFERENCES_DIR = PROJECT_ROOT / "references"
 DEFAULT_OUTPUT_FILE = PROJECT_ROOT / "docs" / "review" / "url_check.json"
@@ -35,6 +40,8 @@ MAX_WORKERS = 8
 
 # ダミーURL除外パターン
 DUMMY_PATTERNS = [
+    "https://...",
+    "http://...",
     "example.com",
     "example.org",
     "example.net",
@@ -47,6 +54,7 @@ DUMMY_PATTERNS = [
     "mypackage",
     "my-tool",
     "my-project",
+    "github.com/author/tool/",
     "my-repo",
     "your-repo",
     "yourname",
@@ -69,14 +77,15 @@ MD_LINK_RE = re.compile(r"\[[^\]]*\]\((https?://[^\)\s]+)\)")
 MD_REF_RE = re.compile(r"^\[[^\]]+\]:\s*(https?://\S+)", re.MULTILINE)
 # Angle-bracket URL: <url>
 ANGLE_URL_RE = re.compile(r"<(https?://[^>]+)>")
-# Bare URL (BibTeX url フィールドなど)
-BIB_URL_RE = re.compile(r"(?:url|howpublished)\s*=\s*\{?(https?://[^\s\},]+)\}?", re.IGNORECASE)
-# DOI フィールド → URL化
-BIB_DOI_RE = re.compile(r"doi\s*=\s*\{([^\}]+)\}", re.IGNORECASE)
-
-
+# Bare URL: https://example.org/path
+# Markdown 記法や日本語本文を巻き込まないよう、URL として妥当な ASCII のみ許容する。
+BARE_URL_RE = re.compile(r"(https?://[A-Za-z0-9._~:/?#@!$&'*+,;=%-]+)")
 def is_dummy_url(url: str) -> bool:
     """ダミー/プレースホルダ URL かどうか判定."""
+    parsed = urlparse(url)
+    if url.startswith(("http://", "https://")) and not parsed.netloc:
+        return True
+
     lower = url.lower()
     for pat in DUMMY_PATTERNS:
         if pat in lower:
@@ -100,35 +109,40 @@ def extract_urls_from_md(filepath: Path) -> list[tuple[str, int]]:
         lines = f.readlines()
 
     for line_no, line in enumerate(lines, start=1):
-        for regex in (MD_LINK_RE, MD_REF_RE, ANGLE_URL_RE):
+        seen_urls: set[str] = set()
+        for regex in (MD_LINK_RE, MD_REF_RE, ANGLE_URL_RE, BARE_URL_RE):
             for match in regex.finditer(line):
                 url = clean_url(match.group(1))
-                if not is_dummy_url(url):
+                if not is_dummy_url(url) and url not in seen_urls:
                     results.append((url, line_no))
+                    seen_urls.add(url)
     return results
 
 
 def extract_urls_from_bib(filepath: Path) -> list[tuple[str, int]]:
     """BibTeXファイルから (url, line_number) のリストを抽出."""
     results = []
-    with open(filepath, encoding="utf-8") as f:
-        lines = f.readlines()
+    for entry in iter_used_bib_entries(filepath, PROJECT_ROOT):
+        explicit_url = extract_explicit_url(entry)
+        if explicit_url is not None:
+            url, line_no = explicit_url
+            url = clean_url(url)
+            if not is_dummy_url(url):
+                results.append((url, line_no))
+            continue
 
-    for line_no, line in enumerate(lines, start=1):
-        # url / howpublished フィールド
-        for match in BIB_URL_RE.finditer(line):
-            url = clean_url(match.group(1))
-            if not is_dummy_url(url):
-                results.append((url, line_no))
-        # doi フィールド → https://doi.org/ URL に変換
-        for match in BIB_DOI_RE.finditer(line):
-            doi = match.group(1).strip()
-            if doi.startswith("http"):
-                url = clean_url(doi)
-            else:
-                url = f"https://doi.org/{doi}"
-            if not is_dummy_url(url):
-                results.append((url, line_no))
+        doi_info = extract_doi(entry)
+        if doi_info is None:
+            continue
+
+        doi, line_no = doi_info
+        if doi.startswith("http"):
+            url = clean_url(doi)
+        else:
+            url = f"https://doi.org/{doi}"
+        if not is_dummy_url(url):
+            results.append((url, line_no))
+
     return results
 
 

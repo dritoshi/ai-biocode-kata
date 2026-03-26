@@ -187,7 +187,7 @@ UNIX哲学は1978年のBell Labsに遡る設計思想であり[1](https://doi.or
 
 > 一つのことをうまくやるプログラムを書け。協調して動くプログラムを書け。テキストストリームを扱うプログラムを書け。[7](http://www.catb.org/esr/writings/taoup/html/)
 
-この思想は、バイオインフォマティクスのツール群（SAMtools[8](https://doi.org/10.1093/bioinformatics/btp352)、BEDTools[9](https://doi.org/10.1093/bioinformatics/btq033) 等）の設計に色濃く反映されている。
+この思想は、バイオインフォマティクスのツール群（SAMtools[8](https://pubmed.ncbi.nlm.nih.gov/19505943/)、BEDTools[9](https://pubmed.ncbi.nlm.nih.gov/20110278/) 等）の設計に色濃く反映されている。
 
 ### テキストストリームとパイプ
 
@@ -435,9 +435,9 @@ def process_fastq(file_path):
 
 [7] Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003. [http://www.catb.org/esr/writings/taoup/html/](http://www.catb.org/esr/writings/taoup/html/)
 
-[8] Li, H. et al. "The Sequence Alignment/Map format and SAMtools". *Bioinformatics*, 25(16), 2078–2079, 2009. [https://doi.org/10.1093/bioinformatics/btp352](https://doi.org/10.1093/bioinformatics/btp352)
+[8] Li, H. et al. "The Sequence Alignment/Map format and SAMtools". *Bioinformatics*, 25(16), 2078–2079, 2009. [https://pubmed.ncbi.nlm.nih.gov/19505943/](https://pubmed.ncbi.nlm.nih.gov/19505943/)
 
-[9] Quinlan, A. R., Hall, I. M. "BEDTools: a flexible suite of utilities for comparing genomic datasets". *Bioinformatics*, 26(6), 841–842, 2010. [https://doi.org/10.1093/bioinformatics/btq033](https://doi.org/10.1093/bioinformatics/btq033)
+[9] Quinlan, A. R., Hall, I. M. "BEDTools: a flexible suite of utilities for comparing genomic datasets". *Bioinformatics*, 26(6), 841–842, 2010. [https://pubmed.ncbi.nlm.nih.gov/20110278/](https://pubmed.ncbi.nlm.nih.gov/20110278/)
 
 [10] Beck, K. et al. "Manifesto for Agile Software Development". 2001. [https://agilemanifesto.org/](https://agilemanifesto.org/) (参照日: 2026-03-25)
 

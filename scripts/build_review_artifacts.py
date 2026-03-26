@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import re
+import sys
 import unicodedata
 from collections import Counter
 from pathlib import Path
@@ -13,6 +14,12 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.reference_usage import extract_doi, extract_explicit_url, iter_used_bib_entries
+from scripts.reference_usage import find_missing_chapter_reference_items, reference_file_to_chapter_path
+
 CHAPTER_DIR = REPO_ROOT / "chapters"
 REFERENCE_DIR = REPO_ROOT / "references"
 REVIEW_DIR = REPO_ROOT / "docs" / "review"
@@ -31,8 +38,6 @@ HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)]+)\)")
 RAW_URL_RE = re.compile(r"https?://[^\s<>)]+")
 BACKTICK_PATH_RE = re.compile(r"(?:scripts|tests|figures)/[A-Za-z0-9_./-]+/?")
-BIB_URL_RE = re.compile(r"(?:url|howpublished)\s*=\s*\{?(https?://[^\s\},]+)\}?", re.IGNORECASE)
-BIB_DOI_RE = re.compile(r"doi\s*=\s*\{([^\}]+)\}", re.IGNORECASE)
 PYTEST_ERROR_RE = re.compile(r"^ERROR\s+(tests/\S+)", re.MULTILINE)
 PYTEST_MISSING_MODULE_RE = re.compile(r"No module named '([^']+)'")
 
@@ -428,12 +433,12 @@ def scan_reference_files(paths: list[Path]) -> list[dict[str, Any]]:
     reference_rows: list[dict[str, Any]] = []
 
     for path in paths:
-        lines = path.read_text(encoding="utf-8").splitlines()
-        rel_path = str(path.relative_to(REPO_ROOT))
+        rel_path = str(path.relative_to(REPO_ROOT)) if path.is_relative_to(REPO_ROOT) else str(path)
 
-        for line_number, line in enumerate(lines, start=1):
-            for match in BIB_URL_RE.finditer(line):
-                raw_url = match.group(1).strip()
+        for entry in iter_used_bib_entries(path, REPO_ROOT):
+            explicit_url = extract_explicit_url(entry)
+            if explicit_url is not None:
+                raw_url, line_number = explicit_url
                 normalized = normalize_url(raw_url)
                 reference_rows.append(
                     {
@@ -449,31 +454,35 @@ def scan_reference_files(paths: list[Path]) -> list[dict[str, Any]]:
                         "anchor_target": "",
                         "anchor_status": "",
                         "syntax_status": classify_url(raw_url),
-                        "context": line.strip(),
+                        "context": entry.fields.get("url") or entry.fields.get("howpublished", ""),
                     }
                 )
+                continue
 
-            for match in BIB_DOI_RE.finditer(line):
-                doi = match.group(1).strip()
-                raw_url = doi if doi.startswith("http") else f"https://doi.org/{doi}"
-                normalized = normalize_url(raw_url)
-                reference_rows.append(
-                    {
-                        "chapter_file": rel_path,
-                        "line": line_number,
-                        "source_kind": "bib_doi",
-                        "label": "",
-                        "target_type": "external",
-                        "raw_target": raw_url,
-                        "normalized_target": normalized,
-                        "domain": normalized.split("/")[2] if "://" in normalized else "",
-                        "exists": "",
-                        "anchor_target": "",
-                        "anchor_status": "",
-                        "syntax_status": classify_url(raw_url),
-                        "context": line.strip(),
-                    }
-                )
+            doi_info = extract_doi(entry)
+            if doi_info is None:
+                continue
+
+            doi, line_number = doi_info
+            raw_url = doi if doi.startswith("http") else f"https://doi.org/{doi}"
+            normalized = normalize_url(raw_url)
+            reference_rows.append(
+                {
+                    "chapter_file": rel_path,
+                    "line": line_number,
+                    "source_kind": "bib_doi",
+                    "label": "",
+                    "target_type": "external",
+                    "raw_target": raw_url,
+                    "normalized_target": normalized,
+                    "domain": normalized.split("/")[2] if "://" in normalized else "",
+                    "exists": "",
+                    "anchor_target": "",
+                    "anchor_status": "",
+                    "syntax_status": classify_url(raw_url),
+                    "context": entry.fields.get("doi", ""),
+                }
+            )
 
     return reference_rows
 
@@ -527,6 +536,36 @@ def parse_pytest_log(path: Path | None, existing_issue_count: int) -> list[dict[
             row["evidence"] = " | ".join(row["evidence"])
 
     return rows
+
+
+def scan_chapter_reference_bib_coverage(paths: list[Path], existing_issue_count: int) -> list[dict[str, Any]]:
+    """章の参考文献項目に対応する BibTeX があるかを確認する."""
+    issue_rows: list[dict[str, Any]] = []
+    issue_number = existing_issue_count + 1
+
+    for path in paths:
+        chapter_path = reference_file_to_chapter_path(path, REPO_ROOT)
+        if chapter_path is None:
+            continue
+
+        for item in find_missing_chapter_reference_items(path, REPO_ROOT):
+            subject = item.urls[0] if item.urls else item.raw_text
+            issue_rows.append(
+                {
+                    "issue_id": f"AUTO-{issue_number:04d}",
+                    "severity": "B",
+                    "chapter_file": chapter_path.name,
+                    "line": item.line_number,
+                    "category": "chapter_reference_missing_in_bib",
+                    "subject": subject,
+                    "evidence": item.raw_text,
+                    "proposed_action": "対応する `.bib` に書誌情報を追加するか、章本文の参考文献表記を既存 `.bib` に合わせて統一する。",
+                    "source": "auto_scan",
+                }
+            )
+            issue_number += 1
+
+    return issue_rows
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
@@ -670,6 +709,7 @@ def main() -> None:
     anchors_by_path, section_rows = build_anchor_map(markdown_files)
     reference_rows, issue_rows, chapter_rows = scan_manuscript(markdown_files, anchors_by_path)
     reference_rows.extend(scan_reference_files(reference_files))
+    issue_rows.extend(scan_chapter_reference_bib_coverage(reference_files, len(issue_rows)))
     issue_rows.extend(parse_pytest_log(args.pytest_log, len(issue_rows)))
     issue_rows = merge_manual_issue_rows(issue_rows, existing_issue_rows)
     chapter_rows = merge_chapter_manual_fields(chapter_rows, existing_chapter_rows)

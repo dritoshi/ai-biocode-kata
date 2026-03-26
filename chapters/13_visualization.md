@@ -484,7 +484,7 @@ def apply_project_style() -> None:
 >     --numberOfProcessors 4
 > ```
 >
-> `bamCoverage` はBAM内のリードカバレッジを計算し、指定したビンサイズで集約してBigWig形式で出力するコマンドである[10](https://doi.org/10.1093/nar/gkw257)。`--normalizeUsing` でRPKM、CPM、BPM等の正規化方法を選択できる。
+> `bamCoverage` はBAM内のリードカバレッジを計算し、指定したビンサイズで集約してBigWig形式で出力するコマンドである[10](https://pubmed.ncbi.nlm.nih.gov/27079975/)。`--normalizeUsing` でRPKM、CPM、BPM等の正規化方法を選択できる。
 >
 > BigWigが推奨される理由は、バイナリ形式かつ内部にインデックスを持つため、ゲノムブラウザが任意の領域を高速にランダムアクセスできる点にある。テキスト形式のBedGraphでは、ファイル全体を読み込む必要があり大規模データでは実用的でない。インデックス付きフォーマットの利点は[§4-2 フォーマット選択の判断基準](./04_data_formats.md#4-2-フォーマット選択の判断基準)で詳しく述べている。
 >
@@ -510,7 +510,7 @@ def apply_project_style() -> None:
 >
 > #### 論文用トラック図の作成
 >
-> ゲノムブラウザのスクリーンショットは手軽だが、解像度が不足する、表示設定の再現が困難、図の体裁を統一できないといった問題がある。論文用のトラック図には**pyGenomeTracks**[11](https://doi.org/10.1093/bioinformatics/btaa692)が適している。INI設定ファイルでトラックの種類・色・高さを宣言的に定義し、コマンド1つでベクタ形式の図を生成できる:
+> ゲノムブラウザのスクリーンショットは手軽だが、解像度が不足する、表示設定の再現が困難、図の体裁を統一できないといった問題がある。論文用のトラック図には**pyGenomeTracks**[11](https://pubmed.ncbi.nlm.nih.gov/32745185/)が適している。INI設定ファイルでトラックの種類・色・高さを宣言的に定義し、コマンド1つでベクタ形式の図を生成できる:
 >
 > ```ini
 > # tracks.ini — pyGenomeTracks設定ファイル
@@ -541,7 +541,7 @@ def apply_project_style() -> None:
 >     --outFileName tracks.pdf
 > ```
 >
-> deepToolsの `plotHeatmap` も、ChIP-seqやATAC-seqのシグナルをTSS（転写開始点）周辺で集約したヒートマップの作成に広く使われる[10](https://doi.org/10.1093/nar/gkw257)。トラック図もヒートマップも、設定ファイルやコマンドをGit管理すれば、[§14 解析パイプラインの自動化](./14_workflow.md)で学ぶワークフローに組み込んで再現可能にできる。
+> deepToolsの `plotHeatmap` も、ChIP-seqやATAC-seqのシグナルをTSS（転写開始点）周辺で集約したヒートマップの作成に広く使われる[10](https://pubmed.ncbi.nlm.nih.gov/27079975/)。トラック図もヒートマップも、設定ファイルやコマンドをGit管理すれば、[§14 解析パイプラインの自動化](./14_workflow.md)で学ぶワークフローに組み込んで再現可能にできる。
 >
 > #### エージェントへの指示例
 >
@@ -692,8 +692,8 @@ def apply_project_style() -> None:
 
 [9] UCSC Genome Browser. "Custom Tracks". [https://genome.ucsc.edu/goldenPath/help/customTrack.html](https://genome.ucsc.edu/goldenPath/help/customTrack.html) (参照日: 2026-03-23)
 
-[10] Ramírez, F. et al. "deepTools2: a next generation web server for deep-sequencing data analysis". *Nucleic Acids Research*, 44(W1), W160–W165, 2016. [https://doi.org/10.1093/nar/gkw257](https://doi.org/10.1093/nar/gkw257)
+[10] Ramírez, F. et al. "deepTools2: a next generation web server for deep-sequencing data analysis". *Nucleic Acids Research*, 44(W1), W160–W165, 2016. [https://pubmed.ncbi.nlm.nih.gov/27079975/](https://pubmed.ncbi.nlm.nih.gov/27079975/)
 
-[11] Lopez-Delisle, L. et al. "pyGenomeTracks: reproducible plots for multivariate genomic datasets". *Bioinformatics*, 37(3), 422–423, 2021. [https://doi.org/10.1093/bioinformatics/btaa692](https://doi.org/10.1093/bioinformatics/btaa692)
+[11] Lopez-Delisle, L. et al. "pyGenomeTracks: reproducible plots for multivariate genomic datasets". *Bioinformatics*, 37(3), 422–423, 2021. [https://pubmed.ncbi.nlm.nih.gov/32745185/](https://pubmed.ncbi.nlm.nih.gov/32745185/)
 
 [12] Ensembl. "Submitting and managing your own data". [https://www.ebi.ac.uk/training/online/courses/ensembl-quick-tour/searching-and-visualising-data/submitting-and-managing-your-own-data/](https://www.ebi.ac.uk/training/online/courses/ensembl-quick-tour/searching-and-visualising-data/submitting-and-managing-your-own-data/) (参照日: 2026-03-25)

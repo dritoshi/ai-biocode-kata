@@ -303,13 +303,13 @@ CLIツールの設計でエージェントが `print()` をstdoutに出すコー
 >
 > バイオインフォマティクスの代表的なCLIツールには、優れた設計の教科書がつまっている。
 >
-> **samtools**[8](https://doi.org/10.1093/bioinformatics/btp352)はサブコマンド型の設計で、`samtools view`, `samtools sort`, `samtools index` など20以上のサブコマンドを持つ。すべてのサブコマンドがstdin/stdout対応で、パイプで連結できる:
+> **samtools**[8](https://pubmed.ncbi.nlm.nih.gov/19505943/)はサブコマンド型の設計で、`samtools view`, `samtools sort`, `samtools index` など20以上のサブコマンドを持つ。すべてのサブコマンドがstdin/stdout対応で、パイプで連結できる:
 >
 > ```bash
 > samtools view -b input.sam | samtools sort | samtools index -
 > ```
 >
-> **bedtools**[9](https://doi.org/10.1093/bioinformatics/btq033)も同様にサブコマンド型で、`bedtools intersect`, `bedtools merge`, `bedtools sort` をパイプで組み合わせる。
+> **bedtools**[9](https://pubmed.ncbi.nlm.nih.gov/20110278/)も同様にサブコマンド型で、`bedtools intersect`, `bedtools merge`, `bedtools sort` をパイプで組み合わせる。
 >
 > **seqkit** は高速な配列操作ツールで、`seqkit stats`, `seqkit grep`, `seqkit seq` などのサブコマンドを提供する。とくに `seqkit stats` の出力はTSVで、他のツールとの連携が容易である。
 >
@@ -860,9 +860,9 @@ python tool.py file1.fastq file2.fastq 30 0.5 true output.tsv
 
 [7] McGugan, W. "Rich: Python library for rich text and beautiful formatting in the terminal". [https://rich.readthedocs.io/](https://rich.readthedocs.io/) (参照日: 2026-03-19)
 
-[8] Li, H. et al. "The Sequence Alignment/Map format and SAMtools." *Bioinformatics*, 25(16), 2078–2079, 2009. [https://doi.org/10.1093/bioinformatics/btp352](https://doi.org/10.1093/bioinformatics/btp352)
+[8] Li, H. et al. "The Sequence Alignment/Map format and SAMtools." *Bioinformatics*, 25(16), 2078–2079, 2009. [https://pubmed.ncbi.nlm.nih.gov/19505943/](https://pubmed.ncbi.nlm.nih.gov/19505943/)
 
-[9] Quinlan, A. R., Hall, I. M. "BEDTools: a flexible suite of utilities for comparing genomic features." *Bioinformatics*, 26(6), 841–842, 2010. [https://doi.org/10.1093/bioinformatics/btq033](https://doi.org/10.1093/bioinformatics/btq033)
+[9] Quinlan, A. R., Hall, I. M. "BEDTools: a flexible suite of utilities for comparing genomic features." *Bioinformatics*, 26(6), 841–842, 2010. [https://pubmed.ncbi.nlm.nih.gov/20110278/](https://pubmed.ncbi.nlm.nih.gov/20110278/)
 
 [10] Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003. [http://www.catb.org/esr/writings/taoup/html/](http://www.catb.org/esr/writings/taoup/html/)
 

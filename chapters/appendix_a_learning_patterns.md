@@ -80,7 +80,7 @@ A-1で整理した3つの観点を、以下の判断軸としてまとめる。A
 
 [4] Thorgeirsson, S., Weidmann, T. B. & Su, Z. "Computer Science Achievement and Writing Skills Predict Vibe Coding Proficiency". *Proceedings of CHI '26*, 2026. https://arxiv.org/abs/2603.14133
 
-[5] Tang, X., Jiang, B., Zhuo, Y., Cheng, Y., Phung, D. & Gerstein, M. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(4), 2024. https://doi.org/10.1093/bioinformatics/btae230
+[5] Tang, X., Jiang, B., Zhuo, Y., Cheng, Y., Phung, D. & Gerstein, M. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(4), 2024. https://pubmed.ncbi.nlm.nih.gov/38940140/
 
 [6] Kazemitabaar, M., Chow, J., Ma, C. K. T., Ericson, B. J., Weintrop, D. & Grossman, T. "Studying the effect of AI Code Generators on Supporting Novice Learners in Introductory Programming". *Proceedings of CHI '23*, 2023. https://doi.org/10.1145/3544548.3580919
 

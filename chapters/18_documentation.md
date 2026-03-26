@@ -659,7 +659,7 @@ pip install vcf-filter
 
 ### ドキュメント生成ツール
 
-- **Quarto Documentation.** https://quarto.org/docs/ — 科学論文・ウェブサイト・書籍の作成まで対応するドキュメント生成ツールの公式ドキュメント。
+- **Quarto Documentation.** https://quarto.org/docs/get-started/ — 科学論文・ウェブサイト・書籍の作成まで対応するドキュメント生成ツールの公式ドキュメント。
 
 ---
 

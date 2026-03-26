@@ -660,9 +660,9 @@ AIが生成したコードは「動く」ことが多いが、それが「良い
 
 | 用途 | 推奨ライブラリ | 自作を避けるべき理由 |
 |-----|-------------|-------------------|
-| FASTA/FASTQのパース | `Bio.SeqIO`（Biopython）[8](https://doi.org/10.1093/bioinformatics/btp163) | 不正なフォーマット、マルチラインFASTA等のエッジケースが多い |
+| FASTA/FASTQのパース | `Bio.SeqIO`（Biopython）[8](https://pubmed.ncbi.nlm.nih.gov/19304878/) | 不正なフォーマット、マルチラインFASTA等のエッジケースが多い |
 | BAM/SAMファイルの操作 | `pysam` | 大規模データの効率的な処理にはCバインディングが必要 |
-| ゲノム区間の操作 | `pybedtools`[9](https://doi.org/10.1093/bioinformatics/btr539) | 区間演算のアルゴリズムは複雑で、自作するとバグの温床になる |
+| ゲノム区間の操作 | `pybedtools`[9](https://pubmed.ncbi.nlm.nih.gov/21949271/) | 区間演算のアルゴリズムは複雑で、自作するとバグの温床になる |
 | 配列アラインメント | 既存アライナ（BWA, STAR等）の呼び出し | アルゴリズムの実装は専門家の領域 |
 
 設定ファイルに「FASTAパーサは `Bio.SeqIO` を使え、自作禁止」のように明記しておけば、エージェントが不要な自作を始めることを防げる。詳しくは[§12 データ処理の実践 — NumPy・pandas・polars](./12_data_processing.md)で各ライブラリの使い方を解説する。
@@ -777,8 +777,8 @@ AIコーディングエージェントはローカル環境でファイルの読
 - [5](https://doi.org/10.1162/tacl_a_00638) Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. "Lost in the Middle: How Language Models Use Long Contexts". *Transactions of the Association for Computational Linguistics*, 12, 157–173, 2024. https://doi.org/10.1162/tacl_a_00638
 - [6](https://docs.anthropic.com/en/docs/about-claude/models) Anthropic. "Models overview". https://docs.anthropic.com/en/docs/about-claude/models (参照日: 2026-03-17)
 - [7](https://docs.anthropic.com/en/docs/about-claude/pricing) Anthropic. "Pricing". https://docs.anthropic.com/en/docs/about-claude/pricing (参照日: 2026-03-17)
-- [8](https://doi.org/10.1093/bioinformatics/btp163) Cock, P. J. A., Antao, T., Chang, J. T., Chapman, B. A., Cox, C. J., Dalke, A., Friedberg, I., Hamelryck, T., Kauff, F., Wilczynski, B., de Hoon, M. J. L. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. https://doi.org/10.1093/bioinformatics/btp163
-- [9](https://doi.org/10.1093/bioinformatics/btr539) Dale, R. K., Pedersen, B. S., Quinlan, A. R. "Pybedtools: a flexible Python library for manipulating genomic datasets and annotations". *Bioinformatics*, 27(24), 3423–3424, 2011. https://doi.org/10.1093/bioinformatics/btr539
+- [8](https://pubmed.ncbi.nlm.nih.gov/19304878/) Cock, P. J. A., Antao, T., Chang, J. T., Chapman, B. A., Cox, C. J., Dalke, A., Friedberg, I., Hamelryck, T., Kauff, F., Wilczynski, B., de Hoon, M. J. L. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. https://pubmed.ncbi.nlm.nih.gov/19304878/
+- [9](https://pubmed.ncbi.nlm.nih.gov/21949271/) Dale, R. K., Pedersen, B. S., Quinlan, A. R. "Pybedtools: a flexible Python library for manipulating genomic datasets and annotations". *Bioinformatics*, 27(24), 3423–3424, 2011. https://pubmed.ncbi.nlm.nih.gov/21949271/
 - [10](https://doi.org/10.1109/ICSE.2013.6606617) Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 35th International Conference on Software Engineering (ICSE '13)*, 712–721, 2013. https://doi.org/10.1109/ICSE.2013.6606617
 - [11](https://arxiv.org/abs/2310.13548) Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., et al. "Towards Understanding Sycophancy in Language Models". *ICLR 2024*. https://arxiv.org/abs/2310.13548
 - [12](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking) Anthropic. "Building with extended thinking". https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking (参照日: 2026-03-17)

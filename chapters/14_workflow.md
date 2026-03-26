@@ -378,7 +378,7 @@ nextflow run nf-core/rnaseq \
 
 ### make — 古典的だが今も有用
 
-GNU make はソフトウェアビルドのために設計されたツールだが、小規模なデータ処理パイプラインにも有用である[7](https://doi.org/10.1093/bib/bbw020)。リファレンスゲノムのダウンロードとインデックス構築のような準備ステップに適している:
+GNU make はソフトウェアビルドのために設計されたツールだが、小規模なデータ処理パイプラインにも有用である[7](https://pubmed.ncbi.nlm.nih.gov/27013646/)。リファレンスゲノムのダウンロードとインデックス構築のような準備ステップに適している:
 
 ```makefile
 # Makefile — リファレンスゲノムの取得とインデックス構築
@@ -677,7 +677,7 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 
 ### パイプラインフレームワークの比較
 
-- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** https://doi.org/10.1093/bib/bbw020 — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
+- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** https://pubmed.ncbi.nlm.nih.gov/27013646/ — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
 
 ### 公式チュートリアル
 
@@ -700,6 +700,6 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 
 [6] Grüning, B. et al. "Bioconda: sustainable and comprehensive software distribution for the life sciences." *Nature Methods*, 15(7), 475–476, 2018. [https://doi.org/10.1038/s41592-018-0046-7](https://doi.org/10.1038/s41592-018-0046-7)
 
-[7] Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017. [https://doi.org/10.1093/bib/bbw020](https://doi.org/10.1093/bib/bbw020)
+[7] Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017. [https://pubmed.ncbi.nlm.nih.gov/27013646/](https://pubmed.ncbi.nlm.nih.gov/27013646/)
 
 [8] nf-core Community. "nf-core — A community effort to collect a curated set of analysis pipelines". [https://nf-co.re/](https://nf-co.re/) (参照日: 2026-03-20)

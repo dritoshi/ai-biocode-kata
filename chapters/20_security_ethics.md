@@ -480,7 +480,7 @@ def check_k_anonymity(
 
 > **🧬 コラム: ゲノムデータは究極の個人情報**
 >
-> 2013年、Gymrekらは衝撃的な研究結果を発表した[3](https://doi.org/10.1126/science.1229566)。匿名で提供された男性のゲノムデータから、Y染色体のSTR（Short Tandem Repeat）マーカーを抽出し、公開されている家系図データベース（Genealogy DB）と突合することで、匿名提供者の**姓**を特定することに成功したのである。
+> 2013年、Gymrekらは衝撃的な研究結果を発表した[3](https://pubmed.ncbi.nlm.nih.gov/23329047/)。匿名で提供された男性のゲノムデータから、Y染色体のSTR（Short Tandem Repeat）マーカーを抽出し、公開されている家系図データベース（Genealogy DB）と突合することで、匿名提供者の**姓**を特定することに成功したのである。
 >
 > この研究は、ゲノムデータの「匿名化」が本質的に脆弱であることを実証した。Y染色体は父系で受け継がれるため、姓（多くの文化圏で父系継承）との対応関係がある。この対応関係と、年齢・居住州などの少量のメタデータを組み合わせることで、データ提供者を個人レベルで特定できたのである。
 >
@@ -627,7 +627,7 @@ __pycache__/
 
 [2] AWS Labs. "git-secrets: Prevents you from committing secrets and credentials into git repositories". https://github.com/awslabs/git-secrets (参照日: 2026-03-21)
 
-[3] Gymrek, M. et al. "Identifying Personal Genomes by Surname Inference". *Science*, 339(6117), 321-324, 2013. https://doi.org/10.1126/science.1229566
+[3] Gymrek, M. et al. "Identifying Personal Genomes by Surname Inference". *Science*, 339(6117), 321-324, 2013. https://pubmed.ncbi.nlm.nih.gov/23329047/
 
 [4] Erlich, Y. & Narayanan, A. "Routes for breaching and protecting genetic privacy". *Nature Reviews Genetics*, 15(6), 409-421, 2014. https://doi.org/10.1038/nrg3723
 

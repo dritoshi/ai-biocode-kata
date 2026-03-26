@@ -1,10 +1,10 @@
 # 未達成レビューと未完了修正
 
-2026-03-25 時点で本文レビュー、URL 到達性レビュー、出版前優先の外部参照修正は完了した。以下は未完了のまま残している。
+2026-03-26 時点で本文レビューと機械的な URL 到達性チェックは完了した。以下は未完了のまま残している。
 
 ## 未達成レビュー
 
-- なし。2026-03-25 にネットワーク制限のない環境で URL チェックを再実行し、現行 [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) で `error` / `timeout` / `connection_error` が 0 件であることを確認した。`anti-bot = 39` はサイト側制限として扱い、追加 issue は起票していない。
+- なし。現行 [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) は `summary.ok = 306`, `summary.anti-bot = 20` であり、`error` / `timeout` / `connection_error` は 0 件である。`anti-bot` 20 件のうち、非 DOI 系 8 件と PubMed に変換できない DOI 系 11 件は手動確認済みであり、`https://doi.org/10.1002/0471448354` はブラウザ再確認で到達確認済みである。したがって、URL 到達性レビューとしての残件はない。
 
 ## 未完了修正
 
