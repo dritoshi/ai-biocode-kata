@@ -82,6 +82,16 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 
 なお、AIコーディングエージェントの能力は急速に進化しており、本書で取り上げた具体的なツールや操作方法は今後変わりうる。しかし、本書が扱うソフトウェア開発の「作法」——テスト、バージョン管理、設計原則、プロジェクト構成——は、ツールの世代交代に左右されない普遍的な知識基盤である。読者には、最新のツール動向を継続的にフォローしつつ、本書で身につけた知識を土台として活用してほしい。
 
+## 謝辞
+
+本書の執筆にあたり、多くの方々にお世話になった。
+
+研究室のみなさまに感謝する。特に、実験系生物科学者の立場から本書の企画に刺激を与えてくれた笹川洋平氏と矢野実氏には、本書を書くきっかけそのものをいただいた。また、実験系のメンバーが日々の研究で本当に必要としていることは何かを常に意識しながら執筆を進めた。すべてのメンバーに感謝する。
+
+本書の執筆にはClaude Code CLI (Claude Opus 4.5, effort: high) を、原稿のレビューにはCodex CLI (GPT-5.4, reasoning: xhigh) を用いた。これらのAIコーディングエージェントの開発者のみなさまに感謝する。
+
+(未完)
+
 ## 参考文献
 
 - [1](https://arxiv.org/abs/2310.06770) Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., Narasimhan, K. "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?". *Proceedings of the Twelfth International Conference on Learning Representations (ICLR)*, 2024. https://arxiv.org/abs/2310.06770
