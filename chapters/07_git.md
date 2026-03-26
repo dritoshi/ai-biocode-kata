@@ -136,6 +136,30 @@ git diff
 git diff --staged
 ```
 
+`git diff` の出力は**unified diff形式**と呼ばれ、以下のように読む。
+
+```diff
+diff --git a/scripts/filter.py b/scripts/filter.py
+--- a/scripts/filter.py
++++ b/scripts/filter.py
+@@ -12,7 +12,7 @@ def filter_by_quality(records, threshold=20):
+     filtered = []
+     for record in records:
+-        if record.letter_annotations["phred_quality"][0] > threshold:
++        if min(record.letter_annotations["phred_quality"]) >= threshold:
+             filtered.append(record)
+     return filtered
+```
+
+- `---` と `+++` はそれぞれ変更前（a）と変更後（b）のファイルを示す
+- `@@` 行は変更箇所の位置を示す。`-12,7` は変更前の12行目から7行、`+12,7` は変更後の12行目から7行が対象であることを意味する
+- `-` で始まる行は削除された行、`+` で始まる行は追加された行である
+- 記号なしの行は変更されていない**コンテキスト行**で、変更箇所の前後に表示され、どこが変わったかを把握する手がかりになる
+
+この例では、品質フィルタの条件が「先頭のスコアが閾値より大きい」から「全スコアの最小値が閾値以上」に変更されたことが一目でわかる。AIエージェントが提案する変更を承認する前に、この差分表示を読んで「何が変わったか」を確認する習慣をつけよう。
+
+なお、`git diff` はGit管理下のファイルを対象とするが、Git管理外のファイルを比較したい場合はシェルの `diff` コマンドが使える。`diff -u file_a.py file_b.py` で同様のunified diff形式の出力が得られる。
+
 `git diff` が見やすいのは、[§4 データフォーマットの選び方](./04_data_formats.md)で学んだテキスト形式のファイルである。バイナリファイル（BAM、pickle等）は差分表示できないため、テキスト形式で保存することにはバージョン管理上の利点もある。
 
 ```bash
