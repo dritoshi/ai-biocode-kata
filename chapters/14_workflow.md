@@ -64,7 +64,7 @@ done
 
 1. **変更されたルールだけ再実行**: 出力ファイルのタイムスタンプを入力と比較し、更新が必要なルールだけを実行する
 2. **並列実行**: 独立したルール（上図のfastqcとtrimmomatic）を自動的に並列実行する
-3. **途中再開**: `--rerun-incomplete`（Snakemake）や`-resume`（Nextflow）で、失敗箇所から再開できる
+3. **途中再開**: 成功済みステップを保ったまま必要箇所だけ再実行できる。Snakemake では通常の up-to-date 判定に加えて `--rerun-incomplete` で不完全出力をやり直し、Nextflow では `-resume` でキャッシュを再利用する
 
 ### 導入タイミング
 
@@ -261,7 +261,7 @@ rule featurecounts:
 
 注目すべきポイント:
 
-- **`temp()`**: trimmomatic・star_alignの出力に `temp()` を付けている。下流のルールが完了すると中間ファイルが自動削除され、ディスク使用量を抑えられる
+- **中間ファイルの自動削除**: trimmomatic・star_alignの出力に `temp()` を付けている。下流のルールが完了すると中間ファイルが自動削除され、ディスク使用量を抑えられる
 - **`log:`**: 全ルールにlog:ディレクティブがあり、実行ログが `logs/` に保存される
 - **`configfile:`**: パラメータがすべて `config.yaml` から読み込まれている
 
@@ -269,7 +269,7 @@ rule featurecounts:
 
 上のSnakefileではFastQCとTrimmomaticを使っているが、ツールの選択とパラメータの設定には判断が必要である。
 
-**QCツールの選択**: FastQCはQCレポートの生成に特化しており、トリミングは行わない。一方、**fastp**はQCレポートの生成とトリミングを1ステップで実行できる。MultiQCは複数サンプルのQCレポートを統合する。新規パイプラインでは、FastQC + Trimmomaticの2ステップをfastp 1ステップに置き換えるのが効率的である。
+**QCツールの選択**: FastQCはQCレポートの生成に特化しており、トリミングは行わない。一方、**fastp**はQCレポートの生成とトリミングを1ステップで実行できる。MultiQCは複数サンプルのQCレポートを統合する。新規パイプラインでは、FastQC + Trimmomaticの2ステップを fastp + MultiQC に置き換える構成が有力な候補になるが、既存手順や論文再現では元のツールチェーンを優先することも多い。
 
 **トリミングパラメータの判断基準**: クオリティのトリミング閾値にはQ20（エラー率1%）とQ30（エラー率0.1%）がよく使われる。一般的なRNA-seq解析ではQ20で十分だが、バリアントコールなど塩基レベルの精度が求められる場合はQ30を選択する。最小リード長は、マッピングの感度とのトレードオフで決める。短すぎるリードはマルチマッピングを増やすため、通常20〜36 bpを下限とする。
 
@@ -321,10 +321,12 @@ Snakemakeとの主な違い:
 |------|-----------|----------|
 | 依存解決 | ファイルパスのパターンマッチ | チャネルによるデータの受け渡し |
 | 記法 | Python風（Snakefileの中でPythonコードが書ける） | Groovy風のDSL2 |
-| 再開 | `--rerun-incomplete`（タイムスタンプ比較） | `-resume`（ハッシュベースのキャッシュ） |
-| HPC対応 | `--slurm`, `--cluster` | `executor` 設定（SLURM, PBS, AWS Batch等） |
+| 再開 | 出力ファイルとメタデータに基づく再実行判定。必要に応じて `--rerun-incomplete` | `-resume`（ハッシュベースのキャッシュ） |
+| HPC対応 | プロファイルやクラスタ実行オプション（版によりCLIが異なる） | `executor` 設定（SLURM, PBS, AWS Batch等） |
 
 Nextflowのチャネルモデルは、データの流れが直感的に追いやすい一方で、ファイル名に基づく柔軟なパターンマッチはSnakemakeに比べてやや冗長になる場合がある。
+
+Snakemake の HPC 連携に使う CLI は版によって差がある。`--cluster`、`--slurm`、executor / profile ベースの指定のどれを使うかは、使用している版の公式ドキュメントを確認すること[4](https://snakemake.readthedocs.io/)。
 
 #### nf-core — 既存パイプライン群の活用
 
@@ -341,7 +343,9 @@ nextflow run nf-core/rnaseq \
 
 この1コマンドで、QCからカウント行列生成まで——本章で扱った全ステップに加えてMultiQCレポート生成まで——が実行される。
 
-> 🧬 **コラム: QCメトリクスの読み方 — 数値の「合格ライン」を知る**
+> 🧬 **コラム: QCメトリクスの読み方**
+>
+> 数値の「合格ライン」を知る。
 >
 > パイプラインの最初のステップであるQC（Quality Control）は、下流の全解析の前提となる。QCの結果を読めなければ、低品質なデータをそのまま解析に回してしまい、マッピング率の低下や偽陽性の増加を招く。以下に主要なQCメトリクスの目安をまとめる:
 >
@@ -360,7 +364,7 @@ nextflow run nf-core/rnaseq \
 
 > 🧬 **コラム: nf-coreエコシステム**
 >
-> nf-core[3](https://doi.org/10.1038/s41587-020-0439-x)[8](https://nf-co.re/)は、Nextflowベースのバイオインフォマティクスパイプラインを開発・共有するコミュニティ主導のプロジェクトである。2026年時点で100以上のパイプラインが公開されており、RNA-seq、ATAC-seq、メタゲノム、系統解析など主要な解析タイプをカバーしている。
+> nf-core[3](https://doi.org/10.1038/s41587-020-0439-x)[8](https://nf-co.re/)は、Nextflowベースのバイオインフォマティクスパイプラインを開発・共有するコミュニティ主導のプロジェクトである。2026年時点でも多数のパイプラインが公開されており、RNA-seq、ATAC-seq、メタゲノム、系統解析など主要な解析タイプをカバーしている。
 >
 > **ゼロから書くか、nf-coreを使うか** の判断基準:
 >
@@ -374,7 +378,7 @@ nextflow run nf-core/rnaseq \
 
 ### make — 古典的だが今も有用
 
-GNU make はソフトウェアビルドのために設計されたツールだが、小規模なデータ処理パイプラインにも有用である[7](https://doi.org/10.1093/bib/bbw020)。リファレンスゲノムのダウンロードとインデックス構築のような準備ステップに適している:
+GNU make はソフトウェアビルドのために設計されたツールだが、小規模なデータ処理パイプラインにも有用である[7](https://pubmed.ncbi.nlm.nih.gov/27013646/)。リファレンスゲノムのダウンロードとインデックス構築のような準備ステップに適している:
 
 ```makefile
 # Makefile — リファレンスゲノムの取得とインデックス構築
@@ -409,7 +413,7 @@ makeの利点は、追加のインストールが不要で、ほぼすべてのU
 |------|------|-----------|----------|
 | 学習コスト | 低 | 中 | 高 |
 | Python親和性 | 低 | 高（Snakefile内でPythonが書ける） | 低（Groovy/DSL2） |
-| HPC対応 | 手動（ジョブスクリプト記述） | `--slurm`, `--cluster` | 組み込み（executor設定） |
+| HPC対応 | 手動（ジョブスクリプト記述） | プロファイルやクラスタ実行オプション | 組み込み（executor設定） |
 | conda/container統合 | なし | `conda:`, `container:` | `container` プロファイル |
 | 既存パイプライン | 少ない | Snakemake Catalog | nf-core（100+パイプライン） |
 | 向いている規模 | 小規模（前処理・準備） | 中〜大規模 | 大規模・クラウド |
@@ -556,7 +560,7 @@ for item in result.warnings:
 
 1. **`configfile:` の使用** — パラメータがハードコーディングされていないか
 2. **`log:` ディレクティブの有無** — 全ルール（`rule all` を除く）にログ出力があるか
-3. **`temp()` の使用** — 中間ファイルにディスク管理マーカーが付いているか
+3. **中間ファイル管理** — `temp()` によるディスク管理マーカーが付いているか
 4. **入出力パスの分離** — 入力ディレクトリに出力を書き込んでいないか
 
 #### エージェントへの指示例
@@ -594,7 +598,7 @@ for item in result.warnings:
 | 部分的再実行 | 手動で特定・再実行 | 変更部分だけ自動再実行 |
 | サンプル展開 | forループ・コピペ | wildcards・expand() |
 | 並列実行 | 手動（`&`, `xargs`） | `-j N` で自動並列 |
-| HPC連携 | ジョブスクリプト手書き | `--slurm` で自動投入 |
+| HPC連携 | ジョブスクリプト手書き | プロファイルやクラスタ実行オプションで自動投入 |
 | 中間ファイル管理 | 手動削除 | `temp()` で自動削除 |
 | ログ管理 | リダイレクト忘れがち | `log:` で強制 |
 | 再現性 | 低（環境依存） | conda/container統合 |
@@ -613,9 +617,9 @@ for item in result.warnings:
 
 以下の3つのシナリオについて、Snakemake/Nextflow のようなワークフロー言語で管理すべきかどうかを判断し、その理由を述べよ。
 
-- **(a)** 3ステップ、1サンプルの解析を1回だけ実行する
-- **(b)** 10ステップ、20サンプルの解析を実行する
-- **(c)** 3ステップ、1サンプルの解析だが、月次で繰り返し実行する
+- (a) 3ステップ、1サンプルの解析を1回だけ実行する
+- (b) 10ステップ、20サンプルの解析を実行する
+- (c) 3ステップ、1サンプルの解析だが、月次で繰り返し実行する
 
 （ヒント）ステップ数×サンプル数の積と繰り返し頻度が判断基準である。1回きりの小規模解析にワークフロー言語を導入するのは過剰だが、繰り返しがある場合は小規模でも自動化の価値がある。
 
@@ -673,7 +677,7 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 
 ### パイプラインフレームワークの比較
 
-- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** https://doi.org/10.1093/bib/bbw020 — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
+- **Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017.** https://pubmed.ncbi.nlm.nih.gov/27013646/ — バイオインフォパイプラインフレームワークの比較レビュー。Snakemake/Nextflow以外の選択肢（CWL、WDL、Luigi等）も含めた全体像を把握できる。
 
 ### 公式チュートリアル
 
@@ -696,6 +700,6 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 
 [6] Grüning, B. et al. "Bioconda: sustainable and comprehensive software distribution for the life sciences." *Nature Methods*, 15(7), 475–476, 2018. [https://doi.org/10.1038/s41592-018-0046-7](https://doi.org/10.1038/s41592-018-0046-7)
 
-[7] Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017. [https://doi.org/10.1093/bib/bbw020](https://doi.org/10.1093/bib/bbw020)
+[7] Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017. [https://pubmed.ncbi.nlm.nih.gov/27013646/](https://pubmed.ncbi.nlm.nih.gov/27013646/)
 
 [8] nf-core Community. "nf-core — A community effort to collect a curated set of analysis pipelines". [https://nf-co.re/](https://nf-co.re/) (参照日: 2026-03-20)

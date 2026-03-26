@@ -1,5 +1,6 @@
 """エラーハンドリングの例 — カスタム例外とガード節パターン."""
 
+from io import StringIO
 from pathlib import Path
 
 from Bio import SeqIO
@@ -33,6 +34,18 @@ class QualityThresholdError(BiofilterError):
         )
 
 
+def _load_effective_fasta_text(fasta_path: Path) -> str | None:
+    """先頭の空行を除いた FASTA テキストを返す."""
+    lines = fasta_path.read_text(encoding="utf-8").splitlines()
+    for index, line in enumerate(lines):
+        if line.strip() == "":
+            continue
+        if not line.lstrip().startswith(">"):
+            return None
+        return "\n".join(lines[index:]) + "\n"
+    return None
+
+
 def validate_fasta(fasta_path: Path) -> list[str]:
     """FASTAファイルを検証し、配列IDのリストを返す.
 
@@ -63,9 +76,17 @@ def validate_fasta(fasta_path: Path) -> list[str]:
     if fasta_path.stat().st_size == 0:
         raise ValueError(f"FASTAファイルが空です: {fasta_path}")
 
+    # Biopython の deprecated なコメント解釈に依存しないよう、
+    # 先頭の実質行が FASTA ヘッダであることを先に確認する。
+    fasta_text = _load_effective_fasta_text(fasta_path)
+    if fasta_text is None:
+        raise ValueError(
+            f"FASTAファイルに配列が含まれていません: {fasta_path}"
+        )
+
     # 本処理
     sequence_ids: list[str] = []
-    for record in SeqIO.parse(fasta_path, "fasta"):
+    for record in SeqIO.parse(StringIO(fasta_text), "fasta"):
         sequence_ids.append(record.id)
 
     # ガード節: 配列の存在確認

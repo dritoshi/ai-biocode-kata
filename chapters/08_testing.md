@@ -4,7 +4,8 @@
 
 実験科学者にとって、これはポジティブコントロールとネガティブコントロールの概念に近い。既知の結果が得られるサンプルを実験に含めることで、実験系全体が正しく機能していることを確認する。ソフトウェアにおけるテストも同じ発想である——既知の入力に対して期待どおりの出力が得られるかを自動で検証する。
 
-本章では、**テスト駆動開発**（Test-Driven Development; TDD）の考え方、**pytest**によるテストの書き方、そして**ruff**・**mypy**・**pre-commit**によるコード品質の自動管理を学ぶ。さらに、[§7](./07_git.md)で触れたGitHub Actionsを活用して、テストとリンターをプッシュのたびに自動実行するCI/CDパイプラインを構築する。
+本章では、**テスト駆動開発**（Test-Driven Development; TDD）の考え方、**pytest**によるテストの書き方、そして**Ruff**・**mypy**・**pre-commit**によるコード品質の自動管理を学ぶ。さらに、[§7](./07_git.md)で触れたGitHub Actionsを活用して、テストとリンターをプッシュのたびに自動実行するCI/CDパイプラインを構築する。
+
 
 ---
 
@@ -24,7 +25,7 @@
 
 ### Red → Green → Refactor サイクル
 
-テスト駆動開発（TDD）は、コードを書く前にテストを書く開発手法である[1](https://doi.org/10.5281/zenodo.9882)。TDDは3つのステップを繰り返すサイクルで進む。
+テスト駆動開発（TDD）は、コードを書く前にテストを書く開発手法である[1](https://www.informit.com/store/test-driven-development-by-example-9780321146533)。TDDは3つのステップを繰り返すサイクルで進む。
 
 ![TDDサイクル: Red（失敗するテストを書く）→ Green（最小限のコードで通す）→ Refactor（きれいにする）](../figures/ch08_tdd_cycle.png)
 
@@ -37,7 +38,7 @@
 **Step 1: Red — 失敗するテストを書く**
 
 ```python
-# tests/ch07/test_reverse_complement.py
+# tests/ch08/test_reverse_complement.py
 from scripts.ch08.reverse_complement import reverse_complement
 
 def test_simple_sequence() -> None:
@@ -121,10 +122,10 @@ pytest tests/
 pytest tests/ -v
 
 # 特定のファイルだけ実行
-pytest tests/ch07/test_reverse_complement.py
+pytest tests/ch08/test_reverse_complement.py
 
 # 特定のテスト関数だけ実行
-pytest tests/ch07/test_reverse_complement.py::test_simple_sequence
+pytest tests/ch08/test_reverse_complement.py::test_simple_sequence
 ```
 
 pytestは `test_` で始まるファイルと関数を自動的にテストとして認識する。テスト関数内で `assert` 文を使い、期待する条件を記述する。
@@ -199,7 +200,7 @@ def test_filter_all(sample_sequences: dict[str, str]) -> None:
 複数のテストファイルで同じフィクスチャを使いたい場合は、`conftest.py` に定義する:
 
 ```python
-# tests/ch07/conftest.py
+# tests/ch08/conftest.py
 import pytest
 from pathlib import Path
 
@@ -303,7 +304,7 @@ def test_fasta_filter_pipeline(tmp_path: Path) -> None:
 
 テストカバレッジの改善を依頼する場合:
 
-> 「`pytest --cov=scripts/ch07 --cov-report=term-missing` を実行して、カバレッジが低いモジュールを特定してください。Missing行に対するテストケースを追加して、カバレッジ80%以上を目指してください」
+> 「`pytest --cov=scripts/ch08 --cov-report=term-missing` を実行して、カバレッジが低いモジュールを特定してください。Missing行に対するテストケースを追加して、カバレッジ80%以上を目指してください」
 
 統合テストの作成を依頼する場合は、入出力の全体像を伝えると精度が上がる:
 
@@ -527,15 +528,15 @@ def filter_fasta_by_gc(
 
 ### エージェントフック — ツール実行前後の自動チェック
 
-pre-commitは「`git commit` の前に自動でチェックを走らせる」仕組みであった。AIコーディングエージェントにも同様の仕組みがある。[§0-3](./00_ai_agent.md#エージェントの拡張機能--mcpフックカスタムコマンド)で予告した**フック**（Hooks）である。
+pre-commitは「`git commit` の前に自動でチェックを走らせる」仕組みであった。AIコーディングエージェントでも、ツール実行の前後に自動チェックを差し込めるものがある。[§0-3](./00_ai_agent.md#エージェントの拡張機能--mcpフックカスタムコマンド)で予告した**フック**（Hooks）である。本節では、2026年3月時点で一般ユーザー向けに利用できる **Claude Code の hooks** を例に説明する。
 
-エージェントフックは、エージェントがツールを実行する**前後**にシェルコマンドを自動実行する仕組みである。pre-commit hookが「コミット前」のみをフックするのに対し、エージェントフックはファイル編集、コマンド実行、セッション開始など、より多くのイベントをフックできる。
+Claude Code の hooks は、エージェントがツールを実行する**前後**にシェルコマンドを自動実行する仕組みである。pre-commit hookが「コミット前」のみをフックするのに対し、Claude Code の hooks はファイル編集、コマンド実行、セッション開始など、より多くのイベントを対象にできる。Codex CLI の hooks は 2026年3月時点で `under development` と表示されるため、本書では前提にしない。
 
 ![エージェントフックのフロー: Before Hook（構文チェック）→ 編集実行 → After Hook（テスト）](../figures/ch08_agent_hooks.png)
 
 #### pre-commit hook との使い分け
 
-| 観点 | pre-commit hook | エージェントフック |
+| 観点 | pre-commit hook | Claude Code の hooks |
 |------|----------------|-----------------|
 | トリガー | `git commit` 時 | エージェントのツール実行時（編集、コマンド等） |
 | 実行タイミング | コミット前のみ | ツール実行の前後どちらも設定可能 |
@@ -545,9 +546,9 @@ pre-commitは「`git commit` の前に自動でチェックを走らせる」仕
 
 #### 設定例
 
-| | Claude Code CLI | Codex CLI |
-|--|-------------|-----------|
-| 設定ファイル | `.claude/settings.json` | `config.toml` |
+| | Claude Code CLI |
+|--|-------------|
+| 設定ファイル | `.claude/settings.json` |
 
 Claude Code CLIの場合、`.claude/settings.json` にフックを定義する:
 
@@ -574,13 +575,13 @@ Claude Code CLIの場合、`.claude/settings.json` にフックを定義する:
 
 #### エージェントへの指示例
 
-フックの設定自体をエージェントに依頼するのが最も簡単である:
+Claude Code では、フックの設定自体をエージェントに依頼するのが最も簡単である:
 
 > 「エージェントフックを設定して。Pythonファイルを編集した後に自動で `ruff check --fix` が走るようにして」
 
 > 「テストファイルを変更したら自動で `pytest` が走るフックを追加して」
 
-pre-commit hookとエージェントフックを組み合わせることで、エージェントの操作中もコミット時も品質チェックが自動的に行われる二重の安全網が構築できる。CI/CDパイプライン（次の[§8-4](#8-4-cicd)）と合わせれば、「ローカルのエージェント操作時」「コミット時」「プッシュ時」の3段階で品質を守る体制が整う。
+pre-commit hookと Claude Code の hooks を組み合わせることで、エージェントの操作中もコミット時も品質チェックが自動的に行われる二重の安全網が構築できる。CI/CDパイプライン（次の[§8-4](#8-4-cicd)）と合わせれば、「ローカルのエージェント操作時」「コミット時」「プッシュ時」の3段階で品質を守る体制が整う。
 
 ---
 
@@ -801,7 +802,7 @@ VCF ファイルから QUAL 値が閾値以上の行を抽出する関数 `filte
 
 ## 参考文献
 
-[1] Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002. [https://doi.org/10.5281/zenodo.9882](https://doi.org/10.5281/zenodo.9882)
+[1] Beck, K. *Test Driven Development: By Example*. Addison-Wesley, 2002. ISBN 978-0-321-14653-3. [https://www.informit.com/store/test-driven-development-by-example-9780321146533](https://www.informit.com/store/test-driven-development-by-example-9780321146533)
 
 [2] pytest. "pytest: helps you write better programs". [https://docs.pytest.org/en/stable/](https://docs.pytest.org/en/stable/) (参照日: 2026-03-18)
 

@@ -2,10 +2,7 @@
 
 from pathlib import Path
 
-import pytest
-
 from scripts.ch04.tsv_csv_handling import (
-    csv_roundtrip_precision,
     read_expression_tsv,
     write_expression_csv,
 )
@@ -76,27 +73,3 @@ class TestWriteExpressionCsv:
         content = csv_file.read_text(encoding="utf-8")
         assert "TP53" in content
         assert "10.5" in content
-
-
-class TestCsvRoundtripPrecision:
-    """csv_roundtrip_precision() のテスト."""
-
-    def test_tracking_length(self) -> None:
-        # n_trips=3 なら 初期値+3回 = 4要素
-        result = csv_roundtrip_precision([1.0 / 3.0], n_trips=3)
-        assert len(result) == 4
-
-    def test_exact_value_preserved(self) -> None:
-        # 0.5 は2進数で正確に表現できるので劣化しない
-        result = csv_roundtrip_precision([0.5], n_trips=5)
-        assert all(v == 0.5 for v in result)
-
-    def test_initial_value_recorded(self) -> None:
-        values = [0.1, 0.2, 0.3]
-        result = csv_roundtrip_precision(values, n_trips=1)
-        assert result[0] == pytest.approx(0.1)
-
-    def test_many_trips_no_crash(self) -> None:
-        # 100回のround-tripでもエラーにならないこと
-        result = csv_roundtrip_precision([3.141592653589793], n_trips=100)
-        assert len(result) == 101

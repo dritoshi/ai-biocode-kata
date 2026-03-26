@@ -1,8 +1,10 @@
 """error_handling モジュールのテスト."""
 
+import warnings
 from pathlib import Path
 
 import pytest
+from Bio import BiopythonDeprecationWarning
 
 from scripts.ch10.error_handling import (
     BiofilterError,
@@ -62,8 +64,14 @@ class TestValidateFasta:
         """FASTA配列が含まれていないファイルでValueErrorが発生する."""
         bad_file = tmp_path / "bad.fasta"
         bad_file.write_text("this is not a fasta file\n")
-        with pytest.raises(ValueError, match="配列が含まれていません"):
-            validate_fasta(bad_file)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always", BiopythonDeprecationWarning)
+            with pytest.raises(ValueError, match="配列が含まれていません"):
+                validate_fasta(bad_file)
+
+        assert not any(
+            isinstance(w.message, BiopythonDeprecationWarning) for w in caught
+        )
 
     def test_valid_fasta(self, tmp_path: Path) -> None:
         """正しいFASTAファイルから配列IDを取得できる."""
@@ -81,3 +89,16 @@ class TestValidateFasta:
         fasta_file.write_text(">only_one\nATGC\n")
         ids = validate_fasta(fasta_file)
         assert ids == ["only_one"]
+
+    def test_leading_blank_lines_are_ignored(self, tmp_path: Path) -> None:
+        """先頭の空行は無視してFASTAとして処理できる."""
+        fasta_file = tmp_path / "blank_lines.fasta"
+        fasta_file.write_text("\n\n>seq1\nATGC\n")
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always", BiopythonDeprecationWarning)
+            ids = validate_fasta(fasta_file)
+
+        assert ids == ["seq1"]
+        assert not any(
+            isinstance(w.message, BiopythonDeprecationWarning) for w in caught
+        )

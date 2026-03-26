@@ -1,0 +1,13 @@
+{
+  "check": "cross_reference_check",
+  "stats": {
+    "total_files_checked": 29,
+    "total_chapter_links": 478,
+    "total_figure_links": 40,
+    "broken_file_links": 0,
+    "broken_anchors": 0,
+    "broken_figure_links": 0
+  },
+  "total_issues": 0,
+  "issues": []
+}

@@ -1,0 +1,5040 @@
+{
+  "metadata": {
+    "total_unique_urls": 254,
+    "total_occurrences": 685,
+    "timestamp": "2026-03-25T00:46:13+0900"
+  },
+  "summary": {
+    "ok": 214,
+    "error": 4,
+    "anti-bot": 36
+  },
+  "urls": [
+    {
+      "url": "http://purl.uniprot.org/core/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://purl.uniprot.org/html/index-en.html",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 121
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 419
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/core/organism",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://purl.uniprot.org/html/index-en.html#organism",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/go/0005739",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://sparql.uniprot.org/sparql/?query=DESCRIBE%20%3chttp://purl.uniprot.org/go/0005739%3e",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 426
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/taxonomy/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.uniprot.org/taxonomy/",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 122
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/taxonomy/9606",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.uniprot.org/taxonomy/9606",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "url": "http://purl.uniprot.org/uniprot/P53_HUMAN",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.uniprot.org/uniprotkb/P53_HUMAN",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "http://togows.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 518
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "url": "http://www.catb.org/esr/writings/taoup/html/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 188
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 434
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 861
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 23
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 84
+        }
+      ]
+    },
+    {
+      "url": "https://12factor.net/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 583
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 648
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1040
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 27
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 51
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "url": "https://apptainer.org/docs/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1092
+        }
+      ]
+    },
+    {
+      "url": "https://artificialintelligenceact.eu/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 305
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2302.06590",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 603
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 780
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 9
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 115
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2310.06770",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 84
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2310.13548",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 468
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 778
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 35
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2401.05566",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 771
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2507.09089",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.14133",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 23
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 51
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 93
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 43
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "url": "https://australianbiocommons.github.io/how-to-guides/hpc_guide",
+      "status_code": 404,
+      "category": "error",
+      "error": "HTTP 404",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "url": "https://bioconda.github.io/contributor/index.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 445
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://biopython.org/wiki/Documentation",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 378
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 467
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "url": "https://blog.burntsushi.net/ripgrep/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://burntsushi.net/ripgrep/",
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 813
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "url": "https://choosealicense.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 314
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 608
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "url": "https://citation-file-format.github.io/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 294
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 604
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://cli.github.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 223
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 598
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "url": "https://click.palletsprojects.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://click.palletsprojects.com/en/stable/",
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 93
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 843
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.5555/2600239.2600241",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1084
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/about-claude/models",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 520
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 773
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/about-claude/pricing",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 586
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 774
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://code.claude.com/docs",
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 805
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 558
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 779
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/claude-code",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://code.claude.com/docs",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 372
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 768
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://docs.astral.sh/ruff/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 320
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 810
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://docs.astral.sh/uv/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 108
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 478
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "url": "https://docs.conda.io/projects/conda/en/latest/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 81
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 472
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://docs.docker.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1090
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/actions/about-github-actions/understanding-github-actions",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://docs.github.com/en/actions/get-started/understand-github-actions",
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 238
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 600
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 593
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 820
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 46
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1094
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 269
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://docs.pola.rs/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 234
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 625
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://docs.pytest.org/en/stable/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 109
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 172
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 806
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/howto/logging.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 575
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 851
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/argparse.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 67
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 847
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/concurrent.futures.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 496
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/csv.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 76
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 775
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/json.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 106
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 777
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/logging.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 301
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 557
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 849
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 70
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/math.html#math.fsum",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 294
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 797
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/math.html#math.isclose",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 324
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 799
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/pdb.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 219
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/profile.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 234
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/sys.html#sys.breakpointhook",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 203
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/tomllib.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 142
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 779
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/traceback.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch09.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/typing.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 383
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 812
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/venv.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 40
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 470
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/library/warnings.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 267
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/reference/import.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 160
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 670
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/datastructures.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 22
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 791
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/errors.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 693
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1042
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/tutorial/modules.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 113
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 672
+        }
+      ]
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 629
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "url": "https://docs.wandb.ai/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1106
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1002/0471448354",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 801
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 142
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1002/j.1538-7305.1978.tb02135.x",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://ieeexplore.ieee.org/document/6770403",
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 19
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 93
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 186
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 422
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 34
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/0022-2836%2881%2990087-5",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/0022283681900875",
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 229
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 817
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/0022-2836(81)90087-5",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/0022283681900875",
+      "locations": [
+        {
+          "file": "references/ch03.bib",
+          "line": 134
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/S0022-2836%2805%2980360-2",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0022283605803602",
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 228
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 815
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1016/S0022-2836(05)80360-2",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0022283605803602",
+      "locations": [
+        {
+          "file": "references/ch03.bib",
+          "line": 122
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/533452a",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/533452a?error=cookies_not_supported&code=078195be-caf5-45a8-a7b7-83110b16f2a1",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 47
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1076
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/75556",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/ng0500_25?error=cookies_not_supported&code=8caa1b8f-ab2f-4a84-bd4d-b087efc1f81a",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 200
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/nbt.3820",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/nbt.3820?error=cookies_not_supported&code=07796bbc-4305-455d-8562-f4a5d5d2b7ab",
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 202
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1036
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 284
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 689
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 36
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/ng1201-365",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/ng1201-365?error=cookies_not_supported&code=424e8ccb-05f0-445f-aac6-83e5223decfb",
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 552
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/nrg3723",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/nrg3723?error=cookies_not_supported&code=da530fbc-855e-43a7-99c0-312411bc75c9",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 384
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41467-020-19160-7",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/s41467-020-19160-7?error=cookies_not_supported&code=c6eddefb-5747-4937-94a9-63673c803aad",
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 321
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 688
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41586-020-2649-2",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/s41586-020-2649-2?error=cookies_not_supported&code=d66369a9-c7cd-4634-935d-7ba4cab375dc",
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 617
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41587-020-0439-x",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/s41587-020-0439-x?error=cookies_not_supported&code=f40fb30f-63b1-4d69-b452-34c66cd5a99d",
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 331
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 363
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 691
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41592-018-0046-7",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/s41592-018-0046-7?error=cookies_not_supported&code=814ef6b3-b9ca-448a-95d4-5cf8afe362b1",
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 291
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 317
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 484
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 125
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 148
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1032
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 697
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 347
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1082
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 73
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 74
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 16
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 57
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/s41592-019-0686-2",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/s41592-019-0686-2?error=cookies_not_supported&code=e633c5dc-6d74-4299-b5e4-195f5859e673",
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 354
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 627
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1038/sdata.2016.18",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/sdata201618?error=cookies_not_supported&code=11096e99-9359-4c95-840b-ed0a2b70ab78",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 39
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 805
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 821
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 161
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 162
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bib/bbw020",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 377
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 699
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btaa692",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 514
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 698
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btae230",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 72
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btp163",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 659
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 775
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 296
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 631
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 68
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 69
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btp324",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 230
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 819
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 146
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 147
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btp352",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 190
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 436
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 537
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 789
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 301
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 857
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 62
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 63
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 45
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 46
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btq033",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 190
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 438
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 307
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 859
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 74
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 75
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btr330",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 539
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 795
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 57
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btr539",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 661
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 776
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 80
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/bioinformatics/btx192",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 347
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1080
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/comjnl/27.2.97",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 187
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/28.1.27",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 204
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkac1052",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch19.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkac1072",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 516
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 123
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkac958",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 512
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 112
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkad1044",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 235
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/nar/gkw257",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 488
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 545
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 696
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1093/oxfordjournals.molbev.a040454",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 239
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 821
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 158
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1101/2025.05.30.656746",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1",
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 554
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 166
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1101/gr.229102",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://genome.cshlp.org/content/12/6/996",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 799
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 69
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1109/DSAA.2018.00006",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://ieeexplore.ieee.org/document/8631415/",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1098
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1109/ICSE.2013.6606617",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://ieeexplore.ieee.org/document/6606617/",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 445
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 777
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 26
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 27
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 90
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1109/MCSE.2007.55",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://ieeexplore.ieee.org/document/4160265/",
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 680
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1126/science.1229566",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 483
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1142/S0218488502001648",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 388
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/103162.103163",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 267
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 795
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 26
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/1465482.1465560",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 24
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/2643130",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/2723872.2723882",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1086
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/272991.272995",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 434
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 803
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 62
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/3287560.3287596",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 418
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/3544548.3580919",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 81
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1145/356635.356640",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://dl.acm.org/doi/10.1145/356635.356640",
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 20
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1162/tacl_a_00638",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 522
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 772
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 40
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1186/s13059-016-1044-7",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://link.springer.com/article/10.1186/s13059-016-1044-7?error=cookies_not_supported&code=b3d0e030-f4c7-48c5-ab60-20757db7d326",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 173
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 781
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 9
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1186/s13059-017-1382-0",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://link.springer.com/article/10.1186/s13059-017-1382-0?error=cookies_not_supported&code=0fc2e0b0-97d3-4a59-8ee9-55e3c7ba35f4",
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 299
+        },
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 633
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.12688/f1000research.29032.2",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://f1000research.com/articles/10-33/v2",
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 202
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1034
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 95
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 687
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 26
+        },
+        {
+          "file": "references/ch14.bib",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pbio.1001745",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745",
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 58
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 426
+        },
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 803
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 472
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 807
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 86
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 87
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 34
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 82
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1002802",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002802",
+      "locations": [
+        {
+          "file": "references/ch21.bib",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1003833",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833",
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 317
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 692
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1004947",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004947",
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 518
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 614
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 106
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1005510",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510",
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 219
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 547
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 107
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1007007",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007007",
+      "locations": [
+        {
+          "file": "references/ch18.bib",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1008316",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008316",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 705
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1088
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pcbi.1008984",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008984",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 180
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 783
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 21
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1371/journal.pone.0177459",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0177459",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 392
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1078
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.18637/jss.v059.i10",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.jstatsoft.org/article/view/v059i10",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 483
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 787
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 33
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.21105/joss.03021",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://joss.theoj.org/papers/10.21105/joss.03021",
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 684
+        },
+        {
+          "file": "references/ch13.bib",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.48550/arXiv.1802.03426",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://arxiv.org/abs/1802.03426",
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 237
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 495
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 809
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 92
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://doi.org/10.5281/zenodo.9882",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 27
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 804
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 6
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "url": "https://dvc.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1102
+        }
+      ]
+    },
+    {
+      "url": "https://ega-archive.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 288
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Agile_software_development",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 275
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 440
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Code_refactoring",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 290
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 444
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Don%27t_repeat_yourself",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Single-responsibility_principle",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 505
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 813
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 111
+        }
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "url": "https://genome.ucsc.edu/FAQ/FAQformat.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 418
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "url": "https://genome.ucsc.edu/FAQ/FAQformat.html#format1",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 538
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 791
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "url": "https://genome.ucsc.edu/goldenPath/help/customTrack.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 502
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 694
+        }
+      ]
+    },
+    {
+      "url": "https://git-lfs.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 393
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 612
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "url": "https://git-scm.com/book/ja/v2",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 590
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "url": "https://git-scm.com/doc",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 592
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "url": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 89
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "url": "https://github.com",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/Augmented-Nature/Augmented-Nature-UniProt-MCP-Server",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 548
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/JackKuo666/PubMed-MCP-Server",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 541
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 136
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/MCPmed/GEOmcp",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 548
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 538
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 793
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 117
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/awslabs/git-secrets",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 63
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/bioconda/bioconda-recipes",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/conda-forge/miniforge",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 83
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 474
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/conda/conda-lock",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 254
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 482
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/genomoncology/biomcp",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 526
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/github/gitignore",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 185
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 596
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/gotcha/ipdb",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 248
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/kynan/nbstripout",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 488
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/lh3/seqtk",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 811
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/longevity-genie/gget-mcp",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 548
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 157
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/ncbi/sra-tools",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 494
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 597
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/openai/codex",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 372
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 769
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pyenv/pyenv",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 21
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 468
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pypa/pip-audit",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 244
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pythonprofilers/memory-profiler",
+      "status_code": 404,
+      "category": "error",
+      "error": "HTTP 404",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch17.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/pyutils/line_profiler",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 306
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/sharkdp/fd",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 815
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/tqdm/tqdm",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 431
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 853
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "url": "https://github.github.com/gfm/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 54
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "url": "https://hpc.nih.gov/docs/userguide.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://huggingface.co/docs/hub/index",
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 422
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 620
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "url": "https://hydra.cc/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 728
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 863
+        },
+        {
+          "file": "chapters/15_container.md",
+          "line": 1100
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "url": "https://hynek.me/articles/testing-packaging/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 464
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1038
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "url": "https://jeroenjanssens.com/dsatcl/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 799
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "url": "https://jmlr.org/papers/v9/vandermaaten08a.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 236
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 495
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 811
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "url": "https://keepachangelog.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 478
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 618
+        },
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 340
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 122
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "url": "https://linker.iecc.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 676
+        }
+      ]
+    },
+    {
+      "url": "https://linuxcommand.org/tlcl.php",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 797
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 104
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 476
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://matplotlib.org/stable/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 678
+        }
+      ]
+    },
+    {
+      "url": "https://mermaid.js.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 86
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://meta.stackoverflow.com/questions/421831",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://meta.stackoverflow.com/questions/421831/policy-generative-ai-e-g-chatgpt-is-banned",
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 259
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 25
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 793
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "url": "https://mkdocstrings.github.io/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 356
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "url": "https://mlflow.org/docs/latest/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1108
+        }
+      ]
+    },
+    {
+      "url": "https://mypy.readthedocs.io/en/stable/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 383
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 814
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "url": "https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 90
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://nf-co.re/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 331
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 363
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 701
+        }
+      ]
+    },
+    {
+      "url": "https://numba.readthedocs.io/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://numba.readthedocs.io/en/stable/",
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 667
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "url": "https://numpy.org/doc/stable/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 619
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/random/generator.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 440
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 805
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "url": "https://numpydoc.readthedocs.io/en/latest/format.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 479
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 818
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://openai.com/index/introducing-gpt-5-2/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 87
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://openai.com/index/introducing-swe-bench-verified/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 85
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 192
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "url": "https://packaging.python.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://packaging.python.org/en/latest/",
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 316
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 680
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 72
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 440
+        },
+        {
+          "file": "chapters/10_deliverables.md",
+          "line": 1030
+        },
+        {
+          "file": "references/ch10.bib",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://packaging.python.org/en/latest/specifications/pyproject-toml/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 178
+        },
+        {
+          "file": "chapters/06_dev_environment.md",
+          "line": 480
+        },
+        {
+          "file": "references/ch06.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://pandas.pydata.org/docs/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/12_data_processing.md",
+          "line": 621
+        },
+        {
+          "file": "references/ch12.bib",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "url": "https://pandas.pydata.org/docs/user_guide/io.html#iterating-through-files-chunk-by-chunk",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 744
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "url": "https://parquet.apache.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch17.bib",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "url": "https://plotly.com/python/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 246
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 686
+        }
+      ]
+    },
+    {
+      "url": "https://pre-commit.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 436
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 816
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "url": "https://producingoss.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 369
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://pypi.org/project/memory-profiler/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 340
+        }
+      ]
+    },
+    {
+      "url": "https://pytest-cov.readthedocs.io/en/latest/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/08_testing.md",
+          "line": 246
+        },
+        {
+          "file": "chapters/08_testing.md",
+          "line": 808
+        },
+        {
+          "file": "references/ch08.bib",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://quarto.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 207
+        },
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 505
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://rich.readthedocs.io/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://rich.readthedocs.io/en/stable/",
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 465
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 855
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "url": "https://rsync.samba.org/tech_report/",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "url": "https://samtools.github.io/hts-specs/CRAMv3.pdf",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 848
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "url": "https://samtools.github.io/hts-specs/SAMv1.pdf",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 797
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 109
+        }
+      ]
+    },
+    {
+      "url": "https://scrumguides.org/scrum-guide.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/01_design.md",
+          "line": 277
+        },
+        {
+          "file": "chapters/01_design.md",
+          "line": 442
+        },
+        {
+          "file": "references/ch01.bib",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "url": "https://seaborn.pydata.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 682
+        }
+      ]
+    },
+    {
+      "url": "https://semver.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 458
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 616
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 114
+        }
+      ]
+    },
+    {
+      "url": "https://slurm.schedmd.com/documentation.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://slurm.schedmd.com/sacct.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://slurm.schedmd.com/sbatch.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://snakemake.readthedocs.io/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://snakemake.readthedocs.io/en/stable/",
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 95
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 693
+        }
+      ]
+    },
+    {
+      "url": "https://sparql.uniprot.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 410
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/help/how-to-ask",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 15
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 154
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://stackoverflow.com/help/minimal-reproducible-example",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/09_debug.md",
+          "line": 108
+        },
+        {
+          "file": "references/ch09.bib",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "url": "https://techcrunch.com/2025/07/30/github-copilot-crosses-20-million-all-time-users/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 91
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "url": "https://typer.tiangolo.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/11_cli.md",
+          "line": 126
+        },
+        {
+          "file": "chapters/11_cli.md",
+          "line": 845
+        },
+        {
+          "file": "references/ch11.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://visit.figure-eight.com/data-science-report.html",
+      "status_code": 404,
+      "category": "error",
+      "error": "HTTP 404",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch04.bib",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "url": "https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 438
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 678
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/AI-resistant-technical-evaluations",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 88
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/engineering/claude-code-best-practices",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://code.claude.com/docs",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 236
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 246
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 770
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 16
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-opus-4-5",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 7
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 86
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://www.biostars.org/",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 146
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 165
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 248
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://www.cisa.gov/news-events/alerts",
+      "status_code": 404,
+      "category": "error",
+      "error": "HTTP 404",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "url": "https://www.conventionalcommits.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 355
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 610
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "url": "https://www.ddbj.nig.ac.jp/jga/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.ddbj.nig.ac.jp/jga/index-e.html",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 287
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "url": "https://www.edwardtufte.com/tufte/books_vdqi",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "http://www.edwardtufte.com/books/",
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 590
+        }
+      ]
+    },
+    {
+      "url": "https://www.ensembl.org/info/docs/index.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://asia.ensembl.org/info/docs/index.html",
+      "locations": [
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 508
+        },
+        {
+          "file": "chapters/13_visualization.md",
+          "line": 700
+        }
+      ]
+    },
+    {
+      "url": "https://www.federalregister.gov/documents/2025/01/06/2024-30983/hipaa-security-rule-to-strengthen-the-cybersecurity-of-electronic-protected-health-information",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 306
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 114
+        }
+      ]
+    },
+    {
+      "url": "https://www.genenames.org/about/guidelines/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 182
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 785
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "url": "https://www.gnu.org/software/bash/manual/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 809
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "url": "https://www.gnu.org/software/coreutils/manual/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/02_terminal.md",
+          "line": 807
+        },
+        {
+          "file": "references/ch02.bib",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "url": "https://www.jsps.go.jp/j-grantsinaid/01_seido/10_datamanagement/index.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 505
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "url": "https://www.mkdocs.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 356
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK179288/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 485
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK25501/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 349
+        },
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 368
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/datasets/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/19_database_api.md",
+          "line": 502
+        },
+        {
+          "file": "references/ch19.bib",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/gap/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://dbgap.ncbi.nlm.nih.gov/home/",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 286
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/nuccore/U00096.3",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 75
+        }
+      ]
+    },
+    {
+      "url": "https://www.nextflow.io/docs/latest/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 284
+        },
+        {
+          "file": "chapters/14_workflow.md",
+          "line": 695
+        }
+      ]
+    },
+    {
+      "url": "https://www.oreilly.com/library/view/python-cookbook-3rd/9781449357337/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 382
+        },
+        {
+          "file": "chapters/05_software_components.md",
+          "line": 674
+        }
+      ]
+    },
+    {
+      "url": "https://www.ppc.go.jp/personalinfo/legal/gentec_data_guideline/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 303
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc4180",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 66
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 773
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "url": "https://www.sphinx-doc.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.sphinx-doc.org/en/master/",
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 396
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "url": "https://www.toptal.com/developers/gitignore",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 185
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 594
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "url": "https://www.unicode.org/versions/Unicode16.0.0/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 382
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 801
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "url": "https://www.wandb.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://wandb.ai/site",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1096
+        }
+      ]
+    },
+    {
+      "url": "https://www8.cao.go.jp/iryou/kouhou/pdf/kaisei_jisedaiiryou_rikatsuyou.pdf",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 304
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "url": "https://x.com/karpathy/status/1886192184808149383",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 15
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 92
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 50
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "url": "https://zenodo.org/",
+      "status_code": 403,
+      "category": "anti-bot",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 288
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 602
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 54
+        }
+      ]
+    }
+  ]
+}
