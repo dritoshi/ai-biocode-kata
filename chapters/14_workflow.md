@@ -1,5 +1,9 @@
 # §14 解析パイプラインの自動化 — Snakemake・Nextflow
 
+> "Civilization advances by extending the number of important operations which we can perform without thinking about them."
+> （文明は、考えずに実行できる重要な操作の数を増やすことによって進歩する。）
+> — Alfred North Whitehead, *An Introduction to Mathematics* (1911), ch. 5
+
 [§13 可視化の実践](./13_visualization.md)では、matplotlib・seabornによるプロットの作成と、科学的可視化の原則を学んだ。しかし、データ処理と可視化のスクリプトが個別ファイルのまま増えていくと、「どのスクリプトをどの順番で実行するのか」「入力ファイルが更新されたらどこまで再実行すればよいのか」という管理上の問題が生じる。
 
 この問題を解決するのが**ワークフロー言語**（workflow language）である。ワークフロー言語は処理ステップ間の依存関係を宣言的に記述し、実行順序の決定・並列化・途中からの再開をエンジンに委ねる仕組みである。代表的なツールとしてSnakemake、Nextflow、makeがあり、いずれもバイオインフォマティクスのパイプライン構築で広く使われている。

@@ -1,5 +1,9 @@
 # §15 コンテナによるソフトウェア環境の再現 — Docker・Apptainer
 
+> "Another roof, another proof."
+> （また別の屋根の下で、また別の証明を。）
+> — Paul Erdős
+
 [§14 解析パイプラインの自動化](./14_workflow.md)では、Snakemake・Nextflow・makeを使ってパイプラインの処理順序と依存関係を管理する方法を学んだ。しかし、パイプラインの再現性はワークフロー定義だけでは保証されない。同じSnakefileを実行しても、STARのバージョンが異なれば出力BAMのアラインメント結果は変わり、OSのライブラリバージョンが異なればツールの挙動そのものが変わりうる。
 
 [§6 Python環境の構築](./06_dev_environment.md)で学んだcondaやvenvは、Pythonパッケージの隔離には有効であった。しかし、バイオインフォマティクスの解析パイプラインは、PythonだけでなくOSレベルの共有ライブラリ（[§5 ソフトウェアの構成要素 — importからpipまで](./05_software_components.md#共有ライブラリとその管理)参照）やC/C++製のバイナリツールにも依存する。別のマシンに環境を移したとたん「shared library not found」エラーに遭遇する——これがcondaやvenvだけでは解決できない壁である。
