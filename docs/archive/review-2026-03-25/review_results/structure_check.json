@@ -1,0 +1,14 @@
+{
+  "check": "structure_check",
+  "stats": {
+    "total_files_checked": 29,
+    "chapter_files_checked": 22,
+    "missing_sections": 0,
+    "section_order_violations": 0,
+    "bold_bracket_violations": 0,
+    "math_bracket_violations": 0,
+    "exercise_issues": 0
+  },
+  "total_issues": 0,
+  "issues": []
+}

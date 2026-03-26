@@ -1,0 +1,453 @@
+{
+  "metadata": {
+    "source_file": "docs/review/url_check.json",
+    "category_filter": "anti-bot",
+    "timeout_sec": 20.0,
+    "delay_sec": 0.5,
+    "timestamp": "2026-03-25T23:51:46+0900",
+    "total_checked": 21
+  },
+  "summary": {
+    "browser_blocked": 19,
+    "browser_ok": 1,
+    "browser_error": 1
+  },
+  "urls": [
+    {
+      "source_url": "https://dl.acm.org/doi/10.5555/2600239.2600241",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.5555/2600239.2600241",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1eb99308753640 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1087
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1002/0471448354",
+      "original_category": "anti-bot",
+      "browser_category": "browser_ok",
+      "response_status": 200,
+      "final_url": "https://onlinelibrary.wiley.com/doi/book/10.1002/0471448354",
+      "page_title": "Exploratory Data Mining and Data Cleaning | Wiley Series in Probability and Statistics",
+      "body_preview": "This website utilizes technologies such as cookies to enable essential site functionality, as well as for analytics, personalization, and targeted advertising. To learn more, view the following link: Privacy Policy Skip to Main Content Search within This Book Anywhere Search term...",
+      "error": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 832
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1093/comjnl/27.2.97",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 200,
+      "final_url": "https://academic.oup.com/comjnl/article-abstract/27/2/97/343244?redirectedFrom=fulltext",
+      "page_title": "Literate Programming | The Computer Journal | Oxford Academic",
+      "body_preview": "Skip to Main Content Journals Books Sign in through your institution Remember my institution Issues More Content Submit Purchase Alerts About Navbar Search Filter The Computer Journal This issue BCS Journals Computer Science Books Journals Oxford Academic Enter search term Search...",
+      "error": "login_or_paywall",
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 187
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1142/S0218488502001648",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 200,
+      "final_url": "https://www.worldscientific.com/doi/abs/10.1142/S0218488502001648",
+      "page_title": "k-ANONYMITY: A MODEL FOR PROTECTING PRIVACY | International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems",
+      "body_preview": "Search My Cart Sign in Institutional Access Skip main navigation Subject Journals Books Resources For Partners Open Access About Us Help Cookies Notification We use cookies on this site to enhance your user experience. By continuing to browse the site, you consent to the use of o...",
+      "error": "login_or_paywall",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 388
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/103162.103163",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 200,
+      "final_url": "https://dl.acm.org/doi/10.1145/103162.103163",
+      "page_title": "What every computer scientist should know about floating-point arithmetic | ACM Computing Surveys",
+      "body_preview": "This website uses cookies We occasionally run membership recruitment campaigns on social media channels and use cookies to track post-clicks. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with oth...",
+      "error": "login_or_paywall",
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 267
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 823
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/1465482.1465560",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/citation.cfm?doid=1465482.1465560",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebaa5b88b09e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 24
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/2643130",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/2643130",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebac95c3709e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 46
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/2723872.2723882",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/2723872.2723882",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebaedab0309e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/15_container.md",
+          "line": 1089
+        },
+        {
+          "file": "references/ch15.bib",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/272991.272995",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/272991.272995",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebb12594809e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 462
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 831
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/3287560.3287596",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/3287560.3287596",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebb35abea09e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/18_documentation.md",
+          "line": 422
+        },
+        {
+          "file": "references/ch18.bib",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/3544548.3580919",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/3544548.3580919",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebb5a1dc109e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "references/appendix_a.bib",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1145/356635.356640",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://dl.acm.org/doi/10.1145/356635.356640",
+      "page_title": "Just a moment...",
+      "body_preview": "dl.acm.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebb7d581109e2 Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/17_performance.md",
+          "line": 20
+        },
+        {
+          "file": "references/ch17.bib",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.1162/tacl_a_00638",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 200,
+      "final_url": "https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00638/119630/Lost-in-the-Middle-How-Language-Models-Use-Long",
+      "page_title": "Lost in the Middle: How Language Models Use Long Contexts | Transactions of the Association for Computational Linguistics | MIT Press",
+      "body_preview": "Skip to Main Content Open Menu header search search input Search input auto suggest filter your search All Content All Journals Transactions of the Association for Computational Linguistics Search Advanced Search Register Sign In Open Menu Issues About Open Menu Submit Open Menu...",
+      "error": "login_or_paywall",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 526
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 777
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "source_url": "https://doi.org/10.5281/zenodo.9882",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://zenodo.org/record/9882",
+      "page_title": "403 Forbidden",
+      "body_preview": "403 Forbidden Access to this resource has been blocked due to unusual traffic from your network. If you believe this is a mistake, please contact support@zenodo.org with the reference information below. Reference: b2d32e94fc878a122530e31776080eae Timestamp: 2026-03-25T15:51:24+01...",
+      "error": "access_denied",
+      "locations": [
+        {
+          "file": "references/ch08.bib",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "source_url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "page_title": "Access Denied",
+      "body_preview": "Access Denied You don't have permission to access \"http://mitpress.mit.edu/9780262046305/introduction-to-algorithms/\" on this server. Reference #18.2d4bcc17.1774450285.1cfef6cd https://errors.edgesuite.net/18.2d4bcc17.1774450285.1cfef6cd",
+      "error": "access_denied",
+      "locations": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 25
+        },
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line": 821
+        },
+        {
+          "file": "references/ch03.bib",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "source_url": "https://rsync.samba.org/tech_report/",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://rsync.samba.org/tech_report/",
+      "page_title": null,
+      "body_preview": "403 Forbidden Request forbidden by administrative rules.",
+      "error": "access_denied",
+      "locations": [
+        {
+          "file": "references/ch16.bib",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "source_url": "https://www.biostars.org/",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://www.biostars.org/",
+      "page_title": "Just a moment...",
+      "body_preview": "www.biostars.org Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray ID: 9e1ebbe27a4efd2b Performance and Security by Cloudflare Privacy",
+      "error": "challenge_page",
+      "locations": [
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 146
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 165
+        },
+        {
+          "file": "chapters/21_collaboration.md",
+          "line": 248
+        },
+        {
+          "file": "references/ch21.bib",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "source_url": "https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/",
+      "original_category": "anti-bot",
+      "browser_category": "browser_error",
+      "response_status": 403,
+      "final_url": "https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/",
+      "page_title": "forbes.com",
+      "body_preview": null,
+      "error": "missing_title_or_unexpected_status",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 834
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "source_url": "https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html",
+      "page_title": "Access Denied",
+      "body_preview": "Access Denied You don't have permission to access \"http://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html\" on this server. Reference #18.465acd17.1774450297.21f63d1b https://errors...",
+      "error": "access_denied",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 306
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 131
+        }
+      ]
+    },
+    {
+      "source_url": "https://x.com/karpathy/status/1886192184808149383",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 200,
+      "final_url": "https://x.com/karpathy/status/1886192184808149383",
+      "page_title": "Andrej Karpathy on X: \"There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good. Also I just talk to Composer with SuperWhisper\" / X",
+      "body_preview": "Don’t miss what’s happening People on X are the first to know. Log in Sign up Post See new posts Conversation Andrej Karpathy @karpathy There's a new kind of coding I call \"vibe coding\", where you fully give in to the vibes, embrace exponentials, and forget that the code even exi...",
+      "error": "login_or_paywall",
+      "locations": [
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 15
+        },
+        {
+          "file": "chapters/hajimeni.md",
+          "line": 93
+        },
+        {
+          "file": "references/appendix_a.bib",
+          "line": 50
+        },
+        {
+          "file": "references/hajimeni.bib",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "source_url": "https://zenodo.org/",
+      "original_category": "anti-bot",
+      "browser_category": "browser_blocked",
+      "response_status": 403,
+      "final_url": "https://zenodo.org/",
+      "page_title": "403 Forbidden",
+      "body_preview": "403 Forbidden Access to this resource has been blocked due to unusual traffic from your network. If you believe this is a mistake, please contact support@zenodo.org with the reference information below. Reference: bf5b9e689c28ad873866826cbf57ee97 Timestamp: 2026-03-25T15:51:45+01...",
+      "error": "access_denied",
+      "locations": [
+        {
+          "file": "chapters/07_git.md",
+          "line": 288
+        },
+        {
+          "file": "chapters/07_git.md",
+          "line": 602
+        },
+        {
+          "file": "references/ch07.bib",
+          "line": 54
+        }
+      ]
+    }
+  ]
+}
