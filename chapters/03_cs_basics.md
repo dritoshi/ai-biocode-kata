@@ -225,9 +225,9 @@ bisect.insort(exon_starts, 2500)
 >
 > | カテゴリ | アルゴリズム・操作 | 計算量 | 備考 |
 > |---------|------------------|--------|------|
-> | 配列検索 | BLAST | ヒューリスティック | 全探索を避けて高速化[13](https://doi.org/10.1016/S0022-2836%2805%2980360-2) |
-> | ペアワイズアラインメント | Smith-Waterman / Needleman-Wunsch | $O(mn)$ | m, nは配列長。局所アラインメントと大域アラインメントの動的計画法[14](https://doi.org/10.1016/0022-2836%2870%2990057-4)[15](https://doi.org/10.1016/0022-2836%2881%2990087-5) |
-> | リードマッピング | BWA / Bowtie2 | $O(m)$（クエリあたり） | FM-indexで参照ゲノムを事前索引化[16](https://pubmed.ncbi.nlm.nih.gov/19451168/) |
+> | 配列検索 | BLAST | ヒューリスティック | 全探索を避けて高速化[14](https://doi.org/10.1016/S0022-2836%2805%2980360-2) |
+> | ペアワイズアラインメント | Smith-Waterman / Needleman-Wunsch | $O(mn)$ | m, nは配列長。局所アラインメントと大域アラインメントの動的計画法[15](https://doi.org/10.1016/0022-2836%2870%2990057-4)[16](https://doi.org/10.1016/0022-2836%2881%2990087-5) |
+> | リードマッピング | BWA / Bowtie2 | $O(m)$（クエリあたり） | FM-indexで参照ゲノムを事前索引化[17](https://pubmed.ncbi.nlm.nih.gov/19451168/) |
 > | 多重配列アライメント | 厳密解（動的計画法） | $O(L^k)$ | Lは配列長、kは配列数。3本以上は近似手法を使う |
 > | インデックス検索 | BAM (.bai) / tabix (.tbi) | $O(\log n)$ | 二分探索ベース |
 > | インデックス検索 | FASTA faidx (.fai) | $O(1)$ | ファイルオフセットで直接アクセス |
@@ -236,7 +236,7 @@ bisect.insort(exon_starts, 2500)
 > | 次元削減 | t-SNE | $O(n^2)$ | Barnes-Hut近似で $O(n \log n)$[11](https://jmlr.org/papers/v9/vandermaaten08a.html) |
 > | 次元削減 | UMAP | $O(n^{1.14})$ 程度 | 近似最近傍探索で高速化[10](https://doi.org/10.48550/arXiv.1802.03426) |
 > | クラスタリング | k-means | $O(nkdi)$ | k: クラスタ数、d: 次元、i: 反復回数 |
-> | 系統樹 | Neighbor-Joining | $O(n^3)$ | nは系統数。大規模データでは律速になる[17](https://pubmed.ncbi.nlm.nih.gov/3447015/) |
+> | 系統樹 | Neighbor-Joining | $O(n^3)$ | nは系統数。大規模データでは律速になる[18](https://pubmed.ncbi.nlm.nih.gov/3447015/) |
 >
 > 表中の計算量は理論上の上界であり、実装の工夫やヒューリスティクスにより実際の速度は大きく異なる。たとえばBLASTはデータベース全体を総当たり比較するのではなく、短いワード一致から候補を絞り込むことで実用的な速度を実現している。ツールの実行時間が想定より極端に長い場合は、入力サイズと計算量の関係を見直す手がかりにしてほしい。
 
@@ -842,12 +842,12 @@ print(sum(tpm_values) == 1.0)       # False
 
 [13] Python Software Foundation. "What’s New In Python 3.1". *Python 3 Documentation*. [https://docs.python.org/ja/3.13/whatsnew/3.1.html](https://docs.python.org/ja/3.13/whatsnew/3.1.html) (参照日: 2026-03-25)
 
-[13] Altschul, S. F. et al. "Basic local alignment search tool". *J. Mol. Biol.*, 215(3), 403–410, 1990. [https://doi.org/10.1016/S0022-2836%2805%2980360-2](https://doi.org/10.1016/S0022-2836%2805%2980360-2)
+[14] Altschul, S. F. et al. "Basic local alignment search tool". *J. Mol. Biol.*, 215(3), 403–410, 1990. [https://doi.org/10.1016/S0022-2836%2805%2980360-2](https://doi.org/10.1016/S0022-2836%2805%2980360-2)
 
-[14] Needleman, S. B., Wunsch, C. D. "A general method applicable to the search for similarities in the amino acid sequence of two proteins". *J. Mol. Biol.*, 48(3), 443–453, 1970. [https://doi.org/10.1016/0022-2836%2870%2990057-4](https://doi.org/10.1016/0022-2836%2870%2990057-4)
+[15] Needleman, S. B., Wunsch, C. D. "A general method applicable to the search for similarities in the amino acid sequence of two proteins". *J. Mol. Biol.*, 48(3), 443–453, 1970. [https://doi.org/10.1016/0022-2836%2870%2990057-4](https://doi.org/10.1016/0022-2836%2870%2990057-4)
 
-[15] Smith, T. F., Waterman, M. S. "Identification of common molecular subsequences". *J. Mol. Biol.*, 147(1), 195–197, 1981. [https://doi.org/10.1016/0022-2836%2881%2990087-5](https://doi.org/10.1016/0022-2836%2881%2990087-5)
+[16] Smith, T. F., Waterman, M. S. "Identification of common molecular subsequences". *J. Mol. Biol.*, 147(1), 195–197, 1981. [https://doi.org/10.1016/0022-2836%2881%2990087-5](https://doi.org/10.1016/0022-2836%2881%2990087-5)
 
-[16] Li, H., Durbin, R. "Fast and accurate short read alignment with Burrows-Wheeler transform". *Bioinformatics*, 25(14), 1754–1760, 2009. [https://pubmed.ncbi.nlm.nih.gov/19451168/](https://pubmed.ncbi.nlm.nih.gov/19451168/)
+[17] Li, H., Durbin, R. "Fast and accurate short read alignment with Burrows-Wheeler transform". *Bioinformatics*, 25(14), 1754–1760, 2009. [https://pubmed.ncbi.nlm.nih.gov/19451168/](https://pubmed.ncbi.nlm.nih.gov/19451168/)
 
-[17] Saitou, N., Nei, M. "The neighbor-joining method: a new method for reconstructing phylogenetic trees". *Mol. Biol. Evol.*, 4(4), 406–425, 1987. [https://pubmed.ncbi.nlm.nih.gov/3447015/](https://pubmed.ncbi.nlm.nih.gov/3447015/)
+[18] Saitou, N., Nei, M. "The neighbor-joining method: a new method for reconstructing phylogenetic trees". *Mol. Biol. Evol.*, 4(4), 406–425, 1987. [https://pubmed.ncbi.nlm.nih.gov/3447015/](https://pubmed.ncbi.nlm.nih.gov/3447015/)
