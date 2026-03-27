@@ -6,17 +6,49 @@
   margin-top: 20mm;
   margin-bottom: 20mm;
 }
-
-/* 見開き: 左ページ（偶数）— のどが右側 */
 @page :left {
-  margin-left: 15mm;   /* 小口（外側） */
-  margin-right: 18mm;  /* のど（内側）: 300-500ページで15.9mm以上 */
+  margin-left: 15mm;
+  margin-right: 18mm;
+}
+@page :right {
+  margin-left: 18mm;
+  margin-right: 15mm;
 }
 
-/* 見開き: 右ページ（奇数）— のどが左側 */
-@page :right {
-  margin-left: 18mm;   /* のど（内側） */
-  margin-right: 15mm;  /* 小口（外側） */
+/* ===== 問題1: 画像をページ幅に合わせる ===== */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== 問題2: リンクURL自動表示を無効化 ===== */
+a[href]::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 脚注エリアに自動挿入されるURLを非表示 */
+@supports (float: footnote) {
+  a[href]::after {
+    content: none !important;
+  }
+}
+
+/* ===== 問題4: 引用文献のURL改行・均等割付抑制 ===== */
+a[href] {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* 参考文献セクションの均等割付を抑制 */
+h2 + ul,
+h2 + ol {
+  text-align: left;
+}
+
+li {
+  text-align: left;
 }
 
 /* ===== 絵文字フォントフォールバック ===== */

@@ -3,7 +3,10 @@ module.exports = {
   author: '二階堂 愛',
   language: 'ja',
   size: '182mm 257mm',
-  theme: '@vivliostyle/theme-techbook',
+  theme: [
+    '@vivliostyle/theme-techbook',
+    'build/custom.css',
+  ],
   entry: [
     'chapters/hajimeni.md',
     'chapters/00_ai_agent.md',
