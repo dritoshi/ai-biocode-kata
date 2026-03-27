@@ -122,4 +122,8 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 - [22](https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1) Li, M., Zheng, Z., Huang, K., et al. "Biomni: A General-Purpose Biomedical AI Agent". bioRxiv, 2025. https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1
 - [23](https://arxiv.org/abs/2511.02824) Schmidgall, S., et al. "Kosmos: An AI Scientist for Autonomous Discovery". arXiv: 2511.02824, 2025. https://arxiv.org/abs/2511.02824
 
-2026年3月　二階堂 愛
+2026年3月  
+二階堂 愛  
+東京科学大学 総合研究院 難治疾患研究所 教授  
+理化学研究所 最先端研究プラットフォーム連携（TRIP）事業本部 科学研究基盤モデル開発プログラム (AGIS) チームディレクター  
+——長い孤独な探究の時代が終わり、人類知と人工知能が共に歩む新たな旅の門出に
