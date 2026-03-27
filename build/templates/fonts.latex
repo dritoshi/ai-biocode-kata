@@ -1,0 +1,15 @@
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp}
+\else % if luatex or xetex
+  % unicode-math を読み込まず fontspec のみ使用（luatexja との互換性のため）
+  \usepackage{fontspec}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+$if(fontfamily)$
+$else$
+\usepackage{lmodern}
+$endif$

@@ -44,10 +44,11 @@ CHAPTER_ORDER=(
 # pandoc共通オプション
 PANDOC_OPTS=(
   --pdf-engine=lualatex
+  --template="$BUILD_DIR/templates/default.latex"
   -V documentclass=ltjsarticle
   -V "geometry:margin=2.5cm"
-  -V "luatexjapresetoptions:fonts=haranoaji"
-  --highlight-style=tango
+  --syntax-highlighting=tango
+  --resource-path="$CHAPTERS_DIR"
 )
 
 FAILED=()
