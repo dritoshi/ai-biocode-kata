@@ -43,6 +43,10 @@ AIコーディングエージェントの登場以前、この二層構造には
 
 次世代シーケンサーが生み出す大量のデータ、シングルセル解析、ゲノムワイド関連解析、タンパク質構造予測——現代の生命科学研究において、データ解析は実験と同等の重要性を持つ。しかし多くの実験系研究者は、分子生物学や生化学を専門とし、計算機科学やソフトウェア工学の体系的な教育を受けていない。それでもプログラミングを「しなければならない」状況に日常的に直面する。
 
+この状況はさらに加速している。世界各国がAI for Science（AI4S）——AIを科学研究の加速に活用する取り組み——を国家戦略に位置づけている[13](https://doi.org/10.1038/s41586-023-06221-2)。米国では2025年11月にトランプ大統領が大統領令「Genesis Mission」を発令し、AIによって10年間で米国の科学的生産性を倍増させるという目標を掲げた[14](https://www.whitehouse.gov/presidential-actions/2025/11/launching-the-genesis-mission/)。バイオテクノロジーは最優先分野の一つに指定されている。EUはHorizon Europeを通じてAI駆動の科学研究を推進し、日本では理研がTRIP-AGISプログラムのもとで生命科学・物質材料科学を対象とした科学研究用基盤モデルの開発と研究自動化を進めている[15](https://www.riken.jp/research/labs/trip/agis/)。AlphaFoldによるタンパク質構造予測は2024年のノーベル化学賞を受賞し[16](https://www.nobelprize.org/prizes/chemistry/2024/press-release/)、シングルセル解析の基盤モデル（scGPT[17](https://doi.org/10.1038/s41592-024-02201-0)、Geneformer[18](https://doi.org/10.1038/s41586-023-06139-9)）やゲノム言語モデル（Evo[19](https://doi.org/10.1126/science.ado9336)）が次々と発表されている。こうしたAI4Sの成果を自分の研究データに適用するには、環境構築、パラメータ調整、結果の後処理といったプログラミング作業が不可避である。
+
+さらに、仮説生成から実験設計、データ解析、論文執筆までを自律的に行う研究用AIエージェントが続々と登場している。Sakana AIのAI Scientistは、アイデア生成から論文執筆までの研究サイクルをエンドツーエンドで自動化するシステムであり、その技術的枠組みがNatureに掲載された[20](https://www.nature.com/articles/s41586-026-10265-5)。ただし現時点では新規の科学的発見ではなくネガティブな結果の報告にとどまっており、自律的な科学発見への道のりはまだ長い。Google ResearchのAI co-scientistはGemini 2.0ベースのマルチエージェントシステムで、提案した薬剤候補が実験で検証されている[21](https://arxiv.org/abs/2502.18864)。StanfordのBiomniは105のバイオソフトウェアと59のデータベースを統合した汎用バイオメディカルエージェントであり、創薬から希少疾患診断まで広範なタスクをコードベースで遂行する[22](https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1)。これらのエージェントは強力だが万能ではない——AI Scientistは実験の42%がコーディングエラーで失敗し、Kosmosは1回の実行で42,000行のコードを生成する[23](https://arxiv.org/abs/2511.02824)。エージェントの出力を検証し、自分の研究パイプラインに統合するには、プログラミングの素養が不可欠である。AIが科学を変えつつある時代に、AIが生成するコードを理解し評価できる能力は、すべての生命科学者に求められる基盤能力になりつつある。
+
 こうした研究者がAIコーディングエージェントに頼るのは自然な流れだ。そして実際、多くの場面でAIは驚くほどうまく機能する。しかし、エージェントが「スプリントで分割しましょう」「MVPから始めましょう」「リファクタリングが必要です」と提案してきたとき、これらの用語の意味がわからなければ、提案を評価することも、修正を指示することもできない。パッケージの公開方法を知らなければ、エージェントが生成したpyproject.tomlの内容が適切かどうか判断できない。テスト駆動開発の考え方を知らなければ、テストのないコードの危うさに気づかない。
 
 ## 本書の目的——AIプログラミング時代に不可欠な背景知識を届ける
@@ -106,5 +110,16 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 - [10](https://x.com/karpathy/status/1886192184808149383) Karpathy, A. "There's a new kind of coding I call 'vibe coding'...". X (formerly Twitter), 2025-02-02. https://x.com/karpathy/status/1886192184808149383 (参照日: 2026-03-19)
 - [11](https://www.collinsdictionary.com/us/woty/) Collins Dictionary. "The Collins Word of the Year 2025 is...". https://www.collinsdictionary.com/us/woty/ (参照日: 2026-03-25)
 - [12](https://arxiv.org/abs/2603.14133) Thorgeirsson, S., Weidmann, T. B., Su, Z. "Computer Science Achievement and Writing Skills Predict Vibe Coding Proficiency". *Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI '26)*, 2026. https://arxiv.org/abs/2603.14133
+- [13](https://doi.org/10.1038/s41586-023-06221-2) Wang, H., Fu, T., Du, Y., et al. "Scientific discovery in the age of artificial intelligence". *Nature*, 620, 47–60, 2023. https://doi.org/10.1038/s41586-023-06221-2
+- [14](https://www.whitehouse.gov/presidential-actions/2025/11/launching-the-genesis-mission/) The White House. "Launching the Genesis Mission". Executive Order, 2025-11-24. https://www.whitehouse.gov/presidential-actions/2025/11/launching-the-genesis-mission/ (参照日: 2026-03-27)
+- [15](https://www.riken.jp/research/labs/trip/agis/) 理化学研究所. "科学研究基盤モデル開発プログラム（AGIS）". https://www.riken.jp/research/labs/trip/agis/ (参照日: 2026-03-27)
+- [16](https://www.nobelprize.org/prizes/chemistry/2024/press-release/) The Nobel Foundation. "The Nobel Prize in Chemistry 2024". https://www.nobelprize.org/prizes/chemistry/2024/press-release/ (参照日: 2026-03-27)
+- [17](https://doi.org/10.1038/s41592-024-02201-0) Cui, H., Wang, C., Maan, H., et al. "scGPT: toward building a foundation model for single-cell multi-omics using generative AI". *Nature Methods*, 21, 1470–1480, 2024. https://doi.org/10.1038/s41592-024-02201-0
+- [18](https://doi.org/10.1038/s41586-023-06139-9) Theodoris, C. V., Xiao, L., Chopra, A., et al. "Transfer learning enables predictions in network biology". *Nature*, 618, 616–624, 2023. https://doi.org/10.1038/s41586-023-06139-9
+- [19](https://doi.org/10.1126/science.ado9336) Nguyen, E., Poli, M., Durrant, M. G., et al. "Sequence modeling and design from molecular to genome scale with Evo". *Science*, 386(6723), 2024. https://doi.org/10.1126/science.ado9336
+- [20](https://www.nature.com/articles/s41586-026-10265-5) Lu, C., Lu, C., Lange, R. T., et al. "Towards end-to-end automation of AI research". *Nature*, 2026. https://www.nature.com/articles/s41586-026-10265-5
+- [21](https://arxiv.org/abs/2502.18864) Gottweis, J., Weng, W.-H., Darber, A., et al. "Towards an AI co-scientist". arXiv: 2502.18864, 2025. https://arxiv.org/abs/2502.18864
+- [22](https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1) Li, M., Zheng, Z., Huang, K., et al. "Biomni: A General-Purpose Biomedical AI Agent". bioRxiv, 2025. https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1
+- [23](https://arxiv.org/abs/2511.02824) Schmidgall, S., et al. "Kosmos: An AI Scientist for Autonomous Discovery". arXiv: 2511.02824, 2025. https://arxiv.org/abs/2511.02824
 
 2026年3月　二階堂 愛
