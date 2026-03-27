@@ -57,7 +57,7 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 | 20 | コードとデータのセキュリティ・倫理 | [20_security_ethics.md](chapters/20_security_ethics.md) | [§20](chapters/roadmap.md#20-コードとデータのセキュリティ倫理) |
 | 21 | 共同開発の実践 — レビュー・質問・OSS参加 | [21_collaboration.md](chapters/21_collaboration.md) | [§21](chapters/roadmap.md#21-共同開発の実践--レビュー質問oss参加) |
 
-### 付録
+### 付録・その他
 
 | 章 | タイトル | 原稿 | ロードマップ |
 |----|---------|------|-------------|
@@ -65,27 +65,33 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 | 付録B | クイックリファレンス対照表 | [appendix_b_cli_reference.md](chapters/appendix_b_cli_reference.md) | [§付録B](chapters/roadmap.md#付録b-claude-code-cli--codex-cli-クイックリファレンス対照表) |
 | 付録C | 論文投稿前チェックリスト | [appendix_c_checklist.md](chapters/appendix_c_checklist.md) | [§付録C](chapters/roadmap.md#付録c-論文投稿前チェックリスト) |
 | 付録D | AIコーディングエージェント頻出用語・フレーズ集 | [appendix_d_agent_vocabulary.md](chapters/appendix_d_agent_vocabulary.md) | [§付録D](chapters/roadmap.md#付録d-aiコーディングエージェント頻出用語フレーズ集) |
+| 用語集 | 用語集 | [glossary.md](chapters/glossary.md) | — |
+| 著者紹介 | 著者紹介 | [author.md](chapters/author.md) | — |
 
 ## ディレクトリ構成
 
 ```
 ai-biocode-kata/
-├── CLAUDE.md           # 執筆規約（Claude Code CLI用）
+├── CLAUDE.md              # 執筆規約（Claude Code CLI用）
 ├── chapters/
-│   ├── hajimeni.md     # はじめに（番号なし）
-│   ├── roadmap.md      # 全体構成マスタードキュメント
-│   ├── 00_ai_agent.md  # §0: AIエージェントとの協働
-│   ├── 01_design.md    # §1: 設計原則
-│   ├── ...             # （以降、各章を追加）
-│   └── appendix_c.md
-├── figures/            # 図表
-├── scripts/            # 書籍内コードサンプル
-├── tests/              # サンプルコードのテスト
-└── build/              # PDF/EPUB生成
+│   ├── hajimeni.md        # はじめに（番号なし）
+│   ├── roadmap.md         # 全体構成マスタードキュメント
+│   ├── 00_ai_agent.md     # §0: AIエージェントとの協働
+│   ├── ...                # §1〜§21
+│   ├── 21_collaboration.md
+│   ├── appendix_a〜d.md   # 付録A〜D
+│   ├── glossary.md        # 用語集
+│   └── author.md          # 著者紹介
+├── references/            # BibTeXファイル（章ごと）
+├── figures/               # 図表
+├── scripts/               # 書籍内コードサンプル
+├── tests/                 # サンプルコードのテスト
+└── build/                 # PDF/EPUB生成
 ```
 
-- 全体構成の詳細は [roadmap.md](chapters/roadmap.md) を参照。
+- 全体構成の詳細は [roadmap.md](chapters/roadmap.md) を参照
 - [用語集](chapters/glossary.md)
+- [著者紹介](chapters/author.md)
 - [執筆 TODO](TODO.md)
 
 ## ライセンス
