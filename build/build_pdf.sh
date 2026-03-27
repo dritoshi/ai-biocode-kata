@@ -45,6 +45,7 @@ CHAPTER_ORDER=(
 PANDOC_OPTS=(
   --pdf-engine=lualatex
   --template="$BUILD_DIR/templates/default.latex"
+  --lua-filter="$BUILD_DIR/emoji-filter.lua"
   -V documentclass=ltjsarticle
   -V "geometry:margin=2.5cm"
   --syntax-highlighting=tango
