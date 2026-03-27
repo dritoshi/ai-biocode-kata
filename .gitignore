@@ -2,6 +2,20 @@
 build/*.pdf
 build/*.epub
 build/*.html
+*.pdf
+
+# Node.js / Vivliostyle
+node_modules/
+build/node_modules/
+.vivliostyle/
+build/.vivliostyle/
+build/chapters/
+chapters/themes/
+themes/
+publication.json
+/custom.css
+package-lock.json
+build/package-lock.json
 
 # Python
 __pycache__/

@@ -1,0 +1,29 @@
+{
+  "name": "ai-biocode-kata",
+  "version": "1.0.0",
+  "description": "配列解析から機械学習まで、環境構築・テスト・設計・公開のベストプラクティス",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dritoshi/ai-biocode-kata.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dritoshi/ai-biocode-kata/issues"
+  },
+  "homepage": "https://github.com/dritoshi/ai-biocode-kata#readme",
+  "dependencies": {
+    "@vivliostyle/cli": "^10.3.1",
+    "@vivliostyle/theme-techbook": "^2.0.1"
+  }
+}

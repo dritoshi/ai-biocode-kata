@@ -1,0 +1,37 @@
+/* build/custom.css — KDP対応カスタムCSS */
+
+/* ===== ページサイズとマージン（B5、KDP要件準拠） ===== */
+@page {
+  size: 182mm 257mm;
+  margin-top: 20mm;
+  margin-bottom: 20mm;
+}
+
+/* 見開き: 左ページ（偶数）— のどが右側 */
+@page :left {
+  margin-left: 15mm;   /* 小口（外側） */
+  margin-right: 18mm;  /* のど（内側）: 300-500ページで15.9mm以上 */
+}
+
+/* 見開き: 右ページ（奇数）— のどが左側 */
+@page :right {
+  margin-left: 18mm;   /* のど（内側） */
+  margin-right: 15mm;  /* 小口（外側） */
+}
+
+/* ===== 絵文字フォントフォールバック ===== */
+body {
+  font-family: "Noto Serif CJK JP", "Noto Color Emoji", serif;
+}
+
+code, pre, .sourceCode {
+  font-family: "JetBrains Mono NL", "Noto Color Emoji", monospace;
+}
+
+/* ===== コードブロックの調整 ===== */
+pre {
+  font-size: 0.8em;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
