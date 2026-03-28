@@ -16,22 +16,33 @@
 }
 
 /* ===== 問題1: 画像をページ幅に合わせる ===== */
+/* DPIに関わらずページ幅いっぱいに表示 */
 img {
-  max-width: 100%;
-  height: auto;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
   display: block;
 }
 
-/* ===== 問題2: リンクURL自動表示を無効化 ===== */
-a[href]::after {
-  content: none !important;
-  display: none !important;
-}
-
-/* 脚注エリアに自動挿入されるURLを非表示 */
-@supports (float: footnote) {
-  a[href]::after {
+/* ===== 問題2: リンクURL脚注の自動挿入を完全無効化 ===== */
+/* theme-baseのfootnote-external-link.cssをオーバーライド */
+@media print {
+  :not(.footnote) > a[href^='http']::before {
     content: none !important;
+    display: none !important;
+    float: none !important;
+  }
+
+  :not(.footnote) > a[href^='http']::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* リンクの色と下線を保持 */
+  :not(.footnote) > a[href^='http'] {
+    color: inherit;
+    text-decoration: underline;
+    counter-increment: none !important;
   }
 }
 
@@ -41,13 +52,8 @@ a[href] {
   overflow-wrap: break-word;
 }
 
-/* 参考文献セクションの均等割付を抑制 */
-h2 + ul,
-h2 + ol {
-  text-align: left;
-}
-
-li {
+/* 参考文献リストの均等割付を抑制 */
+ul, ol, li, p {
   text-align: left;
 }
 
@@ -58,6 +64,28 @@ body {
 
 code, pre, .sourceCode {
   font-family: "JetBrains Mono NL", "Noto Color Emoji", monospace;
+}
+
+/* ===== 表の調整 ===== */
+table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+th, td {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  padding: 4px 8px;
+}
+
+/* 表内のコードが折り返されるようにする */
+td code, th code {
+  word-break: break-all;
+  white-space: normal;
 }
 
 /* ===== コードブロックの調整 ===== */
