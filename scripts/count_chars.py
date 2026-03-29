@@ -12,6 +12,7 @@
 - コードブロックは本文より読書速度が遅い前提で別計算
 """
 
+import re
 import unicodedata
 from pathlib import Path
 
@@ -194,14 +195,32 @@ _md_body = _create_markdown(PlainTextRenderer(escape=False))
 _md_code = _create_markdown(CodeExtractRenderer(escape=False), for_code=True)
 
 
+_REFERENCES_PATTERN = re.compile(
+    r"^## 参考文献\s*$.*",
+    re.MULTILINE | re.DOTALL,
+)
+
+_FURTHER_READING_PATTERN = re.compile(
+    r"^## さらに学びたい読者へ\s*$.*?(?=^## |\Z)",
+    re.MULTILINE | re.DOTALL,
+)
+
+
+def _strip_references(markdown_text: str) -> str:
+    """参考文献セクションと「さらに学びたい読者へ」セクションを除去する."""
+    text = _REFERENCES_PATTERN.sub("", markdown_text)
+    text = _FURTHER_READING_PATTERN.sub("", text)
+    return text
+
+
 def extract_body_text(markdown_text: str) -> str:
     """Markdown記法を除去して本文テキストのみを抽出する."""
-    return _md_body(markdown_text)
+    return _md_body(_strip_references(markdown_text))
 
 
 def extract_code_text(markdown_text: str) -> str:
     """コードブロックのテキストのみを抽出する."""
-    return _md_code(markdown_text)
+    return _md_code(_strip_references(markdown_text))
 
 
 def count_zenkaku(text: str) -> int:
