@@ -57,6 +57,8 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 | 20 | コードとデータのセキュリティ・倫理 | [20_security_ethics.md](chapters/20_security_ethics.md) | 1h08m |
 | 21 | 共同開発の実践 — レビュー・質問・OSS参加 | [21_collaboration.md](chapters/21_collaboration.md) | 1h33m |
 
+読了時間は本文250文字/分・コード100文字/分（全角換算、参考文献セクションを除く）で推定。はじめに〜§21の合計: **約30時間**。
+
 ### 付録・その他
 
 | 章 | タイトル | 原稿 | 読了時間 |
@@ -67,8 +69,6 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 | 付録D | AIコーディングエージェント頻出用語・フレーズ集 | [appendix_d_agent_vocabulary.md](chapters/appendix_d_agent_vocabulary.md) | 14m |
 | 用語集 | 用語集 | [glossary.md](chapters/glossary.md) | 1h04m |
 | 著者紹介 | 著者紹介 | [author.md](chapters/author.md) | 2m |
-
-読了時間は本文250文字/分・コード100文字/分（全角換算、参考文献セクションを除く）で推定。本文＋付録の合計: **約29時間**。
 
 ## ディレクトリ構成
 
