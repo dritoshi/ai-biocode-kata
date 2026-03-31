@@ -519,6 +519,19 @@ DMPに含めるべき主要項目:
 | **共有方法** | 公開DB（DDBJ/SRA等）への登録、制限付き共有 |
 | **破棄手順** | 保存期間終了後のデータ削除方法 |
 
+DMP要件は科研費だけのものではない。2021年4月に内閣府が策定した「公的資金による研究データの管理・利活用に関する基本的な考え方」[17](https://www.mext.go.jp/content/20210608-mxt_jyohoka01-000015787_06.pdf)を上位方針として、主要なファンディング機関がそれぞれDMP制度を導入している。
+
+| ファンディング機関 | DMP作成 | DMP提出 | 特記事項 |
+|---|:--:|:--:|---|
+| JSPS（科研費） | 全課題義務 | 不要 | 2025年度〜メタデータ報告義務化 |
+| JST（CREST/さきがけ等） | 義務 | 義務 | オープン・アンド・クローズ戦略[18](https://www.jst.go.jp/all/about/houshin.html) |
+| AMED | 義務 | **契約時に提出義務** | ゲノムデータシェアリングポリシーあり[19](https://www.amed.go.jp/koubo/datamanagement.html)。非制限公開・制限公開・制限共有の3分類 |
+| NEDO | 2024年〜導入 | 事業者判断 | ムーンショット事業で先行導入[20](https://www.nedo.go.jp/jyouhoukoukai/other_CA_00003.html) |
+
+特にAMEDは、生命科学分野の研究者にとって科研費と並ぶ主要な資金源であり、DMP提出が契約締結時に義務化されている点で科研費より厳格である。AMEDのゲノムデータシェアリングポリシーでは、ヒトゲノムデータを非制限公開データ（誰でもアクセス可能）、制限公開データ（DAC承認制）、制限共有データ（研究者間共有）の3段階に分類しており、本章§20-2で学んだ制限付きデータベース（JGA等）との関連が深い。
+
+各機関の手続きの詳細は改定が頻繁であるため、申請時には必ず各機関の公式サイトで最新の要件を確認すること。
+
 #### オープンサイエンスと個人情報保護のバランス
 
 研究データの公開・共有を促進するオープンサイエンスの理念と、個人情報の保護は時に緊張関係にある。[§19 FAIR原則](./19_database_api.md)で学んだように、データのFindable（発見可能）、Accessible（アクセス可能）、Interoperable（相互運用可能）、Reusable（再利用可能）を実現することは重要だが、ヒトデータについてはAccessibleの部分に制限を設けざるを得ない。
@@ -658,3 +671,11 @@ __pycache__/
 [15] European Data Protection Board. "Opinion 28/2024 on certain data protection aspects related to the processing of personal data in the context of AI models". https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_en (参照日: 2026-03-25)
 
 [16] HHS.gov. "May a HIPAA covered entity or business associate use a cloud service to store or process ePHI?". https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html (参照日: 2026-03-25)
+
+[17] 内閣府. "公的資金による研究データの管理・利活用に関する基本的な考え方". 2021. https://www.mext.go.jp/content/20210608-mxt_jyohoka01-000015787_06.pdf (参照日: 2026-03-31)
+
+[18] JST. "オープンサイエンス推進に向けた研究成果の取扱いに関する基本方針". https://www.jst.go.jp/all/about/houshin.html (参照日: 2026-03-31)
+
+[19] AMED. "AMEDにおける研究開発データの取扱いに関する基本方針、AMED研究データ利活用に係るガイドライン、データマネジメントプラン". https://www.amed.go.jp/koubo/datamanagement.html (参照日: 2026-03-31)
+
+[20] NEDO. "NEDOプロジェクトにおけるデータマネジメントについて". https://www.nedo.go.jp/jyouhoukoukai/other_CA_00003.html (参照日: 2026-03-31)
