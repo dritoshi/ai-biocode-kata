@@ -312,7 +312,7 @@ README.mdの作成を依頼する場合:
 
 **GitHub Releases** — リポジトリにタグを付けてバージョンを固定する。`git tag v1.0.0` でタグを打ち、GitHub上でリリースを作成する。
 
-**Zenodo連携** [7](https://zenodo.org/) — ZenodoはCERNが運営するデータリポジトリで、GitHubと連携してDOI（デジタルオブジェクト識別子）を自動発行できる。手順は3ステップである。
+**Zenodo連携** [7](https://zenodo.org/) — ZenodoはCERNが運営するデータリポジトリで、GitHubと連携してDOI（デジタルオブジェクト識別子。[§4 データフォーマットの選び方](./04_data_formats.md)でも解説）を自動発行できる。手順は3ステップである。
 
 1. Zenodoにログインし、GitHubアカウントを連携する
 2. DOIを発行したいリポジトリを有効化する
