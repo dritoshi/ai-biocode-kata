@@ -18,6 +18,7 @@
   - [x] その他頻出用語: scaffold, spike, happy path, guard clause, dry run, idempotent, regression, entrypoint, acceptance criteria
 
 ## 仕上げ
+- [ ] タイトルページのサブタイトルを検討する（現在: 「配列解析から機械学習まで、環境構築・テスト・設計・公開のベストプラクティス」）
 - [ ] 上下巻に分けるか検討する。上下巻にする場合はそれぞれにはじめや付録などが必要になるか検討する。
 - [ ] 今後の更新でroadmap.mdと本文の対応を管理するコストとメリットを比較してファイルをアーカイブするか決める
 

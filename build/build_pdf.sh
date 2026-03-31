@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# build/build_pdf.sh — 章ごとPDF + 全章統合PDF生成
+# build/build_pdf.sh — 章ごとPDF + 全章統合PDF生成（Eisvogelテンプレート）
 # 使い方: bash build/build_pdf.sh
 set -euo pipefail
 
@@ -41,18 +41,54 @@ CHAPTER_ORDER=(
   author.md
 )
 
-# pandoc共通オプション
+# pandoc共通オプション（Eisvogelテンプレート）
 PANDOC_OPTS=(
-  --pdf-engine=lualatex
-  --template="$BUILD_DIR/templates/default.latex"
+  --template="$BUILD_DIR/templates/eisvogel.latex"
   --lua-filter="$BUILD_DIR/emoji-filter.lua"
-  -V documentclass=ltjsarticle
+  --lua-filter="$BUILD_DIR/epigraph.lua"
+  --top-level-division=chapter
+  -H "$BUILD_DIR/eisvogel-custom.tex"
+  -V luatexjapresetoptions=haranoaji
+  -V monofont="JetBrains Mono NL"
+  -V monofontoptions="Scale=0.85"
   -V "geometry:margin=2.5cm"
-  --syntax-highlighting=tango
+  -V colorlinks=true
+  -V linkcolor=blue
+  -V urlcolor=blue
+  -V book=true
+  --highlight-style=tango
+  -V code-block-font-size="\small"
   --resource-path="$CHAPTERS_DIR"
 )
 
+# pandoc → .tex → sed(figure[H]修正) → lualatex の2段階ビルド
+build_pdf_via_tex() {
+  local input_files=("${@:1:$#-1}")
+  local output_pdf="${!#}"
+  local tex_file="${output_pdf%.pdf}.tex"
+
+  # Step 1: pandoc で .tex を生成
+  pandoc "${input_files[@]}" -o "$tex_file" "${PANDOC_OPTS[@]}" "${EXTRA_OPTS[@]}" 2>/dev/null
+
+  # Step 2: \begin{figure} → \begin{figure}[H] に置換（フロート空白防止）
+  sed -i '' 's/\\begin{figure}/\\begin{figure}[H]/g' "$tex_file"
+
+  # Step 3: lualatex で PDF 生成（2回実行で相互参照を解決）
+  local tex_dir
+  tex_dir="$(dirname "$tex_file")"
+  local tex_base
+  tex_base="$(basename "$tex_file")"
+  (cd "$tex_dir" && lualatex -interaction=nonstopmode "$tex_base" > /dev/null 2>&1 && \
+   lualatex -interaction=nonstopmode "$tex_base" > /dev/null 2>&1) || return 1
+
+  # Step 4: 中間ファイルを削除
+  rm -f "${output_pdf%.pdf}.tex" "${output_pdf%.pdf}.aux" "${output_pdf%.pdf}.log" \
+        "${output_pdf%.pdf}.out" "${output_pdf%.pdf}.toc" "${output_pdf%.pdf}.lof" \
+        "${output_pdf%.pdf}.lot"
+}
+
 FAILED=()
+EXTRA_OPTS=()
 
 echo "=== 章ごとPDF生成 ==="
 for chapter in "${CHAPTER_ORDER[@]}"; do
@@ -60,7 +96,7 @@ for chapter in "${CHAPTER_ORDER[@]}"; do
   dst="$BUILD_DIR/${chapter%.md}.pdf"
   if [[ -f "$src" ]]; then
     echo "  $chapter → $(basename "$dst")"
-    if ! pandoc "$src" -o "$dst" "${PANDOC_OPTS[@]}" 2>/dev/null; then
+    if ! build_pdf_via_tex "$src" "$dst"; then
       echo "  ⚠ エラー: $chapter"
       FAILED+=("$chapter")
     fi
@@ -79,14 +115,25 @@ for chapter in "${CHAPTER_ORDER[@]}"; do
   fi
 done
 
-pandoc "${FULL_INPUTS[@]}" \
-  -o "$BUILD_DIR/ai-biocode-kata-full.pdf" \
-  "${PANDOC_OPTS[@]}" \
-  --toc --toc-depth=2 \
-  -V "title=AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法" \
-  -V "subtitle=配列解析から機械学習まで、環境構築・テスト・設計・公開のベストプラクティス" \
-  -V "author=二階堂 愛" \
-  2>/dev/null || echo "  ⚠ 統合PDF生成でエラー"
+EXTRA_OPTS=(
+  --toc --toc-depth=2
+  -V titlepage=true
+  -V titlepage-color=FFFFFF
+  -V titlepage-text-color=333333
+  -V "title=AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法"
+  -V "subtitle=配列解析から機械学習まで、環境構築・テスト・設計・公開のベストプラクティス"
+  -V "author=二階堂 愛"
+  -V "date=$(date +%Y-%m-%d)"
+  -V "header-left=バイオインフォプログラミングの作法"
+  -V "header-right=\\leftmark"
+  -V "footer-left= "
+  -V "footer-center=\\thepage"
+  -V "footer-right= "
+)
+
+if ! build_pdf_via_tex "${FULL_INPUTS[@]}" "$BUILD_DIR/ai-biocode-kata-full.pdf"; then
+  echo "  ⚠ 統合PDF生成でエラー"
+fi
 
 echo ""
 echo "=== 生成されたPDF ==="

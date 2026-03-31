@@ -1,0 +1,23 @@
+% build/eisvogel-custom.tex — Eisvogelテンプレート用カスタマイズ
+
+% エピグラフ（章頭引用句）
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.9\textwidth}
+\renewcommand{\epigraphflush}{flushright}
+\renewcommand{\sourceflush}{flushright}
+\setlength{\beforeepigraphskip}{0.5\baselineskip}
+\setlength{\afterepigraphskip}{1.5\baselineskip}
+\setlength{\epigraphrule}{0pt}
+\renewcommand{\epigraphsize}{\small}
+
+% ページ下部に余白を寄せる
+\raggedbottom
+
+% コードブロック前後の余白を削減
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{Shaded}{\vspace{-2pt}}
+\AfterEndEnvironment{Shaded}{\vspace{-2pt}}
+
+% tightlist が未定義の場合に備える
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
