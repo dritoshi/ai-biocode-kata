@@ -11,7 +11,12 @@
 ## 現在の状態
 
 - 現行の生データは [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) にある
-- 2026-03-26 の現行結果は `summary.ok = 306`, `summary.anti-bot = 20` であり、`error` / `timeout` / `connection_error` は 0 件である
+- 2026-03-31 の再チェック結果は `summary.ok = 353`, `summary.anti-bot = 22`, `summary.error = 1` である（376 unique URLs, 1049 total occurrences）
+- 2026-03-31 に追記分（前提知識ガイド、CWL、クラウド基礎、TRE、DMP、ホスティング等）で 50 URL が新規追加された
+  - 47 件 ok、2 件 anti-bot、1 件 error
+  - error 1 件は用語集のダミー URL（`https://doi.org/10.xxxx/xxxxx`）であり実害なし
+  - anti-bot 2 件は Science 誌 DOI (`doi.org/10.1126/science.ado9336`) と bioRxiv (`biorxiv.org/content/10.1101/2025.05.30.656746v1`) であり、前回同ドメインで `manual_confirmed` 済みのため今回も確認済みとする
+- 2026-03-26 の現行結果は `summary.ok = 306`, `summary.anti-bot = 20` であり、`error` / `timeout` / `connection_error` は 0 件であった
 - 2026-03-26 に Markdown のベタ書き URL も抽出対象に含めるよう修正し、現行原稿 326 URL を再チェックした
 - DOI 直リンクで `anti-bot` になっていたバイオ系論文のうち、PubMed に PMID があるものは本文・参考文献の閲覧用リンクを PubMed に切り替えた
 - 同日に `check_urls_browser.py` で `anti-bot` 21 件を再確認し、`browser_ok = 1`, `browser_blocked = 19`, `browser_error = 1` を記録した
