@@ -10,13 +10,12 @@
 - [x] クラウドについての基礎知識をどこかにいれる。バイオインフォに関連あるサービスの仕組みやサービス内容(S3など)について記載する
 - [x] AIエージェントで作ったSPA (single page application) のデプロイ先にみんな困るので GitHub pages や S3で static なファイルホスティングができるよという話を加える。アプリケーションの公開、クラウドかgitのあたりにいれる？
 - [x] gitとgithubの違いについて誤解が生まれないように記載を修正する
-- [ ] 本書が前提とする知識を具体的に明記する。それらの知識を学ぶための教科書やドキュメントを記載する
+- [x] 本書が前提とする知識を具体的に明記する。それらの知識を学ぶための教科書やドキュメントを記載する
 
-## 用語集と付録DNA
-- [ ] Codexがよく言う単語
-  - [ ] do 定義
-  - [ ] explicit context
-  - [ ] 実装指示書と全体計画
+## 用語集と付録D
+- [x] Codexがよく言う単語
+  - [x] プランを立案中によく言う用語: do定義、explicit context
+  - [x] その他頻出用語: scaffold, spike, happy path, guard clause, dry run, idempotent, regression, entrypoint, acceptance criteria
 
 ## 仕上げ
 - [ ] 上下巻に分けるか検討する。上下巻にする場合はそれぞれにはじめや付録などが必要になるか検討する。
