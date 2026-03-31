@@ -1,4 +1,4 @@
-# §14 解析パイプラインの自動化 — Snakemake・Nextflow
+# §14 解析パイプラインの自動化 — Snakemake・Nextflow・CWL
 
 > "Civilization advances by extending the number of important operations which we can perform without thinking about them."
 > （文明は、考えずに実行できる重要な操作の数を増やすことによって進歩する。）
@@ -6,11 +6,11 @@
 
 [§13 可視化の実践](./13_visualization.md)では、matplotlib・seabornによるプロットの作成と、科学的可視化の原則を学んだ。しかし、データ処理と可視化のスクリプトが個別ファイルのまま増えていくと、「どのスクリプトをどの順番で実行するのか」「入力ファイルが更新されたらどこまで再実行すればよいのか」という管理上の問題が生じる。
 
-この問題を解決するのが**ワークフロー言語**（workflow language）である。ワークフロー言語は処理ステップ間の依存関係を宣言的に記述し、実行順序の決定・並列化・途中からの再開をエンジンに委ねる仕組みである。代表的なツールとしてSnakemake、Nextflow、makeがあり、いずれもバイオインフォマティクスのパイプライン構築で広く使われている。
+この問題を解決するのが**ワークフロー言語**（workflow language）である。ワークフロー言語は処理ステップ間の依存関係を宣言的に記述し、実行順序の決定・並列化・途中からの再開をエンジンに委ねる仕組みである。代表的なツールとしてSnakemake、Nextflow、CWL、makeがあり、いずれもバイオインフォマティクスのパイプライン構築で広く使われている。
 
 AIエージェントはSnakemakeやNextflowのコードを生成できる。しかし、ルール間の依存関係が正しいか、wildcard展開がサンプルリストと一致しているか、中間ファイルの管理方針が適切か——これらの設計判断は、パイプラインの全体像を把握している人間がレビューしなければならない。
 
-本章では、ワークフロー言語（Snakemake、Nextflow、make）の基礎と、再現可能なパイプラインを設計するためのベストプラクティスを学ぶ。
+本章では、ワークフロー言語（Snakemake、Nextflow、CWL、make）の基礎と、再現可能なパイプラインを設計するためのベストプラクティスを学ぶ。
 
 ---
 
@@ -380,6 +380,153 @@ nextflow run nf-core/rnaseq \
 
 ---
 
+### CWL — ポータブルなワークフロー言語
+
+**CWL**（Common Workflow Language）[9](https://www.commonwl.org/)は、特定のプログラミング言語に依存しない**YAML宣言型**のワークフロー記述仕様である。SnakemakeがPython、NextflowがGroovyに紐づいているのに対し、CWLはワークフローの**定義**と**実行エンジン**を分離している。同一の`.cwl`ファイルを、リファレンス実装の`cwltool`[10](https://github.com/common-workflow-language/cwltool)、Toil、AWS上のSeven Bridgesなど、異なるエンジンで実行できる。このポータビリティこそがCWLの最大の特徴である。
+
+CWLが特に重要になるのは、[§20 コードとデータのセキュリティ・倫理](./20_security_ethics.md)で紹介したTRE（Trusted Research Environment）を使う場合である。Seven BridgesのCancer Genomics CloudはCWLを標準ワークフロー形式として採用しており、Dockstore[11](https://dockstore.org/)（ワークフロー共有レジストリ）でもCWLは主要な記述形式の一つである。
+
+#### CommandLineToolの基本構造
+
+CWLでは、個々のコマンドラインツールを**CommandLineTool**として定義する。以下はFASTQファイルの品質フィルタリング（fastp）をCWLで記述した例である:
+
+```yaml
+# fastp_filter.cwl — FASTQの品質フィルタリング
+cwlVersion: v1.2
+class: CommandLineTool
+baseCommand: fastp
+
+requirements:
+  DockerRequirement:
+    dockerPull: biocontainers/fastp:0.23.4--hadf994f_0
+
+inputs:
+  fastq_r1:
+    type: File
+    inputBinding:
+      prefix: --in1
+  fastq_r2:
+    type: File
+    inputBinding:
+      prefix: --in2
+  sample_name:
+    type: string
+
+outputs:
+  filtered_r1:
+    type: File
+    outputBinding:
+      glob: $(inputs.sample_name)_filtered_R1.fastq.gz
+  filtered_r2:
+    type: File
+    outputBinding:
+      glob: $(inputs.sample_name)_filtered_R2.fastq.gz
+  report_html:
+    type: File
+    outputBinding:
+      glob: $(inputs.sample_name)_fastp.html
+
+arguments:
+  - prefix: --out1
+    valueFrom: $(inputs.sample_name)_filtered_R1.fastq.gz
+  - prefix: --out2
+    valueFrom: $(inputs.sample_name)_filtered_R2.fastq.gz
+  - prefix: --html
+    valueFrom: $(inputs.sample_name)_fastp.html
+```
+
+Snakemakeの`rule`やNextflowの`process`と対比すると構造がわかりやすい。`inputs`が入力、`outputs`が出力、`baseCommand`が実行コマンド、`DockerRequirement`がコンテナ指定に対応する。CWLではこれらをすべてYAML形式で宣言的に記述する。
+
+#### Workflowの定義
+
+複数のCommandLineToolを組み合わせてパイプラインを構成するには、`class: Workflow`を使う:
+
+```yaml
+# rnaseq_pipeline.cwl — RNA-seq解析ワークフロー
+cwlVersion: v1.2
+class: Workflow
+
+inputs:
+  fastq_r1: File
+  fastq_r2: File
+  sample_name: string
+  genome_index: Directory
+
+outputs:
+  bam:
+    type: File
+    outputSource: align/bam_output
+  fastp_report:
+    type: File
+    outputSource: filter/report_html
+
+steps:
+  filter:
+    run: fastp_filter.cwl
+    in:
+      fastq_r1: fastq_r1
+      fastq_r2: fastq_r2
+      sample_name: sample_name
+    out: [filtered_r1, filtered_r2, report_html]
+
+  align:
+    run: hisat2_align.cwl
+    in:
+      fastq_r1: filter/filtered_r1
+      fastq_r2: filter/filtered_r2
+      genome_index: genome_index
+      sample_name: sample_name
+    out: [bam_output]
+```
+
+`steps`の各ステップが`in`と`out`でデータの流れを定義する。Nextflowのチャネルに似た構造だが、CWLではYAMLの中で明示的にステップ間の接続を記述する。
+
+#### 入力ファイル（ジョブファイル）
+
+CWLの大きな特徴は、ワークフロー定義（`.cwl`）と入力パラメータ（`.yml`）が**完全に分離**されていることである:
+
+```yaml
+# inputs.yml — 入力パラメータ
+fastq_r1:
+  class: File
+  location: data/raw/sample_A_R1.fastq.gz
+fastq_r2:
+  class: File
+  location: data/raw/sample_A_R2.fastq.gz
+sample_name: sample_A
+genome_index:
+  class: Directory
+  location: data/ref/hisat2_index/
+```
+
+実行は以下のコマンドで行う:
+
+```bash
+# cwltoolでローカル実行
+cwltool rnaseq_pipeline.cwl inputs.yml
+```
+
+ワークフロー定義を変えずに入力ファイルだけを差し替えられるため、同じパイプラインを異なるサンプルやデータセットに繰り返し適用しやすい。これはTRE環境で標準化されたパイプラインを多数のサンプルに適用する運用と相性がよい。
+
+#### CWLを使う場面
+
+CWLは学習コストがSnakemake/Nextflowより高い（YAMLの記述量が多く、Pythonのように柔軟にロジックを書けない）。そのため、以下の場面で特に価値がある:
+
+- **TRE環境**（Seven Bridges、Terra、AnVIL）でワークフローを実行する場合
+- **Dockstore**でワークフローを公開・共有する場合
+- **異なる実行環境への移植性**を最優先する場合
+- 既存のCWLワークフローを**再利用する**場合（自分で一から書くよりも頻繁）
+
+逆に、ローカルPCやHPCでの日常的な解析にはSnakemakeやNextflowのほうが生産性が高い。CWLの記述は冗長になりやすいが、エージェントに「このSnakefileをCWLに変換して」と依頼すれば変換コードを生成してくれるため、CWLの文法をすべて暗記する必要はない。
+
+#### エージェントへの指示例
+
+> 「このSnakefileをCWL v1.2形式に変換してください。各ルールをCommandLineToolとして分離し、全体をWorkflowで繋いでください。DockerRequirementにはBioContainersのイメージを指定してください」
+
+> 「DockstoreからCWLワークフローをダウンロードして、ローカルのcwltoolで実行するための入力YAMLファイル（inputs.yml）を作成してください。サンプルはdata/raw/配下のFASTQです」
+
+---
+
 ### make — 古典的だが今も有用
 
 GNU make はソフトウェアビルドのために設計されたツールだが、小規模なデータ処理パイプラインにも有用である[7](https://pubmed.ncbi.nlm.nih.gov/27013646/)。リファレンスゲノムのダウンロードとインデックス構築のような準備ステップに適している:
@@ -413,16 +560,16 @@ makeの利点は、追加のインストールが不要で、ほぼすべてのU
 
 ### ツール選択の判断基準
 
-| 基準 | make | Snakemake | Nextflow |
-|------|------|-----------|----------|
-| 学習コスト | 低 | 中 | 高 |
-| Python親和性 | 低 | 高（Snakefile内でPythonが書ける） | 低（Groovy/DSL2） |
-| HPC対応 | 手動（ジョブスクリプト記述） | プロファイルやクラスタ実行オプション | 組み込み（executor設定） |
-| conda/container統合 | なし | `conda:`, `container:` | `container` プロファイル |
-| 既存パイプライン | 少ない | Snakemake Catalog | nf-core（100+パイプライン） |
-| 向いている規模 | 小規模（前処理・準備） | 中〜大規模 | 大規模・クラウド |
+| 基準 | make | Snakemake | Nextflow | CWL |
+|------|------|-----------|----------|-----|
+| 学習コスト | 低 | 中 | 高 | 高 |
+| Python親和性 | 低 | 高（Snakefile内でPythonが書ける） | 低（Groovy/DSL2） | 低（YAML宣言型） |
+| HPC対応 | 手動（ジョブスクリプト記述） | プロファイルやクラスタ実行オプション | 組み込み（executor設定） | 実行エンジン依存 |
+| conda/container統合 | なし | `conda:`, `container:` | `container` プロファイル | `DockerRequirement` |
+| 既存パイプライン | 少ない | Snakemake Catalog | nf-core（100+パイプライン） | Dockstore、Seven Bridges |
+| 向いている規模 | 小規模（前処理・準備） | 中〜大規模 | 大規模・クラウド | TRE環境・クラウド |
 
-**迷ったらSnakemakeから始めることを推奨する。** PythonベースでありNumPy・pandasとの親和性が高く、本書の読者にとって学習コストが最も低い。プロジェクトがクラウド環境やHPCの大規模利用に移行する段階でNextflowへの乗り換えを検討すればよい。
+**迷ったらSnakemakeから始めることを推奨する。** PythonベースでありNumPy・pandasとの親和性が高く、本書の読者にとって学習コストが最も低い。プロジェクトがクラウド環境やHPCの大規模利用に移行する段階でNextflowへの乗り換えを検討すればよい。TRE環境でCWLが求められる場合は、エージェントに既存ワークフローの変換を依頼するのが実践的なアプローチである。
 
 #### エージェントへの指示例
 
@@ -707,3 +854,9 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 [7] Leipzig, J. "A review of bioinformatic pipeline frameworks." *Briefings in Bioinformatics*, 18(3), 530–536, 2017. [https://pubmed.ncbi.nlm.nih.gov/27013646/](https://pubmed.ncbi.nlm.nih.gov/27013646/)
 
 [8] nf-core Community. "nf-core — A community effort to collect a curated set of analysis pipelines". [https://nf-co.re/](https://nf-co.re/) (参照日: 2026-03-20)
+
+[9] Common Workflow Language Project. "Common Workflow Language". [https://www.commonwl.org/](https://www.commonwl.org/) (参照日: 2026-03-31)
+
+[10] Common Workflow Language Project. "cwltool — CWL reference implementation". [https://github.com/common-workflow-language/cwltool](https://github.com/common-workflow-language/cwltool) (参照日: 2026-03-31)
+
+[11] Dockstore. "A platform for sharing Docker-based tools and workflows". [https://dockstore.org/](https://dockstore.org/) (参照日: 2026-03-31)
