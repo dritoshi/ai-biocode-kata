@@ -8,7 +8,7 @@
 
 この問題を解決するのが**ワークフロー言語**（workflow language）である。ワークフロー言語は処理ステップ間の依存関係を宣言的に記述し、実行順序の決定・並列化・途中からの再開をエンジンに委ねる仕組みである。代表的なツールとしてSnakemake、Nextflow、CWL、makeがあり、いずれもバイオインフォマティクスのパイプライン構築で広く使われている。
 
-AIエージェントはSnakemakeやNextflowのコードを生成できる。しかし、ルール間の依存関係が正しいか、wildcard展開がサンプルリストと一致しているか、中間ファイルの管理方針が適切か——これらの設計判断は、パイプラインの全体像を把握している人間がレビューしなければならない。
+AIエージェントはこれらのコードを生成できる。しかし、ステップ間の依存関係が正しいか、サンプルの展開が入力リストと一致しているか、中間ファイルの管理方針が適切か——これらの設計判断は、パイプラインの全体像を把握している人間がレビューしなければならない。
 
 本章では、ワークフロー言語（Snakemake、Nextflow、CWL、make）の基礎と、再現可能なパイプラインを設計するためのベストプラクティスを学ぶ。
 
@@ -68,7 +68,7 @@ done
 
 1. **変更されたルールだけ再実行**: 出力ファイルのタイムスタンプを入力と比較し、更新が必要なルールだけを実行する
 2. **並列実行**: 独立したルール（上図のfastqcとtrimmomatic）を自動的に並列実行する
-3. **途中再開**: 成功済みステップを保ったまま必要箇所だけ再実行できる。Snakemake では通常の up-to-date 判定に加えて `--rerun-incomplete` で不完全出力をやり直し、Nextflow では `-resume` でキャッシュを再利用する
+3. **途中再開**: 成功済みステップを保ったまま必要箇所だけ再実行できる。Snakemake では通常の up-to-date 判定に加えて `--rerun-incomplete` で不完全出力をやり直し、Nextflow では `-resume` でキャッシュを再利用する。CWLではリファレンス実装の`cwltool`自体にはキャッシュ機能が限定的だが、TRE環境（Seven Bridges、Terra等）のエンジンがジョブ単位のキャッシュを提供する
 
 ### 導入タイミング
 
@@ -747,12 +747,12 @@ for item in result.warnings:
 | 課題 | シェルスクリプト | ワークフロー言語 |
 |------|----------------|-----------------|
 | 部分的再実行 | 手動で特定・再実行 | 変更部分だけ自動再実行 |
-| サンプル展開 | forループ・コピペ | wildcards・expand() |
-| 並列実行 | 手動（`&`, `xargs`） | `-j N` で自動並列 |
-| HPC連携 | ジョブスクリプト手書き | プロファイルやクラスタ実行オプションで自動投入 |
-| 中間ファイル管理 | 手動削除 | `temp()` で自動削除 |
-| ログ管理 | リダイレクト忘れがち | `log:` で強制 |
-| 再現性 | 低（環境依存） | conda/container統合 |
+| サンプル展開 | forループ・コピペ | wildcards・expand()（Snakemake）、チャネル（Nextflow）、入力YAML（CWL） |
+| 並列実行 | 手動（`&`, `xargs`） | `-j N`（Snakemake）、自動（Nextflow）、実行エンジン依存（CWL） |
+| HPC連携 | ジョブスクリプト手書き | プロファイルやexecutor設定で自動投入 |
+| 中間ファイル管理 | 手動削除 | `temp()`（Snakemake）等で自動削除 |
+| ログ管理 | リダイレクト忘れがち | `log:`（Snakemake）等で強制 |
+| 再現性 | 低（環境依存） | conda/container統合。CWLはDockerRequirementで明示 |
 
 ワークフロー言語の導入は、パイプラインが3ステップ以上・サンプルが複数ある時点で検討に値する。本章で紹介した `configfile:`、`log:`、`temp()`、入出力の分離といったベストプラクティスは、どのワークフロー言語を選んでも共通の原則である。
 
@@ -834,6 +834,8 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 
 - **Snakemake Documentation. "Tutorial".** https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html — 公式チュートリアル。本章で概要を扱ったSnakemakeの機能（wildcard、configfile、conda integration等）を段階的に学べる。
 - **nf-core Community.** https://nf-co.re/ — コミュニティ管理のNextflowパイプライン集。ベストプラクティスに従ったパイプライン設計の参考例として活用できる。特にDeveloper Tutorialsが自作パイプラインの学習に有用。
+- **Common Workflow Language User Guide.** https://www.commonwl.org/user_guide/ — CWL公式のチュートリアル。CommandLineToolの書き方からWorkflowの組み立てまでを段階的に学べる。
+- **Dockstore.** https://dockstore.org/ — CWL/WDL/Nextflowワークフローの共有レジストリ。公開されているワークフローを読んで記法を学ぶのに有用。
 
 ---
 
