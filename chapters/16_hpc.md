@@ -732,6 +732,11 @@ python simple_filter.py input.vcf > output.vcf
 
 - **Sterling, T., Anderson, M., Brodowicz, M. *High Performance Computing: Modern Systems and Practices*. Morgan Kaufmann, 2017.** https://www.amazon.co.jp/dp/012420158X — HPCの包括的な教科書。並列計算モデル、分散ファイルシステム、ジョブスケジューリングの理論的背景を体系的に学べる。
 
+### クラウドコンピューティングの基礎
+
+- **AWS. "AWS Cloud Practitioner Essentials".** https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/ — S3、EC2、リージョンなど、本章のクラウドコラムで紹介した概念を体系的に学べるAWS公式の無料トレーニング。
+- **Google Cloud. "Google Cloud Skills Boost".** https://www.cloudskillsboost.google/ — GCPのハンズオン学習。無料ラボでGCSやCompute Engineを実際に操作できる。
+
 ---
 
 ## 参考文献

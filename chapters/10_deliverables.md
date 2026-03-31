@@ -1044,6 +1044,12 @@ testpaths = ["tests"]
 
 - **Fowler, M. *Refactoring: Improving the Design of Existing Code* (2nd ed.). Addison-Wesley, 2018.** https://www.amazon.co.jp/dp/0134757599 — スクリプトからパッケージへの「成長」の過程で必要になるリファクタリングの技法書。コードの「臭い」を体系化し、改善パターンをカタログ化している。邦訳: 児玉公信ほか訳『リファクタリング 既存のコードを安全に改善する（第2版）』オーム社, 2019.
 
+### ホスティング・デプロイ
+
+- **GitHub Pages Documentation.** https://docs.github.com/en/pages — MkDocsで生成した静的ドキュメントサイトを無料で公開できる。`mkdocs gh-deploy` で1コマンドデプロイ。
+- **Streamlit Community Cloud.** https://streamlit.io/cloud — StreamlitアプリをGitHubリポジトリから自動デプロイ。環境構築も`requirements.txt`ベースで自動化される。
+- **Hugging Face Spaces.** https://huggingface.co/spaces — GradioやStreamlitアプリの公開に適したプラットフォーム。機械学習モデルのデモに特に有用。
+
 ---
 
 ## 参考文献

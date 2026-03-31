@@ -986,6 +986,11 @@ def fetch_sequences(gene_list):
 
 - **Biopython Tutorial and Cookbook.** https://biopython.org/wiki/Documentation — Biopythonの包括的チュートリアル。Entrez、SeqIO、Blast等のモジュールを使った公共データベースへのプログラマティックなアクセス方法が実践的に解説されている。
 
+### クラウドストレージからのデータ取得
+
+- **NCBI. "SRA in the Cloud".** https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud/ — NCBIがAWS S3およびGoogle Cloud StorageでSRAデータを公開している背景と、クラウド上での利用方法を解説する公式ドキュメント。
+- **AWS CLI Documentation.** https://docs.aws.amazon.com/cli/ — `aws s3 cp`等のコマンドリファレンス。S3パブリックバケットからのデータダウンロードに必要な`--no-sign-request`オプション等の詳細が記載されている。
+
 ---
 
 ## 参考文献
