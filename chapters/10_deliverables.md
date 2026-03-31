@@ -344,6 +344,21 @@ my_app/
 
 Webアプリは「届け方」であり「作り方」ではない。まずパターン2でロジックを作り、それをStreamlitで包む、という順序で進める。
 
+#### 作ったアプリ・サイトをどこで公開するか
+
+AIエージェントに「Streamlitアプリを作って」と指示すれば、ローカルで動くアプリは数分で完成する。しかし「これを共同研究者に使ってもらいたい」「論文の補足として公開したい」となったとき、**どこにホスティングするか**で手が止まることが多い。自前でサーバを運用する必要はない——無料で使えるホスティングサービスが複数存在する。
+
+| ホスティング先 | 対象 | コスト | 特徴 |
+|---|---|---|---|
+| **GitHub Pages**[8](https://docs.github.com/en/pages) | 静的サイト（HTML/CSS/JS） | 無料 | GitHubリポジトリから直接公開。[§18](./18_documentation.md)で学ぶMkDocsドキュメントの公開先に最適 |
+| **Streamlit Community Cloud**[9](https://streamlit.io/cloud) | Streamlitアプリ | 無料枠あり | GitHubリポジトリを連携するだけで自動デプロイ。`requirements.txt`を読んで環境構築も自動 |
+| **Hugging Face Spaces**[10](https://huggingface.co/spaces) | Gradio/Streamlitアプリ | 無料枠あり | 機械学習モデルのデモに最適。Gradioアプリはそのまま動く |
+| **S3静的ホスティング** | 静的サイト | 低コスト | [§16](./16_hpc.md)のクラウドコラムで紹介したオブジェクトストレージを使う方法。独自ドメインの設定も可能 |
+
+**GitHub Pages**は最も手軽で、MkDocsで生成したドキュメントサイトを`mkdocs gh-deploy`の1コマンドで公開できる。Streamlitアプリのような動的なサーバ処理が必要なものはGitHub Pagesでは動かないが、**Streamlit Community Cloud**ならGitHubリポジトリのURLを入力するだけでデプロイが完了する。
+
+エージェントに「Streamlitアプリを作って」と指示したら、続けて「Streamlit Community Cloudにデプロイするための`requirements.txt`と`.streamlit/config.toml`も作って」と依頼するとよい。デプロイに必要なファイルまで一気に整えてくれる。
+
 ---
 
 ### パターン9: コンパイル済みバイナリ
@@ -1046,3 +1061,9 @@ testpaths = ["tests"]
 [6] Wiggins, A. "The Twelve-Factor App". [https://12factor.net/](https://12factor.net/) (参照日: 2026-03-19)
 
 [7] Python Software Foundation. "Errors and Exceptions". [https://docs.python.org/3/tutorial/errors.html](https://docs.python.org/3/tutorial/errors.html) (参照日: 2026-03-19)
+
+[8] GitHub. "GitHub Pages documentation". [https://docs.github.com/en/pages](https://docs.github.com/en/pages) (参照日: 2026-03-31)
+
+[9] Streamlit. "Streamlit Community Cloud". [https://streamlit.io/cloud](https://streamlit.io/cloud) (参照日: 2026-03-31)
+
+[10] Hugging Face. "Spaces". [https://huggingface.co/spaces](https://huggingface.co/spaces) (参照日: 2026-03-31)
