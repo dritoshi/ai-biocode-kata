@@ -49,6 +49,12 @@
 | **Interoperable**（相互運用可能） | データが広く認知された標準フォーマットと語彙を使っている | フォーマットの選択がそのまま相互運用性を決定する |
 | **Reusable**（再利用可能） | データに十分なメタデータ（実験条件、処理手順等）が付随し、明確なライセンスがある | メタデータの質が再利用の可否を決める |
 
+上の表でFindableの条件として挙げた**DOI**（Digital Object Identifier; デジタルオブジェクト識別子）は、科学データや論文を一意に識別するための永続的な識別子である[19](https://www.doi.org/)。DOIは`10.`で始まる文字列で、プレフィクス（登録機関を示す）とサフィクス（対象を示す）をスラッシュで区切った構造を持つ。例えば`10.1038/sdata.2016.18`は、Nature系列（10.1038）のFAIR原則論文を指す。
+
+DOIが必要な理由は、**URLはリンク切れを起こす**からである。Webページは移転・削除されるが、DOIは永続的である。`https://doi.org/10.1038/sdata.2016.18`にアクセスすると、doi.orgが登録された最新のURLにリダイレクトしてくれる。たとえ論文の掲載先のURLが変わっても、DOIは変わらない。この仕組みはInternational DOI Foundation（IDF）が2000年から運用しており、学術出版のインフラとして広く定着している。
+
+DOIは論文だけでなく、データセット、ソフトウェア、プレプリントにも付与できる。[§7 Git入門](./07_git.md)ではZenodoとGitHubを連携してソフトウェアにDOIを発行する方法を、[§19 公共データベースとAPI](./19_database_api.md)ではデータセットへのDOI付与を扱う。ただしDOIは識別子であり、対象の品質を保証するものではないこと、一度発行したDOIは変更・削除ができないこと（だからこそ永続的なのだが）には注意が必要である。
+
 FAIR原則は「データをオープンにせよ」という主張ではない。アクセス制限があるデータでも、メタデータが公開され、アクセス条件が明示されていればFAIRである。重要なのは、**データの存在と取得方法が機械的に発見・判定できる**ことである。
 
 バイオインフォマティクスでは、FAIR原則は日常的な実践に直結する:
@@ -883,3 +889,5 @@ df = pd.read_csv('data.csv')
 [17] Wilkinson, M. D. et al. "The FAIR Guiding Principles for scientific data management and stewardship". *Scientific Data*, 3, 160018, 2016. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
 
 [18] Creative Commons. "About The Licenses". [https://creativecommons.org/licenses/](https://creativecommons.org/licenses/) (参照日: 2026-03-31)
+
+[19] International DOI Foundation. "DOI Handbook". [https://www.doi.org/](https://www.doi.org/) (参照日: 2026-03-31)
