@@ -4,6 +4,8 @@
 > （整然データはどれも似ているが、乱雑なデータはそれぞれに乱雑である。）
 > — Hadley Wickham, "Tidy Data", *Journal of Statistical Software*, 59(10) (2014)
 
+> **この章の前提知識**: NumPyの配列やpandasのDataFrameを触ったことがあること（自分で書ける必要はない）。不安な場合は [改訂 独習Pythonバイオ情報解析](https://www.yodosha.co.jp/yodobook/book/9784758122788/)（実験医学別冊）や [NumPy公式入門](https://numpy.org/doc/stable/user/absolute_beginners.html) を先に読むとよい。
+
 [§11 コマンドラインツールの設計と実装](./11_cli.md)では、コマンドラインの引数設計、stdin/stdout対応、プログレス表示、ロギングを学んだ。CLIはツールの「外側」のインターフェースである。本章では「内側」——ツールの中で実際にデータを処理するライブラリの実践的な使い方を学ぶ。
 
 [§3 コーディングに必要な計算機科学](./03_cs_basics.md)ではNumPyの数値型の罠（int32オーバーフロー、浮動小数点精度）を、[§4 データフォーマットの選び方](./04_data_formats.md)ではpandasによるtidy data変換（`melt()` / `pivot_table()`）を学んだ。本章ではそれらの知識を前提に、バイオインフォマティクスのデータを**効率的に処理するパターン**を扱う。具体的には、NumPyのベクトル化演算による高速化、pandasとPolarsによるテーブルデータの集計・フィルタリング、そしてSciPyをはじめとするライブラリ関数の活用——AIが再発明しがちな処理をライブラリに任せる判断力である。
