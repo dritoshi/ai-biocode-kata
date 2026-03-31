@@ -319,18 +319,7 @@ workflow {
 }
 ```
 
-Snakemakeとの主な違い:
-
-| 観点 | Snakemake | Nextflow |
-|------|-----------|----------|
-| 依存解決 | ファイルパスのパターンマッチ | チャネルによるデータの受け渡し |
-| 記法 | Python風（Snakefileの中でPythonコードが書ける） | Groovy風のDSL2 |
-| 再開 | 出力ファイルとメタデータに基づく再実行判定。必要に応じて `--rerun-incomplete` | `-resume`（ハッシュベースのキャッシュ） |
-| HPC対応 | プロファイルやクラスタ実行オプション（版によりCLIが異なる） | `executor` 設定（SLURM, PBS, AWS Batch等） |
-
-Nextflowのチャネルモデルは、データの流れが直感的に追いやすい一方で、ファイル名に基づく柔軟なパターンマッチはSnakemakeに比べてやや冗長になる場合がある。
-
-Snakemake の HPC 連携に使う CLI は版によって差がある。`--cluster`、`--slurm`、executor / profile ベースの指定のどれを使うかは、使用している版の公式ドキュメントを確認すること[4](https://snakemake.readthedocs.io/)。
+Nextflowのチャネルモデルは、データの流れが直感的に追いやすい一方で、ファイル名に基づく柔軟なパターンマッチはSnakemakeに比べてやや冗長になる場合がある。Snakemake の HPC 連携に使う CLI は版によって差がある。`--cluster`、`--slurm`、executor / profile ベースの指定のどれを使うかは、使用している版の公式ドキュメントを確認すること[4](https://snakemake.readthedocs.io/)。各ツールの設計思想の違いについては、本節末尾の「ツール選択の判断基準」で対比表にまとめている。
 
 #### nf-core — 既存パイプライン群の活用
 
@@ -382,7 +371,7 @@ nextflow run nf-core/rnaseq \
 
 ### CWL — ポータブルなワークフロー言語
 
-**CWL**（Common Workflow Language）[9](https://www.commonwl.org/)は、特定のプログラミング言語に依存しない**YAML宣言型**のワークフロー記述仕様である。SnakemakeがPython、NextflowがGroovyに紐づいているのに対し、CWLはワークフローの**定義**と**実行エンジン**を分離している。同一の`.cwl`ファイルを、リファレンス実装の`cwltool`[10](https://github.com/common-workflow-language/cwltool)、Toil、AWS上のSeven Bridgesなど、異なるエンジンで実行できる。このポータビリティこそがCWLの最大の特徴である。
+**CWL**（Common Workflow Language）[9](https://www.commonwl.org/)は、特定のプログラミング言語に依存しない**YAML宣言型**のワークフロー記述仕様である。ワークフローの**定義**と**実行エンジン**が分離されており、同一の`.cwl`ファイルを、リファレンス実装の`cwltool`[10](https://github.com/common-workflow-language/cwltool)、Toil、AWS上のSeven Bridgesなど、異なるエンジンで実行できる。このポータビリティこそがCWLの最大の特徴である。Snakemake・Nextflowとの設計思想の違いは、本節末尾の「ツール選択の判断基準」で対比表にまとめている。
 
 CWLが特に重要になるのは、[§20 コードとデータのセキュリティ・倫理](./20_security_ethics.md)で紹介したTRE（Trusted Research Environment）を使う場合である。Seven BridgesのCancer Genomics CloudはCWLを標準ワークフロー形式として採用しており、Dockstore[11](https://dockstore.org/)（ワークフロー共有レジストリ）でもCWLは主要な記述形式の一つである。
 
@@ -559,6 +548,18 @@ makeの利点は、追加のインストールが不要で、ほぼすべてのU
 ---
 
 ### ツール選択の判断基準
+
+まず、Snakemake・Nextflow・CWLの設計思想の違いを整理する:
+
+| 観点 | Snakemake | Nextflow | CWL |
+|------|-----------|----------|-----|
+| 依存解決 | ファイルパスのパターンマッチ | チャネルによるデータの受け渡し | stepsのin/outで明示的に接続 |
+| 記法 | Python風（Snakefile内でPythonが書ける） | Groovy風のDSL2 | YAML宣言型（プログラミング言語に非依存） |
+| 再開 | 出力ファイルのタイムスタンプ。`--rerun-incomplete` | `-resume`（ハッシュベースのキャッシュ） | 実行エンジン依存（cwltoolは限定的、TRE環境はジョブ単位キャッシュ） |
+| 実行環境 | ローカル / HPC | ローカル / HPC / クラウド | エンジンを選べる（cwltool, Toil, Seven Bridges等） |
+| ワークフローとロジックの分離 | 低（Snakefile内にPythonを混在可能） | 中（processとworkflowは分離） | 高（定義と入力が完全分離。`.cwl` + `inputs.yml`） |
+
+makeを含む4ツールの選択指針:
 
 | 基準 | make | Snakemake | Nextflow | CWL |
 |------|------|-----------|----------|-----|
