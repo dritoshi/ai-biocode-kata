@@ -98,7 +98,7 @@ npx vivliostyle build
 ### 依存パッケージ
 
 ```bash
-cd build && npm install
+npm install
 ```
 
 `@vivliostyle/cli` と `@vivliostyle/theme-techbook` がインストールされる。
