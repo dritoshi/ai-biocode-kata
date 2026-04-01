@@ -10,8 +10,10 @@
 
 これまで、世界的ベンチマーク研究で世界最高精度を示した高感度シングルセルRNA-seq法Quartz-Seq2、全長型の1細胞Total RNA-seq法RamDA-seq、細胞間相互作用解析法scTensor、シングルセルデータ高速検索法CellFishing.jlなど、多数の実験・解析手法を開発してきた。近年は独自の大規模トランスクリプトームデータを学習した基盤モデル(細胞世界モデル)の開発に取り組んでいる。2025年、竹田国際貢献賞受賞。
 
-実験系研究者がプログラミングの壁に直面する姿を長年見てきた経験が、本書の執筆動機となっている。
+研究室内の実験系研究者がプログラミングの壁に直面する姿を長年見てきた経験が、本書の執筆動機となっている。
 
 - researchmap: https://researchmap.jp/dritoshi
 - ORCID: https://orcid.org/0000-0002-7261-2570
 - 研究室: https://bit.riken.jp/ / https://www.nikaidolab.org/
+- X: https://x.com/dritoshi / https://x.com/dritoshien
+- dritoshi at gmail dot com
