@@ -7,93 +7,216 @@
 AIコーディングエージェント（Claude Code CLI / Codex CLI）との協働を前提として、
 バイオインフォマティクスのプログラミングに必要な知識を体系的に解説する書籍。
 
-## 章の一覧
+各章の文字数・読了時間は [docs/chapter_stats.md](docs/chapter_stats.md) を参照（本文合計 約30万文字、読了 約30時間）。
+
+---
+
+## 目次
 
 ### Phase I: AIと始めるプログラミングの基礎
 
-| 章 | タイトル | 原稿 | 読了時間 |
-|----|---------|------|:------:|
-| はじめに | — | [hajimeni.md](chapters/hajimeni.md) | 24m |
-| 0 | AIエージェントにコードを書かせる | [00_ai_agent.md](chapters/00_ai_agent.md) | 1h39m |
-| 1 | 設計原則 — 良いコードとは何か | [01_design.md](chapters/01_design.md) | 47m |
-| 2 | ターミナルとシェルの基本操作 | [02_terminal.md](chapters/02_terminal.md) | 1h11m |
-| 3 | コーディングに必要な計算機科学 | [03_cs_basics.md](chapters/03_cs_basics.md) | 1h24m |
-| 4 | データフォーマットの選び方 | [04_data_formats.md](chapters/04_data_formats.md) | 1h15m |
-| 5 | ソフトウェアの構成要素 — importからpipまで | [05_software_components.md](chapters/05_software_components.md) | 1h15m |
-| 6 | Python環境の構築 — pyenv・venv・conda・uv | [06_dev_environment.md](chapters/06_dev_environment.md) | 44m |
+#### [はじめに](chapters/hajimeni.md)
+
+コードを書かないプログラミングの時代 / 初心者でもコードが書ける——しかし「良いコード」は書けない / 既存の書籍が埋められなかったギャップ / 生命科学 / 本書の目的 / 本書が前提とする知識 / 本書が目指すもの
+
+#### [§0 AIエージェントにコードを書かせる](chapters/00_ai_agent.md)
+
+- 0-1. セットアップと基本操作
+- 0-2. Plan → Execute → Review ワークフロー
+- 0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）
+- 0-4. エージェントにレビューさせる
+- 0-5. サブエージェントとタスク委譲
+- 0-6. コンテキスト管理
+- 0-7. モデル選択・推論の深さ・コスト意識
+- 0-8. AIに頼るべきこと・自分で判断すべきこと
+- 0-9. 車輪の再発明を防ぐ
+- 0-10. セキュリティと権限管理
+
+#### [§1 設計原則 — 良いコードとは何か](chapters/01_design.md)
+
+- 1-1. コードの設計原則
+- 1-2. UNIX哲学
+- 1-3. ソフトウェア開発手法の用語
+
+#### [§2 ターミナルとシェルの基本操作](chapters/02_terminal.md)
+
+- 2-1. なぜVibe codingにシェルの知識が必要か
+- 2-2. ファイルシステムとパーミッション
+- 2-3. 環境変数とパス
+- 2-4. テキスト処理コマンド
+- 2-5. シェルスクリプティングの基礎
+
+#### [§3 コーディングに必要な計算機科学](chapters/03_cs_basics.md)
+
+- 3-1. データ構造と計算量
+- 3-2. 数値表現と浮動小数点
+- 3-3. 文字エンコーディング
+- 3-4. 乱数と再現性
+- 3-5. 計算機アーキテクチャの基礎
+- 3-6. Pythonの型ヒント
+
+#### [§4 データフォーマットの選び方](chapters/04_data_formats.md)
+
+- 4-0. データとメタデータ
+- 4-1. 汎用フォーマット
+- 4-2. フォーマット選択の判断基準
+
+#### [§5 ソフトウェアの構成要素 — importからpipまで](chapters/05_software_components.md)
+
+- 5-1. プログラムはどう動くか
+- 5-2. Pythonのモジュールシステム
+- 5-3. 依存関係の問題
+- 5-4. APIとインターフェース
+- 5-5. MCP（Model Context Protocol）
+
+#### [§6 Python環境の構築 — pyenv・venv・conda・uv](chapters/06_dev_environment.md)
+
+- 6-1. Pythonの環境管理
+- 6-2. パッケージマネージャの概念
+
+---
 
 ### Phase II: 信頼できるコードを育てる技術
 
-| 章 | タイトル | 原稿 | 読了時間 |
-|----|---------|------|:------:|
-| 7 | Git入門 — コードのバージョン管理 | [07_git.md](chapters/07_git.md) | 1h00m |
-| 8 | コードの正しさを守るテスト技法 | [08_testing.md](chapters/08_testing.md) | 1h21m |
-| 9 | デバッグの技術 — tracebackから最小再現例まで | [09_debug.md](chapters/09_debug.md) | 1h27m |
-| 10 | ソフトウェア成果物の設計 — スクリプトからパッケージまで | [10_deliverables.md](chapters/10_deliverables.md) | 1h35m |
-| 11 | コマンドラインツールの設計と実装 | [11_cli.md](chapters/11_cli.md) | 1h36m |
+#### [§7 Git入門 — コードのバージョン管理](chapters/07_git.md)
+
+- 7-1. Gitの基礎
+- 7-2. GitHubの活用
+- 7-3. コミットの作法
+- 7-4. セマンティックバージョニング
+
+#### [§8 コードの正しさを守るテスト技法](chapters/08_testing.md)
+
+- 8-1. テスト駆動開発（TDD）
+- 8-2. テストの実践
+- 8-3. コード品質ツール
+- 8-4. CI/CD
+
+#### [§9 デバッグの技術 — tracebackから最小再現例まで](chapters/09_debug.md)
+
+- 9-1. デバッグの心構え
+- 9-2. デバッグツール
+- 9-3. よくあるバグのパターン
+
+#### [§10 ソフトウェア成果物の設計 — スクリプトからパッケージまで](chapters/10_deliverables.md)
+
+- 10-1. 成果物の形式の選択
+- 10-2. どのパターンを選ぶか
+- 10-3. ディレクトリ構成
+- 10-4. 設定管理
+- 10-5. エラーハンドリング
+- 10-6. 段階的な成長パス
+
+#### [§11 コマンドラインツールの設計と実装](chapters/11_cli.md)
+
+- 11-1. コマンドラインインターフェースの作法
+- 11-2. プログレス表示とUI
+- 11-3. ロギング
+
+---
 
 ### Phase III: データを扱うコードを書く
 
-| 章 | タイトル | 原稿 | 読了時間 |
-|----|---------|------|:------:|
-| 12 | データ処理の実践 — NumPy・pandas・polars | [12_data_processing.md](chapters/12_data_processing.md) | 1h11m |
-| 13 | 可視化の実践 — matplotlib・seaborn・plotly | [13_visualization.md](chapters/13_visualization.md) | 1h09m |
-| 14 | 解析パイプラインの自動化 — Snakemake・Nextflow | [14_workflow.md](chapters/14_workflow.md) | 1h14m |
+#### [§12 データ処理の実践 — NumPy・pandas・Polars](chapters/12_data_processing.md)
+
+- 12-1. NumPyによるベクトル化演算
+- 12-2. pandasとPolarsによるテーブルデータ処理
+- 12-3. ライブラリ関数の活用
+
+#### [§13 可視化の実践 — Matplotlib・Seaborn・Plotly](chapters/13_visualization.md)
+
+- 13-1. Python可視化ライブラリ
+- 13-2. 可視化の原則
+
+#### [§14 解析パイプラインの自動化 — Snakemake・Nextflow・CWL](chapters/14_workflow.md)
+
+- 14-1. なぜワークフロー言語が必要か
+- 14-2. ワークフロー言語
+- 14-3. ワークフローのベストプラクティス
+
+---
 
 ### Phase IV: ソフトウェア再現性と大規模計算
 
-| 章 | タイトル | 原稿 | 読了時間 |
-|----|---------|------|:------:|
-| 15 | コンテナによるソフトウェア環境の再現 — Docker・Apptainer | [15_container.md](chapters/15_container.md) | 1h54m |
-| 16 | スパコン・クラスタでの大規模計算 | [16_hpc.md](chapters/16_hpc.md) | 1h11m |
-| 17 | コードのパフォーマンス改善 — プロファイリングと高速化 | [17_performance.md](chapters/17_performance.md) | 1h56m |
+#### [§15 コンテナによるソフトウェア環境の再現 — Docker・Apptainer](chapters/15_container.md)
+
+- 15-1. なぜコンテナが必要か
+- 15-2. Docker
+- 15-3. Apptainer / Singularity
+- 15-4. 再現性のレベル
+- 15-5. 論文投稿時の再現性パッケージング
+- 15-6. 実験管理（ML/計算実験の追跡）
+
+#### [§16 スパコン・クラスタでの大規模計算](chapters/16_hpc.md)
+
+- 16-1. HPCの基本
+- 16-2. Slurm
+- 16-3. リモート接続とファイル転送
+- 16-4. データ管理・バックアップ・共有
+
+#### [§17 コードのパフォーマンス改善 — プロファイリングと高速化](chapters/17_performance.md)
+
+- 17-1. プロファイリング
+- 17-2. 高速化テクニック
+- 17-3. 大規模データの扱い
+
+---
 
 ### Phase V: 共有のためのコード整備
 
-| 章 | タイトル | 原稿 | 読了時間 |
-|----|---------|------|:------:|
-| 18 | コードのドキュメント化 | [18_documentation.md](chapters/18_documentation.md) | 1h06m |
-| 19 | 公共データベースとAPI — データ取得の実践 | [19_database_api.md](chapters/19_database_api.md) | 1h52m |
-| 20 | コードとデータのセキュリティ・倫理 | [20_security_ethics.md](chapters/20_security_ethics.md) | 1h08m |
-| 21 | 共同開発の実践 — レビュー・質問・OSS参加 | [21_collaboration.md](chapters/21_collaboration.md) | 1h33m |
+#### [§18 コードのドキュメント化](chapters/18_documentation.md)
 
-読了時間は本文250文字/分・コード100文字/分（全角換算、参考文献セクションを除く）で推定。はじめに〜§21の合計: **約30時間**。
+- 18-1. Markdownの習得
+- 18-2. プロジェクトドキュメント
+- 18-3. 研究ノート
 
-### 付録・その他
+#### [§19 公共データベースとAPI — データ取得の実践](chapters/19_database_api.md)
 
-| 章 | タイトル | 原稿 | 読了時間 |
-|----|---------|------|:------:|
-| 付録A | AIコーディングエージェントとの効果的な学習パターン | [appendix_a_learning_patterns.md](chapters/appendix_a_learning_patterns.md) | 11m |
-| 付録B | クイックリファレンス対照表 | [appendix_b_cli_reference.md](chapters/appendix_b_cli_reference.md) | 5m |
-| 付録C | 論文投稿前チェックリスト | [appendix_c_checklist.md](chapters/appendix_c_checklist.md) | 6m |
-| 付録D | AIコーディングエージェント頻出用語・フレーズ集 | [appendix_d_agent_vocabulary.md](chapters/appendix_d_agent_vocabulary.md) | 14m |
-| 用語集 | 用語集 | [glossary.md](chapters/glossary.md) | 1h04m |
-| 著者紹介 | 著者紹介 | [author.md](chapters/author.md) | 2m |
+- 19-0. データベースの基礎知識
+- 19-1. バイオインフォマティクスの主要データベース
+- 19-2. APIによるデータ取得
+- 19-3. データのダウンロードとローカル管理
+
+#### [§20 コードとデータのセキュリティ・倫理](chapters/20_security_ethics.md)
+
+- 20-1. セキュリティの基礎
+- 20-2. データの倫理
+
+#### [§21 共同開発の実践 — レビュー・質問・OSS参加](chapters/21_collaboration.md)
+
+- 21-1. 質問の技術
+- 21-2. コードレビューとOSSコミュニティへの参加
+- 21-3. 共同研究のコミュニケーション
+
+---
+
+### 付録
+
+- [付録A. AIコーディングエージェントとの効果的な学習パターン](chapters/appendix_a_learning_patterns.md) — A-1〜A-3
+- [付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表](chapters/appendix_b_cli_reference.md)
+- [付録C. 論文投稿前チェックリスト](chapters/appendix_c_checklist.md)
+- [付録D. AIコーディングエージェント頻出用語・フレーズ集](chapters/appendix_d_agent_vocabulary.md) — D-1〜D-4
+- [用語集](chapters/glossary.md)
+- [著者紹介](chapters/author.md)
+
+---
 
 ## ディレクトリ構成
 
 ```
 ai-biocode-kata/
 ├── CLAUDE.md              # 執筆規約（Claude Code CLI用）
-├── chapters/
-│   ├── hajimeni.md        # はじめに（番号なし）
-│   ├── roadmap.md         # 全体構成マスタードキュメント
-│   ├── 00_ai_agent.md     # §0: AIエージェントとの協働
-│   ├── ...                # §1〜§21
-│   ├── 21_collaboration.md
-│   ├── appendix_a〜d.md   # 付録A〜D
-│   ├── glossary.md        # 用語集
-│   └── author.md          # 著者紹介
+├── chapters/              # 各章のMarkdownファイル
 ├── references/            # BibTeXファイル（章ごと）
 ├── figures/               # 図表
 ├── scripts/               # 書籍内コードサンプル
 ├── tests/                 # サンプルコードのテスト
-└── build/                 # PDF/EPUB生成
+├── build/                 # PDF/EPUB生成（手順は build/README.md 参照）
+└── docs/                  # レビュー記録・統計
 ```
 
-- 全体構成の詳細は [roadmap.md](chapters/roadmap.md) を参照
-- [用語集](chapters/glossary.md)
-- [著者紹介](chapters/author.md)
+- [各章の文字数・読了時間](docs/chapter_stats.md)
+- [PDFビルド手順](build/README.md)
 - [執筆 TODO](TODO.md)
 
 ## ライセンス
