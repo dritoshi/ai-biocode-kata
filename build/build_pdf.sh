@@ -116,6 +116,7 @@ for chapter in "${CHAPTER_ORDER[@]}"; do
 done
 
 EXTRA_OPTS=(
+  --lua-filter="$BUILD_DIR/fix-crossref.lua"
   --toc --toc-depth=2
   -V titlepage=true
   -V titlepage-color=FFFFFF
