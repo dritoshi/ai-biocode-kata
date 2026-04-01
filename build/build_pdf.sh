@@ -46,6 +46,7 @@ PANDOC_OPTS=(
   --template="$BUILD_DIR/templates/eisvogel.latex"
   --lua-filter="$BUILD_DIR/emoji-filter.lua"
   --lua-filter="$BUILD_DIR/epigraph.lua"
+  --lua-filter="$BUILD_DIR/flushright.lua"
   --top-level-division=chapter
   -H "$BUILD_DIR/eisvogel-custom.tex"
   -V luatexjapresetoptions=haranoaji
