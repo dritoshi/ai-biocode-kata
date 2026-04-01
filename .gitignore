@@ -14,8 +14,9 @@ chapters/themes/
 themes/
 publication.json
 /custom.css
-package-lock.json
-build/package-lock.json
+# package-lock.json はビルド再現性のためgit追跡する
+# package-lock.json
+# build/package-lock.json
 
 # Python
 __pycache__/
