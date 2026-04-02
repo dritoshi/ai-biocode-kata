@@ -59,7 +59,7 @@ PANDOC_OPTS=(
   -V book=true
   --highlight-style=tango
   -V code-block-font-size="\small"
-  --resource-path="$CHAPTERS_DIR"
+  --resource-path="$CHAPTERS_DIR:$PROJECT_DIR/figures"
 )
 
 # pandoc → .tex → sed(figure[H]修正) → lualatex の2段階ビルド
@@ -79,7 +79,9 @@ build_pdf_via_tex() {
   tex_dir="$(dirname "$tex_file")"
   local tex_base
   tex_base="$(basename "$tex_file")"
-  (cd "$tex_dir" && lualatex -interaction=nonstopmode "$tex_base" > /dev/null 2>&1 && \
+  (cd "$tex_dir" && TEXINPUTS=".:$PROJECT_DIR/figures:$CHAPTERS_DIR:" \
+   lualatex -interaction=nonstopmode "$tex_base" > /dev/null 2>&1 && \
+   TEXINPUTS=".:$PROJECT_DIR/figures:$CHAPTERS_DIR:" \
    lualatex -interaction=nonstopmode "$tex_base" > /dev/null 2>&1) || return 1
 
   # Step 4: 中間ファイルを削除
@@ -120,17 +122,18 @@ EXTRA_OPTS=(
   --lua-filter="$BUILD_DIR/fix-crossref.lua"
   --toc --toc-depth=2
   -V titlepage=true
-  -V titlepage-color=FFFFFF
+  -V "titlepage-background=../figures/cover.jpeg"
   -V titlepage-text-color=333333
-  -V "title=AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法"
-  -V "subtitle=配列解析から機械学習まで、環境構築・テスト・設計・公開のベストプラクティス"
+  -V "title=AIエージェントを使いこなす はじめてのバイオインフォマティクス開発作法"
+  -V "subtitle=配列解析と機械学習を題材に身につける、情報技術・設計・テスト・公開の基本"
   -V "author=二階堂 愛"
   -V "date=$(date +%Y-%m-%d)"
-  -V "header-left=バイオインフォプログラミングの作法"
+  -V "header-left=バイオインフォマティクス開発作法"
   -V "header-right=\\leftmark"
   -V "footer-left= "
   -V "footer-center=\\thepage"
   -V "footer-right= "
+  -A "$BUILD_DIR/back-cover.tex"
 )
 
 if ! build_pdf_via_tex "${FULL_INPUTS[@]}" "$BUILD_DIR/ai-biocode-kata-full.pdf"; then
