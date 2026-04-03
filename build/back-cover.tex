@@ -1,6 +1,8 @@
 % build/back-cover.tex — 裏表紙を最終ページに挿入
-\newpage
+\clearpage
 \thispagestyle{empty}
+% 空白ページを挟まずに裏表紙を配置
+\ifodd\value{page}\else\mbox{}\clearpage\fi
 \begin{tikzpicture}[remember picture,overlay]
   \node[inner sep=0pt] at (current page.center) {%
     \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{../figures/back_cover.jpeg}%

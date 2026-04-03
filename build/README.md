@@ -103,6 +103,36 @@ npm install
 
 `@vivliostyle/cli` と `@vivliostyle/theme-techbook` がインストールされる。
 
+## 表紙・裏表紙
+
+### 表紙（独立生成）
+
+表紙はEisvogelのtitlepage機能ではなく、独立したLaTeXファイルで生成する（背景画像の全面配置がscrbook内で正しく動作しないため）。
+
+```bash
+# 表紙のみテストビルド（高速）
+bash build/build_cover_test.sh
+# → build/cover_test.pdf
+
+# 表紙の本番ビルド
+cd build && lualatex cover.tex
+# → build/cover.pdf
+```
+
+テキストの位置・サイズ調整は `build/cover.tex` を直接編集する。
+
+### 裏表紙
+
+裏表紙は `build/back-cover.tex` で定義し、本文PDFビルド時に `-A` オプションで最終ページに挿入される。
+
+### 最終版の結合（将来）
+
+```bash
+pdfunite build/cover.pdf build/ai-biocode-kata-full.pdf final.pdf
+```
+
+---
+
 ## 2つのPDFパイプラインの使い分け
 
 | | pandoc + LuaLaTeX | Vivliostyle |
