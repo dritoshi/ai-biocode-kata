@@ -121,11 +121,6 @@ done
 EXTRA_OPTS=(
   --lua-filter="$BUILD_DIR/fix-crossref.lua"
   --toc --toc-depth=2
-  -V titlepage=true
-  -V "titlepage-background=../figures/cover.jpeg"
-  -V titlepage-text-color=1E1E1E
-  -V "title-line1=AIエージェントを使いこなす"
-  -V "title-line2=はじめてのバイオインフォマティクス開発作法"
   -V "title=AIエージェントを使いこなす はじめてのバイオインフォマティクス開発作法"
   -V "subtitle=情報技術の基礎から環境構築・設計・テスト・公開まで"
   -V "author=二階堂愛"
