@@ -48,16 +48,27 @@
 
 #### 表紙テキスト仕様（最終）
 
-| 要素 | フォント | サイズ | 位置 | 色 | text width |
-|------|---------|-------|------|-----|-----------|
-| タイトル1行目 | Noto Serif CJK JP Black | 36pt/40pt | north -15% | #1E1E1E | 0.90 |
-| タイトル2行目 | Noto Serif CJK JP Black | 24pt/30pt | north -19.5% | #1E1E1E | 0.90 |
-| 副題 | Noto Sans CJK JP Bold | 16pt/22pt | north -24% | #3C3C3C | 0.85 |
-| 著者 | Noto Serif CJK JP Black | 24pt/30pt | north -34% | #1E1E1E | — |
+| 要素 | フォント | サイズ | 位置(eso-pic) | 色 | 字間(kanjiskip) |
+|------|---------|-------|-------------|-----|---------------|
+| タイトル1行目 | Noto Serif CJK JP Black | 34pt/38pt | 0.85\paperheight | #1E1E1E | +0.12em |
+| タイトル2行目 | Noto Serif CJK JP Black | 27pt/33pt | 0.812\paperheight | #1E1E1E | -0.08em |
+| 副題 | Noto Sans CJK JP Bold | 17pt/23pt | 0.76\paperheight | #8C7A5A | +0.05em |
+| 著者 | Noto Serif CJK JP Black | 16pt/22pt | 0.66\paperheight | #1E1E1E | +0.03em |
 
-背景画像: `figures/cover_v2.png`（`eso-pic`で全面配置）
+背景画像: `figures/cover_v2.png`（`eso-pic`の`\AddToShipoutPictureBG*`で全面配置）
 
-**重要な実装上の注意**: CJKフォントのウェイト指定には `\newjfontfamily`（和文用）と `\newfontfamily`（欧文用）の両方を定義し、使用箇所で両方のコマンドを呼ぶ必要がある。`\newfontfamily` だけでは日本語にウェイトが適用されない。
+テキスト配置方式: **eso-pic + `\put` + `\parbox`**（tikzノードでは`\ltjsetparameter{kanjiskip=...}`が効かないため）
+
+**重要な実装上の注意**:
+1. CJKフォントのウェイト指定には `\newjfontfamily`（和文用）と `\newfontfamily`（欧文用）の両方を定義し、使用箇所で両方のコマンドを呼ぶ必要がある。`\newfontfamily` だけでは日本語にウェイトが適用されない
+2. `\ltjsetparameter{kanjiskip=...}` はtikzの`\node`内では効かない。`\parbox`内であれば正しく動作する
+3. タイトル1行目（12文字）と2行目（19文字）の幅を揃えるため、1行目の字間を広げ（+0.12em）、2行目の字間を詰める（-0.08em）双方向調整を行った
+
+#### 表紙デザインの変遷（補足）
+
+5. **字間調整**: tikzノードでkanjiskipが効かないことが判明 → eso-pic + parbox方式に全面書き換え
+6. **タイトル幅の統一**: DTP専門家のレビューにより2行目が副題に見える問題を指摘 → フォントサイズ拡大+字間の双方向調整で対応
+7. **副題の色**: #3C3C3C → #8C7A5A（背景画像の茶碗・茶筅の色調と調和する暖色系に）
 
 #### 関連ファイル
 
