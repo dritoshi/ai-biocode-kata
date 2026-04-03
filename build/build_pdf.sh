@@ -118,9 +118,14 @@ for chapter in "${CHAPTER_ORDER[@]}"; do
   fi
 done
 
+# 表紙PDFを先に生成
+echo "  表紙PDF生成..."
+(cd "$BUILD_DIR" && lualatex -interaction=nonstopmode cover.tex > /dev/null 2>&1) || echo "  ⚠ 表紙PDF生成でエラー"
+
 EXTRA_OPTS=(
   --lua-filter="$BUILD_DIR/fix-crossref.lua"
   --toc --toc-depth=2
+  -B "$BUILD_DIR/include-cover.tex"
   -V "title=AIエージェントを使いこなす はじめてのバイオインフォマティクス開発作法"
   -V "subtitle=情報技術の基礎から環境構築・設計・テスト・公開まで"
   -V "author=二階堂愛"

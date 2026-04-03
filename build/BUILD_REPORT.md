@@ -18,6 +18,9 @@
 | F3-6 | `microtype`の`\textls`でCJK文字が消える | `microtype`パッケージのトラッキング機能が`luatexja`のCJK描画と干渉し、テキストが一切レンダリングされなくなった | `microtype`を使用しない方針に変更。字間調整は将来必要に応じて`luatexja`の`kanjiskip`で対応 |
 | F3-7 | フォントをBlackに変更しても太くならない | `\newfontfamily`は欧文フォントのみを制御し、CJK文字には適用されない。`Noto Serif CJK JP Black`を指定しても日本語部分はluatexja-presetのHaranoAji Regularのまま描画されていた | `\newjfontfamily`（和文用）と`\newfontfamily`（欧文用）を両方定義し、tikzノード内で両方のコマンドを呼ぶことで和文・欧文ともにBlackウェイトを適用 |
 | F3-8 | `Noto Serif CJK JP Bold`指定でテキストが消える | `fc-list`上のフォント名が`Noto Serif CJK JP`（style=Bold）であり、`Noto Serif CJK JP Bold`というファミリー名は存在しない | `BoldFont`オプションで明示指定、またはBlack（ファミリー名が`Noto Serif CJK JP Black`として独立）を使用 |
+| F3-9 | `\ltjsetparameter{kanjiskip=...}`がtikzノード内で効かない | tikzの`\node`はテキストをhboxで組むため、luatexjaのパラグラフレベルパラメータ（kanjiskip）が適用されない。テスト用texで通常テキストとtikzノードを比較して確認 | テキスト配置をtikzノードから**eso-pic + `\put` + `\parbox`** 方式に全面書き換え。`\parbox`内であればkanjiskipが正しく動作する |
+| F3-10 | `pdfunite`で表紙と本文を結合するとリンクが壊れる | `pdfunite`はPDF内部リンク（ハイパーリンク・ブックマーク）のページ番号を更新しない。表紙1ページ分のオフセットでリンク先がずれる | `pdfunite`を廃止し、LaTeXの`pdfpages`パッケージの`\includepdf`で`cover.pdf`を本文PDFの先頭に取り込む方式に変更。1つのlualatex実行内でページ番号が確定するためリンクが壊れない |
+| F3-11 | 本文PDFに古い表紙（Eisvogel titlepage）が残る | `build_pdf.sh`に`-V titlepage=true`と`titlepage-background`の設定が残っていた | 表紙は`cover.tex`で独立生成する方式に移行済みのため、`build_pdf.sh`から`titlepage`関連の3変数を削除 |
 
 #### 不採用・削除した対処
 
@@ -29,6 +32,9 @@
 | `\usepackage[letterspace=...]{microtype}` による字間調整 | CJKフォントとの相性問題でテキストが消失。`luatexja`環境ではmicrotypeのトラッキングは使えない |
 | `\newfontfamily` のみでBlackウェイト指定 | 欧文フォントしか制御できず、日本語は細いまま。`\newjfontfamily`が必要 |
 | ヒラギノ明朝 ProN W6 の使用 | macOSのライセンスに紐づいており、商用PDFへの埋め込み配布がグレー〜NG |
+| tikzノードによるテキスト配置 | kanjiskip（字間調整）が効かない。hbox組版のため |
+| `pdfunite` による表紙+本文PDF結合 | 内部リンクのページ番号がずれて壊れる。`pdfpages`の`\includepdf`で置き換え |
+| Eisvogelの`titlepage=true`による表紙生成 | scrbook内部構造との干渉で背景画像が正しく描画されない。独立LaTeX（cover.tex）で生成する方式に移行 |
 
 #### 表紙デザインの変遷
 
@@ -40,11 +46,13 @@
 #### 最終的なアーキテクチャ
 
 ```
-表紙:   build/cover.tex    → lualatex → cover.pdf（独立生成）
-本文:   pandoc → .tex → sed → lualatex → ai-biocode-kata-full.pdf（Eisvogel）
-裏表紙: build/back-cover.tex（-A オプションで本文PDFに挿入）
-最終版: pdfunite cover.pdf ai-biocode-kata-full.pdf → 最終PDF（将来対応）
+表紙:   build/cover.tex → lualatex → cover.pdf（独立生成）
+統合:   pandoc → .tex（cover.pdfを\includepdfで先頭に取り込み）→ sed → lualatex
+        → ai-biocode-kata-full.pdf（表紙+目次+本文+裏表紙、リンク完全動作）
+裏表紙: build/back-cover.tex（-A オプションで本文texの末尾に挿入）
 ```
+
+**pdfuniteは使用しない**（リンクが壊れるため）。表紙は`pdfpages`の`\includepdf`で本文PDFに取り込む。
 
 #### 表紙テキスト仕様（最終）
 
@@ -68,13 +76,16 @@
 
 5. **字間調整**: tikzノードでkanjiskipが効かないことが判明 → eso-pic + parbox方式に全面書き換え
 6. **タイトル幅の統一**: DTP専門家のレビューにより2行目が副題に見える問題を指摘 → フォントサイズ拡大+字間の双方向調整で対応
-7. **副題の色**: #3C3C3C → #8C7A5A（背景画像の茶碗・茶筅の色調と調和する暖色系に）
+7. **副題の色**: #3C3C3C → #3A342A → #8C7A5A（背景画像の茶碗・茶筅の色調と調和する暖色系に）
+8. **PDF結合方式の変更**: pdfuniteでリンク破損 → `pdfpages`の`\includepdf`で表紙を本文PDFに統合、リンク完全動作
+9. **Eisvogel titlepage廃止**: `build_pdf.sh`から`-V titlepage=true`を削除、表紙は完全にcover.texに移行
 
 #### 関連ファイル
 
 | ファイル | 役割 |
 |--------|------|
-| `build/cover.tex` | 表紙生成用の独立LaTeX |
+| `build/cover.tex` | 表紙生成用の独立LaTeX（eso-pic + parboxでテキスト配置）|
+| `build/include-cover.tex` | `\includepdf`で表紙PDFを本文に取り込む（pandocの`-B`オプションで使用）|
 | `build/back-cover.tex` | 裏表紙（本文PDFの最終ページに挿入） |
 | `build/flushright.lua` | `<div align="right">` → `\begin{flushright}` 変換 |
 | `build/build_cover_test.sh` | 表紙のみの高速テストビルド |

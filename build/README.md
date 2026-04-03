@@ -70,7 +70,7 @@ Markdown → pandoc (Lua filters) → .tex → sed (figure[H]) → lualatex (2-p
 
 | 設定 | 値 |
 |------|------|
-| タイトルページ | あり（白背景） |
+| 表紙 | `cover.pdf` を `\includepdf` で先頭に取り込み（`pdfpages`パッケージ）|
 | 目次 | あり（depth=2） |
 | ヘッダー左 | 書名（短縮版） |
 | ヘッダー右 | 章タイトル（`\leftmark`） |
@@ -125,11 +125,17 @@ cd build && lualatex cover.tex
 
 裏表紙は `build/back-cover.tex` で定義し、本文PDFビルド時に `-A` オプションで最終ページに挿入される。
 
-### 最終版の結合（将来）
+### 表紙+本文の統合
+
+`build_pdf.sh` の統合PDFビルドで、表紙PDFは `pdfpages` パッケージの `\includepdf` により本文PDFの先頭に自動的に取り込まれる。
 
 ```bash
-pdfunite build/cover.pdf build/ai-biocode-kata-full.pdf final.pdf
+# 一括ビルド（表紙生成→本文ビルド→統合を自動実行）
+bash build/build_pdf.sh
+# → build/ai-biocode-kata-full.pdf（表紙+目次+本文+裏表紙、リンク完全動作）
 ```
+
+**注意**: `pdfunite` による外部結合はPDF内部リンクが壊れるため使用しない。`\includepdf` によるLaTeX内部での結合がリンクを維持する唯一の方法である。
 
 ---
 
