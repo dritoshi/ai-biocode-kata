@@ -4,45 +4,48 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{fontspec}
-\usepackage[haranoaji]{luatexja-preset}
+\usepackage{luatexja-fontspec}
 \usepackage{eso-pic}
 
-% 表紙用フォント
-\newfontfamily\covertitlefont{Noto Serif CJK JP SemiBold}
-\newfontfamily\coversubtitlefont{Noto Sans CJK JP}
-\newfontfamily\coverauthorfont{Noto Serif CJK JP}
+% 表紙用フォント（和文は \newjfontfamily で指定しないとBlackが適用されない）
+\newjfontfamily\covertitlefont{Noto Serif CJK JP Black}
+\newjfontfamily\coversubtitlefont{Noto Sans CJK JP Bold}
+\newjfontfamily\coverauthorfont{Noto Serif CJK JP Black}
+\newfontfamily\covertitlefonten{Noto Serif CJK JP Black}
+\newfontfamily\coversubtitlefonten{Noto Sans CJK JP Bold}
+\newfontfamily\coverauthorfonten{Noto Serif CJK JP Black}
 
 \pagestyle{empty}
 
 \begin{document}
-% 背景画像（eso-picで全面配置 — tikzに依存しない）
+% 背景画像（eso-picで全面配置）
 \AddToShipoutPictureBG*{%
   \AtPageLowerLeft{%
-    \includegraphics[width=\paperwidth,height=\paperheight]{../figures/cover.jpeg}%
+    \includegraphics[width=\paperwidth,height=\paperheight]{../figures/cover_v2.png}%
   }%
 }
 
 % テキストをtikz overlayで配置
 \begin{tikzpicture}[remember picture,overlay]
-  % タイトル1行目
-  \node[text width=0.78\paperwidth, align=center] at
-    ([yshift=-0.14\paperheight]current page.north) {%
-      \color[HTML]{1E1E1E}{\fontsize{36}{40}\selectfont\covertitlefont AIエージェントを使いこなす}%
+  % タイトル1行目: 36pt, north -15%, 2行目と同じ幅に収める
+  \node[text width=0.90\paperwidth, align=center] at
+    ([yshift=-0.15\paperheight]current page.north) {%
+      \color[HTML]{1E1E1E}{\fontsize{36}{40}\selectfont\covertitlefonten\covertitlefont AIエージェントを使いこなす}%
     };
-  % タイトル2行目
+  % タイトル2行目: 24pt, north -19.5%
+  \node[text width=0.90\paperwidth, align=center] at
+    ([yshift=-0.195\paperheight]current page.north) {%
+      \color[HTML]{1E1E1E}{\fontsize{24}{30}\selectfont\covertitlefonten\covertitlefont はじめてのバイオインフォマティクス開発作法}%
+    };
+  % 副題: 16pt, north -25.5%, 主題に近づけてかたまり感を出す
   \node[text width=0.85\paperwidth, align=center] at
-    ([yshift=-0.20\paperheight]current page.north) {%
-      \color[HTML]{1E1E1E}{\fontsize{22}{28}\selectfont\covertitlefont はじめてのバイオインフォマティクス開発作法}%
+    ([yshift=-0.24\paperheight]current page.north) {%
+      \color[HTML]{3C3C3C}{\fontsize{16}{22}\selectfont\coversubtitlefonten\coversubtitlefont 情報技術の基礎から環境構築・設計・テスト・公開まで}%
     };
-  % 副題
-  \node[text width=0.85\paperwidth, align=center] at
-    ([yshift=-0.26\paperheight]current page.north) {%
-      \color[HTML]{3C3C3C}{\fontsize{12.5}{18}\selectfont\coversubtitlefont 情報技術の基礎から環境構築・設計・テスト・公開まで}%
-    };
-  % 著者
+  % 著者: 24pt, north -34%
   \node[align=center] at
-    ([yshift=0.10\paperheight]current page.south) {%
-      \color[HTML]{1E1E1E}{\fontsize{16}{22}\selectfont\coverauthorfont 二階堂愛}%
+    ([yshift=-0.34\paperheight]current page.north) {%
+      \color[HTML]{1E1E1E}{\fontsize{24}{30}\selectfont\coverauthorfonten\coverauthorfont 二階堂愛}%
     };
 \end{tikzpicture}
 \end{document}

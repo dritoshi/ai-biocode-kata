@@ -21,7 +21,7 @@ printf '\\phantom{x}\n' | pandoc -o "$BUILD_DIR/cover_test.tex" \
   --highlight-style=tango \
   -V code-block-font-size="\small" \
   -V titlepage=true \
-  -V "titlepage-background=../figures/cover.jpeg" \
+  -V "titlepage-background=../figures/cover_v2.png" \
   -V titlepage-text-color=1E1E1E \
   -V "title-line1=AIエージェントを使いこなす" \
   -V "title-line2=はじめてのバイオインフォマティクス開発作法" \

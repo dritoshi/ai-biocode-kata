@@ -11,18 +11,31 @@
 | # | 問題 | 原因 | 対処 |
 |---|------|------|------|
 | F3-1 | 表紙の背景画像が上端数mmしか表示されない | Eisvogelの`titlepage-background`のtikz `\node` による全面配置が、`scrbook`クラスの内部ページ構造と干渉して正しく描画されなかった | 表紙を独立LaTeXファイル(`build/cover.tex`)で生成する方式に変更。背景画像は`eso-pic`パッケージの`\AddToShipoutPictureBG*`で配置し、テキストはtikz overlayで重ねる |
-| F3-2 | タイトル2行目が改行される | `text width=0.78\paperwidth` + `fontsize 26pt` で19文字が収まらない | フォントサイズを22ptに縮小、text widthを0.85に拡大 |
+| F3-2 | タイトル2行目が改行される | `text width` + `fontsize` の組み合わせでCJK文字が収まらない | フォントサイズの縮小とtext widthの拡大を繰り返し調整。最終的にtext widthを0.90に統一し、フォントサイズで幅を制御 |
 | F3-3 | 裏表紙の前に空白ページがある | `scrbook`のbook modeでは章が奇数ページから始まるため、本文最終ページが奇数なら偶数ページが自動挿入される | 書籍組版として正しい動作。修正不要 |
 | F3-4 | 署名ブロックが左寄せのプレーンテキスト | Markdownに右寄せの標準構文がない | `<div align="right">` + `flushright.lua`（Div要素のalign=rightを`\begin{flushright}`に変換）|
 | F3-5 | テストビルドで`\end{document}`の`\e`が消える | bashの`echo '\end{document}'`で`\e`がエスケープシーケンスとして解釈された | `printf`に変更。最終的にはtex切り取り方式をやめ、完全なドキュメントとしてビルドする方式に変更 |
+| F3-6 | `microtype`の`\textls`でCJK文字が消える | `microtype`パッケージのトラッキング機能が`luatexja`のCJK描画と干渉し、テキストが一切レンダリングされなくなった | `microtype`を使用しない方針に変更。字間調整は将来必要に応じて`luatexja`の`kanjiskip`で対応 |
+| F3-7 | フォントをBlackに変更しても太くならない | `\newfontfamily`は欧文フォントのみを制御し、CJK文字には適用されない。`Noto Serif CJK JP Black`を指定しても日本語部分はluatexja-presetのHaranoAji Regularのまま描画されていた | `\newjfontfamily`（和文用）と`\newfontfamily`（欧文用）を両方定義し、tikzノード内で両方のコマンドを呼ぶことで和文・欧文ともにBlackウェイトを適用 |
+| F3-8 | `Noto Serif CJK JP Bold`指定でテキストが消える | `fc-list`上のフォント名が`Noto Serif CJK JP`（style=Bold）であり、`Noto Serif CJK JP Bold`というファミリー名は存在しない | `BoldFont`オプションで明示指定、またはBlack（ファミリー名が`Noto Serif CJK JP Black`として独立）を使用 |
 
 #### 不採用・削除した対処
 
 | 対処 | 理由 |
 |------|------|
-| Eisvogelの`titlepage-background`変数による背景画像配置 | scrbook + tikz `\node[overlay]` の組み合わせで画像が正しく全面描画されない。原因は`\newgeometry`とscrbook内部のヘッダー/フッター領域の干渉と推定 |
+| Eisvogelの`titlepage-background`変数による背景画像配置 | scrbook + tikz `\node[overlay]` の組み合わせで画像が正しく全面描画されない。`\newgeometry`とscrbook内部のヘッダー/フッター領域の干渉と推定 |
 | `\newgeometry{top=0pt...}` でマージンをゼロに | scrbookのページ構造が壊れ、さらに状況が悪化した |
 | テストビルドでtitlepageのみ切り出し（sed） | `\end{document}` のエスケープ問題、lualatexの2パス処理でのレイアウト不整合が発生 |
+| `\usepackage[letterspace=...]{microtype}` による字間調整 | CJKフォントとの相性問題でテキストが消失。`luatexja`環境ではmicrotypeのトラッキングは使えない |
+| `\newfontfamily` のみでBlackウェイト指定 | 欧文フォントしか制御できず、日本語は細いまま。`\newjfontfamily`が必要 |
+| ヒラギノ明朝 ProN W6 の使用 | macOSのライセンスに紐づいており、商用PDFへの埋め込み配布がグレー〜NG |
+
+#### 表紙デザインの変遷
+
+1. **v1（cover.jpeg）**: Eisvogelの`titlepage-background`で全面背景 → scrbook干渉で失敗 → 独立LaTeX方式に変更
+2. **v2（cover_v2.png）**: 背景画像を差し替え、テキスト位置・サイズを全面調整
+3. **フォント太さの調整**: SemiBold → Bold（テキスト消失）→ Black（`\newjfontfamily`で解決）
+4. **副題ウェイト分離**: タイトルBlack + 副題Boldでメリハリを付ける
 
 #### 最終的なアーキテクチャ
 
@@ -33,18 +46,18 @@
 最終版: pdfunite cover.pdf ai-biocode-kata-full.pdf → 最終PDF（将来対応）
 ```
 
-現時点では表紙は `cover.pdf` として独立生成。本文PDFへの結合は今後の対応。
-
-#### 表紙テキスト仕様
+#### 表紙テキスト仕様（最終）
 
 | 要素 | フォント | サイズ | 位置 | 色 | text width |
 |------|---------|-------|------|-----|-----------|
-| タイトル1行目 | Noto Serif CJK JP SemiBold | 36pt/40pt | north -14% | #1E1E1E | 0.78 |
-| タイトル2行目 | Noto Serif CJK JP SemiBold | 22pt/28pt | north -20% | #1E1E1E | 0.85 |
-| 副題 | Noto Sans CJK JP | 12.5pt/18pt | north -26% | #3C3C3C | 0.85 |
-| 著者 | Noto Serif CJK JP | 16pt/22pt | south +10% | #1E1E1E | — |
+| タイトル1行目 | Noto Serif CJK JP Black | 36pt/40pt | north -15% | #1E1E1E | 0.90 |
+| タイトル2行目 | Noto Serif CJK JP Black | 24pt/30pt | north -19.5% | #1E1E1E | 0.90 |
+| 副題 | Noto Sans CJK JP Bold | 16pt/22pt | north -24% | #3C3C3C | 0.85 |
+| 著者 | Noto Serif CJK JP Black | 24pt/30pt | north -34% | #1E1E1E | — |
 
-背景画像: `figures/cover.jpeg`（`eso-pic`で全面配置）
+背景画像: `figures/cover_v2.png`（`eso-pic`で全面配置）
+
+**重要な実装上の注意**: CJKフォントのウェイト指定には `\newjfontfamily`（和文用）と `\newfontfamily`（欧文用）の両方を定義し、使用箇所で両方のコマンドを呼ぶ必要がある。`\newfontfamily` だけでは日本語にウェイトが適用されない。
 
 #### 関連ファイル
 
