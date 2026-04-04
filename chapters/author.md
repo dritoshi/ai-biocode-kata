@@ -1,6 +1,6 @@
 # 著者紹介
 
-## 二階堂 愛（にかいどう いとし）
+## 二階堂 愛 （にかいどう いとし）
 
 東京科学大学 総合研究院 難治疾患研究所 教授。理化学研究所 TRIP事業本部 科学研究基盤モデル開発プログラム（AGIS）チームディレクター。博士（理学）。
 
@@ -12,8 +12,10 @@
 
 研究室内の実験系研究者がプログラミングの壁に直面する姿を長年見てきた経験が、本書の執筆動機となっている。
 
+座右の銘は「だったらいいな」で終わらせない。
+
 - researchmap: https://researchmap.jp/dritoshi
 - ORCID: https://orcid.org/0000-0002-7261-2570
 - 研究室: https://bit.riken.jp/ / https://www.nikaidolab.org/
 - X: https://x.com/dritoshi / https://x.com/dritoshien
-- dritoshi at gmail dot com
+- E-mail: dritoshi at gmail dot com
