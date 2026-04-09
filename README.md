@@ -13,6 +13,7 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 
 各章の文字数・読了時間は [docs/chapter_stats.md](docs/chapter_stats.md) を参照（本文合計 約30万文字、読了 約30時間）。
 
+注:引用に誤りが残っている可能性があります。ご指摘頂けると助かります。
 ---
 
 ## 目次
