@@ -613,6 +613,50 @@ AIコーディングエージェントの性能を調整するには、「どの
 - API利用は従量課金であり、高精度モデル×高推論深度では5〜10倍のコストがかかる[7](https://docs.anthropic.com/en/docs/about-claude/pricing)
 - 「すべてに最高性能を使う」のではなく、タスクに応じて使い分ける
 
+### ベンチマークで見るモデルの性能差
+
+「Opusが最高精度」「Haikuが軽量」という定性的な説明だけでは、読者にとってモデル選択の判断は難しい。ここでは、コーディング能力を測る代表的なベンチマークを紹介し、モデル間の性能差を具体的なスコアで示す。
+
+| ベンチマーク | 内容 | 規模 |
+|------------|------|------|
+| SWE-bench Verified[14](https://arxiv.org/abs/2310.06770) | GitHubの実Issue修正（パッチ生成） | 500問 |
+| SWE-bench Pro | 多言語・多ファイルのより困難なIssue修正 | 1,865問 |
+| LiveCodeBench[15](https://arxiv.org/abs/2403.07974) | 競技プログラミングの新問題（データ汚染フリー） | 1,055問 |
+| Terminal-Bench 2.0[16](https://arxiv.org/abs/2601.11868) | ターミナルでの実作業（環境構築、コンパイル等） | 89問 |
+
+以下は、SWE-bench Verifiedにおけるモデル階層ごとのスコアとAPI従量課金の価格である（2026年3月時点）。
+
+| モデル階層 | SWE-bench Verified | API価格(入力 / 出力, $/MTok) |
+|-----------|-------------------|--------------------------|
+| Opus 4.6（最高精度） | 80.8% | $5 / $25 |
+| Sonnet 4.6（バランス） | 79.6% | $3 / $15 |
+| Haiku 4.5（軽量） | 73.3% | $1 / $5 |
+
+Sonnet 4.6はOpus 4.6とわずか1.2ポイント差でありながら、コストは約60%低い。Haiku 4.5でもSonnet 4.5(77.2%)と約4ポイント差に収まり、価格は約1/3である[7](https://docs.anthropic.com/en/docs/about-claude/pricing)。サブスクリプション契約であればこのAPI価格差を直接意識する必要はないが、モデル間の性能差の目安として参考になる。
+
+ベンチマーク間で順位が入れ替わることにも注意が必要である。Terminal-Bench 2.0ではGPT-5.3-Codexが首位(77.3%)、LiveCodeBenchではGemini 3 Proが首位(91.7%)と、タスクの性質によって得意なモデルが異なる。「あらゆるタスクで最強のモデル」は存在しない。ベンチマークのスコアは急速に変動するため、最新の結果は[SWE-bench](https://www.swebench.com/)、[LiveCodeBench](https://livecodebench.github.io/leaderboard.html)、[Epoch AI](https://epoch.ai/benchmarks/)等のリーダーボードで確認できる。
+
+> 🧬 **コラム: バイオインフォマティクスコード生成の壁 — BioCoderベンチマーク**
+>
+> 汎用ベンチマーク(HumanEval等)ではフロンティアモデルが90%を超えるスコアを達成している。しかし、バイオインフォマティクスに特化したBioCoderベンチマーク[19](https://pubmed.ncbi.nlm.nih.gov/38940140/)では、GPT-4でも正解率は約60%にとどまる。0-basedと1-basedの座標系の違い、FASTA/BEDフォーマットの慣習、ドメイン固有のライブラリ依存関係など、汎用ベンチマークでは測れない専門知識が要求されるためである。汎用ベンチマークのスコアだけでモデルを選ぶのではなく、生命科学ドメインのコードでは[§0-4 エージェントにレビューさせる](./00_ai_agent.md#0-4-エージェントにレビューさせる)で学ぶレビューを欠かさないようにしたい。
+
+### エージェントの性能はモデルだけで決まらない
+
+コーディングエージェントの性能を最も大きく左右するのは、意外にも、モデルの選択よりも**エージェントのアーキテクチャ**（スキャフォールド）である[17](https://arxiv.org/abs/2604.03515)。
+
+同一のモデルでも、エージェントの実装が異なると、SWE-benchのスコアが42%から78%まで変動する——36ポイントもの差が生じる。一方、フロンティアモデル6種を同一のエージェントで比較した場合、スコアの差はわずか1.3ポイント以内に収まる[17](https://arxiv.org/abs/2604.03515)。エージェントがどのようにコードを検索し、コンテキストを管理し、エラーから回復するかが、モデルの能力差以上に結果を左右するのである。
+
+この事実は読者にとって2つの意味を持つ。
+
+1. **ツール選択を過度に心配する必要はない**。Claude Code CLIとCodex CLIのどちらを使っても、本書で学ぶ概念（Plan→Execute→Review、テスト駆動開発、コードレビュー）は同様に適用できる
+2. **高額なモデルを使えば必ず良い結果が出るわけではない**。適切な指示の出し方（[§0-2](./00_ai_agent.md#0-2-plan--execute--review-ワークフロー)）やプロジェクト設定（[§0-3](./00_ai_agent.md#0-3-プロジェクト設定ファイルclaudemd--agentsmd)）が、モデルのアップグレードと同等以上の効果をもたらしうる
+
+### 本書の再現性について
+
+LLMの出力は本質的に非決定的である。同一の指示を同一のモデルに与えても、毎回異なるコードが生成される。Ouyang et al.(2025)の研究によれば、同じコード生成タスクを5回実行した場合、75.76%のタスクでテスト結果が毎回異なった[18](https://dl.acm.org/doi/10.1145/3697010)。temperature=0に設定しても、浮動小数点演算の非結合性やバッチサイズの変動により、完全な再現は保証されない[18](https://dl.acm.org/doi/10.1145/3697010)。さらに、モデルのバージョン更新によっても挙動が変わるため、本書の執筆時点と読者がエージェントを使う時点で、生成されるコードは異なりうる。
+
+このため、本書の演習問題は特定のモデル出力に依存しない設計としている。「エージェントが生成したコードを評価・レビューする」「テストで正しさを検証する」という形式であり、生成されるコードが毎回異なっても、読者が身につけるべき**判断力と原則**は変わらない。[§0-2 Plan → Execute → Review ワークフロー](./00_ai_agent.md#0-2-plan--execute--review-ワークフロー)のレビュー習慣と、[§8 コードの正しさを守るテスト技法](./08_testing.md)のテスト技法は、モデルやツールが何であれ有効である。
+
 > 🤖 **コラム: 機械学習タスクでのモデル選択**
 >
 > 機械学習パイプラインの開発では、モデル選択の使い分けが特に重要になる。
@@ -809,3 +853,9 @@ AIコーディングエージェントはローカル環境でファイルの読
 - [11](https://arxiv.org/abs/2310.13548) Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., et al. "Towards Understanding Sycophancy in Language Models". *ICLR 2024*. https://arxiv.org/abs/2310.13548
 - [12](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking) Anthropic. "Building with extended thinking". https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking (参照日: 2026-03-17)
 - [13](https://arxiv.org/abs/2302.06590) Peng, S., Kalliamvakou, E., Cihon, P., Demirer, M. "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot". *arXiv preprint*, 2023. https://arxiv.org/abs/2302.06590
+- [14](https://arxiv.org/abs/2310.06770) Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., Narasimhan, K. "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?" *ICLR 2024*. https://arxiv.org/abs/2310.06770
+- [15](https://arxiv.org/abs/2403.07974) Jain, N., Han, K., Gu, A., Li, W., Yan, F., Zhang, T., Wang, S., Solar-Lezama, A., Sen, K., Stoica, I. "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code". *arXiv preprint*, 2024. https://arxiv.org/abs/2403.07974
+- [16](https://arxiv.org/abs/2601.11868) Wijk, D., Phan, L., Berglund, L., et al. "Terminal-Bench: Benchmarking Agents on Hard, Realistic Tasks in Command Line Interfaces". *ICLR 2026*. https://arxiv.org/abs/2601.11868
+- [17](https://arxiv.org/abs/2604.03515) "Inside the Scaffold: A Source-Code Taxonomy of Coding Agent Architectures". *arXiv preprint*, 2026. https://arxiv.org/abs/2604.03515
+- [18](https://dl.acm.org/doi/10.1145/3697010) Ouyang, S., Zhang, J. M., Harman, M., Wang, M. "An Empirical Study of the Non-Determinism of ChatGPT in Code Generation". *ACM Transactions on Software Engineering and Methodology*, 2025. https://dl.acm.org/doi/10.1145/3697010
+- [19](https://pubmed.ncbi.nlm.nih.gov/38940140/) Tang, X., Jiang, B., Zhuo, Y., Cheng, Y., Phung, D., Gerstein, M. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(4), 2024. https://pubmed.ncbi.nlm.nih.gov/38940140/
