@@ -796,7 +796,7 @@ AIコーディングエージェントはローカル環境でファイルの読
 - [1](https://docs.anthropic.com/en/docs/claude-code) Anthropic. "Claude Code documentation". https://docs.anthropic.com/en/docs/claude-code (参照日: 2026-03-17)
 - [2](https://github.com/openai/codex) OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-17)
 - [3](https://www.anthropic.com/engineering/claude-code-best-practices) Anthropic Engineering. "Claude Code: Best practices for agentic coding". https://www.anthropic.com/engineering/claude-code-best-practices (参照日: 2026-03-17)
-- [4](https://arxiv.org/abs/2401.05566) Yang, J., Jimenez, C. E., Wettig, A., Lieret, K., Yao, S., Narasimhan, K., Press, O. "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering". *arXiv preprint*, 2024. https://arxiv.org/abs/2401.05566
+- [4](https://arxiv.org/abs/2405.15793) Yang, J., Jimenez, C. E., Wettig, A., Lieret, K., Yao, S., Narasimhan, K., Press, O. "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering". *arXiv preprint*, 2024. https://arxiv.org/abs/2405.15793
 - [5](https://doi.org/10.1162/tacl_a_00638) Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. "Lost in the Middle: How Language Models Use Long Contexts". *Transactions of the Association for Computational Linguistics*, 12, 157–173, 2024. https://doi.org/10.1162/tacl_a_00638
 - [6](https://docs.anthropic.com/en/docs/about-claude/models) Anthropic. "Models overview". https://docs.anthropic.com/en/docs/about-claude/models (参照日: 2026-03-17)
 - [7](https://docs.anthropic.com/en/docs/about-claude/pricing) Anthropic. "Pricing". https://docs.anthropic.com/en/docs/about-claude/pricing (参照日: 2026-03-17)
