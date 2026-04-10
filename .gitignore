@@ -3,6 +3,7 @@ build/*.pdf
 build/*.epub
 build/*.html
 *.pdf
+*.epub
 
 # LaTeX intermediate files
 build/*.aux

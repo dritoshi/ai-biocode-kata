@@ -11,19 +11,22 @@
 | JetBrains Mono NL | 手動インストール | https://www.jetbrains.com/lp/mono/ |
 | Node.js | 18+ | Vivliostyle用 |
 | epigraph.sty | TeX Live同梱 | なければ `tlmgr install epigraph` |
+| epubcheck | 5.3+ | `brew install epubcheck`（EPUB検証用、Java依存） |
 
 ## ファイル構成
 
 ```
 build/
-├── build_pdf.sh              # メインビルドスクリプト
+├── build_pdf.sh              # PDF メインビルドスクリプト
+├── build_epub.sh             # EPUB メインビルドスクリプト（KDP向け）
 ├── templates/
 │   └── eisvogel.latex         # Eisvogel 3.4.0（blockquoteスタイルをパッチ済み）
 ├── eisvogel-custom.tex        # epigraphパッケージ設定、raggedbottom、tightlist
-├── emoji-filter.lua           # 絵文字→テキスト変換フィルター
-├── epigraph.lua               # エピグラフ（章頭引用句）変換フィルター
-├── fix-crossref.lua           # 章間リンクを内部リンクに変換（統合PDF用）
+├── emoji-filter.lua           # 絵文字→テキスト変換フィルター（PDF専用）
+├── epigraph.lua               # エピグラフ（章頭引用句）変換フィルター（PDF/EPUB両対応）
+├── fix-crossref.lua           # 章間リンクを内部リンクに変換（統合PDF/EPUB用、形式別マッピング）
 ├── custom.css                 # Vivliostyle用CSSカスタマイズ
+├── epub.css                   # EPUB用CSSスタイル（KDP互換）
 ├── BUILD_REPORT.md            # ビルド履歴・問題解決ログ
 └── README.md                  # 本ファイル
 ```
@@ -79,6 +82,55 @@ Markdown → pandoc (Lua filters) → .tex → sed (figure[H]) → lualatex (2-p
 | 日本語フォント | HaranoAji（luatexja-preset） |
 | コードフォント | JetBrains Mono NL（Scale=0.85） |
 | コードハイライト | tango |
+
+## EPUB ビルド（KDP 向け）
+
+### クイックスタート
+
+```bash
+bash build/build_epub.sh
+```
+
+統合 EPUB（`build/ai-biocode-kata.epub`）が生成され、続けて epubcheck で自動検証される。
+
+### ビルドパイプライン
+
+```
+Markdown → pandoc -t epub3 (Lua filters) → EPUB3 → epubcheck
+```
+
+1. **pandoc**: Markdown を EPUB3 に変換。`gfm_auto_identifiers` 拡張で GitHub 互換のヘッダー ID を生成
+2. **Lua filters**: `epigraph.lua`（章頭引用句の HTML 変換）と `fix-crossref.lua`（章間リンク解決）を適用。`emoji-filter.lua` は EPUB では使用しない（Unicode 絵文字をリーダーがネイティブ表示）
+3. **epubcheck**: 生成された EPUB を W3C EPUB3 仕様に対する準拠チェック
+
+### EPUB 特有の設定
+
+| 設定 | 値 |
+|------|------|
+| Reader | `markdown+gfm_auto_identifiers` |
+| 出力 | EPUB3 |
+| カバー画像 | `figures/cover.jpeg`（1684x2528、JPEG） |
+| CSS | `build/epub.css`（Kindle 互換、相対サイズのみ） |
+| 数式 | MathML |
+| 目次 | あり（depth=2） |
+| 言語 | ja |
+| 出版社 | 二階堂 愛（自費出版想定） |
+| ライセンス | CC BY-NC-ND 4.0 |
+
+### KDP アップロード時の注意
+
+- カバー画像（1.6:1 推奨、最低 1000px）は EPUB 内に既に埋め込まれているが、KDP で別途アップロードを求められた場合は `figures/cover.jpeg` を使う
+- 絵文字（🧬🤖📦）は Unicode のまま埋め込まれている。古い Kindle 端末では tofu 表示になる可能性があるため、Kindle Previewer で要確認
+- 数式は MathML で埋め込まれている。Kindle Previewer 推奨
+
+### `fix-crossref.lua` の形式別マッピング
+
+pandoc は LaTeX 出力と HTML/EPUB 出力で異なる identifier 生成規則を使う:
+
+- **LaTeX (PDF)**: デフォルトの auto_identifiers — 先頭の非アルファベット文字を除去
+- **HTML/EPUB**: gfm_auto_identifiers — 先頭の数字も保持
+
+そのため `fix-crossref.lua` は `FILE_TO_CHAPTER_ID_LATEX` と `FILE_TO_CHAPTER_ID_HTML` の2系統マッピングを持ち、`FORMAT` グローバル変数で出力形式を判定して切り替える。
 
 ## Vivliostyle（CSS組版）
 
