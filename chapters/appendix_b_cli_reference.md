@@ -64,7 +64,7 @@
 | MCP統合 | `claude mcp add` | `codex mcp add` | [§5-5](./05_software_components.md#5-5-mcpmodel-context-protocol-エージェントの能力を拡張する) |
 | 階層設定 | ディレクトリごとに `CLAUDE.md` | ディレクトリごとに `AGENTS.md` | [§10-3](./10_deliverables.md#設定ファイルの階層構造--ディレクトリ単位のルール設定) |
 | プロファイル | — | `--profile dev` (config.tomlの`[profiles]`) | — |
-| バイオ向けMCP | PubMed MCP, BioMCP等 | 同左 | [§19-2](./19_database_api.md) |
+| バイオ向けMCP | PubMed MCP, BioMCP等 | 同左 | [§19-3](./19_database_api.md) |
 
 ## 参考文献
 
