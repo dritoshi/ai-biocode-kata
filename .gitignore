@@ -4,6 +4,14 @@ build/*.epub
 build/*.html
 *.pdf
 
+# LaTeX intermediate files
+build/*.aux
+build/*.log
+build/*.toc
+build/*.out
+build/*.fls
+build/*.fdb_latexmk
+
 # Node.js / Vivliostyle
 node_modules/
 build/node_modules/
