@@ -11,6 +11,7 @@ CHAPTERS_DIR="$PROJECT_DIR/chapters"
 # 章の順序（統合PDF用）
 CHAPTER_ORDER=(
   hajimeni.md
+  notice.md
   00_ai_agent.md
   01_design.md
   02_terminal.md
