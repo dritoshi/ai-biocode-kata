@@ -28,7 +28,7 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 #### [§0 AIエージェントにコードを書かせる](chapters/00_ai_agent.md)
 
 - 0-1. セットアップと基本操作
-- 0-2. Plan → Execute → Review ワークフロー
+- 0-2. Plan → Execute → Review ワークフロー（計画フェーズの外部調査 — Deep Researchの活用 / 「インタビューしてもらう」パターン / 非テキスト資料を使った計画）
 - 0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）
 - 0-4. エージェントにレビューさせる
 - 0-5. サブエージェントとタスク委譲
