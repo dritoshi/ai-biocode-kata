@@ -243,16 +243,24 @@ Markdownが優れている点:
 >
 > Excelは、遺伝子名を日付やその他のデータ型に**自動変換**してしまうという、バイオインフォマティクス界で悪名高い問題を抱えている。
 >
-> 2016年、Ziemann らは主要なゲノム研究ジャーナルの論文を調査し、約20%の補足ファイルに遺伝子名の変換エラーが含まれていることを報告した[5](https://doi.org/10.1186/s13059-016-1044-7)。たとえば:
+> 2016年、Ziemann らは主要なゲノム研究ジャーナルの論文を調査し、約20%の補足ファイルに遺伝子名の変換エラーが含まれていることを報告した[5](https://doi.org/10.1186/s13059-016-1044-7)。変換パターンは大きく2種類ある。
+>
+> **(1) 日付への誤変換**
 >
 > - `MARCH1`（Membrane Associated Ring-CH-Type Finger 1）→ Excelが `3月1日` に変換
 > - `SEPT1`（Septin 1）→ `9月1日` に変換
 > - `DEC1`（Deleted In Esophageal Cancer 1）→ `12月1日` に変換
 > - `OCT4`（POU5F1の別名）→ `10月4日` に変換
 >
+> **(2) 科学表記（浮動小数点）への誤変換**
+>
+> - RIKENクローン識別子 `2310009E13` → `2.31E+13` に変換
+>
+> 後者は、英字 `E` を挟んで数字が続く文字列を Excel が科学表記、すなわち $2.31 \times 10^{13}$ と解釈してしまうために起こる。RIKEN FANTOM クローン ID や Ensembl トランスクリプト ID のように `E` を含む英数字識別子は広く使われているため、影響範囲は遺伝子シンボルにとどまらない。
+>
 > 2021年のフォローアップ調査では、問題はまったく改善していないことが示された[6](https://doi.org/10.1371/journal.pcbi.1008984)。
 >
-> この問題を受けて、HUGO Gene Nomenclature Committee（HGNC）は2020年に27の遺伝子を正式にリネームした[7](https://www.genenames.org/about/guidelines/):
+> この問題を受けて、HUGO Gene Nomenclature Committee（HGNC）は2020年に、Excelで日付に誤変換される一連の遺伝子シンボルを正式にリネームした[7](https://doi.org/10.1038/s41588-020-0669-3):
 >
 > | 旧名 | 新名 | 理由 |
 > |------|------|------|
@@ -868,7 +876,7 @@ df = pd.read_csv('data.csv')
 
 [6] Abeysooriya, M., Soria, M., Kasu, M. S., Ziemann, M. "Gene name errors: Lessons not learned". *PLOS Computational Biology*, 17(7), e1008984, 2021. [https://doi.org/10.1371/journal.pcbi.1008984](https://doi.org/10.1371/journal.pcbi.1008984)
 
-[7] HUGO Gene Nomenclature Committee. "Guidelines for Human Gene Nomenclature". [https://www.genenames.org/about/guidelines/](https://www.genenames.org/about/guidelines/) (参照日: 2026-03-18)
+[7] Bruford, E. A., Braschi, B., Denny, P., Jones, T. E. M., Seal, R. L., Tweedie, S. "Guidelines for human gene nomenclature". *Nature Genetics*, 52(8), 754–758, 2020. [https://doi.org/10.1038/s41588-020-0669-3](https://doi.org/10.1038/s41588-020-0669-3)
 
 [8] Wickham, H. "Tidy Data". *Journal of Statistical Software*, 59(10), 1–23, 2014. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10)
 
