@@ -1,6 +1,6 @@
 # 付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表
 
-> **本付録の記述は 2026年3月時点の各ツールの仕様に基づく。**
+> **本付録の記述は 2026年4月時点の各ツールの仕様に基づく。**
 > AIコーディングエージェントのCLIツールは頻繁にアップデートされるため、最新の仕様は各ツールの公式ドキュメントを参照されたい。
 
 概念で理解し、ツール固有の操作は以下を参照する。
@@ -36,13 +36,15 @@
 
 | | Claude Code | Codex CLI |
 |--|-------------|-----------|
-| 最高精度 | Opus 4.6 | GPT-5.4 |
+| 最高精度 | Opus 4.7 | GPT-5.4 |
 | バランス | Sonnet 4.6 | GPT-5.3-Codex |
 | 高速・低コスト | Haiku 4.5 | GPT-5.3-Codex-Spark |
 | モデル切替 | `/model` | `/model` |
-| 推論の深さ | Extended Thinking (`Alt+T` / `Option+T`) | Reasoning Effort (None〜Extra High) |
-| 推論深さ設定 | Opus 4.6: adaptive（自動調節） | `-c model_reasoning_effort="high"` |
-| 計画時の推論 | Plan Mode + Extended Thinking | `plan_mode_reasoning_effort` |
+| 推論モード | Adaptive thinking（`Alt+T` / `Option+T` でトグル） | Reasoning Effort (None〜Extra High) |
+| 推論強度（effort） | `low` / `medium` / `high` / `xhigh`（Opus 4.7） / `max` | `-c model_reasoning_effort="high"` |
+| Adaptive 対応 | Opus 4.7: 唯一のモード / Sonnet 4.6: 推奨 / Haiku 4.5: 非対応（Extended Thinking のみ） | — |
+| 計画時の推論 | Plan Mode + 高い effort | `plan_mode_reasoning_effort` |
+| タスク予算（beta） | `task-budgets-2026-03-13` ヘッダで `task_budget` を指定可能 | — |
 
 ## セッション管理
 
@@ -74,4 +76,4 @@
 
 ---
 
-本付録の内容は 2026年3月 時点の情報に基づく。
+本付録の内容は 2026年4月 時点の情報に基づく。
