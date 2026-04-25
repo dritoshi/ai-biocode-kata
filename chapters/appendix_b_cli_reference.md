@@ -36,9 +36,9 @@
 
 | | Claude Code | Codex CLI |
 |--|-------------|-----------|
-| 最高精度 | Opus 4.7 | GPT-5.4 |
-| バランス | Sonnet 4.6 | GPT-5.3-Codex |
-| 高速・低コスト | Haiku 4.5 | GPT-5.3-Codex-Spark |
+| 最高精度 | Opus 4.7 | GPT-5.5 |
+| バランス | Sonnet 4.6 | GPT-5.4 |
+| 高速・低コスト | Haiku 4.5 | GPT-5.4-mini |
 | モデル切替 | `/model` | `/model` |
 | 推論モード | Adaptive thinking（`Alt+T` / `Option+T` でトグル） | Reasoning Effort (None〜Extra High) |
 | 推論強度（effort） | `low` / `medium` / `high` / `xhigh`（Opus 4.7） / `max` | `-c model_reasoning_effort="high"` |

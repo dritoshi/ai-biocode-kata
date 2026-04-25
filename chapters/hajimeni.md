@@ -124,7 +124,7 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 
 また、千葉大学の大田達郎准教授にはバイオインフォマティクス研究者の立場から本書のレビューをして頂き、いくつもの有益なコメントを頂いたことに感謝する。Xでの公開後にコメント頂いたみなさまにも感謝する。
 
-本書の執筆やレビューは、Claude Code CLI (Claude Opus 4.7, effort: high) および Codex CLI (GPT-5.4, reasoning: xhigh) の支援のもとで行った。これらのAIコーディングエージェントの開発者のみなさまに感謝する。
+本書の執筆やレビューは、Claude Code CLI (Claude Opus 4.7, effort: high) および Codex CLI (GPT-5.4 / GPT-5.5, reasoning: xhigh) の支援のもとで行った。これらのAIコーディングエージェントの開発者のみなさまに感謝する。
 
 
 <div align="right">
