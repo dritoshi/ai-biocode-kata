@@ -2,6 +2,8 @@
 
 -- 情報技術の基礎から環境構築・設計・テスト・公開まで
 
+[![CI](https://github.com/dritoshi/ai-biocode-kata/actions/workflows/test.yml/badge.svg)](https://github.com/dritoshi/ai-biocode-kata/actions/workflows/test.yml)
+
 ## 概要
 
 AIコーディングエージェント（Claude Code CLI / Codex CLI）との協働を前提として、

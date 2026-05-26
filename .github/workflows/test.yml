@@ -7,7 +7,10 @@
 
 name: テスト実行
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:  # Actions タブから手動でも実行できるようにする
 
 jobs:
   test:
