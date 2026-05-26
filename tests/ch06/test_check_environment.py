@@ -35,8 +35,8 @@ class TestCheckPackageInstalled:
     """check_package_installed のテスト."""
 
     def test_installed_package_returns_version(self) -> None:
-        # pip は必ずインストールされている
-        version = check_package_installed("pip")
+        # pytest はテスト実行時に必ずインストールされている（開発依存）
+        version = check_package_installed("pytest")
         assert version is not None
         assert len(version) > 0
 

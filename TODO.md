@@ -57,3 +57,9 @@
 - [x] 人間にレビューを依頼する
 - [x] 書影作成する
 - [ ] xで公開
+
+## 開発環境・再現性（コードサンプル）
+- [x] Phase 1: ルート `pyproject.toml`（依存・§8のruff設定・pytest設定）と `uv.lock` を整備し、`uv sync` → `uv run pytest` でclone後に再現実行できるようにする。README に手順追記。`tests/ch06` のpip前提テストをpytest前提に修正（760 passed / 2 skipped）
+- [ ] Phase 2-a: 実CI（`.github/workflows`）を追加し、push/PR で `uv run pytest` を走らせる（教材サンプル `scripts/ch07/ci_minimal.yml` を実体化する）
+- [ ] Phase 2-b: リポジトリ全体を ruff/mypy で通す（言行一致）。現状 `uv run ruff check scripts/ tests/` で660件の指摘（87件は自動修正可能）。`ruff --fix` で機械修正できる分から着手し、残りのD（docstring）等を順次解消
+- [ ] mypy 用の型スタブ（types-requests, pandas-stubs, types-PyYAML 等）を dev 依存に追加し、`uv run mypy scripts/` を通す

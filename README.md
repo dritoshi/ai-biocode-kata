@@ -216,6 +216,8 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 ```
 ai-biocode-kata/
 ├── CLAUDE.md              # 執筆規約（Claude Code CLI用）
+├── pyproject.toml         # 依存・ruff・pytest 設定（コードサンプルの実行環境）
+├── uv.lock                # 依存バージョンを固定する uv ロックファイル
 ├── chapters/              # 各章のMarkdownファイル
 ├── references/            # BibTeXファイル（章ごと）
 ├── figures/               # 図表
@@ -228,6 +230,31 @@ ai-biocode-kata/
 - [各章の文字数・読了時間](docs/chapter_stats.md)
 - [PDFビルド手順](build/README.md)
 - [執筆 TODO](TODO.md)
+
+## コードサンプルの実行
+
+本書のコードサンプル（`scripts/`）とテスト（`tests/`）は、[uv](https://docs.astral.sh/uv/) で管理された再現性のある環境で動作する。依存パッケージとそのバージョンは `pyproject.toml` と `uv.lock` に固定されており、`uv sync` でどの環境でも同じ依存構成を再現できる。uv 自体の解説は [§6 Python環境の構築](chapters/06_dev_environment.md)、テスト・ruff の解説は [§8 コードの正しさを守るテスト技法](chapters/08_testing.md) を参照のこと。
+
+```bash
+# uv のインストール（未導入の場合）
+brew install uv                                   # macOS / Homebrew
+# あるいは: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 依存をロックファイルどおりに同期する（.venv を自動生成）
+uv sync
+
+# 全テストを実行する
+uv run pytest
+
+# 特定の章のテストだけ実行する例
+uv run pytest tests/ch08
+
+# リント（コード品質チェック）とフォーマット
+uv run ruff check scripts/ tests/
+uv run ruff format scripts/ tests/
+```
+
+Python 3.10 以上が必要である（`pyproject.toml` の `requires-python`）。
 
 ## 免責事項
 

@@ -1,0 +1,65 @@
+[project]
+name = "ai-biocode-kata"
+version = "0.4.0"
+description = "書籍『AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法』のコードサンプルとテスト"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC-BY-NC-ND-4.0" }
+
+# 本書サンプルコードが実際に import しているサードパーティ依存。
+# scripts/ と tests/ の全 import を棚卸しして決定した（標準ライブラリと自前 scripts パッケージを除く）。
+dependencies = [
+    "biopython",   # Bio.SeqIO 等（§0, §1, §8 ほか）
+    "numpy",       # 数値計算（§3, §12, §17 ほか）
+    "pandas",      # 表形式データ（§4, §12 ほか）
+    "matplotlib",  # 可視化（§3, §13, §17 ほか）
+    "seaborn",     # 統計可視化（§13）
+    "scipy",       # 統計・数値計算（§12）
+    "polars",      # 高速データフレーム（§12）
+    "click",       # CLI 構築（§11）
+    "typer",       # CLI 構築（§11）
+    "requests",    # HTTP（§19）
+    "pyyaml",      # YAML 読み込み（§14, §16）
+    "tqdm",        # 進捗表示（§11）
+    "mistune",     # Markdown 解析（§18）
+    "boto3",       # S3 アクセス（§19）
+]
+
+[dependency-groups]
+# 開発用依存。本書 §6・§8 が読者に推奨する構成（pytest・ruff・mypy）をリポジトリ自身でも採用する。
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+]
+
+[tool.uv]
+# サンプルコードは scripts.chNN.* として直接 import するため、
+# このリポジトリ自体をビルド対象パッケージにはしない（依存だけを venv に入れる）。
+package = false
+
+# --- ruff 設定（本書 §8「ruff — リント＋フォーマット」で提示している設定と一致させる） ---
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle エラー
+    "W",    # pycodestyle 警告
+    "F",    # pyflakes
+    "I",    # isort（import順序）
+    "N",    # pep8-naming
+    "D",    # pydocstyle（docstring）
+    "UP",   # pyupgrade
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+# --- pytest 設定 ---
+[tool.pytest.ini_options]
+# テストは `from scripts.chNN.xxx import ...` でサンプルを参照するため、
+# リポジトリルートを import パスに含める。
+pythonpath = ["."]
+testpaths = ["tests"]
