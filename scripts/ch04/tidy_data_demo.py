@@ -13,7 +13,7 @@ def wide_to_long(
     id_col: str,
     value_cols: list[str],
 ) -> list[dict[str, str]]:
-    """wide form を long form に変換する.
+    """Wide form を long form に変換する.
 
     Parameters
     ----------
@@ -46,7 +46,7 @@ def long_to_wide(
     variable_col: str,
     value_col: str,
 ) -> list[dict[str, str]]:
-    """long form を wide form に変換する.
+    """Long form を wide form に変換する.
 
     Parameters
     ----------

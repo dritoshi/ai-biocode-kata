@@ -10,7 +10,6 @@ matplotlib.use("Agg")
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import numpy as np
 
 FIGURES_DIR = Path(__file__).resolve().parents[2] / "figures"
 

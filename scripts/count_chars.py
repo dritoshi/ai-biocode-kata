@@ -264,7 +264,8 @@ def count_chars(
 ) -> list[tuple[str, int, int, int, int, int]]:
     """chapters/ 内の全 Markdown ファイルの文字数を返す.
 
-    Returns:
+    Returns
+    -------
         (ラベル, raw文字数, 本文文字数, コード文字数, 本文全角換算, コード全角換算) のリスト
     """
     labels: dict[str, str] = {

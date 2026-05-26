@@ -1,5 +1,7 @@
 """seabornによる統計的可視化 — バイオリンプロット."""
 
+from pathlib import Path
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -14,7 +16,7 @@ def expression_violin(
     expression_df: pd.DataFrame,
     category_col: str = "category",
     value_col: str = "expression",
-    output_path: "Path | None" = None,
+    output_path: Path | None = None,
 ) -> Figure:
     """カテゴリ別発現量のバイオリンプロットを作成する.
 
@@ -55,8 +57,6 @@ def expression_violin(
     ax.set_title("Expression Distribution by Category")
 
     if output_path is not None:
-        from pathlib import Path
-
-        fig.savefig(Path(output_path), dpi=300, bbox_inches="tight")
+        fig.savefig(output_path, dpi=300, bbox_inches="tight")
 
     return fig

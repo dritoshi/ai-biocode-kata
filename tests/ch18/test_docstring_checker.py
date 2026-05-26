@@ -1,10 +1,8 @@
 """docstring_checkerモジュールのテスト."""
 
-import pytest
 
 from scripts.ch18.docstring_checker import (
     CoverageResult,
-    ValidationResult,
     check_coverage,
     check_numpy_style,
 )

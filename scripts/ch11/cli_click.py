@@ -1,7 +1,6 @@
 """click版 GCフィルタCLI — 本書の標準推奨ライブラリによる実装."""
 
 import logging
-import sys
 
 import click
 from Bio import SeqIO

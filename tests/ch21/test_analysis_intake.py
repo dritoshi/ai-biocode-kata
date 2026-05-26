@@ -8,7 +8,6 @@ from scripts.ch21.analysis_intake import (
     validate_metadata,
 )
 
-
 # --- get_intake_checklist ---
 
 

@@ -12,13 +12,17 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.reference_usage import extract_doi, extract_explicit_url, iter_used_bib_entries
-from scripts.reference_usage import find_missing_chapter_reference_items, reference_file_to_chapter_path
+from scripts.reference_usage import (  # noqa: E402  # sys.path 追加後に import する必要があるため
+    extract_doi,
+    extract_explicit_url,
+    find_missing_chapter_reference_items,
+    iter_used_bib_entries,
+    reference_file_to_chapter_path,
+)
 
 CHAPTER_DIR = REPO_ROOT / "chapters"
 REFERENCE_DIR = REPO_ROOT / "references"

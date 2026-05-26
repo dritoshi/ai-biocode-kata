@@ -10,7 +10,6 @@ from scripts.review.check_urls_browser import (
     summarize_body_text,
 )
 
-
 SAMPLE_DOCUMENT = {
     "metadata": {"timestamp": "2026-03-25T00:00:00+0900"},
     "summary": {"ok": 1, "anti-bot": 2},

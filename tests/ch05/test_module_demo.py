@@ -11,7 +11,6 @@ from scripts.ch05.mylib import gc_content, reverse_complement, validate_sequence
 from scripts.ch05.mylib.core import gc_content as gc_content_direct
 from scripts.ch05.mylib.utils import validate_sequence as validate_direct
 
-
 # --- show_sys_path ---
 
 

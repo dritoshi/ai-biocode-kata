@@ -104,7 +104,7 @@ Click はデコレータで引数とオプションを宣言するため、関�
 
 ```python
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 from Bio import SeqIO
@@ -116,7 +116,7 @@ app = typer.Typer(help="FASTA配列をGC含量でフィルタリングする")
 @app.command()
 def gc_filter(
     input_file: Annotated[Path, typer.Argument(help="入力FASTAファイル")],
-    output: Annotated[Optional[Path],
+    output: Annotated[Path | None,
                       typer.Option("-o", "--output")] = None,
     min_gc: Annotated[float,
                       typer.Option(help="GC含量の下限",

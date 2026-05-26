@@ -78,7 +78,7 @@ def search_in_dict(gene_dict: dict[str, int], query: str) -> bool:
 
 
 def benchmark_search(n: int = 100_000, n_queries: int = 1000) -> dict[str, float]:
-    """list / set / dict の検索時間を計測する.
+    """List / set / dict の検索時間を計測する.
 
     Parameters
     ----------

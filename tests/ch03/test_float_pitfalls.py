@@ -1,6 +1,5 @@
 """浮動小数点の罠デモのテスト."""
 
-import math
 
 import pytest
 

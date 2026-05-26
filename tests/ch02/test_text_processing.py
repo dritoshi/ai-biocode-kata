@@ -31,7 +31,12 @@ TTAACCGGTTAACC
 @pytest.fixture()
 def tsv_file(tmp_path: Path) -> Path:
     """テスト用TSVファイルを作成する."""
-    content = "gene\tsample_A\tsample_B\nBRCA1\t10.5\t12.3\nTP53\t8.2\t9.1\nEGFR\t15.0\t14.8\n"
+    content = (
+        "gene\tsample_A\tsample_B\n"
+        "BRCA1\t10.5\t12.3\n"
+        "TP53\t8.2\t9.1\n"
+        "EGFR\t15.0\t14.8\n"
+    )
     p = tmp_path / "expression.tsv"
     p.write_text(content)
     return p

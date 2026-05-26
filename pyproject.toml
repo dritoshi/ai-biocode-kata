@@ -57,6 +57,16 @@ select = [
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
+[tool.ruff.lint.per-file-ignores]
+# テストコードには docstring 必須ルール（D）を適用しない。
+# テストメソッド名（test_empty_sequence 等）が説明を兼ねるため、
+# 大規模テストスイートでは docstring を必須にしない運用が一般的である（§8 参照）。
+"tests/**" = ["D"]
+# リポジトリ内部のビルド/レビュー用ツール（書籍の教材ではなく裏方スクリプト）は、
+# docstring（D）と行長（E501）を緩める。ロジックエラー（F）等は引き続き検出する。
+"scripts/*.py" = ["D", "E501"]
+"scripts/review/**" = ["D", "E501"]
+
 # --- pytest 設定 ---
 [tool.pytest.ini_options]
 # テストは `from scripts.chNN.xxx import ...` でサンプルを参照するため、

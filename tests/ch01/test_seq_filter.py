@@ -27,7 +27,11 @@ class TestParseFastaString:
     def test_parse_ids(self) -> None:
         records = parse_fasta_string(SAMPLE_FASTA)
         ids = [r.id for r in records]
-        assert ids == ["seq1 short sequence", "seq2 medium sequence", "seq3 long sequence"]
+        assert ids == [
+            "seq1 short sequence",
+            "seq2 medium sequence",
+            "seq3 long sequence",
+        ]
 
     def test_parse_sequences(self) -> None:
         records = parse_fasta_string(SAMPLE_FASTA)

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import sys
 from pathlib import Path
 
 import pytest
@@ -97,7 +96,9 @@ def test_main_all_pass(tmp_path: Path) -> None:
     input_file.write_text(FASTA_DATA)
     output_file = tmp_path / "output.fasta"
 
-    main([str(input_file), "-o", str(output_file), "--min-gc", "0.0", "--max-gc", "1.0"])
+    main(
+        [str(input_file), "-o", str(output_file), "--min-gc", "0.0", "--max-gc", "1.0"]
+    )
 
     content = output_file.read_text()
     assert "seq1" in content
@@ -111,7 +112,17 @@ def test_main_none_pass(tmp_path: Path) -> None:
     input_file.write_text(FASTA_DATA)
     output_file = tmp_path / "output.fasta"
 
-    main([str(input_file), "-o", str(output_file), "--min-gc", "0.99", "--max-gc", "0.995"])
+    main(
+        [
+            str(input_file),
+            "-o",
+            str(output_file),
+            "--min-gc",
+            "0.99",
+            "--max-gc",
+            "0.995",
+        ]
+    )
 
     assert output_file.read_text() == ""
 

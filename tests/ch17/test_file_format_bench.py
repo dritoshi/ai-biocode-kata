@@ -76,7 +76,9 @@ class TestBenchmarkRead:
 class TestCompareFormats:
     """compare_formats のテスト."""
 
-    def test_returns_both_formats(self, tmp_path: Path, sample_df: pd.DataFrame) -> None:
+    def test_returns_both_formats(
+        self, tmp_path: Path, sample_df: pd.DataFrame
+    ) -> None:
         """CSV/Parquet両方の結果を含む辞書を返す."""
         result = compare_formats(sample_df, tmp_path)
         assert "csv" in result

@@ -12,7 +12,6 @@ from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS_DIR = REPO_ROOT / "scripts"
 TESTS_DIR = REPO_ROOT / "tests"

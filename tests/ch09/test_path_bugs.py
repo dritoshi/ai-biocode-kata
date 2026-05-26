@@ -3,7 +3,6 @@
 import pytest
 
 from scripts.ch09.path_bugs import (
-    read_config_relative_fixed,
     resolve_data_path,
 )
 

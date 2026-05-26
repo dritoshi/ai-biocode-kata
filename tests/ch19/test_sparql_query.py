@@ -92,7 +92,9 @@ class TestRunSparqlQuery:
         import requests
 
         mock_response = MagicMock()
-        mock_response.raise_for_status.side_effect = requests.HTTPError("429 Too Many Requests")
+        mock_response.raise_for_status.side_effect = requests.HTTPError(
+            "429 Too Many Requests"
+        )
         mock_get.return_value = mock_response
 
         with pytest.raises(requests.HTTPError):

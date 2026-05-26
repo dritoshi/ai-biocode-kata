@@ -13,13 +13,37 @@ from scripts.ch21.progress_report import (
 
 # --- テスト用データ ---
 
-SAMPLE_GIT_LOG = """\
-a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2|feat: RNA-seq解析パイプラインを追加|2024-03-18 10:30:00 +0900
-b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3|fix: GC含量計算の丸め誤差を修正|2024-03-17 15:20:00 +0900
-c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4|docs: READMEにインストール手順を追加|2024-03-17 09:00:00 +0900
-d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5|feat(parser): FASTQパーサを実装|2024-03-16 14:00:00 +0900
-e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6|初期コミット|2024-03-15 08:00:00 +0900
-"""
+_SAMPLE_LOG_RECORDS = [
+    (
+        "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+        "feat: RNA-seq解析パイプラインを追加",
+        "2024-03-18 10:30:00 +0900",
+    ),
+    (
+        "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3",
+        "fix: GC含量計算の丸め誤差を修正",
+        "2024-03-17 15:20:00 +0900",
+    ),
+    (
+        "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+        "docs: READMEにインストール手順を追加",
+        "2024-03-17 09:00:00 +0900",
+    ),
+    (
+        "d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5",
+        "feat(parser): FASTQパーサを実装",
+        "2024-03-16 14:00:00 +0900",
+    ),
+    (
+        "e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6",
+        "初期コミット",
+        "2024-03-15 08:00:00 +0900",
+    ),
+]
+SAMPLE_GIT_LOG = "".join(
+    f"{commit_hash}|{message}|{date}\n"
+    for commit_hash, message, date in _SAMPLE_LOG_RECORDS
+)
 
 
 # --- parse_git_log ---

@@ -1,6 +1,5 @@
 """validate_dockerfileモジュールのテスト."""
 
-import pytest
 
 from scripts.ch15.validate_dockerfile import (
     ValidationResult,

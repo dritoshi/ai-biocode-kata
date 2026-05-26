@@ -1,6 +1,5 @@
 """python_pitfalls.py のテスト."""
 
-import numpy as np
 import pandas as pd
 
 from scripts.ch09.python_pitfalls import (

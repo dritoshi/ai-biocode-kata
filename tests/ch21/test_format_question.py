@@ -9,7 +9,6 @@ from scripts.ch21.format_question import (
     format_github_issue,
 )
 
-
 # --- collect_environment ---
 
 

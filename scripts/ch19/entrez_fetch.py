@@ -9,7 +9,6 @@ from __future__ import annotations
 import logging
 import os
 from io import StringIO
-from typing import Optional
 
 from Bio import Entrez, SeqIO
 from Bio.SeqRecord import SeqRecord
@@ -18,8 +17,8 @@ logger = logging.getLogger(__name__)
 
 
 def configure_entrez(
-    email: Optional[str] = None,
-    api_key: Optional[str] = None,
+    email: str | None = None,
+    api_key: str | None = None,
     tool: str = "biocode-kata",
 ) -> None:
     """Entrez モジュールの認証情報を設定する.

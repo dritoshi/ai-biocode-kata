@@ -10,7 +10,8 @@ def bed_to_gff(start: int, end: int) -> tuple[int, int]:
         start: 0-based開始位置
         end: 0-basedの終了位置（含まない）
 
-    Returns:
+    Returns
+    -------
         (gff_start, gff_end): 1-based closed区間
     """
     # 0-based → 1-based: startに+1、endはそのまま（half-open→closedで相殺）
@@ -24,7 +25,8 @@ def gff_to_bed(start: int, end: int) -> tuple[int, int]:
         start: 1-based開始位置
         end: 1-basedの終了位置（含む）
 
-    Returns:
+    Returns
+    -------
         (bed_start, bed_end): 0-based half-open区間
     """
     # 1-based → 0-based: startから-1、endはそのまま（closed→half-openで相殺）

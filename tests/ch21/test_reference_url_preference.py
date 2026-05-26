@@ -2,11 +2,11 @@
 
 import scripts.build_review_artifacts as build_review_artifacts
 import scripts.review.check_urls_all as check_urls_all
-from scripts.review.check_urls_all import extract_urls_from_bib, extract_urls_from_md
 from scripts.reference_usage import (
     extract_chapter_reference_items,
     find_missing_chapter_reference_items,
 )
+from scripts.review.check_urls_all import extract_urls_from_bib, extract_urls_from_md
 
 
 def test_extract_urls_from_bib_prefers_explicit_url(tmp_path) -> None:
@@ -97,7 +97,9 @@ def test_extract_urls_from_bib_supports_howpublished_url_command(tmp_path) -> No
     assert urls == [("https://docs.github.com/en", 3)]
 
 
-def test_extract_urls_from_bib_skips_unused_entry_for_repo_pair(tmp_path, monkeypatch) -> None:
+def test_extract_urls_from_bib_skips_unused_entry_for_repo_pair(
+    tmp_path, monkeypatch
+) -> None:
     chapter_dir = tmp_path / "chapters"
     reference_dir = tmp_path / "references"
     chapter_dir.mkdir()
@@ -166,7 +168,9 @@ track 行: bigDataUrl=https://...
     assert extract_urls_from_md(md_file) == []
 
 
-def test_scan_reference_files_skips_unused_entry_for_repo_pair(tmp_path, monkeypatch) -> None:
+def test_scan_reference_files_skips_unused_entry_for_repo_pair(
+    tmp_path, monkeypatch
+) -> None:
     chapter_dir = tmp_path / "chapters"
     reference_dir = tmp_path / "references"
     chapter_dir.mkdir()

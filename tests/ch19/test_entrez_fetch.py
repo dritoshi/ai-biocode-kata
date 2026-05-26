@@ -118,7 +118,7 @@ class TestFetchFasta:
     @patch("scripts.ch19.entrez_fetch.Entrez.efetch")
     def test_network_error_raises(self, mock_efetch: MagicMock) -> None:
         """通信エラー時は RuntimeError."""
-        mock_efetch.side_effect = IOError("Connection refused")
+        mock_efetch.side_effect = OSError("Connection refused")
 
         with pytest.raises(RuntimeError, match="取得に失敗"):
             fetch_fasta("INVALID_ACC")

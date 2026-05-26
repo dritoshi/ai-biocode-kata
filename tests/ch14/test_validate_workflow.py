@@ -1,6 +1,5 @@
 """validate_workflowモジュールのテスト."""
 
-import pytest
 
 from scripts.ch14.validate_workflow import (
     ValidationResult,

@@ -9,7 +9,6 @@ import pytest
 
 from scripts.ch20.secret_scanner import (
     ScanResult,
-    SecretFinding,
     scan_content,
     scan_directory,
     scan_file,

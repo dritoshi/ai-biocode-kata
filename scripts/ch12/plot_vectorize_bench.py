@@ -37,7 +37,7 @@ def benchmark_gc_calculation(n_sequences: int = 10_000, seq_length: int = 150) -
 
     # NumPyベクトル化版
     start = time.perf_counter()
-    gc_vector = np.mean((sequences == 2) | (sequences == 3), axis=1)
+    np.mean((sequences == 2) | (sequences == 3), axis=1)
     results["NumPy vectorized"] = time.perf_counter() - start
 
     return results

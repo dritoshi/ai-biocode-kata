@@ -60,6 +60,8 @@
 
 ## 開発環境・再現性（コードサンプル）
 - [x] Phase 1: ルート `pyproject.toml`（依存・§8のruff設定・pytest設定）と `uv.lock` を整備し、`uv sync` → `uv run pytest` でclone後に再現実行できるようにする。README に手順追記。`tests/ch06` のpip前提テストをpytest前提に修正（760 passed / 2 skipped）
-- [ ] Phase 2-a: 実CI（`.github/workflows`）を追加し、push/PR で `uv run pytest` を走らせる（教材サンプル `scripts/ch07/ci_minimal.yml` を実体化する）
-- [ ] Phase 2-b: リポジトリ全体を ruff/mypy で通す（言行一致）。現状 `uv run ruff check scripts/ tests/` で660件の指摘（87件は自動修正可能）。`ruff --fix` で機械修正できる分から着手し、残りのD（docstring）等を順次解消
-- [ ] mypy 用の型スタブ（types-requests, pandas-stubs, types-PyYAML 等）を dev 依存に追加し、`uv run mypy scripts/` を通す
+- [x] Phase 2-a: 実CI（`.github/workflows/test.yml`）を追加し、push/PR で `uv sync` → `ruff check` → `pytest` を走らせる（uv ベース。`ch07/ci_minimal.yml` の実体化）
+- [x] Phase 2-b: リポジトリ全体を ruff で通す（660→0）。tests は D（docstring）を per-file-ignores で除外、裏方ツール（scripts直下・review/）は D と E501 を除外（F等は維持）。教材サンプル・testsのロジック/行長は実修正。F821実バグ（ch13 seaborn_biodist の Path 未import）を本文準拠に修正。CI に ruff check ゲート追加済み
+- [ ] Phase 2-c: `ruff format`（現状71ファイルが要整形）。掲載教材コードも整形対象になるため、本文との同期方針を決めてから実施。決定までCIゲートには入れない
+- [ ] mypy 用の型スタブ（types-requests, pandas-stubs, types-PyYAML 等）を dev 依存に追加し、`uv run mypy scripts/` を通す。完了後 CI に mypy ゲート追加
+- [ ] §8 に D グループの扱い（テストは per-file-ignores で docstring 必須を緩めるのが実務的、という両論）を加筆 ← repo の per-file-ignores と本文を整合させるため

@@ -11,7 +11,6 @@ import csv
 import logging
 from dataclasses import dataclass
 from io import StringIO
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

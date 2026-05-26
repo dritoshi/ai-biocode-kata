@@ -1,6 +1,5 @@
 """validate_slurmモジュールのテスト."""
 
-import pytest
 
 from scripts.ch16.validate_slurm import (
     ValidationResult,

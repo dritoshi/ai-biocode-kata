@@ -4,7 +4,13 @@ from pathlib import Path
 
 import pytest
 
-FASTA_PATH = Path(__file__).resolve().parents[2] / "scripts" / "ch00" / "data" / "ecoli_k12_fragment.fasta"
+FASTA_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "scripts"
+    / "ch00"
+    / "data"
+    / "ecoli_k12_fragment.fasta"
+)
 
 
 @pytest.fixture()

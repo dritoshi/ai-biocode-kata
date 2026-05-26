@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import ssl
 import sys
@@ -29,7 +28,11 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from scripts.reference_usage import extract_doi, extract_explicit_url, iter_used_bib_entries
+from scripts.reference_usage import (  # noqa: E402  # sys.path 追加後に import する必要があるため
+    extract_doi,
+    extract_explicit_url,
+    iter_used_bib_entries,
+)
 
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 REFERENCES_DIR = PROJECT_ROOT / "references"

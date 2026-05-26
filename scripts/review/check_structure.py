@@ -16,7 +16,6 @@ import json
 import re
 from pathlib import Path
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 DEFAULT_OUTPUT = PROJECT_ROOT / "docs" / "review" / "structure_check.json"
@@ -175,7 +174,7 @@ def check_math_fullwidth_brackets(filepath: Path, lines: list[str]) -> list[dict
                 "line": line_no,
                 "severity": "MINOR",
                 "type": "math_fullwidth_bracket",
-                "message": f"$数式の直前に全角カッコ '（' がある（GitHub MathJaxで数式が壊れる可能性）",
+                "message": "$数式の直前に全角カッコ '（' がある（GitHub MathJaxで数式が壊れる可能性）",
                 "context": line.strip()[:120],
             })
 
@@ -185,7 +184,7 @@ def check_math_fullwidth_brackets(filepath: Path, lines: list[str]) -> list[dict
                 "line": line_no,
                 "severity": "MINOR",
                 "type": "math_fullwidth_bracket",
-                "message": f"$数式の直後に全角カッコ '）' がある（GitHub MathJaxで数式が壊れる可能性）",
+                "message": "$数式の直後に全角カッコ '）' がある（GitHub MathJaxで数式が壊れる可能性）",
                 "context": line.strip()[:120],
             })
 

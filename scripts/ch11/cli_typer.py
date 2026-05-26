@@ -3,7 +3,7 @@
 import logging
 import sys
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 from Bio import SeqIO
@@ -22,7 +22,7 @@ def gc_filter(
         typer.Argument(help="入力FASTAファイル"),
     ],
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("-o", "--output", help="出力ファイル（省略時はstdout）"),
     ] = None,
     min_gc: Annotated[

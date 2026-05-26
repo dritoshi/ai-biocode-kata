@@ -10,7 +10,7 @@ import csv
 import logging
 import sqlite3
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS samples (
 """
 
 
-def create_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
+def create_connection(db_path: str | None = None) -> sqlite3.Connection:
     """SQLite データベースへの接続を作成する.
 
     Parameters
@@ -123,9 +123,9 @@ def insert_sample(
     accession: str,
     organism: str,
     condition: str,
-    replicate: Optional[int] = None,
-    platform: Optional[str] = None,
-    read_length: Optional[int] = None,
+    replicate: int | None = None,
+    platform: str | None = None,
+    read_length: int | None = None,
 ) -> None:
     """サンプルメタデータを 1 件挿入する.
 

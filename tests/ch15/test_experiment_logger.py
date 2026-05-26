@@ -3,15 +3,12 @@
 import json
 from pathlib import Path
 
-import pytest
-
 from scripts.ch15.experiment_logger import (
     ExperimentRecord,
     find_best,
     load_experiments,
     log_experiment,
 )
-
 
 # --- log_experiment ---
 

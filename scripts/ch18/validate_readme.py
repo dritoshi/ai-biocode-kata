@@ -81,7 +81,6 @@ def check_required_sections(text: str) -> tuple[bool, list[str]]:
         (全セクション存在するか, 欠損セクション名リスト)
     """
     headings = _extract_headings(text)
-    heading_text = " ".join(headings)
     missing: list[str] = []
 
     for section in REQUIRED_SECTIONS:

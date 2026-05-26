@@ -126,7 +126,6 @@ def check_io_separation(text: str) -> tuple[bool, list[str]]:
     rules = _extract_rules(text)
     mixed: list[str] = []
     input_dirs = {"data/", "raw/"}
-    output_dirs = {"results/", "output/"}
 
     for rule_name in rules:
         if rule_name == "all":
@@ -150,7 +149,6 @@ def check_io_separation(text: str) -> tuple[bool, list[str]]:
         )
 
         if input_match and output_match:
-            input_text = input_match.group(1)
             output_text = output_match.group(1)
             # 出力に入力用ディレクトリが含まれている場合は混在
             for d in input_dirs:

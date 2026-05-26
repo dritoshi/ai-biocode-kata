@@ -15,7 +15,6 @@ import re
 import unicodedata
 from pathlib import Path
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 FIGURES_DIR = PROJECT_ROOT / "figures"
@@ -81,7 +80,8 @@ def extract_headings(filepath: Path) -> dict[str, int]:
     コードブロック内の見出しは無視する。
     重複する見出しにはGitHub形式で -1, -2, ... のサフィックスを付与する。
 
-    Returns:
+    Returns
+    -------
         dict: アンカー → 行番号のマッピング
     """
     anchors: dict[str, int] = {}
@@ -129,7 +129,8 @@ def extract_headings(filepath: Path) -> dict[str, int]:
 def extract_links(filepath: Path) -> list[dict]:
     """Markdownファイルからリンクを抽出する。
 
-    Returns:
+    Returns
+    -------
         list of dict: 各リンクの情報（line, column, raw_link, link_file, anchor）
     """
     links = []
@@ -194,7 +195,8 @@ def check_chapter_link(
 ) -> dict | None:
     """章間リンクの存在を確認する。
 
-    Returns:
+    Returns
+    -------
         問題があればissue dictを返す。問題なければNone。
     """
     link_file = link_info["link_file"]  # e.g., "./08_testing.md"
@@ -239,7 +241,8 @@ def check_chapter_link(
 def check_figure_link(source_file: Path, link_info: dict) -> dict | None:
     """画像リンクの存在を確認する。
 
-    Returns:
+    Returns
+    -------
         問題があればissue dictを返す。問題なければNone。
     """
     raw_link = link_info["raw_link"]  # e.g., "../figures/ch01_xxx.png"
@@ -321,11 +324,11 @@ def main() -> None:
     output_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # コンソール出力
-    print(f"=== 相互参照チェック結果 ===")
+    print("=== 相互参照チェック結果 ===")
     print(f"チェック対象ファイル数: {stats['total_files_checked']}")
     print(f"章間リンク数: {stats['total_chapter_links']}")
     print(f"画像リンク数: {stats['total_figure_links']}")
-    print(f"")
+    print("")
     print(f"問題件数: {len(issues)}")
     print(f"  CRITICAL (リンク先ファイル不在): {stats['broken_file_links']}")
     print(f"  CRITICAL (画像ファイル不在):     {stats['broken_figure_links']}")

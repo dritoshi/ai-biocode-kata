@@ -1,7 +1,6 @@
 """TPM正規化の正確性テスト."""
 
 import numpy as np
-import pytest
 
 from scripts.ch17.profiling_demo import (
     normalize_tpm_fast,

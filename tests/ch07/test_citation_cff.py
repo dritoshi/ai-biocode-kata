@@ -12,7 +12,12 @@ import pytest
 import yaml
 
 # テンプレートファイルのパス
-TEMPLATE_PATH = Path(__file__).resolve().parent.parent.parent / "scripts" / "ch07" / "CITATION.cff.template"
+TEMPLATE_PATH = (
+    Path(__file__).resolve().parent.parent.parent
+    / "scripts"
+    / "ch07"
+    / "CITATION.cff.template"
+)
 
 
 def test_template_exists() -> None:
@@ -41,7 +46,9 @@ def test_template_cff_version() -> None:
     """cff-version が 1.2.0 である。"""
     content = TEMPLATE_PATH.read_text(encoding="utf-8")
     data = yaml.safe_load(content)
-    assert data["cff-version"] == "1.2.0", f"cff-version が 1.2.0 でない: {data['cff-version']}"
+    assert data["cff-version"] == "1.2.0", (
+        f"cff-version が 1.2.0 でない: {data['cff-version']}"
+    )
 
 
 def test_template_authors_structure() -> None:

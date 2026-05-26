@@ -1,6 +1,5 @@
 """validate_readmeモジュールのテスト."""
 
-import pytest
 
 from scripts.ch18.validate_readme import (
     ValidationResult,

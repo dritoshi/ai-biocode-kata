@@ -3,8 +3,6 @@
 from pathlib import Path
 
 import pytest
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
 
 from scripts.ch17.generator_fastq import (
     filter_by_length,
@@ -40,7 +38,11 @@ def fastq_file(tmp_path: Path) -> Path:
         [
             ("read1", "ATGCATGC", [30, 30, 30, 30, 30, 30, 30, 30]),  # 長さ8, 品質30
             ("read2", "ATG", [10, 10, 10]),  # 長さ3, 品質10
-            ("read3", "ATGCATGCATGC", [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25]),  # 長さ12, 品質25
+            (
+                "read3",
+                "ATGCATGCATGC",
+                [25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25],
+            ),  # 長さ12, 品質25
             ("read4", "ATGCAT", [35, 35, 5, 5, 5, 5]),  # 長さ6, 平均品質15
         ],
     )

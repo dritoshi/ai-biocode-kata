@@ -30,7 +30,7 @@ class DiffFile:
 
 
 def parse_diff(diff_text: str) -> list[DiffFile]:
-    """unified diff形式のテキストをパースして変更ファイル・追加行を抽出する.
+    """Unified diff形式のテキストをパースして変更ファイル・追加行を抽出する.
 
     Parameters
     ----------
