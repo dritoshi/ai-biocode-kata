@@ -1,0 +1,239 @@
+{
+  "check": "structure_check",
+  "stats": {
+    "total_files_checked": 30,
+    "chapter_files_checked": 24,
+    "missing_sections": 8,
+    "section_order_violations": 0,
+    "bold_bracket_violations": 21,
+    "math_bracket_violations": 0,
+    "exercise_issues": 0
+  },
+  "total_issues": 29,
+  "issues": [
+    {
+      "file": "chapters/author.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## まとめ"
+    },
+    {
+      "file": "chapters/author.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## 演習問題"
+    },
+    {
+      "file": "chapters/author.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## さらに学びたい読者へ"
+    },
+    {
+      "file": "chapters/author.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## 参考文献"
+    },
+    {
+      "file": "chapters/notice.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## まとめ"
+    },
+    {
+      "file": "chapters/notice.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## 演習問題"
+    },
+    {
+      "file": "chapters/notice.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## さらに学びたい読者へ"
+    },
+    {
+      "file": "chapters/notice.md",
+      "line": 0,
+      "severity": "MAJOR",
+      "type": "missing_section",
+      "message": "必須セクションが見つからない: ## 参考文献"
+    },
+    {
+      "file": "chapters/00_ai_agent.md",
+      "line": 874,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **サインインに使うアカウントの種類（Consumer プラン / API / Workspace・Team・Enterprise 契約）によって大きく異なる**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/00_ai_agent.md",
+      "line": 876,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **本書では現時点の具体値を本文に埋め込まず、[§20-2-1](./20_security_ethics.md#プロバイダ別のプライバシー設定2026年4月現在) に 2026年4月現在の対照表と公式ドキュメントへのリンクを整理している**",
+      "found_char": "("
+    },
+    {
+      "file": "chapters/04_data_formats.md",
+      "line": 248,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **(1) 日付への誤変換**",
+      "found_char": "("
+    },
+    {
+      "file": "chapters/04_data_formats.md",
+      "line": 255,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **(2) 科学表記（浮動小数点）への誤変換**",
+      "found_char": "("
+    },
+    {
+      "file": "chapters/16_hpc.md",
+      "line": 367,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **VPN（Virtual Private Network）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/16_hpc.md",
+      "line": 371,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **MFA（Multi-Factor Authentication; 多要素認証）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 346,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **「送ってよいか迷う時点で送らない」**",
+      "found_char": "「"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 371,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **Anthropic（Claude / Claude Code）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 374,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **OpenAI（ChatGPT / Codex CLI / API）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 377,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **GitHub（Copilot）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 380,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **Google（Gemini / Gemini CLI / Vertex AI）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 390,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **Claude（Consumer）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 391,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **Claude（API / Enterprise）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 392,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **ChatGPT / Codex CLI（Consumer）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 394,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **GitHub Copilot（Individual）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 395,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **GitHub Copilot（Business / Enterprise）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 396,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **Gemini（個人）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 397,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **Gemini（Workspace / Vertex AI）**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 401,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **「いずれか一つでも該当すれば送信しない」**",
+      "found_char": "「"
+    },
+    {
+      "file": "chapters/20_security_ethics.md",
+      "line": 409,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **規制対象ではないが個人情報（氏名・連絡先・被験者ID 等）を含むか**",
+      "found_char": "（"
+    },
+    {
+      "file": "chapters/hajimeni.md",
+      "line": 91,
+      "severity": "MINOR",
+      "type": "bold_bracket",
+      "message": "太字内にカッコ/カギ括弧を含む: **東京大学「Pythonプログラミング入門」**",
+      "found_char": "「"
+    }
+  ]
+}

@@ -1,13 +1,14 @@
 {
   "metadata": {
-    "total_unique_urls": 376,
-    "total_occurrences": 1049,
-    "timestamp": "2026-03-31T18:38:59+0900"
+    "total_unique_urls": 410,
+    "total_occurrences": 1163,
+    "timestamp": "2026-07-19T03:26:13+0900"
   },
   "summary": {
-    "ok": 354,
-    "anti-bot": 21,
-    "error": 1
+    "ok": 397,
+    "error": 4,
+    "anti-bot": 8,
+    "timeout": 1
   },
   "urls": [
     {
@@ -200,7 +201,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 664
+          "line": 745
         },
         {
           "file": "references/ch10.bib",
@@ -247,6 +248,31 @@
       ]
     },
     {
+      "url": "https://ai.google.dev/gemini-api/docs/deep-research",
+      "status_code": 302,
+      "category": "error",
+      "error": "HTTP 302",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 283
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 317
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 995
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 272
+        }
+      ]
+    },
+    {
       "url": "https://algs4.cs.princeton.edu/",
       "status_code": 200,
       "category": "ok",
@@ -268,11 +294,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 383
+          "line": 464
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 708
+          "line": 789
         }
       ]
     },
@@ -332,11 +358,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 625
+          "line": 765
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 806
+          "line": 985
         },
         {
           "file": "chapters/appendix_a_learning_patterns.md",
@@ -348,7 +374,7 @@
         },
         {
           "file": "references/ch00.bib",
-          "line": 115
+          "line": 163
         }
       ]
     },
@@ -360,12 +386,24 @@
       "final_url": null,
       "locations": [
         {
+          "file": "chapters/00_ai_agent.md",
+          "line": 702
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 986
+        },
+        {
           "file": "chapters/hajimeni.md",
           "line": 10
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 132
+          "line": 142
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 198
         },
         {
           "file": "references/hajimeni.bib",
@@ -382,11 +420,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 490
+          "line": 563
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 804
+          "line": 983
         },
         {
           "file": "chapters/appendix_a_learning_patterns.md",
@@ -410,12 +448,42 @@
       "final_url": null,
       "locations": [
         {
+          "file": "references/ch00.bib",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2403.07974",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
           "file": "chapters/00_ai_agent.md",
-          "line": 797
+          "line": 704
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 987
         },
         {
           "file": "references/ch00.bib",
-          "line": 30
+          "line": 206
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2405.15793",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 976
         }
       ]
     },
@@ -432,7 +500,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 152
+          "line": 162
         },
         {
           "file": "references/hajimeni.bib",
@@ -458,6 +526,56 @@
       ]
     },
     {
+      "url": "https://arxiv.org/abs/2508.05668",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 283
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 319
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 996
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 281
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2508.12752",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 283
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 319
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 997
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 289
+        }
+      ]
+    },
+    {
       "url": "https://arxiv.org/abs/2511.02824",
       "status_code": 200,
       "category": "ok",
@@ -470,11 +588,32 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 154
+          "line": 164
         },
         {
           "file": "references/hajimeni.bib",
           "line": 198
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2601.11868",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 705
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 988
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 214
         }
       ]
     },
@@ -499,7 +638,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 143
+          "line": 153
         },
         {
           "file": "references/appendix_a.bib",
@@ -512,11 +651,36 @@
       ]
     },
     {
+      "url": "https://arxiv.org/abs/2604.03515",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 725
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 727
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 989
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 221
+        }
+      ]
+    },
+    {
       "url": "https://astral.sh/uv/install.sh",
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://release-assets.githubusercontent.com/github-production-release-asset/699532645/23829516-dcc2-44de-97ee-6c98471a68af?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-03-31T10%3A36%3A16Z&rscd=attachment%3B+filename%3Duv-installer.sh&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-03-31T09%3A35%3A49Z&ske=2026-03-31T10%3A36%3A16Z&sks=b&skv=2018-11-09&sig=k%2BUZoPKOwdSkAB8Nsn8QpgJGJw3LUryaF4Z2xM5qdWo%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc3NDk1MDIwOCwibmJmIjoxNzc0OTQ5OTA4LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.g_ZeIYq-RhTlQcaRM3LLCAn2HNYvlHTYChs_vCx5Fy0&response-content-disposition=attachment%3B%20filename%3Duv-installer.sh&response-content-type=application%2Foctet-stream",
+      "final_url": "https://releases.astral.sh/installers/uv/latest/uv-installer.sh",
       "locations": [
         {
           "file": "chapters/06_dev_environment.md",
@@ -533,7 +697,7 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 739
+          "line": 758
         }
       ]
     },
@@ -567,7 +731,7 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 459
+          "line": 532
         },
         {
           "file": "chapters/19_database_api.md",
@@ -584,7 +748,7 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 459
+          "line": 532
         },
         {
           "file": "chapters/19_database_api.md",
@@ -655,7 +819,7 @@
       "locations": [
         {
           "file": "chapters/author.md",
-          "line": 17
+          "line": 19
         }
       ]
     },
@@ -677,6 +841,31 @@
       ]
     },
     {
+      "url": "https://cdn.openai.com/deep-research-system-card.pdf",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 283
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 317
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 993
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 256
+        }
+      ]
+    },
+    {
       "url": "https://choosealicense.com/",
       "status_code": 200,
       "category": "ok",
@@ -685,11 +874,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 341
+          "line": 343
         },
         {
           "file": "chapters/07_git.md",
-          "line": 635
+          "line": 637
         },
         {
           "file": "references/ch07.bib",
@@ -706,11 +895,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 321
+          "line": 323
         },
         {
           "file": "chapters/07_git.md",
-          "line": 631
+          "line": 633
         },
         {
           "file": "references/ch07.bib",
@@ -723,8 +912,12 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/bootstrap.sh",
+      "final_url": "https://downloads.claude.ai/claude-code-releases/bootstrap.sh",
       "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 49
+        },
         {
           "file": "chapters/appendix_b_cli_reference.md",
           "line": 19
@@ -757,11 +950,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 250
+          "line": 252
         },
         {
           "file": "chapters/07_git.md",
-          "line": 625
+          "line": 627
         },
         {
           "file": "references/ch07.bib",
@@ -808,6 +1001,27 @@
       ]
     },
     {
+      "url": "https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 382
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 811
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 211
+        }
+      ]
+    },
+    {
       "url": "https://code.claude.com/docs",
       "status_code": 200,
       "category": "ok",
@@ -820,7 +1034,7 @@
         },
         {
           "file": "chapters/appendix_b_cli_reference.md",
-          "line": 71
+          "line": 73
         }
       ]
     },
@@ -837,16 +1051,58 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 893
+          "line": 901
+        }
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/codex/models",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://learn.chatgpt.com/docs/models",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 650
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 1004
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 154
+        }
+      ]
+    },
+    {
+      "url": "https://dl.acm.org/doi/10.1145/3697010",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 736
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 990
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 230
         }
       ]
     },
     {
       "url": "https://dl.acm.org/doi/10.5555/2600239.2600241",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/15_container.md",
@@ -884,11 +1140,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 542
+          "line": 618
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 799
+          "line": 978
         },
         {
           "file": "references/ch00.bib",
@@ -905,11 +1161,15 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 608
+          "line": 692
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 800
+          "line": 715
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 979
         },
         {
           "file": "references/ch00.bib",
@@ -935,27 +1195,6 @@
       ]
     },
     {
-      "url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking",
-      "status_code": 200,
-      "category": "ok",
-      "error": null,
-      "final_url": "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
-      "locations": [
-        {
-          "file": "chapters/00_ai_agent.md",
-          "line": 580
-        },
-        {
-          "file": "chapters/00_ai_agent.md",
-          "line": 805
-        },
-        {
-          "file": "references/ch00.bib",
-          "line": 106
-        }
-      ]
-    },
-    {
       "url": "https://docs.anthropic.com/en/docs/claude-code",
       "status_code": 200,
       "category": "ok",
@@ -964,19 +1203,36 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 377
+          "line": 450
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 779
+          "line": 650
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 794
+          "line": 958
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 973
         },
         {
           "file": "references/ch00.bib",
           "line": 5
+        }
+      ]
+    },
+    {
+      "url": "https://docs.anthropic.com/en/docs/claude-code/getting-started",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://code.claude.com/docs/en/getting-started",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 55
         }
       ]
     },
@@ -993,7 +1249,7 @@
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 816
+          "line": 829
         },
         {
           "file": "references/ch08.bib",
@@ -1103,19 +1359,19 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 265
+          "line": 267
         },
         {
           "file": "chapters/07_git.md",
-          "line": 627
+          "line": 629
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 599
+          "line": 612
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 826
+          "line": 839
         },
         {
           "file": "references/ch07.bib",
@@ -1124,6 +1380,27 @@
         {
           "file": "references/ch08.bib",
           "line": 68
+        }
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/privacy",
+      "status_code": 404,
+      "category": "error",
+      "error": "HTTP 404",
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 379
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 807
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 195
         }
       ]
     },
@@ -1212,11 +1489,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 441
+          "line": 443
         },
         {
           "file": "chapters/07_git.md",
-          "line": 649
+          "line": 651
         },
         {
           "file": "references/ch07.bib",
@@ -1266,7 +1543,7 @@
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 812
+          "line": 825
         },
         {
           "file": "references/ch08.bib",
@@ -1350,7 +1627,7 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 861
+          "line": 869
         },
         {
           "file": "references/ch04.bib",
@@ -1371,7 +1648,7 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 863
+          "line": 871
         },
         {
           "file": "references/ch04.bib",
@@ -1534,7 +1811,7 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 865
+          "line": 873
         },
         {
           "file": "references/ch04.bib",
@@ -1568,11 +1845,11 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 389
+          "line": 402
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 818
+          "line": 831
         },
         {
           "file": "references/ch08.bib",
@@ -1736,11 +2013,11 @@
       "locations": [
         {
           "file": "chapters/hajimeni.md",
-          "line": 89
+          "line": 90
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 155
+          "line": 165
         }
       ]
     },
@@ -1836,10 +2113,10 @@
     },
     {
       "url": "https://doi.org/10.1002/0471448354",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://onlinelibrary.wiley.com/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
@@ -1847,17 +2124,17 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 887
+          "line": 895
         },
         {
           "file": "references/ch04.bib",
-          "line": 143
+          "line": 147
         }
       ]
     },
     {
       "url": "https://doi.org/10.1002/j.1538-7305.1978.tb02135.x",
-      "status_code": 200,
+      "status_code": 202,
       "category": "ok",
       "error": null,
       "final_url": "https://ieeexplore.ieee.org/document/6770403",
@@ -1971,7 +2248,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/533452a?error=cookies_not_supported&code=2c650a6e-c78c-4ff9-9641-790db9917f8e",
+      "final_url": "https://www.nature.com/articles/533452a?error=cookies_not_supported&code=4d7badc4-c185-47e1-b0be-089e4630469e",
       "locations": [
         {
           "file": "chapters/15_container.md",
@@ -1992,7 +2269,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/ng0500_25?error=cookies_not_supported&code=91b27c92-c6e9-443a-aa2d-a8a747ab2c1c",
+      "final_url": "https://www.nature.com/articles/ng0500_25?error=cookies_not_supported&code=196af5ca-04a2-4bd0-9743-fbd463f39a85",
       "locations": [
         {
           "file": "chapters/19_database_api.md",
@@ -2013,7 +2290,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/nbt.3820?error=cookies_not_supported&code=894c2bce-e132-4d38-8645-bfae618f2cd3",
+      "final_url": "https://www.nature.com/articles/nbt.3820?error=cookies_not_supported&code=9163b11b-2f55-4ec4-ba22-bc05c994709c",
       "locations": [
         {
           "file": "chapters/10_deliverables.md",
@@ -2050,7 +2327,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/ng1201-365?error=cookies_not_supported&code=4c6a03c5-aabc-4d35-af9f-5afad3e4e425",
+      "final_url": "https://www.nature.com/articles/ng1201-365?error=cookies_not_supported&code=89079446-814c-4b45-b11d-b61e4e069927",
       "locations": [
         {
           "file": "chapters/18_documentation.md",
@@ -2071,19 +2348,19 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/nrg3723?error=cookies_not_supported&code=bb25206a-2585-43b7-b4d0-cf93b2a6a2ca",
+      "final_url": "https://www.nature.com/articles/nrg3723?error=cookies_not_supported&code=b4b6eab0-4c1e-4d3e-8a64-d2265bb3ede5",
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 408
+          "line": 489
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 646
+          "line": 727
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 670
+          "line": 751
         },
         {
           "file": "references/ch20.bib",
@@ -2096,7 +2373,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41467-020-19160-7?error=cookies_not_supported&code=ea0aa08b-cff9-444f-a3dc-075b25e68f4b",
+      "final_url": "https://www.nature.com/articles/s41467-020-19160-7?error=cookies_not_supported&code=8ca9aebc-43db-48fc-be74-2e97c93f66cf",
       "locations": [
         {
           "file": "chapters/13_visualization.md",
@@ -2117,7 +2394,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41586-020-2649-2?error=cookies_not_supported&code=03a428f4-0dcb-42d6-9517-b3dab550d11f",
+      "final_url": "https://www.nature.com/articles/s41586-020-2649-2?error=cookies_not_supported&code=88494a9e-6770-4c7e-90f0-eee573e150ef",
       "locations": [
         {
           "file": "chapters/12_data_processing.md",
@@ -2134,7 +2411,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41586-023-06139-9?error=cookies_not_supported&code=70e980c8-ced6-40b5-ba5c-c92a6c4d6a75",
+      "final_url": "https://www.nature.com/articles/s41586-023-06139-9?error=cookies_not_supported&code=8eb3533c-a98c-4aaf-88e3-3131c03f969c",
       "locations": [
         {
           "file": "chapters/hajimeni.md",
@@ -2142,7 +2419,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 149
+          "line": 159
         },
         {
           "file": "references/hajimeni.bib",
@@ -2155,7 +2432,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41586-023-06221-2?error=cookies_not_supported&code=144ddd5b-c0b6-4472-9148-7d46518f4264",
+      "final_url": "https://www.nature.com/articles/s41586-023-06221-2?error=cookies_not_supported&code=ff97e15e-3e09-42d7-8bdf-297301e45797",
       "locations": [
         {
           "file": "chapters/hajimeni.md",
@@ -2163,7 +2440,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 144
+          "line": 154
         },
         {
           "file": "references/hajimeni.bib",
@@ -2176,15 +2453,15 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41586-023-06647-8?error=cookies_not_supported&code=392d172f-fcc9-4186-ab1b-66da6067c539",
+      "final_url": "https://www.nature.com/articles/s41586-023-06647-8?error=cookies_not_supported&code=8add2b12-ae70-42b0-a04c-8f08b3df55bc",
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 788
+          "line": 967
         },
         {
           "file": "references/ch00.bib",
-          "line": 142
+          "line": 190
         }
       ]
     },
@@ -2193,7 +2470,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41587-020-0439-x?error=cookies_not_supported&code=c71e77b3-d82f-4fe2-824b-5548d88effd4",
+      "final_url": "https://www.nature.com/articles/s41587-020-0439-x?error=cookies_not_supported&code=fcba1843-6f09-4438-91bd-035f429268db",
       "locations": [
         {
           "file": "chapters/14_workflow.md",
@@ -2214,11 +2491,32 @@
       ]
     },
     {
+      "url": "https://doi.org/10.1038/s41588-020-0669-3",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://www.nature.com/articles/s41588-020-0669-3?error=cookies_not_supported&code=bb81ce26-a26b-4111-8d1e-6f55f3cf95eb",
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 263
+        },
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 879
+        },
+        {
+          "file": "references/ch04.bib",
+          "line": 130
+        }
+      ]
+    },
+    {
       "url": "https://doi.org/10.1038/s41592-018-0046-7",
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41592-018-0046-7?error=cookies_not_supported&code=17864f45-a9a8-4fd3-8677-217aa8deecf3",
+      "final_url": "https://www.nature.com/articles/s41592-018-0046-7?error=cookies_not_supported&code=d3758cf7-d3bc-453a-9901-7110906b88dd",
       "locations": [
         {
           "file": "chapters/06_dev_environment.md",
@@ -2279,7 +2577,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41592-019-0686-2?error=cookies_not_supported&code=0bfd4fb3-b1cb-48ef-b7db-eb922865459b",
+      "final_url": "https://www.nature.com/articles/s41592-019-0686-2?error=cookies_not_supported&code=0052d069-4374-456c-85e7-88a681cc90ff",
       "locations": [
         {
           "file": "chapters/12_data_processing.md",
@@ -2300,7 +2598,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41592-024-02201-0?error=cookies_not_supported&code=546771a2-5fd6-499a-af0c-4606e22e4fa5",
+      "final_url": "https://www.nature.com/articles/s41592-024-02201-0?error=cookies_not_supported&code=05cc5521-6ff5-495e-b276-d631f440003d",
       "locations": [
         {
           "file": "chapters/hajimeni.md",
@@ -2308,7 +2606,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 148
+          "line": 158
         },
         {
           "file": "references/hajimeni.bib",
@@ -2321,7 +2619,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/sdata201618?error=cookies_not_supported&code=dd66b7ea-6d4d-49b3-b30c-322a08736014",
+      "final_url": "https://www.nature.com/articles/sdata201618?error=cookies_not_supported&code=2ab8caff-d1c2-4635-9994-3816285ebe6e",
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
@@ -2333,11 +2631,11 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 844
+          "line": 852
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 891
+          "line": 899
         },
         {
           "file": "chapters/19_database_api.md",
@@ -2349,7 +2647,7 @@
         },
         {
           "file": "references/ch04.bib",
-          "line": 162
+          "line": 166
         },
         {
           "file": "references/ch19.bib",
@@ -2380,14 +2678,14 @@
     },
     {
       "url": "https://doi.org/10.1101/gr.229102",
-      "status_code": 200,
-      "category": "ok",
-      "error": null,
-      "final_url": "https://genome.cshlp.org/content/12/6/996",
+      "status_code": 302,
+      "category": "error",
+      "error": "HTTP 302",
+      "final_url": null,
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 885
+          "line": 893
         },
         {
           "file": "references/ch04.bib",
@@ -2397,7 +2695,7 @@
     },
     {
       "url": "https://doi.org/10.1109/DSAA.2018.00006",
-      "status_code": 200,
+      "status_code": 202,
       "category": "ok",
       "error": null,
       "final_url": "https://ieeexplore.ieee.org/document/8631415/",
@@ -2410,18 +2708,18 @@
     },
     {
       "url": "https://doi.org/10.1109/ICSE.2013.6606617",
-      "status_code": 200,
+      "status_code": 202,
       "category": "ok",
       "error": null,
       "final_url": "https://ieeexplore.ieee.org/document/6606617/",
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 467
+          "line": 540
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 803
+          "line": 982
         },
         {
           "file": "chapters/21_collaboration.md",
@@ -2447,7 +2745,7 @@
     },
     {
       "url": "https://doi.org/10.1109/MCSE.2007.55",
-      "status_code": 200,
+      "status_code": 202,
       "category": "ok",
       "error": null,
       "final_url": "https://ieeexplore.ieee.org/document/4160265/",
@@ -2468,10 +2766,10 @@
     },
     {
       "url": "https://doi.org/10.1126/science.ado9336",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://www.science.org/doi/10.1126/science.ado9336",
       "locations": [
         {
           "file": "chapters/hajimeni.md",
@@ -2479,7 +2777,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 150
+          "line": 160
         },
         {
           "file": "references/hajimeni.bib",
@@ -2489,18 +2787,18 @@
     },
     {
       "url": "https://doi.org/10.1142/S0218488502001648",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://www.worldscientific.com/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 412
+          "line": 493
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 682
+          "line": 763
         },
         {
           "file": "references/ch20.bib",
@@ -2510,10 +2808,10 @@
     },
     {
       "url": "https://doi.org/10.1145/103162.103163",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/03_cs_basics.md",
@@ -2535,10 +2833,10 @@
     },
     {
       "url": "https://doi.org/10.1145/1465482.1465560",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/17_performance.md",
@@ -2556,14 +2854,14 @@
     },
     {
       "url": "https://doi.org/10.1145/2643130",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 756
+          "line": 775
         },
         {
           "file": "references/ch16.bib",
@@ -2573,10 +2871,10 @@
     },
     {
       "url": "https://doi.org/10.1145/2723872.2723882",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/15_container.md",
@@ -2594,10 +2892,10 @@
     },
     {
       "url": "https://doi.org/10.1145/272991.272995",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/03_cs_basics.md",
@@ -2615,10 +2913,10 @@
     },
     {
       "url": "https://doi.org/10.1145/3287560.3287596",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/18_documentation.md",
@@ -2636,10 +2934,10 @@
     },
     {
       "url": "https://doi.org/10.1145/3544548.3580919",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/appendix_a_learning_patterns.md",
@@ -2653,10 +2951,10 @@
     },
     {
       "url": "https://doi.org/10.1145/356635.356640",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://dl.acm.org/action/cookieAbsent",
       "locations": [
         {
           "file": "chapters/17_performance.md",
@@ -2681,11 +2979,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 544
+          "line": 620
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 798
+          "line": 977
         },
         {
           "file": "references/ch00.bib",
@@ -2698,7 +2996,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://link.springer.com/article/10.1186/s13059-016-1044-7?error=cookies_not_supported&code=3ad714bb-de7c-4512-91b2-ba2644b1d481",
+      "final_url": "https://link.springer.com/article/10.1186/s13059-016-1044-7?error=cookies_not_supported&code=c9ea0b22-013d-4653-9660-ca0af7faf629",
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
@@ -2706,7 +3004,7 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 867
+          "line": 875
         },
         {
           "file": "references/ch04.bib",
@@ -2719,7 +3017,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://link.springer.com/article/10.1186/s13059-017-1382-0?error=cookies_not_supported&code=43fce4d0-7a08-44bc-8968-fabd9594a8e5",
+      "final_url": "https://link.springer.com/article/10.1186/s13059-017-1382-0?error=cookies_not_supported&code=10bbdf15-c399-4573-9ae3-4f9a10a6d3f2",
       "locations": [
         {
           "file": "chapters/12_data_processing.md",
@@ -2860,7 +3158,7 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 607
+          "line": 609
         },
         {
           "file": "references/ch07.bib",
@@ -2877,15 +3175,15 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 545
+          "line": 547
         },
         {
           "file": "chapters/07_git.md",
-          "line": 606
+          "line": 608
         },
         {
           "file": "chapters/07_git.md",
-          "line": 641
+          "line": 643
         },
         {
           "file": "references/ch07.bib",
@@ -2985,11 +3283,11 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 253
+          "line": 261
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 869
+          "line": 877
         },
         {
           "file": "references/ch04.bib",
@@ -3031,15 +3329,15 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 558
+          "line": 566
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 843
+          "line": 851
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 873
+          "line": 881
         },
         {
           "file": "references/ch04.bib",
@@ -3102,7 +3400,7 @@
       "locations": [
         {
           "file": "chapters/glossary.md",
-          "line": 213
+          "line": 229
         }
       ]
     },
@@ -3116,10 +3414,6 @@
         {
           "file": "chapters/06_dev_environment.md",
           "line": 379
-        },
-        {
-          "file": "chapters/roadmap.md",
-          "line": 830
         }
       ]
     },
@@ -3153,7 +3447,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 676
+          "line": 757
         },
         {
           "file": "references/ch20.bib",
@@ -3192,6 +3486,19 @@
         {
           "file": "references/ch03.bib",
           "line": 111
+        }
+      ]
+    },
+    {
+      "url": "https://epoch.ai/benchmarks/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://epoch.ai/benchmarks",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 717
         }
       ]
     },
@@ -3281,15 +3588,15 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 624
+          "line": 632
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 877
+          "line": 885
         },
         {
           "file": "references/ch04.bib",
-          "line": 133
+          "line": 137
         }
       ]
     },
@@ -3323,11 +3630,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 420
+          "line": 422
         },
         {
           "file": "chapters/07_git.md",
-          "line": 639
+          "line": 641
         },
         {
           "file": "references/ch07.bib",
@@ -3344,11 +3651,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 602
+          "line": 604
         },
         {
           "file": "chapters/07_git.md",
-          "line": 617
+          "line": 619
         },
         {
           "file": "references/ch07.bib",
@@ -3365,7 +3672,7 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 619
+          "line": 621
         },
         {
           "file": "references/ch07.bib",
@@ -3386,7 +3693,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 140
+          "line": 150
         },
         {
           "file": "references/hajimeni.bib",
@@ -3407,7 +3714,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 139
+          "line": 149
         },
         {
           "file": "references/hajimeni.bib",
@@ -3428,7 +3735,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 137
+          "line": 147
         },
         {
           "file": "references/hajimeni.bib",
@@ -3521,11 +3828,11 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 624
+          "line": 632
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 879
+          "line": 887
         },
         {
           "file": "references/ch04.bib",
@@ -3542,7 +3849,7 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 457
+          "line": 470
         }
       ]
     },
@@ -3559,7 +3866,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 666
+          "line": 747
         },
         {
           "file": "references/ch20.bib",
@@ -3640,6 +3947,19 @@
       ]
     },
     {
+      "url": "https://github.com/dritoshi/ai-biocode-kata/blob/main/scripts/ch04/coordinate_convert.py",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/04_data_formats.md",
+          "line": 692
+        }
+      ]
+    },
+    {
       "url": "https://github.com/genomoncology/biomcp",
       "status_code": 200,
       "category": "ok",
@@ -3669,11 +3989,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 212
+          "line": 214
         },
         {
           "file": "chapters/07_git.md",
-          "line": 623
+          "line": 625
         },
         {
           "file": "references/ch07.bib",
@@ -3795,11 +4115,15 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 377
+          "line": 55
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 795
+          "line": 450
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 974
         },
         {
           "file": "chapters/appendix_b_cli_reference.md",
@@ -3807,11 +4131,24 @@
         },
         {
           "file": "chapters/appendix_b_cli_reference.md",
-          "line": 73
+          "line": 75
         },
         {
           "file": "references/ch00.bib",
           "line": 13
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/openai/codex/releases/latest",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://github.com/openai/codex/releases/tag/rust-v0.144.6",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 50
         }
       ]
     },
@@ -3824,7 +4161,7 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 463
+          "line": 476
         }
       ]
     },
@@ -3862,7 +4199,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 678
+          "line": 759
         },
         {
           "file": "references/ch20.bib",
@@ -3951,6 +4288,27 @@
       ]
     },
     {
+      "url": "https://help.openai.com/en/articles/5722486",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 376
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 803
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 179
+        }
+      ]
+    },
+    {
       "url": "https://help.zenodo.org/docs/deposit/manage-files/",
       "status_code": 200,
       "category": "ok",
@@ -3959,11 +4317,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 451
+          "line": 453
         },
         {
           "file": "chapters/07_git.md",
-          "line": 651
+          "line": 653
         },
         {
           "file": "references/ch07.bib",
@@ -3980,11 +4338,11 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 730
+          "line": 749
         },
         {
           "file": "chapters/16_hpc.md",
-          "line": 752
+          "line": 771
         },
         {
           "file": "references/ch16.bib",
@@ -4001,11 +4359,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 449
+          "line": 451
         },
         {
           "file": "chapters/07_git.md",
-          "line": 647
+          "line": 649
         },
         {
           "file": "references/ch07.bib",
@@ -4176,11 +4534,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 505
+          "line": 507
         },
         {
           "file": "chapters/07_git.md",
-          "line": 645
+          "line": 647
         },
         {
           "file": "chapters/18_documentation.md",
@@ -4213,11 +4571,11 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 97
+          "line": 98
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 158
+          "line": 168
         }
       ]
     },
@@ -4239,6 +4597,19 @@
         {
           "file": "references/ch02.bib",
           "line": 6
+        }
+      ]
+    },
+    {
+      "url": "https://livecodebench.github.io/leaderboard.html",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 717
         }
       ]
     },
@@ -4335,7 +4706,7 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 784
+          "line": 963
         },
         {
           "file": "chapters/02_terminal.md",
@@ -4343,15 +4714,15 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 98
+          "line": 99
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 159
+          "line": 169
         },
         {
           "file": "references/ch00.bib",
-          "line": 130
+          "line": 178
         },
         {
           "file": "references/ch02.bib",
@@ -4431,7 +4802,7 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 804
+          "line": 817
         },
         {
           "file": "references/ch08.bib",
@@ -4448,11 +4819,11 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 389
+          "line": 402
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 820
+          "line": 833
         },
         {
           "file": "references/ch08.bib",
@@ -4469,7 +4840,7 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 654
+          "line": 735
         },
         {
           "file": "references/ch20.bib",
@@ -4490,7 +4861,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 138
+          "line": 148
         },
         {
           "file": "references/hajimeni.bib",
@@ -4608,15 +4979,36 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 485
+          "line": 498
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 824
+          "line": 837
         },
         {
           "file": "references/ch08.bib",
           "line": 60
+        }
+      ]
+    },
+    {
+      "url": "https://openai.com/enterprise-privacy/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 375
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 801
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 171
         }
       ]
     },
@@ -4633,11 +5025,36 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 135
+          "line": 145
         },
         {
           "file": "references/hajimeni.bib",
           "line": 29
+        }
+      ]
+    },
+    {
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 715
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 717
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 1003
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 146
         }
       ]
     },
@@ -4654,7 +5071,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 133
+          "line": 143
         },
         {
           "file": "references/hajimeni.bib",
@@ -4671,7 +5088,7 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 592
+          "line": 594
         }
       ]
     },
@@ -4684,7 +5101,7 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 331
+          "line": 333
         }
       ]
     },
@@ -4697,7 +5114,7 @@
       "locations": [
         {
           "file": "chapters/author.md",
-          "line": 16
+          "line": 18
         }
       ]
     },
@@ -4714,11 +5131,11 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 650
+          "line": 731
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 680
+          "line": 761
         },
         {
           "file": "references/ch20.bib",
@@ -4848,6 +5265,142 @@
       ]
     },
     {
+      "url": "https://platform.claude.com/docs/en/about-claude/models/migration-guide",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 745
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 1000
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8",
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 600
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 658
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 668
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 694
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 736
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 742
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 808
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 1001
+        },
+        {
+          "file": "chapters/appendix_d_agent_vocabulary.md",
+          "line": 57
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 656
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 662
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 747
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 984
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/effort",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 656
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 663
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 668
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 694
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 746
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 999
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 114
+        }
+      ]
+    },
+    {
       "url": "https://plotly.com/python/",
       "status_code": 200,
       "category": "ok",
@@ -4881,11 +5434,11 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 442
+          "line": 455
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 822
+          "line": 835
         },
         {
           "file": "references/ch08.bib",
@@ -4948,11 +5501,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 684
+          "line": 826
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 801
+          "line": 980
         },
         {
           "file": "chapters/12_data_processing.md",
@@ -5010,11 +5563,11 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 623
+          "line": 631
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 875
+          "line": 883
         },
         {
           "file": "chapters/11_cli.md",
@@ -5080,11 +5633,11 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 849
+          "line": 857
         },
         {
           "file": "references/ch04.bib",
-          "line": 182
+          "line": 186
         }
       ]
     },
@@ -5097,11 +5650,11 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 625
+          "line": 633
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 881
+          "line": 889
         },
         {
           "file": "references/ch04.bib",
@@ -5118,11 +5671,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 686
+          "line": 828
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 802
+          "line": 981
         },
         {
           "file": "references/ch00.bib",
@@ -5139,11 +5692,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 507
+          "line": 588
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 668
+          "line": 749
         },
         {
           "file": "references/ch20.bib",
@@ -5373,12 +5926,24 @@
       "final_url": null,
       "locations": [
         {
+          "file": "chapters/00_ai_agent.md",
+          "line": 721
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 991
+        },
+        {
           "file": "chapters/appendix_a_learning_patterns.md",
           "line": 83
         },
         {
           "file": "references/appendix_a.bib",
           "line": 73
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 241
         }
       ]
     },
@@ -5416,7 +5981,7 @@
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 814
+          "line": 827
         },
         {
           "file": "references/ch08.bib",
@@ -5475,7 +6040,28 @@
       "locations": [
         {
           "file": "chapters/author.md",
-          "line": 15
+          "line": 17
+        }
+      ]
+    },
+    {
+      "url": "https://resources.github.com/copilot-trust-center/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": "https://github.com/trust-center",
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 378
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 805
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 187
         }
       ]
     },
@@ -5552,7 +6138,7 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 754
+          "line": 773
         },
         {
           "file": "references/ch16.bib",
@@ -5569,11 +6155,11 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 848
+          "line": 856
         },
         {
           "file": "references/ch04.bib",
-          "line": 169
+          "line": 173
         }
       ]
     },
@@ -5607,7 +6193,7 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 883
+          "line": 891
         },
         {
           "file": "references/ch04.bib",
@@ -5666,11 +6252,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 485
+          "line": 487
         },
         {
           "file": "chapters/07_git.md",
-          "line": 643
+          "line": 645
         },
         {
           "file": "references/ch07.bib",
@@ -5700,7 +6286,7 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 611
+          "line": 613
         },
         {
           "file": "references/ch07.bib",
@@ -5717,11 +6303,11 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 726
+          "line": 745
         },
         {
           "file": "chapters/16_hpc.md",
-          "line": 746
+          "line": 765
         },
         {
           "file": "references/ch16.bib",
@@ -5738,7 +6324,7 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 750
+          "line": 769
         },
         {
           "file": "references/ch16.bib",
@@ -5755,7 +6341,7 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 748
+          "line": 767
         },
         {
           "file": "references/ch16.bib",
@@ -5936,15 +6522,36 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 731
+          "line": 750
         },
         {
           "file": "chapters/16_hpc.md",
-          "line": 760
+          "line": 779
         },
         {
           "file": "references/ch16.bib",
           "line": 59
+        }
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemini/answer/13594961",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 381
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 809
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 203
         }
       ]
     },
@@ -5957,11 +6564,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 382
+          "line": 463
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 706
+          "line": 787
         }
       ]
     },
@@ -5975,6 +6582,19 @@
         {
           "file": "chapters/19_database_api.md",
           "line": 275
+        }
+      ]
+    },
+    {
+      "url": "https://togomcp.rdfportal.org/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 532
         }
       ]
     },
@@ -5995,11 +6615,11 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 104
+          "line": 105
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 160
+          "line": 170
         }
       ]
     },
@@ -6037,11 +6657,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 385
+          "line": 466
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 712
+          "line": 793
         }
       ]
     },
@@ -6054,11 +6674,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 374
+          "line": 455
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 704
+          "line": 785
         }
       ]
     },
@@ -6071,11 +6691,11 @@
       "locations": [
         {
           "file": "chapters/hajimeni.md",
-          "line": 90
+          "line": 91
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 156
+          "line": 166
         }
       ]
     },
@@ -6097,11 +6717,11 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://www.amazon.co.jp/black-curtain/black-curtain?ie=UTF8&returnUrl=%2Fdp%2F012420158X",
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 735
+          "line": 754
         }
       ]
     },
@@ -6174,7 +6794,7 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 795
+          "line": 808
         }
       ]
     },
@@ -6252,7 +6872,7 @@
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
-          "line": 853
+          "line": 861
         },
         {
           "file": "chapters/12_data_processing.md",
@@ -6308,7 +6928,7 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 800
+          "line": 813
         }
       ]
     },
@@ -6339,7 +6959,7 @@
       ]
     },
     {
-      "url": "https://www.amazon.co.jp/dp/4815701431",
+      "url": "https://www.amazon.co.jp/dp/4815731063",
       "status_code": 200,
       "category": "ok",
       "error": null,
@@ -6347,11 +6967,11 @@
       "locations": [
         {
           "file": "chapters/hajimeni.md",
-          "line": 105
+          "line": 106
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 161
+          "line": 171
         }
       ]
     },
@@ -6364,11 +6984,11 @@
       "locations": [
         {
           "file": "chapters/hajimeni.md",
-          "line": 106
+          "line": 107
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 162
+          "line": 172
         }
       ]
     },
@@ -6381,11 +7001,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 548
+          "line": 629
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 700
+          "line": 781
         }
       ]
     },
@@ -6402,7 +7022,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 136
+          "line": 146
         },
         {
           "file": "references/hajimeni.bib",
@@ -6415,19 +7035,19 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://code.claude.com/docs",
+      "final_url": "https://code.claude.com/docs/en/best-practices",
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 241
+          "line": 244
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 251
+          "line": 254
         },
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 796
+          "line": 975
         },
         {
           "file": "chapters/appendix_a_learning_patterns.md",
@@ -6444,6 +7064,85 @@
       ]
     },
     {
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 283
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 317
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 994
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 264
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/legal/commercial-terms",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 373
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 799
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 163
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/legal/privacy",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 876
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 992
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 372
+        },
+        {
+          "file": "chapters/20_security_ethics.md",
+          "line": 797
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 248
+        },
+        {
+          "file": "references/ch20.bib",
+          "line": 155
+        }
+      ]
+    },
+    {
       "url": "https://www.anthropic.com/news/claude-opus-4-5",
       "status_code": 200,
       "category": "ok",
@@ -6456,11 +7155,32 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 134
+          "line": 144
         },
         {
           "file": "references/hajimeni.bib",
           "line": 21
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/news/claude-opus-4-7",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 715
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 1002
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 138
         }
       ]
     },
@@ -6473,11 +7193,11 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 780
+          "line": 959
         },
         {
           "file": "references/ch00.bib",
-          "line": 122
+          "line": 170
         }
       ]
     },
@@ -6500,9 +7220,9 @@
     },
     {
       "url": "https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1",
-      "status_code": 403,
-      "category": "anti-bot",
-      "error": null,
+      "status_code": null,
+      "category": "timeout",
+      "error": "Timeout",
       "final_url": null,
       "locations": [
         {
@@ -6511,7 +7231,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 153
+          "line": 163
         },
         {
           "file": "references/hajimeni.bib",
@@ -6557,11 +7277,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 384
+          "line": 465
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 710
+          "line": 791
         }
       ]
     },
@@ -6574,7 +7294,7 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 758
+          "line": 777
         },
         {
           "file": "references/ch16.bib",
@@ -6591,14 +7311,14 @@
       "locations": [
         {
           "file": "chapters/16_hpc.md",
-          "line": 740
+          "line": 759
         }
       ]
     },
     {
       "url": "https://www.collinsdictionary.com/us/woty/",
-      "status_code": 200,
-      "category": "ok",
+      "status_code": 403,
+      "category": "anti-bot",
       "error": null,
       "final_url": null,
       "locations": [
@@ -6608,7 +7328,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 142
+          "line": 152
         },
         {
           "file": "references/hajimeni.bib",
@@ -6655,11 +7375,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 382
+          "line": 384
         },
         {
           "file": "chapters/07_git.md",
-          "line": 637
+          "line": 639
         },
         {
           "file": "references/ch07.bib",
@@ -6676,7 +7396,7 @@
       "locations": [
         {
           "file": "chapters/08_testing.md",
-          "line": 796
+          "line": 809
         },
         {
           "file": "references/ch08.bib",
@@ -6718,7 +7438,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 674
+          "line": 755
         },
         {
           "file": "references/ch20.bib",
@@ -6735,11 +7455,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 386
+          "line": 467
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 714
+          "line": 795
         }
       ]
     },
@@ -6756,7 +7476,7 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 895
+          "line": 903
         }
       ]
     },
@@ -6786,7 +7506,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en",
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
@@ -6794,7 +7514,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 692
+          "line": 773
         },
         {
           "file": "references/ch20.bib",
@@ -6828,7 +7548,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 690
+          "line": 771
         },
         {
           "file": "references/ch20.bib",
@@ -6849,32 +7569,11 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 889
+          "line": 897
         },
         {
           "file": "references/ch04.bib",
-          "line": 150
-        }
-      ]
-    },
-    {
-      "url": "https://www.genenames.org/about/guidelines/",
-      "status_code": 200,
-      "category": "ok",
-      "error": null,
-      "final_url": null,
-      "locations": [
-        {
-          "file": "chapters/04_data_formats.md",
-          "line": 255
-        },
-        {
-          "file": "chapters/04_data_formats.md",
-          "line": 871
-        },
-        {
-          "file": "references/ch04.bib",
-          "line": 125
+          "line": 154
         }
       ]
     },
@@ -6925,7 +7624,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 694
+          "line": 775
         },
         {
           "file": "references/ch20.bib",
@@ -6967,7 +7666,7 @@
         },
         {
           "file": "chapters/08_testing.md",
-          "line": 810
+          "line": 823
         }
       ]
     },
@@ -6980,11 +7679,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 529
+          "line": 610
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 688
+          "line": 769
         },
         {
           "file": "references/ch20.bib",
@@ -7001,11 +7700,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 547
+          "line": 628
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 698
+          "line": 779
         }
       ]
     },
@@ -7018,7 +7717,7 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 658
+          "line": 739
         },
         {
           "file": "references/ch20.bib",
@@ -7035,11 +7734,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 542
+          "line": 623
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 696
+          "line": 777
         }
       ]
     },
@@ -7069,7 +7768,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": "https://www.nature.com/articles/s41586-026-10265-5?error=cookies_not_supported&code=c80e2ffd-eb03-4e8c-b2fd-a347d74b16d9",
+      "final_url": "https://www.nature.com/articles/s41586-026-10265-5?error=cookies_not_supported&code=bc3c4304-07d3-4483-af9e-3505d719621b",
       "locations": [
         {
           "file": "chapters/hajimeni.md",
@@ -7077,7 +7776,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 151
+          "line": 161
         },
         {
           "file": "references/hajimeni.bib",
@@ -7169,7 +7868,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 672
+          "line": 753
         },
         {
           "file": "references/ch20.bib",
@@ -7186,7 +7885,7 @@
       "locations": [
         {
           "file": "chapters/00_ai_agent.md",
-          "line": 80
+          "line": 83
         }
       ]
     },
@@ -7212,11 +7911,11 @@
       "locations": [
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 549
+          "line": 630
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 702
+          "line": 783
         }
       ]
     },
@@ -7225,7 +7924,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://docs.seqera.io/nextflow/",
       "locations": [
         {
           "file": "chapters/14_workflow.md",
@@ -7250,7 +7949,7 @@
       "locations": [
         {
           "file": "chapters/author.md",
-          "line": 17
+          "line": 19
         }
       ]
     },
@@ -7267,7 +7966,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 147
+          "line": 157
         },
         {
           "file": "references/hajimeni.bib",
@@ -7305,7 +8004,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 684
+          "line": 765
         },
         {
           "file": "references/ch20.bib",
@@ -7339,7 +8038,7 @@
       "status_code": 200,
       "category": "ok",
       "error": null,
-      "final_url": null,
+      "final_url": "https://www.rfc-editor.org/info/rfc4180/",
       "locations": [
         {
           "file": "chapters/04_data_formats.md",
@@ -7347,7 +8046,7 @@
         },
         {
           "file": "chapters/04_data_formats.md",
-          "line": 859
+          "line": 867
         },
         {
           "file": "references/ch04.bib",
@@ -7368,7 +8067,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 146
+          "line": 156
         },
         {
           "file": "references/hajimeni.bib",
@@ -7398,6 +8097,23 @@
       ]
     },
     {
+      "url": "https://www.swebench.com/",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 715
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 717
+        }
+      ]
+    },
+    {
       "url": "https://www.toptal.com/developers/gitignore",
       "status_code": 200,
       "category": "ok",
@@ -7406,11 +8122,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 212
+          "line": 214
         },
         {
           "file": "chapters/07_git.md",
-          "line": 621
+          "line": 623
         },
         {
           "file": "references/ch07.bib",
@@ -7469,7 +8185,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 145
+          "line": 155
         },
         {
           "file": "references/hajimeni.bib",
@@ -7490,11 +8206,11 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 91
+          "line": 92
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 157
+          "line": 167
         }
       ]
     },
@@ -7511,7 +8227,7 @@
         },
         {
           "file": "chapters/20_security_ethics.md",
-          "line": 686
+          "line": 767
         },
         {
           "file": "references/ch20.bib",
@@ -7520,9 +8236,56 @@
       ]
     },
     {
+      "url": "https://x.com/OpenAI/status/2021299935678026168",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 317
+        },
+        {
+          "file": "chapters/00_ai_agent.md",
+          "line": 998
+        },
+        {
+          "file": "references/ch00.bib",
+          "line": 296
+        }
+      ]
+    },
+    {
+      "url": "https://x.com/dritoshi",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/author.md",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "url": "https://x.com/dritoshien",
+      "status_code": 200,
+      "category": "ok",
+      "error": null,
+      "final_url": null,
+      "locations": [
+        {
+          "file": "chapters/author.md",
+          "line": 20
+        }
+      ]
+    },
+    {
       "url": "https://x.com/karpathy/status/1886192184808149383",
-      "status_code": 403,
-      "category": "anti-bot",
+      "status_code": 200,
+      "category": "ok",
       "error": null,
       "final_url": null,
       "locations": [
@@ -7536,7 +8299,7 @@
         },
         {
           "file": "chapters/hajimeni.md",
-          "line": 141
+          "line": 151
         },
         {
           "file": "references/appendix_a.bib",
@@ -7578,11 +8341,11 @@
       "locations": [
         {
           "file": "chapters/07_git.md",
-          "line": 315
+          "line": 317
         },
         {
           "file": "chapters/07_git.md",
-          "line": 629
+          "line": 631
         },
         {
           "file": "references/ch07.bib",
