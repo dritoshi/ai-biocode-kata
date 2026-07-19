@@ -447,7 +447,7 @@ DR に投げるプロンプトは、CLI エージェントへの指示とはや�
 
 ## 0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）
 
-プロジェクトのルートに設定ファイルを置くことで、エージェントの振る舞いをカスタマイズできる[1](https://docs.anthropic.com/en/docs/claude-code) [2](https://github.com/openai/codex)。この設定ファイルは、エージェントがセッション開始時に自動的に読み込む「プロジェクトの取扱説明書」のようなものである。
+プロジェクトのルートに設定ファイルを置くことで、エージェントの振る舞いをカスタマイズできる[1](https://code.claude.com/docs) [2](https://github.com/openai/codex)。この設定ファイルは、エージェントがセッション開始時に自動的に読み込む「プロジェクトの取扱説明書」のようなものである。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
@@ -636,55 +636,73 @@ AIコーディングエージェントの**最大の制約はコンテキスト�
 
 ## 0-7. モデル選択・推論の深さ・コスト意識
 
-AIコーディングエージェントの性能を調整するには、「どのモデルを使うか」と「どれだけ深く考えさせるか」の2つの軸がある。料理に喩えるなら、モデルの選択は「どのランクのシェフに頼むか」、推論の深さは「どれだけ時間をかけて調理するか」に対応する。
+AIコーディングエージェントの出力は、3つの軸で調整できる。「どのモデルを使うか」「どれだけ深く考えさせるか」、そして「そのモデルが自分の扱う分野を引き受けてくれるか」である。はじめの2つは料理に喩えられる。モデルの選択は「どのランクのシェフに頼むか」、推論の深さは「どれだけ時間をかけて調理するか」に対応する。3つ目はバイオインフォマティクスを扱う読者に固有の事情であり、本節の後半で改めて述べる。
+
+この節が扱う具体的なモデル名・既定値・推奨値は、モデル世代の交代とともに変わる。そこで本文では**変わりにくい判断の軸**を説明し、変わりやすい具体値には最終確認日を添えた。読者が本書を読む時点での推奨は、各社の公式ドキュメント[1](https://code.claude.com/docs) [32](https://learn.chatgpt.com/docs/models) で確認してほしい。
 
 ### モデルの階層
 
+どちらのツールも、能力とコストの異なる複数のモデルを切り替えて使う。骨格は「最上位・バランス・軽量」の3階層である。ただし**階層の数も、モデルの選ばせ方も、世代交代で変わる**。実際、本書が2026年4月に想定していた構成は、3か月後には両ツールとも変わっていた。Claude Code CLI では従来の最上位のさらに上のクラスが加わり、Codex CLI ではモデル名を直接選ばせず「速さ ←→ 賢さ」のスライダーで指定する方式が既定になった。
+
+ここで押さえておきたいのは、**Codex CLI がモデル選択と推論の深さを1つのスライダーに統合したのに対し、Claude Code CLI は2つを別々のコマンドに分けたままである**という違いである。同じ「使い分け」でも、読者が触るつまみの数が違う。
+
+> **モデル世代に依存する記述** — 最終確認: 2026-07-19。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[33](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[32](https://learn.chatgpt.com/docs/models) を参照。
+
 | 役割 | Claude Code CLI | Codex CLI |
 |-----|-------------|-----------|
-| 最高精度（複雑な設計判断、レビュー） | **Opus** | **GPT-5.5** |
-| バランス（日常の実装、デフォルト） | **Sonnet** | **GPT-5.4** |
-| 高速・低コスト（探索、簡単な修正） | **Haiku** | **GPT-5.4-mini** |
-| 切り替え方法 | `/model` | `/model` |
+| 最上位 | Fable 5（`/model fable`。ただし後述する制約がある） | スライダーを Smarter 側へ |
+| 標準 | Opus 4.8 | 既定位置「Power」＝ Sol ＋ 推論 medium |
+| バランス | Sonnet 5 | Terra |
+| 軽量 | Haiku 4.5 | Luna |
+| 選び方 | `/model` でモデル、`/effort` で深さ | スライダー、または Advanced で個別指定 |
 
-両ツールの最新モデルラインナップは公式ドキュメント[1](https://docs.anthropic.com/en/docs/claude-code) [32](https://developers.openai.com/codex/models) を参照されたい。
+起動時にどのモデルが選ばれるかは契約プランによって異なる。Claude Code CLI では Max 系の契約が Opus 4.8、Pro 系が Sonnet 5 で起動する[33](https://code.claude.com/docs/en/model-config)。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
 
-### 推論の深さ（Reasoning Depth）— 2つ目の調整軸
+### 推論の深さ — 2つ目の調整軸
 
-モデル選択とは**独立して**、エージェントにどれだけ「考えさせるか」を調整できる。推論を深くするほど精度が上がるが、応答時間（レイテンシ）とコストが増える。
+モデル選択とは**独立して**、エージェントにどれだけ働かせるかを調整できる。Claude Code CLI ではこれを **effort**[27](https://platform.claude.com/docs/en/build-with-claude/effort)、Codex CLI では **Reasoning Effort** と呼ぶ。
 
-現在の Claude モデルは、モデル自身がタスクの複雑さに応じて思考量を自動決定する **Adaptive thinking**[12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) と、その強度を段階的に指定する **effort** パラメータ[27](https://platform.claude.com/docs/en/build-with-claude/effort) の組み合わせで推論の深さを制御する。Codex CLI は **Reasoning Effort** で同様の制御を行う。
+この軸を「考える時間の長さ」とだけ理解すると使いこなせない。effort が実際に変えるのは思考量だけではなく、**エージェントの仕事の進め方そのもの**である。低い effort では複数の操作を1回のツール呼び出しにまとめ、呼び出し回数を減らし、前置きなしに行動し、完了報告も簡潔になる。高い effort ではツール呼び出しが増え、着手前に計画を説明し、変更点を詳しく要約する[27](https://platform.claude.com/docs/en/build-with-claude/effort)。「深く考えさせる」というより「丁寧に仕事をさせる」つまみだと捉えるほうが実態に近い。
 
-Adaptive thinking の対応状況はモデル世代で異なる。Opus 4.7 は Adaptive が唯一のモードで、旧来の手動指定（`budget_tokens`）は受け付けない[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。Sonnet 4.6 は Adaptive・手動指定の両対応で Adaptive が推奨される。Haiku 4.5 は Adaptive に未対応で、推論を深めたい場合は従来の Extended Thinking を手動で有効にする。
+もう一つの仕組みが **Adaptive thinking**[12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) である。これはモデル自身がタスクの複雑さに応じて思考量を自動決定するもので、対応状況は世代によって異なる。手動でトークン予算を指定する旧来の方式を受け付けないモデルがあり、最新世代には**思考そのものを止められないモデル**もある。
+
+ここで初心者がつまずきやすい点を2つ挙げる。
+
+第一に、**effort の段階名はモデルごとに較正されている**。同じ `high` でも、モデルが変われば実際に費やされるトークン量は変わる[33](https://code.claude.com/docs/en/model-config)。あるモデルで詰めた設定を別のモデルにそのまま持ち込んでも、同じ挙動にはならない。モデルを切り替えたら深さも調整し直す、と考えておきたい。
+
+第二に、**すべてのモデルが effort に対応しているわけではない**。軽量モデルは非対応のことがあり、Claude Code CLI では指定してもエラーにならず、そのモデルが対応する最上位のレベルに黙って丸められる[33](https://code.claude.com/docs/en/model-config)。設定したつもりで効いていない、という状態が起こりうる。
+
+> **モデル世代に依存する記述** — 最終確認: 2026-07-19。段階の名前・数・既定値はいずれも世代交代で変わる。
+
+Claude Code CLI の effort は `low` / `medium` / `high` / `xhigh` / `max` の5段階で、既定は `high` である。`/effort` で変更する。Haiku 4.5 は effort に対応していない[33](https://code.claude.com/docs/en/model-config)。Codex CLI は Low / Medium / High / Extra high / Max / Ultra を UI で選び、既定は Medium、`/reasoning` で変更する[32](https://learn.chatgpt.com/docs/models)。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
-| 推論モード | Adaptive thinking（モデルが自動で思考量を決定）[12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) | Reasoning Effort |
-| 強度指定（effort） | `low` / `medium` / `high` / `xhigh` / `max`[27](https://platform.claude.com/docs/en/build-with-claude/effort) | None / Low / Medium / High / Extra High |
-| 切り替え方法 | `Alt+T`（macOS: `Option+T`）でトグル、または `/model` で effort を変更 | `/model` → Reasoning effort、または`-c model_reasoning_effort="high"` |
-| 計画時の設定 | Plan Mode + 高い effort | `plan_mode_reasoning_effort` で計画時だけ別の深さを設定可能 |
-| 設定の永続化 | — | `~/.codex/config.toml` に `model_reasoning_effort = "high"` |
+| 深さの指定 | `/effort`（`low`〜`max`）[33](https://code.claude.com/docs/en/model-config) | `/reasoning`（Low〜Ultra）[32](https://learn.chatgpt.com/docs/models) |
+| 既定 | `high` | Medium |
+| 思考の切り替え | `Alt+T`（macOS: `Option+T`）でトグル | — |
+| 設定の永続化 | `~/.claude/settings.json` | `~/.codex/config.toml` の `model_reasoning_effort` |
+| 計画時だけ変える | モデルを切り替える `opusplan` エイリアス | `plan_mode_reasoning_effort` |
 
-Claude Opus 4.7 の公式推奨[27](https://platform.claude.com/docs/en/build-with-claude/effort) は、コーディング・エージェント作業で `xhigh` スタート、通常の知的作業で最低 `high`、コスト重視で `medium`、簡単な短タスクで `low`、`max` はフロンティア問題で `xhigh` に余裕がある場合のみ、である。Sonnet 4.6 はレイテンシ抑制のため `medium` を既定値に置くのが推奨されている[27](https://platform.claude.com/docs/en/build-with-claude/effort)。Opus 4.7 は 4.6 より effort 指定を厳格に守る傾向があり、低 effort では「頼まれた範囲」に厳密に絞り込むため、浅い推論が気になる場合はプロンプトで補うより effort を一段上げるのが効果的である[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。
+Claude Code CLI には、そのターンだけ推論を深くする `ultrathink` というキーワードがある。プロンプトのどこかに書けば、セッションの effort 設定を変えずに済む。注意したいのは、**`think hard` や `think more` はキーワードとして認識されず、ただの文章として渡される**点である[33](https://code.claude.com/docs/en/model-config)。よく見かける言い回しだが、効果はない。
 
-### 使い分けの指針
+### 使い分けの指針 — 判断軸は「要件の曖昧さ」
 
-```
-簡単な修正（タイポ修正、1行変更）
-  → 軽量モデル + 低い effort
-    Claude Code: Sonnet 4.6 または Haiku 4.5, effort = low
-    Codex: GPT-5.4-mini, Reasoning = Low
+上位のモデルや深い推論をいつ使うべきか。「タスクが難しいとき」という答えは、実のところ使いにくい。難しさは主観的で、着手する前には見積もれないことが多いからである。
 
-日常的な実装（関数追加、テスト生成）
-  → デフォルトモデル + 中程度の effort
-    Claude Code: Sonnet 4.6, effort = medium
-    Codex: GPT-5.4, Reasoning = Medium
+両社の公式ドキュメントが示す判断軸は、難しさではなく**要件がどれだけ固まっているか**である。Codex CLI の説明が明快で、最上位は「曖昧で、難しく、追加の分析や判断を要するタスク」に、軽量は「**良い結果がどういうものか既に分かっている**、具体的で大量のタスク」に向くとされる[32](https://learn.chatgpt.com/docs/models)。
 
-複雑な設計判断（アーキテクチャ、リファクタリング計画）
-  → 高精度モデル + 高い effort
-    Claude Code: Opus 4.7, effort = xhigh
-    Codex: GPT-5.5, Reasoning = High / Extra High
-```
+この軸はバイオインフォマティクスの作業に素直に対応する。
+
+| 状況 | 例 | 選択 |
+|-----|-----|-----|
+| 良い結果の形がまだ見えていない | どの正規化手法を使うか、バッチ効果をどう扱うか、原因不明のパイプライン不具合の切り分け | 上位モデル、深さを上げる |
+| 方針は決まり、実装に落とす段階 | 決めた手順のスクリプト化、テスト生成、リファクタリング | 既定のまま |
+| 仕様が確定した定型処理 | フォーマット変換、大量ファイルの整形、読み取り中心の探索 | 軽量側へ、深さを下げる |
+
+操作としては、毎回ゼロから選ぶのではなく**既定から必要な方向へ動かす**と考えるとよい。どちらのツールも、大半のタスクで妥当な既定値を用意している。Codex CLI がスライダーという UI を採ったのは、この「既定から動かす」という発想をそのまま形にしたものである。
+
+深さを上げるべき合図もはっきりしている。エージェントが浅い推論で済ませていると感じたら、プロンプトで注意を足すより**深さを一段上げるほうが効く**[27](https://platform.claude.com/docs/en/build-with-claude/effort)。逆に、結果は正しいのに時間がかかりすぎるなら下げる。この上げ下げを実際に試すこと自体が、エージェントとの協働では欠かせない作業になる。
 
 ### コスト意識
 
@@ -970,7 +988,7 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 
 ## 参考文献
 
-- [1](https://docs.anthropic.com/en/docs/claude-code) Anthropic. "Claude Code documentation". https://docs.anthropic.com/en/docs/claude-code (参照日: 2026-03-17)
+- [1](https://code.claude.com/docs) Anthropic. "Claude Code documentation". https://code.claude.com/docs (参照日: 2026-07-19)
 - [2](https://github.com/openai/codex) OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-17)
 - [3](https://www.anthropic.com/engineering/claude-code-best-practices) Anthropic Engineering. "Claude Code: Best practices for agentic coding". https://www.anthropic.com/engineering/claude-code-best-practices (参照日: 2026-03-17)
 - [4](https://arxiv.org/abs/2405.15793) Yang, J., Jimenez, C. E., Wettig, A., Lieret, K., Yao, S., Narasimhan, K., Press, O. "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering". *arXiv preprint*, 2024. https://arxiv.org/abs/2405.15793
@@ -1001,4 +1019,5 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 - [29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7) Anthropic. "What's new in Claude Opus 4.7". https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7 (参照日: 2026-04-25)
 - [30](https://www.anthropic.com/news/claude-opus-4-7) Anthropic. "Introducing Claude Opus 4.7". 2026-04-16. https://www.anthropic.com/news/claude-opus-4-7 (参照日: 2026-04-25)
 - [31](https://openai.com/index/introducing-gpt-5-5/) OpenAI. "Introducing GPT-5.5". 2026-04-23. https://openai.com/index/introducing-gpt-5-5/ (参照日: 2026-04-25)
-- [32](https://developers.openai.com/codex/models) OpenAI. "Models — Codex". https://developers.openai.com/codex/models (参照日: 2026-04-25)
+- [32](https://learn.chatgpt.com/docs/models) OpenAI. "Models — Codex". https://learn.chatgpt.com/docs/models (参照日: 2026-07-19)
+- [33](https://code.claude.com/docs/en/model-config) Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-19)
