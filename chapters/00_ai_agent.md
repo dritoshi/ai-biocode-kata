@@ -642,19 +642,20 @@ AIコーディングエージェントの出力は、3つの軸で調整でき�
 
 ### モデルの階層
 
-どちらのツールも、能力とコストの異なる複数のモデルを切り替えて使う。骨格は「最上位・バランス・軽量」の3階層である。ただし**階層の数も、モデルの選ばせ方も、世代交代で変わる**。実際、本書が2026年4月に想定していた構成は、3か月後には両ツールとも変わっていた。Claude Code CLI では従来の最上位のさらに上のクラスが加わり、Codex CLI ではモデル名を直接選ばせず「速さ ←→ 賢さ」のスライダーで指定する方式が既定になった。
+どちらのツールも、能力とコストの異なる複数のモデルを切り替えて使う。骨格は「最上位・バランス・軽量」の3階層である。ただし**階層の数も、それぞれに割り当てられるモデルも、世代交代で変わる**。実際、本書が2026年4月に想定していた構成は、3か月後には両ツールとも入れ替わっていた。Claude Code CLI では従来の最上位のさらに上に新しいクラスが加わり、Codex CLI ではモデル名が一新された。
 
-ここで押さえておきたいのは、**Codex CLI がモデル選択と推論の深さを1つのスライダーに統合したのに対し、Claude Code CLI は2つを別々のコマンドに分けたままである**という違いである。同じ「使い分け」でも、読者が触るつまみの数が違う。
+モデルの選び方には、両ツールで微妙な違いがある。**Claude Code CLI はモデルの選択と推論の深さを別々のコマンドに分けている**（それぞれ `/model` と `/effort`）**のに対し、Codex CLI は `/model` の一つでモデルと推論の深さをまとめて選ぶ**[2](https://github.com/openai/codex)。同じ「使い分け」でも、読者が操作する道具立てが異なる。
 
 > **モデル世代に依存する記述** — 最終確認: 2026-07-19。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[33](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[32](https://learn.chatgpt.com/docs/models) を参照。
 
 | 役割 | Claude Code CLI | Codex CLI |
 |-----|-------------|-----------|
-| 最上位 | Fable 5（`/model fable`。ただし後述する制約がある） | スライダーを Smarter 側へ |
-| 標準 | Opus 4.8 | 既定位置「Power」＝ Sol ＋ 推論 medium |
-| バランス | Sonnet 5 | Terra |
-| 軽量 | Haiku 4.5 | Luna |
-| 選び方 | `/model` でモデル、`/effort` で深さ | スライダー、または Advanced で個別指定 |
+| 最上位 | Fable 5（ただし後述する制約がある） | GPT-5.6 Sol |
+| 標準 | Opus 4.8 / Sonnet 5 | GPT-5.6 Terra |
+| 軽量 | Haiku 4.5 | GPT-5.6 Luna |
+| 選び方 | `/model` でモデル、`/effort` で深さ | `/model`（モデルと深さをまとめて） |
+
+Codex CLI の GPT-5.6 は、Sol（最上位）・Terra（標準）・Luna（軽量）という3つのモデルに分かれている[32](https://learn.chatgpt.com/docs/models)。天体の名前が能力とコストの順に対応していると覚えるとよい。
 
 起動時にどのモデルが選ばれるかは契約プランによって異なる。Claude Code CLI では Max 系の契約が Opus 4.8、Pro 系が Sonnet 5 で起動する[33](https://code.claude.com/docs/en/model-config)。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
 
@@ -674,12 +675,13 @@ AIコーディングエージェントの出力は、3つの軸で調整でき�
 
 > **モデル世代に依存する記述** — 最終確認: 2026-07-19。段階の名前・数・既定値はいずれも世代交代で変わる。
 
-Claude Code CLI の effort は `low` / `medium` / `high` / `xhigh` / `max` の5段階で、既定は `high` である。`/effort` で変更する。Haiku 4.5 は effort に対応していない[33](https://code.claude.com/docs/en/model-config)。Codex CLI は Low / Medium / High / Extra high / Max / Ultra を UI で選び、既定は Medium、`/reasoning` で変更する[32](https://learn.chatgpt.com/docs/models)。
+Claude Code CLI の effort は `low` / `medium` / `high` / `xhigh` / `max` の5段階で、既定は `high` である。`/effort` という専用コマンドで変更する。Haiku 4.5 は effort に対応していない[33](https://code.claude.com/docs/en/model-config)。Codex CLI は Low / Medium / High / Extra high / Max / Ultra の6段階で、既定は Medium。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
-| 深さの指定 | `/effort`（`low`〜`max`）[33](https://code.claude.com/docs/en/model-config) | `/reasoning`（Low〜Ultra）[32](https://learn.chatgpt.com/docs/models) |
+| 深さの段階 | `low`〜`max`（5段階）[33](https://code.claude.com/docs/en/model-config) | Low〜Ultra（6段階）[2](https://github.com/openai/codex) |
 | 既定 | `high` | Medium |
+| 変更方法 | `/effort`（モデル選択の `/model` とは別コマンド） | `/model`（モデルと推論強度をまとめて選ぶ） |
 | 思考の切り替え | `Alt+T`（macOS: `Option+T`）でトグル | — |
 | 設定の永続化 | `~/.claude/settings.json` | `~/.codex/config.toml` の `model_reasoning_effort` |
 | 計画時だけ変える | モデルを切り替える `opusplan` エイリアス | `plan_mode_reasoning_effort` |
@@ -700,7 +702,7 @@ Claude Code CLI には、そのターンだけ推論を深くする `ultrathink`
 | 方針は決まり、実装に落とす段階 | 決めた手順のスクリプト化、テスト生成、リファクタリング | 既定のまま |
 | 仕様が確定した定型処理 | フォーマット変換、大量ファイルの整形、読み取り中心の探索 | 軽量側へ、深さを下げる |
 
-操作としては、毎回ゼロから選ぶのではなく**既定から必要な方向へ動かす**と考えるとよい。どちらのツールも、大半のタスクで妥当な既定値を用意している。Codex CLI がスライダーという UI を採ったのは、この「既定から動かす」という発想をそのまま形にしたものである。
+操作としては、毎回ゼロから選ぶのではなく**既定から必要な方向へ動かす**と考えるとよい。どちらのツールも、大半のタスクで妥当な既定値を用意している。上位モデルや深い推論は、既定で物足りないと分かったときに一段ずつ上げるものだと捉えておきたい。
 
 深さを上げるべき合図もはっきりしている。エージェントが浅い推論で済ませていると感じたら、プロンプトで注意を足すより**深さを一段上げるほうが効く**[27](https://platform.claude.com/docs/en/build-with-claude/effort)。逆に、結果は正しいのに時間がかかりすぎるなら下げる。この上げ下げを実際に試すこと自体が、エージェントとの協働では欠かせない作業になる。
 
