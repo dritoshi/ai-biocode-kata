@@ -126,6 +126,7 @@ RDFの強みは、異なるデータベース間のデータをURIで結び付�
 ```sparql
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?protein ?name
 WHERE {
@@ -425,12 +426,13 @@ ENDPOINT = "https://sparql.uniprot.org/sparql"
 query = """
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?protein ?name
 WHERE {
   ?protein a up:Protein ;
            up:organism taxon:9606 ;
-           up:classifiedWith <http://purl.uniprot.org/go/0005739> ;
+           up:classifiedWith <http://purl.obolibrary.org/obo/GO_0005739> ;
            rdfs:label ?name .
 }
 LIMIT 10
@@ -455,7 +457,8 @@ for row in data["results"]["bindings"]:
 
 エージェントにSPARQLクエリを生成させた場合、以下を確認する。
 
-- **PREFIXの正確性**: URIが実在するか
+- **PREFIXの宣言漏れ**: 使っている接頭辞（`up:`・`rdfs:` 等）をすべて `PREFIX` で宣言しているか。宣言漏れは実行時に HTTP 400 で弾かれる
+- **URIの正確性**: `up:classifiedWith` に渡す GO などの URI が実在するか。存在しないURIは**エラーにならず静かに0件を返す**ため、結果が0件のときはまずURIを疑う
 - **トリプルパターンの論理**: 主語-述語-目的語の関係が意味的に正しいか
 - **LIMIT句の有無**: 大量の結果が返る可能性がある場合、LIMITで制限しているか
 
