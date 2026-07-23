@@ -43,6 +43,7 @@ PythonでCLIを構築するライブラリは主に3つある。それぞれの�
 ```python
 import argparse
 import sys
+from pathlib import Path
 
 from Bio import SeqIO
 from mypackage.stats import gc_content
@@ -52,14 +53,17 @@ def parse_args(argv=None):
     parser = argparse.ArgumentParser(
         description="FASTA配列をGC含量でフィルタリングする",
     )
+    # argparse.FileType は Python 3.14 で非推奨。Path で受け取り、
+    # ファイルの開閉は main() 側で行う（省略時は stdin / stdout）。
     parser.add_argument(
         "input", nargs="?",
-        type=argparse.FileType("r"), default=sys.stdin,
+        type=Path, default=None,
         help="入力FASTAファイル（省略時はstdin）",
     )
     parser.add_argument(
         "-o", "--output",
-        type=argparse.FileType("w"), default=sys.stdout,
+        type=Path, default=None,
+        help="出力ファイル（省略時はstdout）",
     )
     parser.add_argument("--min-gc", type=float, default=0.0)
     parser.add_argument("--max-gc", type=float, default=1.0)
@@ -323,7 +327,10 @@ CLIツールの設計でエージェントが `print()` をstdoutに出すコー
 > **samtools**[8](https://pubmed.ncbi.nlm.nih.gov/19505943/)はサブコマンド型の設計で、`samtools view`, `samtools sort`, `samtools index` など20以上のサブコマンドを持つ。すべてのサブコマンドがstdin/stdout対応で、パイプで連結できる:
 >
 > ```bash
-> samtools view -b input.sam | samtools sort | samtools index -
+> # view→sort はパイプで連結できるが、sort -o でBAMを保存してから index する
+> # （... | samtools index - ではBAM本体が保存されず、-.bai だけが残る）
+> samtools view -b input.sam | samtools sort -o sorted.bam
+> samtools index sorted.bam
 > ```
 >
 > **bedtools**[9](https://pubmed.ncbi.nlm.nih.gov/20110278/)も同様にサブコマンド型で、`bedtools intersect`, `bedtools merge`, `bedtools sort` をパイプで組み合わせる。
@@ -376,7 +383,7 @@ CLIツール設計で学んだ「設定の3層構造」を思い出してほし�
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
-| 保存場所 | `.claude/commands/` | プロジェクトルートに `SKILL.md` |
+| 保存場所 | `.claude/commands/` | `.agents/skills/<name>/SKILL.md` |
 | ファイル形式 | Markdownファイル（1コマンド = 1ファイル） | Markdownファイル |
 | 呼び出し方 | `/コマンド名`（スラッシュコマンド） | `$skill-name` |
 
@@ -506,6 +513,7 @@ Rich のプログレスバーは tqdm より多機能で、
 複数のプログレスバーの同時表示や、タスクごとのステータス表示が可能である:
 
 ```python
+from rich.console import Console
 from rich.progress import Progress
 
 with Progress(console=Console(stderr=True)) as progress:
@@ -536,11 +544,13 @@ with console.status("フィルタリング中..."):
 繰り返しになるが、**結果はstdout、プログレスはstderr**——これが鉄則である。以下に seqtool の filter コマンドでの実装パターンを示す:
 
 ```python
-@cli.command()
+@cli.command(name="filter")  # サブコマンド名を "filter" に固定（関数名からは filter-sequences になる）
 @click.argument("input_file", type=click.File("r"), default="-")
 @click.option("-o", "--output", type=click.File("w"), default="-")
+@click.option("--min-gc", type=click.FloatRange(0.0, 1.0), default=0.0)
+@click.option("--max-gc", type=click.FloatRange(0.0, 1.0), default=1.0)
 @click.option("--progress/--no-progress", default=True)
-def filter_sequences(input_file, output, progress):
+def filter_sequences(input_file, output, min_gc, max_gc, progress):
     """GC含量で配列をフィルタリングする."""
     records = list(SeqIO.parse(input_file, "fasta"))
     iterator = records
@@ -548,7 +558,7 @@ def filter_sequences(input_file, output, progress):
         from tqdm import tqdm
         iterator = tqdm(records, desc="フィルタリング", file=sys.stderr)
 
-    filtered = [r for r in iterator if min_gc <= gc_content(str(r.seq))]
+    filtered = [r for r in iterator if min_gc <= gc_content(str(r.seq)) <= max_gc]
     SeqIO.write(filtered, output, "fasta")
     # ステータスメッセージもstderrに
     click.echo(f"{len(filtered)}/{len(records)} 配列を出力", err=True)
@@ -630,6 +640,7 @@ file_handler = logging.FileHandler("pipeline.log")
 
 # 両方を登録
 logger = logging.getLogger()
+logger.setLevel(logging.INFO)  # ルートロガーの既定はWARNING。INFOを出すには明示設定が要る
 logger.addHandler(stderr_handler)
 logger.addHandler(file_handler)
 ```
@@ -708,8 +719,12 @@ def setup_logging(level="INFO", log_file=None, use_rich=False):
 
     # stderrハンドラ（richが利用可能ならRichHandler）
     if use_rich:
+        from rich.console import Console
         from rich.logging import RichHandler
-        stderr_handler = RichHandler(show_time=True, show_path=False)
+        # console を渡さないと既定でstdoutに出力され、結果データにログが混入する
+        stderr_handler = RichHandler(
+            console=Console(stderr=True), show_time=True, show_path=False
+        )
     else:
         stderr_handler = logging.StreamHandler(sys.stderr)
         stderr_handler.setFormatter(formatter)
