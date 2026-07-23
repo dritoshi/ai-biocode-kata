@@ -519,7 +519,7 @@ APIを使ったデータ取得では、使用するライブラリとエンド�
 >
 > 本文ではNCBI Entrez APIとUniProt SPARQLを扱ったが、バイオインフォマティクスには他にも多くの公開APIが存在する。[19-2節](#19-2-バイオインフォマティクスの主要データベース)で紹介したデータベースのうち、プログラムからのアクセスに利用できる代表的なAPIを紹介する。
 >
-> **Ensembl REST API**[13](https://pubmed.ncbi.nlm.nih.gov/36318249/)は、ゲノムアノテーション・バリアント情報をJSONで取得できるRESTful APIである。エンドポイント `https://rest.ensembl.org` に対してGETリクエストを送るだけで、遺伝子情報、配列、バリアント、ID変換などの操作が可能である。認証不要で手軽に試せるため、Entrezと並んで最初に覚えたいAPIの一つである。
+> **Ensembl REST API**[13](https://pubmed.ncbi.nlm.nih.gov/36318249/)は、ゲノムアノテーション・バリアント情報をJSONで取得できるRESTful APIである。エンドポイント `https://rest.ensembl.org` に対してGETリクエストを送るだけで、遺伝子情報、配列、バリアント、ID変換などの操作が認証不要で可能である。ただし注意したい点がある。**Ensembl は release 116 を現行サイトの最終リリースとし、REST API・公開MySQL・FTP はこれ以降更新されない**。2026年夏以降、新しいデータは新プラットフォーム（`beta.ensembl.org`。後継として GraphQL の Thoas と refget が案内されている）でのみ提供される予定である（[Ensembl の移行アナウンス](https://www.ensembl.info/2025/12/02/updates-to-programmatic-access-to-ensembl-and-transitioning-to-the-new-ensembl-platform/)）。既存・アーカイブ版のデータ取得には引き続き使えるが、最新のゲノムアノテーションを追う用途では、新プラットフォームでの提供方式を確認すること。
 >
 > **Ensembl BioMart** は、大量の遺伝子IDやアノテーションの一括取得・フィルタリングに特化したサービスである。Pythonからは `pybiomart`、Rからは `biomaRt`（[19-2節](#19-2-バイオインフォマティクスの主要データベース)で既出）で利用できる。「Ensembl gene IDのリスト1万件をUniProt IDに一括変換したい」といったID変換のユースケースで威力を発揮する。
 >
@@ -986,7 +986,7 @@ def fetch_sequences(gene_list):
 ### APIの公式リファレンス
 
 - **NCBI. "Entrez Programming Utilities Help".** https://www.ncbi.nlm.nih.gov/books/NBK25501/ — E-utilitiesの公式マニュアル。APIのパラメータ、レート制限、クエリ構文の完全なリファレンス。
-- **Ensembl REST API Documentation.** https://rest.ensembl.org/ — EnsemblのREST APIドキュメント。エンドポイント一覧と使用例が対話的に試せる。
+- **Ensembl REST API Documentation.** https://rest.ensembl.org/ — EnsemblのREST APIドキュメント。エンドポイント一覧と使用例が対話的に試せる。ただし release 116 以降は更新されず、新データは新プラットフォーム（beta.ensembl.org）へ移行する点に注意。
 
 ### プログラムからのデータアクセス
 
