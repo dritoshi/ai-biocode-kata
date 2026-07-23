@@ -244,7 +244,7 @@ echo "=== 依存関係 ==="
 echo "  ${JOB1} (FastQC) → ${JOB2} (Alignment) → ${JOB3} (FeatureCounts)"
 ```
 
-`--dependency=afterok:JOB_ID` は「指定したジョブが正常終了した場合のみ開始する」という意味である。ステップ1が失敗した場合、ステップ2以降は自動的にキャンセルされる。
+`--dependency=afterok:JOB_ID` は「指定したジョブが正常終了した場合のみ開始する」という意味である。注意したいのは、ステップ1が失敗しても後続ジョブは**自動的にはキャンセルされない**点である。Slurmの既定では、依存が満たされ得なくなったジョブは実行されないまま `PENDING` のままキューに残り続ける（`squeue` の Reason 欄に `DependencyNeverSatisfied` と表示される）。共有クラスタでは、こうしたゾンビジョブが枠を占有して他の利用者の迷惑になる。パイプラインが失敗したら `scancel` で後続ジョブを明示的に片付けるか、投入時に `--kill-on-invalid-dep=yes` を付けて依存不成立時に自動キャンセルさせる（サイト側で `slurm.conf` の `DependencyParameters=kill_invalid_depend` が設定されていれば既定で片付く）。
 
 なお、より大規模なパイプラインでは依存ジョブの手動管理は煩雑になる。[§14 解析パイプラインの自動化](./14_workflow.md)で学んだSnakemakeのクラスタ実行機能を使えば、各ルールのSlurmジョブ投入と依存関係を自動管理できる。CLIの細部は版差があるため、使用中のSnakemakeの公式ドキュメントを確認すること。
 
