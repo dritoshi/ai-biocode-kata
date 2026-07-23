@@ -2,13 +2,13 @@
 
 > "Above all else show the data."
 > （何よりもまず、データを見せよ。）
-> — Edward R. Tufte, *The Visual Display of Quantitative Information* (Graphics Press, 1983), p.92
+> — Edward R. Tufte, *The Visual Display of Quantitative Information* (2nd ed., Graphics Press, 2001), p.92
 
 [§12 データ処理の実践](./12_data_processing.md)では、NumPyのベクトル化演算、pandasによるテーブル操作、SciPyのライブラリ関数で効率的にデータを処理する方法を学んだ。しかし、処理結果が数値の羅列のままでは、生物学的な意味を読み取ることは難しい。データを「人間が解釈できる形」に変換するのが可視化の役割である。
 
 AIエージェントにプロットコードの生成を依頼すると、動作するコードは得られる。しかし、**グラフの種類が適切か**、**色覚多様性に配慮しているか**、**軸ラベルや凡例が正しいか**——これらの判断は人間の仕事である。エージェントが `plt.plot()` で折れ線グラフを生成しても、データの性質上バイオリンプロットが適切なら、それを見抜いて修正を指示する力が必要になる。
 
-本章では、Pythonの3つの主要な可視化ライブラリ（Matplotlib[1](https://doi.org/10.1109/MCSE.2007.55)[2](https://matplotlib.org/stable/)、Seaborn[3](https://doi.org/10.21105/joss.03021)[4](https://seaborn.pydata.org/)、Plotly[5](https://plotly.com/python/)）の使い方と、科学的可視化の原則を学ぶ。
+本章では、Pythonの3つの主要な可視化ライブラリ（Matplotlib[1](https://matplotlib.org/stable/)[2](https://doi.org/10.1109/MCSE.2007.55)、Seaborn[3](https://seaborn.pydata.org/)[4](https://doi.org/10.21105/joss.03021)、Plotly[5](https://plotly.com/python/)）の使い方と、科学的可視化の原則を学ぶ。
 
 ---
 
@@ -78,6 +78,8 @@ def gc_histogram(
 Volcano plotは、DEG（差次的発現遺伝子）解析の結果を一覧するための散布図である。x軸に発現変化量($\log_2$ Fold Change)、y軸に統計的有意性($-\log_{10}$ adjusted p-value)をとり、有意に発現が変動した遺伝子を色分けする:
 
 ```python
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -160,6 +162,8 @@ def volcano_plot(
 
 ```python
 import seaborn as sns
+from scipy.cluster.hierarchy import linkage
+from scipy.spatial.distance import squareform
 
 def expression_heatmap(
     distance_matrix: np.ndarray,
@@ -175,8 +179,15 @@ def expression_heatmap(
     else:
         df = pd.DataFrame(distance_matrix)
 
+    # 入力はすでに距離行列。凝縮形式に変換して linkage を計算し、
+    # row_linkage/col_linkage で渡す（そのまま渡すと clustermap は
+    # 各行を観測ベクトルとみなし「距離の距離」でクラスタリングしてしまう）。
+    condensed = squareform(distance_matrix, checks=False)
+    link = linkage(condensed, method="average")
     g = sns.clustermap(
         df,
+        row_linkage=link,
+        col_linkage=link,
         cmap="viridis",
         figsize=(8, 8),
         linewidths=0.5,
@@ -190,7 +201,7 @@ def expression_heatmap(
 
 ![発現距離ヒートマップ: サンプル間の距離行列と階層クラスタリング](../figures/ch13_expression_heatmap.png)
 
-`clustermap()` は内部で `scipy.cluster.hierarchy.linkage()` を呼び出し、行と列を類似度に基づいて並べ替える。戻り値は `ClusterGrid` オブジェクトで、通常の `Figure` とは異なる点に注意する。`g.figure` で `Figure` にアクセスし、`g.ax_heatmap` でヒートマップ部分の `Axes` にアクセスできる。
+ここで入力がすでに距離行列である点に注意が必要である。`clustermap()` はデータをそのまま渡すと各行を観測ベクトルとみなして行間のユークリッド距離を計算するため、距離行列を渡すと「距離の距離」でクラスタリングしてしまう。そこで `squareform()` で正方距離行列を凝縮形式（1次元）に変換し、`linkage()` で計算したデンドログラムを `row_linkage`/`col_linkage` として明示的に渡している。戻り値は `ClusterGrid` オブジェクトで、通常の `Figure` とは異なる点に注意する。`g.figure` で `Figure` にアクセスし、`g.ax_heatmap` でヒートマップ部分の `Axes` にアクセスできる。
 
 カラーマップには `"viridis"` を指定している。この選択の根拠は[§13-2](#13-2-可視化の原則)で解説する。
 
@@ -317,7 +328,7 @@ Plotlyのコードは本書のスクリプト集には含めていない。Plotl
 
 エージェントは「グラフを描いて」という指示に対して、データの性質を考慮せずに `plt.plot()` で折れ線グラフを生成することがある。データの性質を理解した上で「バイオリンプロットで描いて」のように具体的に指示することが重要である。
 
-棒グラフで平均値だけを示す「dynamite plot」は、分布の形状（外れ値、双峰性）を隠してしまうため、科学論文では避けるべきとされている[8](https://doi.org/10.1371/journal.pcbi.1003833)。バイオリンプロットやボックスプロットに個々のデータ点を重ねた表現（strip plot + box plot）のほうが情報量が多い。
+棒グラフで平均値だけを示す「dynamite plot」は、分布の形状（外れ値、双峰性）を隠してしまうため、科学論文では避けるべきとされている[8](https://doi.org/10.1371/journal.pbio.1002128)。バイオリンプロットやボックスプロットに個々のデータ点を重ねた表現（strip plot + box plot）のほうが情報量が多い。
 
 ### 色覚多様性への配慮
 
@@ -386,7 +397,7 @@ fig.savefig("plot.pdf", bbox_inches="tight")
 fig.savefig("plot.tiff", dpi=300, bbox_inches="tight")
 ```
 
-`bbox_inches="tight"` は、ラベルが切れないように余白を自動調整するオプションである。これを指定しないと、長い軸ラベルが画像の外にはみ出すことがある。`dpi` はラスタ形式（PNG/TIFF）でのみ意味を持ち、ベクタ形式（SVG/PDF）では無視される。
+`bbox_inches="tight"` は、ラベルが切れないように余白を自動調整するオプションである。これを指定しないと、長い軸ラベルが画像の外にはみ出すことがある。`dpi` は図全体がラスタ化されるPNG/TIFFで出力解像度を決める。SVG/PDFのようなベクタ形式では線や文字はdpiに依存しないが、`imshow` や `pcolormesh`、`rasterized=True` を指定した要素は内部でラスタとして埋め込まれ、その解像度は `dpi` で決まる。ヒートマップなどラスタ要素を含む図をPDF/SVGで出力する場合は、ベクタ形式でも `dpi` を指定する必要がある。
 
 ### 再現可能なプロットスクリプト化
 
@@ -480,7 +491,7 @@ def apply_project_style() -> None:
 >
 > ```bash
 > # BAMからBigWigを生成（RPKMで正規化、ビンサイズ10 bp）
-> deepTools bamCoverage \
+> bamCoverage \
 >     --bam aligned.bam \
 >     --outFileName coverage.bw \
 >     --normalizeUsing RPKM \
@@ -692,7 +703,7 @@ def apply_project_style() -> None:
 
 [7] Tufte, E. R. *The Visual Display of Quantitative Information*. 2nd ed., Graphics Press, 2001. ISBN: 978-0961392147
 
-[8] Rougier, N. P., Droettboom, M. & Bourne, P. E. "Ten Simple Rules for Better Figures". *PLOS Computational Biology*, 10(9), e1003833, 2014. [https://doi.org/10.1371/journal.pcbi.1003833](https://doi.org/10.1371/journal.pcbi.1003833)
+[8] Weissgerber, T. L., Milic, N. M., Winham, S. J. & Garovic, V. D. "Beyond bar and line graphs: time for a new data presentation paradigm". *PLOS Biology*, 13(4), e1002128, 2015. [https://doi.org/10.1371/journal.pbio.1002128](https://doi.org/10.1371/journal.pbio.1002128)
 
 [9] UCSC Genome Browser. "Custom Tracks". [https://genome.ucsc.edu/goldenPath/help/customTrack.html](https://genome.ucsc.edu/goldenPath/help/customTrack.html) (参照日: 2026-03-23)
 
