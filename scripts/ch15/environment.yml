@@ -2,9 +2,8 @@
 # Dockerfile内でconda env create -f environment.ymlとして使用する
 name: rnaseq
 channels:
-  - bioconda
   - conda-forge
-  - defaults
+  - bioconda
 dependencies:
   - python=3.11
   - fastqc=0.12.1

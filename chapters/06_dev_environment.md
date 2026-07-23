@@ -309,11 +309,10 @@ Condaでは、チャネルの優先順位を `.condarc` ファイルで設定す
 channels:
   - conda-forge
   - bioconda
-  - defaults
 channel_priority: strict
 ```
 
-`channel_priority: strict` を設定すると、上位のチャネルが優先される。バイオインフォマティクスでは conda-forge と bioconda を上位に置くのが一般的である。
+`channel_priority: strict` を設定すると、上位のチャネルが優先される。バイオインフォマティクスでは、bioconda が依存する conda-forge を最上位に置くのが Bioconda 公式の推奨である。なお、かつて既定に含まれていた `defaults` チャネルは 2024年8月に Bioconda の推奨セットから外された。
 
 #### エージェントへの指示例
 
@@ -327,26 +326,26 @@ channel_priority: strict
 >
 > **Bioconda**は、8,000以上のバイオインフォマティクスツールを提供するCondaチャネルである[9](https://doi.org/10.1038/s41592-018-0046-7)。BLAST, Samtools, BWA, STAR, fastp など、日常的に使うツールの大半がBiocondaからインストールできる:
 >
-> `-c` はチャネル（パッケージの配布元）を指定するオプションである。Biocondaはバイオインフォマティクスツール専用、conda-forgeは汎用パッケージのチャネルであり、記述順がパッケージ検索の優先順位になる。
+> `-c` はチャネル（パッケージの配布元）を指定するオプションである。Biocondaはバイオインフォマティクスツール専用、conda-forgeは汎用パッケージのチャネルである。**コマンドラインでは先に書いたチャネルほど優先度が高い**。Biocondaは多くの依存を conda-forge に頼るため、Bioconda 公式は conda-forge を最優先にすることを求めている。したがって `-c conda-forge -c bioconda` の順で書く。
 >
 > ```bash
 > # Biocondaからのツールインストール
-> conda install -c bioconda -c conda-forge samtools minimap2 fastp
+> conda install -c conda-forge -c bioconda samtools minimap2 fastp
 > ```
 >
 > **用途別に環境を分ける**のがベストプラクティスである。これにより、ツール間の依存関係の衝突を防げる:
 >
 > ```bash
 > # マッピング用環境
-> conda create -n mapping-env -c bioconda -c conda-forge \
+> conda create -n mapping-env -c conda-forge -c bioconda \
 >     bwa-mem2 samtools picard
 >
 > # バリアントコール用環境
-> conda create -n variant-env -c bioconda -c conda-forge \
+> conda create -n variant-env -c conda-forge -c bioconda \
 >     gatk4 bcftools tabix
 >
 > # RNA-seq用環境
-> conda create -n rnaseq-env -c bioconda -c conda-forge \
+> conda create -n rnaseq-env -c conda-forge -c bioconda \
 >     star salmon fastp multiqc
 > ```
 >
