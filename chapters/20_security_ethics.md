@@ -347,22 +347,16 @@ DUAの禁止事項はデータセットごとに異なるため、新しいデ�
 
 ##### プロバイダ別のプライバシー設定（2026年4月現在）
 
-AI コーディングエージェントのプライバシー設定は、**サインインに使うアカウントの種類と契約プランによって大きく異なる**。同じツールでも、個人の Consumer アカウントで使う場合と、組織の Enterprise 契約で使う場合とで、送信データの扱いは別物になる。以下に主要な4ツールを、2026年4月時点の著者の理解に基づいて整理する。
+AI コーディングエージェントのプライバシー設定は、**サインインに使うアカウントの種類と契約プランによって大きく異なる**。同じツールでも、個人の Consumer アカウントで使う場合と、組織の Enterprise 契約で使う場合とで、送信データの扱いは別物になる。以下に、契約の種類ごとの既定の扱いを 2026年4月時点の著者の理解に基づいて整理する。個別ツールの opt-out 手順は後述の「設定変更の実務手順」にまとめた。
 
 > **重要な但し書き**: **本表は 2026年4月時点で著者が各社の公式ドキュメントを参照して整理したものであり、内容は頻繁に更新される。実際の運用に先立って、本節末尾の公式リンクから必ず現行ポリシーを確認すること**。所属機関の情報セキュリティ部門・倫理審査委員会・法務部門への事前相談も推奨される。
 
-| ツール / プラン | 入力データの学習利用 | 保持期間の既定 | ゼロデータ保持（ZDR） | 設定変更場所 |
-|---|---|---|---|---|
-| Claude Code（Consumer Pro / Max） | 学習非利用が既定 | 一般的に30日程度（Trust & Safety 用途の保持あり） | Enterprise 契約での相談が前提 | claude.ai → Settings → Privacy |
-| Claude Code（API / Team / Enterprise） | 学習非利用が既定 | 組織契約に依存 | Enterprise 契約で ZDR 設定可 | Anthropic Console → Organization Settings |
-| Codex CLI（ChatGPT Plus / Pro / Business） | Consumer プランは「モデル改善に貢献」設定次第、Business 以上は学習非利用が既定 | アカウント設定と契約に依存 | Business / Enterprise 契約で相談 | chatgpt.com → Settings → Data Controls |
-| Codex CLI（OpenAI API） | API 入出力は学習非利用が既定 | 30日の abuse monitoring 保持が既定 | Enterprise 契約で ZDR 設定可 | OpenAI Platform → Settings → Data Controls |
-| GitHub Copilot（Individual） | 既定で一部のテレメトリ・プロンプト送信を学習利用可能な設定あり | 契約とセッションに依存 | 個人プランでは不可 | github.com → Settings → Copilot → Policies |
-| GitHub Copilot（Business / Enterprise） | 学習非利用が既定 | 契約に依存 | Business / Enterprise 契約で相談 | 組織管理者設定（GitHub Enterprise / 組織ポリシー） |
-| Gemini CLI（個人 Google アカウント） | Gemini Apps Activity の設定次第で人によるレビュー・学習利用あり | Gemini Apps Activity 設定に依存 | 個人プランでは不可 | myactivity.google.com → Gemini Apps Activity |
-| Gemini CLI（Google Workspace / Vertex AI） | 学習非利用が既定 | 契約に依存 | Vertex AI 側の設定で可 | Google Workspace 管理コンソール / Vertex AI 設定 |
+| 契約の種類 | 入力データの学習利用（既定） | 保持の目安 | ゼロデータ保持（ZDR） |
+|---|---|---|---|
+| **個人・Consumer プラン**（Claude Free / Pro / Max〈Claude Code 含む〉、ChatGPT Plus / Pro / Free、GitHub Copilot 個人、Gemini 個人 Google アカウント） | **既定で学習利用**。2025〜2026 年に主要各社がこの opt-out 方式へ移行した[27](https://www.anthropic.com/legal/privacy) | opt-out しなければ長期（例: Claude 最長5年、Gemini 最長3年）。opt-out で短縮（例: Claude 30日） | 個人プランには原則なし。各サービスの設定で opt-out する（後述の実務手順を参照） |
+| **商用・組織プラン**（Anthropic API・Claude Team / Enterprise、ChatGPT Business / Enterprise、Copilot Business / Enterprise、Google Workspace / Vertex AI） | **学習非対象が既定**[28](https://www.anthropic.com/legal/commercial-terms) | 契約に準拠（例: Claude 商用は標準30日） | Enterprise 等で別途審査（例: Claude for Enterprise）。最上位モデル Fable 5 は ZDR 非対応 |
 
-**表の読み方に関する注意**: 「学習非利用が既定」は「入力データが将来のモデル訓練に使われないことがポリシーで約束されている」という意味であり、**データがサーバに一切保存されないことを保証するものではない**。通常、不正利用検知（abuse monitoring）や Trust & Safety レビューのために一定期間の保持が行われる。サーバ側に一切のコピーを残さないためには、ゼロデータ保持（ZDR）契約が別途必要である。ZDR は多くの場合、Business / Enterprise 以上の契約と所定の審査を経て利用可能になる。
+**表の読み方に関する注意**: かつては個人プランでも「学習非利用が既定」の時期があったが、2025〜2026 年に主要各社が相次いで、**個人・Consumer プランの既定を学習利用へと変更**した（いずれも opt-out 方式）。したがって「個人アカウントだから安全」という前提はもはや成り立たない。未発表データ・制限付きデータを扱う場合は、商用・Enterprise 契約＋ZDR か、ローカル LLM を用いるのが原則である。個人プランを使うなら、送信前に必ず opt-out の状態と各社の現行ポリシー（本節末尾の公式リンク）を確認すること。なお学習非対象や opt-out であっても、不正利用検知（abuse monitoring）や Trust & Safety レビューのための一定期間の保持は通常行われ、サーバ側に一切コピーを残さないためには ZDR 契約が別途必要である。機密運用で ZDR を使う際は、最上位モデル Fable 5 が ZDR 非対応である点にも注意する（ZDR 組織では Opus 系にフォールバックする）。
 
 ##### プロバイダ公式ドキュメント（2026年4月現在）
 
@@ -371,6 +365,7 @@ AI コーディングエージェントのプライバシー設定は、**サイ
 - **Anthropic（Claude / Claude Code）**:
   - Privacy Policy[27](https://www.anthropic.com/legal/privacy)
   - Commercial Terms of Service（API・商用利用の既定挙動）[28](https://www.anthropic.com/legal/commercial-terms)
+  - Data usage（Claude Code 単位での学習の既定・保持期間・ZDR）: https://code.claude.com/docs/en/data-usage
 - **OpenAI（ChatGPT / Codex CLI / API）**:
   - Enterprise Privacy（API・Enterprise での学習利用と保持）[29](https://openai.com/enterprise-privacy/)
   - How your data is used to improve model performance（Consumer プランの opt-out 手順）[30](https://help.openai.com/en/articles/5722486)
