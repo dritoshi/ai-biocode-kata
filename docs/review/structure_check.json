@@ -69,7 +69,7 @@
     },
     {
       "file": "chapters/00_ai_agent.md",
-      "line": 874,
+      "line": 927,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **サインインに使うアカウントの種類（Consumer プラン / API / Workspace・Team・Enterprise 契約）によって大きく異なる**",
@@ -77,7 +77,7 @@
     },
     {
       "file": "chapters/00_ai_agent.md",
-      "line": 876,
+      "line": 929,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **本書では現時点の具体値を本文に埋め込まず、[§20-2-1](./20_security_ethics.md#プロバイダ別のプライバシー設定2026年4月現在) に 2026年4月現在の対照表と公式ドキュメントへのリンクを整理している**",
