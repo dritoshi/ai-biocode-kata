@@ -16,19 +16,34 @@
 
 ### forループの限界
 
-Pythonのforループは柔軟だが、大量のデータを処理するには遅い。たとえば、数千のDNA配列のGC含量を1つずつ計算するコードを考える:
+Pythonのforループは柔軟だが、大量のデータを処理するには遅い。たとえば、数万のDNA配列のGC含量を、1塩基ずつPythonのforループで数えるコードを考える:
 
 ```python
-# forループ版 — 遅い
-def gc_contents_loop(sequences: list[str]) -> list[float]:
+# 1塩基ずつ数える — 最も遅い
+def gc_contents_slow(sequences: list[str]) -> list[float]:
     results = []
     for seq in sequences:
-        gc = (seq.count("G") + seq.count("C")) / len(seq)
-        results.append(gc)
+        gc = 0
+        for base in seq:          # 塩基1つずつのPythonループが重い
+            if base in ("G", "C"):
+                gc += 1
+        results.append(gc / len(seq))
     return results
 ```
 
-これは正しく動くが、配列数が数万〜数十万になると実行時間が問題になる。
+配列数が数万〜数十万になると、この二重ループ（配列 × 塩基）はインタプリタのオーバーヘッドが積み重なり、実行時間の大きなボトルネックになる。
+
+### 高速化の前に — すでにC実装の道具がないか
+
+ここで一足飛びにNumPyへ行く前に、確認すべきことがある。**その処理に、すでにC言語で実装された組み込みメソッドがないか**である。GC含量なら `str.count()` がまさにそれで、文字列の走査をCレベルで行う:
+
+```python
+# str.count は内部がC実装 — Pythonループは配列ごとに1回だけ
+def gc_contents_count(sequences: list[str]) -> list[float]:
+    return [(seq.count("G") + seq.count("C")) / len(seq) for seq in sequences]
+```
+
+`str.count()` は塩基1つずつのPythonループを持たないため、先ほどの二重ループより一桁以上速い。ここが重要な判断ポイントである。**組み込みメソッドがすでにCで実装されている処理は、無理にNumPy化しても速くならず、むしろ遅くなることがある**（この点はこの後、実例で確かめる）。AIエージェントは「forループを見たらNumPy化」と機械的に提案しがちだが、`str.count` のようなC実装の走査は、そのままのほうが速いことが多い。
 
 ### ベクトル化とは何か
 
@@ -41,28 +56,46 @@ def gc_contents_loop(sequences: list[str]) -> list[float]:
 
 ### バイオインフォでの実践: GC含量の一括計算
 
-[§8 テスト技法](./08_testing.md)で作成した `gc_content()` 関数は1配列ずつ処理する設計だった。NumPyを使えば、複数配列をまとめて処理できる:
+では、NumPyのベクトル化が本当に効くのはどこか。鍵は **配列ごとのPythonループを残さない** ことである。よくある失敗は、配列を1つずつNumPy配列に変換してしまうことだ:
 
 ```python
 import numpy as np
 
-def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
-    """複数のDNA配列のGC含量をNumPyで一括計算する."""
+# 一見ベクトル化に見えるが遅い — 配列ごとのPythonループが残っている
+def gc_content_per_seq(sequences: list[str]) -> np.ndarray:
     results = np.empty(len(sequences), dtype=np.float64)
-    for i, seq in enumerate(sequences):
-        if not seq:
-            results[i] = 0.0
-            continue
-        # np.frombuffer()でDNA配列を1文字ずつのバイト配列（各文字のASCIIコード値）に変換する。
-        # ord("G")はG文字のASCIIコード値（71）を返し、配列全体との一致判定を
-        # ベクトル化演算で行うことで、forループより大幅に高速化される。
+    for i, seq in enumerate(sequences):        # このループが残っている
         arr = np.frombuffer(seq.upper().encode("ascii"), dtype=np.uint8)
-        gc_mask = (arr == ord("G")) | (arr == ord("C"))
-        results[i] = gc_mask.sum() / len(arr)
+        results[i] = ((arr == ord("G")) | (arr == ord("C"))).mean()
     return results
 ```
 
-ポイントは `np.frombuffer()` で文字列をバイト配列に変換し、`==` 演算子でベクトル比較している点である。各文字をforループで比較する代わりに、配列全体に対する一括比較を行っている。
+この版は、配列1つごとに `.encode()` / `np.frombuffer()` / 比較 / `.mean()` の固定コストを払う。150塩基のような短い配列ではこの固定コストが支配的になり、**先ほどの `str.count` 版よりむしろ遅い**（本節冒頭の図で計測値を示した）。NumPyの関数を呼んでいても、Pythonループが1配列ごとに回っている限り「ベクトル化」にはなっていない。
+
+真のベクトル化は、**全配列をまとめて1回の演算で処理する** ことである。全配列を1本のバイト列に連結してGC判定を一度だけ行い、`np.add.reduceat()` で配列の境界ごとに合計を区切る:
+
+```python
+def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
+    """全配列を1本のバッファに連結し、1回のベクトル演算でGC含量を求める."""
+    n = len(sequences)
+    results = np.zeros(n, dtype=np.float64)
+    lengths = np.fromiter((len(s) for s in sequences), dtype=np.int64, count=n)
+    if n == 0 or lengths.sum() == 0:
+        return results
+    # 全配列を連結し、GCかどうかを配列全体に対して一度だけ判定する
+    buffer = np.frombuffer("".join(sequences).upper().encode("ascii"), dtype=np.uint8)
+    is_gc = ((buffer == ord("G")) | (buffer == ord("C"))).astype(np.int64)
+    # 各配列の開始位置で区切って合計する（reduceat が境界ごとの部分和を返す）
+    nonempty = lengths > 0
+    starts = np.concatenate(([0], np.cumsum(lengths)[:-1]))
+    counts = np.add.reduceat(is_gc, starts[nonempty])
+    results[nonempty] = counts / lengths[nonempty]
+    return results
+```
+
+GC判定を全配列に対して一度だけ行い、`np.add.reduceat()` で配列ごとの合計に区切っている。配列ごとのPythonループが消えるため、数万配列でも `str.count` 版と同等かそれ以上に速い。なお、配列長がそろっている場合（同じ長さのリードなど）は、連結せずに `(配列数, 長さ)` の2次元配列へ `reshape` し、`axis=1` で集計するほうが単純でさらに速い。
+
+**この節の教訓**: 「forループがある＝NumPy化で速くなる」とは限らない。`str.count` のようにC実装の組み込みメソッドで済む処理はそのまま使い、NumPyは **配列ごとのループを消して一括処理できるとき** に使う。エージェントが「ベクトル化しました」と言っても、コードに配列ごとの `for` が残っていないかをレビューで確かめる——これが速いコードと遅いコードを見分ける勘所である。
 
 ### ブロードキャスティング
 

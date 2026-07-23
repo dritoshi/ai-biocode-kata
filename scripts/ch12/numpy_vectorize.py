@@ -4,10 +4,13 @@ import numpy as np
 
 
 def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
-    """複数のDNA配列のGC含量をNumPyで一括計算する.
+    """複数のDNA配列のGC含量を、全配列を一括してNumPyで計算する.
 
-    forループで1配列ずつ処理する代わりに、バイト配列への変換と
-    ベクトル比較により高速に計算する。
+    配列を1つずつNumPy配列に変換する（配列ごとのPythonループが残る）と、
+    短い配列では変換の固定コストが支配的になり、かえって遅くなる。
+    ここでは全配列を1本のバイト列に連結し、GC判定を一度だけ行い、
+    ``np.add.reduceat`` で配列の境界ごとに合計を区切る。配列ごとの
+    Pythonループを持たない、真のベクトル化である。
 
     Parameters
     ----------
@@ -19,15 +22,19 @@ def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
     np.ndarray
         各配列のGC含量（0.0〜1.0）。空配列の場合は 0.0。
     """
-    results = np.empty(len(sequences), dtype=np.float64)
-    for i, seq in enumerate(sequences):
-        if not seq:
-            results[i] = 0.0
-            continue
-        # バイト配列に変換してベクトル比較
-        arr = np.frombuffer(seq.upper().encode("ascii"), dtype=np.uint8)
-        gc_mask = (arr == ord("G")) | (arr == ord("C"))
-        results[i] = gc_mask.sum() / len(arr)
+    n = len(sequences)
+    results = np.zeros(n, dtype=np.float64)
+    lengths = np.fromiter((len(s) for s in sequences), dtype=np.int64, count=n)
+    if n == 0 or lengths.sum() == 0:
+        return results
+    # 全配列を連結して1つのバイト配列にし、GCを一度だけベクトル判定する
+    buffer = np.frombuffer("".join(sequences).upper().encode("ascii"), dtype=np.uint8)
+    is_gc = ((buffer == ord("G")) | (buffer == ord("C"))).astype(np.int64)
+    # 各配列の開始位置（空配列は境界が重複するため除外）で合計を区切る
+    nonempty = lengths > 0
+    starts = np.concatenate(([0], np.cumsum(lengths)[:-1]))
+    counts = np.add.reduceat(is_gc, starts[nonempty])
+    results[nonempty] = counts / lengths[nonempty]
     return results
 
 
