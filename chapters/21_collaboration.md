@@ -84,45 +84,30 @@ BRCA1   NA
 
 #### 環境情報の自動収集
 
-以下のスクリプトは、質問に必要な環境情報を自動的に収集し、質問テンプレートを生成する。`collect_environment`関数はOS、Pythonバージョン、指定パッケージのバージョンを辞書として返し、`format_question`関数はそれをMarkdown形式の質問テンプレートに整形する。
+以下のスクリプトは、質問に必要な環境情報を自動的に収集し、質問テンプレートを生成する。`collect_environment`関数はOS、Pythonバージョン、主要パッケージのバージョンを辞書として返し、`format_biostars_question`関数はそれをMarkdown形式の質問テンプレートに整形する（GitHub Issue向けの`format_github_issue`関数も同梱している）。
 
 ```python
 # scripts/ch21/format_question.py — 環境情報の自動収集と質問テンプレート生成（抜粋）
 
-def collect_environment(packages: list[str] | None = None) -> dict[str, str]:
-    """OS、Pythonバージョン、指定パッケージのバージョンを収集する."""
-    info: dict[str, str] = {
-        "os": platform.platform(),
-        "python": platform.python_version(),
-        "architecture": platform.machine(),
+def collect_environment() -> dict[str, str]:
+    """Python版、OS、主要パッケージのバージョンを収集する."""
+    env: dict[str, str] = {
+        "python_version": sys.version,
+        "os_info": f"{platform.system()} {platform.release()}",
     }
-    for pkg in packages or []:
+    for pkg in _TARGET_PACKAGES:  # numpy, pandas, biopython, matplotlib, ...
         try:
-            info[pkg] = importlib.metadata.version(pkg)
-        except importlib.metadata.PackageNotFoundError:
-            info[pkg] = "not installed"
-    return info
+            env[pkg] = version(pkg)
+        except PackageNotFoundError:
+            env[pkg] = "not installed"
+    return env
 
 
-def format_question(
-    title: str,
-    description: str,
-    mre: str,
-    expected: str,
-    actual: str,
-    packages: list[str] | None = None,
+def format_biostars_question(
+    title: str, body: str, error_trace: str, env: dict[str, str]
 ) -> str:
-    """質問テンプレートをMarkdown形式で生成する."""
-    env = collect_environment(packages)
-    env_section = "\n".join(f"- {k}: {v}" for k, v in env.items())
-    return (
-        f"## {title}\n\n"
-        f"### 環境\n{env_section}\n\n"
-        f"### 問題の説明\n{description}\n\n"
-        f"### 最小再現例\n```python\n{mre}\n```\n\n"
-        f"### 期待する結果\n```\n{expected}\n```\n\n"
-        f"### 実際の結果\n```\n{actual}\n```\n"
-    )
+    """環境情報を埋め込んだBiostars向けの質問テンプレートをMarkdownで返す."""
+    ...  # タイトル・質問内容・エラーメッセージ・実行環境を節に分けて整形
 ```
 
 完全なコードは`scripts/ch21/format_question.py`にある。
@@ -323,34 +308,20 @@ Benjamini-Hochberg法以外の補正法（Bonferroni等）を
 - **テストデータの出典**: 公開データベースからのアクセッション番号、または合成データである旨
 - **パラメータの根拠**: 閾値やアルゴリズムの選択理由（論文引用があれば添える）
 
-以下のヘルパースクリプトは、git diffの出力からPR説明文の下書きやレビューコメントの返答を生成するためのテンプレートを作成する。`summarize_diff`関数は変更されたファイルと変更行数を集計し、`format_pr_description`関数はテンプレートに沿った説明文を生成する。
+以下のヘルパースクリプトは、git diffの出力を受け取り、基本的なレビュー観点を自動チェックしてMarkdownのチェックリストを生成する。`parse_diff`関数が変更ファイルと追加行を抽出し、`check_type_hints`・`check_docstrings`関数が型ヒントやdocstringの欠落を検出、`generate_review_checklist`関数がそれらをチェックリストにまとめる。人手のレビュー前に、機械的に潰せる観点を先に洗い出すのに使える。
 
 ```python
-# scripts/ch21/review_helper.py — PR説明文生成ヘルパー（抜粋）
+# scripts/ch21/review_helper.py — レビュー観点の自動チェック（抜粋）
 
-def summarize_diff(diff_text: str) -> list[DiffSummary]:
-    """git diff の出力から変更ファイルと変更行数を集計する."""
-    summaries: list[DiffSummary] = []
-    current_file: str | None = None
-    added, removed = 0, 0
-    for line in diff_text.splitlines():
-        if line.startswith("diff --git"):
-            if current_file is not None:
-                summaries.append(
-                    DiffSummary(file=current_file, added=added, removed=removed)
-                )
-            # "diff --git a/path b/path" からファイルパスを取得
-            current_file = line.split(" b/")[-1]
-            added, removed = 0, 0
-        elif line.startswith("+") and not line.startswith("+++"):
-            added += 1
-        elif line.startswith("-") and not line.startswith("---"):
-            removed += 1
-    if current_file is not None:
-        summaries.append(
-            DiffSummary(file=current_file, added=added, removed=removed)
-        )
-    return summaries
+def check_type_hints(added_lines: list[str]) -> list[str]:
+    """追加された関数定義に戻り値の型ヒントがあるか検査する."""
+    issues: list[str] = []
+    func_pattern = re.compile(r"^\s*def\s+(\w+)\s*\(")
+    for line in added_lines:
+        match = func_pattern.match(line)
+        if match and "->" not in line:
+            issues.append(f"関数 `{match.group(1)}` に戻り値の型ヒントがありません")
+    return issues
 ```
 
 完全なコードは`scripts/ch21/review_helper.py`にある。
@@ -539,9 +510,9 @@ CLAに署名することの意味:
 [§18 コードのドキュメント化](./18_documentation.md)で学んだCHANGELOG管理の応用として、git logから「先週やったこと」を自動的に要約するアプローチがある。
 
 ```bash
-# 直近1週間のコミットログを表示する
-# --since: 期間指定、--oneline: 1行表示、--no-merges: マージコミットを除外
-git log --since="1 week ago" --oneline --no-merges
+# 直近1週間のコミットログを「ハッシュ|件名|日時」形式で出力する
+# --since: 期間指定、--format: 出力形式、--no-merges: マージコミットを除外
+git log --since="1 week ago" --format="%H|%s|%ai" --no-merges
 ```
 
 このコマンドの出力をエージェントに渡して、非技術者向けの進捗報告に変換させる。
@@ -571,42 +542,28 @@ git log --since="1 week ago" --oneline --no-merges
 
 #### コードサンプル
 
-以下のスクリプトは、git logの出力と追加メモから進捗報告Markdownを自動生成する。`parse_git_log`関数はgit logの`--oneline`出力をパースしてコミット一覧を返し、`generate_report`関数はテンプレートに沿った報告文書を組み立てる。
+以下のスクリプトは、git logの出力をパースし、Conventional Commitsの型で分類した進捗報告Markdownを自動生成する。`parse_git_log`関数は `git log --format="%H|%s|%ai"`（ハッシュ｜件名｜日時）の出力をパースしてコミット一覧を返し、`generate_report`関数はfeat/fix/docs等の型で分類した報告文書を組み立てる。
 
 ```python
 # scripts/ch21/progress_report.py — 進捗報告の自動生成（抜粋）
+# 入力は git log --format="%H|%s|%ai"（ハッシュ｜件名｜日時）の出力
 
-def parse_git_log(log_text: str) -> list[CommitEntry]:
-    """git log --oneline の出力をパースする."""
-    entries: list[CommitEntry] = []
+def parse_git_log(log_text: str) -> list[Commit]:
+    """git log --format="%H|%s|%ai" の出力をパースする."""
+    commits: list[Commit] = []
     for line in log_text.strip().splitlines():
-        if not line.strip():
+        parts = line.strip().split("|", maxsplit=2)
+        if len(parts) != 3:            # 3列に分かれない行はスキップ
             continue
-        # "abc1234 コミットメッセージ" の形式をパース
-        parts = line.strip().split(" ", 1)
-        if len(parts) == 2:
-            entries.append(CommitEntry(hash=parts[0], message=parts[1]))
-    return entries
+        commit_hash, subject, date = parts
+        commits.append(Commit(hash=commit_hash, subject=subject, date=date))
+    return commits
 
 
-def generate_report(
-    log_text: str,
-    results: str = "",
-    next_steps: str = "",
-    issues: str = "",
-    date: str | None = None,
-) -> str:
-    """git logと追加情報から進捗報告Markdownを生成する."""
-    commits = parse_git_log(log_text)
-    report_date = date or datetime.date.today().isoformat()
-    done = "\n".join(f"- {c.message}" for c in commits)
-    return (
-        f"# 週次進捗報告 — {report_date}\n\n"
-        f"## やったこと\n{done}\n\n"
-        f"## 主な結果\n{results}\n\n"
-        f"## 次にやること\n{next_steps}\n\n"
-        f"## 困っていること / 相談事項\n{issues}\n"
-    )
+def generate_report(commits: list[Commit], period: str) -> str:
+    """feat/fix/docs 等の型で分類した進捗レポートのMarkdownを生成する."""
+    categorized = categorize_commits(commits)  # 型ごとにコミットを仕分け
+    ...  # カテゴリ別の変更一覧と統計を組み立てて返す
 ```
 
 完全なコードは`scripts/ch21/progress_report.py`にある。
@@ -619,7 +576,7 @@ def generate_report(
 
 > 「今週のDEG解析の結果を要約して、共同研究者への報告メールの下書きを日本語で作成して。有意遺伝子数、トップ10遺伝子の機能、パスウェイ解析の結果を含めて」
 
-> 「`scripts/ch21/progress_report.py`を使って、git logから今週の報告書を生成して」
+> 「`git log --since="1 week ago" --format="%H|%s|%ai"` の出力を `scripts/ch21/progress_report.py` に渡して、今週の進捗レポートを生成して」
 
 ---
 
@@ -703,41 +660,28 @@ def generate_report(
 
 #### コードサンプル
 
-以下のスクリプトは、解析依頼の受け付け時にメタデータの充足度を検証する。`REQUIRED_COLUMNS`に定義された必須カラムがメタデータCSVに含まれているかをチェックし、欠損セルの有無も確認する。
+以下のスクリプトは、解析依頼の受け付け時に使うチェックリストを解析タイプ別に生成し、受け取ったメタデータの充足度を検証する。`get_intake_checklist`関数はRNA-seqやChIP-seqなどの解析タイプに応じた確認項目をMarkdownで返し、`validate_metadata`関数は必須カラムの欠落と空セルを検出する。
 
 ```python
 # scripts/ch21/analysis_intake.py — 解析依頼チェックリスト（抜粋）
 
-REQUIRED_COLUMNS: list[str] = [
-    "sample_id",
-    "group",
-    "replicate",
-    "fastq_r1",
-]
-
-
-def validate_metadata(csv_text: str) -> IntakeResult:
-    """メタデータCSVの必須カラムと欠損値を検証する."""
-    reader = csv.DictReader(io.StringIO(csv_text))
-    fieldnames = list(reader.fieldnames or [])
-
-    # 必須カラムの存在チェック
-    missing_cols = [c for c in REQUIRED_COLUMNS if c not in fieldnames]
-
-    # 各行の欠損値チェック
-    rows = list(reader)
-    missing_values: list[tuple[int, str]] = []
-    for i, row in enumerate(rows, start=2):  # ヘッダ行を1として2行目から
-        for col in REQUIRED_COLUMNS:
-            if col in row and not row[col].strip():
-                missing_values.append((i, col))
-
-    return IntakeResult(
-        total_samples=len(rows),
-        missing_columns=missing_cols,
-        missing_values=missing_values,
-        is_valid=len(missing_cols) == 0 and len(missing_values) == 0,
-    )
+def validate_metadata(
+    metadata_rows: list[dict[str, str]],
+    required_columns: list[str],
+) -> list[str]:
+    """メタデータの必須カラムと空セルを検証し、問題メッセージのリストを返す."""
+    issues: list[str] = []
+    if not metadata_rows:
+        return ["メタデータが空です"]
+    available = set(metadata_rows[0].keys())
+    for col in required_columns:
+        if col not in available:
+            issues.append(f"必須カラム '{col}' がありません")
+    for i, row in enumerate(metadata_rows, start=1):
+        for col in required_columns:
+            if col in row and row[col].strip() == "":
+                issues.append(f"行 {i}: カラム '{col}' が空です")
+    return issues
 ```
 
 [§20-2 データの倫理](./20_security_ethics.md#20-2-データの倫理)のデータ管理計画（DMP）で定めた共有ルールに従い、ヒトデータの場合は倫理審査の承認やDUAの確認も解析前チェックリストに含める。
