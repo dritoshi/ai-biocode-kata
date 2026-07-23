@@ -7,7 +7,7 @@
 
 本章では、AIコーディングエージェントを開発の相棒として使いこなすための基礎を学ぶ。セットアップから始まり、計画→実装→レビューのワークフロー、プロジェクト設定、コンテキスト管理、そしてAIに何を任せ何を自分で判断すべきかまで、実践的なベストプラクティスを体系的に解説する。ここで紹介するワークフローと考え方は、[§1 設計原則 — 良いコードとは何か](./01_design.md)以降のすべての章を通じて繰り返し使うことになる。
 
-本書では概念（「読み取り専用モード」「承認ありモード」等）で記述し、ツール固有の操作は対照表で示す。現在の代表的なツールであるClaude Code CLIとCodex CLIを対照表の例として用いるが、他のAIコーディングエージェント（Cursor、Windsurf等）にも考え方の多くは適用できる。
+本書では概念（「読み取り専用モード」「承認ありモード」等）で記述し、ツール固有の操作は対照表で示す。現在の代表的なツールであるClaude Code CLIとCodex CLIを対照表の例として用いるが、他のAIコーディングエージェント（Cursor、Devin 等）にも考え方の多くは適用できる。
 
 ---
 
@@ -52,7 +52,7 @@ AIコーディングエージェントの利用を始めるには、ツールの
 | 認証 | Claude アカウントでのサインイン または Anthropic APIキー | ChatGPT アカウントでのサインイン または OpenAI APIキー |
 | 起動 | `claude` | `codex` |
 
-Windows やその他の OS での導入手順は、各ツールの公式ドキュメント（[Claude Code](https://docs.anthropic.com/en/docs/claude-code/getting-started)・[Codex CLI](https://github.com/openai/codex)）を参照すること。
+Windows やその他の OS での導入手順は、各ツールの公式ドキュメント（[Claude Code](https://code.claude.com/docs/en/getting-started)・[Codex CLI](https://github.com/openai/codex)）を参照すること。
 
 インストールが完了したら、ターミナルで起動コマンドを入力するだけでエージェントとの対話が始まる。初回起動時にサインインまたはAPIキーの設定を求められるので、あらかじめ利用方法を決めておくこと。サービスによっては多要素認証（MFA）が求められる場合がある（[§16-3 コラム: VPN・多要素認証](./16_hpc.md#16-3-リモート接続とファイル転送)を参照）。
 
@@ -171,15 +171,16 @@ LOG_TRANS = {
 }
 
 def viterbi(sequence: str) -> list[str]:
-    """2状態HMMのViterbiアルゴリズム."""
+    """2状態HMMのViterbiアルゴリズム（初期化とバックトレースは省略した抜粋）."""
+    seq = sequence.upper()
     codons = [seq[i*3:(i+1)*3] for i in range(len(seq) // 3)]
-    # 動的計画法で最適パスを計算
+    # 動的計画法で v[t][state]（コドン位置 t で状態 state に至る最尤スコア）を更新する
     for t in range(1, len(codons)):
-        for state in ["C", "N"]:
-            emit = log(freq[state][codons[t]])
+        for state in ("C", "N"):
+            emit = log_emit(state, codons[t])          # 状態ごとのコドン頻度から放出確率を計算
             best = max(
-                v[t-1][prev] + log_trans[(prev, state)]
-                for prev in ["C", "N"]
+                v[t-1][prev] + LOG_TRANS[(prev, state)]
+                for prev in ("C", "N")
             )
             v[t][state] = best + emit
     # バックトレースで最適パスを復元
@@ -280,7 +281,7 @@ CLI エージェントが内蔵するWeb検索ツールは上記の2番目のレ
 
 #### Deep Researchとは何か
 
-DR はブラウザチャット側から提供されるエージェント型の調査機能である[21](https://cdn.openai.com/deep-research-system-card.pdf) [22](https://www.anthropic.com/engineering/multi-agent-research-system) [23](https://ai.google.dev/gemini-api/docs/deep-research)。ユーザが問いを与えると、エージェントはまず明確化の質問を返して調査範囲を絞り込み、そのうえで計画→検索→読解→再計画を10〜60分かけて自動で反復し、最後に引用付きのレポートを生成する[24](https://arxiv.org/abs/2508.05668) [25](https://arxiv.org/abs/2508.12752)。背後では複数のサブエージェントが並列に検索を走らせており、その動作原理は[§0-5 サブエージェントとタスク委譲](#0-5-サブエージェントとタスク委譲)で扱う概念と相同である。ただし DR の場合、サブエージェントの実行環境は CLI ではなくブラウザ側のサービスであり、結果は CLI のコンテキストを消費しない点が本質的に異なる。
+DR はブラウザチャット側から提供されるエージェント型の調査機能である[19](https://cdn.openai.com/deep-research-system-card.pdf) [20](https://www.anthropic.com/engineering/multi-agent-research-system) [21](https://ai.google.dev/gemini-api/docs/deep-research)。ユーザが問いを与えると、エージェントはまず明確化の質問を返して調査範囲を絞り込み、そのうえで計画→検索→読解→再計画を10〜60分かけて自動で反復し、最後に引用付きのレポートを生成する[22](https://arxiv.org/abs/2508.05668) [23](https://arxiv.org/abs/2508.12752)。背後では複数のサブエージェントが並列に検索を走らせており、その動作原理は[§0-5 サブエージェントとタスク委譲](#0-5-サブエージェントとタスク委譲)で扱う概念と相同である。ただし DR の場合、サブエージェントの実行環境は CLI ではなくブラウザ側のサービスであり、結果は CLI のコンテキストを消費しない点が本質的に異なる。
 
 ツール固有の実装例としては OpenAI、Anthropic、Google、Perplexity 等がそれぞれ DR 系のサービスを提供しているが（2026年Q2時点）、仕様は数か月単位で変動するため本書では概念で扱う。最新の対応状況は各プロバイダの公式ドキュメントで確認すること。
 
@@ -314,9 +315,9 @@ DR が最も威力を発揮するのは、**計画フェーズで複数のツー
 
 > 🤖 **コラム: Deep Researchの中身 — マルチエージェント研究システム**
 >
-> DR の性能は単純な「モデルが強くなった」で説明できるものではなく、**複数エージェントの協調構造**が重要な役割を果たしている。Anthropic が公開した研究事例では、リードエージェント（Opus）が調査を分解し、並列のサブエージェント（Sonnet）が別々の観点から検索を走らせる構成が、単一エージェントより内部評価で **90.2%** 高い成績を示した[22](https://www.anthropic.com/engineering/multi-agent-research-system)。同じ研究では、成績分散の約80%をトークン使用量が説明したと報告されており、「どれだけ読み込んだか」が結果を大きく左右する。OpenAI の DR はリリース当初は o3 系列モデルをベースとして公開されたが[21](https://cdn.openai.com/deep-research-system-card.pdf)、2026年2月に GPT-5.2 へアップグレードされた[26](https://x.com/OpenAI/status/2021299935678026168)。検索結果に応じて方針を転換する反復計画を行うエージェント設計はリリース時から共通する。Google の Gemini Deep Research も多段検索をRLで訓練したエージェントであり、1タスクあたり最大60分程度かけて調査する[23](https://ai.google.dev/gemini-api/docs/deep-research)。
+> DR の性能は単純な「モデルが強くなった」で説明できるものではなく、**複数エージェントの協調構造**が重要な役割を果たしている。Anthropic が公開した研究事例では、リードエージェント（Opus）が調査を分解し、並列のサブエージェント（Sonnet）が別々の観点から検索を走らせる構成が、単一エージェントより内部評価で **90.2%** 高い成績を示した[20](https://www.anthropic.com/engineering/multi-agent-research-system)。同じ研究では、成績分散の約80%をトークン使用量が説明したと報告されており、「どれだけ読み込んだか」が結果を大きく左右する。OpenAI の DR はリリース当初は o3 系列モデルをベースとして公開されたが[19](https://cdn.openai.com/deep-research-system-card.pdf)、2026年2月に GPT-5.2 へアップグレードされた[24](https://x.com/OpenAI/status/2021299935678026168)。検索結果に応じて方針を転換する反復計画を行うエージェント設計はリリース時から共通する。Google の Gemini Deep Research も多段検索をRLで訓練したエージェントであり、1タスクあたり最大60分程度かけて調査する[21](https://ai.google.dev/gemini-api/docs/deep-research)。
 >
-> DR の体系的な比較・評価軸はサーベイ論文でも整理が進んでおり[24](https://arxiv.org/abs/2508.05668) [25](https://arxiv.org/abs/2508.12752)、「引用の正確性」「網羅性」「首尾一貫性」といった多面的な指標で評価される段階に入っている。ただしツール仕様は数か月単位で変動するため、本文は概念レベルで書き、固有サービス名は本書では対照表の脚注に留める方針を採る。
+> DR の体系的な比較・評価軸はサーベイ論文でも整理が進んでおり[22](https://arxiv.org/abs/2508.05668) [23](https://arxiv.org/abs/2508.12752)、「引用の正確性」「網羅性」「首尾一貫性」といった多面的な指標で評価される段階に入っている。ただしツール仕様は数か月単位で変動するため、本文は概念レベルで書き、固有サービス名は本書では対照表の脚注に留める方針を採る。
 
 #### エージェントへの指示例
 
@@ -447,7 +448,7 @@ DR に投げるプロンプトは、CLI エージェントへの指示とはや�
 
 ## 0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）
 
-プロジェクトのルートに設定ファイルを置くことで、エージェントの振る舞いをカスタマイズできる[1](https://docs.anthropic.com/en/docs/claude-code) [2](https://github.com/openai/codex)。この設定ファイルは、エージェントがセッション開始時に自動的に読み込む「プロジェクトの取扱説明書」のようなものである。
+プロジェクトのルートに設定ファイルを置くことで、エージェントの振る舞いをカスタマイズできる[1](https://code.claude.com/docs) [2](https://github.com/openai/codex)。この設定ファイルは、エージェントがセッション開始時に自動的に読み込む「プロジェクトの取扱説明書」のようなものである。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
@@ -519,17 +520,17 @@ DR に投げるプロンプトは、CLI エージェントへの指示とはや�
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
 | MCP追加 | `claude mcp add` | `codex mcp add` |
-| フック設定 | `.claude/settings.json` の `hooks` | — |
-| カスタムコマンド | `.claude/commands/` にMDファイル | `SKILL.md`（`$skill-name` で呼び出し） |
+| フック設定 | `.claude/settings.json` の `hooks` | 対応（複数のライフサイクルイベント） |
+| カスタムコマンド／スキル | `.claude/skills/<name>/SKILL.md`（旧 `.claude/commands/*.md` も後方互換で動作） | `.agents/skills/<name>/SKILL.md`（`$skill-name` で呼び出し） |
 | 階層構造 | ディレクトリごとに `CLAUDE.md` を配置 | ディレクトリごとに `AGENTS.md` を配置 |
 
-Codex CLI の hooks 機能は 2026年3月時点で `codex features list` 上 `under development` と表示されており、本書では前提機能として扱わない。
+Codex CLI の hooks は当初 `under development` の扱いだったが、その後正式機能となり、ツール実行の前後などに対応する9種のライフサイクルイベントを備える[2](https://github.com/openai/codex)。両ツールとも、編集後の lint やテストの自動実行をフックで設定できる。
 
 **今はこれらの名前と概念だけ知っておけばよい。** 本書を読み進めるうちに、これらの機能を使うべき場面が自然に出てくる。各機能の詳しい使い方は、上の表の「本書での詳細」列に示した章で、前提知識が揃った段階で解説する。
 
 > 🧬 **コラム: バイオインフォマティクス向けMCPサーバーとAIエージェント**
 >
-> MCPの仕組みを使えば、エージェントにバイオインフォマティクス特有のデータベースへのアクセス能力を追加できる。たとえばBioMCP（https://biomcp.org/ ）を導入すると、遺伝子・変異・論文・臨床試験など12種のバイオメディカルデータを統一的にクエリできるようになる。PubMed MCPを追加すれば、エージェントが直接PubMedを検索して論文情報を取得できる。DBCLSが開発したTogoMCP（https://togomcp.rdfportal.org/ ）は、UniProt・PDB・ChEMBL・NCBI Geneなど20以上の生命科学データベースにSPARQL経由でアクセスし、65以上のデータベース間のID変換（TogoID）も行える。さらに、Stanford大学が開発したBiomni（https://biomni.stanford.edu/ ）のように、150以上の専門ツールと59のデータベースを統合したバイオメディカル特化のAIエージェントも登場している。これらの実践的な活用方法は[§19 公共データベースとAPI — データ取得の実践](./19_database_api.md)で詳しく扱う。
+> MCPの仕組みを使えば、エージェントにバイオインフォマティクス特有のデータベースへのアクセス能力を追加できる。たとえばBioMCP（https://biomcp.org/ ）を導入すると、遺伝子・変異・論文・臨床試験など約30の情報源を統一的にクエリできるようになる。PubMed MCPを追加すれば、エージェントが直接PubMedを検索して論文情報を取得できる。DBCLSが開発したTogoMCP（https://togomcp.rdfportal.org/ ）は、UniProt・PDB・ChEMBL・NCBI Geneなど30以上の生命科学データベースにSPARQL経由でアクセスし、65以上のデータベース間のID変換（TogoID）も行える。さらに、Stanford大学が開発したBiomni（https://biomni.stanford.edu/ ）のように、150以上の専門ツールと59のデータベースを統合したバイオメディカル特化のAIエージェントも登場している。これらの実践的な活用方法は[§19 公共データベースとAPI — データ取得の実践](./19_database_api.md)で詳しく扱う。
 
 ---
 
@@ -537,7 +538,7 @@ Codex CLI の hooks 機能は 2026年3月時点で `codex features list` 上 `un
 
 AIコーディングエージェントは**実装だけでなくレビューにも使える**。むしろ、レビューこそエージェントの最も効果的な活用法の一つである。
 
-人間のプログラマーがコードレビューを行うのは、書いた本人が見落としがちなバグや設計上の問題を第三者の目で発見するためである[10](https://doi.org/10.1109/ICSE.2013.6606617)。エージェントは「疲れない第三者」として、人間のレビューを補完する強力なパートナーになる。
+人間のプログラマーがコードレビューを行うのは、書いた本人が見落としがちなバグや設計上の問題を第三者の目で発見するためである[8](https://doi.org/10.1109/ICSE.2013.6606617)。エージェントは「疲れない第三者」として、人間のレビューを補完する強力なパートナーになる。
 
 以下の3つのパターンが特に有効である。
 
@@ -560,7 +561,7 @@ AIコーディングエージェントは**実装だけでなくレビューに�
 > バグの可能性、設計上の問題点、テスト不足を厳しく指摘して。
 ```
 
-新しいセッションで行うのがポイントである。実装を行ったセッションでは、エージェントは自分が書いたコードに対して甘くなる傾向がある[11](https://arxiv.org/abs/2310.13548)。別のセッションを開くことで、先入観のない目でコードを評価させられる。
+新しいセッションで行うのがポイントである。実装を行ったセッションでは、エージェントは自分が書いたコードに対して甘くなる傾向がある[9](https://arxiv.org/abs/2310.13548)。別のセッションを開くことで、先入観のない目でコードを評価させられる。
 
 ### テスト生成によるレビュー
 
@@ -597,7 +598,7 @@ AIコーディングエージェントは**実装だけでなくレビューに�
 - サブエージェントはメインのコンテキストを消費しないため、大規模な調査に向く
 - 明示的に「use subagents」「サブエージェントで並列に」と指示すると委譲されやすい
 - 各サブエージェントもトークンを消費するため、コスト意識を持つ
-- Claude Opus 4.7 は 4.6 と比べてサブエージェントを自発的には生成しにくい[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。並列化したいタスクは「以下の3つを並列のサブエージェントで」のように分割の粒度ごと明示的に指示する
+- 近年の上位モデルは、以前の世代と比べてサブエージェントを自発的には生成しにくい傾向がある。並列化したいタスクは「以下の3つを並列のサブエージェントで」のように分割の粒度ごと明示的に指示する
 
 ### 具体的な活用場面
 
@@ -615,9 +616,9 @@ AIコーディングエージェントは**実装だけでなくレビューに�
 
 AIコーディングエージェントの**最大の制約はコンテキストウィンドウ**（Context Window）である。
 
-コンテキストウィンドウとは、エージェントが一度に「記憶」できる情報量の上限を指す。2026年現在、200Kから1Mトークン程度が一般的である[6](https://docs.anthropic.com/en/docs/about-claude/models)。日本語の場合、1トークンはおおむね1〜2文字に相当するため、200Kトークンで数十万文字——書籍1冊分程度の情報を保持できる計算になる。
+コンテキストウィンドウとは、エージェントが一度に「記憶」できる情報量の上限を指す。2026年現在、200Kから1Mトークン程度が一般的である[5](https://platform.claude.com/docs/en/about-claude/models/overview)。日本語の場合、1トークンはおおむね1〜2文字に相当するため、200Kトークンで数十万文字——書籍1冊分程度の情報を保持できる計算になる。
 
-しかし実際には、コードの読み込み、エージェントの思考過程、ツール実行の結果などでコンテキストは急速に消費される。長いセッションでは、初期の指示を「忘れる」ことがある[5](https://doi.org/10.1162/tacl_a_00638)。これは、非常に長い会議で冒頭の議論内容が後半には忘れられるのに似ている。
+しかし実際には、コードの読み込み、エージェントの思考過程、ツール実行の結果などでコンテキストは急速に消費される。長いセッションでは、初期の指示を「忘れる」ことがある[4](https://doi.org/10.1162/tacl_a_00638)。これは、非常に長い会議で冒頭の議論内容が後半には忘れられるのに似ている。
 
 ### 対策
 
@@ -636,117 +637,170 @@ AIコーディングエージェントの**最大の制約はコンテキスト�
 
 ## 0-7. モデル選択・推論の深さ・コスト意識
 
-AIコーディングエージェントの性能を調整するには、「どのモデルを使うか」と「どれだけ深く考えさせるか」の2つの軸がある。料理に喩えるなら、モデルの選択は「どのランクのシェフに頼むか」、推論の深さは「どれだけ時間をかけて調理するか」に対応する。
+AIコーディングエージェントの出力は、3つの軸で調整できる。「どのモデルを使うか」「どれだけ深く考えさせるか」、そして「そのモデルが自分の扱う分野を引き受けてくれるか」である。はじめの2つは料理に喩えられる。モデルの選択は「どのランクのシェフに頼むか」、推論の深さは「どれだけ時間をかけて調理するか」に対応する。3つ目はバイオインフォマティクスを扱う読者に固有の事情であり、[本節後半](#ドメインによる制約--最上位モデルが使えないことがある)で改めて述べる。
+
+この節が扱う具体的なモデル名・既定値・推奨値は、モデル世代の交代とともに変わる。そこで本文では**変わりにくい判断の軸**を説明し、変わりやすい具体値には最終確認日を添えた。読者が本書を読む時点での推奨は、各社の公式ドキュメント[1](https://code.claude.com/docs) [27](https://learn.chatgpt.com/docs/models) で確認してほしい。
 
 ### モデルの階層
 
+どちらのツールも、能力とコストの異なる複数のモデルを切り替えて使う。骨格は「最上位・バランス・軽量」の3階層である。ただし**階層の数も、それぞれに割り当てられるモデルも、世代交代で変わる**。実際、本書が2026年4月に想定していた構成は、3か月後には両ツールとも入れ替わっていた。Claude Code CLI では従来の最上位のさらに上に新しいクラスが加わり、Codex CLI ではモデル名が一新された。
+
+モデルの選び方には、両ツールで微妙な違いがある。**Claude Code CLI はモデルの選択と推論の深さを別々のコマンドに分けている**（それぞれ `/model` と `/effort`）**のに対し、Codex CLI は `/model` の一つでモデルと推論の深さをまとめて選ぶ**[2](https://github.com/openai/codex)。同じ「使い分け」でも、読者が操作する道具立てが異なる。
+
+> **モデル世代に依存する記述** — 最終確認: 2026-07-19。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[28](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[27](https://learn.chatgpt.com/docs/models) を参照。
+
 | 役割 | Claude Code CLI | Codex CLI |
 |-----|-------------|-----------|
-| 最高精度（複雑な設計判断、レビュー） | **Opus** | **GPT-5.5** |
-| バランス（日常の実装、デフォルト） | **Sonnet** | **GPT-5.4** |
-| 高速・低コスト（探索、簡単な修正） | **Haiku** | **GPT-5.4-mini** |
-| 切り替え方法 | `/model` | `/model` |
+| 最上位 | Fable 5（ただし後述する制約がある） | GPT-5.6 Sol |
+| 標準 | Opus 4.8 / Sonnet 5 | GPT-5.6 Terra |
+| 軽量 | Haiku 4.5 | GPT-5.6 Luna |
+| 選び方 | `/model` でモデル、`/effort` で深さ | `/model`（モデルと深さをまとめて） |
 
-両ツールの最新モデルラインナップは公式ドキュメント[1](https://docs.anthropic.com/en/docs/claude-code) [32](https://developers.openai.com/codex/models) を参照されたい。
+Codex CLI の GPT-5.6 は、Sol（最上位）・Terra（標準）・Luna（軽量）という3つのモデルに分かれている[27](https://learn.chatgpt.com/docs/models)。天体の名前が能力とコストの順に対応していると覚えるとよい。
 
-### 推論の深さ（Reasoning Depth）— 2つ目の調整軸
+起動時にどのモデルが選ばれるかは契約プランによって異なる。Claude Code CLI では Max 系の契約が Opus 4.8、Pro 系が Sonnet 5 で起動する[28](https://code.claude.com/docs/en/model-config)。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
 
-モデル選択とは**独立して**、エージェントにどれだけ「考えさせるか」を調整できる。推論を深くするほど精度が上がるが、応答時間（レイテンシ）とコストが増える。
+### 推論の深さ — 2つ目の調整軸
 
-現在の Claude モデルは、モデル自身がタスクの複雑さに応じて思考量を自動決定する **Adaptive thinking**[12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) と、その強度を段階的に指定する **effort** パラメータ[27](https://platform.claude.com/docs/en/build-with-claude/effort) の組み合わせで推論の深さを制御する。Codex CLI は **Reasoning Effort** で同様の制御を行う。
+モデル選択とは**独立して**、エージェントにどれだけ働かせるかを調整できる。Claude Code CLI ではこれを **effort**[25](https://platform.claude.com/docs/en/build-with-claude/effort)、Codex CLI では **Reasoning Effort** と呼ぶ。
 
-Adaptive thinking の対応状況はモデル世代で異なる。Opus 4.7 は Adaptive が唯一のモードで、旧来の手動指定（`budget_tokens`）は受け付けない[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。Sonnet 4.6 は Adaptive・手動指定の両対応で Adaptive が推奨される。Haiku 4.5 は Adaptive に未対応で、推論を深めたい場合は従来の Extended Thinking を手動で有効にする。
+この軸を「考える時間の長さ」とだけ理解すると使いこなせない。effort が実際に変えるのは思考量だけではなく、**エージェントの仕事の進め方そのもの**である。低い effort では複数の操作を1回のツール呼び出しにまとめ、呼び出し回数を減らし、前置きなしに行動し、完了報告も簡潔になる。高い effort ではツール呼び出しが増え、着手前に計画を説明し、変更点を詳しく要約する[25](https://platform.claude.com/docs/en/build-with-claude/effort)。「深く考えさせる」というより「丁寧に仕事をさせる」つまみだと捉えるほうが実態に近い。
+
+もう一つの仕組みが **Adaptive thinking**[10](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) である。これはモデル自身がタスクの複雑さに応じて思考量を自動決定するもので、対応状況は世代によって異なる。手動でトークン予算を指定する旧来の方式を受け付けないモデルがあり、最新世代には**思考そのものを止められないモデル**もある。
+
+ここで初心者がつまずきやすい点を2つ挙げる。
+
+第一に、**effort の段階名はモデルごとに較正されている**。同じ `high` でも、モデルが変われば実際に費やされるトークン量は変わる[28](https://code.claude.com/docs/en/model-config)。あるモデルで詰めた設定を別のモデルにそのまま持ち込んでも、同じ挙動にはならない。モデルを切り替えたら深さも調整し直す、と考えておきたい。
+
+第二に、**すべてのモデルが effort に対応しているわけではない**。軽量モデルは非対応のことがあり、Claude Code CLI では指定してもエラーにならず、そのモデルが対応する最上位のレベルに黙って丸められる[28](https://code.claude.com/docs/en/model-config)。設定したつもりで効いていない、という状態が起こりうる。
+
+> **モデル世代に依存する記述** — 最終確認: 2026-07-19。段階の名前・数・既定値はいずれも世代交代で変わる。
+
+Claude Code CLI の effort は `low` / `medium` / `high` / `xhigh` / `max` の5段階で、既定は `high` である。`/effort` という専用コマンドで変更する。Haiku 4.5 は effort に対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLI は Low / Medium / High / Extra high / Max / Ultra の6段階で、既定は Medium。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
-| 推論モード | Adaptive thinking（モデルが自動で思考量を決定）[12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) | Reasoning Effort |
-| 強度指定（effort） | `low` / `medium` / `high` / `xhigh` / `max`[27](https://platform.claude.com/docs/en/build-with-claude/effort) | None / Low / Medium / High / Extra High |
-| 切り替え方法 | `Alt+T`（macOS: `Option+T`）でトグル、または `/model` で effort を変更 | `/model` → Reasoning effort、または`-c model_reasoning_effort="high"` |
-| 計画時の設定 | Plan Mode + 高い effort | `plan_mode_reasoning_effort` で計画時だけ別の深さを設定可能 |
-| 設定の永続化 | — | `~/.codex/config.toml` に `model_reasoning_effort = "high"` |
+| 深さの段階 | `low`〜`max`（5段階）[28](https://code.claude.com/docs/en/model-config) | Low〜Ultra（6段階）[2](https://github.com/openai/codex) |
+| 既定 | `high` | Medium |
+| 変更方法 | `/effort`（モデル選択の `/model` とは別コマンド） | `/model`（モデルと推論強度をまとめて選ぶ） |
+| 思考の切り替え | `Alt+T`（macOS: `Option+T`）でトグル | — |
+| 設定の永続化 | `~/.claude/settings.json` | `~/.codex/config.toml` の `model_reasoning_effort` |
+| 計画時だけ変える | モデルを切り替える `opusplan` エイリアス | `plan_mode_reasoning_effort` |
 
-Claude Opus 4.7 の公式推奨[27](https://platform.claude.com/docs/en/build-with-claude/effort) は、コーディング・エージェント作業で `xhigh` スタート、通常の知的作業で最低 `high`、コスト重視で `medium`、簡単な短タスクで `low`、`max` はフロンティア問題で `xhigh` に余裕がある場合のみ、である。Sonnet 4.6 はレイテンシ抑制のため `medium` を既定値に置くのが推奨されている[27](https://platform.claude.com/docs/en/build-with-claude/effort)。Opus 4.7 は 4.6 より effort 指定を厳格に守る傾向があり、低 effort では「頼まれた範囲」に厳密に絞り込むため、浅い推論が気になる場合はプロンプトで補うより effort を一段上げるのが効果的である[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。
+Claude Code CLI には、そのターンだけ推論を深くする `ultrathink` というキーワードがある。プロンプトのどこかに書けば、セッションの effort 設定を変えずに済む。注意したいのは、**`think hard` や `think more` はキーワードとして認識されず、ただの文章として渡される**点である[28](https://code.claude.com/docs/en/model-config)。よく見かける言い回しだが、効果はない。
 
-### 使い分けの指針
+### 使い分けの指針 — 判断軸は「要件の曖昧さ」
 
-```
-簡単な修正（タイポ修正、1行変更）
-  → 軽量モデル + 低い effort
-    Claude Code: Sonnet 4.6 または Haiku 4.5, effort = low
-    Codex: GPT-5.4-mini, Reasoning = Low
+上位のモデルや深い推論をいつ使うべきか。「タスクが難しいとき」という答えは、実のところ使いにくい。難しさは主観的で、着手する前には見積もれないことが多いからである。
 
-日常的な実装（関数追加、テスト生成）
-  → デフォルトモデル + 中程度の effort
-    Claude Code: Sonnet 4.6, effort = medium
-    Codex: GPT-5.4, Reasoning = Medium
+両社の公式ドキュメントが示す判断軸は、難しさではなく**要件がどれだけ固まっているか**である。Codex CLI の説明が明快で、最上位は「曖昧で、難しく、追加の分析や判断を要するタスク」に、軽量は「**良い結果がどういうものか既に分かっている**、具体的で大量のタスク」に向くとされる[27](https://learn.chatgpt.com/docs/models)。
 
-複雑な設計判断（アーキテクチャ、リファクタリング計画）
-  → 高精度モデル + 高い effort
-    Claude Code: Opus 4.7, effort = xhigh
-    Codex: GPT-5.5, Reasoning = High / Extra High
-```
+この軸はバイオインフォマティクスの作業に素直に対応する。
+
+| 状況 | 例 | 選択 |
+|-----|-----|-----|
+| 良い結果の形がまだ見えていない | どの正規化手法を使うか、バッチ効果をどう扱うか、原因不明のパイプライン不具合の切り分け | 上位モデル、深さを上げる |
+| 方針は決まり、実装に落とす段階 | 決めた手順のスクリプト化、テスト生成、リファクタリング | 既定のまま |
+| 仕様が確定した定型処理 | フォーマット変換、大量ファイルの整形、読み取り中心の探索 | 軽量側へ、深さを下げる |
+
+操作としては、毎回ゼロから選ぶのではなく**既定から必要な方向へ動かす**と考えるとよい。どちらのツールも、大半のタスクで妥当な既定値を用意している。上位モデルや深い推論は、既定で物足りないと分かったときに一段ずつ上げるものだと捉えておきたい。
+
+深さを上げるべき合図もはっきりしている。エージェントが浅い推論で済ませていると感じたら、プロンプトで注意を足すより**深さを一段上げるほうが効く**[25](https://platform.claude.com/docs/en/build-with-claude/effort)。逆に、結果は正しいのに時間がかかりすぎるなら下げる。この上げ下げを実際に試すこと自体が、エージェントとの協働では欠かせない作業になる。
+
+### ドメインによる制約 — 最上位モデルが使えないことがある
+
+3つ目の調整軸は、本書の読者にとって避けて通れない事情である。**最上位のモデルが、バイオインフォマティクスの作業を引き受けてくれるとは限らない。**
+
+> **モデル世代に依存する記述** — 最終確認: 2026-07-19。以下は現行世代の挙動であり、対象となるモデルも分類の範囲も変わりうる。
+
+Claude Code CLI の最上位クラスである Fable 5 は、サイバーセキュリティと生物学の内容に対する安全性分類器とともに動作する。分類器が反応すると、Claude Code はそのリクエストを自動的に Opus 4.8 で実行し直し、切り替えたことを画面に表示する[28](https://code.claude.com/docs/en/model-config)。公式ドキュメントは、**生物学に隣接したコードベースでは頻繁に、多くの場合は最初のリクエストから切り替えが起き、本格的な生物学の作業ではほぼすべてのリクエストが再ルーティングされると予想せよ**と明記している[28](https://code.claude.com/docs/en/model-config)。
+
+なぜ「最初のリクエストから」なのか。セッションの最初のリクエストには、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の内容や `git status` といったワークスペースの情報が同梱される。つまり**特別なことを何も尋ねていなくても、リポジトリに生物学の材料が含まれているだけで分類器が反応しうる**[28](https://code.claude.com/docs/en/model-config)。本書の読者がまさに置かれる状況である。
+
+ここで大事なのは、**これが異常ではない**という点である。公式は「これらの領域では想定されたルーティングであり、アカウントに問題があるわけではない」と述べている[28](https://code.claude.com/docs/en/model-config)。切り替えの通知を見て慌てる必要はない。
+
+そのうえで、知っておくべき挙動が3つある。
+
+- 原因の切り分けには `claude --safe-mode` を使う。`CLAUDE.md`・スキル・MCP サーバ・フックを無効にして起動できる。ただし `git status` とディレクトリ名は無効化の対象外なので、これらが原因の場合は切り分けきれない[28](https://code.claude.com/docs/en/model-config)
+- 自動で切り替えず毎回確認させたい場合は、`/config` で該当の設定をオフにする[28](https://code.claude.com/docs/en/model-config)
+- **非対話モードや SDK 経由では、確認を表示できないため拒否でターンが終わる**[28](https://code.claude.com/docs/en/model-config)。`claude -p` を CI に組み込む場合はここに注意する
+
+結論として、**本書が扱う作業では、実質的な最上位モデルは Opus 4.8 である**。Fable 5 を指定しても自動的に戻されるため、はじめから Opus 4.8 を選んでおくほうが素直である。「最高性能のモデルを選べばよい」という単純な指針が、扱う分野によっては成り立たない。これが3つ目の軸を立てる理由である。
+
+### 最上位の設定は「深さ」ではなく「委譲」である
+
+推論の深さを最大まで上げた先に、もう一段別の設定がある。Claude Code CLI の `ultracode` と Codex CLI の Ultra である。名前も置き場所も effort の一段階のように見えるが、**実体は別物である**。
+
+`ultracode` は API の effort レベルではない。最も深い effort を指定したうえで、Claude Code が複数エージェントによるワークフローを起動してよいという常時許可を与える設定である[25](https://platform.claude.com/docs/en/build-with-claude/effort)。Codex CLI の Ultra も同様に「単一エージェントの実行を超えるもの」と説明され、サブエージェントを使って作業を分担させる[27](https://learn.chatgpt.com/docs/models)。つまりこれらは推論を深くするつまみではなく、**仕事の進め方を並列に変えるスイッチ**である。
+
+両社とも、**ほとんどのタスクにこれらは不要**だと明言している[27](https://learn.chatgpt.com/docs/models)。使いどころは「作業を意味のある単位に分割できるとき」に限られる。
+
+ここで[§0-5 サブエージェントとタスク委譲](#0-5-サブエージェントとタスク委譲)の内容とつながる。**この最上位設定を選んでいない限り、並列の委譲は明示的に指示する必要がある**[27](https://learn.chatgpt.com/docs/models)。「以下の3つを並列のサブエージェントで調べて」のように、分割の粒度まで指定するのはこのためである。
+
+もう一点、安全性に関わる注意がある。多数のエージェントを並列に走らせる設定と、承認なしで実行を許す権限モードの組み合わせは、影響範囲が一気に広がる。実際 Codex CLI では、この2つを同時に有効にしようとすると専用の警告が表示されるようになった[27](https://learn.chatgpt.com/docs/models)。権限の考え方は[§0-10 セキュリティと権限管理](#0-10-セキュリティと権限管理)で扱うが、**並列度を上げるときは権限を締める**、と覚えておきたい。
+
+### 新しいモデルが出たときの作法
+
+モデルは数か月おきに世代交代する。そのたびに設定を見直すことになるが、ここには**直感と逆の作法**がある。
+
+新しいモデルが出たら、まず**推論の深さを一段下げて試す**。両社の公式移行ガイドが、揃ってこれを勧めている。Anthropic は最新世代について「低い effort の設定でも十分に機能し、旧世代の高い effort を上回ることが多い」と述べ[25](https://platform.claude.com/docs/en/build-with-claude/effort)、OpenAI は「現在の設定を基準として保ち、そこから一段下げたものと代表的なタスクで比較せよ。より少ないトークンで同等以上の品質を保てることが多い」と指示している[29](https://developers.openai.com/api/docs/guides/latest-model)。
+
+「新しくて強いモデルなのだから、より深く考えさせよう」と考えたくなるが、実際には逆である。世代が上がるとトークン効率も上がるため、**同じ結果をより少ない手数で出せるようになる**。深さを据え置いたまま乗り換えると、必要以上のコストと待ち時間を払うことになりやすい。
+
+もう一つの作法が、**旧世代向けに書いた指示を外して試す**ことである。「ダブルチェックしてから返して」「必要なら中間ステータスを報告して」といったお願いは、それが必要だった世代のために書かれたものである。新しい世代では既定の振る舞いに取り込まれていることが多く、残しておくとかえって冗長な出力を招く。いったん外して挙動を確認するのが公式の移行指針である[26](https://platform.claude.com/docs/en/about-claude/models/migration-guide)。
+
+この2つは、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の見直しにもそのまま当てはまる。設定ファイルは書き足すばかりになりがちだが、モデルが変わったら**削れる指示がないかを確認する**時期でもある。
 
 ### コスト意識
 
-- サブスクリプション契約（Claude Max、ChatGPT Pro等）はトークン上限なし、もしくは大きな上限が設定されている
-- API利用は従量課金であり、高精度モデル×高い effort では5〜10倍のコストがかかる[7](https://docs.anthropic.com/en/docs/about-claude/pricing)
-- 「すべてに最高性能を使う」のではなく、タスクに応じて使い分ける
-- Opus 4.7 は新しいトークナイザを採用しており、同じテキストでも従来モデル比で最大 1.35 倍のトークンを消費することがある[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。API 従量課金を前提とする場合は `max_tokens` に余裕を持たせる（`xhigh` / `max` 運用時は 64k 以上が目安）[27](https://platform.claude.com/docs/en/build-with-claude/effort)
+コストの感じ方は契約形態で大きく異なる。API を従量課金で使う場合は、消費したトークンがそのまま金額になる。一方サブスクリプション契約でも、「使い放題」**ではない**点は初心者が誤解しやすい。
 
-### ベンチマークで見るモデルの性能差
+サブスクリプション契約には利用枠があり、一定時間ごと（たとえば5時間のローリング枠）と週単位で上限が設定されている[28](https://code.claude.com/docs/en/model-config)。しかも**この枠はモデルをまたいで共有される**。上位モデルの枠を使い切ったとき、`/model` で軽量モデルに切り替えても枠そのものは回復しない[28](https://code.claude.com/docs/en/model-config)。つまり「サブスクだから気にしなくてよい」のではなく、枠の中でどう配分するかを考える必要がある。
 
-「Opusが最高精度」「Haikuが軽量」という定性的な説明だけでは、読者にとってモデル選択の判断は難しい。ここでは、コーディング能力を測る代表的なベンチマークを紹介し、モデル間の性能差を具体的なスコアで示す。
+コストを左右する要因は、モデルの選択と推論の深さの2つである。上位モデルほど、また深い推論ほどトークンを多く使う。ここで見落としやすいのが、**思考のために生成されるトークンも課金対象**だという点である。画面に折りたたまれて見えていなくても、深く考えさせればその分だけ費用がかかる[28](https://code.claude.com/docs/en/model-config)。
 
-| ベンチマーク | 内容 | 規模 |
-|------------|------|------|
-| SWE-bench Verified[14](https://arxiv.org/abs/2310.06770) | GitHubの実Issue修正（パッチ生成） | 500問 |
-| SWE-bench Pro | 多言語・多ファイルのより困難なIssue修正 | 1,865問 |
-| LiveCodeBench[15](https://arxiv.org/abs/2403.07974) | 競技プログラミングの新問題（データ汚染フリー） | 1,055問 |
-| Terminal-Bench 2.0[16](https://arxiv.org/abs/2601.11868) | ターミナルでの実作業（環境構築、コンパイル等） | 89問 |
+節約の基本は「すべてに最上位を使わない」ことに尽きる。公式ドキュメントも、大半のコーディングは標準モデルで十分にこなせるとし、上位モデルは複雑な設計判断や多段の推論に取っておくよう勧めている[28](https://code.claude.com/docs/en/model-config)。深い推論が要らない定型作業では、`/effort` で深さを下げるだけでも消費を抑えられる。
 
-以下は、SWE-bench Verifiedにおけるモデル階層ごとのスコアとAPI従量課金の価格である（2026年3月時点）。
+もう一つ、意外に効くのが**コンテキストの管理**である。セッションに溜まった無関係なやり取りは、以降のメッセージすべてでトークンを浪費する。作業の区切りで `/clear` を使い、文脈を新しくするだけでコストが下がる。エージェントに何を覚えさせ、何を忘れさせるかは[§0-6 コンテキスト管理](#0-6-コンテキスト管理)で扱った習慣がそのまま効く。
 
-| モデル階層 | SWE-bench Verified | API価格(入力 / 出力, $/MTok) |
-|-----------|-------------------|--------------------------|
-| Opus 4.6（最高精度） | 80.8% | $5 / $25 |
-| Sonnet 4.6（バランス） | 79.6% | $3 / $15 |
-| Haiku 4.5（軽量） | 73.3% | $1 / $5 |
+### ベンチマークの読み方
 
-Sonnet 4.6はOpus 4.6とわずか1.2ポイント差でありながら、コストは約60%低い。Haiku 4.5でもSonnet 4.5(77.2%)と約4ポイント差に収まり、価格は約1/3である[7](https://docs.anthropic.com/en/docs/about-claude/pricing)。サブスクリプション契約であればこのAPI価格差を直接意識する必要はないが、モデル間の性能差の目安として参考になる。なお 2026年4月16日に Anthropic は Claude Opus 4.7 を Opus 4.6 と同じ $5 / $25 per MTok で公開した[30](https://www.anthropic.com/news/claude-opus-4-7)。Anthropic の内部評価では Opus 4.6 比でコーディングタスクの解決率が 13% 向上し、CursorBench では 58% から 70% に改善している[30](https://www.anthropic.com/news/claude-opus-4-7)。一方、2026年4月23日には OpenAI が GPT-5.5 を公開し、SWE-bench Verified で 88.7%、Terminal-Bench 2.0 で state-of-the-art の 82.7% を記録した[31](https://openai.com/index/introducing-gpt-5-5/)。最新のスコアは [SWE-bench リーダーボード](https://www.swebench.com/) を参照されたい。
+モデルを選ぶとき、ベンチマークのスコアは有力な手がかりに見える。実際「このモデルは SWE-bench で何%」という数字はよく引き合いに出される。しかし本書はあえて、**個々のスコアを一覧にして比較することはしない**。理由は2つある。
 
-ベンチマーク間で順位が入れ替わることにも注意が必要である。Terminal-Bench 2.0ではGPT-5.5が首位(82.7%)[31](https://openai.com/index/introducing-gpt-5-5/)、SWE-bench ProではClaude Opus 4.7が首位(64.3%、GPT-5.5は58.6%)[31](https://openai.com/index/introducing-gpt-5-5/)、LiveCodeBenchではGemini 3 Proが首位(91.7%)と、タスクの性質によって得意なモデルが異なる。「あらゆるタスクで最強のモデル」は存在しない。ベンチマークのスコアは急速に変動するため、最新の結果は[SWE-bench](https://www.swebench.com/)、[LiveCodeBench](https://livecodebench.github.io/leaderboard.html)、[Epoch AI](https://epoch.ai/benchmarks/)等のリーダーボードで確認できる。
+第一に、スコアは急速に陳腐化する。コーディング性能を測る代表的なベンチマークには、GitHub の実 Issue を修正させる **SWE-bench Verified**[12](https://arxiv.org/abs/2310.06770)、競技プログラミングの新作問題を解かせる **LiveCodeBench**[13](https://arxiv.org/abs/2403.07974)、ターミナル上の実作業を課す **Terminal-Bench**[14](https://arxiv.org/abs/2601.11868) などがある。だが上位モデルのスコアは数か月で塗り替わり、首位のモデルも入れ替わる。本書に具体的な数値を書けば、読者が手にする頃には古くなっている。
+
+第二に、そして重要なのは、**ベンチマークのスコア自体が、そのまま鵜呑みにできる数字ではなくなってきている**からである。読者に身につけてほしいのは、最新のスコア表よりも、スコアを見るときの以下の注意点である。
+
+- **同じベンチマークでも順位は入れ替わる**。あるベンチマークで首位のモデルが、別のベンチマークでは2位や3位になる。タスクの性質によって得意なモデルが違うため、「あらゆるタスクで最強のモデル」は存在しない。用途に近いベンチマークを見るべきである
+- **誰が測ったのかを確かめる**。開発元が自社モデルについて公表したスコアと、第三者が独立に測ったスコアは区別して読む。同じベンチマーク名でも、測定の条件（試行回数、推論の深さ、足回りのエージェント実装）が違えば数字は変わる。条件の書かれていないスコアは、比較の土台にならない
+- **ベンチマーク自体の欠陥が問題になっている**。よく使われるベンチマークについて、問題設定に不備があった、あるいは学習データに混入していて実力を過大評価していた、といった指摘が相次いでいる。ベンチマークの「タスクの質」を見直しただけで順位が入れ替わることも報告されており、スコアの絶対値を額面どおり受け取るのは危うい
+
+要するに、ベンチマークは**モデル選択の出発点にはなるが、結論にはならない**。最新のスコアは [SWE-bench](https://www.swebench.com/)、[LiveCodeBench](https://livecodebench.github.io/leaderboard.html)、[Epoch AI](https://epoch.ai/benchmarks/) などのリーダーボードで、上記の注意点を踏まえて確認してほしい。そして最終的には、[§0-1](#0-1-セットアップと基本操作)で体験したように、自分の手元のタスクで実際に試すのが一番確実である。
 
 > 🧬 **コラム: バイオインフォマティクスコード生成の壁 — BioCoderベンチマーク**
 >
-> 汎用ベンチマーク(HumanEval等)ではフロンティアモデルが90%を超えるスコアを達成している。しかし、バイオインフォマティクスに特化したBioCoderベンチマーク[19](https://pubmed.ncbi.nlm.nih.gov/38940140/)では、GPT-4でも正解率は約60%にとどまる。0-basedと1-basedの座標系の違い、FASTA/BEDフォーマットの慣習、ドメイン固有のライブラリ依存関係など、汎用ベンチマークでは測れない専門知識が要求されるためである。汎用ベンチマークのスコアだけでモデルを選ぶのではなく、生命科学ドメインのコードでは[§0-4 エージェントにレビューさせる](./00_ai_agent.md#0-4-エージェントにレビューさせる)で学ぶレビューを欠かさないようにしたい。
+> 汎用ベンチマーク(HumanEval等)ではフロンティアモデルが90%を超えるスコアを達成している。しかし、バイオインフォマティクスに特化したBioCoderベンチマーク[17](https://pubmed.ncbi.nlm.nih.gov/38940140/)では、GPT-3.5/4でも正解率は約50%にとどまる（小型モデルは最大でも25%程度である）。0-basedと1-basedの座標系の違い、FASTA/BEDフォーマットの慣習、ドメイン固有のライブラリ依存関係など、汎用ベンチマークでは測れない専門知識が要求されるためである。汎用ベンチマークのスコアだけでモデルを選ぶのではなく、生命科学ドメインのコードでは[§0-4 エージェントにレビューさせる](./00_ai_agent.md#0-4-エージェントにレビューさせる)で学ぶレビューを欠かさないようにしたい。
 
 ### エージェントの性能はモデルだけで決まらない
 
-コーディングエージェントの性能を最も大きく左右するのは、意外にも、モデルの選択よりも**エージェントのアーキテクチャ**（スキャフォールド）である[17](https://arxiv.org/abs/2604.03515)。
+モデル選択の話を締めくくる前に、そもそもの前提を一つ確認しておきたい。**コーディングエージェントの性能は、モデルの選択だけで決まるわけではない**。
 
-同一のモデルでも、エージェントの実装が異なると、SWE-benchのスコアが42%から78%まで変動する——36ポイントもの差が生じる。一方、フロンティアモデル6種を同一のエージェントで比較した場合、スコアの差はわずか1.3ポイント以内に収まる[17](https://arxiv.org/abs/2604.03515)。エージェントがどのようにコードを検索し、コンテキストを管理し、エラーから回復するかが、モデルの能力差以上に結果を左右するのである。
+エージェントは、モデルの周りに「足回り」を持っている。どのようにコードを検索し、コンテキストを管理し、ツールを呼び、エラーから回復するか——この一連の仕組みを**スキャフォールド**（足場）と呼ぶ。同じモデルでも、このスキャフォールドが違えば結果は大きく変わる。実際、公開されているコーディングエージェントのスキャフォールドを調べた研究は、その実装が驚くほど多様であることを報告している[15](https://arxiv.org/abs/2604.03515)。
 
-この事実は読者にとって2つの意味を持つ。
+このことは、前節で見たベンチマークの読み方とも通じる。あるベンチマークのスコアは、モデル単体の能力ではなく「そのモデルを、ある足回りに載せたときの成績」である。だからこそ、測定に使われたエージェント実装まで確かめないと、モデル同士を正しく比較できない。
+
+この前提は、読者にとって2つの意味を持つ。
 
 1. **ツール選択を過度に心配する必要はない**。Claude Code CLIとCodex CLIのどちらを使っても、本書で学ぶ概念（Plan→Execute→Review、テスト駆動開発、コードレビュー）は同様に適用できる
 2. **高額なモデルを使えば必ず良い結果が出るわけではない**。適切な指示の出し方（[§0-2](./00_ai_agent.md#0-2-plan--execute--review-ワークフロー)）やプロジェクト設定（[§0-3](./00_ai_agent.md#0-3-プロジェクト設定ファイルclaudemd--agentsmd)）が、モデルのアップグレードと同等以上の効果をもたらしうる
 
 ### 本書の再現性について
 
-LLMの出力は本質的に非決定的である。同一の指示を同一のモデルに与えても、毎回異なるコードが生成される。Ouyang et al.(2025)の研究によれば、同じコード生成タスクを5回実行した場合、75.76%のタスクでテスト結果が毎回異なった[18](https://dl.acm.org/doi/10.1145/3697010)。temperature=0に設定しても、浮動小数点演算の非結合性やバッチサイズの変動により、完全な再現は保証されない[18](https://dl.acm.org/doi/10.1145/3697010)。さらに Claude Opus 4.7 以降の Messages API では `temperature`/`top_p`/`top_k` といったサンプリングパラメータ自体が受け付けられなくなり、非決定性はプロンプトとテストの側で吸収するしかなくなっている[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。加えて、モデルのバージョン更新によっても挙動が変わるため、本書の執筆時点と読者がエージェントを使う時点で、生成されるコードは異なりうる。
+LLMの出力は本質的に非決定的である。同一の指示を同一のモデルに与えても、毎回異なるコードが生成される。Ouyang et al.(2025)の研究によれば、同じコード生成タスクを繰り返し実行すると、データセットによって47.6%から75.8%のタスクで、実行のたびにテスト結果が一致しなかった[16](https://dl.acm.org/doi/10.1145/3697010)。仮に生成時のランダム性を最小に設定しても、浮動小数点演算の非結合性やバッチサイズの変動により、完全な再現は保証されない[16](https://dl.acm.org/doi/10.1145/3697010)。近年のモデルには、出力のランダム性を制御するパラメータ自体を受け付けないものもあり、非決定性はプロンプトとテストの側で吸収するしかなくなっている。加えて、モデルのバージョン更新によっても挙動が変わるため、本書の執筆時点と読者がエージェントを使う時点で、生成されるコードは異なりうる。
+
+生成されるコードだけでなく、本書がコード例とともに示した実行結果——たとえば[§0-1](#0-1-セットアップと基本操作)の遺伝子予測で得た件数——も、読者の手元で同じ数字になるとは限らない。これらは「本書の執筆時にこう出た」という記録であって、再現を保証する仕様ではない。本文がどのモデルの支援で書かれたかは[はじめに](./hajimeni.md)に記してあるが、それも執筆時点の記録である。読者が確認すべきは特定の数字ではなく、その結果をどう評価し検証するかという手続きのほうである。
 
 このため、本書の演習問題は特定のモデル出力に依存しない設計としている。「エージェントが生成したコードを評価・レビューする」「テストで正しさを検証する」という形式であり、生成されるコードが毎回異なっても、読者が身につけるべき**判断力と原則**は変わらない。[§0-2 Plan → Execute → Review ワークフロー](./00_ai_agent.md#0-2-plan--execute--review-ワークフロー)のレビュー習慣と、[§8 コードの正しさを守るテスト技法](./08_testing.md)のテスト技法は、モデルやツールが何であれ有効である。
-
-> 🤖 **コラム: Claude Opus 4.7 世代で押さえたい設計指針**
->
-> Claude Opus 4.7 は「言われたことを、必要な分だけ、ツールは最小限に、ただし推論は強く」こなす方向に振られたモデルである[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。本文の使い分け指針に加えて、プロンプト設計で押さえておきたいポイントがいくつかある。
->
-> - **指示は列挙する**: 4.7 は指示をより字義通りに解釈する。暗黙的に周辺ケースを補完しなくなったため、カバーしたい条件は明示的に並べる
-> - **4.6 向けの防御的スキャフォールドは外す**: 「ダブルチェックしてから返して」「必要なら中間ステータスを報告して」といった 4.6 向けのお願い指示は、4.7 ではむしろ冗長化を招きうる。いったん外して挙動を確認するのが公式の移行指針である[28](https://platform.claude.com/docs/en/about-claude/models/migration-guide)
-> - **shallow reasoning を見たら effort を上げる**: 表面的な回答が返ってきた場合、プロンプトで工夫するよりも effort を一段上げるのが先である[27](https://platform.claude.com/docs/en/build-with-claude/effort)
-> - **Interleaved thinking が自動で有効になる**: Adaptive thinking ではツール呼び出しの間にも推論が挟まる。エージェント協働のループで特に効果が出やすい[12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking)
->
-> これらは 4.6 以前に最適化されたプロンプトを 4.7 で使い回すときに特に効く。挙動が期待と大きくずれたら、プロンプトを継ぎ足すより先に、これらの観点で一度プロンプトを整理し直したい。
 
 > 🤖 **コラム: 機械学習タスクでのモデル選択**
 >
@@ -762,7 +816,7 @@ LLMの出力は本質的に非決定的である。同一の指示を同一の�
 
 AIコーディングエージェントは万能ではない。得意なことと不得意なことがあり、その境界を理解することが、エージェントを効果的に使いこなす鍵である。
 
-| AIが得意なこと | 人間が判断すべきこと[13](https://arxiv.org/abs/2302.06590) |
+| AIが得意なこと | 人間が判断すべきこと[11](https://arxiv.org/abs/2302.06590) |
 |--------------|-------------------|
 | 定型コードの生成 | アーキテクチャ・設計方針 |
 | APIの使い方・ライブラリの呼び出し | データ構造・フォーマットの選択 |
@@ -805,7 +859,7 @@ AIが生成したコードは「動く」ことが多いが、それが「良い
 >
 > これらに共通するのは、「AIが安全側・汎用側に倒そうとする」傾向である。研究コードでは多くの場合、シンプルさのほうが価値がある。
 >
-> なお Claude Opus 4.7 では、これらのアンチパターンに見られる**過剰さ**自体がモデル側でも抑制される傾向にある[29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7)。一方で低い effort では「頼まれた範囲」のみに厳密に絞り込むため、必要な防御や検証はプロンプトに**明示列挙**する必要がある。「過剰を削る」と「必要なものを書き落とす」は表裏なので、生成されたコードに何が含まれていないかを意識してレビューしたい。
+> なお近年の上位モデルでは、これらのアンチパターンに見られる**過剰さ**自体がモデル側でも抑制される傾向にある。一方で低い effort では「頼まれた範囲」のみに厳密に絞り込むため、必要な防御や検証はプロンプトに**明示列挙**する必要がある。「過剰を削る」と「必要なものを書き落とす」は表裏なので、生成されたコードに何が含まれていないかを意識してレビューしたい。
 
 ---
 
@@ -823,9 +877,9 @@ AIが生成したコードは「動く」ことが多いが、それが「良い
 
 | 用途 | 推奨ライブラリ | 自作を避けるべき理由 |
 |-----|-------------|-------------------|
-| FASTA/FASTQのパース | `Bio.SeqIO`（Biopython）[8](https://pubmed.ncbi.nlm.nih.gov/19304878/) | 不正なフォーマット、マルチラインFASTA等のエッジケースが多い |
+| FASTA/FASTQのパース | `Bio.SeqIO`（Biopython）[6](https://pubmed.ncbi.nlm.nih.gov/19304878/) | 不正なフォーマット、マルチラインFASTA等のエッジケースが多い |
 | BAM/SAMファイルの操作 | `pysam` | 大規模データの効率的な処理にはCバインディングが必要 |
-| ゲノム区間の操作 | `pybedtools`[9](https://pubmed.ncbi.nlm.nih.gov/21949271/) | 区間演算のアルゴリズムは複雑で、自作するとバグの温床になる |
+| ゲノム区間の操作 | `pybedtools`[7](https://pubmed.ncbi.nlm.nih.gov/21949271/) | 区間演算のアルゴリズムは複雑で、自作するとバグの温床になる |
 | 配列アラインメント | 既存アライナ（BWA, STAR等）の呼び出し | アルゴリズムの実装は専門家の領域 |
 
 設定ファイルに「FASTAパーサは `Bio.SeqIO` を使え、自作禁止」のように明記しておけば、エージェントが不要な自作を始めることを防げる。詳しくは[§12 データ処理の実践 — NumPy・pandas・polars](./12_data_processing.md)で各ライブラリの使い方を解説する。
@@ -873,7 +927,7 @@ AIコーディングエージェントはローカル環境でファイルの読
 
 CLI エージェントが入力をモデルの学習に使うか、どの程度の期間サーバに保持するか、ゼロデータ保持（Zero Data Retention; ZDR）契約を結べるかといったポリシーは、**サインインに使うアカウントの種類（Consumer プラン / API / Workspace・Team・Enterprise 契約）によって大きく異なる**。同じツールでも、個人の Consumer アカウントで使う場合と組織の Enterprise 契約で使う場合とで、送信データの扱いが別物になることがある点に注意する。
 
-これらのポリシーは頻繁に更新されるため、**本書では現時点の具体値を本文に埋め込まず、[§20-2-1](./20_security_ethics.md#プロバイダ別のプライバシー設定2026年4月現在) に 2026年4月現在の対照表と公式ドキュメントへのリンクを整理している**[20](https://www.anthropic.com/legal/privacy)。ツールを選び、サインインする前に、各自が公式ドキュメントで現行ポリシーを確認することが強く推奨される。制限付きデータや未発表データを扱うプロジェクトでは、所属機関の情報セキュリティ部門にも事前相談するのが望ましい。
+これらのポリシーは頻繁に更新されるため、**本書では現時点の具体値を本文に埋め込まず、[§20-2-1](./20_security_ethics.md#プロバイダ別のプライバシー設定2026年4月現在) に 2026年4月現在の対照表と公式ドキュメントへのリンクを整理している**[18](https://www.anthropic.com/legal/privacy)。ツールを選び、サインインする前に、各自が公式ドキュメントで現行ポリシーを確認することが強く推奨される。制限付きデータや未発表データを扱うプロジェクトでは、所属機関の情報セキュリティ部門にも事前相談するのが望ましい。
 
 > **本書の免責**: 本書の記述はあくまで執筆時点の情報である。実際の運用に際しては、読者自身の責任で最新のポリシーと所属機関の規程を確認してほしい。詳細は[本書の利用について](./notice.md)を参照。
 
@@ -937,9 +991,9 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 
 （ヒント）ドメイン固有の制約（リファレンスゲノム、座標系など）を含めることが重要である。
 
-### 演習 0-4: Writer/Reviewerパターン **[実践]**
+### 演習 0-4: 実装とレビューの分離 **[実践]**
 
-[§0-4](#0-4-エージェントにレビューさせる)で学んだWriter/Reviewerパターンを実践する。以下の手順で進めよ:
+[§0-4](#0-4-エージェントにレビューさせる)で学んだ、実装とレビューを別セッションに分ける進め方を実践する。以下の手順で進めよ:
 
 1. エージェントに「GC含量を計算するPython関数を書いて」と指示し、コードを生成させる
 2. 別のセッションを開き、生成されたコードをレビューさせる
@@ -955,7 +1009,7 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 
 ### AIエージェントの公式ドキュメント
 
-- **Anthropic. "Claude Code Documentation".** https://docs.anthropic.com/en/docs/claude-code — 本章の参考文献 [1] で引用した公式ドキュメント。Plan→Code→Reviewワークフローの発展的な使い方（カスタムスラッシュコマンド、Hooks、MCPサーバー連携等）が網羅されている。ツールの進化が速いため、最新機能は常にここを参照するのが最善である。
+- **Anthropic. "Claude Code Documentation".** https://code.claude.com/docs — 本章の参考文献 [1] で引用した公式ドキュメント。Plan→Code→Reviewワークフローの発展的な使い方（カスタムスラッシュコマンド、Hooks、MCPサーバー連携等）が網羅されている。ツールの進化が速いため、最新機能は常にここを参照するのが最善である。
 - **Anthropic. "Building effective agents".** https://www.anthropic.com/research/building-effective-agents — エージェントのアーキテクチャパターン（tool use、chain-of-thought、ループ型エージェント等）を体系的に解説した記事。本章で紹介したPlan-Execute-Reviewワークフローの理論的背景を理解できる。
 
 ### コンピュータサイエンスの基礎スキル
@@ -970,35 +1024,32 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 
 ## 参考文献
 
-- [1](https://docs.anthropic.com/en/docs/claude-code) Anthropic. "Claude Code documentation". https://docs.anthropic.com/en/docs/claude-code (参照日: 2026-03-17)
+- [1](https://code.claude.com/docs) Anthropic. "Claude Code documentation". https://code.claude.com/docs (参照日: 2026-07-19)
 - [2](https://github.com/openai/codex) OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-17)
 - [3](https://www.anthropic.com/engineering/claude-code-best-practices) Anthropic Engineering. "Claude Code: Best practices for agentic coding". https://www.anthropic.com/engineering/claude-code-best-practices (参照日: 2026-03-17)
-- [4](https://arxiv.org/abs/2405.15793) Yang, J., Jimenez, C. E., Wettig, A., Lieret, K., Yao, S., Narasimhan, K., Press, O. "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering". *arXiv preprint*, 2024. https://arxiv.org/abs/2405.15793
-- [5](https://doi.org/10.1162/tacl_a_00638) Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. "Lost in the Middle: How Language Models Use Long Contexts". *Transactions of the Association for Computational Linguistics*, 12, 157–173, 2024. https://doi.org/10.1162/tacl_a_00638
-- [6](https://docs.anthropic.com/en/docs/about-claude/models) Anthropic. "Models overview". https://docs.anthropic.com/en/docs/about-claude/models (参照日: 2026-03-17)
-- [7](https://docs.anthropic.com/en/docs/about-claude/pricing) Anthropic. "Pricing". https://docs.anthropic.com/en/docs/about-claude/pricing (参照日: 2026-03-17)
-- [8](https://pubmed.ncbi.nlm.nih.gov/19304878/) Cock, P. J. A., Antao, T., Chang, J. T., Chapman, B. A., Cox, C. J., Dalke, A., Friedberg, I., Hamelryck, T., Kauff, F., Wilczynski, B., de Hoon, M. J. L. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. https://pubmed.ncbi.nlm.nih.gov/19304878/
-- [9](https://pubmed.ncbi.nlm.nih.gov/21949271/) Dale, R. K., Pedersen, B. S., Quinlan, A. R. "Pybedtools: a flexible Python library for manipulating genomic datasets and annotations". *Bioinformatics*, 27(24), 3423–3424, 2011. https://pubmed.ncbi.nlm.nih.gov/21949271/
-- [10](https://doi.org/10.1109/ICSE.2013.6606617) Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 35th International Conference on Software Engineering (ICSE '13)*, 712–721, 2013. https://doi.org/10.1109/ICSE.2013.6606617
-- [11](https://arxiv.org/abs/2310.13548) Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., et al. "Towards Understanding Sycophancy in Language Models". *ICLR 2024*. https://arxiv.org/abs/2310.13548
-- [12](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) Anthropic. "Adaptive thinking". https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking (参照日: 2026-04-25)
-- [13](https://arxiv.org/abs/2302.06590) Peng, S., Kalliamvakou, E., Cihon, P., Demirer, M. "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot". *arXiv preprint*, 2023. https://arxiv.org/abs/2302.06590
-- [14](https://arxiv.org/abs/2310.06770) Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., Narasimhan, K. "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?" *ICLR 2024*. https://arxiv.org/abs/2310.06770
-- [15](https://arxiv.org/abs/2403.07974) Jain, N., Han, K., Gu, A., Li, W., Yan, F., Zhang, T., Wang, S., Solar-Lezama, A., Sen, K., Stoica, I. "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code". *arXiv preprint*, 2024. https://arxiv.org/abs/2403.07974
-- [16](https://arxiv.org/abs/2601.11868) Wijk, D., Phan, L., Berglund, L., et al. "Terminal-Bench: Benchmarking Agents on Hard, Realistic Tasks in Command Line Interfaces". *ICLR 2026*. https://arxiv.org/abs/2601.11868
-- [17](https://arxiv.org/abs/2604.03515) "Inside the Scaffold: A Source-Code Taxonomy of Coding Agent Architectures". *arXiv preprint*, 2026. https://arxiv.org/abs/2604.03515
-- [18](https://dl.acm.org/doi/10.1145/3697010) Ouyang, S., Zhang, J. M., Harman, M., Wang, M. "An Empirical Study of the Non-Determinism of ChatGPT in Code Generation". *ACM Transactions on Software Engineering and Methodology*, 2025. https://dl.acm.org/doi/10.1145/3697010
-- [19](https://pubmed.ncbi.nlm.nih.gov/38940140/) Tang, X., Jiang, B., Zhuo, Y., Cheng, Y., Phung, D., Gerstein, M. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(4), 2024. https://pubmed.ncbi.nlm.nih.gov/38940140/
-- [20](https://www.anthropic.com/legal/privacy) Anthropic. "Privacy Policy". https://www.anthropic.com/legal/privacy (参照日: 2026-04-10)
-- [21](https://cdn.openai.com/deep-research-system-card.pdf) OpenAI. "Deep Research System Card". 2025. https://cdn.openai.com/deep-research-system-card.pdf (参照日: 2026-04-10)
-- [22](https://www.anthropic.com/engineering/multi-agent-research-system) Anthropic Engineering. "How we built our multi-agent research system". 2025. https://www.anthropic.com/engineering/multi-agent-research-system (参照日: 2026-04-10)
-- [23](https://ai.google.dev/gemini-api/docs/deep-research) Google. "Gemini Deep Research Agent". https://ai.google.dev/gemini-api/docs/deep-research (参照日: 2026-04-10)
-- [24](https://arxiv.org/abs/2508.05668) Huang, Y., et al. "A Survey of LLM-based Deep Search Agents: Paradigm, Optimization, Evaluation, and Challenges". *arXiv preprint*, 2025. https://arxiv.org/abs/2508.05668
-- [25](https://arxiv.org/abs/2508.12752) Xu, R., et al. "Deep Research: A Survey of Autonomous Research Agents". *arXiv preprint*, 2025. https://arxiv.org/abs/2508.12752
-- [26](https://x.com/OpenAI/status/2021299935678026168) OpenAI. "Deep research in ChatGPT is now powered by GPT-5.2". X (formerly Twitter), 2026-02-10. https://x.com/OpenAI/status/2021299935678026168 (参照日: 2026-04-10)
-- [27](https://platform.claude.com/docs/en/build-with-claude/effort) Anthropic. "Effort". https://platform.claude.com/docs/en/build-with-claude/effort (参照日: 2026-04-25)
-- [28](https://platform.claude.com/docs/en/about-claude/models/migration-guide) Anthropic. "Migration guide". https://platform.claude.com/docs/en/about-claude/models/migration-guide (参照日: 2026-04-25)
-- [29](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7) Anthropic. "What's new in Claude Opus 4.7". https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7 (参照日: 2026-04-25)
-- [30](https://www.anthropic.com/news/claude-opus-4-7) Anthropic. "Introducing Claude Opus 4.7". 2026-04-16. https://www.anthropic.com/news/claude-opus-4-7 (参照日: 2026-04-25)
-- [31](https://openai.com/index/introducing-gpt-5-5/) OpenAI. "Introducing GPT-5.5". 2026-04-23. https://openai.com/index/introducing-gpt-5-5/ (参照日: 2026-04-25)
-- [32](https://developers.openai.com/codex/models) OpenAI. "Models — Codex". https://developers.openai.com/codex/models (参照日: 2026-04-25)
+- [4](https://doi.org/10.1162/tacl_a_00638) Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. "Lost in the Middle: How Language Models Use Long Contexts". *Transactions of the Association for Computational Linguistics*, 12, 157–173, 2024. https://doi.org/10.1162/tacl_a_00638
+- [5](https://platform.claude.com/docs/en/about-claude/models/overview) Anthropic. "Models overview". https://platform.claude.com/docs/en/about-claude/models/overview (参照日: 2026-07-23)
+- [6](https://pubmed.ncbi.nlm.nih.gov/19304878/) Cock, P. J. A., Antao, T., Chang, J. T., Chapman, B. A., Cox, C. J., Dalke, A., Friedberg, I., Hamelryck, T., Kauff, F., Wilczynski, B., de Hoon, M. J. L. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. https://pubmed.ncbi.nlm.nih.gov/19304878/
+- [7](https://pubmed.ncbi.nlm.nih.gov/21949271/) Dale, R. K., Pedersen, B. S., Quinlan, A. R. "Pybedtools: a flexible Python library for manipulating genomic datasets and annotations". *Bioinformatics*, 27(24), 3423–3424, 2011. https://pubmed.ncbi.nlm.nih.gov/21949271/
+- [8](https://doi.org/10.1109/ICSE.2013.6606617) Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 35th International Conference on Software Engineering (ICSE '13)*, 712–721, 2013. https://doi.org/10.1109/ICSE.2013.6606617
+- [9](https://arxiv.org/abs/2310.13548) Sharma, M., Tong, M., Korbak, T., Duvenaud, D., Askell, A., Bowman, S. R., et al. "Towards Understanding Sycophancy in Language Models". *ICLR 2024*. https://arxiv.org/abs/2310.13548
+- [10](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) Anthropic. "Adaptive thinking". https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking (参照日: 2026-04-25)
+- [11](https://arxiv.org/abs/2302.06590) Peng, S., Kalliamvakou, E., Cihon, P., Demirer, M. "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot". *arXiv preprint*, 2023. https://arxiv.org/abs/2302.06590
+- [12](https://arxiv.org/abs/2310.06770) Jimenez, C. E., Yang, J., Wettig, A., Yao, S., Pei, K., Press, O., Narasimhan, K. "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?" *ICLR 2024*. https://arxiv.org/abs/2310.06770
+- [13](https://arxiv.org/abs/2403.07974) Jain, N., Han, K., Gu, A., Li, W., Yan, F., Zhang, T., Wang, S., Solar-Lezama, A., Sen, K., Stoica, I. "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code". *arXiv preprint*, 2024. https://arxiv.org/abs/2403.07974
+- [14](https://arxiv.org/abs/2601.11868) Merrill, M. A., Shaw, A. G., Carlini, N., et al. "Terminal-Bench: Benchmarking Agents on Hard, Realistic Tasks in Command Line Interfaces". *arXiv preprint*, 2026. https://arxiv.org/abs/2601.11868
+- [15](https://arxiv.org/abs/2604.03515) "Inside the Scaffold: A Source-Code Taxonomy of Coding Agent Architectures". *arXiv preprint*, 2026. https://arxiv.org/abs/2604.03515
+- [16](https://dl.acm.org/doi/10.1145/3697010) Ouyang, S., Zhang, J. M., Harman, M., Wang, M. "An Empirical Study of the Non-Determinism of ChatGPT in Code Generation". *ACM Transactions on Software Engineering and Methodology*, 2025. https://dl.acm.org/doi/10.1145/3697010
+- [17](https://pubmed.ncbi.nlm.nih.gov/38940140/) Tang, X., Qian, B., Gao, R., Chen, J., Chen, X., Gerstein, M. B. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(Supplement_1), i266–i276, 2024. https://pubmed.ncbi.nlm.nih.gov/38940140/
+- [18](https://www.anthropic.com/legal/privacy) Anthropic. "Privacy Policy". https://www.anthropic.com/legal/privacy (参照日: 2026-04-10)
+- [19](https://cdn.openai.com/deep-research-system-card.pdf) OpenAI. "Deep Research System Card". 2025. https://cdn.openai.com/deep-research-system-card.pdf (参照日: 2026-04-10)
+- [20](https://www.anthropic.com/engineering/multi-agent-research-system) Anthropic Engineering. "How we built our multi-agent research system". 2025. https://www.anthropic.com/engineering/multi-agent-research-system (参照日: 2026-04-10)
+- [21](https://ai.google.dev/gemini-api/docs/deep-research) Google. "Gemini Deep Research Agent". https://ai.google.dev/gemini-api/docs/deep-research (参照日: 2026-04-10)
+- [22](https://arxiv.org/abs/2508.05668) Xi, Y., Lin, J., Xiao, Y., et al. "A Survey of LLM-based Deep Search Agents: Paradigm, Optimization, Evaluation, and Challenges". *arXiv preprint*, 2025. https://arxiv.org/abs/2508.05668
+- [23](https://arxiv.org/abs/2508.12752) Zhang, W., Li, X., Zhang, Y., et al. "Deep Research: A Survey of Autonomous Research Agents". *arXiv preprint*, 2025. https://arxiv.org/abs/2508.12752
+- [24](https://x.com/OpenAI/status/2021299935678026168) OpenAI. "Deep research in ChatGPT is now powered by GPT-5.2". X (formerly Twitter), 2026-02-10. https://x.com/OpenAI/status/2021299935678026168 (参照日: 2026-04-10)
+- [25](https://platform.claude.com/docs/en/build-with-claude/effort) Anthropic. "Effort". https://platform.claude.com/docs/en/build-with-claude/effort (参照日: 2026-04-25)
+- [26](https://platform.claude.com/docs/en/about-claude/models/migration-guide) Anthropic. "Migration guide". https://platform.claude.com/docs/en/about-claude/models/migration-guide (参照日: 2026-04-25)
+- [27](https://learn.chatgpt.com/docs/models) OpenAI. "Models — Codex". https://learn.chatgpt.com/docs/models (参照日: 2026-07-19)
+- [28](https://code.claude.com/docs/en/model-config) Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-19)
+- [29](https://developers.openai.com/api/docs/guides/latest-model) OpenAI. "Migrate to the latest model". https://developers.openai.com/api/docs/guides/latest-model (参照日: 2026-07-19)
