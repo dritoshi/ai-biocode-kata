@@ -1036,4 +1036,4 @@ def fetch_sequences(gene_list):
 
 [19] Longevity Genie. "gget-MCP". https://github.com/longevity-genie/gget-mcp (参照日: 2026-03-23)
 
-[20] Liu, Z. et al. "Biomni: A Generalist Biomedical AI Agent with 150+ Tools and Databases". *bioRxiv*, 2025. https://biomni.stanford.edu/paper.pdf
+[20] Huang, K. et al. "Biomni: A General-Purpose Biomedical AI Agent". *bioRxiv*, 2025. https://biomni.stanford.edu/paper.pdf

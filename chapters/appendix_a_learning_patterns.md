@@ -74,13 +74,13 @@ A-1で整理した3つの観点を、以下の判断軸としてまとめる。A
 
 [1] Peng, S., Kalliamvakou, E., Cihon, P. & Demirer, M. "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot". *arXiv preprint*, 2023. https://arxiv.org/abs/2302.06590
 
-[2] Becker, L., Schoenegger, P., Korbak, T., Guo, S. & Murfet, D. "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity". *arXiv preprint*, 2025. https://arxiv.org/abs/2507.09089
+[2] Becker, J., Rush, N., Barnes, E. & Rein, D. "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity". *arXiv preprint*, 2025. https://arxiv.org/abs/2507.09089
 
 [3] Anthropic Engineering. "Claude Code: Best practices for agentic coding". 2025. https://www.anthropic.com/engineering/claude-code-best-practices
 
 [4] Thorgeirsson, S., Weidmann, T. B. & Su, Z. "Computer Science Achievement and Writing Skills Predict Vibe Coding Proficiency". *Proceedings of CHI '26*, 2026. https://arxiv.org/abs/2603.14133
 
-[5] Tang, X., Jiang, B., Zhuo, Y., Cheng, Y., Phung, D. & Gerstein, M. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(4), 2024. https://pubmed.ncbi.nlm.nih.gov/38940140/
+[5] Tang, X., Qian, B., Gao, R., Chen, J., Chen, X. & Gerstein, M. B. "BioCoder: a benchmark for bioinformatics code generation with large language models". *Bioinformatics*, 40(Supplement_1), i266–i276, 2024. https://pubmed.ncbi.nlm.nih.gov/38940140/
 
 [6] Kazemitabaar, M., Chow, J., Ma, C. K. T., Ericson, B. J., Weintrop, D. & Grossman, T. "Studying the effect of AI Code Generators on Supporting Novice Learners in Introductory Programming". *Proceedings of CHI '23*, 2023. https://doi.org/10.1145/3544548.3580919
 

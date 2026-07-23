@@ -606,7 +606,7 @@ GitHub Releasesのリリースノートとしても、このCHANGELOGの内容�
 ### 科学研究でのGit活用
 
 - **Perez-Riverol, Y. et al. "Ten Simple Rules for Taking Advantage of Git and GitHub". *PLOS Computational Biology*, 12(7), e1004947, 2016.** https://doi.org/10.1371/journal.pcbi.1004947 — 本章の参考文献で引用。科学研究者向けにGit/GitHub活用を10のルールで整理している。本章の内容を「なぜ研究者にとって重要か」の観点で補完する。
-- **Blischak, J. D., Davenport, E. R., Wilson, G. "A Quick Introduction to Version Control with Git and GitHub". *PLOS Computational Biology*, 11(1), e1004668, 2015.** https://doi.org/10.1371/journal.pcbi.1004668 — 研究者向けのGit入門。ラボでの共同研究におけるバージョン管理の実践例を扱っており、本章で学んだ基礎を研究現場に応用する際の参考になる。
+- **Blischak, J. D., Davenport, E. R., Wilson, G. "A Quick Introduction to Version Control with Git and GitHub". *PLOS Computational Biology*, 12(1), e1004668, 2016.** https://doi.org/10.1371/journal.pcbi.1004668 — 研究者向けのGit入門。ラボでの共同研究におけるバージョン管理の実践例を扱っており、本章で学んだ基礎を研究現場に応用する際の参考になる。
 
 ### インタラクティブな学習
 

@@ -159,9 +159,9 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 - [18](https://doi.org/10.1038/s41586-023-06139-9) Theodoris, C. V., Xiao, L., Chopra, A., et al. "Transfer learning enables predictions in network biology". *Nature*, 618, 616–624, 2023. https://doi.org/10.1038/s41586-023-06139-9
 - [19](https://doi.org/10.1126/science.ado9336) Nguyen, E., Poli, M., Durrant, M. G., et al. "Sequence modeling and design from molecular to genome scale with Evo". *Science*, 386(6723), 2024. https://doi.org/10.1126/science.ado9336
 - [20](https://www.nature.com/articles/s41586-026-10265-5) Lu, C., Lu, C., Lange, R. T., et al. "Towards end-to-end automation of AI research". *Nature*, 2026. https://www.nature.com/articles/s41586-026-10265-5
-- [21](https://arxiv.org/abs/2502.18864) Gottweis, J., Weng, W.-H., Darber, A., et al. "Towards an AI co-scientist". arXiv: 2502.18864, 2025. https://arxiv.org/abs/2502.18864
-- [22](https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1) Li, M., Zheng, Z., Huang, K., et al. "Biomni: A General-Purpose Biomedical AI Agent". bioRxiv, 2025. https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1
-- [23](https://arxiv.org/abs/2511.02824) Schmidgall, S., et al. "Kosmos: An AI Scientist for Autonomous Discovery". arXiv: 2511.02824, 2025. https://arxiv.org/abs/2511.02824
+- [21](https://arxiv.org/abs/2502.18864) Gottweis, J., Weng, W.-H., Daryin, A., et al. "Towards an AI co-scientist". arXiv: 2502.18864, 2025. https://arxiv.org/abs/2502.18864
+- [22](https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1) Huang, K., Zhang, S., Wang, H., et al. "Biomni: A General-Purpose Biomedical AI Agent". bioRxiv, 2025. https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1
+- [23](https://arxiv.org/abs/2511.02824) Mitchener, L., Yiu, A., Chang, B., et al. "Kosmos: An AI Scientist for Autonomous Discovery". arXiv: 2511.02824, 2025. https://arxiv.org/abs/2511.02824
 - [24](https://docs.python.org/ja/3/tutorial/) Python Software Foundation. "Pythonチュートリアル". https://docs.python.org/ja/3/tutorial/ (参照日: 2026-03-31)
 - [25](https://utokyo-ipp.github.io/) 東京大学. "Pythonプログラミング入門". https://utokyo-ipp.github.io/ (参照日: 2026-03-31)
 - [26](https://www.yodosha.co.jp/yodobook/book/9784758122788/) 先進ゲノム解析研究推進プラットフォーム. "改訂 独習Pythonバイオ情報解析". 実験医学別冊, 羊土社, 2025. https://www.yodosha.co.jp/yodobook/book/9784758122788/

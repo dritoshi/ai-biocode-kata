@@ -836,4 +836,4 @@ sampleC_R2.fastq.gz
 
 [9] Gallant, A. "ripgrep is faster than {grep, ag, git grep, ucg, pt, sift}". 2016. [https://blog.burntsushi.net/ripgrep/](https://blog.burntsushi.net/ripgrep/) (参照日: 2026-03-19)
 
-[10] Peterka, D. "sharkdp/fd: A simple, fast and user-friendly alternative to 'find'". GitHub. [https://github.com/sharkdp/fd](https://github.com/sharkdp/fd) (参照日: 2026-03-19)
+[10] Peter, D. "sharkdp/fd: A simple, fast and user-friendly alternative to 'find'". GitHub. [https://github.com/sharkdp/fd](https://github.com/sharkdp/fd) (参照日: 2026-03-19)
