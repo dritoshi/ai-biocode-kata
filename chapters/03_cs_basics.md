@@ -63,7 +63,7 @@ gene_set = set(gene_list)
 "GENE_099999" in gene_set   # ハッシュテーブルで一発
 ```
 
-listの `in` はリストの先頭から順に要素を比較するため、要素数nに比例して $O(n)$ かかる。一方、setとdictはハッシュテーブルを内部で使っており、要素数に関係なく $O(1)$ で検索できる。
+listの `in` はリストの先頭から順に要素を比較するため、要素数nに比例して $O(n)$ かかる。一方、setとdictはハッシュテーブルを内部で使っており、要素数に関係なく $O(1)$ で検索できる。厳密には set/dict の $O(1)$ はハッシュ衝突が稀であることを前提とした平均計算量で最悪時は $O(n)$ になり、表のlist末尾追加 $O(1)$ も時折の内部再確保をならした償却計算量だが、通常は表のとおりに考えてよい。
 
 以下のベンチマークで、この差を実感してみよう:
 
@@ -119,12 +119,12 @@ Pythonの標準ライブラリ `collections` には、list・dict・setをさら
 from collections import Counter
 
 # DNA配列のトリヌクレオチド頻度を計算する
-def trinucleotide_freq(seq: str) -> Counter:
+def trinucleotide_freq(seq: str) -> Counter[str]:
     """配列中の3塩基の出現頻度を計算する."""
     return Counter(seq[i:i+3] for i in range(len(seq) - 2))
 
 freq = trinucleotide_freq("ATGCGATCGATCG")
-# Counter({'ATC': 2, 'GAT': 2, 'TCG': 2, 'ATG': 1, 'TGC': 1, ...})
+# Counter({'CGA': 2, 'GAT': 2, 'ATC': 2, 'TCG': 2, 'ATG': 1, 'TGC': 1, 'GCG': 1})
 
 # 最も頻度の高い上位5トリヌクレオチド
 freq.most_common(5)
@@ -234,7 +234,7 @@ bisect.insort(exon_starts, 2500)
 > | ペアワイズアラインメント | Smith-Waterman / Needleman-Wunsch | $O(mn)$ | m, nは配列長。局所アラインメントと大域アラインメントの動的計画法[15](https://doi.org/10.1016/0022-2836%2870%2990057-4)[16](https://doi.org/10.1016/0022-2836%2881%2990087-5) |
 > | リードマッピング | BWA / Bowtie2 | $O(m)$（クエリあたり） | FM-indexで参照ゲノムを事前索引化[17](https://pubmed.ncbi.nlm.nih.gov/19451168/) |
 > | 多重配列アライメント | 厳密解（動的計画法） | $O(L^k)$ | Lは配列長、kは配列数。3本以上は近似手法を使う |
-> | インデックス検索 | BAM (.bai) / tabix (.tbi) | $O(\log n)$ | 二分探索ベース |
+> | インデックス検索 | BAM (.bai) / tabix (.tbi) | $O(\log n)$ | 階層ビン索引（UCSC由来）＋リニア索引 |
 > | インデックス検索 | FASTA faidx (.fai) | $O(1)$ | ファイルオフセットで直接アクセス |
 > | ソート | `samtools sort` 等 | $O(n \log n)$ | 比較ソートの理論下限 |
 > | 次元削減 | PCA（特異値分解） | $O(np^2)$ | nはサンプル数、pは特徴量数 |
@@ -265,7 +265,7 @@ b = 2_147_483_647
 print(b + 1)                 # → 2147483648（正しい）
 ```
 
-Pythonの組み込み `int` は任意精度（メモリが許す限り大きな数を扱える）だが、NumPyやpandasの整数型にはビット幅の制限がある。大きなゲノム座標や配列カウントを扱うときは `int64` を明示的に指定するのが安全である。
+現行のNumPyでは、このオーバーフロー時に `RuntimeWarning: overflow encountered in scalar add` も発生する。警告を握りつぶさなければ、NumPy自身が異常を教えてくれる。Pythonの組み込み `int` は任意精度（メモリが許す限り大きな数を扱える）だが、NumPyやpandasの整数型にはビット幅の制限がある。大きなゲノム座標や配列カウントを扱うときは `int64` を明示的に指定するのが安全である。
 
 ### IEEE 754 浮動小数点 — `0.1 + 0.2 != 0.3` 問題
 
@@ -386,7 +386,7 @@ print(nan != nan)            # → True
 print(math.isnan(nan))       # → True（判定にはisnan()を使う）
 ```
 
-`NaN` の最大の罠は、**あらゆる比較演算が `False` を返す**ことである。`NaN == NaN` が `False` になるため、通常の `==` で検出できない。pandasのDataFrameでは `NaN` が欠損値として頻出するので、`pd.isna()` や `math.isnan()` での判定を習慣づけること。
+`NaN` の最大の罠は、大小比較（`<`, `<=`, `>`, `>=`）と等値比較 `==` が**すべて `False` を返し、`!=` だけが `True` を返す**ことである。`NaN == NaN` が `False` になるため通常の `==` では検出できず、逆に `x != x` が `True` になる性質を使った `if x != x:` がNaN検出のイディオムとして知られる。pandasのDataFrameでは `NaN` が欠損値として頻出するので、`pd.isna()` や `math.isnan()` での判定を習慣づけること。
 
 #### エージェントへの指示例
 
@@ -412,7 +412,7 @@ print(math.isnan(nan))       # → True（判定にはisnan()を使う）
 コンピュータはテキストを数値（バイト列）として扱う。その変換規則が**文字エンコーディング**である。
 
 - **ASCII**: 英数字と基本記号のみ（128文字）。FASTA/FASTQファイルの配列部分はASCIIの範囲で完結する。
-- **UTF-8**: Unicodeの実装の一つで、ASCIIと後方互換性がある。日本語を含む多言語テキストを扱える。現在のデファクトスタンダードである[6](https://www.unicode.org/versions/Unicode16.0.0/)。
+- **UTF-8**: Unicodeの実装の一つで、ASCIIと後方互換性がある。日本語を含む多言語テキストを扱える。現在のデファクトスタンダードである[6](https://www.unicode.org/versions/Unicode17.0.0/)。
 
 Pythonの `str` 型はUnicodeを内部表現としており、通常のテキスト処理ではエンコーディングを意識する必要はない。しかし、ファイルの読み書きでは `open()` の `encoding` パラメータに注意が必要である:
 
@@ -466,7 +466,7 @@ Pythonでは `open()` がデフォルトで改行コードを自動変換する�
 
 コンピュータが生成する「乱数」は、実際には決定的なアルゴリズムで計算された**擬似乱数**である。代表的なアルゴリズムにメルセンヌ・ツイスタ[7](https://doi.org/10.1145/272991.272995)やPCGがある。擬似乱数生成器（PRNG: Pseudorandom Number Generator）は、初期値（**シード**）が同じなら常に同じ数列を生成する。
 
-この性質を利用して、ランダムな処理を含む解析でも**結果を完全に再現**できる。
+この性質を利用して、ランダムな処理を含む解析でも**同じ実行環境であれば結果を再現**できる（NumPyなどライブラリのバージョンが変わると、同じシードでも乱数列が変わりうる）。
 
 ### シード固定の実践
 
@@ -486,10 +486,10 @@ sample2 = rng2.choice(100, size=10, replace=False)
 print(sample2)  # 上とは異なる10個の数値
 ```
 
-**重要**: 古いコードでは `np.random.seed(42)` というグローバルなシード固定を見かけるが、これは非推奨である。`default_rng()` を使い、関数ごとに独立した乱数生成器を渡す設計が現在のベストプラクティスである。
+**重要**: 古いコードでは `np.random.seed(42)` というグローバルなシード固定を見かけるが、これはレガシーな方式であり、新しいコードでは避けるべきとされている。`DeprecationWarning` は出ないので気づきにくいが、NumPy公式は `default_rng()` を推奨している。`default_rng()` を使い、関数ごとに独立した乱数生成器を渡す設計が現在のベストプラクティスである。
 
 ```python
-# 非推奨: グローバルなシード固定
+# レガシー（非推奨）: グローバルなシード固定
 np.random.seed(42)
 result = np.random.choice(100, 10)  # グローバル状態に依存
 
@@ -517,7 +517,7 @@ rng = np.random.default_rng(RANDOM_SEED)
 
 #### エージェントへの指示例
 
-再現性の確保はエージェントに明示的に依頼すべきポイントである。指示がないと `np.random.seed()` のような非推奨パターンを使うことがある:
+再現性の確保はエージェントに明示的に依頼すべきポイントである。指示がないと `np.random.seed()` のようなレガシーパターンを使うことがある:
 
 > 「このスクリプトの乱数処理を `np.random.default_rng(seed)` パターンに統一してください。グローバルな `np.random.seed()` は使わず、関数ごとに独立した乱数生成器を渡す設計にしてください」
 
@@ -651,6 +651,8 @@ HPCクラスタでは、NFS（Network File System）やLustre等の分散ファ�
 
 ```python
 from pathlib import Path
+
+import pandas as pd
 from Bio.SeqRecord import SeqRecord
 
 def parse_fasta(path: Path) -> list[SeqRecord]:
@@ -663,7 +665,7 @@ def calculate_gc(sequence: str) -> float:
 
 def filter_variants(
     vcf: Path, min_qual: float = 30.0
-) -> "pd.DataFrame":
+) -> pd.DataFrame:
     """VCFファイルからQUAL値でフィルタしたDataFrameを返す."""
     ...
 ```
@@ -715,7 +717,7 @@ AIが生成するコードや、ライブラリのドキュメントで見かけ
 | `Iterable[str]` | forループで回せるもの | ジェネレータも受け取りたい場合 |
 | `Callable[[int, str], bool]` | `int` と `str` を受け取り `bool` を返す関数 | コールバック関数を引数に取る場合 |
 
-これらは `typing` モジュールからインポートする。日常的な開発では `list` や `dict` で十分なことが多いが、ライブラリのAPIドキュメントを読む際に知っていると助かる。
+これらは `collections.abc` モジュールからインポートする（Python 3.9以降。`typing.Sequence` などの旧エイリアスはPEP 585により非推奨とされた）。日常的な開発では `list` や `dict` で十分なことが多いが、ライブラリのAPIドキュメントを読む際に知っていると助かる。
 
 型ヒントについてさらに詳しくは、mypyによる静的型チェックの実践を [§8-3 コード品質ツール](./08_testing.md)で扱う。
 
@@ -739,7 +741,7 @@ AIが生成するコードや、ライブラリのドキュメントで見かけ
 |---------|------|----------|
 | データ構造 | 検索には set/dict($O(1)$)を使う | listの `in` で10万件検索 → 遅い |
 | 浮動小数点 | `==` ではなく `math.isclose()` で比較 | TPM値が「一致しない」 |
-| 丸め誤差 | `math.fsum()` で高精度に合計 | sum()で0.1を10回足すと1.0にならない |
+| 丸め誤差 | `math.fsum()` で高精度に合計 | 0.1を10回逐次加算すると1.0にならない |
 | CSV/テキスト出力 | 中間データはバイナリ形式で保存 | Excelや有限桁出力を介すと丸め誤差 |
 | NaN | `math.isnan()` で判定する | `NaN == NaN` は `False` |
 | 文字エンコーディング | UTF-8を明示、改行コードに注意 | Windows由来ファイルの `\r` 混入 |
@@ -810,7 +812,7 @@ print(sum(tpm_values) == 1.0)       # False
 
 ### バイオインフォマティクスのアルゴリズム
 
-- **Compeau, P., Pevzner, P. *Bioinformatics Algorithms: An Active Learning Approach* (3rd ed.). Active Learning Publishers, 2015.** https://www.bioinformaticsalgorithms.org/ — バイオインフォマティクスの問題を題材にアルゴリズムを学ぶ教科書。本章で紹介したBLASTの計算量、動的計画法によるアラインメントの背景理論を詳しく扱う。Rosalind.info: https://rosalind.info/ と連動した演習問題で手を動かしながら学べる。
+- **Compeau, P., Pevzner, P. *Bioinformatics Algorithms: An Active Learning Approach* (3rd ed.). Active Learning Publishers, 2018.** https://www.bioinformaticsalgorithms.org/ — バイオインフォマティクスの問題を題材にアルゴリズムを学ぶ教科書。本章で紹介したBLASTの計算量、動的計画法によるアラインメントの背景理論を詳しく扱う。Rosalind.info: https://rosalind.info/ と連動した演習問題で手を動かしながら学べる。
 - **Durbin, R., Eddy, S. R., Krogh, A., Mitchison, G. *Biological Sequence Analysis: Probabilistic Models of Proteins and Nucleic Acids*. Cambridge University Press, 1998.** https://www.amazon.co.jp/dp/0521629713 — 配列解析の数理的基礎（隠れマルコフモデル、確率モデル、アラインメントスコアリング）の古典。本章で触れたSmith-WatermanやBLASTの理論的背景を深く扱う。
 
 ### 浮動小数点演算
@@ -831,7 +833,7 @@ print(sum(tpm_values) == 1.0)       # False
 
 [5] Python Software Foundation. "math.isclose". *Python 3 Documentation*. [https://docs.python.org/3/library/math.html#math.isclose](https://docs.python.org/3/library/math.html#math.isclose) (参照日: 2026-03-18)
 
-[6] The Unicode Consortium. *The Unicode Standard, Version 16.0*. 2024. [https://www.unicode.org/versions/Unicode16.0.0/](https://www.unicode.org/versions/Unicode16.0.0/) (参照日: 2026-03-18)
+[6] The Unicode Consortium. *The Unicode Standard, Version 17.0*. 2025. [https://www.unicode.org/versions/Unicode17.0.0/](https://www.unicode.org/versions/Unicode17.0.0/) (参照日: 2026-07-24)
 
 [7] Matsumoto, M., Nishimura, T. "Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator". *ACM Transactions on Modeling and Computer Simulation*, 8(1), 3–30, 1998. [https://doi.org/10.1145/272991.272995](https://doi.org/10.1145/272991.272995)
 
