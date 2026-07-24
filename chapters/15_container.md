@@ -105,6 +105,8 @@ Docker[5](https://dl.acm.org/doi/10.5555/2600239.2600241)の基本概念を理�
 
 1つのレシピ（イメージ）から何皿でも同じ料理（コンテナ）を作れる。レシピ自体は読み取り専用であり、料理を食べてもレシピが消えることはない。コンテナ内でファイルを変更しても、元のイメージには影響しない。
 
+> **Docker Desktop のライセンスに注意**: 本書で使う `docker` コマンド（Docker Engine）自体はオープンソース（Apache 2.0）で無償である。一方、Mac/Windows 向けの GUI アプリである **Docker Desktop** は、従業員250名以上または年間売上1,000万ドル以上の組織での業務利用には有償サブスクリプションが必要である[17](https://docs.docker.com/subscription/desktop-license/)（個人・小規模事業者=250名未満かつ1,000万ドル未満、教育、非商用オープンソースは無償）。大学・研究所・企業ラボで使う場合はライセンス条件を確認し、必要なら Podman・Rancher Desktop・colima などの代替を検討する。
+
 ### Dockerfileの書き方
 
 Dockerfileはイメージの構築手順をテキストで定義するファイルである。RNA-seq解析環境を例に、主要な命令を説明する:
@@ -151,10 +153,13 @@ CMD ["--help"]
 | `FROM` | ベースイメージの指定 | タグを必ず固定する（`latest`は使わない） |
 | `RUN` | コマンドの実行 | 複数コマンドは`&&`で統合する |
 | `COPY` | ファイルのコピー | 依存定義を先にコピーしてキャッシュを活用する |
+| `ADD` | コピー＋tar展開・URL取得 | 挙動が予想外になりやすい。原則 `COPY` を使う |
 | `ENV` | 環境変数の設定 | PATHの設定に使う |
 | `WORKDIR` | 作業ディレクトリの設定 | 以降の命令の基準ディレクトリ |
 | `ENTRYPOINT` | コンテナ起動時のコマンド | 引数は`CMD`で上書き可能 |
 | `CMD` | デフォルト引数 | `docker run`時に上書きできる |
+
+`COPY` と `ADD` は似ているが、`ADD` はローカルの tar アーカイブを自動展開したり URL からファイルを取得したりする暗黙の機能を持つ。この予想外の挙動は思わぬバグの原因になるため、**原則として `COPY` を使い、`ADD` はローカル tar の展開が明確に必要なときだけに限る**のがベストプラクティスである。
 
 #### ベースイメージの選択
 
@@ -249,6 +254,22 @@ WORKDIR /workspace
 
 `conda-pack`でconda環境をポータブルなアーカイブにし、最小限のランタイムイメージ（debian:bookworm-slim）に展開する。ビルドステージのMiniforge3系イメージは最終イメージに含まれないため、イメージサイズを大幅に削減できる。
 
+### マルチアーキテクチャ対応（arm64 / amd64）
+
+コンテナはOSやライブラリの違いは吸収するが、[§15-1 なぜコンテナが必要か](#15-1-なぜコンテナが必要か)で触れたとおり**CPUアーキテクチャの違いは吸収しない**。Apple Silicon の Mac は arm64（aarch64）、多くの HPC やクラウドの計算ノードは amd64（x86_64）である。arm64 のMacでビルドしたイメージを amd64 のHPCで実行すると `exec format error` で起動に失敗する。
+
+対策は、ビルド時に対象アーキテクチャを明示することである。Docker に同梱のマルチアーキビルド機能 `docker buildx` を使う[18](https://docs.docker.com/build/building/multi-platform/):
+
+```bash
+# amd64（HPC/クラウド向け）のイメージを arm64 の Mac 上でビルドする
+docker buildx build --platform linux/amd64 -t rnaseq-pipeline:v1.0 --load .
+
+# 実行時にプラットフォームを指定する（エミュレーションで動くが遅い）
+docker run --platform linux/amd64 rnaseq-pipeline:v1.0
+```
+
+`--platform linux/amd64,linux/arm64` のように複数指定すれば、両アーキ対応の**マルチアーキイメージ**をレジストリに公開でき、利用者の環境に応じて適切なものが自動選択される。ただし異なるアーキのビルドは QEMU エミュレーション上で行われるため時間がかかる。論文の再現性パッケージを配布する際は、読者が使う可能性の高い amd64 を最低限含めておくとよい。
+
 ### ボリュームマウント — 大規模データの扱い
 
 FASTQファイルやBAMファイルは数十GBに達することがある。これらをイメージに含めるのは非現実的であり、**ボリュームマウント**で外部からコンテナに接続する:
@@ -262,6 +283,7 @@ docker run -v $(pwd)/data/raw:/workspace/data/raw:ro \
 
 - `:ro`（read-only）を付けると、コンテナ内から書き込みできない。生データのディレクトリには必ず`:ro`を付ける
 - 結果ディレクトリは書き込み可能にマウントする
+- コンテナ内では既定で root として動くため、書き込み可能マウントに出力したファイルは**ホスト側で root 所有**になり、通常ユーザーから削除・編集できなくなることがある。これを避けるには実行時に自分のユーザーIDを渡す（`docker run --user $(id -u):$(id -g) ...`）か、Docker の rootless mode を使う
 
 これは[§14 解析パイプラインの自動化](./14_workflow.md#入力データは読み取り専用)で学んだ「入力データは読み取り専用」の原則と同じである。
 
@@ -1118,3 +1140,7 @@ CMD ["python", "analysis.py"]
 [15] Tatman, R., VanderPlas, J. & Dane, S. "A Practical Taxonomy of Reproducibility for Machine Learning Research." *Reproducibility in ML Workshop at ICML*, 2018.
 
 [16] Bioconda. "Bioconda". [https://bioconda.github.io/](https://bioconda.github.io/) (参照日: 2026-07-24)
+
+[17] Docker. "Docker Desktop License Agreement". [https://docs.docker.com/subscription/desktop-license/](https://docs.docker.com/subscription/desktop-license/) (参照日: 2026-07-24)
+
+[18] Docker. "Multi-platform builds". [https://docs.docker.com/build/building/multi-platform/](https://docs.docker.com/build/building/multi-platform/) (参照日: 2026-07-24)
