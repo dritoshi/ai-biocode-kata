@@ -521,7 +521,7 @@ APIを使ったデータ取得では、使用するライブラリとエンド�
 >
 > **Ensembl REST API**[13](https://pubmed.ncbi.nlm.nih.gov/36318249/)は、ゲノムアノテーション・バリアント情報をJSONで取得できるRESTful APIである。エンドポイント `https://rest.ensembl.org` に対してGETリクエストを送るだけで、遺伝子情報、配列、バリアント、ID変換などの操作が認証不要で可能である。なお IP 単位で 1 時間あたり 55,000 リクエスト（応答ヘッダ `x-ratelimit-limit: 55000` / `x-ratelimit-period: 3600`）のレート制限があり、超過時は 429 と `Retry-After` が返るため、大量アクセスではリトライ実装が必要である。さらに、移行に関する大きな注意がある。**Ensembl は release 116 を現行サイトの最終リリースとし、REST API・公開MySQL・FTP はこれ以降更新されない**。2026年夏以降、新しいデータは新プラットフォーム（`beta.ensembl.org`。後継として GraphQL の Thoas と refget が案内されている）でのみ提供される予定である（[Ensembl の移行アナウンス](https://www.ensembl.info/2025/12/02/updates-to-programmatic-access-to-ensembl-and-transitioning-to-the-new-ensembl-platform/)）。既存・アーカイブ版のデータ取得には引き続き使えるが、最新のゲノムアノテーションを追う用途では、新プラットフォームでの提供方式を確認すること。
 >
-> **Ensembl BioMart** は、大量の遺伝子IDやアノテーションの一括取得・フィルタリングに特化したサービスである。Pythonからは `pybiomart`、Rからは `biomaRt`（[19-2節](#19-2-バイオインフォマティクスの主要データベース)で既出）で利用できる。「Ensembl gene IDのリスト1万件をUniProt IDに一括変換したい」といったID変換のユースケースで威力を発揮する。
+> **Ensembl BioMart** は、大量の遺伝子IDやアノテーションの一括取得・フィルタリングに特化したサービスである。Pythonからは `pybiomart`、Rからは `biomaRt`（[19-2節](#19-2-バイオインフォマティクスの主要データベース)で既出）で利用できる。「Ensembl gene IDのリスト1万件をUniProt IDに一括変換したい」といったID変換のユースケースで威力を発揮する。ただし BioMart も現行 Ensembl サイト（release 116）の一部であり、新プラットフォームでの後継は上記の移行アナウンスに示されていない（移行先は未定）。ID変換を継続的に自動化する場合は、移行先での提供方式を確認しておく必要がある。
 >
 > **UCSC Genome Browser REST API**[14](https://pubmed.ncbi.nlm.nih.gov/36420891/)は、UCSC Genome BrowserのトラックデータにプログラムからアクセスするためのAPIである。エンドポイント `https://api.genome.ucsc.edu` から、座標範囲を指定してアノテーションを取得したり、利用可能なトラックの一覧を取得したりできる。
 >
