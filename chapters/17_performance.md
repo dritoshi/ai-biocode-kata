@@ -37,7 +37,7 @@ $$
 
 ### 実行環境の把握
 
-プロファイリング結果を正しく解釈するには、まず実行環境のハードウェア構成を知る必要がある。CPU コア数を知らなければ並列ワーカー数を決められないし、RAM 容量を知らなければ `memory_profiler` の結果が深刻かどうか判断できない。ディスク容量を知らなければ中間ファイルの書き出し戦略も立てられない。[§3-5 計算機アーキテクチャの基礎](./03_cs_basics.md#3-5-計算機アーキテクチャの基礎)で学んだメモリ階層やI/Oの理論が、ここで実践に結びつく。
+プロファイリング結果を正しく解釈するには、まず実行環境のハードウェア構成を知る必要がある。CPU コア数を知らなければ並列ワーカー数を決められないし、RAM 容量を知らなければ `memray` や `tracemalloc` の結果が深刻かどうか判断できない。ディスク容量を知らなければ中間ファイルの書き出し戦略も立てられない。[§3-5 計算機アーキテクチャの基礎](./03_cs_basics.md#3-5-計算機アーキテクチャの基礎)で学んだメモリ階層やI/Oの理論が、ここで実践に結びつく。
 
 #### CPU の確認
 
@@ -83,7 +83,7 @@ free -h
 grep -E "MemTotal|MemAvailable" /proc/meminfo
 ```
 
-実用的な読み方の例: `free -h` で total=64GB、available=50GB と表示された環境で、`memory_profiler` のピーク使用量が45GBなら、他のプロセスと合わせてスワップが発生する危険域である。
+実用的な読み方の例: `free -h` で total=64GB、available=50GB と表示された環境で、`memray` や `tracemalloc` で計測したピーク使用量が45GBなら、他のプロセスと合わせてスワップが発生する危険域である。
 
 バイオインフォマティクスでは、処理前にメモリ見積もりを立てる習慣が重要である。たとえば遺伝子数 × サンプル数 × 8バイト(float64) でカウント行列のメモリ量を概算できる。20,000遺伝子 × 1,000サンプルなら約160 MBだが、100,000遺伝子 × 10,000サンプルでは約8 GBになる。
 
@@ -190,7 +190,12 @@ print(f"アーキテクチャ: {platform.machine()}, OS: {platform.system()}")
 ```python
 import os
 
-n_workers = min(os.cpu_count() - 1, len(tasks))
+# 割り当てCPU数を取得。SLURM 配下では SLURM_CPUS_PER_TASK を優先する。
+# process_cpu_count()（Python 3.13+）は cpuset/CPUアフィニティを尊重する。
+# 3.12 以前や取得失敗時は cpu_count()、それも None なら 1 にフォールバックする。
+_cpu_count = getattr(os, "process_cpu_count", os.cpu_count)
+n_cpus = int(os.environ.get("SLURM_CPUS_PER_TASK") or _cpu_count() or 1)
+n_workers = min(max(1, n_cpus - 1), len(tasks))
 ```
 
 #### エージェントへの指示例
@@ -339,46 +344,56 @@ kernprof -l -v profiling_target.py
 
 出力には各行の実行回数（Hits）、行あたりの時間（Time）、全体に占める割合（% Time）が表示される。「% Time が大きい行 = 改善効果が高い行」である。
 
-### memory_profilerによるメモリプロファイリング
+### memrayによるメモリプロファイリング
 
-実行時間だけでなく、メモリ使用量の計測も重要である。とくにゲノムデータのように大きなデータを扱う場合、メモリ不足（`MemoryError`）でプログラムが落ちることがある。`memory_profiler` はPythonの関数の行ごとのメモリ使用量を計測する[5](https://pypi.org/project/memory-profiler/)。
+実行時間だけでなく、メモリ使用量の計測も重要である。とくにゲノムデータのように大きなデータを扱う場合、メモリ不足（`MemoryError`）でプログラムが落ちることがある。**memray**はBloombergが開発するメモリプロファイラで、行ごとのメモリ割り当てとピーク使用量を計測できる[5](https://pypi.org/project/memray/)。かつて広く使われた `memory_profiler` は2022年11月の0.61.0を最後にメンテナンスが終了しているため、本書では現行の memray と標準ライブラリ `tracemalloc` を用いる。
 
 ```bash
-# memory_profiler のインストール
-pip install memory_profiler
+# memray のインストール（Linux / macOS 対応）
+pip install memray
 ```
 
-`line_profiler` と同様に `@profile` デコレータを付けて計測する:
+`memray` はコードにデコレータを付ける必要がなく、スクリプトをそのまま実行して計測できる:
 
 ```python
 # memory_target.py
-from memory_profiler import profile
+import numpy as np
 
 
-# @profile デコレータを付けた関数のメモリ使用量が行ごとに計測される
-@profile
 def load_large_data():
     # 10万行 × 100列の行列を生成（約80 MB）
     data = np.random.default_rng(42).random((100_000, 100))
     # 平均を計算（追加メモリはほぼ不要）
     means = data.mean(axis=0)
     return means
+
+
+if __name__ == "__main__":
+    load_large_data()
 ```
 
 ```bash
-# memory_profiler を使ってスクリプトを実行
-python3 -m memory_profiler memory_target.py
+# memray run: メモリ割り当てを記録して .bin ファイルに保存
+python3 -m memray run memory_target.py
+
+# memray flamegraph: 記録結果をHTMLのフレームグラフに変換し、
+# どの関数・どの行がメモリを確保したかを可視化する
+memray flamegraph memray-memory_target.py.<PID>.bin
 ```
 
-メモリの時系列変化を可視化するには `mprof` コマンドを使う:
+ピークメモリだけを手軽に知りたい場合は、依存パッケージの要らない標準ライブラリ `tracemalloc` が便利である:
 
-```bash
-# mprof run: メモリ使用量を時系列で記録
-mprof run python3 my_script.py
+```python
+import tracemalloc
 
-# mprof plot: 記録結果をグラフとして表示
-mprof plot
+tracemalloc.start()
+means = load_large_data()
+_, peak = tracemalloc.get_traced_memory()
+print(f"ピークメモリ: {peak / 1024**2:.1f} MB")
+tracemalloc.stop()
 ```
+
+CPU・GPU・メモリを行単位で同時に計測したい場合は、`scalene`（`scalene run script.py`）も有力な選択肢である。
 
 > ### 🤖 コラム: GPU利用率モニタリング
 >
@@ -423,7 +438,7 @@ mprof plot
 |------|------|-----------|
 | **コンピュートバウンド** | `tottime` が大きい関数に計算ループが集中 | ベクトル化、アルゴリズム改善、並列化 |
 | **I/Oバウンド** | `time` で `real >> user + sys`、ファイル読み書き関数が上位 | ストリーミング処理、圧縮形式、非同期I/O |
-| **メモリバウンド** | `memory_profiler` でピーク使用量がRAMに近い | ジェネレータ、チャンク処理、データ型の最適化 |
+| **メモリバウンド** | `memray`/`tracemalloc` でピーク使用量がRAMに近い | ジェネレータ、チャンク処理、データ型の最適化 |
 | **ストレージバウンド** | `df -h` で空き容量不足、`du -sh` で中間ファイル肥大 | 圧縮形式、ストリーミング処理、中間ファイル削除 |
 
 最適化の優先順位は以下の手順で決める:
@@ -439,7 +454,7 @@ mprof plot
 
 > 「cProfileの結果で `normalize_tpm_slow` が全体の85%を占めている。二重forループをNumPyのブロードキャスティングに置き換えて高速化して」
 
-> 「`memory_profiler` の結果、`load_all_samples` 関数でメモリが4 GB急増している。ジェネレータを使ってストリーミング処理に書き換えて」
+> 「`memray` の結果、`load_all_samples` 関数でメモリが4 GB急増している。ジェネレータを使ってストリーミング処理に書き換えて」
 
 > 「`time` コマンドの結果、real=120s に対して user=5s しかない。I/Oバウンドなので、gzip圧縮のままストリーミング読み込みする方式に変更して」
 
@@ -495,7 +510,7 @@ def normalize_tpm_fast(
 
 #### GIL（Global Interpreter Lock）の制約
 
-CPythonには**GIL**（Global Interpreter Lock）と呼ばれるロック機構があり、同一プロセス内では一度に1つのスレッドしかPythonバイトコードを実行できない。つまり、純粋なPythonコードが支配的なCPUバウンド処理では、`threading` モジュールによるスレッド並列は高速化に寄与しにくい。
+**既定のCPythonビルド**には**GIL**（Global Interpreter Lock）と呼ばれるロック機構があり、同一プロセス内では一度に1つのスレッドしかPythonバイトコードを実行できない。つまり、純粋なPythonコードが支配的なCPUバウンド処理では、`threading` モジュールによるスレッド並列は高速化に寄与しにくい。なお Python 3.13 で GIL を無効化した**free-threadedビルド**（`python3.13t`、3.14 では `python3.14t`）が導入され、3.14 で公式にサポートされた（PEP 779）。ただし既定ビルドではなく、単一スレッド性能に数%程度のオーバーヘッドがあり、未対応のC拡張モジュールを import すると GIL が自動的に再有効化される。本書では既定ビルド（GILあり）を前提とする。
 
 CPUバウンドな処理を並列化するには、`multiprocessing` モジュールまたは `concurrent.futures` モジュールの `ProcessPoolExecutor` を使い、**別プロセス**を起動するのが基本である[6](https://docs.python.org/3/library/concurrent.futures.html)。各プロセスは独自のGILを持つため、真の並列実行が可能になる。ただし、NumPy などのC拡張が内部でGILを解放する場合は、スレッドでも効果が出ることがある。
 
@@ -625,7 +640,7 @@ high_quality = filter_by_quality(long_enough, min_avg_quality=20)
 result = list(high_quality)
 ```
 
-この連結では、各レコードが3つのジェネレータを順に通過する。途中のジェネレータはレコードを保持せず、条件を満たすものだけを次に渡す。`memory_profiler` で計測すると、ファイルサイズが増えてもメモリ使用量が一定であることが確認できる。
+この連結では、各レコードが3つのジェネレータを順に通過する。途中のジェネレータはレコードを保持せず、条件を満たすものだけを次に渡す。`memray` で計測すると、ファイルサイズが増えてもメモリ使用量が一定であることが確認できる。
 
 #### itertools活用
 
@@ -707,7 +722,7 @@ Numbaは初回呼び出し時にコンパイルが走るため最初だけ遅い
 
 1. まずNumPyのベクトル化を試す（最も簡単で保守しやすい）
 2. ベクトル化が困難な複雑なループ構造がある場合にNumbaを検討する
-3. Numbaが対応していない操作（文字列処理、辞書操作など）がある場合は`Cython`を検討する
+3. Numbaが扱いにくい処理（任意型のdictやクラスインスタンスなどPythonの汎用オブジェクト、複雑な文字列処理など）がある場合は、型付きコンテナ（`numba.typed.Dict` 等）への書き換えを検討し、それでも難しければ`Cython`を検討する
 4. いずれの場合も、**プロファイリングで確認されたボトルネック**にのみ適用する
 
 #### エージェントへの指示例
@@ -842,7 +857,7 @@ def save_as_parquet(df: pd.DataFrame, path: Path) -> None:
     df.to_parquet(path, index=True)
 ```
 
-Parquetは「中間データの保存」に特に適している。解析パイプラインの途中結果をParquetで保存しておけば、次のステップでの読み込みが高速になり、型情報も失われない。最終的に人間が確認する出力のみCSVやTSVで書き出す、という使い分けが実用的である。
+Parquetは「中間データの保存」に特に適している。解析パイプラインの途中結果をParquetで保存しておけば、次のステップでの読み込みが高速になり、型情報も失われない。最終的に人間が確認する出力のみCSVやTSVで書き出す、という使い分けが実用的である[7](https://parquet.apache.org/)。
 
 #### BAM vs CRAM
 
@@ -851,7 +866,7 @@ Parquetは「中間データの保存」に特に適している。解析パイ�
 | 観点 | BAM | CRAM |
 |------|-----|------|
 | **圧縮方式** | gzip (DEFLATE) | 参照ゲノムベースの差分圧縮 |
-| **ファイルサイズ** | 基準 | BAMの30〜60% |
+| **ファイルサイズ** | 基準 | BAMより30〜60%小さい |
 | **参照ゲノム** | 不要 | 必要（読み込み時に参照） |
 | **互換性** | ほぼすべてのツール | samtools 1.0+, GATK 4+ |
 | **変換** | — | `samtools view -C -T ref.fa in.bam > out.cram` |
@@ -947,7 +962,7 @@ tabix variants.vcf.gz chr1:1000000-2000000
 | **Amdahlの法則** | 全体に占める割合が大きいボトルネックから改善する |
 | **cProfile** | 関数レベルの実行時間を計測。`tottime` が大きい関数がボトルネック |
 | **line_profiler** | 行レベルの実行時間を計測。`@profile` + `kernprof` で使用 |
-| **memory_profiler** | 行レベルのメモリ使用量を計測。ピーク使用量の特定に有用 |
+| **memray** | 行レベルのメモリ割り当てとピーク使用量を計測。デコレータ不要 |
 | **ベクトル化** | forループをNumPy演算に置き換え、数十〜数百倍の高速化 |
 | **並列処理** | `ProcessPoolExecutor` でCPUバウンドな処理を並列実行 |
 | **ジェネレータ** | `yield` で要素を遅延生成し、メモリ使用量を一定に保つ |
@@ -992,7 +1007,7 @@ def calc_edit_distances(seq_pairs: list[tuple[str, str]]) -> list[int]:
     return results
 ```
 
-（ヒント）CPython の GIL（Global Interpreter Lock）により、純粋なPythonコードが支配的な CPU バウンドタスクは `ThreadPoolExecutor` では高速化しにくい。CPU バウンドには `ProcessPoolExecutor`、I/O バウンドには `ThreadPoolExecutor` が適切である。
+（ヒント）既定のCPythonビルドの GIL（Global Interpreter Lock）により、純粋なPythonコードが支配的な CPU バウンドタスクは `ThreadPoolExecutor` では高速化しにくい（free-threadedビルドを除く）。CPU バウンドには `ProcessPoolExecutor`、I/O バウンドには `ThreadPoolExecutor` が適切である。
 
 ### 演習 17-3: プロファイリングの指示 **[指示設計]**
 
@@ -1012,7 +1027,7 @@ def calc_edit_distances(seq_pairs: list[tuple[str, str]]) -> list[int]:
 
 100万配列の FASTA ファイルで両者のピークメモリ使用量を比較し、ジェネレータ版がメモリ効率に優れることを検証せよ。
 
-（ヒント）`memory_profiler` の `@profile` デコレータでピークメモリを測定する。リスト版は全配列をメモリに保持するため配列数に比例してメモリが増加するが、ジェネレータ版は常に1配列分のメモリで済む。
+（ヒント）`memray`（`python3 -m memray run`）または `tracemalloc.get_traced_memory()` でピークメモリを測定する。リスト版は全配列をメモリに保持するため配列数に比例してメモリが増加するが、ジェネレータ版は常に1配列分のメモリで済む。
 
 ---
 
@@ -1048,7 +1063,7 @@ def calc_edit_distances(seq_pairs: list[tuple[str, str]]) -> list[int]:
 
 [4] Robert Kern and others. "line_profiler". https://github.com/pyutils/line_profiler (参照日: 2026-03-21)
 
-[5] Fabian Pedregosa and others. "memory_profiler". https://pypi.org/project/memory-profiler/ (参照日: 2026-03-21)
+[5] Bloomberg. "Memray". https://pypi.org/project/memray/ (参照日: 2026-07-24)
 
 [6] Python Software Foundation. "concurrent.futures — Launching parallel tasks". https://docs.python.org/3/library/concurrent.futures.html (参照日: 2026-03-21)
 

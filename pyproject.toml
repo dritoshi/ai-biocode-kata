@@ -16,6 +16,7 @@ dependencies = [
     "seaborn",     # 統計可視化（§13）
     "scipy",       # 統計・数値計算（§12）
     "polars",      # 高速データフレーム（§12）
+    "pyarrow",     # Parquet 読み書き（§17）
     "click",       # CLI 構築（§11）
     "typer",       # CLI 構築（§11）
     "requests",    # HTTP（§19）
