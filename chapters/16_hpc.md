@@ -58,7 +58,7 @@ Slurmでは、ジョブごとに必要なリソースを4つの軸で申請す�
 2. **sacctで確認する**: ジョブ完了後に `sacct` コマンド（[16-2節](#16-2-slurm)参照）で実際の使用メモリと実行時間を確認する
 3. **余裕を持たせる**: 実測値の1.5〜2倍を目安に申請する。ギリギリの値はサンプルによる変動で失敗しやすい
 
-以下のコマンドで、完了済みジョブの実際のリソース使用量を確認できる。`sacct`はSlurmの会計情報を表示するコマンドで、`--format`で表示する項目を指定する。
+以下のコマンドで、完了済みジョブの実際のリソース使用量を確認できる。`sacct`はSlurmの会計情報を表示するコマンド[1](https://slurm.schedmd.com/sacct.html)で、`--format`で表示する項目を指定する。
 
 ```bash
 # ジョブID 12345 の実際のメモリ使用量と実行時間を確認する
@@ -131,7 +131,7 @@ fastqc --threads 4 data/*.fastq.gz --outdir results/fastqc/
 
 `#SBATCH` ディレクティブはスクリプトの先頭（`#!/bin/bash` の直後）にまとめて記述する必要がある。途中にコメントや空行以外の行を挟むと、それ以降の `#SBATCH` はSlurmに無視される。
 
-投入は `sbatch` コマンドで行う。
+投入は `sbatch` コマンドで行う[2](https://slurm.schedmd.com/sbatch.html)。
 
 ```bash
 # ジョブスクリプトをSlurmに投入する
@@ -364,11 +364,11 @@ HPCを利用するには、ローカルPCからクラスタへのSSH接続と、
 
 > 🧬 **コラム: 所属機関の外からサーバに接続する — VPN・多要素認証**
 >
-> **VPN（Virtual Private Network）**
+> **VPN**（Virtual Private Network）
 >
 > 所属機関のネットワーク外（自宅・出張先・学会会場等）からHPCに接続するには、VPN接続が必要な場合が多い。VPNは暗号化されたトンネルを通じて、外部ネットワークからでも所属機関の内部ネットワークにいるかのようにアクセスできる仕組みである。設定手順は機関ごとに異なるため、所属機関のIT部門のガイドに従うこと。VPN接続後は `ssh hpc` で通常どおり接続できる。
 >
-> **MFA（Multi-Factor Authentication; 多要素認証）**
+> **MFA**（Multi-Factor Authentication; 多要素認証）
 >
 > パスワードだけでなく、もう1つの要素（持っているもの・生体情報）を組み合わせて本人確認する認証方式である。HPCのログインで多要素認証が必須化されている機関が増えている。また、AIコーディングエージェントのサービス（OpenAI等）でもアカウント認証に多要素認証が使われる。
 >
@@ -383,7 +383,7 @@ HPCを利用するには、ローカルPCからクラスタへのSSH接続と、
 
 ### rsyncによるファイル転送
 
-ローカルPCとHPC間のデータ転送には `rsync` が最適である。`scp` も使えるが、rsyncには以下の利点がある。
+ローカルPCとHPC間のデータ転送には `rsync` が最適である。`scp` も使えるが、rsyncには以下の利点がある[3](https://rsync.samba.org/tech_report/)。
 
 | 特徴 | `scp` | `rsync` |
 |------|-------|---------|
@@ -446,7 +446,7 @@ ssh -L 8888:compute-node-01:8888 hpc
 
 ### 多段SSH（ProxyJump）
 
-多くの研究機関では、HPCクラスタに直接接続できず、**踏み台サーバ**（bastion host）を経由する必要がある。`~/.ssh/config` に以下の設定を追加すると、`ssh hpc` だけで踏み台を自動的に経由できる。
+多くの研究機関では、HPCクラスタに直接接続できず、**踏み台サーバ**（bastion host）を経由する必要がある[4](https://www.cisa.gov/news-events/news/securing-network-infrastructure-devices)。`~/.ssh/config` に以下の設定を追加すると、`ssh hpc` だけで踏み台を自動的に経由できる。
 
 ```
 # ~/.ssh/config の設定例
@@ -480,11 +480,11 @@ rsync -avz data/ hpc:~/project/data/
 
 ### 接続が切れても実行を続ける — 永続セッション
 
-ログインノードにSSHで入って作業していると、ノートPCがスリープしたりネットワークが切れたりした瞬間に、実行中のプロセスがまとめて終了してしまうことがある（切断時に `SIGHUP` が送られるため）。長時間の**計算**そのものはSlurmのバッチジョブ([§16-2 Slurm](#16-2-slurm)の `sbatch`)に投げれば切断の影響を受けないが、ログインノード上での対話的な監視作業や、近年はAIエージェントとの対話セッションも、切断をまたいで維持したい場面が増えている。
+ログインノードにSSHで入って作業していると、ノートPCがスリープしたりネットワークが切れたりした瞬間に、実行中のプロセスがまとめて終了してしまうことがある（切断時に `SIGHUP` が送られるため）。ネットワーク接続は本質的に信頼しきれず、途切れることを前提に備える必要がある[5](https://doi.org/10.1145/2643130)。長時間の**計算**そのものはSlurmのバッチジョブ([§16-2 Slurm](#16-2-slurm)の `sbatch`)に投げれば切断の影響を受けないが、ログインノード上での対話的な監視作業や、近年はAIエージェントとの対話セッションも、切断をまたいで維持したい場面が増えている。
 
 **定番: tmux / screen**
 
-`tmux`（や古くからある `screen`）は、リモートホスト上に**永続的なセッション**を作る[10](https://github.com/tmux/tmux/wiki)。セッションから「デタッチ」してもプロセスはサーバ上で走り続け、あとから再接続すれば元の画面に戻れる。SSHが切れてもセッションはサーバ側に残る:
+`tmux`（や古くからある `screen`）は、リモートホスト上に**永続的なセッション**を作る[6](https://github.com/tmux/tmux/wiki)。セッションから「デタッチ」してもプロセスはサーバ上で走り続け、あとから再接続すれば元の画面に戻れる。SSHが切れてもセッションはサーバ側に残る:
 
 ```bash
 ssh hpc               # ログインノードに接続（前項の ~/.ssh/config の Host hpc を利用）
@@ -503,7 +503,7 @@ tmux attach           # 走り続けているセッションに再接続
 
 AIエージェントとの協働では、複数のエージェントを同時に走らせる場面が増える（一方でリファクタリング、別のところでテスト作成、さらに別のところでデータ探索、といった具合である）。tmuxでも複数ペインは開けるが、「どのエージェントが今こちらの入力を待っているか」は画面を目で追わないと分からない。
 
-**herdr** は、この課題に向けて作られた**エージェント多重化ツール**（agent multiplexer）である[9](https://herdr.dev/)。tmuxのように複数のペインでプロセスを走らせつつ、各ペインのエージェントの状態（作業中・待機中・入力待ちなど）をサイドバーに表示する。Rust製の単一バイナリで、外部依存なしに動く。プロジェクトのディレクトリで `herdr` を実行するとバックグラウンドの永続セッションが作られ、各ペインでエージェントのCLI（Claude Code や Codex など）を起動できる。
+**herdr** は、この課題に向けて作られた**エージェント多重化ツール**（agent multiplexer）である[7](https://herdr.dev/)。tmuxのように複数のペインでプロセスを走らせつつ、各ペインのエージェントの状態（作業中・待機中・入力待ちなど）をサイドバーに表示する。Rust製の単一バイナリで、外部依存なしに動く。プロジェクトのディレクトリで `herdr` を実行するとバックグラウンドの永続セッションが作られ、各ペインでエージェントのCLI（Claude Code や Codex など）を起動できる。
 
 HPCとの関連で有用なのが、リモートのherdrセッションにSSH経由でアタッチする `--remote` である。ログインノードで複数のエージェントを動かしっぱなしにして、手元のノートPCから接続し、状態を確認しながら操作できる。tmux同様、接続が切れてもセッションはサーバ側に残る:
 
@@ -810,22 +810,16 @@ python simple_filter.py input.vcf > output.vcf
 
 ## 参考文献
 
-[1] SchedMD. "Slurm Workload Manager Documentation". https://slurm.schedmd.com/documentation.html (参照日: 2026-03-21)
+[1] SchedMD. "sacct - Display accounting data for all jobs". https://slurm.schedmd.com/sacct.html (参照日: 2026-03-21)
 
 [2] SchedMD. "sbatch - Submit a batch script to Slurm". https://slurm.schedmd.com/sbatch.html (参照日: 2026-03-21)
 
-[3] SchedMD. "sacct - Display accounting data for all jobs". https://slurm.schedmd.com/sacct.html (参照日: 2026-03-21)
+[3] Andrew Tridgell and Paul Mackerras. "The rsync algorithm". https://rsync.samba.org/tech_report/ (参照日: 2026-03-21)
 
-[4] NIH HPC. "Biowulf User Guide". https://hpc.nih.gov/docs/userguide.html (参照日: 2026-03-21)
+[4] Cybersecurity and Infrastructure Security Agency. "Securing Network Infrastructure Devices". https://www.cisa.gov/news-events/news/securing-network-infrastructure-devices (参照日: 2026-03-25)
 
-[5] Andrew Tridgell and Paul Mackerras. "The rsync algorithm". https://rsync.samba.org/tech_report/ (参照日: 2026-03-21)
+[5] Peter Bailis and Kyle Kingsbury. "The Network is Reliable". *Communications of the ACM*, 57(9), 48-55, 2014. https://doi.org/10.1145/2643130
 
-[6] Peter Bailis and Kyle Kingsbury. "The Network is Reliable". *Communications of the ACM*, 57(9), 48-55, 2014. https://doi.org/10.1145/2643130
+[6] tmux. "tmux Wiki". https://github.com/tmux/tmux/wiki (参照日: 2026-07-24)
 
-[7] Cybersecurity and Infrastructure Security Agency. "Securing Network Infrastructure Devices". https://www.cisa.gov/news-events/news/securing-network-infrastructure-devices (参照日: 2026-03-25)
-
-[8] Australian BioCommons. "What are HPC and cloud computers?". https://support.biocommons.org.au/support/solutions/articles/6000248145-what-are-hpc-and-cloud-computers- (参照日: 2026-03-25)
-
-[9] herdr. "herdr: Agent multiplexer that lives in your terminal". https://herdr.dev/ (参照日: 2026-07-24)
-
-[10] tmux. "tmux Wiki". https://github.com/tmux/tmux/wiki (参照日: 2026-07-24)
+[7] herdr. "herdr: Agent multiplexer that lives in your terminal". https://herdr.dev/ (参照日: 2026-07-24)
