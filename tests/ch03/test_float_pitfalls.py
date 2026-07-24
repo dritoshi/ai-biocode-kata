@@ -47,6 +47,12 @@ class TestNaiveSum:
     def test_empty(self) -> None:
         assert naive_sum([]) == 0.0
 
+    def test_accumulates_error(self) -> None:
+        # 逐次加算では丸め誤差が蓄積し、0.1×10 は厳密には 1.0 にならない
+        values = [0.1] * 10
+        assert naive_sum(values) != 1.0
+        assert naive_sum(values) == pytest.approx(1.0)
+
 
 class TestAccurateSum:
     """accurate_sum() のテスト."""
@@ -55,7 +61,7 @@ class TestAccurateSum:
         assert accurate_sum([1.0, 2.0, 3.0]) == pytest.approx(6.0)
 
     def test_many_small_values(self) -> None:
-        # 0.1 を10回足すと、sum()では誤差が出るが fsum()は正確
+        # 0.1 を10回逐次加算すると誤差が出るが、fsum()は正確
         values = [0.1] * 10
         assert accurate_sum(values) == 1.0
 
@@ -90,7 +96,7 @@ class TestDemonstrateNanBehavior:
         # NaN は自分自身と等しくない
         assert result["nan == nan"] is False
         assert result["nan != nan"] is True
-        # NaN は比較で常に False
+        # NaN の大小比較（< と >）は常に False
         assert result["nan < 0"] is False
         assert result["nan > 0"] is False
         # math.isnan() でのみ判定可能

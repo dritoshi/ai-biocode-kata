@@ -46,7 +46,10 @@ def safe_float_equal(a: float, b: float, rel_tol: float = 1e-9) -> bool:
 
 
 def naive_sum(values: list[float]) -> float:
-    """組み込みsum()による合計（丸め誤差が蓄積する）.
+    """逐次加算による合計（丸め誤差が蓄積する）.
+
+    Python 3.12以降の組み込み sum() は精度が改善されており、
+    ここでは古典的な罠を示すため for ループで逐次加算する。
 
     Parameters
     ----------
@@ -58,7 +61,10 @@ def naive_sum(values: list[float]) -> float:
     float
         合計値
     """
-    return sum(values)
+    total = 0.0
+    for value in values:
+        total += value
+    return total
 
 
 def accurate_sum(values: list[float]) -> float:
