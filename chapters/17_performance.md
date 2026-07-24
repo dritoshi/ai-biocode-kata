@@ -428,6 +428,28 @@ CPU・GPU・メモリを行単位で同時に計測したい場合は、`scalene
 >
 > GPU利用率が低い場合、データローダがボトルネックになっている可能性がある。`DataLoader` の `num_workers` パラメータを増やしてCPU側のデータ前処理を並列化するのが定石である。
 
+### py-spyによる実行中プロセスのプロファイリング
+
+これまでのプロファイラは、対象コードを自分で起動して計測するものだった。しかし、**すでに動いているプロセスを止めずに外から観測したい**場面もある。典型例が、HPCのバッチジョブとして投入し、数時間走り続けているスクリプトである（[§16 スパコン・クラスタでの大規模計算](./16_hpc.md)参照）。ジョブを一度止めて `cProfile` を仕込み直すのは現実的でない。
+
+**py-spy** は、実行中のPythonプロセスに**プロセスIDを指定して後から接続**（attach）できるサンプリング型プロファイラである[11](https://github.com/benfred/py-spy)。対象プロセスのコードを一切変更せず、別プロセスからスタックを定期的にサンプリングするため、オーバーヘッドも小さい。
+
+```bash
+# 実行中プロセスのPIDを調べる（[§2](./02_terminal.md)で学んだ ps / pgrep）
+pgrep -f my_analysis.py
+
+# py-spy top: 実行中プロセスが「今どの関数にいるか」を top 風に表示
+py-spy top --pid 12345
+
+# py-spy dump: その瞬間のスタックトレースを一度だけ出力（ジョブが固まったときの調査に有用）
+py-spy dump --pid 12345
+
+# py-spy record: 一定時間サンプリングしてフレームグラフ(SVG)を生成
+py-spy record --pid 12345 --output profile.svg --duration 60
+```
+
+「HPCに投げたジョブが想定より遅い、あるいは止まって見える」ときに、ジョブを殺さずに原因の関数を特定できるのが py-spy の強みである。C/C++で書かれたネイティブ拡張に落ちている時間も `--native` オプションで観測できる。
+
 ### ボトルネックの特定と分類
 
 ![プロファイリング結果の例: 関数別処理時間でボトルネックを特定する](../figures/ch17_profiling_result.png)
@@ -688,6 +710,8 @@ result_bisect = positions[left:right]
 
 $n$ = 100万個のSNP座標で比較すると、リスト全走査($O(n)$)に対して二分探索($O(\log n)$)は数千倍高速になる。
 
+大量のオブジェクトを生成する場合は、クラスに `__slots__` を定義するとメモリを節約できる。Pythonのインスタンスは既定で属性を `__dict__`（辞書）に保持するが、`__slots__ = ("pos", "ref", "alt")` のように属性名を固定すると `__dict__` を持たなくなり、1インスタンスあたりのメモリが大きく減る。数百万件のバリアントレコードをオブジェクトとして扱うような場面で効く（ただし宣言していない属性は動的に追加できなくなる）。
+
 ### Cython・Numbaによる高速化（上級）
 
 NumPyのベクトル化や並列処理でも不十分な場合、Python関数をJIT（Just-In-Time）コンパイルして機械語に変換するアプローチがある。**Numba**はデコレータ1つで数値計算関数を高速化できるライブラリである[9](https://numba.readthedocs.io/)。
@@ -819,6 +843,8 @@ def compute_stats_chunked(
 - `chunksize` が小さいほどメモリ使用量は少ないが、I/Oオーバーヘッドが増える
 - 統計量（平均、分散）は**オンラインアルゴリズム**で逐次集約できる。単純に「チャンクごとの平均の平均」を取ると、チャンクサイズが不均一な場合に誤差が生じる
 - 合計やカウントのような単純な集約は、チャンクごとの結果を足し合わせるだけでよい
+
+チャンク処理を自前で書く代わりに、メモリを超えるデータを透過的に扱うライブラリを使う手もある。**Dask** は pandas/NumPy に似たAPIで、データを自動的にチャンク分割して並列・遅延実行する。**Polars** は Rust実装の高速データフレームで、`scan_csv()` などの遅延API（lazy frame）とストリーミング実行により、メモリに載りきらないデータもクエリ最適化しながら処理できる（Polars は本書の依存にも含まれる）。「pandasでメモリが足りない」段階になったら、チャンク処理を手書きするよりこれらへの移行を検討するとよい。
 
 ### 適切なファイル形式の選択
 
@@ -1074,3 +1100,5 @@ def calc_edit_distances(seq_pairs: list[tuple[str, str]]) -> list[int]:
 [9] Numba Development Team. "Numba: A High Performance Python Compiler". https://numba.readthedocs.io/ (参照日: 2026-03-21)
 
 [10] pandas Development Team. "IO tools: Chunking". https://pandas.pydata.org/docs/user_guide/io.html#iterating-through-files-chunk-by-chunk (参照日: 2026-03-21)
+
+[11] Frederickson, B. "py-spy: Sampling profiler for Python programs". https://github.com/benfred/py-spy (参照日: 2026-07-24)
