@@ -13,7 +13,7 @@ from scripts.ch15.validate_dockerfile import (
 # --- テスト用Dockerfileテキスト ---
 
 GOOD_DOCKERFILE = """\
-FROM condaforge/mambaforge:24.3.0-0
+FROM condaforge/miniforge3:24.3.0-0
 
 RUN apt-get update && \\
     apt-get install -y --no-install-recommends \\
@@ -65,7 +65,7 @@ WORKDIR /app
 """
 
 BAD_ORDER_DOCKERFILE = """\
-FROM condaforge/mambaforge:24.3.0-0
+FROM condaforge/miniforge3:24.3.0-0
 
 COPY . /workspace
 
@@ -95,7 +95,7 @@ WORKDIR /app
 """
 
 MULTISTAGE_DOCKERFILE = """\
-FROM condaforge/mambaforge:24.3.0-0 AS builder
+FROM condaforge/miniforge3:24.3.0-0 AS builder
 
 COPY environment.yml /tmp/environment.yml
 RUN mamba env create -f /tmp/environment.yml

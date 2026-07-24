@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: condaforge/mambaforge:24.3.0-0
+From: condaforge/miniforge3:24.3.0-0
 
 %labels
     Author yourname@example.com
