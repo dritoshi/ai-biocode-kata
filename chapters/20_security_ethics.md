@@ -109,11 +109,17 @@ SECRET_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
 ]
 
 
-def scan_content(content: str, filepath: Path | None = None) -> list[SecretFinding]:
+def scan_content(
+    content: str,
+    filepath: Path | None = None,
+    patterns: list[tuple[str, re.Pattern[str]]] | None = None,
+) -> list[SecretFinding]:
     """テキスト内容をスキャンしてシークレットを検出する."""
+    if patterns is None:
+        patterns = SECRET_PATTERNS
     findings: list[SecretFinding] = []
     for line_number, line in enumerate(content.splitlines(), start=1):
-        for pattern_name, pattern in SECRET_PATTERNS:
+        for pattern_name, pattern in patterns:
             if pattern.search(line):
                 findings.append(SecretFinding(
                     filepath=filepath or Path("<stdin>"),
@@ -195,7 +201,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 #### プロンプトインジェクション対策
 
-**プロンプトインジェクション**とは、悪意のある入力テキストがエージェントへの指示として解釈され、意図しない動作を引き起こす攻撃手法である。OWASP Top 10 for LLM Applications[9](https://owasp.org/www-project-top-10-for-large-language-model-applications/)では、LLMアプリケーションに対する最も重大なリスクの一つとして挙げられている。
+**プロンプトインジェクション**とは、悪意のある入力テキストがエージェントへの指示として解釈され、意図しない動作を引き起こす攻撃手法である。OWASP Gen AI Security Project の「Top 10 for LLM Applications」[9](https://genai.owasp.org/llm-top-10/)では、プロンプトインジェクションが最上位のリスク（LLM01）に位置づけられている。
 
 バイオインフォマティクスの文脈では、以下のようなリスクが考えられる:
 
@@ -623,7 +629,7 @@ DMP要件は科研費だけのものではない。2021年4月に内閣府が策
 | JSPS（科研費） | 全課題義務 | 不要 | 2025年度〜メタデータ報告義務化 |
 | JST（CREST/さきがけ等） | 義務 | 義務 | オープン・アンド・クローズ戦略[18](https://www.jst.go.jp/all/about/houshin.html) |
 | AMED | 義務 | **契約時に提出義務** | ゲノムデータシェアリングポリシーあり[19](https://www.amed.go.jp/koubo/datamanagement.html)。非制限公開・制限公開・制限共有の3分類 |
-| NEDO | 2024年〜導入 | 事業者判断 | ムーンショット事業で先行導入[20](https://www.nedo.go.jp/jyouhoukoukai/other_CA_00003.html) |
+| NEDO | 2024年度〜導入 | 事業者判断 | 内閣府方針（令和3年4月）を受け基本方針を2023年12月改定、2024年度以降開始の補助事業に適用[20](https://www.nedo.go.jp/jyouhoukoukai/other_CA_00003.html) |
 
 特にAMEDは、生命科学分野の研究者にとって科研費と並ぶ主要な資金源であり、DMP提出が契約締結時に義務化されている点で科研費より厳格である。AMEDのゲノムデータシェアリングポリシーでは、ヒトゲノムデータを非制限公開データ（誰でもアクセス可能）、制限公開データ（DAC承認制）、制限共有データ（研究者間共有）の3段階に分類しており、本章§20-2で学んだ制限付きデータベース（JGA等）との関連が深い。
 
@@ -724,7 +730,7 @@ __pycache__/
 
 ### AIとセキュリティ
 
-- OWASP. "OWASP Top 10 for Large Language Model Applications (2025)". https://owasp.org/www-project-top-10-for-large-language-model-applications/ — LLMアプリケーションのセキュリティリスクTop 10。AIエージェント利用時のセキュリティ意識の向上に役立つ。
+- OWASP Gen AI Security Project. "OWASP Top 10 for LLM Applications (2025)". https://genai.owasp.org/llm-top-10/ — LLMアプリケーションのセキュリティリスクTop 10。プロンプトインジェクションが LLM01（第1位）。AIエージェント利用時のセキュリティ意識の向上に役立つ。
 
 ### 研究倫理
 
@@ -754,7 +760,7 @@ __pycache__/
 
 [8] Python Packaging Authority. "pip-audit: Auditing Python environments and dependency trees for known vulnerabilities". https://github.com/pypa/pip-audit (参照日: 2026-03-21)
 
-[9] OWASP. "OWASP Top 10 for Large Language Model Applications". https://owasp.org/www-project-top-10-for-large-language-model-applications/ (参照日: 2026-03-21)
+[9] OWASP Gen AI Security Project. "OWASP Top 10 for LLM Applications (2025)". https://genai.owasp.org/llm-top-10/ (参照日: 2026-07-24)
 
 [10] Sweeney, L. "k-Anonymity: A Model for Protecting Privacy". *International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems*, 10(5), 557-570, 2002. https://doi.org/10.1142/S0218488502001648
 
