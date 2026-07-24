@@ -232,7 +232,7 @@ Markdownの記法やMermaid図は、エージェントが得意とする領域�
 
 ## 18-2. プロジェクトドキュメント
 
-コードが正しく動作するだけでは、他の人（あるいは3ヶ月後の自分自身）がそのプロジェクトを利用・保守することはできない。プロジェクトに必要な文脈——何のためのツールか、どうインストールするか、どう使うか——をドキュメントとして整備することが不可欠である。
+コードが正しく動作するだけでは、他の人（あるいは3ヶ月後の自分自身）がそのプロジェクトを利用・保守することはできない。プロジェクトに必要な文脈——何のためのツールか、どうインストールするか、どう使うか——をドキュメントとして整備することが不可欠である。科学計算プロジェクトで最低限そろえるべきドキュメントやデータ記録の作法は、Wilson らが「Good Enough Practices in Scientific Computing」として整理している[13](https://doi.org/10.1371/journal.pcbi.1005510)。
 
 ### README.mdの構造
 
@@ -351,7 +351,7 @@ CHANGELOG.md は、プロジェクトの変更履歴を時系列で記録する�
 
 ### docstringからのAPI自動生成
 
-[§8-3 コード品質ツール](./08_testing.md#8-3-コード品質ツール)で学んだNumPy style docstringは、人間がソースコードを読む際の助けとなるだけでなく、API リファレンスドキュメントを自動生成するための元データにもなる。[§11-3](./11_cli.md#11-3-ロギング)で触れたように、CLIツールでは docstring が `--help` の説明文にも使われる。
+[§8-3 コード品質ツール](./08_testing.md#8-3-コード品質ツール)で学んだNumPy style docstringは、人間がソースコードを読む際の助けとなるだけでなく、API リファレンスドキュメントを自動生成するための元データにもなる。[§11-1 コマンドラインインターフェースの作法](./11_cli.md#11-1-コマンドラインインターフェースの作法)で触れたように、CLIツールでは docstring が `--help` の説明文にも使われる。
 
 本節では、docstringからWebベースのAPIドキュメントを生成するツールチェーンを紹介する。
 
@@ -383,6 +383,8 @@ plugins:
       handlers:
         python:
           paths: [src]
+          options:
+            docstring_style: numpy   # 本書はNumPy styleを採用（既定はgoogle）
 ```
 
 APIリファレンスページの Markdown で `::: モジュール名` と書くと、そのモジュールの公開API（関数・クラス）のdocstringがドキュメントに展開される。
@@ -414,11 +416,22 @@ result = check_coverage(source)
 print(f"カバレッジ: {result.documented}/{result.total} ({result.ratio:.0%})")
 # カバレッジ: 8/10 (80%)
 
-# docstringがNumPy styleに準拠しているか検証する
+# docstringが欠けている公開関数を一覧表示する
 for name in result.missing:
     print(f"  docstringなし: {name}")
 # docstringなし: helper_func
 # docstringなし: parse_args
+
+# 個々のdocstringがNumPy styleに準拠しているか検証する
+docstring = """GC含量を計算する.
+
+Parameters
+----------
+seq : str
+    塩基配列
+"""
+is_valid, issues = check_numpy_style(docstring)
+print(f"NumPy style準拠: {is_valid}")  # NumPy style準拠: True
 ```
 
 > **🤖 コラム: MLプロジェクトのModel Card**
@@ -480,7 +493,7 @@ python3 -c "import platform; print(platform.platform(), platform.machine())"
 
 ### Jupyter Notebookの利点と限界
 
-Jupyter Notebookは、[§10 パターン7](./10_deliverables.md#パターン7-jupyter-notebook解析レポート)で「解析レポート」として位置づけた成果物形式である。研究ノートとしての観点からも評価してみよう。
+Jupyter Notebookは、[§10 パターン7](./10_deliverables.md#パターン7-jupyter-notebook解析レポート)で「解析レポート」として位置づけた成果物形式である。研究ノートとしての観点からも評価してみよう。Notebookを研究で運用する際のベストプラクティスは、Rule らが「Ten Simple Rules for Writing and Sharing Computational Analyses in Jupyter Notebooks」として10のルールにまとめている[12](https://doi.org/10.1371/journal.pcbi.1007007)。
 
 **利点:**
 
@@ -654,7 +667,7 @@ pip install vcf-filter
 ### ドキュメントの思想
 
 - **Knuth, D. E. "Literate Programming". *The Computer Journal*, 27(2), 97–111, 1984.** — 文芸的プログラミングの原論文。Jupyter Notebook、Quarto、R Markdownの思想的源流。コードとドキュメントを一体化するという発想がどこから来たかを理解できる。
-- **Divio. "The Documentation System".** https://documentation.divio.com/ — ドキュメントを4種類（チュートリアル・ハウツーガイド・リファレンス・説明）に分類する実践的フレームワーク。「何をどこに書くべきか」の判断基準が明確になる。
+- **Divio. "The Documentation System".** https://docs.divio.com/documentation-system/ — ドキュメントを4種類（チュートリアル・ハウツーガイド・リファレンス・説明）に分類する実践的フレームワーク。「何をどこに書くべきか」の判断基準が明確になる。
 
 ### 科学計算のドキュメント実践
 
