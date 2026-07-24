@@ -70,7 +70,7 @@ done
 
 1. **変更されたルールだけ再実行**: 出力ファイルのタイムスタンプを入力と比較し、更新が必要なルールだけを実行する
 2. **並列実行**: 独立したルール（上図のfastqcとtrimmomatic）を自動的に並列実行する
-3. **途中再開**: 成功済みステップを保ったまま必要箇所だけ再実行できる。Snakemake では通常の up-to-date 判定に加えて `--rerun-incomplete` で不完全出力をやり直し、Nextflow では `-resume` でキャッシュを再利用する。CWLではリファレンス実装の`cwltool`自体にはキャッシュ機能が限定的だが、TRE環境（Seven Bridges、Terra等）のエンジンがジョブ単位のキャッシュを提供する
+3. **途中再開**: 成功済みステップを保ったまま必要箇所だけ再実行できる。Snakemake では通常の up-to-date 判定に加えて `--rerun-incomplete` で不完全出力をやり直し、Nextflow では `-resume` でキャッシュを再利用する。CWLではリファレンス実装の`cwltool`自体にはキャッシュ機能が限定的だが、TRE環境（Seven Bridges等）のエンジンがジョブ単位のキャッシュを提供する
 
 ### 導入タイミング
 
@@ -175,6 +175,8 @@ genome:
   index: "data/raw/genome/star_index"
 
 params:
+  fastqc:
+    threads: 4
   star:
     threads: 8
     overhang: 100
@@ -202,7 +204,7 @@ rule deseq2:
         "scripts/run_deseq2.R"
 ```
 
-`conda:` ディレクティブを使うと、`snakemake --use-conda` 実行時にルールごとに隔離された環境が自動作成される。これは[§15 コンテナによるソフトウェア環境の再現](./15_container.md)で詳しく扱う再現性確保の第一歩である。`container:` ディレクティブでDockerやApptainerイメージを指定することもできる。
+`conda:` ディレクティブを使うと、`snakemake --use-conda`（新しめの版では `--software-deployment-method conda`、短縮形 `--sdm conda` も使える）実行時にルールごとに隔離された環境が自動作成される。これらの conda 環境の多くは Bioconda[6](https://doi.org/10.1038/s41592-018-0046-7) から提供される。これは[§15 コンテナによるソフトウェア環境の再現](./15_container.md)で詳しく扱う再現性確保の第一歩である。`container:` ディレクティブでDockerやApptainerイメージを指定することもできる。
 
 #### Snakefileの完全な例
 
@@ -287,7 +289,7 @@ rule featurecounts:
 
 ### Nextflow — チャネルベースのワークフロー言語
 
-Nextflow[2](https://doi.org/10.1038/nbt.3820)[5](https://www.nextflow.io/docs/latest/)はDSL2構文を採用したワークフロー言語で、データの流れを**チャネル**（channel）として表現する。Snakemakeの「ファイルベース」の依存解決とは設計思想が異なる。
+Nextflow[2](https://doi.org/10.1038/nbt.3820)[5](https://docs.seqera.io/nextflow/)はDSL2構文を採用したワークフロー言語で、データの流れを**チャネル**（channel）として表現する。Snakemakeの「ファイルベース」の依存解決とは設計思想が異なる。
 
 #### DSL2の基本構文
 
@@ -336,7 +338,7 @@ nextflow run nf-core/rnaseq \
     -profile docker
 ```
 
-この1コマンドで、QCからカウント行列生成まで——本章で扱った全ステップに加えてMultiQCレポート生成まで——が実行される。
+この1コマンドで、QCからカウント行列生成まで——本章で扱った全ステップに加えてMultiQCレポート生成まで——が実行される。なお `--genome GRCh38` は iGenomes のリファレンスを使う簡便な指定だが、iGenomes は遺伝子アノテーションが古く、nf-core 公式は新規解析には非推奨としている。最新の解析では `--fasta`/`--gtf` で Ensembl や GENCODE の最新リファレンスを直接指定するのがよい。
 
 > 🧬 **コラム: QCメトリクスの読み方**
 >
@@ -389,7 +391,7 @@ baseCommand: fastp
 
 requirements:
   DockerRequirement:
-    dockerPull: biocontainers/fastp:0.23.4--hadf994f_0
+    dockerPull: quay.io/biocontainers/fastp:0.23.4--h125f33a_5
 
 inputs:
   fastq_r1:
@@ -503,7 +505,7 @@ cwltool rnaseq_pipeline.cwl inputs.yml
 
 CWLは学習コストがSnakemake/Nextflowより高い（YAMLの記述量が多く、Pythonのように柔軟にロジックを書けない）が、以下の場面で特に価値がある:
 
-- **TRE環境**（Seven Bridges、Terra、AnVIL）でワークフローを実行する場合
+- **TRE環境**（Seven Bridges、Cancer Genomics Cloud等）でワークフローを実行する場合
 - **Dockstore**でワークフローを公開・共有する場合
 - **異なる実行環境への移植性**を最優先する場合
 - 既存のCWLワークフローを**再利用する**場合（自分で一から書くよりも頻繁）
@@ -524,7 +526,7 @@ GNU make はソフトウェアビルドのために設計されたツールだ�
 
 ```makefile
 # Makefile — リファレンスゲノムの取得とインデックス構築
-GENOME_URL := https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/...
+GENOME_URL := https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/...
 GENOME_DIR := data/raw/genome
 GENOME_FA  := $(GENOME_DIR)/GRCh38.fa
 
@@ -569,7 +571,7 @@ makeを含む4ツールの選択指針:
 | Python親和性 | 低 | 高（Snakefile内でPythonが書ける） | 低（Groovy/DSL2） | 低（YAML宣言型） |
 | HPC対応 | 手動（ジョブスクリプト記述） | プロファイルやクラスタ実行オプション | 組み込み（executor設定） | 実行エンジン依存 |
 | conda/container統合 | なし | `conda:`, `container:` | `container` プロファイル | `DockerRequirement` |
-| 既存パイプライン | 少ない | Snakemake Catalog | nf-core（100+パイプライン） | Dockstore、Seven Bridges |
+| 既存パイプライン | 少ない | Snakemake Catalog | nf-core（150以上のパイプライン） | Dockstore、Seven Bridges |
 | 向いている規模 | 小規模（前処理・準備） | 中〜大規模 | 大規模・クラウド | TRE環境・クラウド |
 
 **迷ったらSnakemakeから始めることを推奨する。** PythonベースでありNumPy・pandasとの親和性が高く、本書の読者にとって学習コストが最も低い。プロジェクトがクラウド環境やHPCの大規模利用に移行する段階でNextflowへの乗り換えを検討すればよい。TRE環境でCWLが求められる場合は、エージェントに既存ワークフローの変換を依頼するのが実践的なアプローチである。
@@ -853,7 +855,7 @@ Snakemake が生成する DAG（有向非巡回グラフ）とは何か説明せ
 
 [4] Snakemake Development Team. "Snakemake Documentation". [https://snakemake.readthedocs.io/](https://snakemake.readthedocs.io/) (参照日: 2026-03-20)
 
-[5] Seqera Labs. "Nextflow Documentation". [https://www.nextflow.io/docs/latest/](https://www.nextflow.io/docs/latest/) (参照日: 2026-03-20)
+[5] Seqera Labs. "Nextflow Documentation". [https://docs.seqera.io/nextflow/](https://docs.seqera.io/nextflow/) (参照日: 2026-03-20)
 
 [6] Grüning, B. et al. "Bioconda: sustainable and comprehensive software distribution for the life sciences." *Nature Methods*, 15(7), 475–476, 2018. [https://doi.org/10.1038/s41592-018-0046-7](https://doi.org/10.1038/s41592-018-0046-7)
 

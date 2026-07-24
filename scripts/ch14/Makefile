@@ -1,7 +1,7 @@
 # リファレンスゲノムの取得とインデックス構築
 # 小規模パイプラインでのmake活用例
 
-GENOME_URL := https://ftp.ensembl.org/pub/release-111/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+GENOME_URL := https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 GENOME_DIR := data/raw/genome
 GENOME_FA := $(GENOME_DIR)/GRCh38.fa
 GENOME_INDEX := $(GENOME_DIR)/GRCh38.fa.fai
