@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法',
+  title: 'AIエージェントを使いこなす はじめてのバイオインフォマティクス開発作法',
   author: '二階堂 愛',
   language: 'ja',
   size: '182mm 257mm',

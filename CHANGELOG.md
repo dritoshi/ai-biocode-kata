@@ -1,6 +1,6 @@
 # Changelog
 
-本書『AIエージェントと学ぶ バイオインフォマティクスプログラミングの作法』のリリース履歴。
+本書『AIエージェントを使いこなす はじめてのバイオインフォマティクス開発作法』のリリース履歴。
 書式は [Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) に準拠し、バージョニングは [Semantic Versioning](https://semver.org/lang/ja/) を用いる。
 
 ## [Unreleased]
