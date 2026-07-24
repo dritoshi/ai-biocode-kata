@@ -720,6 +720,33 @@ def validate_metadata(
 
 ---
 
+### 21-3-4. オーサーシップと貢献の明確化
+
+共同研究の成果を論文にまとめる段階で避けて通れないのが、**誰を著者にするか**と**各人の貢献をどう記録するか**である。バイオインフォマティクスの解析者は、実験を主導していなくても解析で本質的な貢献をすることが多く、著者資格の扱いが曖昧になりやすい。判断を属人的な力関係に委ねず、確立された基準に沿って早い段階でPI・共同研究者と合意しておくことが、後のトラブルを防ぐ。
+
+#### ICMJE の著者資格基準
+
+医学・生命科学系の多くの雑誌は、ICMJE（医学雑誌編集者国際委員会）が定める4要件を採用している。著者は次の**4つをすべて満たす**必要がある[10](https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html):
+
+1. 研究の構想・デザイン、またはデータの取得・解析・解釈に**実質的に貢献**した
+2. 論文の草稿を執筆した、または重要な知的内容について**批判的に推敲**した
+3. 出版する版を**最終承認**した
+4. 研究の正確性・整合性に関する疑義が適切に調査・解決されるよう、成果全体に**説明責任を負う**ことに同意した
+
+解析でデータの解析・解釈に貢献した者は要件1を満たすが、それだけでは著者にならない。原稿の推敲（要件2）や最終承認（要件3）にも関与する必要がある。逆に、資金の獲得、研究グループの一般的な監督、データ提供のみといった貢献は——重要であっても——単独では著者資格を満たさず、**謝辞**（Acknowledgments）に記載する。
+
+#### CRediT による貢献の明示
+
+著者順や「筆頭・責任著者」だけでは、誰が何をしたかは伝わりにくい。**CRediT**（Contributor Roles Taxonomy）は、貢献を14種類の役割で明示する ANSI/NISO 標準であり[11](https://credit.niso.org/)、多くの雑誌が投稿時に記入を求める。役割は Conceptualization（構想）、Methodology（方法）、Software（ソフトウェア）、Formal analysis（形式的解析）、Data curation（データ整備）、Validation（検証）、Visualization（可視化）、Investigation（調査）、Resources（資源提供）、Writing – original draft（草稿執筆）、Writing – review & editing（推敲）、Supervision（監督）、Project administration（プロジェクト管理）、Funding acquisition（資金獲得）の14種である。バイオインフォマティクス解析者は Software・Formal analysis・Data curation・Visualization などで自分の貢献を可視化でき、著者資格を議論する際の材料にもなる。
+
+#### 研究不正と生成AIの扱い
+
+貢献の記録と表裏一体なのが**研究公正**である。研究不正の中核は **FFP**——捏造（fabrication）、改ざん（falsification）、盗用（plagiarism）——であり[12](https://www.mext.go.jp/b_menu/houdou/26/08/1351568.htm)、データや図を都合よく加工することもこれに含まれる。[§13 可視化の実践](./13_visualization.md)で「データを歪めない可視化」を、[§20 コードとデータのセキュリティ・倫理](./20_security_ethics.md)で再現性を扱ったのは、この公正性の技術的な裏付けでもある。
+
+生成AIの利用が広がるなか、**AIは著者になれない**という点は主要な出版規定で一致している。ICMJE は「チャットボット（ChatGPT 等）は成果の正確性・整合性・独創性に責任を負えないため著者にしてはならない」と明記する[10](https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html)。AIを執筆や解析の補助に使うこと自体は許容されるが、**どこでどのように使ったかを方法や謝辞で開示**し、最終的な責任は人間が負う。本書が一貫して説く「エージェントが生成し、人間が判断・レビューする」という役割分担は、この公正性の要請とも合致する。
+
+---
+
 ## まとめ
 
 | 概念 | 要点 |
@@ -834,3 +861,9 @@ MITライセンスの自作プロジェクトに、GPL-3.0ライセンスのラ�
 [8] Stack Overflow. "Policy: Generative AI (e.g., ChatGPT) is banned". https://meta.stackoverflow.com/questions/421831 (参照日: 2026-03-25)
 
 [9] "The XY Problem". https://xyproblem.info/ (参照日: 2026-03-25)
+
+[10] International Committee of Medical Journal Editors (ICMJE). "Defining the Role of Authors and Contributors". https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html (参照日: 2026-07-24)
+
+[11] NISO. "CRediT (Contributor Roles Taxonomy)". https://credit.niso.org/ (参照日: 2026-07-24)
+
+[12] 文部科学省. "研究活動における不正行為への対応等に関するガイドライン". https://www.mext.go.jp/b_menu/houdou/26/08/1351568.htm (参照日: 2026-07-24)
