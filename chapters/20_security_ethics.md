@@ -290,7 +290,7 @@ CI/CDパイプラインに`pip-audit`を組み込めば、脆弱なパッケー�
 | データベース | 運営 | アクセス申請先 |
 |------------|------|--------------|
 | **dbGaP**[5](https://www.ncbi.nlm.nih.gov/gap/) | NIH（米国） | Data Access Committee (DAC) |
-| **JGA**[6](https://www.ddbj.nig.ac.jp/jga/) | DDBJ（日本） | データ提供者が指定するDAC |
+| **JGA**[6](https://www.ddbj.nig.ac.jp/jga/) | DDBJ Center・NBDC（日本） | DBCLS が一元審査（NBDC ヒトデータベースへ中央申請） |
 | **EGA**[7](https://ega-archive.org/) | EBI（欧州） | データセットごとのDAC |
 
 アクセス申請のフローは概ね以下の通りである:
@@ -306,9 +306,10 @@ CI/CDパイプラインに`pip-audit`を組み込めば、脆弱なパッケー�
 
 | 法規制 | 地域 | バイオインフォ研究者への影響 |
 |-------|------|--------------------------|
-| **個人情報保護法**[11](https://www.ppc.go.jp/personalinfo/legal/gentec_data_guideline/) | 日本 | 個人遺伝情報やゲノムデータは個人情報に該当しうる。疾患関連の解釈を伴う場合は要配慮個人情報に該当しうるため、同意取得と安全管理を慎重に設計する。制度見直しが継続しているため、最新の法令・ガイドライン確認が必要 |
-| **次世代医療基盤法**[12](https://www8.cao.go.jp/iryou/kouhou/pdf/kaisei_jisedaiiryou_rikatsuyou.pdf) | 日本 | 2024年改正で「仮名加工医療情報」の制度が追加された。認定事業者を介した利活用が前提であり、通常の学術研究データ共有と同一視しない |
+| **個人情報保護法**[11](https://www.ppc.go.jp/personalinfo/legal/gentec_data_guideline/) | 日本 | 全核ゲノム・全エクソーム・SNPアレイ等のゲノムデータは個人識別符号にあたり、個人情報に該当する。疾患・病歴との関連づけを伴う場合は要配慮個人情報に該当しうるため、同意取得と安全管理を慎重に設計する。令和8年改正法が2026年7月17日に公布された（施行日は公布から2年以内に政令で定められるが、執筆時点で政令は未制定）。施行時期と細目は今後の政令・ガイドラインで確認する |
+| **次世代医療基盤法**[12](https://www8.cao.go.jp/iryou/kouhou/pdf/kaisei_jisedaiiryou_rikatsuyou.pdf) | 日本 | 2023年の改正法（2024年4月施行）で「仮名加工医療情報」の制度が追加された。認定事業者を介した利活用が前提であり、通常の学術研究データ共有と同一視しない |
 | **GDPR**[15](https://www.edpb.europa.eu/our-work-tools/our-documents/opinion-board-art-64/opinion-282024-certain-data-protection-aspects_en) | EU | 遺伝データは「特別カテゴリーの個人データ」。EDPB は 2024年12月18日に Opinion 28/2024 を採択し、AIモデル文脈での匿名性、正当利益、違法取得データの扱いを整理した。AI 関連規制との関係は別途確認が必要 |
+| **EU AI Act**[35](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) | EU | AI に関する包括規制。2024年8月1日発効、リスクに応じて段階的に適用される（禁止行為は2025年2月、汎用AI義務は2025年8月、多くの規定は2026年8月以降）。生体データによる分類や医療・健康分野の高リスクAIが規制対象になりうる。専ら科学研究・開発を目的として開発・提供されるAIは適用除外だが、実運用・商用化に移ると規制対象となる |
 | **HIPAA**[14](https://www.federalregister.gov/documents/2025/01/06/2024-30983/hipaa-security-rule-to-strengthen-the-cybersecurity-of-electronic-protected-health-information) | 米国 | 医療情報の保護。18種類の識別子の除去は de-identification の Safe Harbor 基準として広く使われる。2025年1月には Security Rule 強化のNPRMが公表され、MFA などの安全管理強化が提案された。外部クラウドやAIサービスに ePHI を渡す場合は、Business Associate 該当性と BAA の要否を事前確認する[16](https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html) |
 
 #### DUA（Data Use Agreement）の読み方
@@ -804,3 +805,5 @@ __pycache__/
 [33] Google. "Gemini Apps Privacy Hub". https://support.google.com/gemini/answer/13594961 (参照日: 2026-04-10)
 
 [34] Google Cloud. "Generative AI and data governance on Vertex AI". https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance (参照日: 2026-04-10)
+
+[35] European Parliament and Council. "Regulation (EU) 2024/1689 (Artificial Intelligence Act)". https://eur-lex.europa.eu/eli/reg/2024/1689/oj (参照日: 2026-07-24)
