@@ -9,7 +9,7 @@ AIエージェントはコードを自動生成するだけでなく、自動的
 
 実験科学者であれば、実験ノートの重要性は身に染みているだろう。どの試薬を使い、どの温度で、何分反応させたか——記録がなければ実験は再現できない。コードも同じである。昨日まで動いていたスクリプトが今日エラーを出すとき、「昨日から何を変えたか」がわからなければデバッグは手探りになる。**バージョン管理**（version control）は、コードの実験ノートに相当する仕組みである。
 
-本章では、バージョン管理システム**Git**の基礎操作、共有プラットフォーム**GitHub**の活用法、そしてコードを論文から引用可能にするための公開手順を学ぶ。GitとGitHubは名前が似ているが別のものである。GitはローカルPC上で動作するバージョン管理ソフトウェアであり、GitHubはGitリポジトリをクラウド上にホスティングして共有・公開するためのWebサービスである。実験ノートに喩えるなら、Gitはノートそのもの、GitHubはそのノートを共同研究者と共有するための棚である。
+本章では、バージョン管理システム**Git**[1](https://git-scm.com/book/ja/v2)の基礎操作、共有プラットフォーム**GitHub**の活用法、そしてコードを論文から引用可能にするための公開手順を学ぶ。GitとGitHubは名前が似ているが別のものである。GitはローカルPC上で動作するバージョン管理ソフトウェアであり、GitHubはGitリポジトリをクラウド上にホスティングして共有・公開するためのWebサービスである。実験ノートに喩えるなら、Gitはノートそのもの、GitHubはそのノートを共同研究者と共有するための棚である。
 
 ---
 
@@ -31,7 +31,7 @@ analysis_v2_final_really_final_20260301.py
 
 ### リポジトリの作成と初期設定
 
-Gitでは、プロジェクトの変更履歴を保存する場所を**リポジトリ**（repository）と呼ぶ。新しいプロジェクトを始めるには `git init` でリポジトリを作成する。
+Gitでは、プロジェクトの変更履歴を保存する場所を**リポジトリ**（repository）と呼ぶ。新しいプロジェクトを始めるには `git init` でリポジトリを作成する。個々のGitコマンドの網羅的な説明は公式ドキュメント[2](https://git-scm.com/doc)にある。
 
 ```bash
 # プロジェクトディレクトリの作成とGitリポジトリの初期化
@@ -147,7 +147,7 @@ git diff --staged
 diff --git a/scripts/filter.py b/scripts/filter.py
 --- a/scripts/filter.py
 +++ b/scripts/filter.py
-@@ -12,7 +12,7 @@ def filter_by_quality(records, threshold=20):
+@@ -12,5 +12,5 @@ def filter_by_quality(records, threshold=20):
      filtered = []
      for record in records:
 -        if record.letter_annotations["phred_quality"][0] > threshold:
@@ -157,7 +157,7 @@ diff --git a/scripts/filter.py b/scripts/filter.py
 ```
 
 - `---` と `+++` はそれぞれ変更前（a）と変更後（b）のファイルを示す
-- `@@` 行は変更箇所の位置を示す。`-12,7` は変更前の12行目から7行、`+12,7` は変更後の12行目から7行が対象であることを意味する
+- `@@` 行は変更箇所の位置を示す。`-12,5` は変更前の12行目から5行、`+12,5` は変更後の12行目から5行が対象であることを意味する（コンテキスト4行＋変更1行）
 - `-` で始まる行は削除された行、`+` で始まる行は追加された行である
 - 記号なしの行は変更されていない**コンテキスト行**で、変更箇所の前後に表示され、どこが変わったかを把握する手がかりになる
 
@@ -277,8 +277,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
@@ -601,7 +601,7 @@ GitHub Releasesのリリースノートとしても、このCHANGELOGの内容�
 
 ### Gitの包括的な教科書
 
-- **Chacon, S., Straub, B. *Pro Git* (2nd ed.). Apress, 2014.** — 本章の参考文献 [1] で引用。Gitの包括的教科書で、日本語版が無料で公開されている: https://git-scm.com/book/ja/v2 。本章で扱ったブランチ・マージの内部的な仕組み（コミットオブジェクト、DAG）を第10章 "Git Internals" で理解できる。
+- **Chacon, S., Straub, B. *Pro Git* (2nd ed.). Apress, 2014.** — Gitの包括的教科書で、日本語版が無料で公開されている: https://git-scm.com/book/ja/v2 。本章で扱ったブランチ・マージの内部的な仕組み（コミットオブジェクト、DAG）を第10章 "Git Internals" で理解できる。
 
 ### 科学研究でのGit活用
 
