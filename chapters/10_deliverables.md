@@ -87,7 +87,13 @@ dependencies = [
 
 [project.scripts]
 my-tool = "my_tool.cli:main"    # CLIコマンドの登録
+
+[build-system]
+requires = ["hatchling"]           # ビルドに必要なツール
+build-backend = "hatchling.build"  # パッケージを組み立てるバックエンド
 ```
+
+`[build-system]` テーブルは、このパッケージをビルドするツール（ビルドバックエンド）を宣言する。ここでは軽量な `hatchling` を指定している。`pip install` はまずこのテーブルを読んでビルドツールを準備し、それからパッケージを組み立てる。PyPA の公式ガイドは、どのバックエンドを使う場合でも `[build-system]` を常に記述することを推奨している[1](https://packaging.python.org/)。
 
 インストールと実行:
 
@@ -105,7 +111,7 @@ from my_tool.analysis import run_analysis   # ライブラリとして利用
 
 PyPIへの公開:
 
-`build` はソースコード配布物（sdist）とコンパイル済み配布物（wheel）を `dist/` ディレクトリに生成するツールである。`twine` は生成したパッケージをPyPIにアップロードするツールで、実行時にPyPIのAPIトークンによる認証が必要である。
+`build` はソースコード配布物（sdist）とビルド済み配布物（wheel）を `dist/` ディレクトリに生成するツールである。`twine` は生成したパッケージをPyPIにアップロードするツールで、実行時にPyPIのAPIトークンによる認証が必要である。
 
 ```bash
 python -m pip install build twine
@@ -149,7 +155,7 @@ Conda パッケージ化では、**安定した取得URLとハッシュ、ライ
 
 > **🧬 コラム: Biocondaへのパッケージ公開**
 >
-> Bioconda はバイオインフォマティクスソフトウェアの最大のパッケージリポジトリであり、1万以上のパッケージが登録されている[2](https://doi.org/10.1038/s41592-018-0046-7)。公開の手順は以下のとおりである:
+> Bioconda はバイオインフォマティクスソフトウェアの最大のパッケージリポジトリであり、8,000以上のパッケージが登録されている[11](https://bioconda.github.io/)。公開の手順は以下のとおりである:
 >
 > 1. タグ付きリリースやPyPIのsdistなど、安定したソースアーカイブを用意する
 > 2. [bioconda-recipes](https://github.com/bioconda/bioconda-recipes) リポジトリをフォークする
@@ -350,12 +356,12 @@ AIエージェントに「Streamlitアプリを作って」と指示すれば、
 
 | ホスティング先 | 対象 | コスト | 特徴 |
 |---|---|---|---|
-| **GitHub Pages**[8](https://docs.github.com/en/pages) | 静的サイト（HTML/CSS/JS） | 無料 | GitHubリポジトリから直接公開。[§18](./18_documentation.md)で学ぶMkDocsドキュメントの公開先に最適 |
+| **GitHub Pages**[8](https://docs.github.com/en/pages) | 静的サイト（HTML/CSS/JS） | 無料（公開リポジトリ） | GitHubリポジトリから直接公開。[§18](./18_documentation.md)で学ぶMkDocsドキュメントの公開先に最適 |
 | **Streamlit Community Cloud**[9](https://streamlit.io/cloud) | Streamlitアプリ | 無料枠あり | GitHubリポジトリを連携するだけで自動デプロイ。`requirements.txt`を読んで環境構築も自動 |
 | **Hugging Face Spaces**[10](https://huggingface.co/spaces) | Gradio/Streamlitアプリ | 無料枠あり | 機械学習モデルのデモに最適。Gradioアプリはそのまま動く |
 | **S3静的ホスティング** | 静的サイト | 低コスト | [§16](./16_hpc.md)のクラウドコラムで紹介したオブジェクトストレージを使う方法。独自ドメインの設定も可能 |
 
-**GitHub Pages**は最も手軽で、MkDocsで生成したドキュメントサイトを`mkdocs gh-deploy`の1コマンドで公開できる。Streamlitアプリのような動的なサーバ処理が必要なものはGitHub Pagesでは動かないが、**Streamlit Community Cloud**ならGitHubリポジトリのURLを入力するだけでデプロイが完了する。
+**GitHub Pages**は最も手軽で、MkDocsで生成したドキュメントサイトを`mkdocs gh-deploy`の1コマンドで公開できる。Streamlitアプリのような動的なサーバ処理が必要なものはGitHub Pagesでは動かないが、**Streamlit Community Cloud**ならGitHubリポジトリのURLを入力するだけでデプロイが完了する。なお、GitHub Pages を無料で使えるのは公開リポジトリの場合で、プライベートリポジトリから公開するには GitHub Pro / Team / Enterprise などの有料プランが必要になる[8](https://docs.github.com/en/pages)。
 
 エージェントに「Streamlitアプリを作って」と指示したら、続けて「Streamlit Community Cloudにデプロイするための`requirements.txt`と`.streamlit/config.toml`も作って」と依頼するとよい。デプロイに必要なファイルまで一気に整えてくれる。
 
@@ -601,7 +607,7 @@ def filter_variants(vcf_path: str) -> list[dict]:
 
 ### 設定ファイルによる外部化
 
-パラメータは設定ファイル（YAMLまたはTOML）で外部化する[6](https://12factor.net/):
+パラメータは設定ファイル（YAMLまたはTOML）で外部化する。設定をコードから分離するこの考え方は Twelve-Factor App にも通じる（ただし Twelve-Factor 自体は格納先として環境変数を推奨しており、その方式は後述する）[6](https://12factor.net/):
 
 ```yaml
 # config.yaml
@@ -761,9 +767,22 @@ class QualityThresholdError(BiofilterError):
 関数の先頭で不正な入力を弾く「ガード節」パターンは、コードの読みやすさを大幅に向上させる:
 
 ```python
+from io import StringIO
 from pathlib import Path
 
 from Bio import SeqIO
+
+
+def _load_effective_fasta_text(fasta_path: Path) -> str | None:
+    """先頭の空行を除いた FASTA テキストを返す."""
+    lines = fasta_path.read_text(encoding="utf-8").splitlines()
+    for index, line in enumerate(lines):
+        if line.strip() == "":
+            continue
+        if not line.lstrip().startswith(">"):
+            return None
+        return "\n".join(lines[index:]) + "\n"
+    return None
 
 
 def validate_fasta(fasta_path: Path) -> list[str]:
@@ -784,7 +803,7 @@ def validate_fasta(fasta_path: Path) -> list[str]:
     FileNotFoundError
         ファイルが存在しない場合
     ValueError
-        ファイルが空、または不正なフォーマットの場合
+        ファイルが空、または配列が含まれていない場合
     """
     # ガード節: ファイルの存在確認
     if not fasta_path.exists():
@@ -796,9 +815,17 @@ def validate_fasta(fasta_path: Path) -> list[str]:
     if fasta_path.stat().st_size == 0:
         raise ValueError(f"FASTAファイルが空です: {fasta_path}")
 
+    # Biopython の deprecated なコメント解釈に依存しないよう、
+    # 先頭の実質行が FASTA ヘッダであることを先に確認する。
+    fasta_text = _load_effective_fasta_text(fasta_path)
+    if fasta_text is None:
+        raise ValueError(
+            f"FASTAファイルに配列が含まれていません: {fasta_path}"
+        )
+
     # 本処理
     sequence_ids: list[str] = []
-    for record in SeqIO.parse(fasta_path, "fasta"):
+    for record in SeqIO.parse(StringIO(fasta_text), "fasta"):
         sequence_ids.append(record.id)
 
     # ガード節: 配列の存在確認
@@ -1056,7 +1083,7 @@ testpaths = ["tests"]
 
 [1] Python Packaging Authority. "Python Packaging User Guide". [https://packaging.python.org/](https://packaging.python.org/) (参照日: 2026-03-19)
 
-[2] Grüning, B. et al. "Bioconda: sustainable and comprehensive software distribution for the life sciences." *Nature Methods*, 15, 475–476, 2018. [https://doi.org/10.1038/s41592-018-0046-7](https://doi.org/10.1038/s41592-018-0046-7)
+[2] Grüning, B. et al. "Bioconda: sustainable and comprehensive software distribution for the life sciences." *Nature Methods*, 15(7), 475–476, 2018. [https://doi.org/10.1038/s41592-018-0046-7](https://doi.org/10.1038/s41592-018-0046-7)
 
 [3] Mölder, F. et al. "Sustainable data analysis with Snakemake." *F1000Research*, 10, 33, 2021. [https://doi.org/10.12688/f1000research.29032.2](https://doi.org/10.12688/f1000research.29032.2)
 
@@ -1073,3 +1100,5 @@ testpaths = ["tests"]
 [9] Streamlit. "Streamlit Community Cloud". [https://streamlit.io/cloud](https://streamlit.io/cloud) (参照日: 2026-03-31)
 
 [10] Hugging Face. "Spaces". [https://huggingface.co/spaces](https://huggingface.co/spaces) (参照日: 2026-03-31)
+
+[11] Bioconda. "Bioconda". [https://bioconda.github.io/](https://bioconda.github.io/) (参照日: 2026-07-24)
