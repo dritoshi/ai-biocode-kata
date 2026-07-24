@@ -762,6 +762,30 @@ class QualityThresholdError(BiofilterError):
 
 カスタム例外の基底クラス（`BiofilterError`）を定義しておくと、呼び出し側で `except BiofilterError` とするだけでパッケージ固有のエラーをまとめて捕捉できる。
 
+### 例外の連鎖（raise from）
+
+低レベルの例外を捕捉して、より分かりやすいドメイン固有の例外に変換したい場面は多い。たとえば設定ファイルから読んだ品質スコアの閾値が数値でなかったとき、`float()` が投げる素っ気ない `ValueError` の代わりに「どの設定項目が不正か」を伝える例外を投げたい。このとき `raise ... from ...` を使うと、**元の例外を原因として保持**（chaining）したまま新しい例外を送出できる:
+
+```python
+# scripts/ch10/error_handling.py
+
+def load_min_quality(config: dict[str, str]) -> float:
+    """設定から最低品質スコアを読み込む."""
+    raw = config["min_quality"]
+    try:
+        return float(raw)
+    except ValueError as exc:
+        # 元の例外 exc を原因として連鎖させる（"from exc"）
+        raise BiofilterError(
+            f"設定 min_quality の値 '{raw}' を数値に変換できません。"
+            f"20 のような数値を指定してください"
+        ) from exc
+```
+
+`from exc` を付けると、トレースバックに「The above exception was the direct cause of the following exception」と表示され、元の `ValueError`（数値変換の失敗）と、それを包んだ `BiofilterError`（設定値が不正）の両方をたどれる。「分かりやすい上位のエラー」と「本当に何が起きたかの下位のエラー」の両方が残るので、デバッグ時に原因を見失わずに済む[7](https://docs.python.org/3/tutorial/errors.html)。
+
+`from` を付け忘れても、Pythonは「During handling of the above exception, another exception occurred」という暗黙の連鎖（`__context__`）を表示するが、これは「例外処理中にたまたま別の例外が起きた」ようにも読めて意図が曖昧になる。逆に、内部実装の詳細を隠して原因を意図的に切り離したいときは `raise NewError(...) from None` と書く。例外を変換するときは `from exc` か `from None` を明示する習慣をつけるとよい。
+
 ### 早期リターン（ガード節）パターン
 
 関数の先頭で不正な入力を弾く「ガード節」パターンは、コードの読みやすさを大幅に向上させる:
@@ -864,6 +888,39 @@ raise ValueError(
 1. **何が起きたか**（事実）
 2. **どこで起きたか**（ファイルパス、行番号、パラメータ名）
 3. **どうすればよいか**（修正のヒント）
+
+### 後始末を保証する（try/finally と with）
+
+処理が成功しても失敗しても、開いたファイルや確保した一時領域は必ず後始末しなければならない。`try ... finally` の `finally` 節は、例外が発生してもしなくても**必ず実行される**ため、後始末の保証に使える:
+
+```python
+# scripts/ch10/error_handling.py
+
+def count_records_with_cleanup(records: list[str], work_dir: Path) -> int:
+    """一時ファイルを作り、処理後に必ず後始末する."""
+    marker = work_dir / "processing.lock"
+    marker.write_text("running", encoding="utf-8")
+    try:
+        if not records:
+            raise ValueError("処理対象のレコードが空です")
+        return len(records)
+    finally:
+        # 成功・失敗にかかわらず必ず後始末する
+        marker.unlink(missing_ok=True)
+```
+
+`records` が空で `ValueError` が送出されても、`finally` 節が走って一時ファイル（`processing.lock`）は削除される。もし後始末を `return` の手前に書いていたら、例外で処理が中断されたときに一時ファイルが残り、次の実行を妨げるゴミになる。
+
+ただし、ファイルのように「開いたら閉じる」対象には、`try/finally` を手書きするより `with` 文（コンテキストマネージャ）を使うのが定石である:
+
+```python
+# with を使うと close() を書かなくても確実に閉じられる
+with open(output_path, "w", encoding="utf-8") as handle:
+    handle.write(result)
+# このブロックを抜けた時点で、例外の有無にかかわらず handle は閉じられている
+```
+
+`with open(...)` は内部的に `try/finally` と同じ後始末を行うため、ファイルハンドルの閉じ忘れを防げる[7](https://docs.python.org/3/tutorial/errors.html)。ファイル、`tempfile`、データベース接続、ロックなど `with` に対応したオブジェクトでは `with` を優先し、後始末の仕組みが用意されていない対象にだけ明示的な `try/finally` を使う。
 
 ### fail-fastの原則
 
