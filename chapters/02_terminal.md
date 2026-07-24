@@ -344,6 +344,8 @@ broken = find_broken_path_entries()
 | `find` | 条件に合うファイルを再帰的に検索 | 特定の拡張子: `find data/ -name "*.fastq.gz"` |
 | `xargs` | 標準入力を引数として渡す | 一括処理: `find . -name "*.bam" -print0 \| xargs -0 -n1 samtools index` |
 
+この表のうち `sort`・`uniq`・`cut`・`wc` などは GNU Core Utilities[5](https://www.gnu.org/software/coreutils/manual/) に含まれる標準コマンドで、ほとんどのLinux/macOS環境に最初から用意されている。
+
 ### パイプによるコマンドの連結
 
 シェルの真価は、パイプ（`|`）でコマンドを連結できることにある。[§1 設計原則 — 良いコードとは何か](./01_design.md#1-2-unix哲学)で学んだUNIX哲学——「1つのことをうまくやるプログラムを作り、それらを組み合わせる」——の実践そのものである。
@@ -435,9 +437,11 @@ values = extract_column(Path("expression.tsv"), column=1, delimiter="\t")
 | `[^]` | 否定文字クラス | `[^ACGT]` | ACGT以外の任意の文字 |
 | `^` | 行頭 | `^>` | FASTAのヘッダ行 |
 | `$` | 行末 | `\*$` | 終止コドン（`*`で終わる行） |
-| `\d` | 数字（`[0-9]`と同等） | `chr\d+` | `chr1`, `chr22` |
+| `\d` | 数字（既定で全角数字も含む。ASCII限定は `re.ASCII`） | `chr\d+` | `chr1`, `chr22` |
 | `\s` | 空白文字（スペース、タブ等） | `gene\s+id` | `gene id`, `gene  id` |
-| `\w` | 単語文字（`[a-zA-Z0-9_]`） | `\w+` | 連続する英数字 |
+| `\w` | 単語文字（既定でUnicode文字も含む。`re.ASCII`でASCII限定） | `\w+` | 連続する英数字 |
+
+なお Python の `re` は既定でUnicode対応であり、`\d`・`\w`・`\s` は半角英数字だけでなく全角数字やかな漢字にもマッチする。ASCII文字だけに限定したい場合は `re.ASCII` フラグを付ける。
 
 #### キャプチャグループ
 
@@ -455,7 +459,7 @@ match = re.search(r">(\w+\.\d+)", header)
 if match:
     accession = match.group(1)  # "NM_007294.4"
 
-# GFF3のattributeからgene_idを抽出する例
+# GTFのattributeからgene_idを抽出する例（GFF3と異なりGTFは値を引用符で囲む）
 # gene_id "([^"]+)" は「gene_id "」の後の引用符内の文字列を取得する
 attribute = 'gene_id "ENSG00000012048"; transcript_id "ENST00000357654"'
 match = re.search(r'gene_id "([^"]+)"', attribute)
@@ -490,17 +494,17 @@ chrom = "chr1"
 ensembl_chrom = re.sub(r"^chr", "", chrom)  # "1"
 ```
 
-grepやsedのパターンと `re` モジュールのパターンは基本的に同じ記法である。シェルで試したパターンをそのままPythonに持ち込めるのが正規表現の強みである。
+文字クラス（`[ACGT]`）やアンカー（`^`・`$`）といった基本部分は grep・sed・`re` で共通で、一度覚えれば使い回せるのが正規表現の強みである。ただし方言差には注意が必要である。シェルの `grep`・`sed` は既定でBRE（基本正規表現）を使い、`+`・`?`・`\d` などは特別扱いされない（`grep -E` でERE、`grep -P` やPythonの `re` でこれらが有効になる）。本節のメタ文字表はPythonの `re`（およびPCRE）の記法に沿っている。
 
 #### エージェントへの指示例
 
 正規表現は強力だが、複雑なパターンは可読性が低くなりやすい。エージェントに正規表現を書かせる際は、何を抽出したいかを自然言語で明確に伝えることが重要である:
 
-> 「GFF3ファイルの第9カラム（attributes）から `gene_id` の値を正規表現で抽出する関数を書いて。`gene_id "ENSG00000012048"` のようなフォーマットを想定して」
+> 「GTFファイルの第9カラム（attributes）から `gene_id` の値を正規表現で抽出する関数を書いて。`gene_id "ENSG00000012048"` のようなフォーマットを想定して」
 
 > 「FASTAヘッダ行（`>`で始まる行）からアクセッション番号（`NM_007294.4`のような`英数字.数字`のパターン）を`re.findall()`で抽出するワンライナーを書いて」
 
-> 「エージェントが生成した `re.sub(r"(?<=\\t)([^\\t]+)(?=\\t)", r"\\1_modified", line)` というコードの意味を説明して。読みやすい形に書き換えられないかも検討して」
+> 「エージェントが生成した `re.sub(r"(?<=\t)([^\t]+)(?=\t)", r"\1_modified", line)` というコードの意味を説明して。読みやすい形に書き換えられないかも検討して」
 
 正規表現が複雑になる場合、`re.VERBOSE` フラグを使うとパターン内にコメントを書ける。エージェントにこのフラグでの記述を依頼すると、レビューしやすいコードが得られる。
 
@@ -518,7 +522,7 @@ grepやsedのパターンと `re` モジュールのパターンは基本的に�
 >
 > §2-4で学んだ `grep` や `find` はUNIXの古典的コマンドだが、AIコーディングエージェントはこれらの高速な代替ツールを内部で使っている。
 >
-> **ripgrep**（`rg`）は `grep` のRust実装で、再帰検索が10〜50倍高速である[9]。Claude Codeの検索機能（Grepツール）はripgrepで実装されており、Codex CLIもripgrepに依存している（未インストールだと起動時にエラーになる）。最大の特徴は `.gitignore` を自動で尊重する点で、不要なファイル（`node_modules/` や `.git/` 内のファイル）を検索対象から除外してくれる。
+> **ripgrep**（`rg`）は `grep` のRust実装で、単一ファイルの検索でもGNU grepのおよそ2倍高速である（大文字小文字を無視するUnicode検索などではさらに差が開く）[1](https://burntsushi.net/ripgrep/)。再帰検索そのものの速度はgit grepと同程度だが、後述の `.gitignore` 自動尊重によって探索対象が絞られるぶん、実際のプロジェクトでは体感が速い。Claude Codeの検索機能（Grepツール）はripgrepで実装されており[3](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview)、Codex CLIも検索にripgrepを利用する（環境によっては未インストール時に `find`/`grep` へフォールバックしたりエラーになったりする）。最大の特徴は `.gitignore` を自動で尊重する点で、不要なファイル（`node_modules/` や `.git/` 内のファイル）を検索対象から除外してくれる。
 >
 > ```bash
 > # grep での再帰検索
@@ -528,7 +532,7 @@ grepやsedのパターンと `re` モジュールのパターンは基本的に�
 > rg "import pandas" --type py
 > ```
 >
-> **fd** は `find` のRust実装で、直感的な構文と高速な検索が特徴である[10]。Claude Codeでも利用が推奨されている。
+> **fd** は `find` のRust実装で、直感的な構文と高速な検索が特徴である[2](https://github.com/sharkdp/fd)。AIコーディングの現場でも `find` の代替として広く使われている。
 >
 > ```bash
 > # find でのファイル検索
@@ -544,7 +548,7 @@ grepやsedのパターンと `re` モジュールのパターンは基本的に�
 
 ## 2-5. シェルスクリプティングの基礎
 
-ワンライナーでは収まらない一連の処理を自動化するのが**シェルスクリプト**である。バイオインフォマティクスでは、FASTQの前処理からマッピング、定量までの一連のステップをシェルスクリプトで記述することが多い。
+ワンライナーでは収まらない一連の処理を自動化するのが**シェルスクリプト**である。バイオインフォマティクスでは、FASTQの前処理からマッピング、定量までの一連のステップをシェルスクリプトで記述することが多い[6](https://www.gnu.org/software/bash/manual/)。
 
 ただし、**本格的なCLIツールはPythonで書くべきである**（[§11 コマンドラインツールの設計と実装](./11_cli.md)参照）。シェルスクリプトは「接着剤」——既存のツールを順番に呼び出す程度に留めるのがよい。
 
@@ -565,7 +569,7 @@ set -euo pipefail
 | `-u` | 未定義の変数を参照するとエラー | タイポによる `$SAMPLE_NAEM`（`NAME` のつもり）を検出 |
 | `-o pipefail` | パイプの途中でエラーが起きても検出 | `cmd1 \| cmd2` で `cmd1` の失敗を見逃さない |
 
-**`set -euo pipefail` なしのスクリプトは、サイレントに失敗する**。データ解析でこれが起きると、誤った結果に気づかないまま論文に使ってしまう危険がある。
+**`set -euo pipefail` なしのスクリプトは、サイレントに失敗する**。データ解析でこれが起きると、誤った結果に気づかないまま論文に使ってしまう危険がある[4](https://doi.org/10.1371/journal.pbio.1001745)。
 
 ### シェルスクリプトの基本構造
 
@@ -802,13 +806,14 @@ sampleC_R2.fastq.gz
 
 ### シェル・コマンドラインの教科書
 
-- **Shotts, W. E. *The Linux Command Line: A Complete Introduction* (5th Internet Edition). 2019.** — 本章の参考文献 [1] で引用。全文が無料公開されている: https://linuxcommand.org/tlcl.php 。本章で扱ったコマンドの背景知識（パーミッション、プロセス管理、シェルスクリプト）を体系的に学べる。
-- **Janssens, J. *Data Science at the Command Line* (2nd ed.). O'Reilly, 2021.** — 本章の参考文献 [2] で引用。コマンドラインをデータ分析ツールとして使い倒す手法を紹介する。全文がオンラインで無料公開されている: https://jeroenjanssens.com/dsatcl/ 。
+- **Shotts, W. E. *The Linux Command Line: A Complete Introduction* (5th Internet Edition). 2019.** — 全文が無料公開されている: https://linuxcommand.org/tlcl.php 。本章で扱ったコマンドの背景知識（パーミッション、プロセス管理、シェルスクリプト）を体系的に学べる。
+- **Janssens, J. *Data Science at the Command Line* (2nd ed.). O'Reilly, 2021.** — コマンドラインをデータ分析ツールとして使い倒す手法を紹介する。全文がオンラインで無料公開されている: https://jeroenjanssens.com/dsatcl/ 。
 
 ### バイオインフォマティクスのコマンドライン実践
 
 - **Buffalo, V. *Bioinformatics Data Skills*. O'Reilly, 2015.** https://www.amazon.co.jp/dp/1449367372 — バイオインフォマティクス研究者のための計算スキルの教科書。特に Part I（Ideology: Data Skills for Robust and Reproducible Bioinformatics）と Part II（Prerequisites: Essential Skills for Getting Started with a Bioinformatics Project）が本章と直結する。awk/sed の実践例が豊富。
 - **Haddock, S. H. D., Dunn, C. W. *Practical Computing for Biologists*. Sinauer Associates, 2011.** https://www.amazon.co.jp/dp/0878933913 — 正規表現の解説が特に手厚い教科書。本章で概要を扱った正規表現をFASTAヘッダーのパースやパターンマッチングに実践的に応用する際に最適である。
+- **Li, H. *seqtk*. GitHub.** https://github.com/lh3/seqtk — FASTA/FASTQ を高速に処理する定番ツールキット。サブサンプリング、フォーマット変換、逆相補鎖の生成などをワンライナーで実行できる。軽量なC実装で、シェルパイプラインに組み込みやすい。
 
 ### オンライン講義
 
@@ -818,22 +823,14 @@ sampleC_R2.fastq.gz
 
 ## 参考文献
 
-[1] Shotts, W. E. *The Linux Command Line: A Complete Introduction*. 5th Internet Edition, 2019. [https://linuxcommand.org/tlcl.php](https://linuxcommand.org/tlcl.php)
+[1] Gallant, A. "ripgrep is faster than {grep, ag, git grep, ucg, pt, sift}". 2016. [https://burntsushi.net/ripgrep/](https://burntsushi.net/ripgrep/) (参照日: 2026-03-19)
 
-[2] Janssens, J. *Data Science at the Command Line*. 2nd ed., O'Reilly Media, 2021. [https://jeroenjanssens.com/dsatcl/](https://jeroenjanssens.com/dsatcl/)
+[2] Peter, D. "sharkdp/fd: A simple, fast and user-friendly alternative to 'find'". GitHub. [https://github.com/sharkdp/fd](https://github.com/sharkdp/fd) (参照日: 2026-03-19)
 
-[3] Buffalo, V. *Bioinformatics Data Skills*. O'Reilly Media, 2015. ISBN 978-1449367374
+[3] Anthropic. "Claude Code Documentation". [https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) (参照日: 2026-03-19)
 
 [4] Wilson, G. et al. "Best Practices for Scientific Computing". *PLOS Biology*, 12(1), e1001745, 2014. [https://doi.org/10.1371/journal.pbio.1001745](https://doi.org/10.1371/journal.pbio.1001745)
 
-[5] Anthropic. "Claude Code Documentation". [https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) (参照日: 2026-03-19)
+[5] GNU Coreutils. "GNU Core Utilities". [https://www.gnu.org/software/coreutils/manual/](https://www.gnu.org/software/coreutils/manual/) (参照日: 2026-03-19)
 
-[6] GNU Coreutils. "GNU Core Utilities". [https://www.gnu.org/software/coreutils/manual/](https://www.gnu.org/software/coreutils/manual/) (参照日: 2026-03-19)
-
-[7] "Bash Reference Manual". GNU Project. [https://www.gnu.org/software/bash/manual/](https://www.gnu.org/software/bash/manual/) (参照日: 2026-03-19)
-
-[8] Heng Li. "lh3/seqtk: Toolkit for processing sequences in FASTA/Q formats". GitHub. [https://github.com/lh3/seqtk](https://github.com/lh3/seqtk) (参照日: 2026-03-19)
-
-[9] Gallant, A. "ripgrep is faster than {grep, ag, git grep, ucg, pt, sift}". 2016. [https://blog.burntsushi.net/ripgrep/](https://blog.burntsushi.net/ripgrep/) (参照日: 2026-03-19)
-
-[10] Peter, D. "sharkdp/fd: A simple, fast and user-friendly alternative to 'find'". GitHub. [https://github.com/sharkdp/fd](https://github.com/sharkdp/fd) (参照日: 2026-03-19)
+[6] "Bash Reference Manual". GNU Project. [https://www.gnu.org/software/bash/manual/](https://www.gnu.org/software/bash/manual/) (参照日: 2026-03-19)
