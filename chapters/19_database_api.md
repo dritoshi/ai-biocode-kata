@@ -95,7 +95,7 @@ RDB以外のデータベースを総称して**NoSQL**と呼ぶ。代表的な�
 | 語彙・意味定義 | **RDFS / OWL** | クラス・プロパティ・階層関係を定義し、データに意味を付与する |
 | 問い合わせ | **SPARQL** | RDFデータを検索・取得するクエリ言語 |
 
-各層は下位の層を基盤として利用する——RDFがデータ構造を提供し、RDFS/OWLがその上に語彙の意味を定義し、SPARQLがRDFデータに対してクエリを実行する。バイオインフォマティクスでは、UniProt[7]がRDF形式でタンパク質データを公開しSPARQLエンドポイントを提供するなど、この技術スタックを活用したデータ公開が進んでいる。
+各層は下位の層を基盤として利用する——RDFがデータ構造を提供し、RDFS/OWLがその上に語彙の意味を定義し、SPARQLがRDFデータに対してクエリを実行する。バイオインフォマティクスでは、UniProt[7](https://pubmed.ncbi.nlm.nih.gov/36408920/)がRDF形式でタンパク質データを公開しSPARQLエンドポイントを提供するなど、この技術スタックを活用したデータ公開が進んでいる。
 
 #### RDF
 
@@ -234,7 +234,7 @@ SQLとSPARQLの対比を以下にまとめる。
 | 欧州系 | UniProt | タンパク質配列・機能 | P12345, Q9UHD2 |
 | 欧州系 | ENA | 塩基配列（DDBJと相互ミラー） | — |
 | 日本系 | DDBJ | 塩基配列（GenBankと相互ミラー） | — |
-| 日本系 | PDBj | 立体構造 | PDB ID (4文字) |
+| 日本系 | PDBj | 立体構造 | PDB ID (4文字。2027年7月21日以降の新規は12文字の拡張ID pdb_xxxxxxxx) |
 | ブラウザ | UCSC Genome Browser | ゲノム可視化 | — |
 | ブラウザ | IGV | ローカルゲノム可視化 | — |
 | 統合系 | TogoWS | 複数DBへの統一API | — |
@@ -519,13 +519,13 @@ APIを使ったデータ取得では、使用するライブラリとエンド�
 >
 > 本文ではNCBI Entrez APIとUniProt SPARQLを扱ったが、バイオインフォマティクスには他にも多くの公開APIが存在する。[19-2節](#19-2-バイオインフォマティクスの主要データベース)で紹介したデータベースのうち、プログラムからのアクセスに利用できる代表的なAPIを紹介する。
 >
-> **Ensembl REST API**[13](https://pubmed.ncbi.nlm.nih.gov/36318249/)は、ゲノムアノテーション・バリアント情報をJSONで取得できるRESTful APIである。エンドポイント `https://rest.ensembl.org` に対してGETリクエストを送るだけで、遺伝子情報、配列、バリアント、ID変換などの操作が認証不要で可能である。ただし注意したい点がある。**Ensembl は release 116 を現行サイトの最終リリースとし、REST API・公開MySQL・FTP はこれ以降更新されない**。2026年夏以降、新しいデータは新プラットフォーム（`beta.ensembl.org`。後継として GraphQL の Thoas と refget が案内されている）でのみ提供される予定である（[Ensembl の移行アナウンス](https://www.ensembl.info/2025/12/02/updates-to-programmatic-access-to-ensembl-and-transitioning-to-the-new-ensembl-platform/)）。既存・アーカイブ版のデータ取得には引き続き使えるが、最新のゲノムアノテーションを追う用途では、新プラットフォームでの提供方式を確認すること。
+> **Ensembl REST API**[13](https://pubmed.ncbi.nlm.nih.gov/36318249/)は、ゲノムアノテーション・バリアント情報をJSONで取得できるRESTful APIである。エンドポイント `https://rest.ensembl.org` に対してGETリクエストを送るだけで、遺伝子情報、配列、バリアント、ID変換などの操作が認証不要で可能である。なお IP 単位で 1 時間あたり 55,000 リクエスト（応答ヘッダ `x-ratelimit-limit: 55000` / `x-ratelimit-period: 3600`）のレート制限があり、超過時は 429 と `Retry-After` が返るため、大量アクセスではリトライ実装が必要である。さらに、移行に関する大きな注意がある。**Ensembl は release 116 を現行サイトの最終リリースとし、REST API・公開MySQL・FTP はこれ以降更新されない**。2026年夏以降、新しいデータは新プラットフォーム（`beta.ensembl.org`。後継として GraphQL の Thoas と refget が案内されている）でのみ提供される予定である（[Ensembl の移行アナウンス](https://www.ensembl.info/2025/12/02/updates-to-programmatic-access-to-ensembl-and-transitioning-to-the-new-ensembl-platform/)）。既存・アーカイブ版のデータ取得には引き続き使えるが、最新のゲノムアノテーションを追う用途では、新プラットフォームでの提供方式を確認すること。
 >
 > **Ensembl BioMart** は、大量の遺伝子IDやアノテーションの一括取得・フィルタリングに特化したサービスである。Pythonからは `pybiomart`、Rからは `biomaRt`（[19-2節](#19-2-バイオインフォマティクスの主要データベース)で既出）で利用できる。「Ensembl gene IDのリスト1万件をUniProt IDに一括変換したい」といったID変換のユースケースで威力を発揮する。
 >
 > **UCSC Genome Browser REST API**[14](https://pubmed.ncbi.nlm.nih.gov/36420891/)は、UCSC Genome BrowserのトラックデータにプログラムからアクセスするためのAPIである。エンドポイント `https://api.genome.ucsc.edu` から、座標範囲を指定してアノテーションを取得したり、利用可能なトラックの一覧を取得したりできる。
 >
-> **TogoWS**[9](http://togows.org/)は、DBCLS（ライフサイエンス統合データベースセンター）が提供する複数データベースへの統一RESTゲートウェイである。`/entry/DB名/ID` 形式の統一URLでGenBank、UniProt、PDB等の異なるDBにアクセスできるため、DB固有のAPI仕様を個別に学ぶ手間を省ける。
+> **TogoWS**[9](http://togows.org/)は、DBCLS（ライフサイエンス統合データベースセンター）が提供する複数データベースへの統一RESTゲートウェイである。`/entry/DB名/ID` 形式の統一URLでGenBank、UniProt、PDB等の異なるDBにアクセスできるため、DB固有のAPI仕様を個別に学ぶ手間を省ける。ただし対応DBや出力形式には欠けがあり（実測では `entry/pdb/...` が404、一部の `.json` 取得が500を返す）、応答が不安定なことがある。本番パイプラインでは各DBの公式APIを優先し、TogoWSは軽い試行にとどめるのが安全である。
 >
 > このほか、[19-2節](#19-2-バイオインフォマティクスの主要データベース)で触れた**MyGene.info**もREST APIとして利用可能であり、遺伝子情報の検索・ID変換をJSON形式で手軽に行える。目的のデータに応じてこれらのAPIを使い分けることで、データ取得の効率と再現性が向上する。
 
@@ -533,7 +533,7 @@ APIを使ったデータ取得では、使用するライブラリとエンド�
 >
 > [§5-5](./05_software_components.md#5-5-mcpmodel-context-protocol-エージェントの能力を拡張する)で、MCP（Model Context Protocol）によってエージェントに外部ツールへのアクセス能力を追加できることを学んだ。§5-5ではGitHubやNotionといった汎用的なMCPサーバーを紹介したが、バイオインフォマティクスに特化したMCPサーバーも開発が進んでいる。
 >
-> **BioMCP**（https://biomcp.org/ ）[15](https://github.com/genomoncology/biomcp)は、遺伝子・変異・論文・臨床試験・医薬品・疾患・パスウェイなど12種のバイオメディカルエンティティを統一的なコマンド文法でクエリできるCLIツール兼MCPサーバーである。
+> **BioMCP**（https://biomcp.org/ ）[15](https://github.com/genomoncology/biomcp)は、遺伝子・変異・論文・臨床試験・医薬品・疾患・パスウェイなど14種のエンティティを、約30のバイオメディカルデータソースにまたがって統一的なコマンド文法でクエリできるCLIツール兼MCPサーバーである。
 >
 > ```bash
 > # BioMCPのインストール
@@ -561,7 +561,7 @@ APIを使ったデータ取得では、使用するライブラリとエンド�
 >
 > **Biomni — バイオメディカル特化のAIエージェント**
 >
-> MCPサーバーとは異なるアプローチとして、Stanford大学のSNAPグループが開発した**Biomni**（https://biomni.stanford.edu/ ）[20](https://biomni.stanford.edu/paper.pdf)がある。Biomniは150以上の専門ツールと59のデータベースを統合した汎用バイオメディカルAIエージェントであり、LLMの推論能力と検索ベースの計画策定、コード実行を組み合わせて、研究タスクを自律的に遂行する。
+> MCPサーバーとは異なるアプローチとして、Stanford大学のSNAPグループが開発した**Biomni**（https://biomni.stanford.edu/ ）[20](https://doi.org/10.1126/science.adz4351)がある。Biomniは150以上の専門ツールと59のデータベースを統合した汎用バイオメディカルAIエージェントであり、LLMの推論能力と検索ベースの計画策定、コード実行を組み合わせて、研究タスクを自律的に遂行する。
 >
 > Biomniの検証済みの実績には、ウェアラブルデバイスのデータから食後の熱産生応答を特定した解析、33万個以上のシングルセルRNA-seq・ATAC-seqデータセットからの遺伝子制御ネットワーク解析、さらにはウェットラボで実際に検証された分子クローニングプロトコルの設計がある。LAB-Benchベンチマークでは専門家と同等の精度を達成している。
 >
@@ -618,13 +618,14 @@ fasterq-dump SRR1234567 --split-3 --threads 4
 
 #### Aspera
 
-**Aspera**（`ascp`）は、FTPより高速にファイルを転送できるプロトコルである。NCBIやEBIは Aspera によるダウンロードをサポートしている。大量のSRAファイルをダウンロードする場合に有効である。
+**Aspera**（`ascp`）は、FTPより高速にファイルを転送できるプロトコルである。EBI（ENA）は Aspera によるダウンロードをサポートしている（NCBI は SRA の FTP/Aspera 直配布を終了し、現在は SRA Toolkit の `prefetch` やクラウド〈S3/GCS〉から取得する）。大量のリードファイルをダウンロードする場合に有効である。
 
 ```bash
-# Asperaでのダウンロード例
+# Aspera（EBI ENA）でのダウンロード例。
+# 正確なパスは ENA の filereport API（fastq_aspera フィールド）で取得する。
 ascp -QT -l 300m -P 33001 \
   -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh \
-  anonftp@ftp.ncbi.nlm.nih.gov:/sra/sra-instant/reads/ByRun/sra/SRR/SRR123/SRR1234567/SRR1234567.sra \
+  era-fasp@fasp.sra.ebi.ac.uk:/vol1/fastq/SRR123/007/SRR1234567/SRR1234567.fastq.gz \
   ./
 ```
 
@@ -637,11 +638,11 @@ NCBIはシーケンスデータをAWS S3およびGoogle Cloud Storage（GCS）�
 aws s3 cp s3://sra-pub-run-odp/sra/SRR1234567/ . \
   --recursive --no-sign-request
 
-# Google Cloud Storage から（認証不要）
-gsutil -m cp -r gs://sra-pub-run-1/SRR1234567 .
+# Google Cloud Storage から（requester-pays: 自分のGCPプロジェクトと課金が必要）
+gcloud storage cp -r gs://sra-pub-run-1/SRR1234567 . --billing-project=<自分のGCPプロジェクトID>
 ```
 
-`--no-sign-request`（AWS）はAWSアカウントなしでパブリックバケットにアクセスするためのオプションである。`gsutil -m`（GCS）は並列転送を有効にする。クラウドストレージの基礎用語（バケット、リージョン、オブジェクトストレージ等）については[§16 スパコン・クラスタでの大規模計算](./16_hpc.md)のクラウドコラムを参照。
+`--no-sign-request`（AWS）はAWSアカウントなしでパブリックバケットにアクセスするためのオプションである。一方、NCBIのGCSバケットは requester-pays のため、課金先となる自分のGCPプロジェクトの指定と認証が必要である（`gsutil` は2027年3月以降 gcloud CLI に同梱されないため `gcloud storage` を使う）。クラウドストレージの基礎用語（バケット、リージョン、オブジェクトストレージ等）については[§16 スパコン・クラスタでの大規模計算](./16_hpc.md)のクラウドコラムを参照。
 
 EBIも同様にS3互換のストレージでENA（European Nucleotide Archive）のデータを公開している。どの取得方法を使うかは、ローカル環境ではSRA Toolkit、HPCではAspera、クラウドではS3/GCSが一般的な使い分けである。
 
@@ -872,7 +873,7 @@ project/
 > |---|---|---|
 > | 塩基配列（アセンブリ、遺伝子） | DDBJ / GenBank / ENA | INSDC三極体制。いずれかに登録すればミラーされる |
 > | シーケンスリード | DRA / SRA / ERA | 上記に対応するリードアーカイブ |
-> | 遺伝子発現データ | GEO / ArrayExpress | マイクロアレイ・RNA-seq |
+> | 遺伝子発現データ | GEO / BioStudies (ArrayExpress) | マイクロアレイ・RNA-seq。ArrayExpress は BioStudies に統合 |
 > | ヒトゲノム（制限付き） | JGA / dbGaP / EGA | データアクセス委員会（DAC）の承認が必要 |
 > | 汎用データ・解析コード | Zenodo | 50GBまで（拡張可能）。GitHub連携でDOI自動発行 |
 > | 図表・補足データ | figshare | 5GB/ファイル。DOI自動発行 |
@@ -1039,4 +1040,4 @@ def fetch_sequences(gene_list):
 
 [19] Longevity Genie. "gget-MCP". https://github.com/longevity-genie/gget-mcp (参照日: 2026-03-23)
 
-[20] Huang, K. et al. "Biomni: A General-Purpose Biomedical AI Agent". *bioRxiv*, 2025. https://biomni.stanford.edu/paper.pdf
+[20] Huang, K. et al. "Autonomous biomedical research with an artificial intelligence agent". *Science*, 2026. https://doi.org/10.1126/science.adz4351
