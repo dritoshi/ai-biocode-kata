@@ -15,11 +15,11 @@
 
 ## 9-1. デバッグの心構え
 
-デバッグは闇雲にコードを眺める作業ではない。体系的なアプローチを取ることで、原因の特定を大幅に効率化できる。本節では、デバッグの基本戦略を4つ紹介する。
+デバッグは闇雲にコードを眺める作業ではない。体系的なアプローチを取ることで、原因の特定を大幅に効率化できる[6]。本節では、デバッグの基本戦略を4つ紹介する。
 
 ### tracebackを読む
 
-Pythonでエラーが発生すると、**traceback**（スタックトレース）が表示される。tracebackはエラーに至るまでの関数呼び出しの連鎖を記録したもので、デバッグの最も重要な手がかりとなる。
+Pythonでエラーが発生すると、**traceback**（スタックトレース）が表示される[2](https://docs.python.org/3/library/traceback.html)。tracebackはエラーに至るまでの関数呼び出しの連鎖を記録したもので、デバッグの最も重要な手がかりとなる。
 
 ![Pythonのtraceback出力例: エラーの発生箇所と呼び出し連鎖が表示される](../figures/ch09_traceback_raw.png)
 
@@ -46,7 +46,7 @@ def read_fasta_records(path: Path) -> list[dict[str, str]]:
 Traceback (most recent call last):
   File "main.py", line 5, in <module>
     records = read_fasta_records(Path("missing.fasta"))
-  File "scripts/ch09/traceback_demo.py", line 30, in read_fasta_records
+  File "scripts/ch09/traceback_demo.py", line 26, in read_fasta_records
     text = path.read_text()
   ...
 FileNotFoundError: [Errno 2] No such file or directory: 'missing.fasta'
@@ -123,7 +123,7 @@ MREの作り方は次の手順で進める。
 
 ### 二分探索デバッグ
 
-パイプラインのどこかで結果がおかしくなっているが、どのステップが原因か分からない——そんなとき有効なのが**二分探索デバッグ**である。
+パイプラインのどこかで結果がおかしくなっているが、どのステップが原因か分からない——そんなとき有効なのが**二分探索デバッグ**である。この考え方は、系統的デバッグやデルタデバッギングの理論的背景を持つ[7]。
 
 手順はシンプルである。
 
@@ -228,7 +228,8 @@ pdbの基本コマンドを以下にまとめる。
 | `next` | `n` | 次の行に進む（関数呼び出しの内部には入らない） |
 | `step` | `s` | 次の行に進む（関数呼び出しの内部に入る） |
 | `continue` | `c` | 次のブレークポイントまで実行を続ける |
-| `print(expr)` | `p expr` | 式を評価して表示する |
+| `p expr` | — | 式を評価して表示する |
+| `pp expr` | — | 式を整形して表示する（pretty-print） |
 | `list` | `l` | 現在の行の前後のソースコードを表示する |
 | `where` | `w` | コールスタック（呼び出し階層）を表示する |
 | `quit` | `q` | デバッガを終了する |
@@ -236,7 +237,7 @@ pdbの基本コマンドを以下にまとめる。
 典型的なデバッグセッションは次のようになる。
 
 ```
-> scripts/ch09/pdb_demo.py(13)calculate_gc_stats()
+> scripts/ch09/pdb_demo.py(28)calculate_gc_stats()
 -> gc_ratios.append(gc_ratio)
 (Pdb) p seq          # 現在の配列を確認
 'GCGC'
@@ -271,7 +272,7 @@ Pythonの `warnings` モジュール[3](https://docs.python.org/3/library/warnin
 
 - **DeprecationWarning**: 使用中の機能が将来削除される予定。ライブラリのバージョンアップ時に頻出する
 - **FutureWarning**: 将来バージョンで挙動が変わる予定。pandasで特に多い
-- **SettingWithCopyWarning**（pandas固有）: DataFrameのコピーとビューの区別に関する警告
+- **ChainedAssignmentError**（pandas固有）: チェーンインデックスによる代入時に出る警告。pandas 3.0 の copy-on-write では元のDataFrameは決して変更されない
 
 警告は通常無視されがちだが、デバッグ時には重要な手がかりになることがある。警告を例外に昇格させることで、発生箇所を特定できる。
 
@@ -418,11 +419,11 @@ def validate_coordinates(start, end, seq_length, coordinate_system="bed"):
 
 > 🧬 **バイオインフォ座標系の罠**
 >
-> ゲノム座標系の混乱は、バイオインフォマティクスにおける最大のバグ源の一つである[8](https://genome.ucsc.edu/FAQ/FAQformat.html)。主な注意点をまとめる。
+> ゲノム座標系の混乱は、バイオインフォマティクスにおける最大のバグ源の一つである。主な注意点をまとめる。
 >
 > | 罠 | 説明 |
 > |---|------|
-> | **BED vs GFF** | BED `(0, 10)` = GFF `(1, 10)`。start が1ずれる |
+> | **BED vs GFF** | BED `(0, 10)` = GFF `(1, 10)`。start が1ずれる[8](https://genome.ucsc.edu/FAQ/FAQformat.html) |
 > | **reverse_complement忘れ** | マイナス鎖の遺伝子では逆相補鎖を取る必要がある |
 > | **FASTAヘッダのパース** | `>gene1 description` のスペース以降を遺伝子名に含めてしまう |
 > | **N塩基の扱い** | `N` をGC含量計算に含めるか除外するかで結果が変わる |
@@ -470,7 +471,7 @@ def resolve_data_path(path_str: str) -> Path:
 テキストファイルの文字エンコーディングの不一致は、`UnicodeDecodeError` を引き起こす。
 
 ```
-UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 42
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 42: invalid continuation byte
 ```
 
 主な原因と対処は以下のとおりである。
@@ -642,7 +643,7 @@ a is b     # True（キャッシュされている）
 
 a = 257
 b = 257
-a is b     # False（別オブジェクト）
+a is b     # 対話REPLでは False になりうる（.pyファイルでは通常 True）
 
 # ✅ 値の比較には常に == を使う。is は None との比較にだけ使う
 if value is None: ...      # ✅ None との比較は is
@@ -658,14 +659,14 @@ sequence.replace("N", "")   # "ATGC" を返すが、sequence は変わらない
 sequence = sequence.replace("N", "")  # sequence が "ATGC" に更新される
 ```
 
-**pandasの`SettingWithCopyWarning`**: DataFrameのスライスに対して値を代入すると、元のDataFrameが変更されるかコピーが変更されるかが曖昧になる。
+**pandasのチェーンインデックス代入**: DataFrameのスライスに対して値を代入しても、pandas 3.0 の copy-on-write では元のDataFrameは変更されず、代入は黙って無視される（`ChainedAssignmentError` の警告が出る）。
 
 ```python
 import pandas as pd
 
 df = pd.DataFrame({"gene": ["BRCA1", "TP53"], "score": [0.9, 0.3]})
 
-# ❌ 警告が出る: チェーンインデックスによる代入
+# ❌ ChainedAssignmentError の警告が出る（元のdfは変更されない）
 df[df["score"] > 0.5]["gene"] = "HIGH"
 
 # ✅ .loc[] を使って明示的にアクセスする
@@ -692,7 +693,7 @@ Python固有の落とし穴を知っていると、エージェントが生成�
 
 > 「この関数のデフォルト引数に `results: dict = {}` が使われている。ミュータブルデフォルト引数のバグがないか確認して、必要なら修正して」
 
-> 「エージェントが生成したコードで `df[df['padj'] < 0.05]['log2FC']` というチェーンインデックスが使われている。`SettingWithCopyWarning` が出ないように `.loc[]` に書き換えて」
+> 「エージェントが生成したコードで `df[df['padj'] < 0.05]['log2FC']` というチェーンインデックスが使われている。`ChainedAssignmentError` が出ないように `.loc[]` に書き換えて」
 
 > 「このNumPy配列操作がビューを返すかコピーを返すか判断がつかない。`np.shares_memory()` で確認するアサーションを追加して」
 
@@ -803,7 +804,7 @@ end_gff = end_bed
 
 [7] Zeller, A. *Why Programs Fail: A Guide to Systematic Debugging*. 2nd ed. Morgan Kaufmann, 2009. ISBN: 978-0123745156
 
-[8] UCSC Genome Browser. "FAQ: Coordinate Transforms". https://genome.ucsc.edu/FAQ/FAQformat.html (参照日: 2026-03-21)
+[8] UCSC Genome Browser. "Frequently Asked Questions: Data File Formats". https://genome.ucsc.edu/FAQ/FAQformat.html (参照日: 2026-03-21)
 
 [9] gotcha and contributors. "ipdb: IPython-enabled pdb". https://github.com/gotcha/ipdb (参照日: 2026-03-21)
 
