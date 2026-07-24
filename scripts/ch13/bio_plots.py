@@ -11,6 +11,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib.figure import Figure
+from scipy.cluster.hierarchy import linkage
+from scipy.spatial.distance import squareform
 
 
 def volcano_plot(
@@ -120,8 +122,15 @@ def expression_heatmap(
     else:
         df = pd.DataFrame(distance_matrix)
 
+    # 入力はすでに距離行列。凝縮形式に変換して linkage を計算し、
+    # row_linkage/col_linkage で渡す（そのまま渡すと clustermap は
+    # 各行を観測ベクトルとみなし「距離の距離」でクラスタリングしてしまう）。
+    condensed = squareform(distance_matrix, checks=False)
+    link = linkage(condensed, method="average")
     g = sns.clustermap(
         df,
+        row_linkage=link,
+        col_linkage=link,
         cmap="viridis",
         figsize=(8, 8),
         linewidths=0.5,
