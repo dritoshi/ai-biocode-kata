@@ -3,7 +3,7 @@
 > 「疑うがゆえに知り、知るがゆえに疑う」
 > — 寺田寅彦, 随筆「知と疑い」
 
-> **この章の前提知識**: Pythonの関数定義（`def`）と`import`文を読めること。不安な場合は [Python公式チュートリアル §4.7 関数定義](https://docs.python.org/ja/3/tutorial/controlflow.html#defining-functions) を先に読むとよい。
+> **この章の前提知識**: Pythonの関数定義（`def`）と`import`文を読めること。不安な場合は [Python公式チュートリアル §4.8 関数定義](https://docs.python.org/ja/3/tutorial/controlflow.html#defining-functions) を先に読むとよい。
 
 [§7 Git入門 — コードのバージョン管理](./07_git.md)では、コードの変更履歴を記録し、共有・公開する仕組みを学んだ。しかし、バージョン管理されたコードが正しく動作する保証はどこにもない。「昨日まで動いていたスクリプトが、新しい関数を追加したら壊れた」——こうした事態を防ぐには、コードが期待どおりに動くことを**自動的に検証する仕組み**が必要である。
 
@@ -180,6 +180,8 @@ class TestReverseComplement:
 ```python
 import pytest
 
+from scripts.ch01.gc_content import filter_sequences_by_gc
+
 @pytest.fixture()
 def sample_sequences() -> dict[str, str]:
     """テスト用のサンプル配列."""
@@ -237,7 +239,7 @@ def sample_fasta(test_data_dir: Path) -> Path:
 ```python
 def test_sequence_with_n() -> None:
     """N（不明塩基）を含む配列でもエラーにならない."""
-    # NはGCにもATにもカウントしない想定
+    # N は GC にも AT にもカウントされないが、分母（配列長）には含まれる（"ATNGC" なら 2/5 = 0.4）
     result = gc_content("ATNGC")
     assert 0.0 <= result <= 1.0
 
@@ -383,17 +385,19 @@ convention = "numpy"
 #### ruffが検出する問題の例
 
 ```python
-# ruffが指摘する問題の例
+# ruffが指摘する問題の例（本書設定 E/W/F/I/N/D/UP での実際の出力）
 
-import os          # F401: 未使用のimport
+import os          # F401: 未使用のimport（os・sys・json の3つに出る）
 import sys
-import json        # I001: importの順序が不正
+import json        # I001: importブロックの順序・整形が必要
 
-def Calculate_GC(seq):   # N802: 関数名はsnake_caseにすべき
-    x = seq.upper()      # E501: 行が長すぎる（設定次第）
-    gc = x.count("G")+x.count("C")   # E225: 演算子の前後にスペースがない
-    return gc/len(x)
+def Calculate_GC(seq):   # N802: 関数名はsnake_caseにすべき / D103: docstringがない
+    x = seq.upper()
+    gc = x.count("G") + x.count("C")
+    return gc / len(x)
 ```
+
+この例では上記に加え、モジュール先頭の docstring がないことによる D100 も検出され、合計7件の指摘となる。
 
 ruffのフォーマッターは、インデント、空白、改行、引用符のスタイルなどを自動的に統一する。チームでフォーマットの好みを議論する必要がなくなり、コードレビューでスタイルの指摘に時間を費やすこともなくなる。
 
@@ -468,13 +472,13 @@ pre-commit install
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.6
+    rev: v0.16.0
     hooks:
-      - id: ruff
+      - id: ruff-check
         args: [--fix]
       - id: ruff-format
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.14.1
+    rev: v2.3.0
     hooks:
       - id: mypy
         additional_dependencies: [types-requests]
@@ -576,14 +580,16 @@ Claude Code CLIの場合、`.claude/settings.json` にフックを定義する:
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "ruff check --fix $FILEPATH"
+        "hooks": [
+          { "type": "command", "command": "ruff check --fix ." }
+        ]
       }
     ]
   }
 }
 ```
 
-この設定は「エージェントがファイルを編集・作成した直後に `ruff check --fix` を自動実行する」という意味である。エージェントが生成したコードにリントエラーがあれば、自動的に修正される。
+この設定は「エージェントがファイルを編集・作成した直後に `ruff check --fix` を自動実行する」という意味である。エージェントが生成したコードにリントエラーがあれば、自動的に修正される。matcher に一致したツール実行のたびに、`hooks` 配列内のコマンドが起動される。編集したファイルのパスが必要な場合は、フックの標準入力に渡されるJSONから `jq -r '.tool_input.file_path'` で取り出す（`$FILEPATH` のような環境変数は存在しない）。
 
 #### バイオインフォマティクスでの活用例
 
@@ -631,10 +637,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Python のセットアップ
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -657,7 +663,7 @@ jobs:
         run: pytest tests/ --cov=scripts --cov-report=term-missing
 ```
 
-GitHub Actionsでは、`--cov-report=term-missing`の出力はジョブのログに記録され、Actions画面の「Run tests」ステップで確認できる。
+GitHub Actionsでは、`--cov-report=term-missing`の出力はジョブのログに記録され、Actions画面の「pytest によるテスト」ステップで確認できる。
 
 このワークフローは以下のタイミングで実行される:
 
@@ -676,16 +682,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       # 以降のステップは同じ
 ```
 
-この設定により、Python 3.10、3.11、3.12の3環境で並列にテストが実行される。バイオインフォマティクスのツールでは、利用者の環境が多様であるため、複数バージョンでの動作確認は実用上重要である。
+この設定により、Python 3.11、3.12、3.13、3.14の4環境で並列にテストが実行される。バイオインフォマティクスのツールでは、利用者の環境が多様であるため、複数バージョンでの動作確認は実用上重要である。
 
 #### エージェントへの指示例
 
@@ -795,7 +801,7 @@ VCF ファイルから QUAL 値が閾値以上の行を抽出する関数 `filte
 - 依存関係のキャッシュ（`actions/cache` または `pip cache`）が設定されているか
 - Python バージョンのマトリクステストが含まれているか
 
-（ヒント）`actions/setup-python@v5` のようにメジャーバージョンで固定する。`pip install -e ".[dev]"` で開発依存を含めてインストールするパターンが一般的である。
+（ヒント）`actions/setup-python@v7` のようにメジャーバージョンで固定する。`pip install -e ".[dev]"` で開発依存を含めてインストールするパターンが一般的である。
 
 ---
 
