@@ -132,6 +132,27 @@ def scan_content(
 
 `scan_content`関数は各行を全パターンと照合し、マッチした行の情報を`SecretFinding`データクラスとして返す。完全なコードは`scripts/ch20/secret_scanner.py`にあり、ディレクトリ全体の再帰スキャン機能も含む。
 
+#### コミットしてしまったシークレットの対処
+
+予防をすり抜けて、シークレットを含むファイルを `git commit` / `git push` してしまうことは起こりうる。このとき、後から `.gitignore` に追加したり `git rm` で削除して新しくコミットしても、**過去の履歴からは依然として読み取れる**。誰かが古いコミットを `git show` すれば見えてしまうためである。公開リポジトリなら、push した瞬間にボットやクローラに取得される前提で動く必要がある。
+
+対処には順序がある。
+
+1. **まず失効・ローテーションが最優先**である。push した時点で「漏洩した」とみなし、該当するAPIキーやトークンを直ちに無効化し、新しい値に差し替える（前述のライフサイクルの「失効」に相当）。一度ネットに出たものは取り消せないため、これが最も重要な措置である。
+2. **次に履歴からの除去**を行う。`git filter-repo`（推奨）または BFG Repo-Cleaner を使い、全コミット履歴から該当ファイル・文字列を削除して force-push する[36](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)。`git rm` してコミットするだけでは過去の履歴に残るため不十分である。
+3. **force-push した後は、共同研究者に再cloneを依頼する**。これを怠ると、古い履歴を持つ手元のリポジトリからシークレットが再び混入したり、書き換えが差し戻ったりする。
+
+```bash
+# git-filter-repo で特定ファイルを全履歴から削除する例
+pip install git-filter-repo
+git filter-repo --path .env --invert-paths
+
+# 履歴を書き換えたので force-push（共同研究者には再cloneを依頼する）
+git push origin --force --all
+```
+
+繰り返すが、履歴の書き換えは補助であって、**キーの失効こそが最優先**である。漏洩したキーを失効させないまま履歴だけ消しても、すでに取得された値は使われうる。
+
 #### SSH鍵のパスフレーズ設定
 
 SSH鍵はGitHubやリモートサーバへの認証に使われる。鍵を生成する際は必ずパスフレーズを設定する。パスフレーズなしの鍵が漏洩した場合、即座にサーバへの不正アクセスが可能になる。
@@ -633,6 +654,10 @@ DMP要件は科研費だけのものではない。2021年4月に内閣府が策
 
 特にAMEDは、生命科学分野の研究者にとって科研費と並ぶ主要な資金源であり、DMP提出が契約締結時に義務化されている点で科研費より厳格である。AMEDのゲノムデータシェアリングポリシーでは、ヒトゲノムデータを非制限公開データ（誰でもアクセス可能）、制限公開データ（DAC承認制）、制限共有データ（研究者間共有）の3段階に分類しており、本章§20-2で学んだ制限付きデータベース（JGA等）との関連が深い。
 
+海外の制限付きデータベースを利用する場合は、その資金機関のポリシーも確認する。とくに **NIH**（米国国立衛生研究所）は Data Management and Sharing (DMS) Policy と Genomic Data Sharing (GDS) Policy を持ち、dbGaP 等の管理アクセスデータを使う研究者に遵守を求める。近年は管理が段階的に厳格化されており、NOT-OD-25-083（2025年4月4日発効）は、懸念国に所在する機関による管理アクセスデータへのアクセスを**禁止**した（懸念国は中国・ロシア・イラン・北朝鮮・キューバ・ベネズエラ等）[37](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-083.html)。
+
+NIH は生成AIとの関係についても明確な指針を示している。管理アクセスデータやその派生データ（data derivatives）を公開の生成AIツールにプロンプトやアップロードで渡すことは**禁止**されており、そのデータで生成AIモデルを学習させるには NIH の承認が必要で、プロジェクト終了後はモデル（パラメータを含む）を保持してはならない[38](https://sharing.nih.gov/genomic-data-sharing-policy)。これは[§20-2-1 ヒトデータの法規制と利用規約](#20-2-1-ヒトデータの法規制と利用規約)で述べた「制限付きデータをクラウドAIに送信しない」原則が、単なる入力にとどまらず**モデルの学習・ファインチューニングにまで及ぶ**ことを意味する。
+
 各機関の手続きの詳細は改定が頻繁であるため、申請時には必ず各機関の公式サイトで最新の要件を確認すること。
 
 #### オープンサイエンスと個人情報保護のバランス
@@ -813,3 +838,9 @@ __pycache__/
 [34] Google Cloud. "Generative AI and data governance on Vertex AI". https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance (参照日: 2026-04-10)
 
 [35] European Parliament and Council. "Regulation (EU) 2024/1689 (Artificial Intelligence Act)". https://eur-lex.europa.eu/eli/reg/2024/1689/oj (参照日: 2026-07-24)
+
+[36] GitHub. "Removing sensitive data from a repository". https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository (参照日: 2026-07-24)
+
+[37] NIH. "Implementation Update: Enhancing Security Measures for NIH Controlled-Access Data (NOT-OD-25-083)". https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-083.html (参照日: 2026-07-24)
+
+[38] NIH. "NIH Genomic Data Sharing Policy". https://sharing.nih.gov/genomic-data-sharing-policy (参照日: 2026-07-24)
