@@ -8,7 +8,7 @@
 
 [§6 Python環境の構築](./06_dev_environment.md)で学んだcondaやvenvは、Pythonパッケージの隔離には有効であった。しかし、バイオインフォマティクスの解析パイプラインは、PythonだけでなくOSレベルの共有ライブラリ（[§5 ソフトウェアの構成要素 — importからpipまで](./05_software_components.md#共有ライブラリとその管理)参照）やC/C++製のバイナリツールにも依存する。別のマシンに環境を移したとたん「shared library not found」エラーに遭遇する——これがcondaやvenvだけでは解決できない壁である。
 
-この壁を超えるのが**コンテナ**（container）である。コンテナはアプリケーションとその依存関係（OS、ライブラリ、ツール）を丸ごとパッケージングし、どの計算機でも同一の実行環境を再現する技術である。
+この壁を超えるのが**コンテナ**（container）である。コンテナはアプリケーションとその依存関係（OS、ライブラリ、ツール）を丸ごとパッケージングし、同一のCPUアーキテクチャ上であれば、どの計算機でも同一の実行環境を再現する技術である。
 
 AIエージェントはDockerfileや`compose.yaml`を生成できる。しかし、ベースイメージの選択（Miniforge3系かUbuntuか）、レイヤー構成の効率、HPCでのApptainer互換性、セキュリティ上のベストプラクティス——これらの設計判断は、実行環境とデータの特性を理解している人間がレビューしなければならない。
 
@@ -44,13 +44,13 @@ AIエージェントはDockerfileや`compose.yaml`を生成できる。しかし
 | バイナリツール（STAR等） | condaで管理可能 | コンテナ内に固定 |
 | カーネル | ホストのカーネル | ホストのカーネルを共有 |
 
-condaはbiocondaチャネルを通じてSTARやsamtoolsのバイナリも管理できるが、それらが依存するシステムライブラリまでは制御できない。コンテナはカーネル以外のすべてをパッケージングするため、「自分の環境では動く」問題を根本的に解決する。
+condaはbiocondaチャネルを通じてSTARやsamtoolsのバイナリも管理できるが、それらが依存するシステムライブラリまでは制御できない。コンテナはカーネル以外のすべてをパッケージングするため、「自分の環境では動く」問題を（同一のCPUアーキテクチャ上で）根本的に解決する。ただしコンテナはCPUアーキテクチャ（arm64/amd64など）の差までは吸収しない。arm64のMacでビルドしたイメージをamd64のHPCでそのまま動かすと `exec format error` になることがあり、その場合はビルド時に対象アーキテクチャを指定する必要がある。
 
 ### 再現性危機とコンテナ
 
 2016年にNature誌が1,500名以上の研究者を対象に実施した調査[1](https://doi.org/10.1038/533452a)では、回答者の70%以上が「他の研究者の実験を再現しようとして失敗した経験がある」と回答した。計算科学においては、ソフトウェアのバージョン・環境設定の違いが再現失敗の主要因の一つである。
 
-コンテナは、この再現性危機に対する実践的な解決策を提供する。Dockerfileに実行環境を明示的に定義し、イメージとして固定することで、論文の査読者や将来の自分が同一の環境を復元できる。
+コンテナは、この再現性危機に対する実践的な解決策を提供する[6](https://doi.org/10.1145/2723872.2723882)。Dockerfileに実行環境を明示的に定義し、イメージとして固定することで、論文の査読者や将来の自分が同一の環境を復元できる。
 
 ### コンテナを使うべきタイミング
 
@@ -96,7 +96,7 @@ VMはゲストOS（Linux, Windows等）を丸ごと起動する。起動に数�
 
 ### イメージとコンテナの違い
 
-Dockerの基本概念を理解するために、料理のアナロジーで考える:
+Docker[5](https://dl.acm.org/doi/10.5555/2600239.2600241)の基本概念を理解するために、料理のアナロジーで考える:
 
 - **イメージ**（image）= レシピ。Dockerfileから`docker build`で作成される。レシピ自体は不変であり、複製・共有できる
 - **コンテナ**（container）= 料理の実体。イメージから`docker run`で作り出される。食べる（実行する）ことも捨てる（削除する）こともできる
@@ -267,7 +267,7 @@ docker run -v $(pwd)/data/raw:/workspace/data/raw:ro \
 
 ### Docker Compose
 
-複数のマウントやオプションを毎回コマンドラインで指定するのは煩雑である。`docker compose` では `compose.yaml`（推奨。`docker-compose.yml` も後方互換で利用可）にこれらを宣言的に定義できる:
+複数のマウントやオプションを毎回コマンドラインで指定するのは煩雑である。`docker compose` では `compose.yaml`（推奨。`docker-compose.yml` も後方互換で利用可）にこれらを宣言的に定義できる[8](https://docs.docker.com/):
 
 ```yaml
 # compose.yaml
@@ -348,7 +348,7 @@ Dockerfileの構築は、一発で成功することは稀である。特にバ�
 
 > 🧬 **コラム: BioContainersとbioconda**
 >
-> BioContainers[3](https://pubmed.ncbi.nlm.nih.gov/28379341/)は、biocondaパッケージに対応するDockerイメージを自動生成するプロジェクトである。biocondaに登録された1万以上のツール[4](https://doi.org/10.1038/s41592-018-0046-7)について、ツール単体のDockerイメージ・Apptainerイメージが提供されている。
+> BioContainers[3](https://pubmed.ncbi.nlm.nih.gov/28379341/)は、bioconda[4](https://doi.org/10.1038/s41592-018-0046-7)パッケージに対応するDockerイメージを自動生成するプロジェクトである。biocondaに登録された8,000以上のパッケージ[16](https://bioconda.github.io/)について、ツール単体のDockerイメージ・Apptainerイメージが提供されている。
 >
 > たとえば、samtools 1.20のイメージは以下のように取得できる:
 >
@@ -391,9 +391,9 @@ Dockerfileの作成や改善をエージェントに依頼する場合:
 
 ### HPCでDockerが使えない理由
 
-多くのHPC（High-Performance Computing）クラスタでは、Dockerを使用できない。理由は**セキュリティ**である。Dockerデーモンはroot権限で動作するため、コンテナ内からホストのファイルシステムにアクセスしたり、他のユーザーのプロセスに影響を与える可能性がある。共有計算環境であるHPCでは、これは許容できないリスクである。
+多くのHPC（High-Performance Computing）クラスタでは、Dockerを使用できない。理由は**セキュリティ**である。伝統的な構成ではDockerデーモンがroot権限で動作し、`docker` グループに属するユーザーは実質的にホストのroot相当の操作ができてしまう。Docker 20.10以降にはrootless modeもあるが、多数のユーザーが同居する共有計算環境向けには設計されていない。こうした権限昇格のリスクが、HPCでDockerが敬遠される主因である。
 
-**Apptainer**（旧Singularity）[2](https://doi.org/10.1371/journal.pone.0177459)は、HPC向けに設計されたコンテナランタイムである。以下の特徴を持つ:
+**Apptainer**（旧Singularity）[2](https://doi.org/10.1371/journal.pone.0177459)は、HPC向けに設計されたコンテナランタイムである。2021年にSingularityがLinux Foundation傘下へ移行してApptainerに改名した一方、Sylabs社はSingularityCEとして別フォークを継続しており、施設によっては `singularity` コマンドの実体が異なる点に注意する。以下の特徴を持つ:
 
 - **ユーザー権限で実行**: rootデーモン不要。一般ユーザーがそのまま実行できる
 - **SIFファイル**: コンテナイメージが単一ファイル（`.sif`）にパッケージされる。コピー・移動が容易
@@ -402,7 +402,7 @@ Dockerfileの作成や改善をエージェントに依頼する場合:
 
 ### Dockerイメージからの変換
 
-Dockerイメージは`apptainer pull`で直接Apptainerイメージに変換できる:
+Dockerイメージは`apptainer pull`で直接Apptainerイメージに変換できる[9](https://apptainer.org/docs/):
 
 ```bash
 # Docker HubのイメージをSIFファイルに変換
@@ -412,7 +412,9 @@ apptainer pull rnaseq.sif docker://condaforge/miniforge3:24.3.0-0
 apptainer pull samtools.sif docker://quay.io/biocontainers/samtools:1.20--h50ea8bc_0
 
 # 自分でビルドしたイメージを変換（ローカルDockerイメージから）
-docker save myimage:v1.0 | apptainer build myimage.sif docker-archive:/dev/stdin
+# docker-archiveはtarファイル指定が必要なため、一旦保存してから変換する
+docker save myimage:v1.0 -o myimage.tar
+apptainer build myimage.sif docker-archive:myimage.tar
 ```
 
 ### Apptainer定義ファイル
@@ -493,13 +495,13 @@ apptainer run --nv myimage.sif python train.py
 
 > 🤖 **コラム: GPUコンテナとCUDAバージョンの罠**
 >
-> GPUを使うコンテナでは、**CUDAバージョンの互換性**が最も頻繁に問題になる。以下の3つのバージョンが一致している必要がある:
+> GPUを使うコンテナでは、**CUDAバージョンの互換性**が最も頻繁に問題になる。以下の3つのバージョンが整合している必要がある（CUDA 11以降は同一メジャーバージョン内なら minor version が食い違っても、最低ドライバ要件を満たせば動作する）:
 >
 > 1. **ホストのNVIDIAドライバ**: `nvidia-smi`で確認
-> 2. **コンテナ内のCUDA Toolkit**: `nvcc --version`で確認
+> 2. **コンテナ内のCUDA Toolkit**: `nvcc --version`で確認（ただし実行専用イメージには `nvcc` が含まれないことが多い）
 > 3. **ライブラリが要求するCUDA**: PyTorchやTensorFlowのインストール時に指定
 >
-> ホストのドライバがサポートするCUDAバージョンの上限は決まっており、コンテナ内のCUDAがそれを超えると動作しない。たとえばドライバが CUDA 12.2までサポートしている環境で、CUDA 12.4のコンテナを実行するとエラーになる。
+> ホストのドライバが古すぎて、コンテナのCUDAメジャーバージョンに満たない場合（たとえばCUDA 11系までしか対応しないドライバでCUDA 12系のコンテナを実行する場合）は動作しない。一方、同一メジャー内（たとえばドライバがCUDA 12.2相当、コンテナがCUDA 12.4）であれば、minor version compatibilityにより多くの場合そのまま動作する。
 >
 > NVIDIAが提供するNGC（NVIDIA GPU Cloud）のベースイメージを使うと、CUDA・cuDNN・NCCLの互換性が保証される:
 >
@@ -524,7 +526,7 @@ HPC環境でのコンテナ利用をエージェントに相談する場合:
 
 ## 15-4. 再現性のレベル
 
-再現性には程度がある。コストと再現性のバランスを考え、プロジェクトの段階に応じた戦略を選択する。
+再現性には程度がある[15](https://www.rctatman.com/publication/2018-7-14-MLReproducibility)。コストと再現性のバランスを考え、プロジェクトの段階に応じた戦略を選択する。
 
 ### 4段階のスペクトラム
 
@@ -548,9 +550,10 @@ condaのロックファイルとDockerfileは排他的ではない。Dockerfile�
 ```dockerfile
 FROM condaforge/miniforge3:24.3.0-0
 
-# conda-lockで生成したロックファイルを使用
+# conda-lockで生成したロックファイルを使用（conda-lockは先に導入する）
 COPY conda-lock.yml /tmp/conda-lock.yml
-RUN conda-lock install -n rnaseq /tmp/conda-lock.yml && \
+RUN mamba install -y -n base conda-lock && \
+    conda-lock install -n rnaseq /tmp/conda-lock.yml && \
     mamba clean --all --yes
 
 ENV PATH="/opt/conda/envs/rnaseq/bin:$PATH"
@@ -590,7 +593,7 @@ ENV PATH="/opt/conda/envs/rnaseq/bin:$PATH"
 
 ### コンテナイメージの公開
 
-コンテナイメージはDocker HubまたはGitHub Container Registry（GHCR）に公開する。
+コンテナイメージはDocker HubまたはGitHub Container Registry（GHCR）に公開する[10](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)。
 
 ```bash
 # GHCRにイメージをプッシュする例
@@ -620,17 +623,19 @@ Dockerfile内でバージョン固定を徹底する:
 ```dockerfile
 FROM condaforge/miniforge3:24.3.0-0@sha256:abc123...
 
-# conda-lockによる完全固定
+# conda-lockによる完全固定（conda-lockは先に導入する）
 COPY conda-lock.yml /tmp/conda-lock.yml
-RUN conda-lock install -n rnaseq /tmp/conda-lock.yml
+RUN mamba install -y -n base conda-lock && \
+    conda-lock install -n rnaseq /tmp/conda-lock.yml
 
 # または pip freeze + requirements.txt
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# または uv.lock
+# または uv.lock（uvは先に導入する）
 COPY pyproject.toml uv.lock /tmp/
-RUN uv sync --frozen --no-cache
+RUN mamba install -y -n base uv && \
+    uv sync --frozen --no-cache
 ```
 
 これら3つの方法はいずれも、インストール時期によらず同一のパッケージセットを再現する。プロジェクトで使用しているパッケージマネージャに合わせて選択する。
@@ -790,12 +795,12 @@ Nüst et al. (2020)[7](https://doi.org/10.1371/journal.pcbi.1008316)の「Docker
 |-------|------|------|--------------|
 | **wandb**（Weights & Biases） | クラウドSaaS | 可視化が美しい、チーム共有が容易、無料枠あり | ML学習実験、ハイパーパラメータ探索 |
 | **MLflow** | OSS | ローカル/サーバー両対応、モデルレジストリ | モデル管理、オンプレミス環境 |
-| **hydra** | OSS | 設定ファイルの構成管理（追跡そのものではない） | パラメータの組み合わせ管理 |
-| **DVC**（Data Version Control） | OSS | データとモデルのバージョン管理（Git連携） | 大規模データのバージョニング |
+| **hydra** | OSS | 設定ファイルの構成管理（追跡そのものではない）[13](https://hydra.cc/) | パラメータの組み合わせ管理 |
+| **DVC**（Data Version Control） | OSS | データとモデルのバージョン管理（Git連携）[14](https://dvc.org/) | 大規模データのバージョニング |
 
 #### wandb — クラウドベースの実験追跡
 
-wandbは最も手軽に導入できる実験追跡ツールである。無料の個人アカウントで始められ、ブラウザ上でメトリクスの推移グラフやパラメータの比較表を確認できる。
+wandbは最も手軽に導入できる実験追跡ツールである[11](https://www.wandb.com/)。無料の個人アカウントで始められ、ブラウザ上でメトリクスの推移グラフやパラメータの比較表を確認できる。
 
 以下は、scRNA-seqデータのクラスタリングにおいて、UMAPの次元削減パラメータ（`n_neighbors`: 近傍点の数、`min_dist`: 点間の最小距離）とクラスタリングの解像度（`resolution`）を変えて最適な細胞クラスタを探索する実験を記録する例である:
 
@@ -834,7 +839,7 @@ wandb.finish()
 
 #### MLflow — オンプレミス対応の実験追跡
 
-MLflowはオープンソースの実験管理プラットフォームである。クラウドに依存せず、ローカルマシンや研究室のサーバーで完結できる。モデルレジストリ機能により、学習済みモデルのバージョン管理も可能である。
+MLflowはオープンソースの実験管理プラットフォームである[12](http://sites.computer.org/debull/A18dec/p39.pdf)。クラウドに依存せず、ローカルマシンや研究室のサーバーで完結できる。モデルレジストリ機能により、学習済みモデルのバージョン管理も可能である。
 
 以下は、タンパク質の機能予測モデル（ニューラルネットワーク）を学習する実験で、近傍点の数や点間距離を変えながら分類精度を比較する例である:
 
@@ -925,8 +930,8 @@ print(f"最良パラメータ: {best.params}")  # {"n_neighbors": 15, ...}
 以下は生成されるJSONLファイルの内容例である。JSONL（JSON Lines）は1行に1つのJSONオブジェクトを記録する形式で、ファイルへの追記が容易であり、`pandas.read_json(path, lines=True)` で直接DataFrameに読み込める。
 
 ```json
-{"timestamp": "2026-03-20T10:30:00+00:00", "git_hash": "a1b2c3d", "params": {"n_neighbors": 15, "min_dist": 0.1}, "metrics": {"silhouette": 0.72}}
-{"timestamp": "2026-03-20T11:00:00+00:00", "git_hash": "a1b2c3d", "params": {"n_neighbors": 30, "min_dist": 0.2}, "metrics": {"silhouette": 0.68}}
+{"timestamp": "2026-03-20T10:30:00.123456+00:00", "git_hash": "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f09", "params": {"n_neighbors": 15, "min_dist": 0.1, "resolution": 0.5}, "metrics": {"silhouette": 0.72, "n_clusters": 5}}
+{"timestamp": "2026-03-20T11:00:00.234567+00:00", "git_hash": "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f09", "params": {"n_neighbors": 30, "min_dist": 0.2, "resolution": 0.8}, "metrics": {"silhouette": 0.68, "n_clusters": 3}}
 ```
 
 #### 段階的な導入パス
@@ -1075,6 +1080,8 @@ CMD ["python", "analysis.py"]
 
 - **Docker Documentation.** https://docs.docker.com/ — Dockerの公式ドキュメント。マルチステージビルド、BuildKit、Docker Compose等の詳細な機能解説。
 - **Apptainer Documentation.** https://apptainer.org/docs/ — HPC環境向けコンテナランタイムの公式ドキュメント。Dockerイメージからの変換方法やHPC固有の設定が詳しい。
+- **W&B Documentation.** https://docs.wandb.ai/ — Weights & Biases（wandb）の公式ドキュメント。実験追跡・ハイパーパラメータ探索・成果物管理の使い方を網羅する。
+- **MLflow Documentation.** https://mlflow.org/docs/latest/ — MLflowの公式ドキュメント。実験追跡・モデルレジストリ・デプロイの詳細を解説する。
 
 ---
 
@@ -1102,7 +1109,7 @@ CMD ["python", "analysis.py"]
 
 [11] Biewald, L. "Experiment Tracking with Weights and Biases." *Weights & Biases*, 2020. [https://www.wandb.com/](https://www.wandb.com/) (参照日: 2026-03-20)
 
-[12] Zaharia, M. et al. "Accelerating the Machine Learning Lifecycle with MLflow." *IEEE Data Engineering Bulletin*, 41(4), 39–45, 2018. [https://doi.org/10.1109/DSAA.2018.00006](https://doi.org/10.1109/DSAA.2018.00006)
+[12] Zaharia, M. et al. "Accelerating the Machine Learning Lifecycle with MLflow." *IEEE Data Engineering Bulletin*, 41(4), 39–45, 2018. [http://sites.computer.org/debull/A18dec/p39.pdf](http://sites.computer.org/debull/A18dec/p39.pdf)
 
 [13] Yadan, O. "Hydra — A framework for elegantly configuring complex applications." 2019. [https://hydra.cc/](https://hydra.cc/) (参照日: 2026-03-20)
 
@@ -1110,6 +1117,4 @@ CMD ["python", "analysis.py"]
 
 [15] Tatman, R., VanderPlas, J. & Dane, S. "A Practical Taxonomy of Reproducibility for Machine Learning Research." *Reproducibility in ML Workshop at ICML*, 2018.
 
-[16] Weights & Biases. "W&B Documentation". [https://docs.wandb.ai/](https://docs.wandb.ai/) (参照日: 2026-03-20)
-
-[17] MLflow Contributors. "MLflow Documentation". [https://mlflow.org/docs/latest/](https://mlflow.org/docs/latest/) (参照日: 2026-03-20)
+[16] Bioconda. "Bioconda". [https://bioconda.github.io/](https://bioconda.github.io/) (参照日: 2026-07-24)

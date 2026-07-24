@@ -3,7 +3,7 @@
 # ステージ2: 実行環境（ランタイムのみ）
 
 # --- ステージ1: ビルド ---
-FROM condaforge/mambaforge:24.3.0-0 AS builder
+FROM condaforge/miniforge3:24.3.0-0 AS builder
 
 COPY environment.yml /tmp/environment.yml
 

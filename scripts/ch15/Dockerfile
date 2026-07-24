@@ -1,6 +1,6 @@
 # RNA-seq解析環境のDockerfile
-# mambaforgeベースでbiocondaパッケージを利用する
-FROM condaforge/mambaforge:24.3.0-0
+# Miniforge3ベースでbiocondaパッケージを利用する
+FROM condaforge/miniforge3:24.3.0-0
 
 LABEL maintainer="yourname@example.com"
 LABEL description="RNA-seq解析パイプライン環境"
