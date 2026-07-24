@@ -1,4 +1,4 @@
-"""エラーハンドリングの例 — カスタム例外とガード節パターン."""
+"""エラーハンドリングの例 — カスタム例外・ガード節・例外連鎖・後始末パターン."""
 
 from io import StringIO
 from pathlib import Path
@@ -96,3 +96,69 @@ def validate_fasta(fasta_path: Path) -> list[str]:
         )
 
     return sequence_ids
+
+
+def load_min_quality(config: dict[str, str]) -> float:
+    """設定から最低品質スコアを読み込む.
+
+    値を数値に変換できない場合は、元の ValueError を連鎖させて
+    パッケージ固有の BiofilterError を送出する（例外の連鎖）。
+
+    Parameters
+    ----------
+    config : dict[str, str]
+        設定辞書。キー "min_quality" に閾値の文字列を持つ
+
+    Returns
+    -------
+    float
+        最低品質スコア
+
+    Raises
+    ------
+    BiofilterError
+        min_quality の値が数値に変換できない場合
+    """
+    raw = config["min_quality"]
+    try:
+        return float(raw)
+    except ValueError as exc:
+        # 元の例外 exc を原因として連鎖させる（"from exc"）
+        raise BiofilterError(
+            f"設定 min_quality の値 '{raw}' を数値に変換できません。"
+            f"20 のような数値を指定してください"
+        ) from exc
+
+
+def count_records_with_cleanup(records: list[str], work_dir: Path) -> int:
+    """一時ファイルを作り、処理後に必ず後始末する.
+
+    処理の途中で例外が発生しても、finally 節によって一時ファイルの
+    削除を保証する（後始末の保証）。
+
+    Parameters
+    ----------
+    records : list[str]
+        処理対象のレコード
+    work_dir : Path
+        一時ファイルを置く作業ディレクトリ
+
+    Returns
+    -------
+    int
+        レコード件数
+
+    Raises
+    ------
+    ValueError
+        records が空の場合
+    """
+    marker = work_dir / "processing.lock"
+    marker.write_text("running", encoding="utf-8")
+    try:
+        if not records:
+            raise ValueError("処理対象のレコードが空です")
+        return len(records)
+    finally:
+        # 成功・失敗にかかわらず必ず後始末する
+        marker.unlink(missing_ok=True)

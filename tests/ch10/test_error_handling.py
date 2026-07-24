@@ -10,6 +10,8 @@ from scripts.ch10.error_handling import (
     BiofilterError,
     InvalidSequenceError,
     QualityThresholdError,
+    count_records_with_cleanup,
+    load_min_quality,
     validate_fasta,
 )
 
@@ -102,3 +104,38 @@ class TestValidateFasta:
         assert not any(
             isinstance(w.message, BiopythonDeprecationWarning) for w in caught
         )
+
+
+class TestLoadMinQuality:
+    """load_min_quality関数（例外の連鎖）のテスト."""
+
+    def test_valid_value(self) -> None:
+        """数値に変換できる設定値を読み込める."""
+        assert load_min_quality({"min_quality": "20"}) == 20.0
+
+    def test_invalid_value_raises_biofilter_error(self) -> None:
+        """変換できない値でBiofilterErrorが発生する."""
+        with pytest.raises(BiofilterError, match="変換できません"):
+            load_min_quality({"min_quality": "high"})
+
+    def test_invalid_value_chains_original_cause(self) -> None:
+        """raise from により元のValueErrorが__cause__に保持される."""
+        with pytest.raises(BiofilterError) as excinfo:
+            load_min_quality({"min_quality": "high"})
+        assert isinstance(excinfo.value.__cause__, ValueError)
+
+
+class TestCountRecordsWithCleanup:
+    """count_records_with_cleanup関数（finally による後始末）のテスト."""
+
+    def test_cleanup_on_success(self, tmp_path: Path) -> None:
+        """正常終了時にレコード数を返し、一時ファイルを削除する."""
+        result = count_records_with_cleanup(["a", "b"], tmp_path)
+        assert result == 2
+        assert not (tmp_path / "processing.lock").exists()
+
+    def test_cleanup_on_error(self, tmp_path: Path) -> None:
+        """例外発生時でもfinally節が走り、一時ファイルを削除する."""
+        with pytest.raises(ValueError, match="空です"):
+            count_records_with_cleanup([], tmp_path)
+        assert not (tmp_path / "processing.lock").exists()
