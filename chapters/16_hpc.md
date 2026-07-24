@@ -478,6 +478,52 @@ rsync -avz data/ hpc:~/project/data/
 
 `ServerAliveInterval 60` は60秒ごとにキープアライブ信号を送る設定で、無操作時のSSH切断を防ぐ。
 
+### 接続が切れても実行を続ける — 永続セッション
+
+ログインノードにSSHで入って作業していると、ノートPCがスリープしたりネットワークが切れたりした瞬間に、実行中のプロセスがまとめて終了してしまうことがある（切断時に `SIGHUP` が送られるため）。長時間の**計算**そのものはSlurmのバッチジョブ([§16-2 Slurm](#16-2-slurm)の `sbatch`)に投げれば切断の影響を受けないが、ログインノード上での対話的な監視作業や、近年はAIエージェントとの対話セッションも、切断をまたいで維持したい場面が増えている。
+
+**定番: tmux / screen**
+
+`tmux`（や古くからある `screen`）は、リモートホスト上に**永続的なセッション**を作る[10](https://github.com/tmux/tmux/wiki)。セッションから「デタッチ」してもプロセスはサーバ上で走り続け、あとから再接続すれば元の画面に戻れる。SSHが切れてもセッションはサーバ側に残る:
+
+```bash
+ssh hpc               # ログインノードに接続（前項の ~/.ssh/config の Host hpc を利用）
+tmux                  # 永続セッションを開始
+# ここで対話的な監視やエージェントを起動する
+# Ctrl-b を押してから d でデタッチ（セッションはサーバ上で継続）
+
+# 接続が切れても、あとで再接続すれば元に戻れる
+ssh hpc
+tmux attach           # 走り続けているセッションに再接続
+```
+
+ただし、重い計算をログインノードで直接動かしてはいけない。それはSlurmの役割である。tmux/screenは、あくまで対話的な監視・軽作業・エージェントセッションのためのものと考える。
+
+**AIエージェント向け: herdr**
+
+AIエージェントとの協働では、複数のエージェントを同時に走らせる場面が増える（一方でリファクタリング、別のところでテスト作成、さらに別のところでデータ探索、といった具合である）。tmuxでも複数ペインは開けるが、「どのエージェントが今こちらの入力を待っているか」は画面を目で追わないと分からない。
+
+**herdr** は、この課題に向けて作られた**エージェント多重化ツール**（agent multiplexer）である[9](https://herdr.dev/)。tmuxのように複数のペインでプロセスを走らせつつ、各ペインのエージェントの状態（作業中・待機中・入力待ちなど）をサイドバーに表示する。Rust製の単一バイナリで、外部依存なしに動く。プロジェクトのディレクトリで `herdr` を実行するとバックグラウンドの永続セッションが作られ、各ペインでエージェントのCLI（Claude Code や Codex など）を起動できる。
+
+HPCとの関連で有用なのが、リモートのherdrセッションにSSH経由でアタッチする `--remote` である。ログインノードで複数のエージェントを動かしっぱなしにして、手元のノートPCから接続し、状態を確認しながら操作できる。tmux同様、接続が切れてもセッションはサーバ側に残る:
+
+```bash
+# リモート（ログインノード）の herdr セッションに SSH 経由でアタッチ
+# （前項で定義した ~/.ssh/config の Host hpc をそのまま使える）
+herdr --remote hpc
+
+# ssh:// 形式でユーザー名やポートも明示できる
+herdr --remote ssh://your_username@login.hpc.internal:2222
+
+# 既定ではローカルのキーバインドが使われる（接続先が変わっても操作感を保てる）。
+# アタッチ先サーバ側の設定（config.toml）のキーバインドを使いたいときは:
+herdr --remote hpc --remote-keybindings server
+```
+
+`--remote-keybindings server` を付けると、アタッチ先サーバのキーバインド設定が使われる。付けない既定では、ローカルのキーバインドがそのまま効くため、複数のホストをまたいでも手が覚えた操作を維持できる。
+
+> herdr は急速に発展中の新しいツールである（本書執筆時点で v0.7 系）。フラグや挙動は今後変わりうるため、最新の仕様は公式ドキュメントで確認してほしい。
+
 #### エージェントへの指示例
 
 リモート接続やファイル転送の設定をエージェントに依頼する場合:
@@ -487,6 +533,8 @@ rsync -avz data/ hpc:~/project/data/
 > 「HPC上のJupyter Notebookにローカルからアクセスするためのポートフォワーディングの手順を教えてください。HPCにはProxyJump経由で接続しています」
 
 > 「大容量のFASTQファイル（合計500GB）をローカルからHPCに転送するrsyncコマンドを書いてください。途中で切れても再開でき、中間ファイル（*.bam, *.sam）は除外したい」
+
+> 「HPCのログインノードで長時間の対話的な監視を行いたい。SSHが切れても継続するよう、tmuxでセッションを開始・デタッチ・再アタッチする手順を教えてください」
 
 ---
 
@@ -777,3 +825,7 @@ python simple_filter.py input.vcf > output.vcf
 [7] Cybersecurity and Infrastructure Security Agency. "Securing Network Infrastructure Devices". https://www.cisa.gov/news-events/news/securing-network-infrastructure-devices (参照日: 2026-03-25)
 
 [8] Australian BioCommons. "What are HPC and cloud computers?". https://support.biocommons.org.au/support/solutions/articles/6000248145-what-are-hpc-and-cloud-computers- (参照日: 2026-03-25)
+
+[9] herdr. "herdr: Agent multiplexer that lives in your terminal". https://herdr.dev/ (参照日: 2026-07-24)
+
+[10] tmux. "tmux Wiki". https://github.com/tmux/tmux/wiki (参照日: 2026-07-24)
