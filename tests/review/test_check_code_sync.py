@@ -13,7 +13,10 @@ from scripts.review.check_code_sync import (
     chapter_dir_name,
     classify,
     extract_blocks,
+    has_counterpart,
+    read_previous_unsynced,
     significant_lines,
+    strip_inline_comment,
 )
 
 
@@ -32,6 +35,47 @@ class TestSignificantLines:
     def test_book_only_comment_does_not_affect_match(self) -> None:
         """本文にだけ付いた説明コメントは一致判定に影響しない."""
         book = "# 本文だけの解説\nresult = compute(x)"
+        script = "result = compute(x)"
+        assert significant_lines(book) == significant_lines(script)
+
+
+class TestStripInlineComment:
+    """strip_inline_comment のテスト.
+
+    本文には解説コメントを付け scripts/ には付けないことが多く、これを
+    残したまま比較すると同一のコードが不一致と判定される（実測で全体の
+    12% が偽陽性だった）。
+    """
+
+    def test_removes_trailing_comment(self) -> None:
+        """行末コメントを落とす."""
+        assert (
+            strip_inline_comment("x = compute()  # ここで実行").strip()
+            == "x = compute()"
+        )
+
+    def test_keeps_hash_inside_double_quotes(self) -> None:
+        """二重引用符の中の # は残す."""
+        assert strip_inline_comment('path = "a#b"') == 'path = "a#b"'
+
+    def test_keeps_hash_inside_single_quotes(self) -> None:
+        """単一引用符の中の # は残す."""
+        assert (
+            strip_inline_comment("p = re.compile('#\\\\d+')")
+            == "p = re.compile('#\\\\d+')"
+        )
+
+    def test_handles_escaped_quote(self) -> None:
+        """エスケープされた引用符で文字列が終わったと誤認しない."""
+        assert strip_inline_comment('s = "a\\"b"  # 注釈').strip() == 's = "a\\"b"'
+
+    def test_line_without_comment_is_unchanged(self) -> None:
+        """コメントがなければそのまま返す."""
+        assert strip_inline_comment("x = 1") == "x = 1"
+
+    def test_book_and_script_match_after_stripping(self) -> None:
+        """本文だけに行末コメントがあっても一致する."""
+        book = "result = compute(x)  # ここで初めて実行"
         script = "result = compute(x)"
         assert significant_lines(book) == significant_lines(script)
 
@@ -94,6 +138,27 @@ class TestClassify:
         assert category == "marked_skip"
         assert reason == "ライブラリ紹介のため"
 
+    def test_dockerfile_is_checked_despite_parse_failure(self) -> None:
+        """Dockerfile は ast.parse に失敗するが検証対象から外さない.
+
+        CLAUDE.md の表では設定・ワークフロー定義も scripts/ への配置が必要。
+        Python として解釈できないことを除外の理由にしてはならない。
+        """
+        code = "FROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt ."
+        category, reason = classify(code, "### Dockerfile", None, "dockerfile")
+        assert category == "checked"
+        assert "dockerfile" in reason
+
+    def test_yaml_is_checked_despite_parse_failure(self) -> None:
+        """YAML も同様に検証対象とする."""
+        code = "samples:\n  - SRR001\n  - SRR002"
+        assert classify(code, "### 設定", None, "yaml")[0] == "checked"
+
+    def test_bad_example_rule_still_applies_to_config(self) -> None:
+        """設定ファイルでも悪例は除外する."""
+        code = "# ❌ 悪い例\nFROM ubuntu:latest\nRUN apt-get install -y python3"
+        assert classify(code, "### 注意", None, "dockerfile")[0] == "bad_example"
+
     def test_plain_python_is_checked(self) -> None:
         """通常の実装コードは検証対象になる."""
         code = (
@@ -124,6 +189,66 @@ class TestBestRatio:
     def test_empty_corpus(self) -> None:
         """照合先がなければ 0.0 を返す."""
         assert best_ratio(["x = 1"], {}) == (0.0, "")
+
+
+class TestHasCounterpart:
+    """has_counterpart のテスト.
+
+    「乖離」と「そもそも実体が無い」では棚卸しで取る対応が異なるため、
+    両者を取り違えてはならない。
+    """
+
+    def test_python_with_py_file(self) -> None:
+        """py ファイルがあれば python の対応先ありとみなす."""
+        assert has_counterpart("python", {"scripts/ch01/a.py": set()})
+
+    def test_yaml_without_yaml_file(self) -> None:
+        """py しかない章に yaml の対応先は無い."""
+        assert not has_counterpart("yaml", {"scripts/ch08/a.py": set()})
+
+    def test_yaml_with_yml_file(self) -> None:
+        """.yml も yaml の対応先として数える."""
+        assert has_counterpart("yaml", {"scripts/ch15/docker-compose.yml": set()})
+
+    def test_dockerfile_matches_by_prefix(self) -> None:
+        """Dockerfile.multistage のような派生名も対応先とみなす."""
+        assert has_counterpart(
+            "dockerfile", {"scripts/ch15/Dockerfile.multistage": set()}
+        )
+
+    def test_snakefile_counts_for_python(self) -> None:
+        """Snakefile は python タグで書かれるため python の対応先になる."""
+        assert has_counterpart("python", {"scripts/ch14/Snakefile": set()})
+
+    def test_empty_corpus(self) -> None:
+        """照合先が空なら対応先なし."""
+        assert not has_counterpart("python", {})
+
+
+class TestReadPreviousUnsynced:
+    """read_previous_unsynced のテスト."""
+
+    def test_reads_count(self, tmp_path: Path) -> None:
+        """前回の件数を読む."""
+        path = tmp_path / "out.json"
+        path.write_text('{"unsynced_count": 74}', encoding="utf-8")
+        assert read_previous_unsynced(path) == 74
+
+    def test_missing_file(self, tmp_path: Path) -> None:
+        """初回実行では None を返す."""
+        assert read_previous_unsynced(tmp_path / "none.json") is None
+
+    def test_broken_json(self, tmp_path: Path) -> None:
+        """壊れた JSON でも例外を投げない."""
+        path = tmp_path / "out.json"
+        path.write_text("{壊れている", encoding="utf-8")
+        assert read_previous_unsynced(path) is None
+
+    def test_unexpected_shape(self, tmp_path: Path) -> None:
+        """想定外の形式なら None を返す."""
+        path = tmp_path / "out.json"
+        path.write_text('{"unsynced_count": "多い"}', encoding="utf-8")
+        assert read_previous_unsynced(path) is None
 
 
 class TestBucketOf:
@@ -180,11 +305,29 @@ class TestExtractBlocks:
         md.write_text("```python\nx = 1\n```\n", encoding="utf-8")
         assert extract_blocks(md) == []
 
-    def test_ignores_non_target_language(self, tmp_path: Path) -> None:
-        """python 以外の言語タグは対象外."""
+    def test_non_target_language_is_recorded_not_dropped(self, tmp_path: Path) -> None:
+        """照合対象外の言語も記録する.
+
+        黙って飛ばすと報告が「網羅した」と誤読される。件数を出せるよう
+        other_lang として残す。
+        """
         md = tmp_path / "01_x.md"
         md.write_text("```bash\nls -l\ncd /tmp\npwd\n```\n", encoding="utf-8")
-        assert extract_blocks(md) == []
+        blocks = extract_blocks(md)
+        assert len(blocks) == 1
+        assert blocks[0].category == "other_lang"
+        assert blocks[0].lang == "bash"
+
+    def test_dockerfile_block_is_extracted(self, tmp_path: Path) -> None:
+        """設定・ワークフロー定義は照合対象の言語として抽出する."""
+        md = tmp_path / "15_x.md"
+        md.write_text(
+            "```dockerfile\nFROM python:3.12\nWORKDIR /app\nCOPY . .\n```\n",
+            encoding="utf-8",
+        )
+        blocks = extract_blocks(md)
+        assert blocks[0].category == "checked"
+        assert blocks[0].lang == "dockerfile"
 
     def test_skip_marker_applies_to_next_block(self, tmp_path: Path) -> None:
         """マーカーは直後のブロックに適用される."""

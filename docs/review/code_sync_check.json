@@ -7,13 +7,14 @@
     "min_significant_lines": 3
   },
   "categories": {
-    "checked": 159,
-    "exercise": 7,
+    "checked": 180,
+    "other_lang": 152,
+    "exercise": 8,
     "scripts_call": 16,
-    "bad_example": 13,
+    "bad_example": 16,
     "not_python": 4
   },
-  "per_chapter": {
+  "per_file": {
     "00_ai_agent.md": {
       "partial": 1,
       "slight": 1
@@ -32,42 +33,48 @@
     },
     "04_data_formats.md": {
       "slight": 9,
-      "none": 2
+      "none": 3
     },
     "05_software_components.md": {
       "none": 1,
       "slight": 1
     },
     "06_dev_environment.md": {
-      "slight": 1
+      "slight": 1,
+      "none": 2
+    },
+    "07_git.md": {
+      "exact": 1,
+      "partial": 1
     },
     "08_testing.md": {
       "partial": 4,
-      "none": 3,
+      "none": 6,
       "slight": 2,
       "near": 2
     },
     "09_debug.md": {
-      "slight": 6,
-      "near": 3,
-      "partial": 5,
-      "exact": 1,
-      "none": 2
+      "partial": 7,
+      "near": 4,
+      "slight": 2,
+      "exact": 3,
+      "none": 1
     },
     "10_deliverables.md": {
+      "none": 1,
       "near": 3,
       "slight": 2,
       "exact": 2
     },
     "11_cli.md": {
-      "partial": 6,
-      "slight": 10,
+      "partial": 7,
+      "slight": 9,
       "near": 2
     },
     "12_data_processing.md": {
-      "partial": 4,
-      "near": 9,
-      "slight": 3,
+      "near": 12,
+      "partial": 3,
+      "slight": 1,
       "none": 1
     },
     "13_visualization.md": {
@@ -77,12 +84,16 @@
     },
     "14_workflow.md": {
       "near": 3,
-      "exact": 2,
-      "slight": 2,
-      "partial": 1
+      "exact": 3,
+      "partial": 3,
+      "slight": 1,
+      "none": 3
     },
     "15_container.md": {
-      "none": 3
+      "exact": 2,
+      "near": 1,
+      "none": 4,
+      "partial": 1
     },
     "17_performance.md": {
       "none": 4,
@@ -91,11 +102,11 @@
       "partial": 4
     },
     "18_documentation.md": {
-      "partial": 1
+      "partial": 1,
+      "none": 1
     },
     "19_database_api.md": {
-      "slight": 1,
-      "partial": 3,
+      "partial": 4,
       "none": 1
     },
     "20_security_ethics.md": {
@@ -103,11 +114,11 @@
       "near": 2
     },
     "21_collaboration.md": {
-      "none": 1,
+      "none": 2,
       "partial": 4
     }
   },
-  "unsynced_count": 84,
+  "unsynced_count": 87,
   "blocks": [
     {
       "file": "00_ai_agent.md",
@@ -116,8 +127,9 @@
       "heading": "#### Step 1: 最初の指示 — 全ORFを検出する",
       "category": "checked",
       "reason": "",
-      "ratio": 0.52,
-      "best_match": "scripts/ch00/find_orfs.py"
+      "ratio": 0.64,
+      "best_match": "scripts/ch00/find_orfs.py",
+      "counterpart": true
     },
     {
       "file": "00_ai_agent.md",
@@ -126,8 +138,75 @@
       "heading": "#### Step 2: 結果を見て戦略を練り直す — HMMで本物の遺伝子を選別する",
       "category": "checked",
       "reason": "",
-      "ratio": 0.22727272727272727,
-      "best_match": "scripts/ch00/hmm_gene_predict.py"
+      "ratio": 0.2727272727272727,
+      "best_match": "scripts/ch00/hmm_gene_predict.py",
+      "counterpart": true
+    },
+    {
+      "file": "00_ai_agent.md",
+      "line": 192,
+      "lang": "text",
+      "heading": "#### Step 2: 結果を見て戦略を練り直す — HMMで本物の遺伝子を選別する",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: text",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "00_ai_agent.md",
+      "line": 292,
+      "lang": "none",
+      "heading": "#### Vibe codingワークフローにおける位置付け",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "00_ai_agent.md",
+      "line": 342,
+      "lang": "none",
+      "heading": "### 「インタビューしてもらう」パターン — 要件が曖昧なときの最強テクニック",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "00_ai_agent.md",
+      "line": 438,
+      "lang": "none",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "00_ai_agent.md",
+      "line": 461,
+      "lang": "markdown",
+      "heading": "## バイオインフォ固有の注意",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "00_ai_agent.md",
+      "line": 547,
+      "lang": "none",
+      "heading": "### 実装後のセルフレビュー",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "01_design.md",
@@ -137,7 +216,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8571428571428571,
-      "best_match": "scripts/ch01/gc_content.py"
+      "best_match": "scripts/ch01/gc_content.py",
+      "counterpart": true
     },
     {
       "file": "01_design.md",
@@ -147,7 +227,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "01_design.md",
@@ -156,8 +237,9 @@
       "heading": "### DRY原則（Don't Repeat Yourself）",
       "category": "checked",
       "reason": "",
-      "ratio": 0.8181818181818182,
-      "best_match": "scripts/ch01/gc_content.py"
+      "ratio": 0.9090909090909091,
+      "best_match": "scripts/ch01/gc_content.py",
+      "counterpart": true
     },
     {
       "file": "01_design.md",
@@ -167,7 +249,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8,
-      "best_match": "scripts/ch01/seq_filter.py"
+      "best_match": "scripts/ch01/seq_filter.py",
+      "counterpart": true
+    },
+    {
+      "file": "01_design.md",
+      "line": 311,
+      "lang": "none",
+      "heading": "### 🤖 AIエージェントとの会話で使うと効果的なフレーズ集",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "01_design.md",
@@ -177,7 +271,52 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 19,
+      "lang": "bash",
+      "heading": "## 2-1. なぜVibe codingにシェルの知識が必要か",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 63,
+      "lang": "none",
+      "heading": "### ディレクトリ構造",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 124,
+      "lang": "bash",
+      "heading": "### パーミッションと実行権限",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 156,
+      "lang": "bash",
+      "heading": "### 圧縮と展開",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "02_terminal.md",
@@ -187,7 +326,30 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 213,
+      "lang": "bash",
+      "heading": "### PATHが壊れるとエージェントがツールを見つけられない",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 264,
+      "lang": "bash",
+      "heading": "### .envファイルによるプロジェクト固有の設定",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "02_terminal.md",
@@ -197,7 +359,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.25,
-      "best_match": "scripts/ch02/env_check.py"
+      "best_match": "scripts/ch02/env_check.py",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 290,
+      "lang": "bash",
+      "heading": "### whichコマンド — 「どの」コマンドが使われているか",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "02_terminal.md",
@@ -207,7 +381,19 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 353,
+      "lang": "bash",
+      "heading": "### パイプによるコマンドの連結",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "02_terminal.md",
@@ -217,7 +403,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "02_terminal.md",
@@ -227,7 +414,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.375,
-      "best_match": "scripts/ch02/regex_basics.py"
+      "best_match": "scripts/ch02/regex_basics.py",
+      "counterpart": true
     },
     {
       "file": "02_terminal.md",
@@ -237,7 +425,96 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2,
-      "best_match": "scripts/ch02/regex_basics.py"
+      "best_match": "scripts/ch02/regex_basics.py",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 576,
+      "lang": "bash",
+      "heading": "### シェルスクリプトの基本構造",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 599,
+      "lang": "bash",
+      "heading": "### 変数",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 615,
+      "lang": "bash",
+      "heading": "### 条件分岐",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 632,
+      "lang": "bash",
+      "heading": "### ループ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 677,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 691,
+      "lang": "none",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 705,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "02_terminal.md",
+      "line": 776,
+      "lang": "none",
+      "heading": "### 演習 2-3: ファイル整理の指示 **[指示設計]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -247,7 +524,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -257,7 +535,19 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "03_cs_basics.md",
+      "line": 80,
+      "lang": "none",
+      "heading": "### 遺伝子ID検索: list vs set の決定的な違い",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -267,7 +557,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -277,7 +568,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -287,7 +579,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -297,7 +590,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2,
-      "best_match": "scripts/ch03/plot_complexity.py"
+      "best_match": "scripts/ch03/plot_complexity.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -307,7 +601,8 @@
       "category": "not_python",
       "reason": "Python として解釈できない（図解・出力例・抜粋の可能性）",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -317,7 +612,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5,
-      "best_match": "scripts/ch03/float_pitfalls.py"
+      "best_match": "scripts/ch03/float_pitfalls.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -327,7 +623,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.1,
-      "best_match": "scripts/ch03/float_pitfalls.py"
+      "best_match": "scripts/ch03/float_pitfalls.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -337,7 +634,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2,
-      "best_match": "scripts/ch03/plot_complexity.py"
+      "best_match": "scripts/ch03/plot_complexity.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -347,7 +645,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -357,7 +656,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2857142857142857,
-      "best_match": "scripts/ch03/float_pitfalls.py"
+      "best_match": "scripts/ch03/float_pitfalls.py",
+      "counterpart": true
+    },
+    {
+      "file": "03_cs_basics.md",
+      "line": 442,
+      "lang": "bash",
+      "heading": "### 改行コードの罠 — LF vs CR+LF",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -367,7 +678,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.14285714285714285,
-      "best_match": "scripts/ch03/plot_complexity.py"
+      "best_match": "scripts/ch03/plot_complexity.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -377,7 +689,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5,
-      "best_match": "scripts/ch03/random_reproducibility.py"
+      "best_match": "scripts/ch03/random_reproducibility.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -387,7 +700,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch03/plot_complexity.py"
+      "best_match": "scripts/ch03/plot_complexity.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -397,7 +711,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.08333333333333333,
-      "best_match": "scripts/ch03/plot_bench.py"
+      "best_match": "scripts/ch03/plot_bench.py",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -407,7 +722,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -417,7 +733,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "03_cs_basics.md",
@@ -427,7 +744,8 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -437,7 +755,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3,
-      "best_match": "scripts/ch04/tsv_csv_handling.py"
+      "best_match": "scripts/ch04/tsv_csv_handling.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -447,7 +766,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.1111111111111111,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -457,7 +777,30 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "04_data_formats.md",
+      "line": 204,
+      "lang": "yaml",
+      "heading": "### YAML / TOML — 設定ファイル",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "04_data_formats.md",
+      "line": 217,
+      "lang": "toml",
+      "heading": "### YAML / TOML — 設定ファイル",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: toml",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -467,7 +810,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -477,7 +821,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.25,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -487,7 +832,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.25,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -497,7 +843,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -507,7 +854,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -517,7 +865,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -527,7 +876,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.25,
-      "best_match": "scripts/ch04/encoding_traps.py"
+      "best_match": "scripts/ch04/encoding_traps.py",
+      "counterpart": true
+    },
+    {
+      "file": "04_data_formats.md",
+      "line": 522,
+      "lang": "none",
+      "heading": "### AIコーディングエージェントで機械可読形式に変換する",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -537,7 +898,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -547,7 +909,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.35294117647058826,
-      "best_match": "scripts/ch04/tidy_data_demo.py"
+      "best_match": "scripts/ch04/tidy_data_demo.py",
+      "counterpart": true
     },
     {
       "file": "04_data_formats.md",
@@ -557,7 +920,19 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "04_data_formats.md",
+      "line": 812,
+      "lang": "none",
+      "heading": "### 演習 4-2: tidy dataへの変換判断 **[レビュー]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -567,7 +942,19 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "05_software_components.md",
+      "line": 128,
+      "lang": "none",
+      "heading": "### モジュール・パッケージ・ライブラリ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -577,7 +964,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -587,7 +975,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -597,7 +986,52 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "05_software_components.md",
+      "line": 291,
+      "lang": "none",
+      "heading": "### 依存関係の連鎖",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "05_software_components.md",
+      "line": 301,
+      "lang": "bash",
+      "heading": "### 依存関係の連鎖",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "05_software_components.md",
+      "line": 324,
+      "lang": "none",
+      "heading": "### 依存関係地獄",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "05_software_components.md",
+      "line": 356,
+      "lang": "bash",
+      "heading": "### 依存関係の可視化",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -607,7 +1041,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -617,7 +1052,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2,
-      "best_match": "scripts/ch05/module_demo.py"
+      "best_match": "scripts/ch05/module_demo.py",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -627,7 +1063,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -637,7 +1074,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "05_software_components.md",
@@ -647,7 +1085,30 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 28,
+      "lang": "bash",
+      "heading": "### pyenv — Pythonバージョンの管理",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 49,
+      "lang": "bash",
+      "heading": "### venv — 標準ライブラリの仮想環境",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "06_dev_environment.md",
@@ -657,7 +1118,294 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.25,
-      "best_match": "scripts/ch06/check_environment.py"
+      "best_match": "scripts/ch06/check_environment.py",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 94,
+      "lang": "bash",
+      "heading": "### Miniforge3 / Micromamba — conda環境",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 119,
+      "lang": "bash",
+      "heading": "### uv — 高速な新世代パッケージマネージャ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 152,
+      "lang": "none",
+      "heading": "### 依存関係定義ファイルの比較",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 159,
+      "lang": "toml",
+      "heading": "### 依存関係定義ファイルの比較",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: toml",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 171,
+      "lang": "yaml",
+      "heading": "### 依存関係定義ファイルの比較",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 193,
+      "lang": "none",
+      "heading": "### 依存関係の競合と解決",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 271,
+      "lang": "bash",
+      "heading": "### ロックファイル — 再現性の鍵",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 307,
+      "lang": "yaml",
+      "heading": "### チャネルとレジストリ",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 338,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 372,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "06_dev_environment.md",
+      "line": 441,
+      "lang": "none",
+      "heading": "### 演習 6-2: requirements.txtの問題 **[レビュー]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 22,
+      "lang": "none",
+      "heading": "### なぜバージョン管理か",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 36,
+      "lang": "bash",
+      "heading": "### リポジトリの作成と初期設定",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 62,
+      "lang": "bash",
+      "heading": "### ステージング → コミット → プッシュ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 83,
+      "lang": "bash",
+      "heading": "### ブランチと切り替え",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 111,
+      "lang": "none",
+      "heading": "### コンフリクトの解決",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 133,
+      "lang": "bash",
+      "heading": "### 便利なコマンド: log, diff, stash",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 146,
+      "lang": "diff",
+      "heading": "### 便利なコマンド: log, diff, stash",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: diff",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 189,
+      "lang": "gitignore",
+      "heading": "### .gitignore — 管理すべきでないファイルの除外",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: gitignore",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 254,
+      "lang": "bash",
+      "heading": "### GitHub CLI（ghコマンド）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 271,
+      "lang": "yaml",
+      "heading": "### GitHub Actions（CI/CDの入口）",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 1.0,
+      "best_match": "scripts/ch07/ci_minimal.yml",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 325,
+      "lang": "yaml",
+      "heading": "### コードの公開と引用可能性",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.75,
+      "best_match": "scripts/ch07/CITATION.cff.template",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 374,
+      "lang": "none",
+      "heading": "### 意味のあるコミットメッセージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 386,
+      "lang": "none",
+      "heading": "### 意味のあるコミットメッセージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 426,
+      "lang": "bash",
+      "heading": "### 大きなファイルの扱い — Git LFS",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "07_git.md",
+      "line": 509,
+      "lang": "markdown",
+      "heading": "### Added",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -667,7 +1415,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -677,7 +1426,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.6666666666666666,
-      "best_match": "scripts/ch08/reverse_complement.py"
+      "best_match": "scripts/ch08/reverse_complement.py",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -687,7 +1437,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.6666666666666666,
-      "best_match": "tests/ch08/test_reverse_complement.py"
+      "best_match": "tests/ch08/test_reverse_complement.py",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 119,
+      "lang": "bash",
+      "heading": "#### インストールと基本的な使い方",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -697,7 +1459,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -707,7 +1470,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.75,
-      "best_match": "tests/ch08/test_reverse_complement.py"
+      "best_match": "tests/ch08/test_reverse_complement.py",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -717,7 +1481,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -727,7 +1492,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3333333333333333,
-      "best_match": "tests/ch08/test_seq_stats.py"
+      "best_match": "tests/ch08/test_seq_stats.py",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -737,7 +1503,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.625,
-      "best_match": "tests/ch08/test_seq_stats.py"
+      "best_match": "tests/ch08/test_seq_stats.py",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 268,
+      "lang": "none",
+      "heading": "### テストカバレッジの計測",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -747,7 +1525,30 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 330,
+      "lang": "bash",
+      "heading": "### ruff — リント＋フォーマット",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 348,
+      "lang": "toml",
+      "heading": "#### pyproject.toml での設定",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: toml",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -757,7 +1558,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -767,7 +1569,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch08/seq_stats.py"
+      "best_match": "scripts/ch08/seq_stats.py",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -777,7 +1580,41 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8571428571428571,
-      "best_match": "scripts/ch08/seq_stats.py"
+      "best_match": "scripts/ch08/seq_stats.py",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 447,
+      "lang": "toml",
+      "heading": "#### pyproject.toml でのmypy設定",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: toml",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 471,
+      "lang": "yaml",
+      "heading": "### pre-commit — コミット前の自動チェック",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "08_testing.md",
+      "line": 489,
+      "lang": "none",
+      "heading": "### pre-commit — コミット前の自動チェック",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "08_testing.md",
@@ -787,7 +1624,52 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9629629629629629,
-      "best_match": "scripts/ch08/seq_stats.py"
+      "best_match": "scripts/ch08/seq_stats.py",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 577,
+      "lang": "json",
+      "heading": "#### 設定例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: json",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "08_testing.md",
+      "line": 626,
+      "lang": "yaml",
+      "heading": "### ワークフローYAMLの書き方",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "08_testing.md",
+      "line": 679,
+      "lang": "yaml",
+      "heading": "### ワークフローの拡張",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "08_testing.md",
+      "line": 718,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -796,8 +1678,20 @@
       "heading": "### tracebackを読む",
       "category": "checked",
       "reason": "",
-      "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch09/traceback_demo.py"
+      "ratio": 0.6666666666666666,
+      "best_match": "scripts/ch09/traceback_demo.py",
+      "counterpart": true
+    },
+    {
+      "file": "09_debug.md",
+      "line": 45,
+      "lang": "none",
+      "heading": "### tracebackを読む",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -807,7 +1701,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8888888888888888,
-      "best_match": "scripts/ch09/traceback_demo.py"
+      "best_match": "scripts/ch09/traceback_demo.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -817,7 +1712,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8,
-      "best_match": "scripts/ch09/traceback_demo.py"
+      "best_match": "scripts/ch09/traceback_demo.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -827,7 +1723,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.75,
-      "best_match": "scripts/ch09/debug_print_demo.py"
+      "best_match": "scripts/ch09/debug_print_demo.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -837,7 +1734,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.6,
-      "best_match": "scripts/ch09/pdb_demo.py"
+      "best_match": "scripts/ch09/pdb_demo.py",
+      "counterpart": true
+    },
+    {
+      "file": "09_debug.md",
+      "line": 239,
+      "lang": "none",
+      "heading": "### pdb / breakpoint() / ipdb",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -847,7 +1756,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2,
-      "best_match": "scripts/ch09/debug_print_demo.py"
+      "best_match": "scripts/ch09/debug_print_demo.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -857,7 +1767,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.4444444444444444,
-      "best_match": "scripts/ch09/debug_print_demo.py"
+      "best_match": "scripts/ch09/debug_print_demo.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -866,8 +1777,9 @@
       "heading": "### Off-by-one: 0-based vs 1-based",
       "category": "checked",
       "reason": "",
-      "ratio": 0.2857142857142857,
-      "best_match": "scripts/ch09/coordinate_bugs.py"
+      "ratio": 0.6666666666666666,
+      "best_match": "scripts/ch09/coordinate_bugs.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -877,7 +1789,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5,
-      "best_match": "scripts/ch09/coordinate_bugs.py"
+      "best_match": "scripts/ch09/coordinate_bugs.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -886,8 +1799,9 @@
       "heading": "### パス関連のバグ",
       "category": "checked",
       "reason": "",
-      "ratio": 0.7142857142857143,
-      "best_match": "scripts/ch09/path_bugs.py"
+      "ratio": 1.0,
+      "best_match": "scripts/ch09/path_bugs.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -897,7 +1811,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8333333333333334,
-      "best_match": "scripts/ch09/path_bugs.py"
+      "best_match": "scripts/ch09/path_bugs.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -906,8 +1821,9 @@
       "heading": "### 型の不一致",
       "category": "checked",
       "reason": "",
-      "ratio": 0.75,
-      "best_match": "scripts/ch09/type_bugs.py"
+      "ratio": 1.0,
+      "best_match": "scripts/ch09/type_bugs.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -917,7 +1833,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 1.0,
-      "best_match": "scripts/ch09/type_bugs.py"
+      "best_match": "scripts/ch09/type_bugs.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -927,7 +1844,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -937,7 +1855,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -946,8 +1865,9 @@
       "heading": "### Python固有の落とし穴",
       "category": "checked",
       "reason": "",
-      "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch09/python_pitfalls.py"
+      "ratio": 0.8333333333333334,
+      "best_match": "scripts/ch09/python_pitfalls.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -957,7 +1877,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -966,8 +1887,9 @@
       "heading": "### Python固有の落とし穴",
       "category": "checked",
       "reason": "",
-      "ratio": 0.0,
-      "best_match": ""
+      "ratio": 0.6666666666666666,
+      "best_match": "scripts/ch09/python_pitfalls.py",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -977,7 +1899,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "09_debug.md",
@@ -986,8 +1909,163 @@
       "heading": "### Python固有の落とし穴",
       "category": "checked",
       "reason": "",
-      "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch09/python_pitfalls.py"
+      "ratio": 0.5,
+      "best_match": "scripts/ch09/python_pitfalls.py",
+      "counterpart": true
+    },
+    {
+      "file": "09_debug.md",
+      "line": 731,
+      "lang": "none",
+      "heading": "### 演習 9-1: traceback の読解 **[概念]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 60,
+      "lang": "none",
+      "heading": "### パターン2: pipインストール可能なPythonパッケージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 77,
+      "lang": "toml",
+      "heading": "### パターン2: pipインストール可能なPythonパッケージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: toml",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 102,
+      "lang": "bash",
+      "heading": "### パターン2: pipインストール可能なPythonパッケージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 116,
+      "lang": "bash",
+      "heading": "### パターン2: pipインストール可能なPythonパッケージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 124,
+      "lang": "none",
+      "heading": "### パターン2: pipインストール可能なPythonパッケージ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 182,
+      "lang": "none",
+      "heading": "### パターン4: シェルスクリプトパイプライン",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 224,
+      "lang": "none",
+      "heading": "### パターン5: ワークフロー言語（Snakemake / Nextflow）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 243,
+      "lang": "none",
+      "heading": "### パターン5: ワークフロー言語（Snakemake / Nextflow）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 327,
+      "lang": "none",
+      "heading": "### パターン8: Webアプリ（Streamlit / Gradio）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 437,
+      "lang": "none",
+      "heading": "### エージェントへの最初の指示に含めるべきこと",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 467,
+      "lang": "none",
+      "heading": "### src layout",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 510,
+      "lang": "none",
+      "heading": "### 各ファイル・ディレクトリの役割",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 545,
+      "lang": "none",
+      "heading": "#### ディレクトリごとの設定ファイル",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -997,7 +2075,19 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 612,
+      "lang": "yaml",
+      "heading": "### 設定ファイルによる外部化",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
     },
     {
       "file": "10_deliverables.md",
@@ -1007,7 +2097,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9583333333333334,
-      "best_match": "scripts/ch10/config_example.py"
+      "best_match": "scripts/ch10/config_example.py",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1017,7 +2108,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.25,
-      "best_match": "scripts/ch10/error_handling.py"
+      "best_match": "scripts/ch10/error_handling.py",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1027,7 +2119,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 1.0,
-      "best_match": "scripts/ch10/error_handling.py"
+      "best_match": "scripts/ch10/error_handling.py",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1037,7 +2130,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9,
-      "best_match": "scripts/ch10/error_handling.py"
+      "best_match": "scripts/ch10/error_handling.py",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1047,7 +2141,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 1.0,
-      "best_match": "scripts/ch10/error_handling.py"
+      "best_match": "scripts/ch10/error_handling.py",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1057,7 +2152,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1067,7 +2163,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9,
-      "best_match": "scripts/ch10/error_handling.py"
+      "best_match": "scripts/ch10/error_handling.py",
+      "counterpart": true
     },
     {
       "file": "10_deliverables.md",
@@ -1077,7 +2174,30 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.21428571428571427,
-      "best_match": "scripts/ch10/error_handling.py"
+      "best_match": "scripts/ch10/error_handling.py",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 1051,
+      "lang": "none",
+      "heading": "### 演習 10-2: プロジェクト構造の評価 **[レビュー]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "10_deliverables.md",
+      "line": 1086,
+      "lang": "toml",
+      "heading": "### 演習 10-4: pyproject.tomlの読解 **[概念]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: toml",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1087,7 +2207,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.55,
-      "best_match": "scripts/ch11/cli_argparse.py"
+      "best_match": "scripts/ch11/cli_argparse.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1097,7 +2218,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.29411764705882354,
-      "best_match": "scripts/ch11/cli_click.py"
+      "best_match": "scripts/ch11/cli_click.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1107,7 +2229,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.36363636363636365,
-      "best_match": "scripts/ch11/cli_typer.py"
+      "best_match": "scripts/ch11/cli_typer.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1117,7 +2240,8 @@
       "category": "not_python",
       "reason": "Python として解釈できない（図解・出力例・抜粋の可能性）",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1127,7 +2251,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8333333333333334,
-      "best_match": "scripts/ch11/cli_click.py"
+      "best_match": "scripts/ch11/cli_click.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1137,7 +2262,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.4117647058823529,
-      "best_match": "scripts/ch11/seqtool.py"
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
+    },
+    {
+      "file": "11_cli.md",
+      "line": 239,
+      "lang": "bash",
+      "heading": "### stdin/stdout対応の実装",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1147,7 +2284,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch11/cli_click.py"
+      "best_match": "scripts/ch11/cli_click.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1157,7 +2295,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.047619047619047616,
-      "best_match": "scripts/ch11/cli_click.py"
+      "best_match": "scripts/ch11/cli_click.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1167,7 +2306,41 @@
       "category": "not_python",
       "reason": "Python として解釈できない（図解・出力例・抜粋の可能性）",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "11_cli.md",
+      "line": 436,
+      "lang": "markdown",
+      "heading": "#### カスタムコマンドの作り方",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "11_cli.md",
+      "line": 456,
+      "lang": "markdown",
+      "heading": "#### 実用的なカスタムコマンドの例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "11_cli.md",
+      "line": 466,
+      "lang": "markdown",
+      "heading": "#### 実用的なカスタムコマンドの例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1177,7 +2350,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5,
-      "best_match": "scripts/ch11/seqtool.py"
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1187,7 +2361,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.1111111111111111,
-      "best_match": "scripts/ch11/cli_argparse.py"
+      "best_match": "scripts/ch11/cli_argparse.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1196,8 +2371,9 @@
       "heading": "### Rich — リッチなターミナルUI",
       "category": "checked",
       "reason": "",
-      "ratio": 0.6,
-      "best_match": "scripts/ch11/seqtool.py"
+      "ratio": 0.7,
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1207,7 +2383,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.14285714285714285,
-      "best_match": "scripts/ch11/seqtool.py"
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1217,7 +2394,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch11/seqtool.py"
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1226,8 +2404,9 @@
       "heading": "### stdoutとプログレスの棲み分け",
       "category": "checked",
       "reason": "",
-      "ratio": 0.4375,
-      "best_match": "scripts/ch11/seqtool.py"
+      "ratio": 0.5,
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1237,7 +2416,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1247,7 +2427,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.6666666666666666,
-      "best_match": "scripts/ch11/cli_argparse.py"
+      "best_match": "scripts/ch11/cli_argparse.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1257,7 +2438,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch11/logging_setup.py"
+      "best_match": "scripts/ch11/logging_setup.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1267,7 +2449,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8,
-      "best_match": "scripts/ch11/logging_setup.py"
+      "best_match": "scripts/ch11/logging_setup.py",
+      "counterpart": true
+    },
+    {
+      "file": "11_cli.md",
+      "line": 706,
+      "lang": "none",
+      "heading": "### タイムスタンプとフォーマット",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1277,7 +2471,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5882352941176471,
-      "best_match": "scripts/ch11/seqtool.py"
+      "best_match": "scripts/ch11/seqtool.py",
+      "counterpart": true
     },
     {
       "file": "11_cli.md",
@@ -1287,7 +2482,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5925925925925926,
-      "best_match": "scripts/ch11/logging_setup.py"
+      "best_match": "scripts/ch11/logging_setup.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1296,8 +2492,9 @@
       "heading": "### forループの限界",
       "category": "checked",
       "reason": "",
-      "ratio": 0.7777777777777778,
-      "best_match": "scripts/ch12/plot_vectorize_bench.py"
+      "ratio": 0.8888888888888888,
+      "best_match": "scripts/ch12/plot_vectorize_bench.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1306,8 +2503,9 @@
       "heading": "### バイオインフォでの実践: GC含量の一括計算",
       "category": "checked",
       "reason": "",
-      "ratio": 0.7142857142857143,
-      "best_match": "scripts/ch12/plot_vectorize_bench.py"
+      "ratio": 0.8571428571428571,
+      "best_match": "scripts/ch12/plot_vectorize_bench.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1317,7 +2515,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9230769230769231,
-      "best_match": "scripts/ch12/numpy_vectorize.py"
+      "best_match": "scripts/ch12/numpy_vectorize.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1326,8 +2525,9 @@
       "heading": "### ブロードキャスティング",
       "category": "checked",
       "reason": "",
-      "ratio": 0.42857142857142855,
-      "best_match": "scripts/ch12/numpy_vectorize.py"
+      "ratio": 0.7142857142857143,
+      "best_match": "scripts/ch12/numpy_vectorize.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1336,8 +2536,9 @@
       "heading": "### ファンシーインデックスとマスク",
       "category": "checked",
       "reason": "",
-      "ratio": 0.25,
-      "best_match": "scripts/ch12/numpy_vectorize.py"
+      "ratio": 0.75,
+      "best_match": "scripts/ch12/numpy_vectorize.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1346,8 +2547,9 @@
       "heading": "#### 読み込み: 型とNA値の指定",
       "category": "checked",
       "reason": "",
-      "ratio": 0.6666666666666666,
-      "best_match": "scripts/ch12/pandas_bio_ops.py"
+      "ratio": 0.8888888888888888,
+      "best_match": "scripts/ch12/pandas_bio_ops.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1357,7 +2559,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8888888888888888,
-      "best_match": "scripts/ch12/pandas_bio_ops.py"
+      "best_match": "scripts/ch12/pandas_bio_ops.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1367,7 +2570,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8571428571428571,
-      "best_match": "scripts/ch12/pandas_bio_ops.py"
+      "best_match": "scripts/ch12/pandas_bio_ops.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1377,7 +2581,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9090909090909091,
-      "best_match": "scripts/ch12/pandas_bio_ops.py"
+      "best_match": "scripts/ch12/pandas_bio_ops.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1387,7 +2592,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.14285714285714285,
-      "best_match": "scripts/ch12/pandas_bio_ops.py"
+      "best_match": "scripts/ch12/pandas_bio_ops.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1396,8 +2602,9 @@
       "heading": "### Polars: 大規模データの高速処理",
       "category": "checked",
       "reason": "",
-      "ratio": 0.5,
-      "best_match": "scripts/ch12/polars_bio_ops.py"
+      "ratio": 0.5714285714285714,
+      "best_match": "scripts/ch12/polars_bio_ops.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1407,7 +2614,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1417,7 +2625,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.875,
-      "best_match": "scripts/ch12/scipy_stats_bio.py"
+      "best_match": "scripts/ch12/scipy_stats_bio.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1427,7 +2636,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9285714285714286,
-      "best_match": "scripts/ch12/scipy_stats_bio.py"
+      "best_match": "scripts/ch12/scipy_stats_bio.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1437,7 +2647,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8,
-      "best_match": "scripts/ch12/scipy_stats_bio.py"
+      "best_match": "scripts/ch12/scipy_stats_bio.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1447,7 +2658,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9,
-      "best_match": "scripts/ch12/scipy_stats_bio.py"
+      "best_match": "scripts/ch12/scipy_stats_bio.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1457,7 +2669,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8,
-      "best_match": "scripts/ch12/scipy_stats_bio.py"
+      "best_match": "scripts/ch12/scipy_stats_bio.py",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1467,7 +2680,8 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "12_data_processing.md",
@@ -1477,7 +2691,8 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1487,7 +2702,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.14285714285714285,
-      "best_match": "scripts/ch13/bio_plots.py"
+      "best_match": "scripts/ch13/bio_plots.py",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1497,7 +2713,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9444444444444444,
-      "best_match": "scripts/ch13/matplotlib_bindist.py"
+      "best_match": "scripts/ch13/matplotlib_bindist.py",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1507,7 +2724,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9019607843137255,
-      "best_match": "scripts/ch13/bio_plots.py"
+      "best_match": "scripts/ch13/bio_plots.py",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1517,7 +2735,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9655172413793104,
-      "best_match": "scripts/ch13/bio_plots.py"
+      "best_match": "scripts/ch13/bio_plots.py",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1527,7 +2746,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9545454545454546,
-      "best_match": "scripts/ch13/seaborn_biodist.py"
+      "best_match": "scripts/ch13/seaborn_biodist.py",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1537,7 +2757,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3076923076923077,
-      "best_match": "scripts/ch13/bio_plots.py"
+      "best_match": "scripts/ch13/bio_plots.py",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1547,7 +2768,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "13_visualization.md",
@@ -1557,7 +2779,52 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.09090909090909091,
-      "best_match": "scripts/ch13/bio_plots.py"
+      "best_match": "scripts/ch13/bio_plots.py",
+      "counterpart": true
+    },
+    {
+      "file": "13_visualization.md",
+      "line": 492,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "13_visualization.md",
+      "line": 530,
+      "lang": "ini",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: ini",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "13_visualization.md",
+      "line": 552,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 35,
+      "lang": "bash",
+      "heading": "### シェルスクリプトの限界",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1567,7 +2834,8 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 0.9090909090909091,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1577,7 +2845,8 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 1.0,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1586,8 +2855,20 @@
       "heading": "#### wildcards — サンプル展開の自動化",
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
-      "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch14/Snakefile"
+      "ratio": 0.6666666666666666,
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 165,
+      "lang": "yaml",
+      "heading": "#### 設定ファイル — パラメータの外出し",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 1.0,
+      "best_match": "scripts/ch14/config.yaml",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1597,7 +2878,8 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 0.2727272727272727,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1607,7 +2889,85 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 0.9090909090909091,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 298,
+      "lang": "groovy",
+      "heading": "#### DSL2の基本構文",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: groovy",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 332,
+      "lang": "bash",
+      "heading": "#### nf-core — 既存パイプライン群の活用",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 386,
+      "lang": "yaml",
+      "heading": "#### CommandLineToolの基本構造",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 437,
+      "lang": "yaml",
+      "heading": "#### Workflowの定義",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 481,
+      "lang": "yaml",
+      "heading": "#### 入力ファイル（ジョブファイル）",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 527,
+      "lang": "makefile",
+      "heading": "### make — 古典的だが今も有用",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（makefile）として検証対象",
+      "ratio": 0.75,
+      "best_match": "scripts/ch14/Makefile",
+      "counterpart": true
+    },
+    {
+      "file": "14_workflow.md",
+      "line": 599,
+      "lang": "none",
+      "heading": "### 入力データは読み取り専用",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1617,7 +2977,8 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 1.0,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1627,7 +2988,8 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 0.6666666666666666,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1637,7 +2999,8 @@
       "category": "bad_example",
       "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1647,7 +3010,8 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 0.8,
-      "best_match": "scripts/ch14/Snakefile"
+      "best_match": "scripts/ch14/Snakefile",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1657,7 +3021,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "14_workflow.md",
@@ -1667,7 +3032,107 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 114,
+      "lang": "dockerfile",
+      "heading": "### Dockerfileの書き方",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（dockerfile）として検証対象",
+      "ratio": 1.0,
+      "best_match": "scripts/ch15/Dockerfile",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 174,
+      "lang": "dockerfile",
+      "heading": "#### ベースイメージの選択",
+      "category": "bad_example",
+      "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 196,
+      "lang": "dockerfile",
+      "heading": "### レイヤーキャッシュの仕組みと最適化",
+      "category": "bad_example",
+      "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 213,
+      "lang": "dockerfile",
+      "heading": "### レイヤーキャッシュの仕組みと最適化",
+      "category": "bad_example",
+      "reason": "パターン一致: ❌|悪い例|アンチパターン|危険:|誤り:",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 229,
+      "lang": "dockerfile",
+      "heading": "### マルチステージビルド",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（dockerfile）として検証対象",
+      "ratio": 0.875,
+      "best_match": "scripts/ch15/Dockerfile.multistage",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 277,
+      "lang": "bash",
+      "heading": "### ボリュームマウント — 大規模データの扱い",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 294,
+      "lang": "yaml",
+      "heading": "### Docker Compose",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 1.0,
+      "best_match": "scripts/ch15/docker-compose.yml",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 313,
+      "lang": "bash",
+      "heading": "### Docker Compose",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 352,
+      "lang": "none",
+      "heading": "#### 承認ありモードでDockerfileを反復構築する",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "15_container.md",
@@ -1677,7 +3142,74 @@
       "category": "checked",
       "reason": "Snakefile（設定・ワークフロー定義として検証対象）",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 429,
+      "lang": "bash",
+      "heading": "### Dockerイメージからの変換",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 446,
+      "lang": "none",
+      "heading": "### Apptainer定義ファイル",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 572,
+      "lang": "dockerfile",
+      "heading": "### 両方を併用する戦略",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（dockerfile）として検証対象",
+      "ratio": 0.5,
+      "best_match": "scripts/ch15/Dockerfile",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 645,
+      "lang": "dockerfile",
+      "heading": "### バージョン固定の実践",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（dockerfile）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 671,
+      "lang": "markdown",
+      "heading": "## フルデータでの再現",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 698,
+      "lang": "none",
+      "heading": "### 再現性パッケージのディレクトリ構成例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "15_container.md",
@@ -1687,7 +3219,8 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "15_container.md",
@@ -1697,7 +3230,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "15_container.md",
@@ -1707,7 +3241,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "15_container.md",
@@ -1717,7 +3252,184 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 978,
+      "lang": "bash",
+      "heading": "#### 段階的な導入パス",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "15_container.md",
+      "line": 1043,
+      "lang": "dockerfile",
+      "heading": "### 演習 15-1: Dockerfile のレビュー **[レビュー]**",
+      "category": "exercise",
+      "reason": "演習問題のコードは問題文中にインライン配置する規約",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 117,
+      "lang": "bash",
+      "heading": "### ジョブスクリプトの書き方",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 152,
+      "lang": "bash",
+      "heading": "### アレイジョブ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 188,
+      "lang": "none",
+      "heading": "### アレイジョブ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 205,
+      "lang": "bash",
+      "heading": "### 依存ジョブ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 303,
+      "lang": "bash",
+      "heading": "### GPU申請",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 401,
+      "lang": "bash",
+      "heading": "### rsyncによるファイル転送",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 431,
+      "lang": "bash",
+      "heading": "### ポートフォワーディング",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 455,
+      "lang": "none",
+      "heading": "### 多段SSH（ProxyJump）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 493,
+      "lang": "bash",
+      "heading": "### 接続が切れても実行を続ける — 永続セッション",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 514,
+      "lang": "bash",
+      "heading": "### 接続が切れても実行を続ける — 永続セッション",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 564,
+      "lang": "bash",
+      "heading": "### ホーム vs スクラッチ",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 587,
+      "lang": "bash",
+      "heading": "### モジュールシステム",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 655,
+      "lang": "none",
+      "heading": "### 将来のグループメンバーがアクセスできる設計",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "16_hpc.md",
+      "line": 666,
+      "lang": "markdown",
+      "heading": "## 解析の実行手順",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1727,7 +3439,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1737,7 +3450,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1747,7 +3461,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch17/chunk_processing.py"
+      "best_match": "scripts/ch17/chunk_processing.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1757,7 +3472,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.9411764705882353,
-      "best_match": "scripts/ch17/profiling_demo.py"
+      "best_match": "scripts/ch17/profiling_demo.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1767,7 +3483,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5384615384615384,
-      "best_match": "scripts/ch17/profiling_demo.py"
+      "best_match": "scripts/ch17/profiling_demo.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1777,7 +3494,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.75,
-      "best_match": "scripts/ch17/profiling_demo.py"
+      "best_match": "scripts/ch17/profiling_demo.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1787,7 +3505,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.2857142857142857,
-      "best_match": "scripts/ch17/plot_amdahl.py"
+      "best_match": "scripts/ch17/plot_amdahl.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1797,7 +3516,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "17_performance.md",
+      "line": 437,
+      "lang": "bash",
+      "heading": "### py-spyによる実行中プロセスのプロファイリング",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1807,7 +3538,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.875,
-      "best_match": "scripts/ch17/profiling_demo.py"
+      "best_match": "scripts/ch17/profiling_demo.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1817,7 +3549,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8888888888888888,
-      "best_match": "scripts/ch17/parallel_gc.py"
+      "best_match": "scripts/ch17/parallel_gc.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1827,7 +3560,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.375,
-      "best_match": "scripts/ch17/generator_fastq.py"
+      "best_match": "scripts/ch17/generator_fastq.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1837,7 +3571,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5,
-      "best_match": "scripts/ch17/generator_fastq.py"
+      "best_match": "scripts/ch17/generator_fastq.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1847,7 +3582,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch17/chunk_processing.py"
+      "best_match": "scripts/ch17/chunk_processing.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1857,7 +3593,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1867,7 +3604,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.058823529411764705,
-      "best_match": "scripts/ch17/chunk_processing.py"
+      "best_match": "scripts/ch17/chunk_processing.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1877,7 +3615,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.3333333333333333,
-      "best_match": "scripts/ch17/generator_fastq.py"
+      "best_match": "scripts/ch17/generator_fastq.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1887,7 +3626,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8709677419354839,
-      "best_match": "scripts/ch17/chunk_processing.py"
+      "best_match": "scripts/ch17/chunk_processing.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1897,7 +3637,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.7272727272727273,
-      "best_match": "scripts/ch17/file_format_bench.py"
+      "best_match": "scripts/ch17/file_format_bench.py",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1907,7 +3648,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "scripts/ch17/chunk_processing.py"
+      "best_match": "scripts/ch17/chunk_processing.py",
+      "counterpart": true
+    },
+    {
+      "file": "17_performance.md",
+      "line": 953,
+      "lang": "bash",
+      "heading": "#### bgzip + tabix — インデックス付き圧縮",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "17_performance.md",
@@ -1917,7 +3670,63 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 49,
+      "lang": "markdown",
+      "heading": "### Markdownの基本記法",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 62,
+      "lang": "markdown",
+      "heading": "### GitHub Flavored Markdown",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 78,
+      "lang": "markdown",
+      "heading": "### GitHub Flavored Markdown",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 125,
+      "lang": "mermaid",
+      "heading": "### Mermaid記法による図の埋め込み",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: mermaid",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 152,
+      "lang": "mermaid",
+      "heading": "### Mermaid記法による図の埋め込み",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: mermaid",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "18_documentation.md",
@@ -1927,7 +3736,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.75,
-      "best_match": "tests/ch18/test_mermaid_helper.py"
+      "best_match": "tests/ch18/test_mermaid_helper.py",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 245,
+      "lang": "markdown",
+      "heading": "## ライセンス",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "18_documentation.md",
@@ -1937,7 +3758,30 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 301,
+      "lang": "markdown",
+      "heading": "## ライセンス",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 374,
+      "lang": "yaml",
+      "heading": "### docstringからのAPI自動生成",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
     },
     {
       "file": "18_documentation.md",
@@ -1947,7 +3791,85 @@
       "category": "scripts_call",
       "reason": "パターン一致: ^(from|import)\\s+scripts\\.",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 529,
+      "lang": "markdown",
+      "heading": "## 品質管理",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "18_documentation.md",
+      "line": 551,
+      "lang": "markdown",
+      "heading": "## 2026-03-22: フィルタリング条件の変更",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 29,
+      "lang": "sql",
+      "heading": "#### リレーショナルデータベース（RDB）とSQL",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: sql",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 104,
+      "lang": "none",
+      "heading": "#### RDF",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 126,
+      "lang": "sparql",
+      "heading": "#### SPARQL",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: sparql",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 310,
+      "lang": "none",
+      "heading": "### HTTPの仕組み — API利用に必要な最低限",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 378,
+      "lang": "none",
+      "heading": "### NCBI Entrez API",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "19_database_api.md",
@@ -1956,8 +3878,9 @@
       "heading": "### NCBI Entrez API",
       "category": "checked",
       "reason": "",
-      "ratio": 0.4,
-      "best_match": "scripts/ch19/entrez_fetch.py"
+      "ratio": 0.5333333333333333,
+      "best_match": "scripts/ch19/entrez_fetch.py",
+      "counterpart": true
     },
     {
       "file": "19_database_api.md",
@@ -1966,8 +3889,31 @@
       "heading": "### SPARQLエンドポイント",
       "category": "checked",
       "reason": "",
-      "ratio": 0.56,
-      "best_match": "scripts/ch19/sparql_query.py"
+      "ratio": 0.6,
+      "best_match": "scripts/ch19/sparql_query.py",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 497,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 538,
+      "lang": "bash",
+      "heading": "#### エージェントへの指示例",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "19_database_api.md",
@@ -1977,7 +3923,52 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 594,
+      "lang": "bash",
+      "heading": "#### wget / curl",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 623,
+      "lang": "bash",
+      "heading": "#### Aspera",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 636,
+      "lang": "bash",
+      "heading": "#### クラウドストレージからの直接取得（S3 / GCS）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 670,
+      "lang": "bash",
+      "heading": "### チェックサム検証",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "19_database_api.md",
@@ -1987,7 +3978,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.5555555555555556,
-      "best_match": "scripts/ch19/parse_flatfile.py"
+      "best_match": "scripts/ch19/parse_flatfile.py",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 746,
+      "lang": "bash",
+      "heading": "#### ゲノムインデックス",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "19_database_api.md",
@@ -1996,8 +3999,20 @@
       "heading": "#### SQLiteによるメタデータ管理",
       "category": "checked",
       "reason": "",
-      "ratio": 0.5384615384615384,
-      "best_match": "scripts/ch19/local_db.py"
+      "ratio": 0.5769230769230769,
+      "best_match": "scripts/ch19/local_db.py",
+      "counterpart": true
+    },
+    {
+      "file": "19_database_api.md",
+      "line": 815,
+      "lang": "none",
+      "heading": "#### ディレクトリ構成のベストプラクティス",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "19_database_api.md",
@@ -2007,7 +4022,8 @@
       "category": "exercise",
       "reason": "演習問題のコードは問題文中にインライン配置する規約",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "20_security_ethics.md",
@@ -2017,7 +4033,30 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.16666666666666666,
-      "best_match": "tests/ch20/test_secret_scanner.py"
+      "best_match": "tests/ch20/test_secret_scanner.py",
+      "counterpart": true
+    },
+    {
+      "file": "20_security_ethics.md",
+      "line": 58,
+      "lang": "ini",
+      "heading": "#### `.env` + `python-dotenv` のパターン",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: ini",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "20_security_ethics.md",
+      "line": 71,
+      "lang": "bash",
+      "heading": "#### git-secretsによるコミット前検出",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "20_security_ethics.md",
@@ -2027,7 +4066,41 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8666666666666667,
-      "best_match": "scripts/ch20/secret_scanner.py"
+      "best_match": "scripts/ch20/secret_scanner.py",
+      "counterpart": true
+    },
+    {
+      "file": "20_security_ethics.md",
+      "line": 145,
+      "lang": "bash",
+      "heading": "#### コミットしてしまったシークレットの対処",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "20_security_ethics.md",
+      "line": 209,
+      "lang": "markdown",
+      "heading": "## 禁止するコマンド",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "20_security_ethics.md",
+      "line": 279,
+      "lang": "bash",
+      "heading": "#### pip-auditによる脆弱性スキャン",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: bash",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "20_security_ethics.md",
@@ -2037,7 +4110,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.8823529411764706,
-      "best_match": "scripts/ch20/anonymize_metadata.py"
+      "best_match": "scripts/ch20/anonymize_metadata.py",
+      "counterpart": true
     },
     {
       "file": "20_security_ethics.md",
@@ -2047,7 +4121,19 @@
       "category": "not_python",
       "reason": "Python として解釈できない（図解・出力例・抜粋の可能性）",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "20_security_ethics.md",
+      "line": 711,
+      "lang": "none",
+      "heading": "### 演習 20-1: シークレット漏洩のチェック **[レビュー]**",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "21_collaboration.md",
@@ -2057,7 +4143,19 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.0,
-      "best_match": ""
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "21_collaboration.md",
+      "line": 73,
+      "lang": "none",
+      "heading": "### 実際の結果",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "21_collaboration.md",
@@ -2066,8 +4164,20 @@
       "heading": "#### 環境情報の自動収集",
       "category": "checked",
       "reason": "",
-      "ratio": 0.7058823529411765,
-      "best_match": "scripts/ch21/format_question.py"
+      "ratio": 0.7647058823529411,
+      "best_match": "scripts/ch21/format_question.py",
+      "counterpart": true
+    },
+    {
+      "file": "21_collaboration.md",
+      "line": 288,
+      "lang": "markdown",
+      "heading": "## Test plan（テスト方法）",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "21_collaboration.md",
@@ -2077,7 +4187,41 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.6666666666666666,
-      "best_match": "scripts/ch21/review_helper.py"
+      "best_match": "scripts/ch21/review_helper.py",
+      "counterpart": true
+    },
+    {
+      "file": "21_collaboration.md",
+      "line": 356,
+      "lang": "markdown",
+      "heading": "### Additional context",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
+    },
+    {
+      "file": "21_collaboration.md",
+      "line": 423,
+      "lang": "yaml",
+      "heading": "#### Biocondaレシピ貢献",
+      "category": "checked",
+      "reason": "設定・ワークフロー定義（yaml）として検証対象",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": false
+    },
+    {
+      "file": "21_collaboration.md",
+      "line": 524,
+      "lang": "markdown",
+      "heading": "## 困っていること / 相談事項",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: markdown",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "21_collaboration.md",
@@ -2086,8 +4230,20 @@
       "heading": "#### コードサンプル",
       "category": "checked",
       "reason": "",
-      "ratio": 0.5,
-      "best_match": "scripts/ch21/progress_report.py"
+      "ratio": 0.6428571428571429,
+      "best_match": "scripts/ch21/progress_report.py",
+      "counterpart": true
+    },
+    {
+      "file": "21_collaboration.md",
+      "line": 653,
+      "lang": "none",
+      "heading": "#### 「解析前インタビュー」パターン",
+      "category": "other_lang",
+      "reason": "検証対象外の言語タグ: none",
+      "ratio": 0.0,
+      "best_match": "",
+      "counterpart": true
     },
     {
       "file": "21_collaboration.md",
@@ -2097,7 +4253,8 @@
       "category": "checked",
       "reason": "",
       "ratio": 0.75,
-      "best_match": "scripts/ch21/analysis_intake.py"
+      "best_match": "scripts/ch21/analysis_intake.py",
+      "counterpart": true
     }
   ]
 }

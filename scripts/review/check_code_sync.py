@@ -11,10 +11,28 @@ CLAUDE.md「本文と `scripts/` の同期」の規約に基づき、章の本�
 （scripts/ch05/mylib/ 等）、および tests/ を含める。これらを漏らすと
 乖離を過大に評価する。
 
+照合する言語は python だけではない。CLAUDE.md の表は「設定・ワークフロー
+定義」も `scripts/` への配置を求めるため、Dockerfile・YAML・Makefile も
+対象とする。これらは `ast.parse` に失敗するが、それを除外の理由にしない。
+
 CLAUDE.md の「`scripts/` に置くコード・置かないコード」の表のうち、
 機械的に判定できるもの（呼び出し例・悪例・演習・REPL）は自動で除外する。
 「ライブラリの使い方紹介」は自動判定できないため、一致率が低いものを
 「要棚卸し」として提示し、人間の判断に委ねる。
+
+要棚卸しは2種に分けて報告する。取るべき対応が異なるため。
+
+- 乖離: 章に同種のファイルがあるのに食い違う → `scripts/` を先に直す
+- 新規候補: 章に同種のファイルが無い → `scripts/` に起こすか判断する
+
+既知の制約:
+
+- 一致率は行の集合の包含率であり、順序や文脈は見ない。「完全一致」は
+  コードが同一である保証ではなく、全行がそのファイルのどこかに存在する
+  ことを意味する。判定は乖離を見落とす方向（偽陰性）に働く
+- 照合は章内に閉じる。他章の実体を参照する例（§15 に出てくる Snakemake の
+  rule は `scripts/ch14/Snakefile` が対応する）は「乖離」と報告される。
+  章をまたいで照合すると無関係な一致が増えるため、あえて広げていない
 
 判断済みのブロックは、コードブロックの直前に次のコメントを置くことで
 除外できる。棚卸しの結果をここに記録する。
@@ -37,8 +55,25 @@ SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 TESTS_DIR = PROJECT_ROOT / "tests"
 DEFAULT_OUTPUT = PROJECT_ROOT / "docs" / "review" / "code_sync_check.json"
 
-# 同期の検証対象とする言語タグ。Snakefile は Python 拡張構文のため python が付く
-TARGET_LANGS = {"python"}
+# 同期の検証対象とする言語タグ。
+# CLAUDE.md の表は「設定・ワークフロー定義」も scripts/ への配置を求めるため、
+# python だけでなく Dockerfile・YAML・Makefile も照合する。
+# Snakefile は Python 拡張構文のため python タグが付く。
+TARGET_LANGS = {"python", "dockerfile", "yaml", "makefile"}
+
+# 行コメントの開始文字。python / yaml / dockerfile / makefile はいずれも "#"
+COMMENT_CHAR = "#"
+
+# 言語タグごとの「対応しうるファイル」の見分け方。
+# 一致率0%のとき、章に同種のファイルが存在しないのか（新規作成の候補）、
+# 存在するのに食い違うのか（乖離）を区別するために使う。対応が必要な作業が
+# 異なるため、まとめて報告すると棚卸しの判断を誤る。
+LANG_FILE_HINTS: dict[str, tuple[str, ...]] = {
+    "python": (".py", "Snakefile"),
+    "yaml": (".yml", ".yaml"),
+    "dockerfile": ("Dockerfile", ".def"),
+    "makefile": ("Makefile",),
+}
 
 # これ未満の行数のブロックは断片として扱い、検証対象外とする
 MIN_SIGNIFICANT_LINES = 3
@@ -69,7 +104,9 @@ EXCLUSION_RULES: list[tuple[str, str]] = [
 # Snakefile は Python 拡張構文のため ast.parse に失敗するが、
 # CLAUDE.md の表では「設定・ワークフロー定義」として scripts/ への配置が必要。
 # Python として解釈できないことを理由に検証対象から外してはならない。
-SNAKEMAKE_RE = re.compile(r"^\s*(rule\s+\w+:|configfile:|include:|workdir:)", re.MULTILINE)
+SNAKEMAKE_RE = re.compile(
+    r"^\s*(rule\s+\w+:|configfile:|include:|workdir:)", re.MULTILINE
+)
 
 
 @dataclass
@@ -85,18 +122,48 @@ class Block:
     reason: str = ""
     ratio: float = 0.0
     best_match: str = ""
+    counterpart: bool = True
+
+
+def strip_inline_comment(line: str) -> str:
+    """行末コメントを落とす。文字列リテラル内の "#" は残す.
+
+    本書は「コードブロック内のコメントは日本語」を規約とし、本文には解説
+    コメントを付けて `scripts/` には付けない（あるいは別の文言にする）ことが
+    多い。これを残したまま比較すると、同一のコードが不一致と判定される。
+
+    判定は1行内で完結し、複数行にまたがる文字列は追跡しない。本文と
+    `scripts/` の双方に同じ処理を適用するため、多少崩れても比較の一貫性は
+    保たれる。
+    """
+    quote: str | None = None
+    index = 0
+    while index < len(line):
+        char = line[index]
+        if quote:
+            if char == "\\":
+                index += 2
+                continue
+            if char == quote:
+                quote = None
+        elif char in "\"'":
+            quote = char
+        elif char == COMMENT_CHAR:
+            return line[:index]
+        index += 1
+    return line
 
 
 def significant_lines(code: str) -> list[str]:
     """比較用に意味のある行だけを残す.
 
-    空行とコメント行を落とし、連続する空白を1つに畳む。本文にだけ付いた
-    説明コメントや字下げの差で不一致にならないようにするため。
+    空行・コメント行・行末コメントを落とし、連続する空白を1つに畳む。
+    本文にだけ付いた説明コメントや字下げの差で不一致にならないようにするため。
     """
     result: list[str] = []
     for raw in code.split("\n"):
-        stripped = raw.strip()
-        if stripped and not stripped.startswith("#"):
+        stripped = strip_inline_comment(raw).strip()
+        if stripped:
             result.append(re.sub(r"\s+", " ", stripped))
     return result
 
@@ -131,8 +198,15 @@ def build_corpus(chapter: str) -> dict[str, set[str]]:
     return corpus
 
 
-def classify(code: str, heading: str, skip_reason: str | None) -> tuple[str, str]:
+def classify(
+    code: str, heading: str, skip_reason: str | None, lang: str = "python"
+) -> tuple[str, str]:
     """ブロックを CLAUDE.md の分類表に照らして仕分ける.
+
+    Python として解釈できるかの判定は `python` タグのブロックにのみ適用する。
+    Dockerfile・YAML・Makefile は当然 `ast.parse` に失敗するため、これを
+    検証対象から外す理由にしてはならない。CLAUDE.md の表では設定・
+    ワークフロー定義も `scripts/` への配置が必要である。
 
     Returns
     -------
@@ -146,6 +220,8 @@ def classify(code: str, heading: str, skip_reason: str | None) -> tuple[str, str
     for name, pattern in EXCLUSION_RULES:
         if re.search(pattern, code, re.MULTILINE):
             return name, f"パターン一致: {pattern}"
+    if lang != "python":
+        return "checked", f"設定・ワークフロー定義（{lang}）として検証対象"
     if SNAKEMAKE_RE.search(code):
         return "checked", "Snakefile（設定・ワークフロー定義として検証対象）"
     try:
@@ -166,6 +242,18 @@ def best_ratio(signature: list[str], corpus: dict[str, set[str]]) -> tuple[float
         if ratio > best:
             best, where = ratio, path
     return best, where
+
+
+def has_counterpart(lang: str, corpus: dict[str, set[str]]) -> bool:
+    """章の scripts/ tests/ に、その言語に対応しうるファイルがあるか."""
+    for hint in LANG_FILE_HINTS.get(lang, ()):
+        for path in corpus:
+            name = Path(path).name
+            if hint.startswith(".") and name.endswith(hint):
+                return True
+            if not hint.startswith(".") and name.startswith(hint):
+                return True
+    return False
 
 
 def bucket_of(ratio: float) -> str:
@@ -216,22 +304,26 @@ def extract_blocks(md_path: Path) -> list[Block]:
             pending_skip = None
         elif fence and in_block:
             in_block = False
-            if lang in TARGET_LANGS:
-                code = "\n".join(buffer)
-                signature = significant_lines(code)
-                if len(signature) >= MIN_SIGNIFICANT_LINES:
-                    category, reason = classify(code, heading, skip_reason)
-                    blocks.append(
-                        Block(
-                            file=md_path.name,
-                            line=start,
-                            lang=lang,
-                            heading=heading,
-                            signature=signature,
-                            category=category,
-                            reason=reason,
-                        )
+            code = "\n".join(buffer)
+            signature = significant_lines(code)
+            if len(signature) >= MIN_SIGNIFICANT_LINES:
+                if lang in TARGET_LANGS:
+                    category, reason = classify(code, heading, skip_reason, lang)
+                else:
+                    # 検証対象外の言語も記録する。黙って飛ばすと
+                    # 「網羅した」と誤読されるため（no silent skips）
+                    category, reason = "other_lang", f"検証対象外の言語タグ: {lang}"
+                blocks.append(
+                    Block(
+                        file=md_path.name,
+                        line=start,
+                        lang=lang,
+                        heading=heading,
+                        signature=signature,
+                        category=category,
+                        reason=reason,
                     )
+                )
             skip_reason = None
         elif in_block:
             buffer.append(body)
@@ -257,18 +349,18 @@ def analyze() -> tuple[list[Block], dict[str, int], dict[str, dict[str, int]]]:
         for block in extract_blocks(md_path):
             if block.category == "checked":
                 block.ratio, block.best_match = best_ratio(block.signature, corpus)
+                block.counterpart = has_counterpart(block.lang, corpus)
             all_blocks.append(block)
 
     categories: dict[str, int] = {}
-    buckets: dict[str, dict[str, int]] = {}
+    per_file: dict[str, dict[str, int]] = {}
     for block in all_blocks:
         categories[block.category] = categories.get(block.category, 0) + 1
         if block.category == "checked":
-            chapter = block.file
             name = bucket_of(block.ratio)
-            buckets.setdefault(chapter, {})
-            buckets[chapter][name] = buckets[chapter].get(name, 0) + 1
-    return all_blocks, categories, buckets
+            per_file.setdefault(block.file, {})
+            per_file[block.file][name] = per_file[block.file].get(name, 0) + 1
+    return all_blocks, categories, per_file
 
 
 def render_summary(
@@ -298,12 +390,20 @@ def render_summary(
     }
 
     out = ["=== 本文↔scripts 同期チェック ===", ""]
-    out.append(f"対象コードブロック（{MIN_SIGNIFICANT_LINES}行以上）: {len(blocks)}")
+    out.append(f"全コードブロック（{MIN_SIGNIFICANT_LINES}行以上）: {len(blocks)}")
+    out.append(f"照合する言語タグ: {', '.join(sorted(TARGET_LANGS))}")
     out.append("")
     out.append("規約により検証対象外:")
     for key, label in cat_labels.items():
         if categories.get(key):
             out.append(f"  {label:34} {categories[key]:4}")
+    other = [b for b in blocks if b.category == "other_lang"]
+    if other:
+        by_lang: dict[str, int] = {}
+        for block in other:
+            by_lang[block.lang] = by_lang.get(block.lang, 0) + 1
+        detail = " ".join(f"{k}:{v}" for k, v in sorted(by_lang.items()))
+        out.append(f"  {'照合対象外の言語':34} {len(other):4}  ({detail})")
     out.append("")
     out.append(f"検証対象: {len(checked)}")
     for key in ("exact", "near", "partial", "slight", "none"):
@@ -312,8 +412,40 @@ def render_summary(
         bar = "#" * round(share / 100 * 32)
         out.append(f"  {labels[key]:22} {count:4}  {bar} {share:.0f}%")
     out.append("")
-    out.append(f"要棚卸し（一致率 {int(THRESHOLD_PARTIAL * 100)}% 未満）: {len(unsynced)}")
+    out.append(
+        f"要棚卸し（一致率 {int(THRESHOLD_PARTIAL * 100)}% 未満）: {len(unsynced)}"
+    )
+    no_counterpart = [b for b in unsynced if not b.counterpart]
+    out.append(
+        f"  ├ 実体があるのに食い違う（乖離）      {len(unsynced) - len(no_counterpart):4}"
+    )
+    out.append(f"  └ 章に同種のファイルが無い（新規候補）{len(no_counterpart):4}")
+    out.append(
+        "  ※ 一致率は行の集合の包含率であり、順序や文脈は見ない。"
+        "「完全一致」はコードが同一である保証ではなく、"
+        "全行がそのファイルのどこかに存在することを意味する"
+    )
+    out.append(
+        "  ※ 要棚卸しには「ライブラリの使い方紹介」など "
+        "scripts/ に置く必要のないものが含まれる。件数がそのまま作業量ではない"
+    )
     return "\n".join(out)
+
+
+def read_previous_unsynced(path: Path) -> int | None:
+    """前回の出力から要棚卸し件数を読む.
+
+    コミット済みの JSON がベースラインになるため、上書きする前に読んで
+    増減を示す。壊れていたり形式が違えば None を返し、報告を省く。
+    """
+    if not path.is_file():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    value = data.get("unsynced_count")
+    return value if isinstance(value, int) else None
 
 
 def main() -> None:
@@ -338,7 +470,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    blocks, categories, buckets = analyze()
+    blocks, categories, per_file = analyze()
     unsynced = sorted(
         (b for b in blocks if b.category == "checked" and b.ratio < THRESHOLD_PARTIAL),
         key=lambda b: (b.file, b.line),
@@ -349,10 +481,20 @@ def main() -> None:
         print("\n=== 要棚卸し一覧 ===")
         for block in unsynced:
             where = block.best_match or "-"
+            kind = "乖離" if block.counterpart else "新規候補"
             print(
                 f"  {block.file}:{block.line:<5} {block.ratio * 100:3.0f}% "
-                f"→ {where:34} {block.heading[:34]}"
+                f"[{kind:4}] {block.lang:10} → {where:34} {block.heading[:30]}"
             )
+
+    # 既存の出力（コミット済みのベースライン）と比べて増減を示す。
+    # 上書き前に読むこと。
+    previous = read_previous_unsynced(args.output)
+    if previous is not None:
+        delta = len(unsynced) - previous
+        sign = "+" if delta > 0 else ""
+        state = "変化なし" if delta == 0 else f"{sign}{delta}"
+        print(f"\n前回の記録 {previous} 件からの増減: {state}")
 
     payload = {
         "check": "code_sync_check",
@@ -363,7 +505,7 @@ def main() -> None:
             "min_significant_lines": MIN_SIGNIFICANT_LINES,
         },
         "categories": categories,
-        "per_chapter": buckets,
+        "per_file": per_file,
         "unsynced_count": len(unsynced),
         "blocks": [
             {k: v for k, v in asdict(b).items() if k != "signature"} for b in blocks
