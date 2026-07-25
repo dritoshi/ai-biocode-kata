@@ -629,7 +629,7 @@ wide form と long form のどちらが適切かは、下流の処理によっ�
 > | カテゴリ | 形式 | 注意点 |
 > |---------|------|--------|
 > | 配列 | FASTA, FASTQ | FASTAインデックス（`.fai`）でランダムアクセス可能 |
-> | マッピング | SAM/BAM/CRAM[9](https://pubmed.ncbi.nlm.nih.gov/19505943/) | BAM+BAIが日常使い。FLAGフィールドはビットフラグ |
+> | マッピング | SAM/BAM/CRAM[9](https://pubmed.ncbi.nlm.nih.gov/19505943/)[13](https://samtools.github.io/hts-specs/SAMv1.pdf) | BAM+BAIが日常使い。FLAGフィールドはビットフラグ |
 > | アノテーション | BED[10](https://genome.ucsc.edu/FAQ/FAQformat.html#format1), GFF3/GTF[11](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) | **BED=0-based half-open**, **GFF=1-based closed** — 混同は致命的バグの元 |
 > | 変異 | VCF/BCF[12](https://pubmed.ncbi.nlm.nih.gov/21653522/) | ヘッダ行（`##`）の構造を理解する |
 > | MSA | FASTA, Clustal, Stockholm, PHYLIP | ツール間の変換は `Biopython AlignIO` or EMBOSS `seqret` |
@@ -650,7 +650,7 @@ wide form と long form のどちらが適切かは、下流の処理によっ�
 > **🧬 コラム: 座標系の罠 — 0-based vs 1-based**
 >
 > なぜ同じゲノム位置を指すのに2つの座標系が存在するのか。
-> 歴史的に、UCSCゲノムブラウザが採用したBED形式はC言語や
+> 歴史的に、UCSCゲノムブラウザ[14](https://doi.org/10.1101/gr.229102)が採用したBED形式はC言語や
 > Pythonと同じ0-based indexingを使い、区間を半開区間
 > [start, end) で表す。一方、GFFやVCFは生物学者にとって直感的な
 > 1-based closed区間 [start, end] を採用した。

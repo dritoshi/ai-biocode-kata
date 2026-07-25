@@ -9,8 +9,8 @@
 
 | ツール | 公式ドキュメント |
 |-------|----------------|
-| Claude Code CLI | https://code.claude.com/docs [1] |
-| Codex CLI | https://github.com/openai/codex [2] |
+| Claude Code CLI | https://code.claude.com/docs [1](https://code.claude.com/docs) |
+| Codex CLI | https://github.com/openai/codex [2](https://github.com/openai/codex) |
 
 ## セットアップ
 

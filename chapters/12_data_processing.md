@@ -47,7 +47,7 @@ def gc_contents_count(sequences: list[str]) -> list[float]:
 
 ### ベクトル化とは何か
 
-**ベクトル化**（vectorization）とは、forループを使わず、配列全体に対する一括演算として処理を記述するテクニックである。NumPyのベクトル化演算が高速な理由は2つある:
+**ベクトル化**（vectorization）とは、forループを使わず、配列全体に対する一括演算として処理を記述するテクニックである。NumPy[1](https://doi.org/10.1038/s41586-020-2649-2)[2](https://numpy.org/doc/stable/)のベクトル化演算が高速な理由は2つある:
 
 1. **C言語レベルのループ**: NumPyの内部はCで実装されており、Pythonのインタプリタオーバーヘッドがない
 2. **連続メモリアクセス**: NumPy配列はメモリ上に連続して配置される（[§3-5](./03_cs_basics.md#3-5-計算機アーキテクチャの基礎)で学んだC orderのメモリレイアウト）ため、CPUキャッシュを効率的に利用できる
@@ -166,7 +166,7 @@ def filter_by_quality(scores: np.ndarray, threshold: int = 20) -> np.ndarray:
 
 ### pandasの基本操作パターン
 
-pandasはテーブルデータ操作のデファクトスタンダードである。[§4](./04_data_formats.md)では `melt()` と `pivot_table()` によるtidy data変換を学んだが、実際のデータ処理ではさらに多くの操作が必要になる。
+pandas[3](https://pandas.pydata.org/docs/)はテーブルデータ操作のデファクトスタンダードである。[§4](./04_data_formats.md)では `melt()` と `pivot_table()` によるtidy data変換を学んだが、実際のデータ処理ではさらに多くの操作が必要になる。
 
 ![pd.melt()によるデータ変換: Wide形式からTidy形式への変換](../figures/ch12_tidy_melt.png)
 
@@ -270,7 +270,7 @@ result = (
 
 ### Polars: 大規模データの高速処理
 
-**Polars**[5](https://docs.pola.rs/)はRust製のDataFrameライブラリで、pandasと同様のテーブル操作を高速に実行できる。特に数百万行を超える大規模データで威力を発揮する。
+**Polars**[4](https://docs.pola.rs/)はRust製のDataFrameライブラリで、pandasと同様のテーブル操作を高速に実行できる。特に数百万行を超える大規模データで威力を発揮する。
 
 Polarsの最大の特徴は**lazy evaluation**（遅延評価）である。これは、操作をその場で実行せず「何をするか」という計画だけを先に組み立て、最後にまとめて最適化・実行する方式を指す:
 
@@ -336,10 +336,10 @@ pandasやPolarsの操作をエージェントに依頼するときは、入力�
 >
 > | ライブラリ | 用途 | 代表的な使い方 |
 > |-----------|------|---------------|
-> | **Biopython**[8](https://pubmed.ncbi.nlm.nih.gov/19304878/) | 配列操作の万能ナイフ | `SeqIO`（FASTA/FASTQ）, `AlignIO`（MSA）, `Blast`（結果パース）, `Entrez`（NCBI API） |
+> | **Biopython**[7](https://pubmed.ncbi.nlm.nih.gov/19304878/) | 配列操作の万能ナイフ | `SeqIO`（FASTA/FASTQ）, `AlignIO`（MSA）, `Blast`（結果パース）, `Entrez`（NCBI API） |
 > | **pysam** | SAM/BAM/VCF操作 | htslibのPythonラッパー。大規模NGSデータの高速処理 |
 > | **pyBigWig** | BigWigの読み書き | ゲノムシグナルデータの操作 |
-> | **scanpy**[9](https://doi.org/10.1186/s13059-017-1382-0) | シングルセル解析 | 前処理→クラスタリング→可視化の一気通貫 |
+> | **scanpy**[8](https://doi.org/10.1186/s13059-017-1382-0) | シングルセル解析 | 前処理→クラスタリング→可視化の一気通貫 |
 > | **anndata** | シングルセルデータ構造 | `.X`（発現量行列）, `.obs`（細胞メタデータ）, `.var`（遺伝子メタデータ） |
 > | **pyranges** | ゲノム区間演算 | BED的操作をpandas風APIで。区間の交差・結合・差分 |
 > | **ETE Toolkit** | 系統樹操作・可視化 | Newick/NHX形式の読み込み、系統樹の装飾・描画・解析 |
@@ -394,7 +394,7 @@ pandasやPolarsの操作をエージェントに依頼するときは、入力�
 
 ## 12-3. ライブラリ関数の活用 — AIが再発明しがちなパターン
 
-§12-1・§12-2で学んだ「forループではなくライブラリAPIで書く」原則は、科学計算にもそのまま適用される。統計検定、距離計算、最適化——これらの処理にはSciPy[6](https://doi.org/10.1038/s41592-019-0686-2)をはじめとするライブラリに十分にテストされた実装が用意されている。
+§12-1・§12-2で学んだ「forループではなくライブラリAPIで書く」原則は、科学計算にもそのまま適用される。統計検定、距離計算、最適化——これらの処理にはSciPy[5](https://doi.org/10.1038/s41592-019-0686-2)[6](https://docs.scipy.org/doc/scipy/)をはじめとするライブラリに十分にテストされた実装が用意されている。
 
 ここでいう**ライブラリ関数**とは、標準ライブラリや外部ライブラリが提供する既製の関数である。統計検定や距離計算のような定番処理では、まずライブラリ関数が存在しないかを確認し、自前実装は最後の手段にする。
 
@@ -665,14 +665,12 @@ SciPyのライブラリ関数を使うよう修正させるための指示文を
 
 [3] pandas Development Team. "pandas Documentation". [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/) (参照日: 2026-03-19)
 
-[4] McKinney, W. *Python for Data Analysis*. 3rd ed., O'Reilly Media, 2022. ISBN: 978-1098104030
+[4] Polars Contributors. "Polars Documentation". [https://docs.pola.rs/](https://docs.pola.rs/) (参照日: 2026-03-19)
 
-[5] Polars Contributors. "Polars Documentation". [https://docs.pola.rs/](https://docs.pola.rs/) (参照日: 2026-03-19)
+[5] Virtanen, P. et al. "SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python". *Nature Methods*, 17(3), 261–272, 2020. [https://doi.org/10.1038/s41592-019-0686-2](https://doi.org/10.1038/s41592-019-0686-2)
 
-[6] Virtanen, P. et al. "SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python". *Nature Methods*, 17(3), 261–272, 2020. [https://doi.org/10.1038/s41592-019-0686-2](https://doi.org/10.1038/s41592-019-0686-2)
+[6] SciPy Developers. "SciPy Documentation". [https://docs.scipy.org/doc/scipy/](https://docs.scipy.org/doc/scipy/) (参照日: 2026-03-19)
 
-[7] SciPy Developers. "SciPy Documentation". [https://docs.scipy.org/doc/scipy/](https://docs.scipy.org/doc/scipy/) (参照日: 2026-03-19)
+[7] Cock, P. J. A. et al. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. [https://pubmed.ncbi.nlm.nih.gov/19304878/](https://pubmed.ncbi.nlm.nih.gov/19304878/)
 
-[8] Cock, P. J. A. et al. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. [https://pubmed.ncbi.nlm.nih.gov/19304878/](https://pubmed.ncbi.nlm.nih.gov/19304878/)
-
-[9] Wolf, F. A. et al. "SCANPY: large-scale single-cell gene expression data analysis". *Genome Biology*, 19(1), 15, 2018. [https://doi.org/10.1186/s13059-017-1382-0](https://doi.org/10.1186/s13059-017-1382-0)
+[8] Wolf, F. A. et al. "SCANPY: large-scale single-cell gene expression data analysis". *Genome Biology*, 19(1), 15, 2018. [https://doi.org/10.1186/s13059-017-1382-0](https://doi.org/10.1186/s13059-017-1382-0)
