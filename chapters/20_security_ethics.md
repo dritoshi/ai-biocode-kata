@@ -484,10 +484,12 @@ AI コーディングエージェントのプライバシー設定は、**サイ
 > | プラットフォーム | 運営 | 対象データ | 特徴 |
 > |---|---|---|---|
 > | **Terra**[22](https://terra.bio/) | Broad Institute / Verily / Microsoft | dbGaP、TCGA、GTEx等 | WDL/Nextflowワークフロー実行。Google Cloud / Azure基盤。65,000人以上が利用 |
-> | **AnVIL**[23](https://anvilproject.org/) | NHGRI（NIH） | ヒトゲノムデータ（60万サンプル以上） | TerraをベースにしたNIH公式プラットフォーム。dbGaPデータへの直接アクセス |
-> | **Cancer Genomics Cloud**[24](https://www.cancergenomicscloud.org/) | Seven Bridges（Velsera）/ NCI | TCGA、CPTAC等 | CWLベースのワークフロー。850以上の解析ツールを提供 |
-> | **UK Biobank RAP**[25](https://ukbiobank.dnanexus.com/) | UK Biobank / DNAnexus | UK Biobank（40PB以上） | 90か国以上・28,000人以上の研究者が利用。DNAnexus基盤 |
+> | **AnVIL**[23](https://anvilproject.org/) | NHGRI（NIH） | ヒトゲノムデータ（約29万参加者・4.7PB超） | TerraをベースにしたNIH公式プラットフォーム。dbGaPデータへの直接アクセス |
+> | **Cancer Genomics Cloud**[24](https://www.cancergenomicscloud.org/) | Seven Bridges（Velsera）/ NCI | TCGA、CPTAC等 | CWLベースのワークフロー。900以上のツール・ワークフローを提供 |
+> | **UK Biobank RAP**[25](https://ukbiobank.dnanexus.com/) | UK Biobank / DNAnexus | UK Biobank（30PB超） | 90か国以上・30,000人以上が登録するUK Biobankの解析環境。DNAnexus基盤 |
 > | **DDBJグループクラウド**[26](https://www.ddbj.nig.ac.jp/services/ddbj-group-cloud.html) | DDBJ / NIG（日本） | JGA等 | 日本のヒトゲノムデータ向け。遺伝研スパコンの個人ゲノム解析区画と連携 |
+>
+> ただし、この表は各プラットフォームが常時利用できることを保証するものではない。UK Biobankでは、参加者50万人分の匿名化データが外部のウェブサイトで販売提示されているのが2026年4月に発覚した。外部からの侵入ではなく、アクセスを承認された利用者の手元から規約に反して持ち出されたものとみられ、同年6月に公表された監督委員会の報告書は、専任セキュリティチームの設置と、解析環境からのデータ持ち出しを検査する**データエアロック**の実装を勧告している[39](https://www.sciencemediacentre.org/expert-reaction-to-the-oversight-committee-report-into-data-security-at-uk-biobank/)[40](https://www.publictechnology.net/2026/07/13/health-and-social-care/uk-biobank-commissions-200k-security-review-after-major-data-incident/)。研究利用は、この検査の仕組みが整うまで再開しないとされている。TREが備えるべき脅威は外部からの侵入だけではないこと、そして利用を予定するプラットフォームの稼働状況は公式サイトで都度確認すべきことを示す事例である。
 >
 > これらのプラットフォームでは、データをダウンロードするのではなく、**解析をデータのある場所に持っていく**（[§16](./16_hpc.md)のクラウドコラム参照）。ワークフロー定義ファイル（WDL、CWL、Nextflow）やDockerコンテナをアップロードし、クラウド上で実行する。[§14](./14_workflow.md)で学んだワークフロー管理と[§15](./15_container.md)で学んだコンテナ技術の知識が、ここで直結する。
 
@@ -811,11 +813,11 @@ __pycache__/
 
 [21] UK Health Data Research Alliance. "Trusted Research Environments (TRE) — A strategy towards building public trust". 2020. https://ukhealthdata.org/wp-content/uploads/2020/04/200430-TRE-Green-Paper-v1.pdf (参照日: 2026-03-31)
 
-[22] Terra. "Science at Scale". https://terra.bio/ (参照日: 2026-03-31)
+[22] Terra. "Science at Scale". https://terra.bio/ (参照日: 2026-07-25)
 
-[23] AnVIL Project. "NHGRI Genomic Data Science Analysis, Visualization, and Informatics Lab-space". https://anvilproject.org/ (参照日: 2026-03-31)
+[23] AnVIL Project. "NHGRI Genomic Data Science Analysis, Visualization, and Informatics Lab-space". https://anvilproject.org/ (参照日: 2026-07-25)
 
-[24] Seven Bridges / NCI. "Cancer Genomics Cloud". https://www.cancergenomicscloud.org/ (参照日: 2026-03-31)
+[24] Seven Bridges / NCI. "Cancer Genomics Cloud". https://www.cancergenomicscloud.org/ (参照日: 2026-07-25)
 
 [25] UK Biobank / DNAnexus. "UK Biobank Research Analysis Platform". https://ukbiobank.dnanexus.com/ (参照日: 2026-03-31)
 
@@ -844,3 +846,7 @@ __pycache__/
 [37] NIH. "Implementation Update: Enhancing Security Measures for NIH Controlled-Access Data (NOT-OD-25-083)". https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-083.html (参照日: 2026-07-24)
 
 [38] NIH. "NIH Genomic Data Sharing Policy". https://sharing.nih.gov/genomic-data-sharing-policy (参照日: 2026-07-24)
+
+[39] Science Media Centre. "expert reaction to the Oversight Committee report into data security at UK Biobank". https://www.sciencemediacentre.org/expert-reaction-to-the-oversight-committee-report-into-data-security-at-uk-biobank/ (参照日: 2026-07-25)
+
+[40] Trendall, S. "UK Biobank commissions £200k security review after major 'data incident'". *PublicTechnology*, 2026. https://www.publictechnology.net/2026/07/13/health-and-social-care/uk-biobank-commissions-200k-security-review-after-major-data-incident/ (参照日: 2026-07-25)
