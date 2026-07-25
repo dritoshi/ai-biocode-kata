@@ -5,6 +5,7 @@ import polars as pl
 from scripts.ch12.polars_bio_ops import (
     filter_significant_genes_lazy,
     summarize_by_category_lazy,
+    summarize_by_direction_lazy,
 )
 
 
@@ -50,6 +51,44 @@ class TestFilterSignificantGenesLazy:
         """有意な遺伝子がない場合."""
         lf = _make_deg_lazyframe()
         result = filter_significant_genes_lazy(
+            lf, padj_threshold=1e-20, log2fc_threshold=10.0
+        ).collect()
+        assert len(result) == 0
+
+
+class TestSummarizeByDirectionLazy:
+    """summarize_by_direction_lazy のテスト."""
+
+    def test_direction_column_is_created(self) -> None:
+        """direction 列が入力になくても group_by できる（本文コード例の回帰テスト）."""
+        lf = _make_deg_lazyframe()
+        assert "direction" not in lf.collect_schema().names()
+        result = summarize_by_direction_lazy(lf).collect()
+        assert set(result["direction"].to_list()) == {"up", "down"}
+
+    def test_mean_per_direction(self) -> None:
+        """向きごとの平均log2FCが正しい（up: BRCA1 2.5とMYC 1.5、down: TP53 -1.8）."""
+        lf = _make_deg_lazyframe()
+        result = summarize_by_direction_lazy(lf).collect()
+        means = dict(
+            zip(
+                result["direction"].to_list(),
+                result["log2FoldChange"].to_list(),
+                strict=True,
+            )
+        )
+        assert means["up"] == 2.0
+        assert means["down"] == -1.8
+
+    def test_returns_lazyframe(self) -> None:
+        """戻り値がLazyFrameである（まだ実行されていない）."""
+        lf = _make_deg_lazyframe()
+        assert isinstance(summarize_by_direction_lazy(lf), pl.LazyFrame)
+
+    def test_no_significant(self) -> None:
+        """有意な遺伝子がない場合は空になる."""
+        lf = _make_deg_lazyframe()
+        result = summarize_by_direction_lazy(
             lf, padj_threshold=1e-20, log2fc_threshold=10.0
         ).collect()
         assert len(result) == 0

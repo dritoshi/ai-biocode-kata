@@ -280,11 +280,16 @@ import polars as pl
 # lazy evaluation: scan_csv()で読み込みを遅延
 lf = pl.scan_csv("deg_results.csv")
 
-# フィルタと集計を「計画」として記述
+# フィルタ・列追加・集計を「計画」として記述
 result = (
     lf.filter(
         (pl.col("padj") < 0.05)
         & (pl.col("log2FoldChange").abs() >= 1.0)
+    )
+    .with_columns(  # 発現変化の向きを表す direction 列を追加
+        direction=pl.when(pl.col("log2FoldChange") > 0)
+        .then(pl.lit("up"))
+        .otherwise(pl.lit("down"))
     )
     .group_by("direction")
     .agg(pl.col("log2FoldChange").mean())
@@ -293,6 +298,8 @@ result = (
 ```
 
 `scan_csv()` はファイルをすぐには読み込まず、`.collect()` が呼ばれた時点で必要な列だけを読み込む。これにより、不要な列の読み込みやフィルタ前の全行読み込みを回避できる。
+
+列を追加する `with_columns()` は、pandasの `.assign()` に相当する。中の `pl.when(条件).then(A).otherwise(B)` は「条件が真ならA、偽ならB」を返す式で、先ほどのpandas版で使った `np.where()` と同じ役割である。`pl.lit()` は列ではなく定数を表す（"up" という文字列そのものを値として使う、という指定である）。ここで `direction` 列を作っておかないと、次の `group_by("direction")` はその列を見つけられずエラーになる。
 
 ただし、Polars が常に pandas より優れているわけではない。小〜中規模データ、周辺ライブラリとの連携、行ラベル中心の操作では pandas のほうが自然なことも多い。また、lazy API を使っていても `.collect()` は最終結果をメモリに実体化するため、出力自体が巨大なら RAM 使用量は依然として問題になる。
 
