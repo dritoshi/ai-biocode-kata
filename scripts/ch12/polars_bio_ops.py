@@ -33,6 +33,44 @@ def filter_significant_genes_lazy(
     )
 
 
+def summarize_by_direction_lazy(
+    lf: pl.LazyFrame,
+    padj_threshold: float = 0.05,
+    log2fc_threshold: float = 1.0,
+) -> pl.LazyFrame:
+    """有意な遺伝子を発現変化の向きで分類し、向きごとに平均log2FCを集計する.
+
+    本書 §12-2「Polars: 大規模データの高速処理」のコード例に対応する。
+    `direction` はDEG結果の入力には含まれない列なので、`group_by()` の前に
+    `with_columns()` で作る必要がある。これを省くと `group_by("direction")`
+    が ColumnNotFoundError になる。
+
+    Parameters
+    ----------
+    lf : pl.LazyFrame
+        DEG結果のLazyFrame（padj, log2FoldChange カラムが必要）
+    padj_threshold : float
+        調整済みp値の閾値（この値未満を有意とする）
+    log2fc_threshold : float
+        |log2FoldChange| の閾値（この値以上を有意とする）
+
+    Returns
+    -------
+    pl.LazyFrame
+        direction（up / down）ごとの平均 log2FoldChange を含むLazyFrame
+    """
+    return (
+        filter_significant_genes_lazy(lf, padj_threshold, log2fc_threshold)
+        .with_columns(
+            direction=pl.when(pl.col("log2FoldChange") > 0)
+            .then(pl.lit("up"))
+            .otherwise(pl.lit("down"))
+        )
+        .group_by("direction")
+        .agg(pl.col("log2FoldChange").mean())
+    )
+
+
 def summarize_by_category_lazy(
     lf: pl.LazyFrame,
     category_col: str,
