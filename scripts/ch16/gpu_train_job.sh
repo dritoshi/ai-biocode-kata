@@ -16,7 +16,8 @@ module load cuda/12.0
 module load cudnn/8.9
 
 # conda環境をアクティベート
-source activate ml_env
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate ml_env
 
 # GPUが認識されているか確認（デバッグ用）
 echo "=== GPU情報 ==="
