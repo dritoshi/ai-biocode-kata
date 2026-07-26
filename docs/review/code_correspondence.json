@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-07-26T10:01:08+09:00",
+  "generated_at": "2026-07-26T12:03:20+09:00",
   "method": "docs/review/2026-07-25_code_correspondence_reaudit_plan.md",
-  "source_commit": "96d5dd89e862c24937bec22f5a2c6f6aa966ebe6",
-  "source_snapshot_sha256": "d335e0ac0d2ccbd84a06a707eeed3b5d32a577c64343ac74d1d11131d46ed750",
+  "source_commit": "2ec5969f10f328174424d5b91c755ecc2a0c1554",
+  "source_snapshot_sha256": "2ec29550dc48a4fd01d52e3676e54397966d20eccfc3c14935a45ea342acf85d",
   "environment": {
     "python": "3.14.6",
     "pytest": "pytest 9.0.3",
@@ -13,7 +13,7 @@
     "chapters": 22,
     "book_blocks": 529,
     "script_files": 116,
-    "test_files_under_chapters": 91,
+    "test_files_under_chapters": 92,
     "languages": {
       "python": 227,
       "text": 2,
@@ -34,34 +34,34 @@
       "sparql": 1
     },
     "categories": {
-      "implementation": 71,
+      "implementation": 70,
       "output_data_diagram": 90,
       "bad_example": 23,
       "command": 144,
       "exercise": 26,
-      "library_usage": 90,
+      "library_usage": 91,
       "scripts_call": 16,
       "config_workflow": 56,
       "concept_stub": 5,
       "test_code": 8
     },
     "placements": {
-      "required_scripts": 127,
-      "not_required": 394,
+      "required_scripts": 126,
+      "not_required": 395,
       "required_tests": 8
     },
     "correspondence_all": {
-      "E3": 36,
-      "EN": 394,
+      "E3": 37,
+      "EN": 395,
       "E1": 38,
-      "E5": 39,
+      "E5": 37,
       "E2": 12,
       "E0": 10
     },
     "correspondence_required": {
-      "E3": 36,
+      "E3": 37,
       "E1": 38,
-      "E5": 39,
+      "E5": 37,
       "E2": 12,
       "E0": 10
     },
@@ -76,10 +76,10 @@
       "passed_with_skip": 1
     },
     "test_run": {
-      "files": 71,
-      "chapter_test_files": 69,
+      "files": 72,
+      "chapter_test_files": 70,
       "review_test_files": 2,
-      "passed": 836,
+      "passed": 839,
       "failed": 0,
       "skipped": 1,
       "errors": 0
@@ -9538,9 +9538,10 @@
       "tests": {
         "status": "passed",
         "files": [
-          "tests/ch11/test_seqtool.py"
+          "tests/ch11/test_seqtool.py",
+          "tests/ch11/test_seqtool_streams.py"
         ],
-        "passed": 13,
+        "passed": 16,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -10144,12 +10145,40 @@
       "category": "implementation",
       "placement": "required_scripts",
       "category_reason": "名前付き実装定義",
-      "relations": [],
-      "correspondence": "E5",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/seqtool.py",
+          "target_entity": "filter_cmd",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同じfilter CLI処理だが、関数名、内包表記とループ、ステータスメッセージに差がある",
+          "verification": "manual",
+          "cross_chapter": false,
+          "target_file_id": "S-11-057",
+          "target_entity_locations": [
+            {
+              "id": "S-11-057-E003",
+              "name": "filter_cmd",
+              "kind": "FunctionDef",
+              "line_start": 145,
+              "line_end": 177
+            }
+          ],
+          "history": {
+            "book_last_update": "2026-07-23T23:24:15+09:00",
+            "target_last_update": "2026-03-22T17:23:06+09:00",
+            "target_granularity": "file"
+          }
+        }
+      ],
+      "correspondence": "E3",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch11/test_seqtool.py",
+          "tests/ch11/test_seqtool_streams.py"
+        ],
+        "passed": 16,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -10354,9 +10383,10 @@
       "tests": {
         "status": "passed",
         "files": [
-          "tests/ch11/test_seqtool.py"
+          "tests/ch11/test_seqtool.py",
+          "tests/ch11/test_seqtool_streams.py"
         ],
-        "passed": 13,
+        "passed": 16,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -10648,11 +10678,11 @@
       ],
       "sha256": "ff8e200ef778ced94a43483573cedec3ad54c7551bf9fe29579c5a9a6db81a1b",
       "nonempty_lines": 3,
-      "category": "implementation",
-      "placement": "required_scripts",
-      "category_reason": "名前付き実装定義",
+      "category": "library_usage",
+      "placement": "not_required",
+      "category_reason": "str.countの使い方を紹介する数行のライブラリ利用例",
       "relations": [],
-      "correspondence": "E5",
+      "correspondence": "EN",
       "tests": {
         "status": "no_direct_test",
         "files": [],
@@ -20652,6 +20682,7 @@
       "book_status": "body_correspondence",
       "body_block_ids": [
         "B-11-007",
+        "B-11-024",
         "B-11-030"
       ],
       "reference_block_ids": [],
@@ -20660,14 +20691,19 @@
         {
           "test_file": "tests/ch11/test_seqtool.py",
           "evidence": "direct_import"
+        },
+        {
+          "test_file": "tests/ch11/test_seqtool_streams.py",
+          "evidence": "direct_import"
         }
       ],
       "test_result": {
         "status": "passed",
         "files": [
-          "tests/ch11/test_seqtool.py"
+          "tests/ch11/test_seqtool.py",
+          "tests/ch11/test_seqtool_streams.py"
         ],
-        "passed": 13,
+        "passed": 16,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -22269,7 +22305,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.307,
+        "duration_seconds": 0.281,
         "summary": "11 passed in 0.07s"
       }
     },
@@ -22288,8 +22324,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.44,
-        "summary": "9 passed in 0.26s"
+        "duration_seconds": 0.474,
+        "summary": "9 passed in 0.28s"
       }
     },
     {
@@ -22307,8 +22343,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.099,
-        "summary": "8 passed in 0.77s"
+        "duration_seconds": 1.006,
+        "summary": "8 passed in 0.69s"
       }
     },
     {
@@ -22339,7 +22375,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.199,
+        "duration_seconds": 0.221,
         "summary": "9 passed in 0.01s"
       }
     },
@@ -22358,7 +22394,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.213,
+        "duration_seconds": 0.233,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -22388,8 +22424,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.194,
-        "summary": "12 passed in 0.01s"
+        "duration_seconds": 0.245,
+        "summary": "12 passed in 0.02s"
       }
     },
     {
@@ -22407,8 +22443,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.223,
-        "summary": "11 passed in 0.02s"
+        "duration_seconds": 0.303,
+        "summary": "11 passed in 0.03s"
       }
     },
     {
@@ -22426,7 +22462,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
+        "duration_seconds": 0.212,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -22445,8 +22481,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.218,
-        "summary": "18 passed in 0.02s"
+        "duration_seconds": 0.237,
+        "summary": "18 passed in 0.03s"
       }
     },
     {
@@ -22475,7 +22511,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.201,
+        "duration_seconds": 0.231,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -22494,7 +22530,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.196,
+        "duration_seconds": 0.22,
         "summary": "17 passed in 0.01s"
       }
     },
@@ -22513,8 +22549,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.306,
-        "summary": "12 passed in 0.08s"
+        "duration_seconds": 0.295,
+        "summary": "12 passed in 0.09s"
       }
     },
     {
@@ -22543,7 +22579,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.212,
         "summary": "7 passed in 0.01s"
       }
     },
@@ -22562,7 +22598,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.259,
+        "duration_seconds": 0.214,
         "summary": "8 passed in 0.02s"
       }
     },
@@ -22581,7 +22617,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.253,
+        "duration_seconds": 0.217,
         "summary": "13 passed in 0.01s"
       }
     },
@@ -22600,8 +22636,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.813,
-        "summary": "8 passed in 0.51s"
+        "duration_seconds": 0.815,
+        "summary": "8 passed in 0.49s"
       }
     },
     {
@@ -22619,7 +22655,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.217,
+        "duration_seconds": 0.235,
         "summary": "6 passed in 0.01s"
       }
     },
@@ -22649,8 +22685,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.256,
-        "summary": "21 passed in 0.06s"
+        "duration_seconds": 0.277,
+        "summary": "21 passed in 0.07s"
       }
     },
     {
@@ -22668,7 +22704,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.203,
+        "duration_seconds": 0.248,
         "summary": "10 passed in 0.01s"
       }
     },
@@ -22687,7 +22723,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.205,
+        "duration_seconds": 0.228,
         "summary": "6 passed in 0.01s"
       }
     },
@@ -22717,7 +22753,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.246,
+        "duration_seconds": 0.226,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -22736,7 +22772,7 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.261,
+        "duration_seconds": 0.232,
         "summary": "5 passed, 1 skipped in 0.03s"
       }
     },
@@ -22771,7 +22807,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.221,
+        "duration_seconds": 0.205,
         "summary": "7 passed in 0.01s"
       }
     },
@@ -22794,8 +22830,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.406,
-        "summary": "11 passed in 0.14s"
+        "duration_seconds": 0.337,
+        "summary": "11 passed in 0.11s"
       }
     },
     {
@@ -22824,8 +22860,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.231,
-        "summary": "15 passed in 0.01s"
+        "duration_seconds": 0.218,
+        "summary": "15 passed in 0.02s"
       }
     },
     {
@@ -22843,7 +22879,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.227,
+        "duration_seconds": 0.219,
         "summary": "7 passed in 0.01s"
       }
     },
@@ -22862,8 +22898,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.376,
-        "summary": "5 passed in 0.08s"
+        "duration_seconds": 0.201,
+        "summary": "5 passed in 0.01s"
       }
     },
     {
@@ -22881,7 +22917,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.198,
+        "duration_seconds": 0.232,
         "summary": "9 passed in 0.01s"
       }
     },
@@ -22900,8 +22936,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.884,
-        "summary": "11 passed in 0.36s"
+        "duration_seconds": 0.67,
+        "summary": "11 passed in 0.34s"
       }
     },
     {
@@ -22919,7 +22955,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.244,
+        "duration_seconds": 0.228,
         "summary": "12 passed in 0.02s"
       }
     },
@@ -22938,7 +22974,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.654,
+        "duration_seconds": 0.632,
         "summary": "11 passed in 0.33s"
       }
     },
@@ -22968,7 +23004,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.244,
+        "duration_seconds": 0.229,
         "summary": "5 passed in 0.02s"
       }
     },
@@ -22987,8 +23023,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.349,
-        "summary": "15 passed in 0.13s"
+        "duration_seconds": 0.363,
+        "summary": "15 passed in 0.12s"
       }
     },
     {
@@ -23017,7 +23053,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.329,
+        "duration_seconds": 0.337,
         "summary": "7 passed in 0.11s"
       }
     },
@@ -23036,8 +23072,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.373,
-        "summary": "9 passed in 0.13s"
+        "duration_seconds": 0.407,
+        "summary": "9 passed in 0.12s"
       }
     },
     {
@@ -23055,8 +23091,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.225,
-        "summary": "10 passed in 0.03s"
+        "duration_seconds": 0.272,
+        "summary": "10 passed in 0.04s"
       }
     },
     {
@@ -23074,12 +23110,31 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.413,
+        "duration_seconds": 0.405,
         "summary": "13 passed in 0.15s"
       }
     },
     {
-      "id": "T-12-050",
+      "id": "T-11-050",
+      "path": "tests/ch11/test_seqtool_streams.py",
+      "chapter": "ch11",
+      "sha256": "8cef5f49b8637973f46c96e16d3af05fce9954fa6091c984d32dafe24c0b0d06",
+      "line_count": 101,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.358,
+        "summary": "3 passed in 0.12s"
+      }
+    },
+    {
+      "id": "T-12-051",
       "path": "tests/ch12/__init__.py",
       "chapter": "ch12",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -23090,7 +23145,7 @@
       "test_result": null
     },
     {
-      "id": "T-12-051",
+      "id": "T-12-052",
       "path": "tests/ch12/test_numpy_vectorize.py",
       "chapter": "ch12",
       "sha256": "2c5614c1017dac636d96ed2385fdbd7b008e91d65e6ee33b099a25053b388447",
@@ -23104,12 +23159,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.285,
+        "duration_seconds": 0.276,
         "summary": "13 passed in 0.05s"
       }
     },
     {
-      "id": "T-12-052",
+      "id": "T-12-053",
       "path": "tests/ch12/test_pandas_bio_ops.py",
       "chapter": "ch12",
       "sha256": "6e5db34b4203710539b33802b50c22036a467afcaa6e5f8e6a3d6d324e5cef1c",
@@ -23123,12 +23178,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.669,
-        "summary": "9 passed in 0.34s"
+        "duration_seconds": 0.69,
+        "summary": "9 passed in 0.35s"
       }
     },
     {
-      "id": "T-12-053",
+      "id": "T-12-054",
       "path": "tests/ch12/test_polars_bio_ops.py",
       "chapter": "ch12",
       "sha256": "263b8d4f4886002d86ed2fca6ba9e241190571d01c353cfcb6130aad78511ec5",
@@ -23142,12 +23197,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.435,
-        "summary": "10 passed in 0.17s"
+        "duration_seconds": 0.43,
+        "summary": "10 passed in 0.16s"
       }
     },
     {
-      "id": "T-12-054",
+      "id": "T-12-055",
       "path": "tests/ch12/test_scipy_stats_bio.py",
       "chapter": "ch12",
       "sha256": "90aaf980d73d8148acc71b1c0b8527a4b5b58f3c879ec8edadd84de36bde5924",
@@ -23161,12 +23216,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.218,
-        "summary": "19 passed in 0.87s"
+        "duration_seconds": 1.071,
+        "summary": "19 passed in 0.77s"
       }
     },
     {
-      "id": "T-13-055",
+      "id": "T-13-056",
       "path": "tests/ch13/__init__.py",
       "chapter": "ch13",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -23177,7 +23232,7 @@
       "test_result": null
     },
     {
-      "id": "T-13-056",
+      "id": "T-13-057",
       "path": "tests/ch13/test_bio_plots.py",
       "chapter": "ch13",
       "sha256": "f4ae06e14f08f68cc77acb19dd1f6ee343f75bc854afc368534a538d00be8d5e",
@@ -23191,12 +23246,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 2.326,
-        "summary": "10 passed in 1.77s"
+        "duration_seconds": 2.287,
+        "summary": "10 passed in 1.75s"
       }
     },
     {
-      "id": "T-13-057",
+      "id": "T-13-058",
       "path": "tests/ch13/test_matplotlib_bindist.py",
       "chapter": "ch13",
       "sha256": "51cacb86ea71aa52bdf70f1244b11bdfbdcdf0ac1ea512e36efbcf84cfbc0d9e",
@@ -23210,12 +23265,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.748,
-        "summary": "6 passed in 0.42s"
+        "duration_seconds": 0.734,
+        "summary": "6 passed in 0.41s"
       }
     },
     {
-      "id": "T-13-058",
+      "id": "T-13-059",
       "path": "tests/ch13/test_seaborn_biodist.py",
       "chapter": "ch13",
       "sha256": "6b57388f9d8adf8ae59f1a59829a7552b2acdb744aa2780d23b60cb95853308d",
@@ -23229,12 +23284,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.858,
-        "summary": "5 passed in 1.34s"
+        "duration_seconds": 1.901,
+        "summary": "5 passed in 1.36s"
       }
     },
     {
-      "id": "T-14-059",
+      "id": "T-14-060",
       "path": "tests/ch14/__init__.py",
       "chapter": "ch14",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23245,7 +23300,7 @@
       "test_result": null
     },
     {
-      "id": "T-14-060",
+      "id": "T-14-061",
       "path": "tests/ch14/test_validate_workflow.py",
       "chapter": "ch14",
       "sha256": "f32389d6a201b207ed8a07f3277f5bff55702a685fd8234060a715ab8c75c57f",
@@ -23259,12 +23314,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.224,
+        "duration_seconds": 0.214,
         "summary": "14 passed in 0.01s"
       }
     },
     {
-      "id": "T-15-061",
+      "id": "T-15-062",
       "path": "tests/ch15/__init__.py",
       "chapter": "ch15",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23275,7 +23330,7 @@
       "test_result": null
     },
     {
-      "id": "T-15-062",
+      "id": "T-15-063",
       "path": "tests/ch15/test_experiment_logger.py",
       "chapter": "ch15",
       "sha256": "435ea0645e05cd90dd3adf0268df5fc77b3102a9de2117a92ee6a1ada809fd89",
@@ -23289,12 +23344,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.359,
-        "summary": "17 passed in 0.16s"
+        "duration_seconds": 0.381,
+        "summary": "17 passed in 0.17s"
       }
     },
     {
-      "id": "T-15-063",
+      "id": "T-15-064",
       "path": "tests/ch15/test_validate_dockerfile.py",
       "chapter": "ch15",
       "sha256": "19d298392b9ba3c7c89de4016b5e43fc3fb629f9475d2bd0ca3015adbe296237",
@@ -23308,12 +23363,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
-        "summary": "22 passed in 0.01s"
+        "duration_seconds": 0.221,
+        "summary": "22 passed in 0.02s"
       }
     },
     {
-      "id": "T-16-064",
+      "id": "T-16-065",
       "path": "tests/ch16/__init__.py",
       "chapter": "ch16",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23324,7 +23379,7 @@
       "test_result": null
     },
     {
-      "id": "T-16-065",
+      "id": "T-16-066",
       "path": "tests/ch16/test_validate_slurm.py",
       "chapter": "ch16",
       "sha256": "719acf9e86f94d9e7ce16f72fa577dbc7410b4cd1df15453e218a5dd1c9e01f9",
@@ -23338,12 +23393,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
+        "duration_seconds": 0.227,
         "summary": "31 passed in 0.02s"
       }
     },
     {
-      "id": "T-17-066",
+      "id": "T-17-067",
       "path": "tests/ch17/__init__.py",
       "chapter": "ch17",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -23354,7 +23409,7 @@
       "test_result": null
     },
     {
-      "id": "T-17-067",
+      "id": "T-17-068",
       "path": "tests/ch17/test_chunk_processing.py",
       "chapter": "ch17",
       "sha256": "a85d8a86d620fa067d45dfed19c550af020f7e5385183f8e94d9d4096b824505",
@@ -23368,12 +23423,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.67,
-        "summary": "4 passed in 0.35s"
+        "duration_seconds": 0.655,
+        "summary": "4 passed in 0.33s"
       }
     },
     {
-      "id": "T-17-068",
+      "id": "T-17-069",
       "path": "tests/ch17/test_file_format_bench.py",
       "chapter": "ch17",
       "sha256": "52830708c8224bd60a0d6a30046e1a841b535e797675e6c9281efa7a69b1ebb0",
@@ -23387,12 +23442,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.728,
-        "summary": "6 passed in 0.43s"
+        "duration_seconds": 0.861,
+        "summary": "6 passed in 0.44s"
       }
     },
     {
-      "id": "T-17-069",
+      "id": "T-17-070",
       "path": "tests/ch17/test_generator_fastq.py",
       "chapter": "ch17",
       "sha256": "fe44b5bfc83b8c1c3d45e839396571c543d3cbbc0eac69578108cee6d0f8be1d",
@@ -23406,12 +23461,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.399,
-        "summary": "7 passed in 0.13s"
+        "duration_seconds": 0.385,
+        "summary": "7 passed in 0.12s"
       }
     },
     {
-      "id": "T-17-070",
+      "id": "T-17-071",
       "path": "tests/ch17/test_parallel_gc.py",
       "chapter": "ch17",
       "sha256": "b62b728ea0b5810684279e855c4277066d308c5225464b9a8545ea1d7dea660e",
@@ -23425,12 +23480,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.564,
-        "summary": "9 passed in 0.35s"
+        "duration_seconds": 0.593,
+        "summary": "9 passed in 0.38s"
       }
     },
     {
-      "id": "T-17-071",
+      "id": "T-17-072",
       "path": "tests/ch17/test_profiling_demo.py",
       "chapter": "ch17",
       "sha256": "a12ab057044e188df01b8ff8d85bde238b60922e2c51229c1de2448e5f4bab23",
@@ -23444,12 +23499,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.302,
+        "duration_seconds": 0.287,
         "summary": "6 passed in 0.07s"
       }
     },
     {
-      "id": "T-18-072",
+      "id": "T-18-073",
       "path": "tests/ch18/__init__.py",
       "chapter": "ch18",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23460,7 +23515,7 @@
       "test_result": null
     },
     {
-      "id": "T-18-073",
+      "id": "T-18-074",
       "path": "tests/ch18/test_docstring_checker.py",
       "chapter": "ch18",
       "sha256": "c1323857cede34fbf472d317558fbfc1fc7ab102d010539b6cd417077d92e189",
@@ -23474,12 +23529,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.249,
+        "duration_seconds": 0.225,
         "summary": "11 passed in 0.01s"
       }
     },
     {
-      "id": "T-18-074",
+      "id": "T-18-075",
       "path": "tests/ch18/test_mermaid_helper.py",
       "chapter": "ch18",
       "sha256": "40eb9806b96c8dbb9a4ada88864f9649bac983c1bc826040dd01a9dfe4199524",
@@ -23493,12 +23548,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
-        "summary": "19 passed in 0.02s"
+        "duration_seconds": 0.209,
+        "summary": "19 passed in 0.01s"
       }
     },
     {
-      "id": "T-18-075",
+      "id": "T-18-076",
       "path": "tests/ch18/test_validate_readme.py",
       "chapter": "ch18",
       "sha256": "91f92663b0370d349c2ec6d7254f34a53bae0d9f1cacfabdfe5bc8c08d3748f9",
@@ -23512,12 +23567,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.262,
-        "summary": "18 passed in 0.02s"
+        "duration_seconds": 0.21,
+        "summary": "18 passed in 0.01s"
       }
     },
     {
-      "id": "T-19-076",
+      "id": "T-19-077",
       "path": "tests/ch19/__init__.py",
       "chapter": "ch19",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23528,7 +23583,7 @@
       "test_result": null
     },
     {
-      "id": "T-19-077",
+      "id": "T-19-078",
       "path": "tests/ch19/test_checksum_verify.py",
       "chapter": "ch19",
       "sha256": "97dfdfad80a7506f440231e1b6ef5c42a26958a3a140a67e9b2746d5181a4f27",
@@ -23542,12 +23597,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
-        "summary": "13 passed in 0.03s"
+        "duration_seconds": 0.231,
+        "summary": "13 passed in 0.02s"
       }
     },
     {
-      "id": "T-19-078",
+      "id": "T-19-079",
       "path": "tests/ch19/test_entrez_fetch.py",
       "chapter": "ch19",
       "sha256": "9cf8a75da3c2cdfaf93165cf2256e82e70b34567b0521dce063d868848b4362d",
@@ -23561,12 +23616,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.566,
-        "summary": "9 passed in 0.25s"
+        "duration_seconds": 0.375,
+        "summary": "9 passed in 0.11s"
       }
     },
     {
-      "id": "T-19-079",
+      "id": "T-19-080",
       "path": "tests/ch19/test_local_db.py",
       "chapter": "ch19",
       "sha256": "53730dc4aae9e45ef5f3066e3fbf4793887a85f68be32370340e81d03a0f76f5",
@@ -23580,12 +23635,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.215,
-        "summary": "13 passed in 0.02s"
+        "duration_seconds": 0.282,
+        "summary": "13 passed in 0.04s"
       }
     },
     {
-      "id": "T-19-080",
+      "id": "T-19-081",
       "path": "tests/ch19/test_parse_flatfile.py",
       "chapter": "ch19",
       "sha256": "21455de745157da3199d517f05a86dee4435ff139f72820d3c69c71d27d10950",
@@ -23599,12 +23654,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.363,
-        "summary": "12 passed in 0.12s"
+        "duration_seconds": 0.369,
+        "summary": "12 passed in 0.13s"
       }
     },
     {
-      "id": "T-19-081",
+      "id": "T-19-082",
       "path": "tests/ch19/test_sparql_query.py",
       "chapter": "ch19",
       "sha256": "231c5fded2390105bc0c79f3c527c0236fd0963f1ff36cad39f37039cfa5f7f2",
@@ -23618,12 +23673,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.31,
-        "summary": "9 passed in 0.08s"
+        "duration_seconds": 0.336,
+        "summary": "9 passed in 0.09s"
       }
     },
     {
-      "id": "T-20-082",
+      "id": "T-20-083",
       "path": "tests/ch20/__init__.py",
       "chapter": "ch20",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23634,7 +23689,7 @@
       "test_result": null
     },
     {
-      "id": "T-20-083",
+      "id": "T-20-084",
       "path": "tests/ch20/test_anonymize_metadata.py",
       "chapter": "ch20",
       "sha256": "25327b19a1106c912184f6b6977125f41b01b8f552c0a33657c2fee045c5f02e",
@@ -23648,12 +23703,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.228,
+        "duration_seconds": 0.235,
         "summary": "25 passed in 0.02s"
       }
     },
     {
-      "id": "T-20-084",
+      "id": "T-20-085",
       "path": "tests/ch20/test_secret_scanner.py",
       "chapter": "ch20",
       "sha256": "5f25b25c346367882081d9adce5ac5086b3f7210820d6723fd43f4f313e3911a",
@@ -23667,12 +23722,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.229,
+        "duration_seconds": 0.225,
         "summary": "21 passed in 0.03s"
       }
     },
     {
-      "id": "T-21-085",
+      "id": "T-21-086",
       "path": "tests/ch21/__init__.py",
       "chapter": "ch21",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -23683,7 +23738,7 @@
       "test_result": null
     },
     {
-      "id": "T-21-086",
+      "id": "T-21-087",
       "path": "tests/ch21/test_analysis_intake.py",
       "chapter": "ch21",
       "sha256": "5416be9c77b9962599c0a36835cd4020f0ffea4bdd1347c0ec925b818ac28cb5",
@@ -23697,12 +23752,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.22,
-        "summary": "11 passed in 0.01s"
+        "duration_seconds": 0.248,
+        "summary": "11 passed in 0.02s"
       }
     },
     {
-      "id": "T-21-087",
+      "id": "T-21-088",
       "path": "tests/ch21/test_check_urls_browser.py",
       "chapter": "ch21",
       "sha256": "4dbeca3637e27a8aa6d5a98ba5ff62296b7732699619a43f4b1c1406d1a82df5",
@@ -23716,12 +23771,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.195,
+        "duration_seconds": 0.22,
         "summary": "10 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-088",
+      "id": "T-21-089",
       "path": "tests/ch21/test_format_question.py",
       "chapter": "ch21",
       "sha256": "7621c45f86cd28928da8e1f2b36a13ae78de6e54487e133a081773be355d5c51",
@@ -23735,12 +23790,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.317,
+        "duration_seconds": 0.236,
         "summary": "5 passed in 0.03s"
       }
     },
     {
-      "id": "T-21-089",
+      "id": "T-21-090",
       "path": "tests/ch21/test_progress_report.py",
       "chapter": "ch21",
       "sha256": "d879e5761c0988910b9a435076ac3edf4cff0374a72ea010b5a70aa9225282fc",
@@ -23754,12 +23809,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.251,
+        "duration_seconds": 0.209,
         "summary": "8 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-090",
+      "id": "T-21-091",
       "path": "tests/ch21/test_reference_url_preference.py",
       "chapter": "ch21",
       "sha256": "d8b6233878ab7ed016ef5eda4abdc8a89d894f308e22b474fe5759007a704ae1",
@@ -23773,12 +23828,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.31,
+        "duration_seconds": 0.249,
         "summary": "13 passed in 0.04s"
       }
     },
     {
-      "id": "T-21-091",
+      "id": "T-21-092",
       "path": "tests/ch21/test_review_helper.py",
       "chapter": "ch21",
       "sha256": "feab14b15477a8664fd557e1767070634605f0090def46948a7f8ff7ac080716",
@@ -23792,8 +23847,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.31,
-        "summary": "9 passed in 0.02s"
+        "duration_seconds": 0.219,
+        "summary": "9 passed in 0.01s"
       }
     }
   ],
@@ -23804,7 +23859,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.307,
+      "duration_seconds": 0.281,
       "summary": "11 passed in 0.07s"
     },
     "tests/ch00/test_hmm_gene_predict.py": {
@@ -23813,8 +23868,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.44,
-      "summary": "9 passed in 0.26s"
+      "duration_seconds": 0.474,
+      "summary": "9 passed in 0.28s"
     },
     "tests/ch00/test_plot_orfs.py": {
       "returncode": 0,
@@ -23822,8 +23877,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.099,
-      "summary": "8 passed in 0.77s"
+      "duration_seconds": 1.006,
+      "summary": "8 passed in 0.69s"
     },
     "tests/ch01/test_gc_content.py": {
       "returncode": 0,
@@ -23831,7 +23886,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.199,
+      "duration_seconds": 0.221,
       "summary": "9 passed in 0.01s"
     },
     "tests/ch01/test_seq_filter.py": {
@@ -23840,7 +23895,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.213,
+      "duration_seconds": 0.233,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_env_check.py": {
@@ -23849,8 +23904,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.194,
-      "summary": "12 passed in 0.01s"
+      "duration_seconds": 0.245,
+      "summary": "12 passed in 0.02s"
     },
     "tests/ch02/test_fastq_gzip.py": {
       "returncode": 0,
@@ -23858,8 +23913,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.223,
-      "summary": "11 passed in 0.02s"
+      "duration_seconds": 0.303,
+      "summary": "11 passed in 0.03s"
     },
     "tests/ch02/test_regex_basics.py": {
       "returncode": 0,
@@ -23867,7 +23922,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.214,
+      "duration_seconds": 0.212,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_text_processing.py": {
@@ -23876,8 +23931,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.218,
-      "summary": "18 passed in 0.02s"
+      "duration_seconds": 0.237,
+      "summary": "18 passed in 0.03s"
     },
     "tests/ch03/test_data_structure_bench.py": {
       "returncode": 0,
@@ -23885,7 +23940,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.201,
+      "duration_seconds": 0.231,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch03/test_float_pitfalls.py": {
@@ -23894,7 +23949,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.196,
+      "duration_seconds": 0.22,
       "summary": "17 passed in 0.01s"
     },
     "tests/ch03/test_random_reproducibility.py": {
@@ -23903,8 +23958,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.306,
-      "summary": "12 passed in 0.08s"
+      "duration_seconds": 0.295,
+      "summary": "12 passed in 0.09s"
     },
     "tests/ch04/test_coordinate_convert.py": {
       "returncode": 0,
@@ -23912,7 +23967,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.212,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch04/test_encoding_traps.py": {
@@ -23921,7 +23976,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.259,
+      "duration_seconds": 0.214,
       "summary": "8 passed in 0.02s"
     },
     "tests/ch04/test_messy_to_tidy.py": {
@@ -23930,7 +23985,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.253,
+      "duration_seconds": 0.217,
       "summary": "13 passed in 0.01s"
     },
     "tests/ch04/test_tidy_data_demo.py": {
@@ -23939,8 +23994,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.813,
-      "summary": "8 passed in 0.51s"
+      "duration_seconds": 0.815,
+      "summary": "8 passed in 0.49s"
     },
     "tests/ch04/test_tsv_csv_handling.py": {
       "returncode": 0,
@@ -23948,7 +24003,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.217,
+      "duration_seconds": 0.235,
       "summary": "6 passed in 0.01s"
     },
     "tests/ch05/test_module_demo.py": {
@@ -23957,8 +24012,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.256,
-      "summary": "21 passed in 0.06s"
+      "duration_seconds": 0.277,
+      "summary": "21 passed in 0.07s"
     },
     "tests/ch05/test_mylib_core.py": {
       "returncode": 0,
@@ -23966,7 +24021,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.203,
+      "duration_seconds": 0.248,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch05/test_mylib_utils.py": {
@@ -23975,7 +24030,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.205,
+      "duration_seconds": 0.228,
       "summary": "6 passed in 0.01s"
     },
     "tests/ch06/test_check_environment.py": {
@@ -23984,7 +24039,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.246,
+      "duration_seconds": 0.226,
       "summary": "11 passed in 0.02s"
     },
     "tests/ch07/test_citation_cff.py": {
@@ -23993,7 +24048,7 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.261,
+      "duration_seconds": 0.232,
       "summary": "5 passed, 1 skipped in 0.03s"
     },
     "tests/ch08/test_reverse_complement.py": {
@@ -24002,7 +24057,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.221,
+      "duration_seconds": 0.205,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch08/test_seq_stats.py": {
@@ -24011,8 +24066,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.406,
-      "summary": "11 passed in 0.14s"
+      "duration_seconds": 0.337,
+      "summary": "11 passed in 0.11s"
     },
     "tests/ch09/test_coordinate_bugs.py": {
       "returncode": 0,
@@ -24020,8 +24075,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.231,
-      "summary": "15 passed in 0.01s"
+      "duration_seconds": 0.218,
+      "summary": "15 passed in 0.02s"
     },
     "tests/ch09/test_debug_print_demo.py": {
       "returncode": 0,
@@ -24029,7 +24084,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.227,
+      "duration_seconds": 0.219,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch09/test_path_bugs.py": {
@@ -24038,8 +24093,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.376,
-      "summary": "5 passed in 0.08s"
+      "duration_seconds": 0.201,
+      "summary": "5 passed in 0.01s"
     },
     "tests/ch09/test_pdb_demo.py": {
       "returncode": 0,
@@ -24047,7 +24102,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.198,
+      "duration_seconds": 0.232,
       "summary": "9 passed in 0.01s"
     },
     "tests/ch09/test_python_pitfalls.py": {
@@ -24056,8 +24111,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.884,
-      "summary": "11 passed in 0.36s"
+      "duration_seconds": 0.67,
+      "summary": "11 passed in 0.34s"
     },
     "tests/ch09/test_traceback_demo.py": {
       "returncode": 0,
@@ -24065,7 +24120,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.244,
+      "duration_seconds": 0.228,
       "summary": "12 passed in 0.02s"
     },
     "tests/ch09/test_type_bugs.py": {
@@ -24074,7 +24129,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.654,
+      "duration_seconds": 0.632,
       "summary": "11 passed in 0.33s"
     },
     "tests/ch10/test_config_example.py": {
@@ -24083,7 +24138,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.244,
+      "duration_seconds": 0.229,
       "summary": "5 passed in 0.02s"
     },
     "tests/ch10/test_error_handling.py": {
@@ -24092,8 +24147,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.349,
-      "summary": "15 passed in 0.13s"
+      "duration_seconds": 0.363,
+      "summary": "15 passed in 0.12s"
     },
     "tests/ch11/test_cli_argparse.py": {
       "returncode": 0,
@@ -24101,7 +24156,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.329,
+      "duration_seconds": 0.337,
       "summary": "7 passed in 0.11s"
     },
     "tests/ch11/test_cli_click.py": {
@@ -24110,8 +24165,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.373,
-      "summary": "9 passed in 0.13s"
+      "duration_seconds": 0.407,
+      "summary": "9 passed in 0.12s"
     },
     "tests/ch11/test_logging_setup.py": {
       "returncode": 0,
@@ -24119,8 +24174,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.225,
-      "summary": "10 passed in 0.03s"
+      "duration_seconds": 0.272,
+      "summary": "10 passed in 0.04s"
     },
     "tests/ch11/test_seqtool.py": {
       "returncode": 0,
@@ -24128,8 +24183,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.413,
+      "duration_seconds": 0.405,
       "summary": "13 passed in 0.15s"
+    },
+    "tests/ch11/test_seqtool_streams.py": {
+      "returncode": 0,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.358,
+      "summary": "3 passed in 0.12s"
     },
     "tests/ch12/test_numpy_vectorize.py": {
       "returncode": 0,
@@ -24137,7 +24201,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.285,
+      "duration_seconds": 0.276,
       "summary": "13 passed in 0.05s"
     },
     "tests/ch12/test_pandas_bio_ops.py": {
@@ -24146,8 +24210,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.669,
-      "summary": "9 passed in 0.34s"
+      "duration_seconds": 0.69,
+      "summary": "9 passed in 0.35s"
     },
     "tests/ch12/test_polars_bio_ops.py": {
       "returncode": 0,
@@ -24155,8 +24219,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.435,
-      "summary": "10 passed in 0.17s"
+      "duration_seconds": 0.43,
+      "summary": "10 passed in 0.16s"
     },
     "tests/ch12/test_scipy_stats_bio.py": {
       "returncode": 0,
@@ -24164,8 +24228,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.218,
-      "summary": "19 passed in 0.87s"
+      "duration_seconds": 1.071,
+      "summary": "19 passed in 0.77s"
     },
     "tests/ch13/test_bio_plots.py": {
       "returncode": 0,
@@ -24173,8 +24237,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 2.326,
-      "summary": "10 passed in 1.77s"
+      "duration_seconds": 2.287,
+      "summary": "10 passed in 1.75s"
     },
     "tests/ch13/test_matplotlib_bindist.py": {
       "returncode": 0,
@@ -24182,8 +24246,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.748,
-      "summary": "6 passed in 0.42s"
+      "duration_seconds": 0.734,
+      "summary": "6 passed in 0.41s"
     },
     "tests/ch13/test_seaborn_biodist.py": {
       "returncode": 0,
@@ -24191,8 +24255,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.858,
-      "summary": "5 passed in 1.34s"
+      "duration_seconds": 1.901,
+      "summary": "5 passed in 1.36s"
     },
     "tests/ch14/test_validate_workflow.py": {
       "returncode": 0,
@@ -24200,7 +24264,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.224,
+      "duration_seconds": 0.214,
       "summary": "14 passed in 0.01s"
     },
     "tests/ch15/test_experiment_logger.py": {
@@ -24209,8 +24273,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.359,
-      "summary": "17 passed in 0.16s"
+      "duration_seconds": 0.381,
+      "summary": "17 passed in 0.17s"
     },
     "tests/ch15/test_validate_dockerfile.py": {
       "returncode": 0,
@@ -24218,8 +24282,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.207,
-      "summary": "22 passed in 0.01s"
+      "duration_seconds": 0.221,
+      "summary": "22 passed in 0.02s"
     },
     "tests/ch16/test_validate_slurm.py": {
       "returncode": 0,
@@ -24227,7 +24291,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.214,
+      "duration_seconds": 0.227,
       "summary": "31 passed in 0.02s"
     },
     "tests/ch17/test_chunk_processing.py": {
@@ -24236,8 +24300,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.67,
-      "summary": "4 passed in 0.35s"
+      "duration_seconds": 0.655,
+      "summary": "4 passed in 0.33s"
     },
     "tests/ch17/test_file_format_bench.py": {
       "returncode": 0,
@@ -24245,8 +24309,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.728,
-      "summary": "6 passed in 0.43s"
+      "duration_seconds": 0.861,
+      "summary": "6 passed in 0.44s"
     },
     "tests/ch17/test_generator_fastq.py": {
       "returncode": 0,
@@ -24254,8 +24318,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.399,
-      "summary": "7 passed in 0.13s"
+      "duration_seconds": 0.385,
+      "summary": "7 passed in 0.12s"
     },
     "tests/ch17/test_parallel_gc.py": {
       "returncode": 0,
@@ -24263,8 +24327,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.564,
-      "summary": "9 passed in 0.35s"
+      "duration_seconds": 0.593,
+      "summary": "9 passed in 0.38s"
     },
     "tests/ch17/test_profiling_demo.py": {
       "returncode": 0,
@@ -24272,7 +24336,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.302,
+      "duration_seconds": 0.287,
       "summary": "6 passed in 0.07s"
     },
     "tests/ch18/test_docstring_checker.py": {
@@ -24281,7 +24345,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.249,
+      "duration_seconds": 0.225,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch18/test_mermaid_helper.py": {
@@ -24290,8 +24354,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.214,
-      "summary": "19 passed in 0.02s"
+      "duration_seconds": 0.209,
+      "summary": "19 passed in 0.01s"
     },
     "tests/ch18/test_validate_readme.py": {
       "returncode": 0,
@@ -24299,8 +24363,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.262,
-      "summary": "18 passed in 0.02s"
+      "duration_seconds": 0.21,
+      "summary": "18 passed in 0.01s"
     },
     "tests/ch19/test_checksum_verify.py": {
       "returncode": 0,
@@ -24308,8 +24372,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.234,
-      "summary": "13 passed in 0.03s"
+      "duration_seconds": 0.231,
+      "summary": "13 passed in 0.02s"
     },
     "tests/ch19/test_entrez_fetch.py": {
       "returncode": 0,
@@ -24317,8 +24381,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.566,
-      "summary": "9 passed in 0.25s"
+      "duration_seconds": 0.375,
+      "summary": "9 passed in 0.11s"
     },
     "tests/ch19/test_local_db.py": {
       "returncode": 0,
@@ -24326,8 +24390,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.215,
-      "summary": "13 passed in 0.02s"
+      "duration_seconds": 0.282,
+      "summary": "13 passed in 0.04s"
     },
     "tests/ch19/test_parse_flatfile.py": {
       "returncode": 0,
@@ -24335,8 +24399,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.363,
-      "summary": "12 passed in 0.12s"
+      "duration_seconds": 0.369,
+      "summary": "12 passed in 0.13s"
     },
     "tests/ch19/test_sparql_query.py": {
       "returncode": 0,
@@ -24344,8 +24408,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.31,
-      "summary": "9 passed in 0.08s"
+      "duration_seconds": 0.336,
+      "summary": "9 passed in 0.09s"
     },
     "tests/ch20/test_anonymize_metadata.py": {
       "returncode": 0,
@@ -24353,7 +24417,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.228,
+      "duration_seconds": 0.235,
       "summary": "25 passed in 0.02s"
     },
     "tests/ch20/test_secret_scanner.py": {
@@ -24362,7 +24426,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.229,
+      "duration_seconds": 0.225,
       "summary": "21 passed in 0.03s"
     },
     "tests/ch21/test_analysis_intake.py": {
@@ -24371,8 +24435,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.22,
-      "summary": "11 passed in 0.01s"
+      "duration_seconds": 0.248,
+      "summary": "11 passed in 0.02s"
     },
     "tests/ch21/test_check_urls_browser.py": {
       "returncode": 0,
@@ -24380,7 +24444,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.195,
+      "duration_seconds": 0.22,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch21/test_format_question.py": {
@@ -24389,7 +24453,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.317,
+      "duration_seconds": 0.236,
       "summary": "5 passed in 0.03s"
     },
     "tests/ch21/test_progress_report.py": {
@@ -24398,7 +24462,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.251,
+      "duration_seconds": 0.209,
       "summary": "8 passed in 0.01s"
     },
     "tests/ch21/test_reference_url_preference.py": {
@@ -24407,7 +24471,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.31,
+      "duration_seconds": 0.249,
       "summary": "13 passed in 0.04s"
     },
     "tests/ch21/test_review_helper.py": {
@@ -24416,8 +24480,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.31,
-      "summary": "9 passed in 0.02s"
+      "duration_seconds": 0.219,
+      "summary": "9 passed in 0.01s"
     },
     "tests/review/test_check_code_sync.py": {
       "returncode": 0,
@@ -24425,7 +24489,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.299,
+      "duration_seconds": 0.259,
       "summary": "45 passed in 0.04s"
     },
     "tests/review/test_code_correspondence.py": {
@@ -24434,14 +24498,14 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.902,
-      "summary": "15 passed in 0.69s"
+      "duration_seconds": 0.908,
+      "summary": "15 passed in 0.68s"
     }
   },
   "classification_review": {
     "pending_resolved": 91,
-    "manual_category_overrides": 26,
-    "manual_relation_blocks": 83,
+    "manual_category_overrides": 27,
+    "manual_relation_blocks": 84,
     "note": "配置必須ブロック、対応ありブロック、全保留ブロックを本文前後と実体で目視",
     "goldset_method": "E0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検",
     "goldset": [

@@ -180,10 +180,22 @@ class TestOverrides:
         blocks, _ = extract_all_blocks(PROJECT_ROOT)
         apply_category_overrides(blocks, overrides)
         relations = add_relations(PROJECT_ROOT, blocks, overrides)
-        assert len(overrides["category_overrides"]) == 26
-        assert len(overrides["relation_overrides"]) == 83
+        assert len(overrides["category_overrides"]) == 27
+        assert len(overrides["relation_overrides"]) == 84
         assert len(overrides["substitution_tests"]) == 28
         assert len(relations) == 529
+        assert overrides["category_overrides"]["B-12-002"] == {
+            "block_sha256": (
+                "ff8e200ef778ced94a43483573cedec3ad54c7551bf9fe29579c5a9a6db81a1b"
+            ),
+            "category": "library_usage",
+            "placement": "not_required",
+            "reason": "str.countの使い方を紹介する数行のライブラリ利用例",
+        }
+        relation = overrides["relation_overrides"]["B-11-024"]["relations"][0]
+        assert relation["target_file"] == "scripts/ch11/seqtool.py"
+        assert relation["target_entity"] == "filter_cmd"
+        assert relation["equivalence"] == "E3"
 
     def test_rejects_stale_substitution_test_hash(self, tmp_path: Path) -> None:
         root = _minimal_repository(tmp_path)
