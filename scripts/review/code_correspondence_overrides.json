@@ -1,0 +1,1784 @@
+{
+  "schema_version": 1,
+  "description": "本文前後と実体を目視して確定した分類・関係・差し替え結果。block_sha256が変わった判断は生成時に拒否する。",
+  "category_overrides": {
+    "B-02-031": {
+      "block_sha256": "33a64ca6dfb6ee7f71d581c71bda31d050f8c98ad494fe6d486ffcb21b351a5d",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "SSH configの設定定義"
+    },
+    "B-03-004": {
+      "block_sha256": "dc9504d7ebc3a42d71cb4928158ddcb1a35a82e05b84230f06aa84fdd0868d9c",
+      "category": "library_usage",
+      "placement": "not_required",
+      "reason": "Counterの使い方紹介"
+    },
+    "B-03-024": {
+      "block_sha256": "8bd7988813dab8f72bff5a69ef6b614cf0eeec00732059fbcc47427a95f7e9f3",
+      "category": "concept_stub",
+      "placement": "not_required",
+      "reason": "型シグネチャだけを示す省略定義"
+    },
+    "B-03-025": {
+      "block_sha256": "fd08e6c47551a2e25189b14d5ddc1586f9ae4de7255f54cc1608fc6cbdb43abc",
+      "category": "concept_stub",
+      "placement": "not_required",
+      "reason": "Optional型記法の省略定義"
+    },
+    "B-03-026": {
+      "block_sha256": "abecab3ed00f06838cfc71b90269b2a28ebfc003220653a16a316fe65917535d",
+      "category": "concept_stub",
+      "placement": "not_required",
+      "reason": "Union型記法の省略定義"
+    },
+    "B-06-006": {
+      "block_sha256": "84f0c672e67bab720e82b8074bb99624ac0f914fbdc542f6b740b2e71a35b9c1",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "requirements.txtの設定例"
+    },
+    "B-08-001": {
+      "block_sha256": "ec5fd33a18fcb003b046acc363b225e7712e5d224e0b32919e2f6a6c14e86996",
+      "category": "test_code",
+      "placement": "required_tests",
+      "reason": "テストファイル名を明記した実装テスト"
+    },
+    "B-08-007": {
+      "block_sha256": "3d74c5f5c271be4aa60ea6cc10ef548a99596a56e8902db31900c8e51b5d1d12",
+      "category": "test_code",
+      "placement": "required_tests",
+      "reason": "fixtureとテスト関数の実装"
+    },
+    "B-08-016": {
+      "block_sha256": "a3aa228dde8f4aac0d7722701407d5f51cf5d26d5667fb03aabe31763bf7a6c3",
+      "category": "bad_example",
+      "placement": "not_required",
+      "reason": "ruffが検出する反面教師"
+    },
+    "B-08-017": {
+      "block_sha256": "7d88134566f8608bf63fc711fbfc0eb823a837b4d6af069fe2863ea59f6b8475",
+      "category": "concept_stub",
+      "placement": "not_required",
+      "reason": "型注釈の有無を示す省略定義"
+    },
+    "B-08-024": {
+      "block_sha256": "af80ee5cf3621cdc38a5d135dd44cafc190f85141a14413d2aad33bc823fe983",
+      "category": "concept_stub",
+      "placement": "not_required",
+      "reason": "docstring構造を示す本体省略例"
+    },
+    "B-08-025": {
+      "block_sha256": "cc5abd2acc63156ee729eb35df8d162cd9d4286ae90c4c01b9dd681ca6690f52",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "エージェントフックのJSON設定例"
+    },
+    "B-09-017": {
+      "block_sha256": "c0c5f41b49423f3bac945b14c5558f779fee118989021f673aae9e06df7847c5",
+      "category": "bad_example",
+      "placement": "not_required",
+      "reason": "座標変換のバグあり版を含む比較"
+    },
+    "B-09-019": {
+      "block_sha256": "d2b4219b6beac91ec8f5ba420eaef6da8ee524deb3099f5786b1182d80d4bb71",
+      "category": "bad_example",
+      "placement": "not_required",
+      "reason": "cwd依存のバグあり版を含む比較"
+    },
+    "B-09-023": {
+      "block_sha256": "0323b5c02f48644e1104b01486be179e0b1d8627a53d1951c30c09736c62c7d0",
+      "category": "bad_example",
+      "placement": "not_required",
+      "reason": "文字列加算のバグあり版を含む比較"
+    },
+    "B-13-006": {
+      "block_sha256": "3a5cc9006ddae81c6a5587ff2cde5a5371e918cb282b56dcb40a863b1473467c",
+      "category": "library_usage",
+      "placement": "not_required",
+      "reason": "本文がPlotly未導入のためスクリプト集に含めないと明記"
+    },
+    "B-14-001": {
+      "block_sha256": "a88e41bf6dd7f16cb729ce20ae4dd3219c31791e8e43db683993be6890dee7e2",
+      "category": "bad_example",
+      "placement": "not_required",
+      "reason": "問題のあるシェルパイプライン例"
+    },
+    "B-14-004": {
+      "block_sha256": "d505f5447a2c058f4b16e5c55ae4e2d5eb7578aaad59b0c87106a979c67c679b",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "Snakefileのconfigfile/expand断片"
+    },
+    "B-15-003": {
+      "block_sha256": "2484b2e53b1e414de772ddd8ee62b9dda3f0513771dd6fa49f75a840741e3fbe",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "キャッシュ効率のよいDockerfile断片"
+    },
+    "B-15-014": {
+      "block_sha256": "1f3f7da931fe141afcb82678870f670e5ff33cb9bcf936cccfee1de0a4f516ce",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "Apptainer定義ファイル"
+    },
+    "B-16-016": {
+      "block_sha256": "9de44d167fe2316a515df48f7dd742baa6d37ad4b124ea3bc71acd6b50212eb0",
+      "category": "config_workflow",
+      "placement": "required_scripts",
+      "reason": "ProxyJump用SSH config"
+    },
+    "B-17-035": {
+      "block_sha256": "06a2acd3a1787744cd749e224e4b40a8f045c7e3eb004d67a0419a6de7e91464",
+      "category": "library_usage",
+      "placement": "not_required",
+      "reason": "Numbaの使い方紹介"
+    },
+    "B-18-015": {
+      "block_sha256": "f5b821cab1f3a71c822209fa833d522ed2d9ea983340e0f938b8d82cdbc40fd9",
+      "category": "scripts_call",
+      "placement": "not_required",
+      "reason": "Mermaid helperの利用例"
+    },
+    "B-19-022": {
+      "block_sha256": "92c24dc025430d79e3e46efbf1a5171503ac9d7f9d933f68e1dc051aa6e18956",
+      "category": "implementation",
+      "placement": "required_scripts",
+      "reason": "SQLite操作の完結した実装例"
+    },
+    "B-20-010": {
+      "block_sha256": "04ac461e286fec93c99eef0c6097b1d3a19d2abe9ad8cbc5964194ca88c04660",
+      "category": "implementation",
+      "placement": "required_scripts",
+      "reason": "k-匿名性検証実装の明示的な抜粋"
+    },
+    "B-21-002": {
+      "block_sha256": "958594ddfc4f5fc0258aaa1468c9263b78b7260ac2133d78194bfe17198eed16",
+      "category": "library_usage",
+      "placement": "not_required",
+      "reason": "MREの作り方を示す利用例"
+    }
+  },
+  "relation_overrides": {
+    "B-00-001": {
+      "block_sha256": "67dc4d9d34033e217d667ee7170a0a75df039a0bdd9c8dccdb4db7df9671796b",
+      "relations": [
+        {
+          "target_file": "scripts/ch00/find_orfs.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "ORFとfind_all_orfsは同題材だが入力検証・探索仕様に差がある",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-00-003": {
+      "block_sha256": "3697e2f23d0c69b936f31677aca3bda3c176583f53ec124b058b0dc6173b82b0",
+      "relations": [
+        {
+          "target_file": "scripts/ch00/hmm_gene_predict.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "viterbiの初期化・バックトレースを本文が省略し、そのままでは同じ動作にならない",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-02-021": {
+      "block_sha256": "15058fe9f0c473affc78b98708836987933546bc764f5c1e645c4a4e571f53e8",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/regex_basics.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "同じ正規表現処理を本文はトップレベル、実体は関数として実装",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-02-022": {
+      "block_sha256": "e20dfea00d174b6b5cb5c6ee4f9bc5d1cc81355ef2fa3005c801c6ba129afcc5",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/regex_basics.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "findall/sub/searchの利用例と再利用可能関数が対応",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-02-031": {
+      "block_sha256": "33a64ca6dfb6ee7f71d581c71bda31d050f8c98ad494fe6d486ffcb21b351a5d",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/ssh_config.example",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同じSSH configだがホスト名・利用者・ProxyJump構成が異なる章横断候補",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": true
+        }
+      ]
+    },
+    "B-03-010": {
+      "block_sha256": "77df22dc16ca26b6b34ea8e436aecf8b814f61c2374d103f4b0a244437a783ee",
+      "relations": [
+        {
+          "target_file": "scripts/ch03/float_pitfalls.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "浮動小数点比較の挙動を本文はREPL、実体は関数として示す",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-03-011": {
+      "block_sha256": "3c0a950e0d512c7906eed5f5a4bbba15294142006d6f1524591fb0c76fd7f410",
+      "relations": [
+        {
+          "target_file": "scripts/ch03/float_pitfalls.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "逐次加算とmath.fsumの比較という処理が対応",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-03-014": {
+      "block_sha256": "5a4eef01f5dc8a3ac1fe5e85c05388ec975e1fd94d4b9aada9f9c576e8c69220",
+      "relations": [
+        {
+          "target_file": "scripts/ch03/float_pitfalls.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "math.iscloseの使い方とsafe_float_equalが対応",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-03-015": {
+      "block_sha256": "00feb07a677318fd1a29a21fbeb0f3399f265a2ccacfdd11ccd39bce6b760cd9",
+      "relations": [
+        {
+          "target_file": "scripts/ch03/float_pitfalls.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "NaN/infの挙動紹介とdemonstrate_nan_behaviorが対応",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-03-019": {
+      "block_sha256": "a5679bd3d403543d47aa293e324de53d554703b76c185a0cdf2c1af27ec17229",
+      "relations": [
+        {
+          "target_file": "scripts/ch03/random_reproducibility.py",
+          "target_entity": "subsample_with_seed",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "関数名とNumPy型注釈だけが異なり、default_rng→choice→添字抽出はAST上同じ",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-04-001": {
+      "block_sha256": "8ba99bd9707ceedfc77b5ff90eaf7929b5745e66c372554aedcbae9dcda9012c",
+      "relations": [
+        {
+          "target_file": "scripts/ch04/tsv_csv_handling.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "本文が標準ライブラリの最小利用例、実体が関数化した再利用版と明記",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-04-008": {
+      "block_sha256": "3381168476c1561e5e899acf3480c110e0121762ca620ebcaba7081f3a735653",
+      "relations": [
+        {
+          "target_file": "scripts/ch04/encoding_traps.py",
+          "target_entity": "read_csv_with_bom_handling",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "utf-8-sigによるBOM除去は同じだが本文はトップレベル、実体はPath入力の関数",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-04-009": {
+      "block_sha256": "c149864ad983e550b435cfaf81e3169387b795a7269a3affaade1bf373e39017",
+      "relations": [
+        {
+          "target_file": "scripts/ch04/encoding_traps.py",
+          "target_entity": "normalize_filename_nfc",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "Unicode正規化の題材が同じで、本文は比較デモ、実体は再利用関数",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-04-017": {
+      "block_sha256": "5f4b4640296921af9d71c3c7c287604f49bad88635b2408963e0619540c5f2cc",
+      "relations": [
+        {
+          "target_file": "scripts/ch04/tidy_data_demo.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "wide→long変換の題材が一致するがデータと関数境界が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-06-003": {
+      "block_sha256": "163d9022c6ff50e515d7445d34ad8a1de4b8feaf489eeb5190ca3b557f5e330b",
+      "relations": [
+        {
+          "target_file": "scripts/ch06/check_environment.py",
+          "target_entity": "get_environment_info",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "sys.prefix/base_prefixによる仮想環境判定は同じだが、実体はdataclassへ集約",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-07-011": {
+      "block_sha256": "f78d8c45ea25646a334add9fab94f83a23dca3eaafe7a06526f481f33342a62d",
+      "relations": [
+        {
+          "target_file": "scripts/ch07/gitignore_bioinfo.template",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文の主要パターンを含み、実体テンプレートが追加の除外項目を持つ",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-07-014": {
+      "block_sha256": "0657778195124200966a2b7bd96e5caeea5a962e9978fb9282873f91469d54ba",
+      "relations": [
+        {
+          "target_file": "scripts/ch07/ci_minimal.yml",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除く正規化行列が一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-07-015": {
+      "block_sha256": "475e17e9241a35bfc47357fab325cd61a8aff174da3fcbf3a7e237965f4c7912",
+      "relations": [
+        {
+          "target_file": "scripts/ch07/CITATION.cff.template",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "CFF必須構造は同じで、実体は追加フィールドを持ち例示値が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-001": {
+      "block_sha256": "ec5fd33a18fcb003b046acc363b225e7712e5d224e0b32919e2f6a6c14e86996",
+      "relations": [
+        {
+          "target_file": "tests/ch08/test_reverse_complement.py",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "同じ入力・期待値のテストがクラスメソッド名だけを変えて存在",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-002": {
+      "block_sha256": "6d305cc4420f6d54e98679cda1c8d9370ded96ba77e29a0192e9c0404ce593ef",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/reverse_complement.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "基本処理は同じだが実体に空入力・不正塩基の検証があり例外仕様が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-003": {
+      "block_sha256": "d3fae32e3c4162c044dfeef93968b2b48cb75ac78f439f570ce9b300516ed445",
+      "relations": [
+        {
+          "target_file": "tests/ch08/test_reverse_complement.py",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "空入力・小文字の同じassertがテストクラス内に存在",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-005": {
+      "block_sha256": "6613807efce0c01741de06dba34aadb859524adb321af76248498c878e123e8d",
+      "relations": [
+        {
+          "target_file": "tests/ch08/test_seq_stats.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "同じgc_content正常系だが入力配列・関数名・クラス構造が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-006": {
+      "block_sha256": "fd77ea1851f3be3e9cb6f47d6f4bee26f88381b81f10ba11c6b5cb2e258d46a2",
+      "relations": [
+        {
+          "target_file": "tests/ch08/test_reverse_complement.py",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "simple/palindrome/emptyの同じ振る舞いを実体のテストクラスが検証",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-007": {
+      "block_sha256": "3d74c5f5c271be4aa60ea6cc10ef548a99596a56e8902db31900c8e51b5d1d12",
+      "relations": [
+        {
+          "target_file": "tests/ch01/test_gc_content.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "fixtureとGCフィルタのテスト意図は同じだが、規約上の同章tests/ch08には存在しない",
+          "cross_chapter": true,
+          "verification": "manual",
+          "target_entity": null
+        }
+      ]
+    },
+    "B-08-009": {
+      "block_sha256": "5d5090b751097d12d6a8482d3c6234b008c3e01378bcaa44d39358765881ebd8",
+      "relations": [
+        {
+          "target_file": "tests/ch08/test_reverse_complement.py",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "single-baseのassertが存在",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        },
+        {
+          "target_file": "tests/ch08/test_seq_stats.py",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "Nを含むGC含量とsingle-baseのassertが存在",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-012": {
+      "block_sha256": "01adc0f321421d80e416474bf6a4832052c3865b73822dde9b0c41e68603e306",
+      "relations": [
+        {
+          "target_file": "tests/ch08/test_seq_stats.py",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "同じ3配列・同じ閾値・同じ出力assertをfixture利用のメソッドとして実装",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-026": {
+      "block_sha256": "5ee3a63da7d9f4fe5a3dfdafd166a142b5a4741832a62fc3f8228c235176a2cc",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/python_pitfalls.py",
+          "target_entity": "add_gene_buggy",
+          "equivalence": "E1",
+          "kind": "concept",
+          "evidence": "ミュータブルデフォルト引数のバグ関数がdocstring差を除いて同じ",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-027": {
+      "block_sha256": "24513c018c243b41bb3b0ddc56f4b83135ecfaa82839d57c9ea8998b6c0171e8",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/python_pitfalls.py",
+          "target_entity": "shallow_copy_demo",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "浅いコピーでネストしたlistが共有される同じ挙動を関数化",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-029": {
+      "block_sha256": "6052ab1fc5763380b81ad3f261ea63d6b5ad08c031ab468a287ca05c70fdf1a7",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/python_pitfalls.py",
+          "target_entity": "remove_n_fixed",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "str.replaceの戻り値代入という同じ修正を関数化",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-030": {
+      "block_sha256": "b4a7ab88185fdd73872e212b943db95078917dd67921c7c84f0829d0edd42ff2",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/python_pitfalls.py",
+          "target_entity": "filter_with_loc",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "chained assignment回避のloc利用を再利用関数として実装",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-031": {
+      "block_sha256": "af4aceb73dc3d62250f50022949579c8b45904a99c127e4b32136abfe65c8e2e",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/python_pitfalls.py",
+          "target_entity": "demonstrate_numpy_view",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "NumPy view/copyの共有挙動を同じ配列例で関数化",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-002": {
+      "block_sha256": "316d8d571bd63c15ed0ba047314e5be4d5c125610c4751782456cdcbcd4493ba",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/cli_click.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "Click版に対応するが、実体は型ヒント・version・ログ・戻り値等を追加",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-003": {
+      "block_sha256": "3b656658b9fbba582efecf7d29bd3aae3427096b5c7c67fab4ebdd73a0402988",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/cli_typer.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "Typer版に対応するが引数・出力・例外処理に差がある",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-006": {
+      "block_sha256": "61139200c57242d6f4e0e3fde68d71bb0a6629f2ce221078c0b5f8595242764e",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/cli_click.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "version/helpデコレータ例だが実体のgc_filterシグネチャと処理が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-011": {
+      "block_sha256": "4db97d31b78d14dac51a3b00bbeb221010632a4786dbf5826ab95261e9eac527",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/cli_click.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "終了コードの例と実体のCLIで入力検証・終了処理が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-013": {
+      "block_sha256": "ec210a5eb78aeeb5f988b1f4d666fabc9faa68406fa434e3162accaeab3fce17",
+      "relations": [
+        {
+          "target_file": "scripts/ch10/config_example.py",
+          "target_entity": "load_config",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "load_configは章横断候補だがdefaultsと戻り値仕様が異なる",
+          "cross_chapter": true,
+          "verification": "manual"
+        },
+        {
+          "target_file": "scripts/ch11/cli_click.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "設定をCLIへ合成する処理は同題材だが実体のオプション・検証が異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-031": {
+      "block_sha256": "ca3b7c2d3377c56225c6d9ba8f8b976fec75825974d6537ac08f3bfbc854f193",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/logging_setup.py",
+          "target_entity": "setup_logging",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある",
+          "verification": "manual",
+          "cross_chapter": false
+        },
+        {
+          "target_file": "scripts/ch11/progress_demo.py",
+          "target_entity": "setup_logging",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同じsetup_loggingの別実体にも対応する多対多関係",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-12-012": {
+      "block_sha256": "567771ff21d017b85932df33a53c1ceb2a42cfc72510005219daeac8c94386fb",
+      "relations": [
+        {
+          "target_file": "scripts/ch12/polars_bio_ops.py",
+          "target_entity": "summarize_by_direction_lazy",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "Polars lazyのfilter・方向列・group_byは同じだが、本文はCSV読込からcollectまでの利用例",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-13-008": {
+      "block_sha256": "852ac08489eb121efcf5ec0a123cf73a0f3572eccf74294d0c8b58def12278e5",
+      "relations": []
+    },
+    "B-14-002": {
+      "block_sha256": "d37852040ec0636f36b24e6ae6ccd024a02fa6ef164f1193f6fd0b0508768830",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "target_entity": "rule fastqc",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "処理は同じだがthreadsが定数4とconfig参照で異なる",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-003": {
+      "block_sha256": "8dcdad9aa3b363dbc8c9e83b8218417cf7e843e1f1b5f7100734f21eace23d24",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "target_entity": "rule all",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除くrule内容が一致",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-004": {
+      "block_sha256": "d505f5447a2c058f4b16e5c55ae4e2d5eb7578aaad59b0c87106a979c67c679b",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "configfile、SAMPLES、expandは実体トップレベルの矛盾しない抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-005": {
+      "block_sha256": "4fb0f00a5858382b6fe70edf7347341c4d690fb68151c8f97b6baf6ab505a5f1",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/config.yaml",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文YAMLは実体設定の主要キーを抜粋し、実体が追加パラメータを持つ",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-006": {
+      "block_sha256": "d94c9972096fbf255ff71a793f70e400dc46275be8ae2487bc1532e01b6850f4",
+      "relations": []
+    },
+    "B-14-007": {
+      "block_sha256": "e65fca3d797148dc8051dd227a7b5bbc9a129d00522d6c1944f52cfa9865e8ce",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "完全例と明記された実体の先頭rulesを順序どおり抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-008": {
+      "block_sha256": "fc79e2e5b2f662e846246779ba91d6bdde578f457e06fe4d98b1378fd7d388ed",
+      "relations": []
+    },
+    "B-14-010": {
+      "block_sha256": "4ad9132ea4acb24a38be90ab3f6c7b85f477a04385c059d48373bc3b761c12ea",
+      "relations": []
+    },
+    "B-14-011": {
+      "block_sha256": "8c9d0bbe3a8fad82d486fc8c012735127e00d8790a164ad036aa19951e86d575",
+      "relations": []
+    },
+    "B-14-012": {
+      "block_sha256": "a6497b617e414e82a4737328921ee857bba1616cda9f27e6db6585396424ae52",
+      "relations": []
+    },
+    "B-14-014": {
+      "block_sha256": "291410a9a73eed52bf10f5670c0318f609452790d21c0553899cc2cbacdd4751",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Makefile",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "依存関係は同じだが本文URLが省略記号で実行不能、変数・clean処理にも差がある",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-016": {
+      "block_sha256": "4d8a32b4c4cc7096adb2cf0bc31c3b580758073c65fdb1f5b8285d9cd7c2afc3",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "target_entity": "rule trimmomatic",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "input/output/temp指定が実体ruleの連続した抜粋",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-017": {
+      "block_sha256": "ec124d0494209257740b7d877e0c48792ba2c345ef1621fe4f80bf45f11f2a9f",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "target_entity": "rule star_align",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "protectedとtemp、BAMパスが異なるため動作上の差がある",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-14-019": {
+      "block_sha256": "4a5f869cd6aa2c8e09991d1d48367485b4701897732d69a70190d1c418aa953e",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile",
+          "target_entity": "rule star_align",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "logの意図は同じだがshell文字列が説明用省略形",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-15-001": {
+      "block_sha256": "d222bcac0a754f2e88ac3b71f00ff2526b70ab114017126632265007697bb26b",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/Dockerfile",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除く命令列が一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-15-003": {
+      "block_sha256": "2484b2e53b1e414de772ddd8ee62b9dda3f0513771dd6fa49f75a840741e3fbe",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/Dockerfile",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "COPY environment→環境作成→COPY全体の順序を示す概念的抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-15-005": {
+      "block_sha256": "8b2845b8d517e40034381435ba10d20770704837f1026b8ee1315796a620c062",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/Dockerfile.multistage",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "実体のbuild/runtime両stageから主要命令を順序どおり抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-15-008": {
+      "block_sha256": "d847cd4855f8e3185a593d85a9b390d5f0ebf56f0b1b45883e363f793de0a016",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/docker-compose.yml",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除くYAML内容が一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-15-012": {
+      "block_sha256": "14f812664e18a4a0563022b4c5d74a2bb36d5f18448a02aab525a9665637d630",
+      "relations": []
+    },
+    "B-15-014": {
+      "block_sha256": "1f3f7da931fe141afcb82678870f670e5ff33cb9bcf936cccfee1de0a4f516ce",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/apptainer.def",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "説明コメントを除いたApptainer定義が一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-15-018": {
+      "block_sha256": "4399691fe22001863621550ecc8014b6da1db3c1170b399aa1823b6761e05ab1",
+      "relations": []
+    },
+    "B-15-019": {
+      "block_sha256": "3a4d59c12fd4c337e1568aabbab728a374846b79ea329e6ad913529e22a91134",
+      "relations": []
+    },
+    "B-15-022": {
+      "block_sha256": "f7f2345be1ef20cd29867ae9eff06cce0959d78ec4e6d81b980b495b0614bd8c",
+      "relations": []
+    },
+    "B-16-002": {
+      "block_sha256": "6fd15df31beeae9a72282c9632ab3b7548c862aae343d7e6d1b927a7613f67d7",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/basic_job.sh",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除くジョブスクリプトが一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-16-004": {
+      "block_sha256": "d8eb0bbc9fbf34007739f91025771d9c4e5f808588e705f3257b9e2e9df0248a",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/array_job.sh",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除くアレイジョブが一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-16-006": {
+      "block_sha256": "4f525b0230194e670f844957c91796698b3f348ce2deaa3b737b4a57d1ff0efc",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/pipeline_submit.sh",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "依存ジョブ投入とID連結の主要処理を実体から抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-16-009": {
+      "block_sha256": "9a323d11c707a0cc4de952f8fe80f978d1b9ab69c86b6b0d8a70a217bc7cb1b9",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/gpu_train_job.sh",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "GPUのSBATCH指示が実体ジョブの連続した抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-16-011": {
+      "block_sha256": "c62c1304bf991af0f06f69e884bb56c2d15d2814631a6c5b420a2ffedee1e44a",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/gpu_train_job.sh",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメント・空白を除くGPUジョブスクリプトが一致",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-16-016": {
+      "block_sha256": "9de44d167fe2316a515df48f7dd742baa6d37ad4b124ea3bc71acd6b50212eb0",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/ssh_config.example",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "ProxyJump構造は同じだがHost別名とHostNameが異なる",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-16-025": {
+      "block_sha256": "74ec6d10301de8f5d2eaf725fa93d24c6d38d2f9ad86adad34149b3882773f9d",
+      "relations": [
+        {
+          "target_file": "scripts/ch16/project_readme_template.md",
+          "equivalence": "E2",
+          "kind": "reference",
+          "evidence": "本文が完全版へのリンク付きでREADMEの一部を具体例に置換した抜粋",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-17-031": {
+      "block_sha256": "680965df45a17fdb4b9e41dd86f610783925155ff22b5f71f43edc1ea5576272",
+      "relations": [
+        {
+          "target_file": "scripts/ch17/generator_fastq.py",
+          "equivalence": "E3",
+          "kind": "concept",
+          "evidence": "generator版はfilter_by_lengthと同じ目的だがAPIが異なり、list版の実体は無い",
+          "unmatched_components": [
+            "filter_reads_list"
+          ],
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-17-032": {
+      "block_sha256": "460820490b28c39f0db72a8285bddc3ad99377980fe0f80c79618768e074a9d1",
+      "relations": [
+        {
+          "target_file": "scripts/ch17/generator_fastq.py",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "関数名・docstring差を除き3つのジェネレータ処理がAST上同じ",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-17-035": {
+      "block_sha256": "06a2acd3a1787744cd749e224e4b40a8f045c7e3eb004d67a0419a6de7e91464",
+      "relations": []
+    },
+    "B-17-036": {
+      "block_sha256": "b1ecc4d2e3f9abba85019d3f62d0856c148c023d5a0d37466d6ba93de479ab9b",
+      "relations": []
+    },
+    "B-17-039": {
+      "block_sha256": "b161f9b849b37d2655e2619e671ce5852376d2c1511086be85fc7724bb699d6b",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/fastq_gzip.py",
+          "target_entity": "count_reads_in_gzip",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "章をまたぐ改名・変数名差のみでgzip行数÷4の処理は同じ",
+          "cross_chapter": true,
+          "verification": "manual"
+        }
+      ]
+    },
+    "B-18-015": {
+      "block_sha256": "f5b821cab1f3a71c822209fa833d522ed2d9ea983340e0f938b8d82cdbc40fd9",
+      "relations": [
+        {
+          "target_file": "scripts/ch18/mermaid_helper.py",
+          "equivalence": "E3",
+          "kind": "reference",
+          "evidence": "PipelineStepとgenerate_pipeline_diagramの利用例で、定義本体の抜粋ではない",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-18-021": {
+      "block_sha256": "42337806acb96e1c42635b53487547ca8075302c17a32f6bb1a2cb2c49ff5a81",
+      "relations": []
+    },
+    "B-19-006": {
+      "block_sha256": "900c7b6b079ade657c1cc4006976c0493260c1f4f10e50e928925e133ef7fdf9",
+      "relations": [
+        {
+          "target_file": "scripts/ch19/entrez_fetch.py",
+          "equivalence": "E3",
+          "kind": "reference",
+          "evidence": "本文がBiopython APIの利用例、実体が再利用・エラー処理を加えた完全版",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-19-007": {
+      "block_sha256": "cdfc36bd3061b96aaf2f428344a2d12abbf31844fb835a6755487b0dd96fb7b0",
+      "relations": [
+        {
+          "target_file": "scripts/ch19/sparql_query.py",
+          "equivalence": "E3",
+          "kind": "reference",
+          "evidence": "本文のrequests利用例に対し実体は関数化・再試行・検証を追加",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-19-019": {
+      "block_sha256": "f44adc84f66ebe82413ba84fd30de90cace01fca5a9c61b4b1bb94cc9bd9cfd3",
+      "relations": [
+        {
+          "target_file": "scripts/ch19/parse_flatfile.py",
+          "equivalence": "E3",
+          "kind": "reference",
+          "evidence": "本文のSeqIO利用例に対し実体はCDS抽出を関数化した完全版",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-19-022": {
+      "block_sha256": "92c24dc025430d79e3e46efbf1a5171503ac9d7f9d933f68e1dc051aa6e18956",
+      "relations": [
+        {
+          "target_file": "scripts/ch19/local_db.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同じSQLite処理だが実体は関数分割・追加列・ロギングを持ち、本文は直書き",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-20-004": {
+      "block_sha256": "a75e34d4d8cf6d4d1a996ceb18b73d82ba2004aa0c8bfc756a77532a781d60d0",
+      "relations": [
+        {
+          "target_file": "scripts/ch20/secret_scanner.py",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同名scan_contentだが戻り値・パターン・引数・除外処理に差がある",
+          "verification": "manual",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-20-009": {
+      "block_sha256": "710baae93d3924f5423f139954e26bc9a34987e502d9cca17dd195f6f8a9feb9",
+      "relations": [
+        {
+          "target_file": "scripts/ch20/anonymize_metadata.py",
+          "target_entity": "generalize_age",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "年代化の基本式は同じだが実体に入力検証とエラー仕様がある",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-20-010": {
+      "block_sha256": "04ac461e286fec93c99eef0c6097b1d3a19d2abe9ad8cbc5964194ca88c04660",
+      "relations": [
+        {
+          "target_file": "scripts/ch20/anonymize_metadata.py",
+          "target_entity": "check_k_anonymity",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文がrows準備・空入力・列検証・統計項目を明示的に省略した抜粋",
+          "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    }
+  },
+  "goldset": [
+    {
+      "block_id": "B-07-014",
+      "expected": "E0",
+      "reason": "CI YAMLの正規化行列が一致"
+    },
+    {
+      "block_id": "B-15-001",
+      "expected": "E0",
+      "reason": "Dockerfileの正規化命令列が一致"
+    },
+    {
+      "block_id": "B-03-019",
+      "expected": "E1",
+      "reason": "処理順が同じで関数名とNumPy型注釈だけが異なる"
+    },
+    {
+      "block_id": "B-12-004",
+      "expected": "E1",
+      "reason": "docstring除去後のASTが一致"
+    },
+    {
+      "block_id": "B-14-007",
+      "expected": "E2",
+      "reason": "完全例と明記したSnakefileのruleを順序どおり抜粋"
+    },
+    {
+      "block_id": "B-20-010",
+      "expected": "E2",
+      "reason": "省略した準備・検証・統計項目の境界を本文が明示"
+    },
+    {
+      "block_id": "B-00-003",
+      "expected": "E3",
+      "reason": "初期化・バックトレースを省略し、そのままでは同じ動作にならない"
+    },
+    {
+      "block_id": "B-17-037",
+      "expected": "E3",
+      "reason": "同名関数だが入力検証に差がある"
+    },
+    {
+      "block_id": "B-08-008",
+      "expected": "E5",
+      "reason": "配置必須のpytest fixtureだが対応するtests資産がない"
+    },
+    {
+      "block_id": "B-14-010",
+      "expected": "E5",
+      "reason": "配置必須のCWL定義だが対応するscripts資産がない"
+    },
+    {
+      "block_id": "B-13-006",
+      "expected": "EN",
+      "reason": "本文がPlotly例をスクリプト集へ含めないと明記"
+    },
+    {
+      "block_id": "B-17-035",
+      "expected": "EN",
+      "reason": "Numbaライブラリの使い方紹介"
+    }
+  ],
+  "substitution_tests": {
+    "B-00-001::scripts/ch00/find_orfs.py": {
+      "status": "failed",
+      "reason": "置換定義: ORF, find_all_orfs",
+      "block_id": "B-00-001",
+      "target_file": "scripts/ch00/find_orfs.py",
+      "test_files": [
+        "tests/ch00/test_find_orfs.py",
+        "tests/ch00/test_hmm_gene_predict.py",
+        "tests/ch00/test_plot_orfs.py"
+      ],
+      "returncode": 1,
+      "passed": 17,
+      "failed": 11,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "11 failed, 17 passed in 0.76s",
+      "failure_cause": "本文は逆鎖処理を省略し、_find_stopの呼出しシグネチャも実体と異なる",
+      "block_sha256": "67dc4d9d34033e217d667ee7170a0a75df039a0bdd9c8dccdb4db7df9671796b",
+      "target_sha256": "a655f926e1bb927daa22bb5e169207dda027b70756febbf88bb1cfd08412932d",
+      "test_file_sha256": {
+        "tests/ch00/test_find_orfs.py": "d41de3a32887246254c41f88264d3e96dcbe60a5489a446d4bcda8c44db29449",
+        "tests/ch00/test_hmm_gene_predict.py": "e1ed9f69dc146df59dc5e7a99f573c2aa83fc5d4984ce43172fc7664edb9cfe5",
+        "tests/ch00/test_plot_orfs.py": "3a8068ed85c19d997e051ddac91846a5ec98b051fd8b4a9571314cd4c42ecac8"
+      }
+    },
+    "B-00-003::scripts/ch00/hmm_gene_predict.py": {
+      "status": "failed",
+      "reason": "置換定義: viterbi",
+      "block_id": "B-00-003",
+      "target_file": "scripts/ch00/hmm_gene_predict.py",
+      "test_files": [
+        "tests/ch00/test_hmm_gene_predict.py"
+      ],
+      "returncode": 1,
+      "passed": 1,
+      "failed": 8,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "8 failed, 1 passed in 0.11s",
+      "failure_cause": "本文は初期化・バックトレース等を省略し、log_emitとvが未定義",
+      "block_sha256": "3697e2f23d0c69b936f31677aca3bda3c176583f53ec124b058b0dc6173b82b0",
+      "target_sha256": "d35770fb0468acb82223f77aaa0c328a9ec2fb93c28d4f1abf39dd11355741dd",
+      "test_file_sha256": {
+        "tests/ch00/test_hmm_gene_predict.py": "e1ed9f69dc146df59dc5e7a99f573c2aa83fc5d4984ce43172fc7664edb9cfe5"
+      }
+    },
+    "B-08-002::scripts/ch08/reverse_complement.py": {
+      "status": "passed",
+      "reason": "置換定義: reverse_complement",
+      "block_id": "B-08-002",
+      "target_file": "scripts/ch08/reverse_complement.py",
+      "test_files": [
+        "tests/ch08/test_reverse_complement.py"
+      ],
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "7 passed in 0.01s",
+      "block_sha256": "6d305cc4420f6d54e98679cda1c8d9370ded96ba77e29a0192e9c0404ce593ef",
+      "target_sha256": "313fd6b88f55970af522ad6f0c6f75f4b97bb77d02fccb9b31b31f9d23b698a1",
+      "test_file_sha256": {
+        "tests/ch08/test_reverse_complement.py": "9da992ff64a11b1c0788fa4eded51af0241e09e236b93c75f05f21a5fad6167c"
+      }
+    },
+    "B-09-001::scripts/ch09/traceback_demo.py": {
+      "status": "not_run",
+      "reason": "本文定義が省略記号を含む: read_fasta_records",
+      "block_id": "B-09-001",
+      "target_file": "scripts/ch09/traceback_demo.py",
+      "block_sha256": "4a714526692eb3bef2316426b097d063c7d90ff65a1021ca0ac981996bad629b",
+      "target_sha256": "19850418f12f98b711b5b852511c8c709228fb9f5cca5300332313867a2c3644",
+      "test_file_sha256": {}
+    },
+    "B-09-005::scripts/ch09/traceback_demo.py": {
+      "status": "passed",
+      "reason": "置換定義: lookup_gene_annotation",
+      "block_id": "B-09-005",
+      "target_file": "scripts/ch09/traceback_demo.py",
+      "test_files": [
+        "tests/ch09/test_traceback_demo.py"
+      ],
+      "returncode": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "12 passed in 0.02s",
+      "block_sha256": "4dc559ce8bb1c5cbad2322c2dc83a63356ff22dde336867975d109c373d49dca",
+      "target_sha256": "19850418f12f98b711b5b852511c8c709228fb9f5cca5300332313867a2c3644",
+      "test_file_sha256": {
+        "tests/ch09/test_traceback_demo.py": "9df95dfae657db3fe520bf9ca058668fc2589d59b14df890e4b398207d7daa45"
+      }
+    },
+    "B-09-008::scripts/ch09/pdb_demo.py": {
+      "status": "not_run",
+      "reason": "本文定義が省略記号を含む: calculate_gc_stats",
+      "block_id": "B-09-008",
+      "target_file": "scripts/ch09/pdb_demo.py",
+      "block_sha256": "c9ae1d56429071c374ba9d7d64b771fd53424955b6523a9a2009826ad547d280",
+      "target_sha256": "2f0692db5ed9a98d7204b7d1fdc023966761c59265efdd4bfedffe15c5d1ee03",
+      "test_file_sha256": {}
+    },
+    "B-09-018::scripts/ch09/coordinate_bugs.py": {
+      "status": "not_run",
+      "reason": "本文定義が省略記号を含む: validate_coordinates",
+      "block_id": "B-09-018",
+      "target_file": "scripts/ch09/coordinate_bugs.py",
+      "block_sha256": "d21b2926d0b93e2973b354f8f56bffa46ab425f4897aed39444b29893ee9420a",
+      "target_sha256": "ab3d9ffb68ba7000fcc6ebd9f31b7fa1800e41cd01747e43e769ee02a1e2fb5d",
+      "test_file_sha256": {}
+    },
+    "B-09-020::scripts/ch09/path_bugs.py": {
+      "status": "passed",
+      "reason": "置換定義: resolve_data_path",
+      "block_id": "B-09-020",
+      "target_file": "scripts/ch09/path_bugs.py",
+      "test_files": [
+        "tests/ch09/test_path_bugs.py"
+      ],
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "5 passed in 0.01s",
+      "block_sha256": "e41c22f79d3f2c4f7243b2a6e65472403c6b7199a853cc871a1a58944458e106",
+      "target_sha256": "53390c6fea3a225c2f32c4d3284ffc75bf82c37729ea43c7332ec4ccc5ad1ba2",
+      "test_file_sha256": {
+        "tests/ch09/test_path_bugs.py": "5de685dc6e98c7c215a754e6b243d67796bd1a7973844b48b7a664906445caab"
+      }
+    },
+    "B-11-001::scripts/ch11/cli_argparse.py": {
+      "status": "passed",
+      "reason": "置換定義: parse_args",
+      "block_id": "B-11-001",
+      "target_file": "scripts/ch11/cli_argparse.py",
+      "test_files": [
+        "tests/ch11/test_cli_argparse.py"
+      ],
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "7 passed in 0.13s",
+      "block_sha256": "05e0c0008c75fce98ac8fa74dd1b423b33fd606f4b4add6435b106207dbc7e43",
+      "target_sha256": "e502871fa1c235ae455c69693a4b8c271863d05475b5a9f51f29be82831c55ab",
+      "test_file_sha256": {
+        "tests/ch11/test_cli_argparse.py": "c32105a64f23f30a0431fea85e192619cca3e7c00020e29e23e9ab8135a30a91"
+      }
+    },
+    "B-11-002::scripts/ch11/cli_click.py": {
+      "status": "not_run",
+      "reason": "本文定義が省略記号を含む: gc_filter",
+      "block_id": "B-11-002",
+      "target_file": "scripts/ch11/cli_click.py",
+      "block_sha256": "316d8d571bd63c15ed0ba047314e5be4d5c125610c4751782456cdcbcd4493ba",
+      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
+      "test_file_sha256": {}
+    },
+    "B-11-003::scripts/ch11/cli_typer.py": {
+      "status": "not_run",
+      "reason": "対応スクリプトに直接テストがない",
+      "block_id": "B-11-003",
+      "target_file": "scripts/ch11/cli_typer.py",
+      "block_sha256": "3b656658b9fbba582efecf7d29bd3aae3427096b5c7c67fab4ebdd73a0402988",
+      "target_sha256": "20e0c83d7ba90f4b1fc43b137bdbf5587990a57a80e204b07dfefc2f376ef5a0",
+      "test_file_sha256": {}
+    },
+    "B-11-006::scripts/ch11/cli_click.py": {
+      "status": "failed",
+      "reason": "置換定義: gc_filter",
+      "block_id": "B-11-006",
+      "target_file": "scripts/ch11/cli_click.py",
+      "test_files": [
+        "tests/ch11/test_cli_click.py"
+      ],
+      "returncode": 1,
+      "passed": 3,
+      "failed": 6,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "6 failed, 3 passed in 0.15s",
+      "failure_cause": "本文の--version用断片では実体CLIの入力・出力・フィルタ処理を保持できない",
+      "block_sha256": "61139200c57242d6f4e0e3fde68d71bb0a6629f2ce221078c0b5f8595242764e",
+      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
+      "test_file_sha256": {
+        "tests/ch11/test_cli_click.py": "eca5bb1afb5027065255d33021547e124a7f9bebd152f6dcb5f52a5b6f6699ad"
+      }
+    },
+    "B-11-007::scripts/ch11/seqtool.py": {
+      "status": "failed",
+      "reason": "置換定義: cli",
+      "block_id": "B-11-007",
+      "target_file": "scripts/ch11/seqtool.py",
+      "test_files": [
+        "tests/ch11/test_seqtool.py"
+      ],
+      "returncode": 1,
+      "passed": 12,
+      "failed": 1,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "1 failed, 12 passed in 0.17s",
+      "failure_cause": "本文のcli定義には実体が持つ--version処理がない",
+      "block_sha256": "8f7a919dfd3383384c844a55c8c80116543861ade9f4f8acd0dddf9705c7729d",
+      "target_sha256": "ef19b33e85394455652c4b324c6c2ed859d951318351592306d56de7f9f55f52",
+      "test_file_sha256": {
+        "tests/ch11/test_seqtool.py": "3657fb481b449bea3f8a0de88395bbc12121ee6f45a7d33d96507b69270e36e4"
+      }
+    },
+    "B-11-011::scripts/ch11/cli_click.py": {
+      "status": "not_run",
+      "reason": "本文定義が省略記号を含む: gc_filter",
+      "block_id": "B-11-011",
+      "target_file": "scripts/ch11/cli_click.py",
+      "block_sha256": "4db97d31b78d14dac51a3b00bbeb221010632a4786dbf5826ab95261e9eac527",
+      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
+      "test_file_sha256": {}
+    },
+    "B-11-013::scripts/ch11/cli_click.py": {
+      "status": "not_run",
+      "reason": "本文定義が省略記号を含む: gc_filter",
+      "block_id": "B-11-013",
+      "target_file": "scripts/ch11/cli_click.py",
+      "block_sha256": "ec210a5eb78aeeb5f988b1f4d666fabc9faa68406fa434e3162accaeab3fce17",
+      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
+      "test_file_sha256": {}
+    },
+    "B-11-030::scripts/ch11/seqtool.py": {
+      "status": "failed",
+      "reason": "置換定義: cli",
+      "block_id": "B-11-030",
+      "target_file": "scripts/ch11/seqtool.py",
+      "test_files": [
+        "tests/ch11/test_seqtool.py"
+      ],
+      "returncode": 1,
+      "passed": 12,
+      "failed": 1,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "1 failed, 12 passed in 0.16s",
+      "failure_cause": "本文のcli定義には実体が持つ--version処理がない",
+      "block_sha256": "9fbc8d4277a51c134f1fa7adcd39ddf6ff5b8987cf50318e4ef78fb8643f37d6",
+      "target_sha256": "ef19b33e85394455652c4b324c6c2ed859d951318351592306d56de7f9f55f52",
+      "test_file_sha256": {
+        "tests/ch11/test_seqtool.py": "3657fb481b449bea3f8a0de88395bbc12121ee6f45a7d33d96507b69270e36e4"
+      }
+    },
+    "B-11-031::scripts/ch11/logging_setup.py": {
+      "status": "passed",
+      "reason": "置換定義: setup_logging",
+      "block_id": "B-11-031",
+      "target_file": "scripts/ch11/logging_setup.py",
+      "test_files": [
+        "tests/ch11/test_logging_setup.py"
+      ],
+      "returncode": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "10 passed in 0.04s",
+      "block_sha256": "ca3b7c2d3377c56225c6d9ba8f8b976fec75825974d6537ac08f3bfbc854f193",
+      "target_sha256": "d2801550996f1bc75471adb24c6ea940fcd8bdace4a1813d4cd82ec97097556e",
+      "test_file_sha256": {
+        "tests/ch11/test_logging_setup.py": "ade0050b419f4ad6eeeda9ddf1a2b825da8fa9272ac39ada7326253d18b45ff4"
+      }
+    },
+    "B-11-031::scripts/ch11/progress_demo.py": {
+      "status": "passed",
+      "reason": "置換定義: setup_logging",
+      "block_id": "B-11-031",
+      "target_file": "scripts/ch11/progress_demo.py",
+      "test_files": [
+        "tests/ch11/test_logging_setup.py"
+      ],
+      "returncode": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "10 passed in 0.03s",
+      "block_sha256": "ca3b7c2d3377c56225c6d9ba8f8b976fec75825974d6537ac08f3bfbc854f193",
+      "target_sha256": "299cd3acf3fa2eb0cdcbceefcefb4e8f0a4e191e9bc98fc0e77bc526eb1ec9b6",
+      "test_file_sha256": {
+        "tests/ch11/test_logging_setup.py": "ade0050b419f4ad6eeeda9ddf1a2b825da8fa9272ac39ada7326253d18b45ff4"
+      }
+    },
+    "B-13-005::scripts/ch13/seaborn_biodist.py": {
+      "status": "passed",
+      "reason": "置換定義: expression_violin",
+      "block_id": "B-13-005",
+      "target_file": "scripts/ch13/seaborn_biodist.py",
+      "test_files": [
+        "tests/ch13/test_seaborn_biodist.py"
+      ],
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "5 passed in 1.68s",
+      "block_sha256": "fe70742e1562c966653b538b534d9c83d0fbf3132571c5570c75d15ec4676016",
+      "target_sha256": "db231b74c3f1295b531620224100a9b7a32931ddc6664b86e09de05783f098b9",
+      "test_file_sha256": {
+        "tests/ch13/test_seaborn_biodist.py": "6b57388f9d8adf8ae59f1a59829a7552b2acdb744aa2780d23b60cb95853308d"
+      }
+    },
+    "B-17-019::scripts/ch17/profiling_demo.py": {
+      "status": "failed",
+      "reason": "置換定義: normalize_tpm_slow",
+      "block_id": "B-17-019",
+      "target_file": "scripts/ch17/profiling_demo.py",
+      "test_files": [
+        "tests/ch17/test_profiling_demo.py"
+      ],
+      "returncode": 2,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 1,
+      "summary": "1 error in 0.11s",
+      "failure_cause": "本文はline_profiler注入前提の@profileを使い、通常import時の代替定義がない",
+      "block_sha256": "6ac87f54a7b06628a96a63e87555ae00affef5fddbeb08c016fb01b2af775209",
+      "target_sha256": "59160c986523c302c0b8fe85199258c4cbc1590618de0d34fb1d1c97ac406251",
+      "test_file_sha256": {
+        "tests/ch17/test_profiling_demo.py": "a12ab057044e188df01b8ff8d85bde238b60922e2c51229c1de2448e5f4bab23"
+      }
+    },
+    "B-17-037::scripts/ch17/chunk_processing.py": {
+      "status": "failed",
+      "reason": "置換定義: compute_stats_chunked",
+      "block_id": "B-17-037",
+      "target_file": "scripts/ch17/chunk_processing.py",
+      "test_files": [
+        "tests/ch17/test_chunk_processing.py"
+      ],
+      "returncode": 1,
+      "passed": 3,
+      "failed": 1,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "1 failed, 3 passed in 0.36s",
+      "failure_cause": "本文には2サンプル未満を拒否する入力検証がない",
+      "block_sha256": "2670c81c0f483e149dd15eaacbf7132e9f3adb5dcee7d28da28849779903ccfd",
+      "target_sha256": "d83e64d082f49c393b69e3f36c8e9e50291535adf4b3cecc987a45953219f82d",
+      "test_file_sha256": {
+        "tests/ch17/test_chunk_processing.py": "a85d8a86d620fa067d45dfed19c550af020f7e5385183f8e94d9d4096b824505"
+      }
+    },
+    "B-19-022::scripts/ch19/local_db.py": {
+      "status": "not_run",
+      "reason": "同名のトップレベル定義がない",
+      "block_id": "B-19-022",
+      "target_file": "scripts/ch19/local_db.py",
+      "block_sha256": "92c24dc025430d79e3e46efbf1a5171503ac9d7f9d933f68e1dc051aa6e18956",
+      "target_sha256": "d550c7da47cfad8393431934b28f9323154efdefed424bf092d68ba9a423a490",
+      "test_file_sha256": {}
+    },
+    "B-20-004::scripts/ch20/secret_scanner.py": {
+      "status": "passed",
+      "reason": "置換定義: scan_content",
+      "block_id": "B-20-004",
+      "target_file": "scripts/ch20/secret_scanner.py",
+      "test_files": [
+        "tests/ch20/test_secret_scanner.py"
+      ],
+      "returncode": 0,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "21 passed in 0.03s",
+      "block_sha256": "a75e34d4d8cf6d4d1a996ceb18b73d82ba2004aa0c8bfc756a77532a781d60d0",
+      "target_sha256": "51343e9e175ebb4518792dc79e44f50a1918fef8048ffb7c81f9f82f26e47de3",
+      "test_file_sha256": {
+        "tests/ch20/test_secret_scanner.py": "5f25b25c346367882081d9adce5ac5086b3f7210820d6723fd43f4f313e3911a"
+      }
+    },
+    "B-20-009::scripts/ch20/anonymize_metadata.py": {
+      "status": "failed",
+      "reason": "置換定義: generalize_age",
+      "block_id": "B-20-009",
+      "target_file": "scripts/ch20/anonymize_metadata.py",
+      "test_files": [
+        "tests/ch20/test_anonymize_metadata.py"
+      ],
+      "returncode": 1,
+      "passed": 23,
+      "failed": 2,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "2 failed, 23 passed in 0.04s",
+      "failure_cause": "本文には負の年齢と0以下のbin_sizeを拒否する入力検証がない",
+      "block_sha256": "710baae93d3924f5423f139954e26bc9a34987e502d9cca17dd195f6f8a9feb9",
+      "target_sha256": "4f5fa0e6d06548f6373c3b632bda97908ec928c99b83046048f41f9011148a8b",
+      "test_file_sha256": {
+        "tests/ch20/test_anonymize_metadata.py": "25327b19a1106c912184f6b6977125f41b01b8f552c0a33657c2fee045c5f02e"
+      }
+    },
+    "B-21-004::scripts/ch21/format_question.py": {
+      "status": "passed",
+      "reason": "置換定義: collect_environment",
+      "block_id": "B-21-004",
+      "target_file": "scripts/ch21/format_question.py",
+      "test_files": [
+        "tests/ch21/test_format_question.py"
+      ],
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "5 passed in 0.03s",
+      "block_sha256": "00fd326a21d98b61efce22c1b5784586c99b4c50b6e200f3605d55de17f99845",
+      "target_sha256": "dc4d003911ccf3d7cd510c940a17c52817bdba98119c6901134d5aa485555813",
+      "test_file_sha256": {
+        "tests/ch21/test_format_question.py": "7621c45f86cd28928da8e1f2b36a13ae78de6e54487e133a081773be355d5c51"
+      }
+    },
+    "B-21-007::scripts/ch21/review_helper.py": {
+      "status": "passed",
+      "reason": "置換定義: check_type_hints",
+      "block_id": "B-21-007",
+      "target_file": "scripts/ch21/review_helper.py",
+      "test_files": [
+        "tests/ch21/test_review_helper.py"
+      ],
+      "returncode": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "9 passed in 0.02s",
+      "block_sha256": "fdb26fcbe554c949ea1c6723b42879640fd3106fa48edcaa02bfbba10e14f3d7",
+      "target_sha256": "c2a86e6ee349fcd259193d878618615881be0b64d3bfc81674accec4a7e21ec1",
+      "test_file_sha256": {
+        "tests/ch21/test_review_helper.py": "feab14b15477a8664fd557e1767070634605f0090def46948a7f8ff7ac080716"
+      }
+    },
+    "B-21-012::scripts/ch21/progress_report.py": {
+      "status": "passed",
+      "reason": "置換定義: parse_git_log",
+      "block_id": "B-21-012",
+      "target_file": "scripts/ch21/progress_report.py",
+      "test_files": [
+        "tests/ch21/test_progress_report.py"
+      ],
+      "returncode": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "8 passed in 0.02s",
+      "block_sha256": "17a5d24c5d06647ba17bfbc82b206533e6fc85059220caa1e2828917bb42d31f",
+      "target_sha256": "befe2a44ad2fcef75fb97059ba70ccc60abdc03980243a76bd90367b92ca1de9",
+      "test_file_sha256": {
+        "tests/ch21/test_progress_report.py": "d879e5761c0988910b9a435076ac3edf4cff0374a72ea010b5a70aa9225282fc"
+      }
+    },
+    "B-21-014::scripts/ch21/analysis_intake.py": {
+      "status": "passed",
+      "reason": "置換定義: validate_metadata",
+      "block_id": "B-21-014",
+      "target_file": "scripts/ch21/analysis_intake.py",
+      "test_files": [
+        "tests/ch21/test_analysis_intake.py"
+      ],
+      "returncode": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "11 passed in 0.02s",
+      "block_sha256": "24a046921c4ed2955bf4b684df8e8d71d6adeb4c497403bca8cf36055ad3b0b1",
+      "target_sha256": "31db200a598357214bbbe6c47348e7869dae3718bef63d1ff42ea7630ec8298e",
+      "test_file_sha256": {
+        "tests/ch21/test_analysis_intake.py": "5416be9c77b9962599c0a36835cd4020f0ffea4bdd1347c0ec925b818ac28cb5"
+      }
+    }
+  },
+  "substitution_environment": {
+    "python": "3.14.6",
+    "pytest": "pytest 9.0.3",
+    "test_command": ".venv/bin/pytest tests/ -q -p no:cacheprovider"
+  },
+  "review_metadata": {
+    "pending_resolved": 91,
+    "note": "配置必須ブロック、対応ありブロック、全保留ブロックを本文前後と実体で目視",
+    "goldset_method": "E0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検"
+  }
+}
