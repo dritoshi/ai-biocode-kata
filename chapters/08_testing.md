@@ -208,13 +208,16 @@ def test_filter_all(sample_sequences: dict[str, str]) -> None:
 
 ```python
 # tests/ch08/conftest.py
-import pytest
 from pathlib import Path
+
+import pytest
+
 
 @pytest.fixture()
 def test_data_dir() -> Path:
     """テストデータディレクトリのパスを返す."""
     return Path(__file__).parent / "data"
+
 
 @pytest.fixture()
 def sample_fasta(test_data_dir: Path) -> Path:
