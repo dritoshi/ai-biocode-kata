@@ -1,15 +1,14 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
-- 作成日: 2026-07-25
-- 対象コミット: `8153267`
+- 生成日: 2026-07-26
+- 対象コミット: `96d5dd89e862c24937bec22f5a2c6f6aa966ebe6`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
+- E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - 全件表: [`code_correspondence.json`](./code_correspondence.json)
-- 対象: 番号付き22章の全fenced code block、`scripts/ch00`〜`scripts/ch21` の全実ファイル、対応テスト
-- 非対象: 本文、既存スクリプト、既存テストの修正
 
-本書の配置規約を先に適用し、その後に対応と本質的一致を判定した。演習、悪例、
-ライブラリ紹介、コマンド、出力例など、規約上実体を必要としないブロックを
-「欠落」へ数えていない。本レポートは従来版を置き換える再監査結果である。
+本書の配置規約を先に適用し、その後に対応と本質的一致を判定した。
+演習、悪例、ライブラリ紹介、コマンド、出力例など、規約上実体を
+必要としないブロックは「欠落」に数えずENとして全件表に残した。
 
 ## 1. 結論
 
@@ -23,154 +22,138 @@
 | EN | 394 | 規約上、対応実体は不要 |
 | **合計** | **529** | 全本文ブロック |
 
-配置が必要な135ブロックのうち、E0〜E2の60件は対応済み、E3の36件は差の確認が必要、
-E5の39件は実体が欠けている。配置不要394件を除外せず、全件表にはENとして残した。
+配置が必要なブロックは135件である。E5は39件であり、具体的な解消順序はE5解消計画に記録した。
 
-`scripts/ch*` 側は全116ファイルで、本文コードと直接対応64件、本文から参照のみ23件、
-本文コードとの対応なし29件である。対応なし29件の内訳は、パッケージ初期化19件、
-図表生成8件、データ1件、検証ツール1件であり、大半は意図的な補助資産と判断できる。
+`scripts/ch*` 側は全116ファイルで、本文コードと直接対応64件、本文から参照のみ23件、本文コードとの対応なし29件である。
 
 ## 2. 章別集計
 
-「配置必須」は `scripts/` または `tests/` への配置が規約上必要なブロック数である。
+| 章 | 全ブロック | 配置必須 | E0 | E1 | E2 | E3 | E4 | E5 | EN |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| ch00 | 11 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 9 |
+| ch01 | 9 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 6 |
+| ch02 | 35 | 5 | 0 | 0 | 0 | 1 | 0 | 4 | 30 |
+| ch03 | 28 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 27 |
+| ch04 | 20 | 2 | 0 | 0 | 0 | 0 | 0 | 2 | 18 |
+| ch05 | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 23 |
+| ch06 | 16 | 4 | 0 | 0 | 0 | 0 | 0 | 4 | 12 |
+| ch07 | 22 | 3 | 1 | 0 | 2 | 0 | 0 | 0 | 19 |
+| ch08 | 29 | 17 | 0 | 5 | 1 | 3 | 0 | 8 | 12 |
+| ch09 | 33 | 8 | 0 | 3 | 0 | 5 | 0 | 0 | 25 |
+| ch10 | 35 | 8 | 2 | 3 | 0 | 0 | 0 | 3 | 27 |
+| ch11 | 34 | 10 | 0 | 0 | 0 | 9 | 0 | 1 | 24 |
+| ch12 | 20 | 15 | 0 | 14 | 0 | 0 | 0 | 1 | 5 |
+| ch13 | 11 | 6 | 0 | 3 | 0 | 1 | 0 | 2 | 5 |
+| ch14 | 23 | 14 | 1 | 0 | 4 | 4 | 0 | 5 | 9 |
+| ch15 | 32 | 9 | 3 | 0 | 2 | 0 | 0 | 4 | 23 |
+| ch16 | 26 | 6 | 3 | 0 | 2 | 1 | 0 | 0 | 20 |
+| ch17 | 42 | 11 | 0 | 6 | 0 | 3 | 0 | 2 | 31 |
+| ch18 | 30 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 29 |
+| ch19 | 24 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 23 |
+| ch20 | 12 | 4 | 0 | 0 | 1 | 2 | 0 | 1 | 8 |
+| ch21 | 14 | 5 | 0 | 0 | 0 | 4 | 0 | 1 | 9 |
+| **合計** | **529** | **135** | **10** | **38** | **12** | **36** | **0** | **39** | **394** |
 
-| 章 | 全ブロック | 配置必須 | E0 | E1 | E2 | E3 | E5 | EN |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| ch00 | 11 | 2 | 0 | 0 | 0 | 2 | 0 | 9 |
-| ch01 | 9 | 3 | 0 | 3 | 0 | 0 | 0 | 6 |
-| ch02 | 35 | 5 | 0 | 0 | 0 | 1 | 4 | 30 |
-| ch03 | 28 | 1 | 0 | 1 | 0 | 0 | 0 | 27 |
-| ch04 | 20 | 2 | 0 | 0 | 0 | 0 | 2 | 18 |
-| ch05 | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 23 |
-| ch06 | 16 | 4 | 0 | 0 | 0 | 0 | 4 | 12 |
-| ch07 | 22 | 3 | 1 | 0 | 2 | 0 | 0 | 19 |
-| ch08 | 29 | 17 | 0 | 5 | 1 | 3 | 8 | 12 |
-| ch09 | 33 | 8 | 0 | 3 | 0 | 5 | 0 | 25 |
-| ch10 | 35 | 8 | 2 | 3 | 0 | 0 | 3 | 27 |
-| ch11 | 34 | 10 | 0 | 0 | 0 | 9 | 1 | 24 |
-| ch12 | 20 | 15 | 0 | 14 | 0 | 0 | 1 | 5 |
-| ch13 | 11 | 6 | 0 | 3 | 0 | 1 | 2 | 5 |
-| ch14 | 23 | 14 | 1 | 0 | 4 | 4 | 5 | 9 |
-| ch15 | 32 | 9 | 3 | 0 | 2 | 0 | 4 | 23 |
-| ch16 | 26 | 6 | 3 | 0 | 2 | 1 | 0 | 20 |
-| ch17 | 42 | 11 | 0 | 6 | 0 | 3 | 2 | 31 |
-| ch18 | 30 | 1 | 0 | 0 | 0 | 0 | 1 | 29 |
-| ch19 | 24 | 1 | 0 | 0 | 0 | 1 | 0 | 23 |
-| ch20 | 12 | 4 | 0 | 0 | 1 | 2 | 1 | 8 |
-| ch21 | 14 | 5 | 0 | 0 | 0 | 4 | 1 | 9 |
-| **合計** | **529** | **135** | **10** | **38** | **12** | **36** | **39** | **394** |
+## 3. 対応実体がないブロック
 
-## 3. 対応実体がない39ブロック
+| ID | 章・開始行 | 種別 | 見出し |
+|---|---|---|---|
+| `B-02-025` | `ch02` L559 | config_workflow | set -euo pipefail — 安全なスクリプトの第一行 |
+| `B-02-026` | `ch02` L576 | config_workflow | シェルスクリプトの基本構造 |
+| `B-02-028` | `ch02` L615 | config_workflow | 条件分岐 |
+| `B-02-029` | `ch02` L632 | config_workflow | ループ |
+| `B-04-004` | `ch04` L204 | config_workflow | YAML / TOML — 設定ファイル |
+| `B-04-005` | `ch04` L217 | config_workflow | YAML / TOML — 設定ファイル |
+| `B-06-006` | `ch06` L152 | config_workflow | 依存関係定義ファイルの比較 |
+| `B-06-007` | `ch06` L159 | config_workflow | 依存関係定義ファイルの比較 |
+| `B-06-008` | `ch06` L171 | config_workflow | 依存関係定義ファイルの比較 |
+| `B-06-012` | `ch06` L307 | config_workflow | チャネルとレジストリ |
+| `B-08-008` | `ch08` L209 | test_code | conftest.py — フィクスチャの共有 |
+| `B-08-014` | `ch08` L348 | config_workflow | pyproject.toml での設定 |
+| `B-08-015` | `ch08` L378 | config_workflow | ルールをディレクトリ単位で調整する — per-file-ignores |
+| `B-08-020` | `ch08` L447 | config_workflow | pyproject.toml でのmypy設定 |
+| `B-08-022` | `ch08` L471 | config_workflow | pre-commit — コミット前の自動チェック |
+| `B-08-025` | `ch08` L577 | config_workflow | 設定例 |
+| `B-08-026` | `ch08` L626 | config_workflow | ワークフローYAMLの書き方 |
+| `B-08-027` | `ch08` L679 | config_workflow | ワークフローの拡張 |
+| `B-10-004` | `ch10` L77 | config_workflow | パターン2: pipインストール可能なPythonパッケージ |
+| `B-10-023` | `ch10` L612 | config_workflow | 設定ファイルによる外部化 |
+| `B-10-033` | `ch10` L929 | implementation | fail-fastの原則 |
+| `B-11-024` | `ch11` L590 | implementation | stdoutとプログレスの棲み分け |
+| `B-12-002` | `ch12` L40 | implementation | 高速化の前に — すでにC実装の道具がないか |
+| `B-13-008` | `ch13` L415 | implementation | スクリプト化のポイント |
+| `B-13-010` | `ch13` L530 | config_workflow | 論文用トラック図の作成 |
+| `B-14-006` | `ch14` L193 | config_workflow | conda / container統合 |
+| `B-14-008` | `ch14` L298 | config_workflow | DSL2の基本構文 |
+| `B-14-010` | `ch14` L386 | config_workflow | CommandLineToolの基本構造 |
+| `B-14-011` | `ch14` L437 | config_workflow | Workflowの定義 |
+| `B-14-012` | `ch14` L481 | config_workflow | 入力ファイル（ジョブファイル） |
+| `B-15-012` | `ch15` L389 | config_workflow | 承認ありモードでDockerfileを反復構築する |
+| `B-15-018` | `ch15` L530 | config_workflow | GPUコンテナ |
+| `B-15-019` | `ch15` L572 | config_workflow | 両方を併用する戦略 |
+| `B-15-022` | `ch15` L645 | config_workflow | バージョン固定の実践 |
+| `B-17-022` | `ch17` L358 | implementation | memrayによるメモリプロファイリング |
+| `B-17-036` | `ch17` L772 | implementation | ストリーミング処理 — 全データをメモリに載せない |
+| `B-18-021` | `ch18` L374 | config_workflow | docstringからのAPI自動生成 |
+| `B-20-002` | `ch20` L58 | config_workflow | `.env` + `python-dotenv` のパターン |
+| `B-21-009` | `ch21` L423 | config_workflow | Biocondaレシピ貢献 |
 
-内訳は、設定・ワークフロー32件、実装6件、テスト1件である。行番号はfence開始行を示す。
-見出し、言語、ハッシュ、分類根拠は全件表に記録した。
+## 4. 対応はあるが差があるブロック
 
-| 章 | ブロックID、開始行、種別 |
-|---|---|
-| `ch02` | `B-02-025` L559 設定、`B-02-026` L576 設定、`B-02-028` L615 設定、`B-02-029` L632 設定 |
-| `ch04` | `B-04-004` L204 設定、`B-04-005` L217 設定 |
-| `ch06` | `B-06-006` L152 設定、`B-06-007` L159 設定、`B-06-008` L171 設定、`B-06-012` L307 設定 |
-| `ch08` | `B-08-008` L209 テスト、`B-08-014` L348 設定、`B-08-015` L378 設定、`B-08-020` L447 設定、`B-08-022` L471 設定、`B-08-025` L577 設定、`B-08-026` L626 設定、`B-08-027` L679 設定 |
-| `ch10` | `B-10-004` L77 設定、`B-10-023` L612 設定、`B-10-033` L929 実装 |
-| `ch11` | `B-11-024` L590 実装 |
-| `ch12` | `B-12-002` L40 実装 |
-| `ch13` | `B-13-008` L415 実装、`B-13-010` L530 設定 |
-| `ch14` | `B-14-006` L193 設定、`B-14-008` L298 設定、`B-14-010` L386 設定、`B-14-011` L437 設定、`B-14-012` L481 設定 |
-| `ch15` | `B-15-012` L389 設定、`B-15-018` L530 設定、`B-15-019` L572 設定、`B-15-022` L645 設定 |
-| `ch17` | `B-17-022` L358 実装、`B-17-036` L772 実装 |
-| `ch18` | `B-18-021` L374 設定 |
-| `ch20` | `B-20-002` L58 設定 |
-| `ch21` | `B-21-009` L423 設定 |
-
-## 4. 対応はあるが差がある36ブロック
-
-構造差E3のうち、安全にトップレベル定義を差し替えられる28関係を一時コピーで試験した。
-現行の直接テストで12件は成功、8件は失敗、8件は未検証であった。成功は
-「そのテストが観測する範囲で差を検出しなかった」という意味であり、完全な振る舞い等価を
-保証しない。設定、ワークフロー、本文掲載テスト8件は、この差し替え試験の対象外である。
-
-| ブロック | 対応先 | 差し替え結果 |
-|---|---|---|
-| `B-00-001` | `scripts/ch00/find_orfs.py` | 失敗、11 failed / 17 passed |
-| `B-00-003` | `scripts/ch00/hmm_gene_predict.py` | 失敗、8 failed / 1 passed |
-| `B-02-031` | `scripts/ch16/ssh_config.example` | 対象外、設定 |
-| `B-08-002` | `scripts/ch08/reverse_complement.py` | 成功、7 passed |
-| `B-08-005` | `tests/ch08/test_seq_stats.py` | 対象外、本文掲載テスト |
-| `B-08-007` | `tests/ch01/test_gc_content.py` | 対象外、本文掲載テスト |
-| `B-09-001` | `scripts/ch09/traceback_demo.py` | 未検証、省略記号あり |
-| `B-09-005` | `scripts/ch09/traceback_demo.py` | 成功、12 passed |
-| `B-09-008` | `scripts/ch09/pdb_demo.py` | 未検証、省略記号あり |
-| `B-09-018` | `scripts/ch09/coordinate_bugs.py` | 未検証、省略記号あり |
-| `B-09-020` | `scripts/ch09/path_bugs.py` | 成功、5 passed |
-| `B-11-001` | `scripts/ch11/cli_argparse.py` | 成功、7 passed |
-| `B-11-002` | `scripts/ch11/cli_click.py` | 未検証、省略記号あり |
-| `B-11-003` | `scripts/ch11/cli_typer.py` | 未検証、直接テストなし |
-| `B-11-006` | `scripts/ch11/cli_click.py` | 失敗、6 failed / 3 passed |
-| `B-11-007` | `scripts/ch11/seqtool.py` | 失敗、1 failed / 12 passed |
-| `B-11-011` | `scripts/ch11/cli_click.py` | 未検証、省略記号あり |
-| `B-11-013` | `scripts/ch10/config_example.py`、`scripts/ch11/cli_click.py` | 未検証、省略記号あり |
-| `B-11-030` | `scripts/ch11/seqtool.py` | 失敗、1 failed / 12 passed |
-| `B-11-031` | `scripts/ch11/logging_setup.py`、`scripts/ch11/progress_demo.py` | 成功、各10 passed |
-| `B-13-005` | `scripts/ch13/seaborn_biodist.py` | 成功、5 passed |
-| `B-14-002` | `scripts/ch14/Snakefile` | 対象外、ワークフロー |
-| `B-14-014` | `scripts/ch14/Makefile` | 対象外、ワークフロー |
-| `B-14-017` | `scripts/ch14/Snakefile` | 対象外、ワークフロー |
-| `B-14-019` | `scripts/ch14/Snakefile` | 対象外、ワークフロー |
-| `B-16-016` | `scripts/ch16/ssh_config.example` | 対象外、設定 |
-| `B-17-019` | `scripts/ch17/profiling_demo.py` | 失敗、1 error |
-| `B-17-031` | `scripts/ch17/generator_fastq.py` | 対象外、部分定義の安全な置換不可 |
-| `B-17-037` | `scripts/ch17/chunk_processing.py` | 失敗、1 failed / 3 passed |
-| `B-19-022` | `scripts/ch19/local_db.py` | 未検証、同名トップレベル定義なし |
-| `B-20-004` | `scripts/ch20/secret_scanner.py` | 成功、21 passed |
-| `B-20-009` | `scripts/ch20/anonymize_metadata.py` | 失敗、2 failed / 23 passed |
-| `B-21-004` | `scripts/ch21/format_question.py` | 成功、5 passed |
-| `B-21-007` | `scripts/ch21/review_helper.py` | 成功、9 passed |
-| `B-21-012` | `scripts/ch21/progress_report.py` | 成功、8 passed |
-| `B-21-014` | `scripts/ch21/analysis_intake.py` | 成功、11 passed |
-
-失敗8件の直接原因は次のとおりである。
-
-| ブロック | 差の要点 |
-|---|---|
-| `B-00-001` | 逆鎖処理が省略され、`_find_stop` の呼出しシグネチャも実体と異なる |
-| `B-00-003` | 初期化・バックトレース等が省略され、`log_emit` と `v` が未定義 |
-| `B-11-006` | `--version` 用断片では実体CLIの入力・出力・フィルタ処理を保持できない |
-| `B-11-007` | 本文の `cli` 定義には実体が持つ `--version` 処理がない |
-| `B-11-030` | 本文の `cli` 定義には実体が持つ `--version` 処理がない |
-| `B-17-019` | `line_profiler` 注入前提の `@profile` に通常import時の代替定義がない |
-| `B-17-037` | 2サンプル未満を拒否する入力検証がない |
-| `B-20-009` | 負の年齢と0以下の `bin_size` を拒否する入力検証がない |
+| ブロック | 対応先 | 差し替え結果 | 差の根拠 |
+|---|---|---|---|
+| `B-00-001` | `scripts/ch00/find_orfs.py` | 11 failed, 17 passed in 0.76s | ORFとfind_all_orfsは同題材だが入力検証・探索仕様に差がある |
+| `B-00-003` | `scripts/ch00/hmm_gene_predict.py` | 8 failed, 1 passed in 0.11s | viterbiの初期化・バックトレースを本文が省略し、そのままでは同じ動作にならない |
+| `B-02-031` | `scripts/ch16/ssh_config.example` | 対象外 | 同じSSH configだがホスト名・利用者・ProxyJump構成が異なる章横断候補 |
+| `B-08-002` | `scripts/ch08/reverse_complement.py` | 7 passed in 0.01s | 基本処理は同じだが実体に空入力・不正塩基の検証があり例外仕様が異なる |
+| `B-08-005` | `tests/ch08/test_seq_stats.py` | 対象外 | 同じgc_content正常系だが入力配列・関数名・クラス構造が異なる |
+| `B-08-007` | `tests/ch01/test_gc_content.py` | 対象外 | fixtureとGCフィルタのテスト意図は同じだが、規約上の同章tests/ch08には存在しない |
+| `B-09-001` | `scripts/ch09/traceback_demo.py` | 未実行: 本文定義が省略記号を含む: read_fasta_records | 同章・同名だがAST差 |
+| `B-09-005` | `scripts/ch09/traceback_demo.py` | 12 passed in 0.02s | 同章・同名だがAST差 |
+| `B-09-008` | `scripts/ch09/pdb_demo.py` | 未実行: 本文定義が省略記号を含む: calculate_gc_stats | 同章・同名だがAST差 |
+| `B-09-018` | `scripts/ch09/coordinate_bugs.py` | 未実行: 本文定義が省略記号を含む: validate_coordinates | 同章・同名だがAST差 |
+| `B-09-020` | `scripts/ch09/path_bugs.py` | 5 passed in 0.01s | 同章・同名だがAST差 |
+| `B-11-001` | `scripts/ch11/cli_argparse.py` | 7 passed in 0.13s | 同章・同名だがAST差 |
+| `B-11-002` | `scripts/ch11/cli_click.py` | 未実行: 本文定義が省略記号を含む: gc_filter | Click版に対応するが、実体は型ヒント・version・ログ・戻り値等を追加 |
+| `B-11-003` | `scripts/ch11/cli_typer.py` | 未実行: 対応スクリプトに直接テストがない | Typer版に対応するが引数・出力・例外処理に差がある |
+| `B-11-006` | `scripts/ch11/cli_click.py` | 6 failed, 3 passed in 0.15s | version/helpデコレータ例だが実体のgc_filterシグネチャと処理が異なる |
+| `B-11-007` | `scripts/ch11/seqtool.py` | 1 failed, 12 passed in 0.17s | 同章・同名だがAST差 |
+| `B-11-011` | `scripts/ch11/cli_click.py` | 未実行: 本文定義が省略記号を含む: gc_filter | 終了コードの例と実体のCLIで入力検証・終了処理が異なる |
+| `B-11-013` | `scripts/ch10/config_example.py` | 対象外 | load_configは章横断候補だがdefaultsと戻り値仕様が異なる |
+| `B-11-013` | `scripts/ch11/cli_click.py` | 未実行: 本文定義が省略記号を含む: gc_filter | 設定をCLIへ合成する処理は同題材だが実体のオプション・検証が異なる |
+| `B-11-030` | `scripts/ch11/seqtool.py` | 1 failed, 12 passed in 0.16s | 同章・同名だがAST差 |
+| `B-11-031` | `scripts/ch11/logging_setup.py` | 10 passed in 0.04s | 同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある |
+| `B-11-031` | `scripts/ch11/progress_demo.py` | 10 passed in 0.03s | 同じsetup_loggingの別実体にも対応する多対多関係 |
+| `B-13-005` | `scripts/ch13/seaborn_biodist.py` | 5 passed in 1.68s | 同章・同名だがAST差 |
+| `B-14-002` | `scripts/ch14/Snakefile` | 対象外 | 処理は同じだがthreadsが定数4とconfig参照で異なる |
+| `B-14-014` | `scripts/ch14/Makefile` | 対象外 | 依存関係は同じだが本文URLが省略記号で実行不能、変数・clean処理にも差がある |
+| `B-14-017` | `scripts/ch14/Snakefile` | 対象外 | protectedとtemp、BAMパスが異なるため動作上の差がある |
+| `B-14-019` | `scripts/ch14/Snakefile` | 対象外 | logの意図は同じだがshell文字列が説明用省略形 |
+| `B-16-016` | `scripts/ch16/ssh_config.example` | 対象外 | ProxyJump構造は同じだがHost別名とHostNameが異なる |
+| `B-17-019` | `scripts/ch17/profiling_demo.py` | 1 error in 0.11s | 同章・同名だがAST差 |
+| `B-17-031` | `scripts/ch17/generator_fastq.py` | 対象外 | generator版はfilter_by_lengthと同じ目的だがAPIが異なり、list版の実体は無い |
+| `B-17-037` | `scripts/ch17/chunk_processing.py` | 1 failed, 3 passed in 0.36s | 同章・同名だがAST差 |
+| `B-19-022` | `scripts/ch19/local_db.py` | 未実行: 同名のトップレベル定義がない | 同じSQLite処理だが実体は関数分割・追加列・ロギングを持ち、本文は直書き |
+| `B-20-004` | `scripts/ch20/secret_scanner.py` | 21 passed in 0.03s | 同名scan_contentだが戻り値・パターン・引数・除外処理に差がある |
+| `B-20-009` | `scripts/ch20/anonymize_metadata.py` | 2 failed, 23 passed in 0.04s | 年代化の基本式は同じだが実体に入力検証とエラー仕様がある |
+| `B-21-004` | `scripts/ch21/format_question.py` | 5 passed in 0.03s | 同章・同名だがAST差 |
+| `B-21-007` | `scripts/ch21/review_helper.py` | 9 passed in 0.02s | 同章・同名だがAST差 |
+| `B-21-012` | `scripts/ch21/progress_report.py` | 8 passed in 0.02s | 同章・同名だがAST差 |
+| `B-21-014` | `scripts/ch21/analysis_intake.py` | 11 passed in 0.02s | 同章・同名だがAST差 |
 
 ## 5. テスト状況
 
-全テストを一括実行し、さらに70個の `test_*.py` をファイル単位で実行した。
-実行環境はPython 3.14.6、pytest 9.0.3である。
+全対象テストファイルを個別実行し、その結果を対応表へ保存した。
 
 | 項目 | 結果 |
 |---|---:|
-| 一括実行 | 821 passed、1 skipped、0 failed、0 errors |
+| テストファイル | 71 |
 | 章別テストファイル | 69 |
-| レビュー用テストファイル | 1 |
-| 直接テスト成功のスクリプト | 67 |
-| 直接テスト成功、skipあり | 1 |
-| 直接テストを確認できないスクリプト | 48 |
-
-skipは `tests/ch07/test_citation_cff.py` の1件で、`cffconvert` がインストールされて
-いないことが理由である。
-
-直接テストを確認できない48件のうち、初期化、図表生成、データ、テンプレートなど
-補助資産33件を除いた15件は次のとおりである。
-
-| 種別 | ファイル |
-|---|---|
-| 実装・デモ | `scripts/ch11/cli_typer.py`、`scripts/ch11/progress_demo.py` |
-| CI | `scripts/ch07/ci_minimal.yml` |
-| ワークフロー | `scripts/ch14/Makefile`、`scripts/ch14/Snakefile`、`scripts/ch14/config.yaml` |
-| コンテナ | `scripts/ch15/Dockerfile`、`scripts/ch15/Dockerfile.multistage`、`scripts/ch15/apptainer.def`、`scripts/ch15/docker-compose.yml`、`scripts/ch15/environment.yml` |
-| HPCジョブ | `scripts/ch16/array_job.sh`、`scripts/ch16/basic_job.sh`、`scripts/ch16/gpu_train_job.sh`、`scripts/ch16/pipeline_submit.sh` |
-
-「直接テストなし」は未検証を意味し、直ちに誤りを意味しない。設定資産については、
-構文検査や小さな検証用フィクスチャも直接テストとして数えられる。
+| レビュー用テストファイル | 2 |
+| passed | 836 |
+| skipped | 1 |
+| failed | 0 |
+| errors | 0 |
 
 ## 6. 多対多対応
 
@@ -184,138 +167,37 @@ skipは `tests/ch07/test_citation_cff.py` の1件で、`cffconvert` がインス
 | `B-11-013` | `scripts/ch10/config_example.py`、`scripts/ch11/cli_click.py` |
 | `B-11-031` | `scripts/ch11/logging_setup.py`、`scripts/ch11/progress_demo.py` |
 
-複数本文ブロックから1スクリプトへの対応は22ファイルある。
+## 7. 実体側だけにあるファイル
 
-| 対応ブロック数 | スクリプト |
-|---:|---|
-| 7 | `scripts/ch14/Snakefile` |
-| 5 | `scripts/ch09/python_pitfalls.py`、`scripts/ch12/scipy_stats_bio.py` |
-| 4 | `scripts/ch03/float_pitfalls.py`、`scripts/ch10/error_handling.py`、`scripts/ch11/cli_click.py`、`scripts/ch12/pandas_bio_ops.py` |
-| 3 | `scripts/ch09/traceback_demo.py`、`scripts/ch12/numpy_vectorize.py`、`scripts/ch17/profiling_demo.py` |
-| 2 | `scripts/ch01/gc_content.py`、`scripts/ch02/regex_basics.py`、`scripts/ch04/encoding_traps.py`、`scripts/ch10/config_example.py`、`scripts/ch11/seqtool.py`、`scripts/ch12/plot_vectorize_bench.py`、`scripts/ch13/bio_plots.py`、`scripts/ch15/Dockerfile`、`scripts/ch16/gpu_train_job.sh`、`scripts/ch16/ssh_config.example`、`scripts/ch17/generator_fastq.py`、`scripts/ch20/anonymize_metadata.py` |
+本文コードとの対応がない資産は29件である。
+個別の役割とテスト結果は全件表の`scripts`に記録した。
 
-全件表では、本文ブロックの `relations` とスクリプトの `body_block_ids` の両方向から
-同じ関係を追跡できる。
+| 役割 | ファイル数 |
+|---|---:|
+| data_support | 1 |
+| figure_generation | 8 |
+| package_support | 19 |
+| validator | 1 |
 
-## 7. 実体側だけにある29ファイル
+## 8. 手法と検証
 
-本文コードとの対応がない29件のうち28件は、`__init__.py`、図表生成スクリプト、
-入力データである。残る `scripts/ch16/validate_slurm.py` は検証ツールで、テストは
-成功するが本文コードまたは本文中のファイル参照との対応がない。意図した内部検証資産なら
-現状のままでよい。読者向けサンプルなら、本文から役割を参照する候補である。
+1. 文字数や言語で除外せず、番号付き章の全コードブロックを抽出した
+2. `scripts/ch*` と `tests/ch*` の全実ファイルを別母集団で抽出した
+3. 機械分類後、ハッシュ付きoverride台帳の人手判断を適用した
+4. Python AST、定義名、順序保存部分列、非Python正規化行を候補生成に使った
+5. import、命名、直接パス参照から実体とテストを対応付けた
+6. 独立監査でソースハッシュ、ID、参照先、集計、Markdownを再計算する
 
-個別の29ファイル、役割、テスト結果は全件表の `scripts` に記録した。
+分類overrideは26件、関係overrideは83件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
 
-## 8. 更新履歴から見た片側更新候補
+## 9. 全件表の読み方
 
-E3関係について、本文はブロック行範囲、対応先はファイル全体の最終更新日を比較した。
-30日以上の差があるものは17関係である。
+`blocks`は本文ブロック、`scripts`はスクリプト資産、`test_assets`は章別テスト資産、`test_files`は個別実行結果を保持する。
+各関係の`target_file_id`は`scripts`または`test_assets`のIDへ解決され、定義単位の対応には`target_entity_locations`を記録する。
 
-- 本文側が新しい11関係:
-  `B-00-003`、`B-08-007`、`B-11-001`、`B-11-011`、
-  `B-11-031` の2対応先、`B-20-004`、`B-21-004`、`B-21-007`、
-  `B-21-012`、`B-21-014`
-- 対応先側が新しい6関係:
-  `B-11-002`、`B-11-006`、`B-11-013` の `cli_click.py` 対応、
-  `B-13-005`、`B-19-022`、`B-20-009`
-
-更新日の新しい側を正しいとは判定していない。また、対応先は定義単位ではなくファイル単位の
-履歴であるため、別の定義の編集日を拾う可能性がある。これらは修正方向を決める証拠ではなく、
-個別レビューの順序を決める候補である。
-
-## 9. 修正案
-
-実際の修正は行っていない。規約に従い、本文の実装コードを変える場合も、対応実体を先に修正し、
-テスト後に本文へ反映する前提である。
-
-| 優先 | 対象 | 提案 |
-|---:|---|---|
-| 1 | E5 39件 | 設定32件と実装6件を `scripts/`、テスト1件を `tests/` に完全な形で起こし、各資産の検証を追加する。本文が単なる紹介であると再判断する場合は、規約上の分類根拠を明示する |
-| 2 | 差し替え失敗8件 | 本文を実行可能な完全例として扱うか、明示的な抜粋として扱うかを決める。完全例なら実体とテストを先に同期し、抜粋なら省略境界と非実行例であることを明確にする |
-| 3 | 未検証8件 | 省略記号を含む6件は抜粋境界を確認する。`cli_typer.py` には直接テストを追加し、`local_db.py` はトップレベル例と関数化実体の入出力を比較する |
-| 4 | 直接テストなし15資産 | Python実装は振る舞いテスト、設定・CI・コンテナ・HPC資産は構文検査または検証用フィクスチャを追加する |
-| 5 | 差し替え成功12件 | テスト成功だけでE1/E2へ下げず、API、例外、戻り値、ファイル出力など未検証差を確認する。意図的な説明用簡略化なら抜粋として明示する |
-| 6 | `scripts/ch16/validate_slurm.py` | 内部検証資産として維持するか、本文から役割を参照するかを決める |
-
-## 10. 手法と検証
-
-### 10.1 抽出と判定
-
-1. 文字数や言語で事前除外せず、22章の全529ブロックを抽出した
-2. 全116スクリプトファイルと、章別テスト資産91ファイルを別母集団で抽出した
-3. 本文前後の説明を読み、全ブロックを配置必須135件と配置不要394件へ分類した
-4. ファイル名、import、定義名、AST、順序を保つ命令列、非Pythonの正規化行を候補生成に使った
-5. 配置必須、対応あり、判定保留の全件を本文と実体で目視確認した
-6. E3のうち安全に置換できる定義を一時コピーへ差し替え、直接テストを実行した
-
-コメントや整形は無視したが、型注釈、演算子、境界値、例外、引数順、文順は
-一律に無視していない。E2は行集合ではなく、順序、制御構造、依存関係、本文の省略説明を
-確認して判定した。
-
-### 10.2 独立監査
-
-成果物生成処理とは別の監査処理で、次を再計算し、全項目が成功した。
-
-| 検証 | 結果 |
-|---|---|
-| 章22、本文ブロック529、スクリプト116、章別テスト資産91 | 成功 |
-| ブロックID、行、言語、コードハッシュのソース再照合 | 529 / 529 成功 |
-| スクリプトパスとファイルハッシュのソース再照合 | 116 / 116 成功 |
-| テスト資産パスとファイルハッシュのソース再照合 | 91 / 91 成功 |
-| 配置・対応区分の保存則 | 529 / 529 成功 |
-| 関係の参照先パスとIDの実在性 | 全件成功 |
-| テストファイル70件と集計値の再照合 | 全件成功 |
-| 固定ゴールドセット12件 | 12 / 12 成功 |
-| 演算子、境界、例外、引数順、文順の負例 | 5 / 5 を同一扱いしなかった |
-| ソーススナップショット | 一致 |
-
-### 10.3 実行レビューで修正した調査上の欠陥
-
-第1巡では、設定検証用の合成フィクスチャを実資産の直接テストと誤って数えていたため、
-静的なファイル参照があるものだけへ修正した。また、本文コードとの対応がない補助ファイルの
-役割分けと、SSH、Apptainer、依存定義など言語タグのない設定ブロックの分類漏れを修正した。
-
-第2巡では、E3を一つの結論にまとめると構造差とテスト上の振る舞いを混同するため、
-構造判定と差し替え結果を別フィールドへ分離した。失敗原因と未実行理由も関係ごとに保持した。
-
-第3巡では、関係先のパスは実在していたものの、テスト補助資産21件をJSON内のIDで
-解決できないスキーマ不足と、テスト実行環境の記録漏れを検出した。章別テスト資産91件の表、
-`target_file_id`、定義行、Python・pytestのバージョンを追加した。
-また、ゴールドセットが固定乱数抽出ではなく、6区分から2件ずつ選ぶ層化固定選択だったため、
-方法と各期待値の根拠をJSONへ明記した。
-
-第4巡の独立監査ではfindings 0件となった。
-
-## 11. 従来版から訂正した点
-
-従来版を正解データとして使わず再抽出した結果、次を訂正した。
-
-- 母数379は短い断片や対象外言語を先に落とした値であり、全件は529ブロックであった
-- 対象章は30ではなく、番号付き22章であった
-- テスト関数1007件を通常実装へ混ぜたため、実体側だけの1202件と本文側だけの47件が膨張していた
-- 演習、悪例、ライブラリ紹介を「対応なし」へ含めていた
-- 非Python比較が順序を無視する行集合で、本質的一致の根拠として弱かった
-- テスト集計が章別69ファイルだけの776 passedで、レビュー用1ファイルを含む全体821 passedを反映していなかった
-- 個別行に対応テストと実行結果がなく、計画上の表構造を満たしていなかった
-
-## 12. 全件表の読み方
-
-JSONの `blocks` は本文529ブロックを1件ずつ保持する。主なキーは
-`category`、`placement`、`correspondence`、`relations`、`tests`、
-`substitution_tests` である。`scripts` は116ファイルを1件ずつ保持し、
-`book_status`、`body_block_ids`、`reference_block_ids`、`tests`、
-`test_result` を持つ。`test_assets` は章別テスト資産91ファイルを保持し、
-本文ブロックとの関係を逆引きできる。`test_files` は70テストファイルの個別実行結果である。
-各 `relations` の `target_file_id` は `scripts` または `test_assets` のIDへ解決される。
-定義・rule単位の対応には `target_entity_locations` として実体側のIDと行範囲も記録した。
-
-完全なコード本文は重複保存せず、ソース位置とSHA-256で同一性を固定した。
-`source_snapshot_sha256` は対象章、`scripts/ch*`、`tests/ch*` 全体の監査時点を示す。
-
-## 13. 限界
+## 10. 限界
 
 1. テスト成功は現行テスト範囲の観測であり、完全な意味論的等価の証明ではない
-2. 非Python資産はAST相当の統一構文木を持たないため、正規化行と人手確認を併用した
-3. Git履歴は本文が行範囲、対応先がファイル単位であり、片側更新候補には偽陽性がありうる
-4. 実体配置の要否は現行の執筆規約に基づく。規約を変更する場合は再分類が必要である
-5. 調査用プログラムは `/private/tmp` に置き、リポジトリの成果物には含めていない
+2. 非Python資産は統一構文木を持たないため、正規化行と人手確認を併用する
+3. Git履歴は本文が行範囲、対応先がファイル単位であり偽陽性がありうる
+4. 実体配置の要否は現行の執筆規約に基づく

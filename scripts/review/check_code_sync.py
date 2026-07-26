@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""本文と scripts/ の同期チェックスクリプト
+"""本文とscriptsの同期候補を示す互換CLI.
 
 CLAUDE.md「本文と `scripts/` の同期」の規約に基づき、章の本文にある
 コードブロックが `scripts/chNN/` `tests/chNN/` の実体とどれだけ一致するかを測る。
 
-本書は本文から執筆・レビューするため、放置すると本文だけが修正され
-`scripts/` が取り残される。その乖離を定量化し、棚卸しの対象を洗い出す。
+このCLIの行集合類似度は既存の `--list` と `--max-unsynced` を維持するための
+参考指標であり、E0〜ENの正解判定には使わない。精密判定は
+`build_code_correspondence.py` が生成する `code_correspondence.json` を用いる。
 
 照合先には非Pythonファイル（Snakefile, config.yaml 等）とサブディレクトリ
 （scripts/ch05/mylib/ 等）、および tests/ を含める。これらを漏らすと
@@ -46,10 +47,20 @@ import argparse
 import ast
 import json
 import re
+import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from scripts.review import code_correspondence as _core  # noqa: E402
+
+extract_source_blocks = _core.extract_source_blocks
+significant_lines = _core.significant_lines
+strip_inline_comment = _core.strip_inline_comment
+
 CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 TESTS_DIR = PROJECT_ROOT / "tests"
@@ -123,49 +134,6 @@ class Block:
     ratio: float = 0.0
     best_match: str = ""
     counterpart: bool = True
-
-
-def strip_inline_comment(line: str) -> str:
-    """行末コメントを落とす。文字列リテラル内の "#" は残す.
-
-    本書は「コードブロック内のコメントは日本語」を規約とし、本文には解説
-    コメントを付けて `scripts/` には付けない（あるいは別の文言にする）ことが
-    多い。これを残したまま比較すると、同一のコードが不一致と判定される。
-
-    判定は1行内で完結し、複数行にまたがる文字列は追跡しない。本文と
-    `scripts/` の双方に同じ処理を適用するため、多少崩れても比較の一貫性は
-    保たれる。
-    """
-    quote: str | None = None
-    index = 0
-    while index < len(line):
-        char = line[index]
-        if quote:
-            if char == "\\":
-                index += 2
-                continue
-            if char == quote:
-                quote = None
-        elif char in "\"'":
-            quote = char
-        elif char == COMMENT_CHAR:
-            return line[:index]
-        index += 1
-    return line
-
-
-def significant_lines(code: str) -> list[str]:
-    """比較用に意味のある行だけを残す.
-
-    空行・コメント行・行末コメントを落とし、連続する空白を1つに畳む。
-    本文にだけ付いた説明コメントや字下げの差で不一致にならないようにするため。
-    """
-    result: list[str] = []
-    for raw in code.split("\n"):
-        stripped = strip_inline_comment(raw).strip()
-        if stripped:
-            result.append(re.sub(r"\s+", " ", stripped))
-    return result
 
 
 def chapter_dir_name(md_name: str) -> str | None:
@@ -270,66 +238,35 @@ def bucket_of(ratio: float) -> str:
 
 
 def extract_blocks(md_path: Path) -> list[Block]:
-    """章ファイルからコードブロックを抽出する.
+    """共通抽出器の全件結果を互換CLI用の3行以上ブロックへ変換する."""
 
-    コラム内のブロックは行頭に "> " が付くため、これを除いてから解釈する。
-    """
     blocks: list[Block] = []
-    lines = md_path.read_text(encoding="utf-8").split("\n")
-    in_block = False
-    lang = ""
-    buffer: list[str] = []
-    start = 0
-    heading = ""
-    skip_reason: str | None = None
-    pending_skip: str | None = None
-
-    for number, raw in enumerate(lines, start=1):
-        if HEADING_RE.match(raw):
-            heading = raw.strip()
-        marker = SKIP_MARKER_RE.search(raw)
-        if marker and not in_block:
-            pending_skip = marker.group("reason")
+    source_blocks, _ = extract_source_blocks(md_path, root=PROJECT_ROOT)
+    for source in source_blocks:
+        signature = significant_lines(source.code)
+        if len(signature) < MIN_SIGNIFICANT_LINES:
             continue
-
-        body = QUOTE_PREFIX_RE.sub("", raw)
-        fence = FENCE_RE.match(body)
-
-        if fence and not in_block:
-            in_block = True
-            lang = fence.group(1) or "none"
-            buffer = []
-            start = number
-            skip_reason = pending_skip
-            pending_skip = None
-        elif fence and in_block:
-            in_block = False
-            code = "\n".join(buffer)
-            signature = significant_lines(code)
-            if len(signature) >= MIN_SIGNIFICANT_LINES:
-                if lang in TARGET_LANGS:
-                    category, reason = classify(code, heading, skip_reason, lang)
-                else:
-                    # 検証対象外の言語も記録する。黙って飛ばすと
-                    # 「網羅した」と誤読されるため（no silent skips）
-                    category, reason = "other_lang", f"検証対象外の言語タグ: {lang}"
-                blocks.append(
-                    Block(
-                        file=md_path.name,
-                        line=start,
-                        lang=lang,
-                        heading=heading,
-                        signature=signature,
-                        category=category,
-                        reason=reason,
-                    )
-                )
-            skip_reason = None
-        elif in_block:
-            buffer.append(body)
-        elif raw.strip():
-            pending_skip = None  # 直前の行がマーカーでなければ無効化
-
+        if source.lang in TARGET_LANGS:
+            category, reason = classify(
+                source.code,
+                source.heading,
+                source.skip_reason,
+                source.lang,
+            )
+        else:
+            category = "other_lang"
+            reason = f"検証対象外の言語タグ: {source.lang}"
+        blocks.append(
+            Block(
+                file=md_path.name,
+                line=source.line_start,
+                lang=source.lang,
+                heading=source.heading_markdown,
+                signature=signature,
+                category=category,
+                reason=reason,
+            )
+        )
     return blocks
 
 
@@ -498,6 +435,8 @@ def main() -> None:
 
     payload = {
         "check": "code_sync_check",
+        "metric": "legacy_line_set_similarity",
+        "authoritative_report": "docs/review/code_correspondence.json",
         "thresholds": {
             "exact": THRESHOLD_EXACT,
             "near": THRESHOLD_NEAR,
@@ -515,7 +454,11 @@ def main() -> None:
     args.output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    print(f"\n結果を {args.output.relative_to(PROJECT_ROOT)} に保存しました。")
+    try:
+        display_path = args.output.relative_to(PROJECT_ROOT)
+    except ValueError:
+        display_path = args.output
+    print(f"\n結果を {display_path} に保存しました。")
 
     if args.max_unsynced is not None and len(unsynced) > args.max_unsynced:
         raise SystemExit(
