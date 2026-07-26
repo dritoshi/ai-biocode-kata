@@ -1,0 +1,9 @@
+# pyproject.toml
+[project]
+name = "my-bioinfo-tool"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "biopython>=1.83",
+    "numpy>=1.26",
+]

@@ -1,0 +1,4 @@
+# requirements.txt の例
+biopython>=1.83
+numpy>=1.26,<2.0
+pandas>=2.0

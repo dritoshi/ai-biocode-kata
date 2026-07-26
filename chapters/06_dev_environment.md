@@ -174,7 +174,6 @@ name: rnaseq-env
 channels:
   - conda-forge
   - bioconda
-  - defaults
 dependencies:
   - python=3.11
   - numpy>=1.26

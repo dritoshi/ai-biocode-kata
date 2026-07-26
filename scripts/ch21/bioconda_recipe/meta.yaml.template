@@ -1,0 +1,23 @@
+# meta.yaml.template — 実在パッケージ向けに値を置換するテンプレート
+package:
+  name: "REPLACE_WITH_PACKAGE_NAME"
+  version: "REPLACE_WITH_VERSION"
+
+source:
+  url: "REPLACE_WITH_RELEASE_ARCHIVE_URL"
+  sha256: "REPLACE_WITH_64_CHARACTER_SHA256"
+
+build:
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - pip
+  run:
+    - python >=3.10
+    - biopython >=1.80
+
+test:
+  commands:
+    - "REPLACE_WITH_COMMAND --help"

@@ -320,6 +320,34 @@
         }
       ]
     },
+    "B-04-004": {
+      "block_sha256": "7149361c94a30684e85d9c086b4901c3a784994177c3b57b60a8a3a7ba937d82",
+      "relations": [
+        {
+          "target_file": "scripts/ch04/config_example.yaml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "環境固有パスを除いた本文同期後のYAMLが正規化行列で一致",
+          "verification": "実資産のYAML構文・必須値・相対パスをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-04-005": {
+      "block_sha256": "0d82a6b0fcf23996d889d5bd1d04a55aab0ada88070231a4d3709f82acc79f50",
+      "relations": [
+        {
+          "target_file": "scripts/ch04/pyproject_example.toml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "PEP 621のdependencies配列へ修正後のTOMLが正規化行列で一致",
+          "verification": "実資産をtomllibで読み、依存配列をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-04-008": {
       "block_sha256": "3381168476c1561e5e899acf3480c110e0121762ca620ebcaba7081f3a735653",
       "relations": [
@@ -372,6 +400,62 @@
           "kind": "concept",
           "evidence": "sys.prefix/base_prefixによる仮想環境判定は同じだが、実体はdataclassへ集約",
           "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-06-006": {
+      "block_sha256": "84f0c672e67bab720e82b8074bb99624ac0f914fbdc542f6b740b2e71a35b9c1",
+      "relations": [
+        {
+          "target_file": "scripts/ch06/examples/requirements.txt",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "requirements.txtの正規化行列が一致",
+          "verification": "実資産の依存指定と上下限をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-06-007": {
+      "block_sha256": "0bfd5089bbc760cfece6b56ba47708186067ecd4fd3f7c44d0b4f95ae20c7007",
+      "relations": [
+        {
+          "target_file": "scripts/ch06/examples/pyproject.toml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "コメントを除くpyproject.tomlの正規化行列が一致",
+          "verification": "実資産をtomllibで読み、必須メタデータと依存配列をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-06-008": {
+      "block_sha256": "006ae1ac855aa83f99640b5a5a723344bd5e717e084b3be1f3e70a5868a3247c",
+      "relations": [
+        {
+          "target_file": "scripts/ch06/examples/environment.yml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "defaults除去後のenvironment.ymlが正規化行列で一致",
+          "verification": "実資産のチャネル順・依存・pip節をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-06-012": {
+      "block_sha256": "c5f3021532702952dd89f92d22c7e4049f449216ac0e29b3c492c73e0ae335d4",
+      "relations": [
+        {
+          "target_file": "scripts/ch06/examples/condarc.example",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "condarc.exampleの正規化行列が一致",
+          "verification": "実資産のチャネル順とstrict優先度をpytestで検証",
           "cross_chapter": false
         }
       ]
@@ -539,6 +623,85 @@
         }
       ]
     },
+    "B-08-014": {
+      "block_sha256": "786dd7d549ff4c1ca68f56fc110365c1aaf4b6feafb0332db6bce452510d9b66",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/pyproject.toml",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "Ruff基本設定が統合pyproject.tomlの順序保存部分列",
+          "verification": "実資産をtomllibで読み、Ruff設定をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-015": {
+      "block_sha256": "2c59bf41c7c7db24afaca62c244338cb478a226c837ac79d5dfafec9df8b55ee",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/pyproject.toml",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "per-file-ignores設定が統合pyproject.tomlの順序保存部分列",
+          "verification": "実資産をtomllibで読み、tests向けD除外をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-020": {
+      "block_sha256": "c55494a132555d549cc22204140860ca1aa5a51383ce11d91f342c88c016a061",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/pyproject.toml",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "mypy設定が統合pyproject.tomlの順序保存部分列",
+          "verification": "実資産をtomllibで読み、mypy設定をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-022": {
+      "block_sha256": "1dd6732e1a82b4a8b0d5093f3ae37a40c62f81a4d9ea0639ec8f3542798e2891",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/pre-commit-config.yaml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "pre-commit設定の正規化行列が一致",
+          "verification": "公式repoの実在タグと実資産のhook構造を確認し、pytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-025": {
+      "block_sha256": "cc5abd2acc63156ee729eb35df8d162cd9d4286ae90c4c01b9dd681ca6690f52",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/claude-settings.json",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "Claude Code用PostToolUse設定がJSONとして一致",
+          "verification": "Anthropic公式schemaを確認し、実資産をpytestで検証",
+          "cross_chapter": false
+        },
+        {
+          "target_file": "scripts/ch08/examples/codex-hooks.json",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "Codex CLI用PostToolUse設定が同じイベント構造で一致",
+          "verification": "OpenAI公式Hooks文書を確認し、実資産をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-09-026": {
       "block_sha256": "5ee3a63da7d9f4fe5a3dfdafd166a142b5a4741832a62fc3f8228c235176a2cc",
       "relations": [
@@ -605,6 +768,34 @@
           "kind": "concept",
           "evidence": "NumPy view/copyの共有挙動を同じ配列例で関数化",
           "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-10-004": {
+      "block_sha256": "82d9087ac80462c30b92fe0fa72945ada61040de2a3dd59ec6ece971aeed9f4d",
+      "relations": [
+        {
+          "target_file": "scripts/ch10/package_example/pyproject.toml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "パッケージ用pyproject.tomlの正規化行列が一致",
+          "verification": "PEP 621・build backend・実在CLI entry pointをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-10-023": {
+      "block_sha256": "5001280e974836c301b719218000f0159a543b07937e1684d1f5558125afdc47",
+      "relations": [
+        {
+          "target_file": "scripts/ch10/config.yaml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "config.yamlの正規化行列が一致",
+          "verification": "既存load_configで実資産を読み、値のマージをpytestで検証",
           "cross_chapter": false
         }
       ]
@@ -742,6 +933,20 @@
     "B-13-008": {
       "block_sha256": "852ac08489eb121efcf5ec0a123cf73a0f3572eccf74294d0c8b58def12278e5",
       "relations": []
+    },
+    "B-13-010": {
+      "block_sha256": "40f8849c09f7aef1fa34bfa9ce461911811449fb7e9a287183f2617050901139",
+      "relations": [
+        {
+          "target_file": "scripts/ch13/tracks.ini",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "pyGenomeTracks設定の正規化行列が一致",
+          "verification": "実資産のINI構文と3トラックの必須値をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
     },
     "B-14-002": {
       "block_sha256": "d37852040ec0636f36b24e6ae6ccd024a02fa6ef164f1193f6fd0b0508768830",
@@ -1200,6 +1405,20 @@
         }
       ]
     },
+    "B-20-002": {
+      "block_sha256": "2d85cc04e77a6b3ad392071c40d39a06690aad154d2edb0b5f341331d9243050",
+      "relations": [
+        {
+          "target_file": "scripts/ch20/.env.example",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": ".env.exampleの正規化行列が一致",
+          "verification": "必須キー・placeholder・シークレット不在をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-20-004": {
       "block_sha256": "a75e34d4d8cf6d4d1a996ceb18b73d82ba2004aa0c8bfc756a77532a781d60d0",
       "relations": [
@@ -1238,6 +1457,20 @@
           "kind": "excerpt",
           "evidence": "本文がrows準備・空入力・列検証・統計項目を明示的に省略した抜粋",
           "verification": "manual",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-21-009": {
+      "block_sha256": "287dee99e64a840216bb58f71f4baaf461b56e55e97d3ba359c8203bac254301",
+      "relations": [
+        {
+          "target_file": "scripts/ch21/bioconda_recipe/meta.yaml.template",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "置換前テンプレートとして同期したBiocondaレシピが一致",
+          "verification": "実資産の必須section・placeholder・test commandをpytestで検証",
           "cross_chapter": false
         }
       ]

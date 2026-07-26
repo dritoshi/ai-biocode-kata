@@ -13,6 +13,12 @@ from pathlib import Path
 from typing import Any
 
 FENCE_RE = re.compile(r"^\s*(?:>\s*)*(`{3,}|~{3,})\s*([^\s`]*)")
+IGNORED_ASSET_DIRS = {
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+}
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -72,7 +78,7 @@ def _asset_paths(root: Path, base_name: str) -> list[Path]:
         path
         for path in (root / base_name).glob("ch[0-9][0-9]/**/*")
         if path.is_file()
-        and "__pycache__" not in path.parts
+        and not IGNORED_ASSET_DIRS.intersection(path.parts)
         and path.suffix != ".pyc"
     )
 

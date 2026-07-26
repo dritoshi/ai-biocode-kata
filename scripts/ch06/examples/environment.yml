@@ -1,0 +1,12 @@
+# environment.yml の例
+name: rnaseq-env
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - numpy>=1.26
+  - biopython>=1.83
+  - samtools=1.19
+  - pip:
+    - scanpy>=1.10

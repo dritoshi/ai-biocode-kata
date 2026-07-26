@@ -418,20 +418,20 @@ OSSへの貢献準備は、エージェントにCONTRIBUTING.mdの要件を読�
 
 [§6 Python環境の構築](./06_dev_environment.md)で学んだcondaのバイオインフォチャンネルである**Bioconda**[4](https://bioconda.github.io/contributor/index.html)は、コミュニティドリブンで運営されている。新しいツールのレシピ（パッケージ定義ファイル）を追加するPRや、既存ツールのバージョン更新PRは、初心者でも取り組みやすい貢献形態である。
 
-Biocondaレシピの基本構造（`meta.yaml`）:
+Biocondaレシピの基本構造を示す。以下は実在パッケージのレシピではなく、名前、バージョン、配布URL、SHA-256、テストコマンドを置換して使うテンプレートである:
 
 ```yaml
-# meta.yaml — biocondaレシピの基本構造
+# meta.yaml.template — 実在パッケージ向けに値を置換するテンプレート
 package:
-  name: my-bio-tool              # パッケージ名
-  version: "1.0.0"               # バージョン
+  name: "REPLACE_WITH_PACKAGE_NAME"
+  version: "REPLACE_WITH_VERSION"
 
 source:
-  url: https://github.com/author/tool/archive/v1.0.0.tar.gz
-  sha256: abc123...               # ダウンロードファイルのハッシュ値
+  url: "REPLACE_WITH_RELEASE_ARCHIVE_URL"
+  sha256: "REPLACE_WITH_64_CHARACTER_SHA256"
 
 build:
-  number: 0                      # ビルド番号（同一バージョンの再ビルド時にインクリメント）
+  number: 0
 
 requirements:
   host:
@@ -443,7 +443,7 @@ requirements:
 
 test:
   commands:
-    - my-bio-tool --help          # インストール後のテストコマンド
+    - "REPLACE_WITH_COMMAND --help"
 ```
 
 #### Bioconductorのレビュープロセス
