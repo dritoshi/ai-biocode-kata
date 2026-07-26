@@ -92,6 +92,12 @@
       "placement": "not_required",
       "reason": "文字列加算のバグあり版を含む比較"
     },
+    "B-12-002": {
+      "block_sha256": "ff8e200ef778ced94a43483573cedec3ad54c7551bf9fe29579c5a9a6db81a1b",
+      "category": "library_usage",
+      "placement": "not_required",
+      "reason": "str.countの使い方を紹介する数行のライブラリ利用例"
+    },
     "B-13-006": {
       "block_sha256": "3a5cc9006ddae81c6a5587ff2cde5a5371e918cb282b56dcb40a863b1473467c",
       "category": "library_usage",
@@ -678,6 +684,20 @@
           "evidence": "設定をCLIへ合成する処理は同題材だが実体のオプション・検証が異なる",
           "verification": "manual",
           "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-024": {
+      "block_sha256": "a8e00a69c34a4418ebf3cbd038ef2ba7baf2115d476b903ab58de4f9da40a71b",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/seqtool.py",
+          "target_entity": "filter_cmd",
+          "equivalence": "E3",
+          "kind": "excerpt",
+          "evidence": "同じfilter CLI処理だが、関数名、内包表記とループ、ステータスメッセージに差がある",
+          "verification": "manual",
           "cross_chapter": false
         }
       ]
