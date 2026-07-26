@@ -586,6 +586,29 @@
         }
       ]
     },
+    "B-08-008": {
+      "block_sha256": "2905ab290d350c5dbb9b7585f2a734b92c159172d53d29e432da1771d54ce54b",
+      "relations": [
+        {
+          "target_file": "tests/ch08/conftest.py",
+          "target_entity": "test_data_dir",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "test_data_dirフィクスチャのASTが本文と一致",
+          "verification": "共有フィクスチャを実テストから利用し、返却パスをpytestで検証",
+          "cross_chapter": false
+        },
+        {
+          "target_file": "tests/ch08/conftest.py",
+          "target_entity": "sample_fasta",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "sample_fastaフィクスチャのASTが本文と一致",
+          "verification": "実FASTA資産をBio.SeqIOで読み、内容をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-08-009": {
       "block_sha256": "5d5090b751097d12d6a8482d3c6234b008c3e01378bcaa44d39358765881ebd8",
       "relations": [
@@ -800,6 +823,20 @@
         }
       ]
     },
+    "B-10-033": {
+      "block_sha256": "10f2c71d14bf7a983a501c57d3aec91a5841c9f8525c012b5ce1a4c20d64665c",
+      "relations": [
+        {
+          "target_file": "scripts/ch10/fail_fast_pipeline.py",
+          "target_entity": "run_pipeline",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "run_pipeline関数のASTが本文と一致",
+          "verification": "入力・参照の早期失敗と検証後の出力作成をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-11-002": {
       "block_sha256": "316d8d571bd63c15ed0ba047314e5be4d5c125610c4751782456cdcbcd4493ba",
       "relations": [
@@ -932,7 +969,17 @@
     },
     "B-13-008": {
       "block_sha256": "852ac08489eb121efcf5ec0a123cf73a0f3572eccf74294d0c8b58def12278e5",
-      "relations": []
+      "relations": [
+        {
+          "target_file": "scripts/ch13/plot_config.py",
+          "target_entity": "apply_project_style",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "apply_project_style関数のASTが本文と一致",
+          "verification": "6項目のMatplotlib rcParams更新をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
     },
     "B-13-010": {
       "block_sha256": "40f8849c09f7aef1fa34bfa9ce461911811449fb7e9a287183f2617050901139",
@@ -1278,6 +1325,20 @@
         }
       ]
     },
+    "B-17-022": {
+      "block_sha256": "cc33d003bad9607b1b914f076eb58b30fab77ea7b1fe3c288fc83c1dafa00b73",
+      "relations": [
+        {
+          "target_file": "scripts/ch17/memory_target.py",
+          "target_entity": "load_large_data",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "load_large_data関数のASTが本文と一致",
+          "verification": "小規模入力で再現可能な列平均と戻り値形状をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-17-031": {
       "block_sha256": "680965df45a17fdb4b9e41dd86f610783925155ff22b5f71f43edc1ea5576272",
       "relations": [
@@ -1314,8 +1375,18 @@
       "relations": []
     },
     "B-17-036": {
-      "block_sha256": "b1ecc4d2e3f9abba85019d3f62d0856c148c023d5a0d37466d6ba93de479ab9b",
-      "relations": []
+      "block_sha256": "91b314cde4f995cf7a85c3792486650232ab829d13c4ea35abc1651f505ae97d",
+      "relations": [
+        {
+          "target_file": "scripts/ch17/streaming_fasta.py",
+          "target_entity": "count_long_sequences",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "count_long_sequences関数のASTが本文と一致",
+          "verification": "境界長を含むFASTAと空FASTAをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
     },
     "B-17-039": {
       "block_sha256": "b161f9b849b37d2655e2619e671ce5852376d2c1511086be85fc7724bb699d6b",
@@ -1518,9 +1589,9 @@
       "reason": "同名関数だが入力検証に差がある"
     },
     {
-      "block_id": "B-08-008",
+      "block_id": "B-02-025",
       "expected": "E5",
-      "reason": "配置必須のpytest fixtureだが対応するtests資産がない"
+      "reason": "配置必須の安全なシェルスクリプト断片だが対応するscripts資産がない"
     },
     {
       "block_id": "B-14-010",

@@ -930,7 +930,7 @@ with open(output_path, "w", encoding="utf-8") as handle:
 from pathlib import Path
 
 
-def run_pipeline(config: dict) -> None:
+def run_pipeline(config: dict[str, str]) -> None:
     """パイプラインの実行. 入力の検証を全て先に行う."""
     # ★ 先に全ての入力を検証する（fail-fast）
     input_path = Path(config["input"])
@@ -947,9 +947,8 @@ def run_pipeline(config: dict) -> None:
         )
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # ★ 検証を通過してから処理を開始する
-    # （ここで初めて時間のかかる処理が始まる）
-    ...
+    # 検証を通過してから時間のかかる処理を開始する
+    return None
 ```
 
 12時間かかるパイプラインが11時間目に「リファレンスファイルが見つかりません」と落ちる事態は避けなければならない。入力の検証は処理の最初にまとめて行う。
