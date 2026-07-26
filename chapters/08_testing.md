@@ -638,37 +638,49 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v6
 
       - name: Python のセットアップ
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
+      - name: uv のセットアップ
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
       - name: 依存パッケージのインストール
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-cov ruff mypy
+        run: uv sync --frozen
 
       - name: ruff によるリント
-        run: ruff check .
-
-      - name: ruff によるフォーマットチェック
-        run: ruff format --check .
+        run: uv run ruff check scripts/ tests/
 
       - name: mypy による型チェック
-        run: mypy scripts/
+        run: >-
+          uv run mypy --follow-imports=skip --ignore-missing-imports
+          scripts/ch08 tests/ch08
 
       - name: pytest によるテスト
-        run: pytest tests/ --cov=scripts --cov-report=term-missing
+        run: >-
+          uv run --with pytest-cov pytest tests/
+          --cov=scripts --cov-report=term-missing
 ```
 
 GitHub Actionsでは、`--cov-report=term-missing`の出力はジョブのログに記録され、Actions画面の「pytest によるテスト」ステップで確認できる。
+
+GitHubは、利用するアクションをコミットSHA・タグ・メジャーバージョンなどのGit参照で固定することを強く推奨している[12](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idstepsuses)。本例は現行メジャーの`actions/checkout@v6`と`actions/setup-python@v6`を使い[13](https://github.com/actions/checkout/releases)[14](https://github.com/actions/setup-python/releases)、`setup-uv`はv8.1.0のコミットSHAへ固定した[15](https://github.com/astral-sh/setup-uv)。検証済みの完全例は[単一Python版](../scripts/ch08/examples/ci.yml)に配置している。
+
+本書のリポジトリではmypyを段階導入しているため、この例の型チェック対象は本章の`scripts/ch08`と`tests/ch08`に限定している。プロジェクト全体の型エラーを解消した段階で、対象を`scripts/`と`tests/`へ広げればよい。
+
+同様に、リポジトリ全体のフォーマット統一は未完了であるため、`ruff format --check`はまだCIゲートへ含めていない。全ファイルを`ruff format`で整形した後に追加する。
 
 このワークフローは以下のタイミングで実行される:
 
@@ -687,16 +699,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       # 以降のステップは同じ
 ```
 
-この設定により、Python 3.11、3.12、3.13、3.14の4環境で並列にテストが実行される。バイオインフォマティクスのツールでは、利用者の環境が多様であるため、複数バージョンでの動作確認は実用上重要である。
+この設定により、Python 3.10、3.11、3.12、3.13、3.14の5環境で並列にテストが実行される。バイオインフォマティクスのツールでは、利用者の環境が多様であるため、複数バージョンでの動作確認は実用上重要である。
+
+検証済みの完全例は[マトリクス版](../scripts/ch08/examples/ci-matrix.yml)に配置している。
 
 #### エージェントへの指示例
 
@@ -806,7 +820,7 @@ VCF ファイルから QUAL 値が閾値以上の行を抽出する関数 `filte
 - 依存関係のキャッシュ（`actions/cache` または `pip cache`）が設定されているか
 - Python バージョンのマトリクステストが含まれているか
 
-（ヒント）`actions/setup-python@v7` のようにメジャーバージョンで固定する。`pip install -e ".[dev]"` で開発依存を含めてインストールするパターンが一般的である。
+（ヒント）`actions/setup-python@v6` のように現行メジャーバージョンで固定する。本書のリポジトリでは `uv sync --frozen` でロックファイルどおりに開発依存を同期する。
 
 ---
 
@@ -852,3 +866,11 @@ VCF ファイルから QUAL 値が閾値以上の行を抽出する関数 `filte
 [10] Anthropic. "Hooks reference". [https://code.claude.com/docs/en/hooks](https://code.claude.com/docs/en/hooks) (参照日: 2026-07-26)
 
 [11] OpenAI. "Hooks". [https://developers.openai.com/codex/hooks](https://developers.openai.com/codex/hooks) (参照日: 2026-07-26)
+
+[12] GitHub Docs. "Workflow syntax for GitHub Actions". [https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) (参照日: 2026-07-26)
+
+[13] GitHub. "Releases: actions/checkout". [https://github.com/actions/checkout/releases](https://github.com/actions/checkout/releases) (参照日: 2026-07-26)
+
+[14] GitHub. "Releases: actions/setup-python". [https://github.com/actions/setup-python/releases](https://github.com/actions/setup-python/releases) (参照日: 2026-07-26)
+
+[15] Astral. "setup-uv". [https://github.com/astral-sh/setup-uv](https://github.com/astral-sh/setup-uv) (参照日: 2026-07-26)
