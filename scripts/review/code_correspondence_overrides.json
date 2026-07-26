@@ -531,14 +531,14 @@
       ]
     },
     "B-07-014": {
-      "block_sha256": "0657778195124200966a2b7bd96e5caeea5a962e9978fb9282873f91469d54ba",
+      "block_sha256": "65b9a6d9f26b53076fed7e72610f5e609f826c2ed12b91ab47ec590add06b3a5",
       "relations": [
         {
           "target_file": "scripts/ch07/ci_minimal.yml",
           "equivalence": "E0",
           "kind": "excerpt",
           "evidence": "コメント・空白を除く正規化行列が一致",
-          "verification": "manual",
+          "verification": "本文と実体の正規化比較、およびtests/ch07/test_ci_minimal.pyによる構造検証",
           "target_entity": null,
           "cross_chapter": false
         }

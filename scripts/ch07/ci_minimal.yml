@@ -7,13 +7,27 @@
 name: テスト実行
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v6
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: pytest tests/
+
+      - name: uv のセットアップ
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
+      - name: 依存パッケージのインストール
+        run: uv sync --frozen
+
+      - name: pytest によるテスト
+        run: uv run pytest tests/
