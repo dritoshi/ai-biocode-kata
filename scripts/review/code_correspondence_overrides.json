@@ -222,6 +222,62 @@
         }
       ]
     },
+    "B-02-025": {
+      "block_sha256": "48ef667fdda00670920e98185fb73dcc13fff72cff073b36683c5a63ca2d4549",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/fastqc_pipeline.sh",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "安全設定2行が実行可能なFASTQCスクリプトの先頭部分と一致",
+          "verification": "bash -nと外部ツールのスタブ実行をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-02-026": {
+      "block_sha256": "91dc4b049ad050f9d2901d84edeb0a99e002e0723dcdddaa33b8fb7d05a17d99",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/fastqc_pipeline.sh",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "基本構造の正規化行列が実体と一致",
+          "verification": "出力ディレクトリ作成・標準出力・FASTQC引数をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-02-028": {
+      "block_sha256": "b8427ce9f1e8a29a9a5574e5b8589813a8a5998f323cb2f842a2f6db734cbce3",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/check_fastq.sh",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "条件分岐が引数設定を補った実体の順序保存部分列",
+          "verification": "FASTQの存在・不在と出力ディレクトリ作成をpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-02-029": {
+      "block_sha256": "238e44862c8966f433d16d3b0d97fba729e7335c04ce3e381d113994fe362270",
+      "relations": [
+        {
+          "target_file": "scripts/ch02/batch_process.sh",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "2つのループが安全設定と出力準備を補った実体の順序保存部分列",
+          "verification": "3サンプルのFASTQC呼び出しとBAM索引作成をスタブでpytest検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-02-031": {
       "block_sha256": "33a64ca6dfb6ee7f71d581c71bda31d050f8c98ad494fe6d486ffcb21b351a5d",
       "relations": [
@@ -1589,9 +1645,9 @@
       "reason": "同名関数だが入力検証に差がある"
     },
     {
-      "block_id": "B-02-025",
+      "block_id": "B-08-026",
       "expected": "E5",
-      "reason": "配置必須の安全なシェルスクリプト断片だが対応するscripts資産がない"
+      "reason": "配置必須のGitHub Actionsワークフローだが対応するscripts資産がない"
     },
     {
       "block_id": "B-14-010",
