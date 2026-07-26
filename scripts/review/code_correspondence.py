@@ -28,6 +28,12 @@ DEF_TYPES = (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)
 RANK = {"E0": 0, "E1": 1, "E2": 2, "E3": 3, "E4": 4, "E5": 5, "EN": 6}
 VALID_PLACEMENTS = {"required_scripts", "required_tests", "not_required"}
 VALID_EQUIVALENCE = set(RANK)
+IGNORED_ASSET_DIRS = {
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+}
 
 
 @dataclass
@@ -521,7 +527,7 @@ def asset_paths(root: Path, base_name: str) -> list[Path]:
         path
         for path in (root / base_name).glob("ch[0-9][0-9]/**/*")
         if path.is_file()
-        and "__pycache__" not in path.parts
+        and not IGNORED_ASSET_DIRS.intersection(path.parts)
         and path.suffix != ".pyc"
     )
 

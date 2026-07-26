@@ -1,0 +1,8 @@
+# config.yaml（Snakemakeの設定例）
+samples:
+  - sample_A
+  - sample_B
+reference:
+  genome: reference/hg38.fa
+  annotation: reference/gencode.v44.gtf
+threads: 8

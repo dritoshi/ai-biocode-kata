@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
 - 生成日: 2026-07-26
-- 対象コミット: `2ec5969f10f328174424d5b91c755ecc2a0c1554`
+- 対象コミット: `a6a5808ef68c0568fe7355d89e1bdfda8737846b`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - 全件表: [`code_correspondence.json`](./code_correspondence.json)
@@ -14,17 +14,17 @@
 
 | 判定 | 件数 | 意味 |
 |---|---:|---|
-| E0 | 10 | コメント・空白を除いて同一 |
+| E0 | 23 | コメント・空白を除いて同一 |
 | E1 | 38 | docstringや説明上の差を除けば同じ処理 |
-| E2 | 12 | 実体と矛盾しない抜粋 |
+| E2 | 15 | 実体と矛盾しない抜粋 |
 | E3 | 37 | 対応はあるが構造または振る舞いに差がある |
-| E5 | 37 | 配置が必要だが対応実体がない |
+| E5 | 21 | 配置が必要だが対応実体がない |
 | EN | 395 | 規約上、対応実体は不要 |
 | **合計** | **529** | 全本文ブロック |
 
-配置が必要なブロックは134件である。E5は37件であり、具体的な解消順序はE5解消計画に記録した。
+配置が必要なブロックは134件である。E5は21件であり、具体的な解消順序はE5解消計画に記録した。
 
-`scripts/ch*` 側は全116ファイルで、本文コードと直接対応64件、本文から参照のみ23件、本文コードとの対応なし29件である。
+`scripts/ch*` 側は全133ファイルで、本文コードと直接対応79件、本文から参照のみ25件、本文コードとの対応なし29件である。
 
 ## 2. 章別集計
 
@@ -34,25 +34,25 @@
 | ch01 | 9 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 6 |
 | ch02 | 35 | 5 | 0 | 0 | 0 | 1 | 0 | 4 | 30 |
 | ch03 | 28 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 27 |
-| ch04 | 20 | 2 | 0 | 0 | 0 | 0 | 0 | 2 | 18 |
+| ch04 | 20 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 18 |
 | ch05 | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 23 |
-| ch06 | 16 | 4 | 0 | 0 | 0 | 0 | 0 | 4 | 12 |
+| ch06 | 16 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 12 |
 | ch07 | 22 | 3 | 1 | 0 | 2 | 0 | 0 | 0 | 19 |
-| ch08 | 29 | 17 | 0 | 5 | 1 | 3 | 0 | 8 | 12 |
+| ch08 | 29 | 17 | 2 | 5 | 4 | 3 | 0 | 3 | 12 |
 | ch09 | 33 | 8 | 0 | 3 | 0 | 5 | 0 | 0 | 25 |
-| ch10 | 35 | 8 | 2 | 3 | 0 | 0 | 0 | 3 | 27 |
+| ch10 | 35 | 8 | 4 | 3 | 0 | 0 | 0 | 1 | 27 |
 | ch11 | 34 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 24 |
 | ch12 | 20 | 14 | 0 | 14 | 0 | 0 | 0 | 0 | 6 |
-| ch13 | 11 | 6 | 0 | 3 | 0 | 1 | 0 | 2 | 5 |
+| ch13 | 11 | 6 | 1 | 3 | 0 | 1 | 0 | 1 | 5 |
 | ch14 | 23 | 14 | 1 | 0 | 4 | 4 | 0 | 5 | 9 |
 | ch15 | 32 | 9 | 3 | 0 | 2 | 0 | 0 | 4 | 23 |
 | ch16 | 26 | 6 | 3 | 0 | 2 | 1 | 0 | 0 | 20 |
 | ch17 | 42 | 11 | 0 | 6 | 0 | 3 | 0 | 2 | 31 |
 | ch18 | 30 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 29 |
 | ch19 | 24 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 23 |
-| ch20 | 12 | 4 | 0 | 0 | 1 | 2 | 0 | 1 | 8 |
-| ch21 | 14 | 5 | 0 | 0 | 0 | 4 | 0 | 1 | 9 |
-| **合計** | **529** | **134** | **10** | **38** | **12** | **37** | **0** | **37** | **395** |
+| ch20 | 12 | 4 | 1 | 0 | 1 | 2 | 0 | 0 | 8 |
+| ch21 | 14 | 5 | 1 | 0 | 0 | 4 | 0 | 0 | 9 |
+| **合計** | **529** | **134** | **23** | **38** | **15** | **37** | **0** | **21** | **395** |
 
 ## 3. 対応実体がないブロック
 
@@ -62,25 +62,11 @@
 | `B-02-026` | `ch02` L576 | config_workflow | シェルスクリプトの基本構造 |
 | `B-02-028` | `ch02` L615 | config_workflow | 条件分岐 |
 | `B-02-029` | `ch02` L632 | config_workflow | ループ |
-| `B-04-004` | `ch04` L204 | config_workflow | YAML / TOML — 設定ファイル |
-| `B-04-005` | `ch04` L217 | config_workflow | YAML / TOML — 設定ファイル |
-| `B-06-006` | `ch06` L152 | config_workflow | 依存関係定義ファイルの比較 |
-| `B-06-007` | `ch06` L159 | config_workflow | 依存関係定義ファイルの比較 |
-| `B-06-008` | `ch06` L171 | config_workflow | 依存関係定義ファイルの比較 |
-| `B-06-012` | `ch06` L307 | config_workflow | チャネルとレジストリ |
 | `B-08-008` | `ch08` L209 | test_code | conftest.py — フィクスチャの共有 |
-| `B-08-014` | `ch08` L348 | config_workflow | pyproject.toml での設定 |
-| `B-08-015` | `ch08` L378 | config_workflow | ルールをディレクトリ単位で調整する — per-file-ignores |
-| `B-08-020` | `ch08` L447 | config_workflow | pyproject.toml でのmypy設定 |
-| `B-08-022` | `ch08` L471 | config_workflow | pre-commit — コミット前の自動チェック |
-| `B-08-025` | `ch08` L577 | config_workflow | 設定例 |
-| `B-08-026` | `ch08` L626 | config_workflow | ワークフローYAMLの書き方 |
-| `B-08-027` | `ch08` L679 | config_workflow | ワークフローの拡張 |
-| `B-10-004` | `ch10` L77 | config_workflow | パターン2: pipインストール可能なPythonパッケージ |
-| `B-10-023` | `ch10` L612 | config_workflow | 設定ファイルによる外部化 |
+| `B-08-026` | `ch08` L628 | config_workflow | ワークフローYAMLの書き方 |
+| `B-08-027` | `ch08` L681 | config_workflow | ワークフローの拡張 |
 | `B-10-033` | `ch10` L929 | implementation | fail-fastの原則 |
 | `B-13-008` | `ch13` L415 | implementation | スクリプト化のポイント |
-| `B-13-010` | `ch13` L530 | config_workflow | 論文用トラック図の作成 |
 | `B-14-006` | `ch14` L193 | config_workflow | conda / container統合 |
 | `B-14-008` | `ch14` L298 | config_workflow | DSL2の基本構文 |
 | `B-14-010` | `ch14` L386 | config_workflow | CommandLineToolの基本構造 |
@@ -93,8 +79,6 @@
 | `B-17-022` | `ch17` L358 | implementation | memrayによるメモリプロファイリング |
 | `B-17-036` | `ch17` L772 | implementation | ストリーミング処理 — 全データをメモリに載せない |
 | `B-18-021` | `ch18` L374 | config_workflow | docstringからのAPI自動生成 |
-| `B-20-002` | `ch20` L58 | config_workflow | `.env` + `python-dotenv` のパターン |
-| `B-21-009` | `ch21` L423 | config_workflow | Biocondaレシピ貢献 |
 
 ## 4. 対応はあるが差があるブロック
 
@@ -146,23 +130,24 @@
 
 | 項目 | 結果 |
 |---|---:|
-| テストファイル | 72 |
-| 章別テストファイル | 70 |
+| テストファイル | 79 |
+| 章別テストファイル | 77 |
 | レビュー用テストファイル | 2 |
-| passed | 839 |
+| passed | 857 |
 | skipped | 1 |
 | failed | 0 |
 | errors | 0 |
 
 ## 6. 多対多対応
 
-1ブロックから複数ファイルへの対応は5件ある。
+1ブロックから複数ファイルへの対応は6件ある。
 
 | 本文ブロック | 対応先 |
 |---|---|
 | `B-05-004` | `scripts/ch05/mylib/core.py`、`scripts/ch05/mylib/utils.py` |
 | `B-05-005` | `scripts/ch05/mylib/__init__.py`、`scripts/ch05/mylib/core.py` |
 | `B-08-009` | `tests/ch08/test_reverse_complement.py`、`tests/ch08/test_seq_stats.py` |
+| `B-08-025` | `scripts/ch08/examples/claude-settings.json`、`scripts/ch08/examples/codex-hooks.json` |
 | `B-11-013` | `scripts/ch10/config_example.py`、`scripts/ch11/cli_click.py` |
 | `B-11-031` | `scripts/ch11/logging_setup.py`、`scripts/ch11/progress_demo.py` |
 
@@ -187,7 +172,7 @@
 5. import、命名、直接パス参照から実体とテストを対応付けた
 6. 独立監査でソースハッシュ、ID、参照先、集計、Markdownを再計算する
 
-分類overrideは27件、関係overrideは84件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
+分類overrideは27件、関係overrideは100件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
 
 ## 9. 全件表の読み方
 

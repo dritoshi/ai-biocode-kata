@@ -1,0 +1,9 @@
+# config.yaml
+filtering:
+  min_qual: 30
+  min_depth: 10
+  max_missing_rate: 0.1
+
+output:
+  directory: results
+  format: vcf

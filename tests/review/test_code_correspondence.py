@@ -14,6 +14,7 @@ from scripts.review.audit_code_correspondence import audit
 from scripts.review.code_correspondence import (
     add_relations,
     apply_category_overrides,
+    asset_paths,
     build_inventory,
     extract_all_blocks,
     extract_source_blocks,
@@ -181,7 +182,7 @@ class TestOverrides:
         apply_category_overrides(blocks, overrides)
         relations = add_relations(PROJECT_ROOT, blocks, overrides)
         assert len(overrides["category_overrides"]) == 27
-        assert len(overrides["relation_overrides"]) == 84
+        assert len(overrides["relation_overrides"]) == 100
         assert len(overrides["substitution_tests"]) == 28
         assert len(relations) == 529
         assert overrides["category_overrides"]["B-12-002"] == {
@@ -196,6 +197,29 @@ class TestOverrides:
         assert relation["target_file"] == "scripts/ch11/seqtool.py"
         assert relation["target_entity"] == "filter_cmd"
         assert relation["equivalence"] == "E3"
+
+    def test_asset_paths_ignore_tool_caches(self, tmp_path: Path) -> None:
+        root = tmp_path / "repo"
+        script_dir = root / "scripts/ch01"
+        script_dir.mkdir(parents=True)
+        (script_dir / "example.py").write_text(
+            "value = 1\n",
+            encoding="utf-8",
+        )
+        for cache_name in (
+            "__pycache__",
+            ".mypy_cache",
+            ".pytest_cache",
+            ".ruff_cache",
+        ):
+            cache_dir = script_dir / cache_name
+            cache_dir.mkdir()
+            (cache_dir / "cache-entry").write_text(
+                "generated\n",
+                encoding="utf-8",
+            )
+
+        assert asset_paths(root, "scripts") == [script_dir / "example.py"]
 
     def test_rejects_stale_substitution_test_hash(self, tmp_path: Path) -> None:
         root = _minimal_repository(tmp_path)
@@ -291,6 +315,27 @@ class TestBuildAndAudit:
         result = audit(root, tampered, report)
         assert result["status"] == "failed"
         assert "block_source_identity" in result["failures"]
+
+    def test_independent_audit_ignores_tool_caches(
+        self,
+        tmp_path: Path,
+    ) -> None:
+        root = _minimal_repository(tmp_path)
+        cache_dir = root / "scripts/ch01/.ruff_cache"
+        cache_dir.mkdir()
+        (cache_dir / "CACHEDIR.TAG").write_text(
+            "generated\n",
+            encoding="utf-8",
+        )
+        data = build_inventory(
+            root,
+            _minimal_overrides(),
+            _test_results(),
+            generated_at="2026-07-26T00:00:00+09:00",
+            include_history=False,
+        )
+
+        assert audit(root, data, render_report(data))["status"] == "passed"
 
     def test_determinism_normalization_removes_times(
         self,

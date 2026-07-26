@@ -1,0 +1,16 @@
+[project]
+name = "my-tool"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "biopython>=1.80",
+    "pysam>=0.22",
+    "click>=8.0",
+]
+
+[project.scripts]
+my-tool = "my_tool.cli:main"    # CLIコマンドの登録
+
+[build-system]
+requires = ["hatchling"]           # ビルドに必要なツール
+build-backend = "hatchling.build"  # パッケージを組み立てるバックエンド

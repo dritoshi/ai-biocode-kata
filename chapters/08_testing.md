@@ -550,9 +550,9 @@ def filter_fasta_by_gc(
 
 ### エージェントフック — ツール実行前後の自動チェック
 
-pre-commitは「`git commit` の前に自動でチェックを走らせる」仕組みであった。AIコーディングエージェントでも、ツール実行の前後に自動チェックを差し込めるものがある。[§0-3](./00_ai_agent.md#エージェントの拡張機能--mcpフックカスタムコマンド)で予告した**フック**（Hooks）である。本節では、2026年7月時点で一般ユーザー向けに利用できる **Claude Code の hooks** を例に説明する。
+pre-commitは「`git commit` の前に自動でチェックを走らせる」仕組みであった。AIコーディングエージェントでも、ツール実行の前後に自動チェックを差し込めるものがある。[§0-3](./00_ai_agent.md#エージェントの拡張機能--mcpフックカスタムコマンド)で予告した**フック**（Hooks）である。本節では、2026年7月時点で一般ユーザー向けに利用できるClaude Codeのhooks[10](https://code.claude.com/docs/en/hooks)を例に説明する。
 
-Claude Code の hooks は、エージェントがツールを実行する**前後**にシェルコマンドを自動実行する仕組みである。pre-commit hookが「コミット前」のみをフックするのに対し、Claude Code の hooks はファイル編集、コマンド実行、セッション開始など、より多くのイベントを対象にできる。Codex CLI にも同様の hooks が正式機能として用意されているが、以下では Claude Code の hooks を例に説明する。設定方法の詳細は各ツールの公式ドキュメントを確認してほしい。
+Claude Codeのhooksは、エージェントがツールを実行する**前後**にシェルコマンドを自動実行する仕組みである。pre-commit hookが「コミット前」のみをフックするのに対し、Claude Codeのhooksはファイル編集、コマンド実行、セッション開始など、より多くのイベントを対象にできる。Codex CLIにも同様のライフサイクルフックが正式機能として用意されている[11](https://developers.openai.com/codex/hooks)。設定方法の詳細は各ツールの公式ドキュメントを確認してほしい。
 
 ![エージェントフックのフロー: Before Hook（構文チェック）→ 編集実行 → After Hook（テスト）](../figures/ch08_agent_hooks.png)
 
@@ -568,9 +568,9 @@ Claude Code の hooks は、エージェントがツールを実行する**前�
 
 #### 設定例
 
-| | Claude Code CLI |
-|--|-------------|
-| 設定ファイル | `.claude/settings.json` |
+| | Claude Code CLI | Codex CLI |
+|--|---|---|
+| 設定ファイル | `.claude/settings.json` | `.codex/hooks.json` |
 
 Claude Code CLIの場合、`.claude/settings.json` にフックを定義する:
 
@@ -590,6 +590,8 @@ Claude Code CLIの場合、`.claude/settings.json` にフックを定義する:
 ```
 
 この設定は「エージェントがファイルを編集・作成した直後に `ruff check --fix` を自動実行する」という意味である。エージェントが生成したコードにリントエラーがあれば、自動的に修正される。matcher に一致したツール実行のたびに、`hooks` 配列内のコマンドが起動される。編集したファイルのパスが必要な場合は、フックの標準入力に渡されるJSONから `jq -r '.tool_input.file_path'` で取り出す（`$FILEPATH` のような環境変数は存在しない）。
+
+Codex CLIでも同じJSON構造を `.codex/hooks.json` に配置できる。ただしプロジェクトローカルのフックは、信頼済みプロジェクトでのみ読み込まれ、新規または変更されたコマンドフックは `/hooks` で内容を確認して信頼する必要がある。検証済みの完全例は[Claude Code用設定](../scripts/ch08/examples/claude-settings.json)と[Codex CLI用設定](../scripts/ch08/examples/codex-hooks.json)に配置している。
 
 #### バイオインフォマティクスでの活用例
 
@@ -843,3 +845,7 @@ VCF ファイルから QUAL 値が閾値以上の行を抽出する関数 `filte
 [8] numpydoc. "numpydoc — Numpy's Sphinx extensions". [https://numpydoc.readthedocs.io/en/latest/format.html](https://numpydoc.readthedocs.io/en/latest/format.html) (参照日: 2026-03-18)
 
 [9] GitHub Docs. "Understanding GitHub Actions". [https://docs.github.com/en/actions/about-github-actions/understanding-github-actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) (参照日: 2026-03-18)
+
+[10] Anthropic. "Hooks reference". [https://code.claude.com/docs/en/hooks](https://code.claude.com/docs/en/hooks) (参照日: 2026-07-26)
+
+[11] OpenAI. "Hooks". [https://developers.openai.com/codex/hooks](https://developers.openai.com/codex/hooks) (参照日: 2026-07-26)

@@ -207,12 +207,12 @@ samples:
   - sample_A
   - sample_B
 reference:
-  genome: /data/ref/hg38.fa
-  annotation: /data/ref/gencode.v44.gtf
+  genome: reference/hg38.fa
+  annotation: reference/gencode.v44.gtf
 threads: 8
 ```
 
-**TOML**はPython 3.11以降で標準ライブラリの `tomllib` で読み込める[4](https://docs.python.org/3/library/tomllib.html)。`pyproject.toml` がその代表例である:
+**TOML**はPython 3.11以降で標準ライブラリの `tomllib` で読み込める[4](https://docs.python.org/3/library/tomllib.html)。`pyproject.toml` がその代表例であり、PEP 621の `dependencies` は依存指定文字列の配列として記述する[20](https://packaging.python.org/en/latest/specifications/pyproject-toml/#dependencies):
 
 ```toml
 # pyproject.toml
@@ -220,10 +220,10 @@ threads: 8
 name = "my-bioinfo-tool"
 version = "0.1.0"
 requires-python = ">=3.10"
-
-[project.dependencies]
-biopython = ">=1.83"
-numpy = ">=1.26"
+dependencies = [
+    "biopython>=1.83",
+    "numpy>=1.26",
+]
 ```
 
 YAMLとTOMLの使い分け:
@@ -902,3 +902,5 @@ df = pd.read_csv('data.csv')
 [18] Creative Commons. "About The Licenses". [https://creativecommons.org/licenses/](https://creativecommons.org/licenses/) (参照日: 2026-03-31)
 
 [19] International DOI Foundation. "DOI Handbook". [https://www.doi.org/](https://www.doi.org/) (参照日: 2026-03-31)
+
+[20] Python Packaging Authority. "pyproject.toml specification". [https://packaging.python.org/en/latest/specifications/pyproject-toml/](https://packaging.python.org/en/latest/specifications/pyproject-toml/) (参照日: 2026-07-26)
