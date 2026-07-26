@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: uv のセットアップ
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
+      - name: 依存パッケージのインストール
+        run: uv sync --frozen
+
+      - name: ruff によるリント
+        run: uv run ruff check scripts/ tests/
+
+      - name: mypy による型チェック
+        run: >-
+          uv run mypy --follow-imports=skip --ignore-missing-imports
+          scripts/ch08 tests/ch08
+
+      - name: pytest によるテスト
+        run: >-
+          uv run --with pytest-cov pytest tests/
+          --cov=scripts --cov-report=term-missing

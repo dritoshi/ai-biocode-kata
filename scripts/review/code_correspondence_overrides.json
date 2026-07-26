@@ -781,6 +781,34 @@
         }
       ]
     },
+    "B-08-026": {
+      "block_sha256": "e6233a29dec477b1fd8558f6cf4af22b63e9e2b46a4dcca59804d7e283bd2a28",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/ci.yml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "単一Python版ワークフローの正規化行列が実体と一致",
+          "verification": "トリガー・権限・アクション参照・uvコマンドをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-08-027": {
+      "block_sha256": "e3f6ac162a56525dc74e230b26aa0a27aba27cb235e986d68a277be3a6aa6f62",
+      "relations": [
+        {
+          "target_file": "scripts/ch08/examples/ci-matrix.yml",
+          "target_entity": null,
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "マトリクス設定が完全ワークフローの順序保存部分列",
+          "verification": "Python 3.10から3.14の行列とsetup-pythonへの値引き渡しをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-09-026": {
       "block_sha256": "5ee3a63da7d9f4fe5a3dfdafd166a142b5a4741832a62fc3f8228c235176a2cc",
       "relations": [
@@ -1645,9 +1673,9 @@
       "reason": "同名関数だが入力検証に差がある"
     },
     {
-      "block_id": "B-08-026",
+      "block_id": "B-14-006",
       "expected": "E5",
-      "reason": "配置必須のGitHub Actionsワークフローだが対応するscripts資産がない"
+      "reason": "配置必須のSnakemake conda/container統合設定だが対応するscripts資産がない"
     },
     {
       "block_id": "B-14-010",
