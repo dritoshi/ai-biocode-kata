@@ -273,19 +273,35 @@ GitHub Actionsでは、リポジトリの `.github/workflows/` ディレクト�
 name: テスト実行
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@v6
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: pytest tests/
+
+      - name: uv のセットアップ
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
+      - name: 依存パッケージのインストール
+        run: uv sync --frozen
+
+      - name: pytest によるテスト
+        run: uv run pytest tests/
 ```
 
-この設定により、プッシュやPR作成のたびに自動でテストが実行される。テストの書き方やワークフローの詳細は[§8 コードの正しさを守るテスト技法](./08_testing.md)で学ぶ。
+この設定により、プッシュやPR作成のたびに自動でテストが実行される。`permissions`はワークフローに読み取り権限だけを与える。`uv sync --frozen`は既存の `uv.lock` を変更せずに環境を同期し、`uv run`はその環境でpytestを実行する[23](https://docs.astral.sh/uv/concepts/projects/sync/)。
+
+GitHubは利用するアクションをGit参照、タグ、またはコミットSHAで固定することを強く推奨している[19](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#jobsjob_idstepsuses)。本例では、[§8 コードの正しさを守るテスト技法](./08_testing.md)の検証済み例と揃えて`actions/checkout@v6`と`actions/setup-python@v6`を使い[20](https://github.com/actions/checkout/releases)[21](https://github.com/actions/setup-python/releases)、`setup-uv`はv8.1.0のコミットSHAへ固定した[22](https://github.com/astral-sh/setup-uv/releases/tag/v8.1.0)。[検証済みの完全例](../scripts/ch07/ci_minimal.yml)も参照できる。テストの書き方やワークフローの詳細は[§8 コードの正しさを守るテスト技法](./08_testing.md)で学ぶ。
 
 #### エージェントへの指示例
 
@@ -651,3 +667,13 @@ GitHub Releasesのリリースノートとしても、このCHANGELOGの内容�
 [17] GitHub Docs. "Git Large File Storage の課金". [https://docs.github.com/ja/billing/concepts/product-billing/git-lfs](https://docs.github.com/ja/billing/concepts/product-billing/git-lfs) (参照日: 2026-03-25)
 
 [18] Zenodo. "Manage files". [https://help.zenodo.org/docs/deposit/manage-files/](https://help.zenodo.org/docs/deposit/manage-files/) (参照日: 2026-03-25)
+
+[19] GitHub Docs. "Workflow syntax for GitHub Actions". [https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) (参照日: 2026-07-26)
+
+[20] GitHub. "Releases: actions/checkout". [https://github.com/actions/checkout/releases](https://github.com/actions/checkout/releases) (参照日: 2026-07-26)
+
+[21] GitHub. "Releases: actions/setup-python". [https://github.com/actions/setup-python/releases](https://github.com/actions/setup-python/releases) (参照日: 2026-07-26)
+
+[22] Astral. "setup-uv v8.1.0". [https://github.com/astral-sh/setup-uv/releases/tag/v8.1.0](https://github.com/astral-sh/setup-uv/releases/tag/v8.1.0) (参照日: 2026-07-26)
+
+[23] Astral. "Locking and syncing". [https://docs.astral.sh/uv/concepts/projects/sync/](https://docs.astral.sh/uv/concepts/projects/sync/) (参照日: 2026-07-26)
