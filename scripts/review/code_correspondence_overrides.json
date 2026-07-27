@@ -282,13 +282,13 @@
       "block_sha256": "33a64ca6dfb6ee7f71d581c71bda31d050f8c98ad494fe6d486ffcb21b351a5d",
       "relations": [
         {
-          "target_file": "scripts/ch16/ssh_config.example",
-          "equivalence": "E3",
+          "target_file": "scripts/ch02/ssh_config.example",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "同じSSH configだがホスト名・利用者・ProxyJump構成が異なる章横断候補",
-          "verification": "manual",
+          "evidence": "基本HPC接続用SSH設定の正規化行列が本文と一致",
+          "verification": "ssh -G -FでHost別名、HostName、User、IdentityFileを展開してpytest検証",
           "target_entity": null,
-          "cross_chapter": true
+          "cross_chapter": false
         }
       ]
     },
@@ -1122,15 +1122,15 @@
       ]
     },
     "B-14-002": {
-      "block_sha256": "d37852040ec0636f36b24e6ae6ccd024a02fa6ef164f1193f6fd0b0508768830",
+      "block_sha256": "4e4a5972a644a9a1ed4d5a3ce9668d40055128d7a855fd07610fff13bdda19ba",
       "relations": [
         {
           "target_file": "scripts/ch14/Snakefile",
           "target_entity": "rule fastqc",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "処理は同じだがthreadsが定数4とconfig参照で異なる",
-          "verification": "manual",
+          "evidence": "fastqc ruleを設定参照、入出力、ログ、shellを保って実体から連続抜粋",
+          "verification": "config値の静的検証とSnakemake 9.23.1のdry-runで3サンプルのDAGを確認",
           "cross_chapter": false
         }
       ]
@@ -1262,14 +1262,14 @@
       ]
     },
     "B-14-014": {
-      "block_sha256": "291410a9a73eed52bf10f5670c0318f609452790d21c0553899cc2cbacdd4751",
+      "block_sha256": "e3e738d0b1f2c30ec0d926ee7df166a00ba400b01c66dc9c6678b14caed64899",
       "relations": [
         {
           "target_file": "scripts/ch14/Makefile",
-          "equivalence": "E3",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "依存関係は同じだが本文URLが省略記号で実行不能、変数・clean処理にも差がある",
-          "verification": "manual",
+          "evidence": "URL、変数、依存関係、cleanを含むMakefileの正規化行列が本文と一致",
+          "verification": "make -n all/cleanで依存順と削除対象をpytest検証",
           "target_entity": null,
           "cross_chapter": false
         }
@@ -1290,29 +1290,29 @@
       ]
     },
     "B-14-017": {
-      "block_sha256": "ec124d0494209257740b7d877e0c48792ba2c345ef1621fe4f80bf45f11f2a9f",
+      "block_sha256": "920e259a0ea5a4b8b71dc90939e1bd4980564114dbe3c152288110ac3a65e8eb",
       "relations": [
         {
           "target_file": "scripts/ch14/Snakefile",
           "target_entity": "rule star_align",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "protectedとtemp、BAMパスが異なるため動作上の差がある",
-          "verification": "manual",
+          "evidence": "star_alignの中間BAMに対するtemp指定と完全な出力パスを実体から抜粋",
+          "verification": "実体のtemp指定をpytestで読み、Snakemake dry-runでfeaturecounts後の一時出力削除計画を確認",
           "cross_chapter": false
         }
       ]
     },
     "B-14-019": {
-      "block_sha256": "4a5f869cd6aa2c8e09991d1d48367485b4701897732d69a70190d1c418aa953e",
+      "block_sha256": "e98f8902a60754b6c12ea06c89fcb90c280ba09cdbeb9c232577ac0e40063fed",
       "relations": [
         {
           "target_file": "scripts/ch14/Snakefile",
           "target_entity": "rule star_align",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "logの意図は同じだがshell文字列が説明用省略形",
-          "verification": "manual",
+          "evidence": "star_alignのlog、threads、完全なshell文字列を実体末尾から連続抜粋",
+          "verification": "ログパスとshellの{log}参照をpytestで読み、Snakemake dry-runで展開を確認",
           "cross_chapter": false
         }
       ]
@@ -1518,10 +1518,10 @@
       "relations": [
         {
           "target_file": "scripts/ch16/ssh_config.example",
-          "equivalence": "E3",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "ProxyJump構造は同じだがHost別名とHostNameが異なる",
-          "verification": "manual",
+          "evidence": "bastionとhpcのProxyJump設定の正規化行列が本文と一致",
+          "verification": "ssh -G -Fで両Hostの接続先、User、ProxyJump、ServerAliveIntervalをpytest検証",
           "target_entity": null,
           "cross_chapter": false
         }
