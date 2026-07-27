@@ -372,25 +372,29 @@ pip install mkdocs mkdocs-material "mkdocstrings[python]"
 `mkdocs.yml` 設定ファイルでプロジェクト名やテーマを定義し、mkdocstringsプラグインを有効にする。`src layout` を採用しているプロジェクトでは、Python handler が `src/` 以下を探索できるように `paths` も指定しておくとよい。
 
 ```yaml
-# mkdocs.yml — mkdocsの設定ファイル
-site_name: My Tool Docs      # サイトのタイトル
+site_name: My Tool Docs
 theme:
-  name: material              # Material for MkDocsテーマ
+  name: material
+nav:
+  - Home: index.md
+  - API Reference: api.md
 plugins:
-  - search                    # サイト内検索プラグイン
+  - search
   - mkdocstrings:
       default_handler: python
       handlers:
         python:
           paths: [src]
           options:
-            docstring_style: numpy   # 本書はNumPy styleを採用（既定はgoogle）
+            docstring_style: numpy
 ```
+
+`nav` はサイトのページ構成を定義する。`paths: [src]` は設定ファイルを基準とした探索先、`docstring_style: numpy` はdocstringの解析形式である。動作する最小構成は、[mkdocs.yml](../scripts/ch18/mkdocs_example/mkdocs.yml)、[APIページ](../scripts/ch18/mkdocs_example/docs/api.md)、[APIの実装](../scripts/ch18/mkdocs_example/src/my_tool/core.py)に配置している。
 
 APIリファレンスページの Markdown で `::: モジュール名` と書くと、そのモジュールの公開API（関数・クラス）のdocstringがドキュメントに展開される。
 
 ```markdown
-# API リファレンス
+# APIリファレンス
 
 ::: my_tool.core
 ```

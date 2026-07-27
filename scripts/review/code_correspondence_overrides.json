@@ -1551,8 +1551,18 @@
       ]
     },
     "B-18-021": {
-      "block_sha256": "42337806acb96e1c42635b53487547ca8075302c17a32f6bb1a2cb2c49ff5a81",
-      "relations": []
+      "block_sha256": "e09d1d119004bb459c41087ec61d0e0ccd44b9afc7dd10039a68f937b85db60f",
+      "relations": [
+        {
+          "target_file": "scripts/ch18/mkdocs_example/mkdocs.yml",
+          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "本文のMkDocs設定全体が実体と一致",
+          "verification": "YAML・参照パス・API関数をpytestで検証し、mkdocs build --strictを実行",
+          "cross_chapter": false
+        }
+      ]
     },
     "B-19-006": {
       "block_sha256": "900c7b6b079ade657c1cc4006976c0493260c1f4f10e50e928925e133ef7fdf9",
@@ -1728,9 +1738,9 @@
       "reason": "配置必須のSnakemake container ruleだが対応するscripts資産がない"
     },
     {
-      "block_id": "B-18-021",
+      "block_id": "B-15-018",
       "expected": "E5",
-      "reason": "配置必須のmkdocs設定だが対応するscripts資産がない"
+      "reason": "配置必須のGPUコンテナ定義だが対応するscripts資産がない"
     },
     {
       "block_id": "B-13-006",
