@@ -1,10 +1,38 @@
 """cProfileによるプロファイリングデモ — TPM正規化の遅い版と速い版."""
 
+import builtins
 import cProfile
 import pstats
+from collections.abc import Callable
 from io import StringIO
+from typing import ParamSpec, Protocol, TypeVar, cast
 
 import numpy as np
+
+_P = ParamSpec("_P")
+_R = TypeVar("_R")
+
+
+class _ProfileDecorator(Protocol):
+    """関数の型を保つプロファイリング用デコレータ."""
+
+    def __call__(
+        self, func: Callable[_P, _R]
+    ) -> Callable[_P, _R]:
+        """関数をプロファイル対象として登録する."""
+        ...
+
+
+def _identity_profile(func: Callable[_P, _R]) -> Callable[_P, _R]:
+    """kernprof外では関数を変更せずに返す."""
+    return func
+
+
+# kernprofは実行時にbuiltins.profileを注入する。通常import時はno-opを使う。
+profile = cast(
+    _ProfileDecorator,
+    getattr(builtins, "profile", _identity_profile),
+)
 
 
 def normalize_tpm_slow(
@@ -52,6 +80,10 @@ def normalize_tpm_slow(
     return tpm
 
 
+# @profile構文と同じデコレータ呼び出しで、既存関数を計測対象に登録する。
+profiled_normalize_tpm_slow = profile(normalize_tpm_slow)
+
+
 def normalize_tpm_fast(
     counts: np.ndarray, gene_lengths: np.ndarray
 ) -> np.ndarray:
@@ -86,7 +118,7 @@ def normalize_tpm_fast(
 
 
 def profile_pipeline(
-    func: callable, *args: object
+    func: Callable[..., object], *args: object
 ) -> pstats.Stats:
     """指定した関数を cProfile で計測し、結果を返す.
 
@@ -112,3 +144,14 @@ def profile_pipeline(
     stats = pstats.Stats(profiler, stream=stream)
     stats.sort_stats("cumulative")
     return stats
+
+
+def main() -> None:
+    """小規模データでline_profilerの計測対象を実行する."""
+    counts = np.array([[100, 200], [300, 400]], dtype=np.float64)
+    gene_lengths = np.array([1000, 2000], dtype=np.float64)
+    profiled_normalize_tpm_slow(counts, gene_lengths)
+
+
+if __name__ == "__main__":
+    main()

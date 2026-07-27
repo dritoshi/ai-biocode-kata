@@ -90,16 +90,34 @@ git secrets --add 'NCBI_API_KEY\s*=\s*[A-Za-z0-9]+'
 ```python
 # scripts/ch20/secret_scanner.py — シークレットスキャナの中核部分
 
-# 検出対象のシークレットパターン（一部抜粋）
+# 検出対象のシークレットパターン
 SECRET_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     (
         "AWS Access Key",
         re.compile(r"(?<![A-Z0-9])(AKIA[0-9A-Z]{16})(?![A-Z0-9])"),
     ),
     (
+        "AWS Secret Key",
+        re.compile(
+            r"""(?i)aws[_\-]?secret[_\-]?(?:access[_\-]?)?key\s*[=:]\s*['"]?([A-Za-z0-9/+=]{40})['"]?"""
+        ),
+    ),
+    (
         "Generic API Key assignment",
         re.compile(
             r"""(?i)(?:api[_\-]?key|apikey)\s*[=:]\s*['"]([A-Za-z0-9_\-]{20,})['"]"""
+        ),
+    ),
+    (
+        "Generic Password assignment",
+        re.compile(
+            r"""(?i)['"]?(?:password|passwd|pwd)['"]?\s*[=:]\s*['"]([^'"]{8,})['"]"""
+        ),
+    ),
+    (
+        "Generic Token assignment",
+        re.compile(
+            r"""(?i)(?:token|secret)\s*[=:]\s*['"]([A-Za-z0-9_\-]{20,})['"]"""
         ),
     ),
     (
@@ -117,20 +135,33 @@ def scan_content(
     """テキスト内容をスキャンしてシークレットを検出する."""
     if patterns is None:
         patterns = SECRET_PATTERNS
+    if filepath is None:
+        filepath = Path("<stdin>")
+
     findings: list[SecretFinding] = []
+
     for line_number, line in enumerate(content.splitlines(), start=1):
         for pattern_name, pattern in patterns:
             if pattern.search(line):
-                findings.append(SecretFinding(
-                    filepath=filepath or Path("<stdin>"),
-                    line_number=line_number,
-                    pattern_name=pattern_name,
-                    line=line.strip(),
-                ))
+                findings.append(
+                    SecretFinding(
+                        filepath=filepath,
+                        line_number=line_number,
+                        pattern_name=pattern_name,
+                        line=line.strip(),
+                    )
+                )
+                logger.warning(
+                    "シークレット検出: %s:%d [%s]",
+                    filepath,
+                    line_number,
+                    pattern_name,
+                )
+
     return findings
 ```
 
-`scan_content`関数は各行を全パターンと照合し、マッチした行の情報を`SecretFinding`データクラスとして返す。完全なコードは`scripts/ch20/secret_scanner.py`にあり、ディレクトリ全体の再帰スキャン機能も含む。
+`scan_content`関数は各行を全パターンと照合し、マッチした行の情報を`SecretFinding`データクラスのリストとして返す。上の抜粋ではimport、データクラス定義、詳細なdocstring、バイナリ拡張子の除外を省略した。完全なコードは`scripts/ch20/secret_scanner.py`にあり、ディレクトリ全体の再帰スキャン機能も含む。
 
 #### コミットしてしまったシークレットの対処
 
@@ -550,13 +581,24 @@ def generalize_age(age: int, bin_size: int = 10) -> str:
         元の年齢値。
     bin_size : int
         ビンの幅（デフォルト: 10）。
-        10なら30-39, 5なら30-34のようになる。
 
     Returns
     -------
     str
-        一般化された年代（例: "30-39"）。
+        一般化された年代（例: ``"30-39"``）。
+
+    Raises
+    ------
+    ValueError
+        年齢が負の値の場合。
     """
+    if age < 0:
+        msg = f"年齢は0以上でなければなりません: {age}"
+        raise ValueError(msg)
+    if bin_size <= 0:
+        msg = f"ビンサイズは正の整数でなければなりません: {bin_size}"
+        raise ValueError(msg)
+
     lower = (age // bin_size) * bin_size
     upper = lower + bin_size - 1
     return f"{lower}-{upper}"

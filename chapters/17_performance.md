@@ -319,27 +319,49 @@ cProfileで「どの関数が遅いか」がわかったら、次は「その関
 pip install line_profiler
 ```
 
-プロファイル対象の関数に `@profile` デコレータを付け、`kernprof` コマンドで実行する:
+プロファイル対象の関数に `@profile` デコレータを付け、`kernprof` コマンドで実行する。`kernprof`は実行時に`builtins.profile`を注入するため、通常のPythonからimportするときは何もしないfallbackを用意する。本書の完全版では、直前のcProfile例と同じ関数を再利用するため、`@profile`と等価なデコレータ呼び出しを別名へ代入する。`scripts/ch17/profiling_demo.py`から、fallbackと登録処理を抜粋すると次のようになる:
 
 ```python
-# profiling_target.py
-# @profile デコレータを付けた関数が計測対象になる
-@profile
-def normalize_tpm_slow(counts, gene_lengths):
-    n_genes, n_samples = counts.shape
-    lengths_kb = gene_lengths / 1000.0
-    rpk = np.empty_like(counts, dtype=np.float64)
-    for i in range(n_genes):
-        for j in range(n_samples):
-            rpk[i, j] = counts[i, j] / lengths_kb[i]
-    # ... 省略 ...
+# scripts/ch17/profiling_demo.py — line_profiler対応部分の抜粋
+import builtins
+from collections.abc import Callable
+from typing import ParamSpec, Protocol, TypeVar, cast
+
+import numpy as np
+
+_P = ParamSpec("_P")
+_R = TypeVar("_R")
+
+
+class _ProfileDecorator(Protocol):
+    def __call__(
+        self, func: Callable[_P, _R]
+    ) -> Callable[_P, _R]:
+        ...
+
+
+def _identity_profile(func: Callable[_P, _R]) -> Callable[_P, _R]:
+    """kernprof外では関数を変更せずに返す."""
+    return func
+
+
+profile = cast(
+    _ProfileDecorator,
+    getattr(builtins, "profile", _identity_profile),
+)
+
+
+# @profile構文と同じデコレータ呼び出しで、既存関数を計測対象に登録する。
+profiled_normalize_tpm_slow = profile(normalize_tpm_slow)
 ```
+
+fallbackは関数をそのまま返すため通常import時の計算結果を変えない。`kernprof`実行時には注入されたデコレータが同じ関数を計測対象へ登録する。完全版には、小規模データで`profiled_normalize_tpm_slow()`を呼ぶ`main()`入口も含まれる。
 
 ```bash
 # kernprof: line_profiler の実行コマンド
 # -l: 行単位プロファイルを有効化
 # -v: 実行後に結果をターミナルに表示
-kernprof -l -v profiling_target.py
+kernprof -l -v scripts/ch17/profiling_demo.py
 ```
 
 出力には各行の実行回数（Hits）、行あたりの時間（Time）、全体に占める割合（% Time）が表示される。「% Time が大きい行 = 改善効果が高い行」である。
@@ -607,20 +629,58 @@ def gc_content_parallel(
 以下は、FASTQファイルから条件に合うリードを抽出する2つの実装を比較する:
 
 ```python
+from collections.abc import Generator
+from pathlib import Path
+
 from Bio import SeqIO
+from Bio.SeqRecord import SeqRecord
 
 # リスト版: 全レコードをメモリに保持してからフィルタリング
 # → ファイルサイズに比例してメモリを消費
-def filter_reads_list(path, min_length):
-    all_records = list(SeqIO.parse(path, "fastq"))  # 全件メモリに展開
-    return [r for r in all_records if len(r.seq) >= min_length]
+def filter_reads_list(path: Path, min_length: int) -> list[SeqRecord]:
+    """FASTQを全件読み込み、指定長以上のレコードをリストで返す.
+
+    Parameters
+    ----------
+    path : Path
+        FASTQファイルのパス
+    min_length : int
+        最小配列長（この値以上のレコードのみ通過）
+
+    Returns
+    -------
+    list[SeqRecord]
+        条件を満たすレコードのリスト
+    """
+    all_records = list(SeqIO.parse(path, "fastq"))
+    return [
+        record
+        for record in all_records
+        if len(record.seq) >= min_length  # type: ignore[arg-type]
+    ]
 
 
 # ジェネレータ版: 1レコードずつ処理し、条件に合うものだけ yield
 # → メモリ使用量は一定（ファイルサイズに依存しない）
-def filter_reads_generator(path, min_length):
+def filter_reads_generator(
+    path: Path, min_length: int
+) -> Generator[SeqRecord, None, None]:
+    """FASTQを遅延読み込みし、指定長以上のレコードを逐次返す.
+
+    Parameters
+    ----------
+    path : Path
+        FASTQファイルのパス
+    min_length : int
+        最小配列長（この値以上のレコードのみ通過）
+
+    Yields
+    ------
+    SeqRecord
+        条件を満たすレコード
+    """
     for record in SeqIO.parse(path, "fastq"):
-        if len(record.seq) >= min_length:
+        if len(record.seq) >= min_length:  # type: ignore[arg-type]
             yield record
 ```
 
@@ -802,25 +862,45 @@ pandas の `read_csv()` は `chunksize` パラメータを指定すると、Data
 以下は、サンプル × 遺伝子の発現量テーブル（行=サンプル、列=遺伝子）から、遺伝子ごとの平均と分散をチャンク処理で計算する例である。Welfordのオンラインアルゴリズムのバッチ版を用いて、チャンクごとに統計量を逐次更新する:
 
 ```python
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
 
 
 def compute_stats_chunked(
     path: Path, chunksize: int = 1000
 ) -> dict[str, pd.Series]:
-    """チャンク処理で遺伝子ごとの統計量を逐次集約する."""
-    n_total = 0
-    running_mean = None
-    running_m2 = None  # 偏差平方和
+    """チャンク処理で統計量を逐次集約する.
 
-    # chunksize=1000: 1000行（サンプル）ずつ読み込む
+    Welfordのオンラインアルゴリズムのバッチ版を用いて、チャンクごとに
+    平均と分散を逐次更新する。メモリ使用量はチャンクサイズに比例し、
+    ファイル全体のサイズに依存しない。
+
+    行=サンプル、列=遺伝子の形式を前提とする。チャンクはサンプル方向
+    （行方向）に分割され、遺伝子ごとの統計量をサンプル間で集約する。
+
+    Parameters
+    ----------
+    path : Path
+        CSV ファイルのパス。行=サンプル、列=遺伝子の発現量テーブル。
+    chunksize : int
+        一度に読み込む行数（サンプル数）。デフォルト: 1000
+
+    Returns
+    -------
+    dict[str, pd.Series]
+        "mean"（遺伝子ごとの平均発現量）と "var"（不偏分散）を含む辞書
+    """
+    n_total = 0
+    running_mean: pd.Series | None = None
+    running_m2: pd.Series | None = None
+
     reader = pd.read_csv(path, index_col=0, chunksize=chunksize)
     for chunk in reader:
         batch_count = len(chunk)
         batch_mean = chunk.mean(axis=0).astype(np.float64)
-        # 母分散 × サンプル数 = 偏差平方和
+        # 母分散（ddof=0）× サンプル数 = 偏差平方和
         batch_m2 = chunk.var(axis=0, ddof=0).astype(np.float64) * batch_count
 
         if running_mean is None:
@@ -839,9 +919,15 @@ def compute_stats_chunked(
             )
             n_total = new_count
 
-    # 不偏分散: 偏差平方和 / (n - 1)
+    if running_mean is None or running_m2 is None or n_total < 2:
+        raise ValueError("統計量の計算には2サンプル以上が必要です")
+
     variance = running_m2 / (n_total - 1)
-    return {"mean": running_mean, "var": variance}
+
+    return {
+        "mean": running_mean,
+        "var": variance,
+    }
 ```
 
 チャンク処理のポイント:

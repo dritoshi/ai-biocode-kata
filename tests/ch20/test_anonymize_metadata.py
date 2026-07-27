@@ -80,6 +80,11 @@ class TestGeneralizeAge:
         with pytest.raises(ValueError, match="正の整数"):
             generalize_age(30, bin_size=0)
 
+    def test_negative_bin_size_raises(self) -> None:
+        """負のビンサイズで ValueError."""
+        with pytest.raises(ValueError, match="正の整数"):
+            generalize_age(30, bin_size=-5)
+
 
 # --- generalize_region ---
 

@@ -764,47 +764,26 @@ hisat2-build reference.fasta hisat2_index/reference
 
 サンプルメタデータをCSVファイルで管理する方法は手軽だが、サンプル数が増えると検索やフィルタリングが煩雑になる。SQLiteを使えば、SQLクエリで柔軟にデータを操作できる。
 
-以下は、CSVファイルからSQLiteデータベースにメタデータを読み込み、条件別に集計する例である（[§4 データフォーマットの選び方](./04_data_formats.md)で学んだCSVの扱いの発展形）。
+以下は、CSVファイルからSQLiteデータベースにメタデータを読み込み、条件別に集計する例である（[§4 データフォーマットの選び方](./04_data_formats.md)で学んだCSVの扱いの発展形）。データベースとCSVのパスは、CLI引数などから`db_path`と`csv_path`へ取得済みとする。完全版の公開関数を呼び出す部分だけを抜粋する:
 
 ```python
-import sqlite3
-import csv
-from pathlib import Path
+from scripts.ch19.local_db import (
+    count_by_condition,
+    create_connection,
+    initialize_db,
+    load_csv,
+)
 
-# SQLiteデータベースに接続（ファイルが存在しなければ新規作成）
-conn = sqlite3.connect("samples.db")
-conn.row_factory = sqlite3.Row  # 列名でアクセス可能にする
-
-# テーブル作成
-conn.execute("""
-    CREATE TABLE IF NOT EXISTS samples (
-        sample_id   TEXT PRIMARY KEY,
-        accession   TEXT NOT NULL,
-        organism    TEXT NOT NULL,
-        condition   TEXT NOT NULL,
-        replicate   INTEGER
-    )
-""")
-
-# CSVから読み込み
-with open("samples.csv", newline="", encoding="utf-8") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        conn.execute(
-            "INSERT OR REPLACE INTO samples VALUES (?, ?, ?, ?, ?)",
-            (row["sample_id"], row["accession"], row["organism"],
-             row["condition"], int(row["replicate"])),
-        )
-conn.commit()
-
-# 条件別にサンプル数を集計
-for row in conn.execute(
-    "SELECT condition, COUNT(*) as cnt FROM samples GROUP BY condition"
-):
-    print(f"{row['condition']}: {row['cnt']}件")
+conn = create_connection(db_path)
+try:
+    initialize_db(conn)
+    load_csv(conn, csv_path)
+    counts = count_by_condition(conn)
+finally:
+    conn.close()
 ```
 
-`sqlite3.connect` はファイルが存在しなければ新規作成する。`conn.row_factory = sqlite3.Row` を設定すると、結果を `row["列名"]` で辞書的にアクセスできる。`INSERT OR REPLACE` は同一主キーが存在する場合に上書きする。
+`create_connection()`はファイルが存在しなければ新規作成し、列名で結果へアクセスできる接続を返す。`initialize_db()`は`CREATE TABLE IF NOT EXISTS`を使うため再実行できる。`load_csv()`の`INSERT OR REPLACE`は同一主キーが存在する場合に上書きし、`count_by_condition()`は条件名をキー、件数を値とする辞書を返す。接続は処理の成否にかかわらず`finally`節で閉じる。
 
 完全な実装は `scripts/ch19/local_db.py` を参照されたい。
 

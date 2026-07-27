@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
 - 生成日: 2026-07-28
-- 対象コミット: `2594abe4da68f7bba77fc2b898222e2e817594e6`
+- 対象コミット: `a8000ddfc686f342c9c6c9b6a407586e521a6744`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - 全件表: [`code_correspondence.json`](./code_correspondence.json)
@@ -14,10 +14,10 @@
 
 | 判定 | 件数 | 意味 |
 |---|---:|---|
-| E0 | 46 | コメント・空白を除いて同一 |
+| E0 | 49 | コメント・空白を除いて同一 |
 | E1 | 45 | docstringや説明上の差を除けば同じ処理 |
-| E2 | 25 | 実体と矛盾しない抜粋 |
-| E3 | 18 | 対応はあるが構造または振る舞いに差がある |
+| E2 | 28 | 実体と矛盾しない抜粋 |
+| E3 | 12 | 対応はあるが構造または振る舞いに差がある |
 | E5 | 0 | 配置が必要だが対応実体がない |
 | EN | 395 | 規約上、対応実体は不要 |
 | **合計** | **529** | 全本文ブロック |
@@ -47,12 +47,12 @@
 | ch14 | 23 | 14 | 7 | 0 | 7 | 0 | 0 | 0 | 9 |
 | ch15 | 32 | 9 | 7 | 0 | 2 | 0 | 0 | 0 | 23 |
 | ch16 | 26 | 6 | 4 | 0 | 2 | 0 | 0 | 0 | 20 |
-| ch17 | 42 | 11 | 2 | 6 | 0 | 3 | 0 | 0 | 31 |
+| ch17 | 42 | 11 | 4 | 6 | 1 | 0 | 0 | 0 | 31 |
 | ch18 | 30 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 29 |
-| ch19 | 24 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 23 |
-| ch20 | 12 | 4 | 1 | 0 | 1 | 2 | 0 | 0 | 8 |
+| ch19 | 24 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 23 |
+| ch20 | 12 | 4 | 2 | 0 | 2 | 0 | 0 | 0 | 8 |
 | ch21 | 14 | 5 | 1 | 4 | 0 | 0 | 0 | 0 | 9 |
-| **合計** | **529** | **134** | **46** | **45** | **25** | **18** | **0** | **0** | **395** |
+| **合計** | **529** | **134** | **49** | **45** | **28** | **12** | **0** | **0** | **395** |
 
 ## 3. 対応実体がないブロック
 
@@ -78,12 +78,6 @@
 | `B-11-030` | `scripts/ch11/seqtool.py` | 1 failed, 12 passed in 0.16s | 同章・同名だがAST差 |
 | `B-11-031` | `scripts/ch11/logging_setup.py` | 10 passed in 0.04s | 同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある |
 | `B-11-031` | `scripts/ch11/progress_demo.py` | 10 passed in 0.03s | 同じsetup_loggingの別実体にも対応する多対多関係 |
-| `B-17-019` | `scripts/ch17/profiling_demo.py` | 1 error in 0.11s | 同章・同名だがAST差 |
-| `B-17-031` | `scripts/ch17/generator_fastq.py` | 対象外 | generator版はfilter_by_lengthと同じ目的だがAPIが異なり、list版の実体は無い |
-| `B-17-037` | `scripts/ch17/chunk_processing.py` | 1 failed, 3 passed in 0.36s | 同章・同名だがAST差 |
-| `B-19-022` | `scripts/ch19/local_db.py` | 未実行: 同名のトップレベル定義がない | 同じSQLite処理だが実体は関数分割・追加列・ロギングを持ち、本文は直書き |
-| `B-20-004` | `scripts/ch20/secret_scanner.py` | 21 passed in 0.03s | 同名scan_contentだが戻り値・パターン・引数・除外処理に差がある |
-| `B-20-009` | `scripts/ch20/anonymize_metadata.py` | 2 failed, 23 passed in 0.04s | 年代化の基本式は同じだが実体に入力検証とエラー仕様がある |
 
 ## 5. テスト状況
 
@@ -94,14 +88,14 @@
 | テストファイル | 94 |
 | 章別テストファイル | 92 |
 | レビュー用テストファイル | 2 |
-| passed | 914 |
+| passed | 922 |
 | skipped | 11 |
 | failed | 0 |
 | errors | 0 |
 
 ## 6. 多対多対応
 
-1ブロックから複数ファイルへの対応は7件ある。
+1ブロックから複数ファイルへの対応は8件ある。
 
 | 本文ブロック | 対応先 |
 |---|---|
@@ -112,6 +106,7 @@
 | `B-08-025` | `scripts/ch08/examples/claude-settings.json`、`scripts/ch08/examples/codex-hooks.json` |
 | `B-11-013` | `scripts/ch10/config_example.py`、`scripts/ch11/cli_click.py` |
 | `B-11-031` | `scripts/ch11/logging_setup.py`、`scripts/ch11/progress_demo.py` |
+| `B-17-031` | `scripts/ch17/generator_fastq.py`、`scripts/ch17/generator_fastq.py` |
 
 ## 7. 実体側だけにあるファイル
 
@@ -135,7 +130,7 @@
 5. import、命名、直接パス参照から実体とテストを対応付けた
 6. 独立監査でソースハッシュ、ID、参照先、集計、Markdownを再計算する
 
-分類overrideは27件、関係overrideは112件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
+分類overrideは27件、関係overrideは114件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
 
 ## 9. 全件表の読み方
 
