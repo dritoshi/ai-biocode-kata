@@ -4,13 +4,17 @@ from __future__ import annotations
 
 import json
 import subprocess
+from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-from scripts.review.audit_code_correspondence import audit
+from scripts.review.audit_code_correspondence import (
+    _populated_goldset_stages,
+    audit,
+)
 from scripts.review.code_correspondence import (
     add_relations,
     apply_category_overrides,
@@ -295,6 +299,19 @@ class TestBuildAndAudit:
             include_history=False,
         )
         assert data["blocks"][0]["correspondence"] == "E5"
+
+    def test_goldset_excludes_empty_stage(self) -> None:
+        correspondence = Counter(
+            {"E0": 10, "E1": 3, "E2": 2, "E3": 1, "EN": 4}
+        )
+
+        assert _populated_goldset_stages(correspondence) == (
+            "E0",
+            "E1",
+            "E2",
+            "E3",
+            "EN",
+        )
 
     def test_independent_audit_detects_source_tampering(
         self,
