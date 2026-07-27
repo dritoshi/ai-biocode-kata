@@ -100,6 +100,8 @@ def collect_environment() -> dict[str, str]:
             env[pkg] = version(pkg)
         except PackageNotFoundError:
             env[pkg] = "not installed"
+            logger.debug("パッケージ未インストール: %s", pkg)
+
     return env
 
 
@@ -317,10 +319,17 @@ def check_type_hints(added_lines: list[str]) -> list[str]:
     """追加された関数定義に戻り値の型ヒントがあるか検査する."""
     issues: list[str] = []
     func_pattern = re.compile(r"^\s*def\s+(\w+)\s*\(")
+
     for line in added_lines:
         match = func_pattern.match(line)
-        if match and "->" not in line:
-            issues.append(f"関数 `{match.group(1)}` に戻り値の型ヒントがありません")
+        if match:
+            func_name = match.group(1)
+            if "->" not in line:
+                issues.append(
+                    f"関数 `{func_name}` に戻り値の型ヒントがありません"
+                )
+                logger.info("型ヒント欠落: %s", func_name)
+
     return issues
 ```
 
@@ -551,12 +560,22 @@ git log --since="1 week ago" --format="%H|%s|%ai" --no-merges
 def parse_git_log(log_text: str) -> list[Commit]:
     """git log --format="%H|%s|%ai" の出力をパースする."""
     commits: list[Commit] = []
+
     for line in log_text.strip().splitlines():
-        parts = line.strip().split("|", maxsplit=2)
-        if len(parts) != 3:            # 3列に分かれない行はスキップ
+        line = line.strip()
+        if not line:
             continue
+
+        parts = line.split("|", maxsplit=2)
+        if len(parts) != 3:
+            logger.warning("不正な形式の行をスキップ: %s", line)
+            continue
+
         commit_hash, subject, date = parts
-        commits.append(Commit(hash=commit_hash, subject=subject, date=date))
+        commits.append(
+            Commit(hash=commit_hash.strip(), subject=subject.strip(), date=date.strip())
+        )
+
     return commits
 
 
@@ -671,16 +690,26 @@ def validate_metadata(
 ) -> list[str]:
     """メタデータの必須カラムと空セルを検証し、問題メッセージのリストを返す."""
     issues: list[str] = []
+
     if not metadata_rows:
-        return ["メタデータが空です"]
-    available = set(metadata_rows[0].keys())
+        issues.append("メタデータが空です")
+        return issues
+
+    # 最初の行のカラムを基準に必須カラムの存在を確認
+    available_columns = set(metadata_rows[0].keys())
     for col in required_columns:
-        if col not in available:
+        if col not in available_columns:
             issues.append(f"必須カラム '{col}' がありません")
+
+    # 各行の空値チェック
     for i, row in enumerate(metadata_rows, start=1):
         for col in required_columns:
             if col in row and row[col].strip() == "":
                 issues.append(f"行 {i}: カラム '{col}' が空です")
+
+    if issues:
+        logger.warning("メタデータ検証で %d 件の問題を検出", len(issues))
+
     return issues
 ```
 

@@ -2090,7 +2090,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "5 passed in 1.68s",
-      "block_sha256": "fe70742e1562c966653b538b534d9c83d0fbf3132571c5570c75d15ec4676016",
+      "block_sha256": "c2790843cb6eae123ee57b66336af06e590082428ae77de0cab7fe93d61117b3",
       "target_sha256": "db231b74c3f1295b531620224100a9b7a32931ddc6664b86e09de05783f098b9",
       "test_file_sha256": {
         "tests/ch13/test_seaborn_biodist.py": "6b57388f9d8adf8ae59f1a59829a7552b2acdb744aa2780d23b60cb95853308d"
@@ -2202,7 +2202,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "5 passed in 0.03s",
-      "block_sha256": "00fd326a21d98b61efce22c1b5784586c99b4c50b6e200f3605d55de17f99845",
+      "block_sha256": "3f730b1da3a8c0adfa0da9d644de1893cca3f56f2cd9a632a0ed9637cfc39edc",
       "target_sha256": "dc4d003911ccf3d7cd510c940a17c52817bdba98119c6901134d5aa485555813",
       "test_file_sha256": {
         "tests/ch21/test_format_question.py": "7621c45f86cd28928da8e1f2b36a13ae78de6e54487e133a081773be355d5c51"
@@ -2222,7 +2222,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "9 passed in 0.02s",
-      "block_sha256": "fdb26fcbe554c949ea1c6723b42879640fd3106fa48edcaa02bfbba10e14f3d7",
+      "block_sha256": "968e537b59b73f002dca4fac26abac4a2e0fdd5541fbb72fb15cebb0eac66868",
       "target_sha256": "c2a86e6ee349fcd259193d878618615881be0b64d3bfc81674accec4a7e21ec1",
       "test_file_sha256": {
         "tests/ch21/test_review_helper.py": "feab14b15477a8664fd557e1767070634605f0090def46948a7f8ff7ac080716"
@@ -2242,7 +2242,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "8 passed in 0.02s",
-      "block_sha256": "17a5d24c5d06647ba17bfbc82b206533e6fc85059220caa1e2828917bb42d31f",
+      "block_sha256": "db61ef5aa0382d2ef01d97061610871ed4f9b4d04986cda06750aa9a8986bb89",
       "target_sha256": "befe2a44ad2fcef75fb97059ba70ccc60abdc03980243a76bd90367b92ca1de9",
       "test_file_sha256": {
         "tests/ch21/test_progress_report.py": "d879e5761c0988910b9a435076ac3edf4cff0374a72ea010b5a70aa9225282fc"
@@ -2262,7 +2262,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "11 passed in 0.02s",
-      "block_sha256": "24a046921c4ed2955bf4b684df8e8d71d6adeb4c497403bca8cf36055ad3b0b1",
+      "block_sha256": "601db33930343537b72efc87aa3e9d2fcd48a5c3f0a6729515434fdacb84c5f2",
       "target_sha256": "31db200a598357214bbbe6c47348e7869dae3718bef63d1ff42ea7630ec8298e",
       "test_file_sha256": {
         "tests/ch21/test_analysis_intake.py": "5416be9c77b9962599c0a36835cd4020f0ffea4bdd1347c0ec925b818ac28cb5"
