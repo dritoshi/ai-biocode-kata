@@ -1,0 +1,15 @@
+site_name: My Tool Docs
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - API Reference: api.md
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: numpy
