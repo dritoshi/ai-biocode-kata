@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-07-28T00:50:19+09:00",
+  "generated_at": "2026-07-28T01:51:42+09:00",
   "method": "docs/review/2026-07-25_code_correspondence_reaudit_plan.md",
-  "source_commit": "2d6b03653c5d5284133aa63c62e1f005d482fbb5",
-  "source_snapshot_sha256": "c7988a2ec539c8eba0548c476e90e3b94972f83ba87f878d5c19c9915ea4622f",
+  "source_commit": "d01340fceec35aa0c9c28fd405a60a245abb37ec",
+  "source_snapshot_sha256": "ad3744992b9104bc6f9549e88c9efcf6de6602591507bdc8934f110da16fff9c",
   "environment": {
     "python": "3.14.6",
     "pytest": "pytest 9.0.3",
@@ -13,7 +13,7 @@
     "chapters": 22,
     "book_blocks": 529,
     "script_files": 174,
-    "test_files_under_chapters": 112,
+    "test_files_under_chapters": 113,
     "languages": {
       "python": 227,
       "text": 2,
@@ -51,17 +51,17 @@
       "required_tests": 8
     },
     "correspondence_all": {
-      "E3": 32,
+      "E3": 24,
       "EN": 395,
-      "E1": 42,
-      "E2": 19,
-      "E0": 41
+      "E1": 45,
+      "E2": 22,
+      "E0": 43
     },
     "correspondence_required": {
-      "E3": 32,
-      "E1": 42,
-      "E2": 19,
-      "E0": 41
+      "E3": 24,
+      "E1": 45,
+      "E2": 22,
+      "E0": 43
     },
     "script_book_status": {
       "script_only": 33,
@@ -74,10 +74,10 @@
       "passed_with_skip": 27
     },
     "test_run": {
-      "files": 90,
-      "chapter_test_files": 88,
+      "files": 91,
+      "chapter_test_files": 89,
       "review_test_files": 2,
-      "passed": 902,
+      "passed": 908,
       "failed": 0,
       "skipped": 11,
       "errors": 0
@@ -543,9 +543,10 @@
       "tests": {
         "status": "passed",
         "files": [
-          "tests/ch01/test_gc_content.py"
+          "tests/ch01/test_gc_content.py",
+          "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 9,
+        "passed": 11,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -625,9 +626,10 @@
       "tests": {
         "status": "passed",
         "files": [
-          "tests/ch01/test_gc_content.py"
+          "tests/ch01/test_gc_content.py",
+          "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 9,
+        "passed": 11,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -5768,7 +5770,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-040",
+          "target_file_id": "T-08-041",
           "target_entity_locations": []
         }
       ],
@@ -5778,7 +5780,7 @@
         "files": [
           "tests/ch08/test_reverse_complement.py"
         ],
-        "passed": 7,
+        "passed": 8,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -5807,28 +5809,31 @@
       "relations": [
         {
           "target_file": "scripts/ch08/reverse_complement.py",
-          "equivalence": "E3",
+          "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "基本処理は同じだが実体に空入力・不正塩基の検証があり例外仕様が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "実体の空入力早期returnは本文の空joinと同じ空文字列を返し、通常・小文字・不正塩基の戻り値と例外も一致",
+          "verification": "空入力、小文字、通常配列、無効塩基をpytestで検証し、分岐ごとの戻り値・例外を目視比較",
+          "target_entity": "reverse_complement",
           "cross_chapter": false,
           "target_file_id": "S-08-052",
-          "target_entity_locations": [],
-          "history": {
-            "book_last_update": "2026-03-22T17:23:06+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          "target_entity_locations": [
+            {
+              "id": "S-08-052-E001",
+              "name": "reverse_complement",
+              "kind": "FunctionDef",
+              "line_start": 11,
+              "line_end": 26
+            }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E1",
       "tests": {
         "status": "passed",
         "files": [
           "tests/ch08/test_reverse_complement.py"
         ],
-        "passed": 7,
+        "passed": 8,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -5843,11 +5848,11 @@
             "tests/ch08/test_reverse_complement.py"
           ],
           "returncode": 0,
-          "passed": 7,
+          "passed": 8,
           "failed": 0,
           "skipped": 0,
           "errors": 0,
-          "summary": "7 passed in 0.01s"
+          "summary": "8 passed in 0.01s"
         }
       ]
     },
@@ -5879,7 +5884,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-040",
+          "target_file_id": "T-08-041",
           "target_entity_locations": []
         }
       ],
@@ -5889,7 +5894,7 @@
         "files": [
           "tests/ch08/test_reverse_complement.py"
         ],
-        "passed": 7,
+        "passed": 8,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -5949,28 +5954,31 @@
       "relations": [
         {
           "target_file": "tests/ch08/test_seq_stats.py",
-          "equivalence": "E3",
-          "kind": "concept",
-          "evidence": "同じgc_content正常系だが入力配列・関数名・クラス構造が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "test_gc_content_typical関数のASTが本文と一致",
+          "verification": "pytest収集とpytest.approxによる期待値比較を実行",
+          "target_entity": "test_gc_content_typical",
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
-          "target_entity_locations": [],
-          "history": {
-            "book_last_update": "2026-03-18T09:55:13Z",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          "target_file_id": "T-08-042",
+          "target_entity_locations": [
+            {
+              "id": "T-08-042-E001",
+              "name": "test_gc_content_typical",
+              "kind": "FunctionDef",
+              "line_start": 10,
+              "line_end": 19
+            }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E0",
       "tests": {
         "status": "passed",
         "files": [
           "tests/ch08/test_seq_stats.py"
         ],
-        "passed": 11,
+        "passed": 12,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -6005,7 +6013,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-040",
+          "target_file_id": "T-08-041",
           "target_entity_locations": []
         }
       ],
@@ -6015,7 +6023,7 @@
         "files": [
           "tests/ch08/test_reverse_complement.py"
         ],
-        "passed": 7,
+        "passed": 8,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -6042,29 +6050,24 @@
       "category_reason": "fixtureとテスト関数の実装",
       "relations": [
         {
-          "target_file": "tests/ch01/test_gc_content.py",
-          "equivalence": "E3",
-          "kind": "concept",
-          "evidence": "fixtureとGCフィルタのテスト意図は同じだが、規約上の同章tests/ch08には存在しない",
-          "cross_chapter": true,
-          "verification": "manual",
+          "target_file": "tests/ch08/test_gc_fixture.py",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "fixtureと2つのテストを含むモジュールASTが本文と一致",
+          "cross_chapter": false,
+          "verification": "fixture注入、GC閾値、3レコードのフィルタ結果をpytestで検証",
           "target_entity": null,
-          "target_file_id": "T-01-007",
-          "target_entity_locations": [],
-          "history": {
-            "book_last_update": "2026-07-24T18:01:50+09:00",
-            "target_last_update": "2026-03-17T17:05:37Z",
-            "target_granularity": "file"
-          }
+          "target_file_id": "T-08-040",
+          "target_entity_locations": []
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E0",
       "tests": {
         "status": "passed",
         "files": [
-          "tests/ch01/test_gc_content.py"
+          "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 9,
+        "passed": 2,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -6168,7 +6171,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-040",
+          "target_file_id": "T-08-041",
           "target_entity_locations": []
         },
         {
@@ -6179,7 +6182,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
+          "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
       ],
@@ -6190,7 +6193,7 @@
           "tests/ch08/test_reverse_complement.py",
           "tests/ch08/test_seq_stats.py"
         ],
-        "passed": 18,
+        "passed": 20,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -6284,7 +6287,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
+          "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
       ],
@@ -6294,7 +6297,7 @@
         "files": [
           "tests/ch08/test_seq_stats.py"
         ],
-        "passed": 11,
+        "passed": 12,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -6557,7 +6560,7 @@
         "files": [
           "tests/ch08/test_seq_stats.py"
         ],
-        "passed": 11,
+        "passed": 12,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -6961,7 +6964,7 @@
         "9-1. デバッグの心構え",
         "tracebackを読む"
       ],
-      "sha256": "4a714526692eb3bef2316426b097d063c7d90ff65a1021ca0ac981996bad629b",
+      "sha256": "b732595a1217369528b00a11de922f3ce57b249ece2c402abf0e75ce141f9d53",
       "nonempty_lines": 4,
       "category": "implementation",
       "placement": "required_scripts",
@@ -6970,10 +6973,10 @@
         {
           "target_file": "scripts/ch09/traceback_demo.py",
           "target_entity": "read_fasta_records",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "同章・同名だがAST差",
-          "verification": "AST/順序比較後に章・対象名を目視",
+          "evidence": "実体の先頭にあるpath.read_text()を連続して抜粋し、以降の空入力検証・FASTAパース・戻り値を省略すると明示",
+          "verification": "ファイル欠落、空FASTA、単一・複数レコードをpytestで検証し、抜粋境界を目視確認",
           "cross_chapter": false,
           "target_file_id": "S-09-061",
           "target_entity_locations": [
@@ -6984,15 +6987,10 @@
               "line_start": 6,
               "line_end": 58
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-21T14:46:32+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E2",
       "tests": {
         "status": "passed",
         "files": [
@@ -7006,7 +7004,7 @@
       "substitution_tests": [
         {
           "status": "not_run",
-          "reason": "本文定義が省略記号を含む: read_fasta_records",
+          "reason": "本文はread_text()までの意図的な抜粋で、完全な関数定義ではない",
           "block_id": "B-09-001",
           "target_file": "scripts/ch09/traceback_demo.py"
         }
@@ -7129,7 +7127,7 @@
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
       "line_start": 85,
-      "line_end": 93,
+      "line_end": 95,
       "lang": "python",
       "heading": "tracebackを読む",
       "heading_path": [
@@ -7137,8 +7135,8 @@
         "9-1. デバッグの心構え",
         "tracebackを読む"
       ],
-      "sha256": "4dc559ce8bb1c5cbad2322c2dc83a63356ff22dde336867975d109c373d49dca",
-      "nonempty_lines": 7,
+      "sha256": "5707596569d936e7ab7fef29e6c995a8b303c9cb9c8e760b3e4a571bc49e2ab3",
+      "nonempty_lines": 9,
       "category": "implementation",
       "placement": "required_scripts",
       "category_reason": "名前付き実装定義",
@@ -7146,9 +7144,9 @@
         {
           "target_file": "scripts/ch09/traceback_demo.py",
           "target_entity": "lookup_gene_annotation",
-          "equivalence": "E3",
+          "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "同章・同名だがAST差",
+          "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
           "target_file_id": "S-09-061",
@@ -7160,15 +7158,10 @@
               "line_start": 94,
               "line_end": 119
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-21T14:46:32+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E1",
       "tests": {
         "status": "passed",
         "files": [
@@ -7201,8 +7194,8 @@
       "id": "B-09-006",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 170,
-      "line_end": 175,
+      "line_start": 172,
+      "line_end": 177,
       "lang": "python",
       "heading": "print()デバッグの作法",
       "heading_path": [
@@ -7231,8 +7224,8 @@
       "id": "B-09-007",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 179,
-      "line_end": 200,
+      "line_start": 181,
+      "line_end": 202,
       "lang": "python",
       "heading": "print()デバッグの作法",
       "heading_path": [
@@ -7283,8 +7276,8 @@
       "id": "B-09-008",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 208,
-      "line_end": 220,
+      "line_start": 212,
+      "line_end": 224,
       "lang": "python",
       "heading": "pdb / breakpoint() / ipdb",
       "heading_path": [
@@ -7292,7 +7285,7 @@
         "9-2. デバッグツール",
         "pdb / breakpoint() / ipdb"
       ],
-      "sha256": "c9ae1d56429071c374ba9d7d64b771fd53424955b6523a9a2009826ad547d280",
+      "sha256": "560b45d34cac0812ec092b96438bb7bcff257cbeb5f345661c863979f7db4eaa",
       "nonempty_lines": 11,
       "category": "implementation",
       "placement": "required_scripts",
@@ -7300,36 +7293,31 @@
       "relations": [
         {
           "target_file": "scripts/ch09/pdb_demo.py",
-          "target_entity": "calculate_gc_stats",
-          "equivalence": "E3",
+          "target_entity": "calculate_gc_stats_debug",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "同章・同名だがAST差",
-          "verification": "AST/順序比較後に章・対象名を目視",
+          "evidence": "実体のGC比計算ループとbreakpoint呼び出しを連続して抜粋し、空入力処理と集計returnの省略を明示",
+          "verification": "breakpointをmonkeypatchし、通常入力では配列ごとの呼び出し、空入力では非呼び出しをpytestで検証",
           "cross_chapter": false,
           "target_file_id": "S-09-059",
           "target_entity_locations": [
             {
-              "id": "S-09-059-E001",
-              "name": "calculate_gc_stats",
+              "id": "S-09-059-E002",
+              "name": "calculate_gc_stats_debug",
               "kind": "FunctionDef",
-              "line_start": 4,
-              "line_end": 34
+              "line_start": 37,
+              "line_end": 68
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-21T14:46:32+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E2",
       "tests": {
         "status": "passed",
         "files": [
           "tests/ch09/test_pdb_demo.py"
         ],
-        "passed": 9,
+        "passed": 11,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -7337,7 +7325,7 @@
       "substitution_tests": [
         {
           "status": "not_run",
-          "reason": "本文定義が省略記号を含む: calculate_gc_stats",
+          "reason": "本文はGC比計算ループの意図的な抜粋で、完全な関数定義ではない",
           "block_id": "B-09-008",
           "target_file": "scripts/ch09/pdb_demo.py"
         }
@@ -7347,8 +7335,8 @@
       "id": "B-09-009",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 239,
-      "line_end": 250,
+      "line_start": 243,
+      "line_end": 254,
       "lang": "none",
       "heading": "pdb / breakpoint() / ipdb",
       "heading_path": [
@@ -7377,8 +7365,8 @@
       "id": "B-09-010",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 254,
-      "line_end": 259,
+      "line_start": 258,
+      "line_end": 263,
       "lang": "bash",
       "heading": "pdb / breakpoint() / ipdb",
       "heading_path": [
@@ -7407,8 +7395,8 @@
       "id": "B-09-011",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 263,
-      "line_end": 267,
+      "line_start": 267,
+      "line_end": 271,
       "lang": "bash",
       "heading": "pdb / breakpoint() / ipdb",
       "heading_path": [
@@ -7437,8 +7425,8 @@
       "id": "B-09-012",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 279,
-      "line_end": 289,
+      "line_start": 283,
+      "line_end": 293,
       "lang": "python",
       "heading": "warningsモジュール",
       "heading_path": [
@@ -7467,8 +7455,8 @@
       "id": "B-09-013",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 293,
-      "line_end": 299,
+      "line_start": 297,
+      "line_end": 303,
       "lang": "python",
       "heading": "warningsモジュール",
       "heading_path": [
@@ -7497,8 +7485,8 @@
       "id": "B-09-014",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 307,
-      "line_end": 321,
+      "line_start": 311,
+      "line_end": 325,
       "lang": "python",
       "heading": "デバッグ時のlogger活用",
       "heading_path": [
@@ -7527,8 +7515,8 @@
       "id": "B-09-015",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 323,
-      "line_end": 329,
+      "line_start": 327,
+      "line_end": 333,
       "lang": "bash",
       "heading": "デバッグ時のlogger活用",
       "heading_path": [
@@ -7557,8 +7545,8 @@
       "id": "B-09-016",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 333,
-      "line_end": 348,
+      "line_start": 337,
+      "line_end": 352,
       "lang": "python",
       "heading": "デバッグ時のlogger活用",
       "heading_path": [
@@ -7587,8 +7575,8 @@
       "id": "B-09-017",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 388,
-      "line_end": 401,
+      "line_start": 392,
+      "line_end": 405,
       "lang": "python",
       "heading": "Off-by-one: 0-based vs 1-based",
       "heading_path": [
@@ -7617,8 +7605,8 @@
       "id": "B-09-018",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 405,
-      "line_end": 418,
+      "line_start": 409,
+      "line_end": 441,
       "lang": "python",
       "heading": "Off-by-one: 0-based vs 1-based",
       "heading_path": [
@@ -7626,8 +7614,8 @@
         "9-3. よくあるバグのパターン",
         "Off-by-one: 0-based vs 1-based"
       ],
-      "sha256": "d21b2926d0b93e2973b354f8f56bffa46ab425f4897aed39444b29893ee9420a",
-      "nonempty_lines": 12,
+      "sha256": "e88bbcb2ddffcc70de0fe3d68c749edf6dbfcc13de06640222e599ebee36aef7",
+      "nonempty_lines": 31,
       "category": "implementation",
       "placement": "required_scripts",
       "category_reason": "名前付き実装定義",
@@ -7635,10 +7623,10 @@
         {
           "target_file": "scripts/ch09/coordinate_bugs.py",
           "target_entity": "validate_coordinates",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "同章・同名だがAST差",
-          "verification": "AST/順序比較後に章・対象名を目視",
+          "evidence": "BED・GFF・不明形式の検証分岐を実体どおり抜粋し、正常時のreturn Trueだけを省略すると明示",
+          "verification": "両座標系の境界、start > end、配列長超過、不明形式をpytestで検証",
           "cross_chapter": false,
           "target_file_id": "S-09-055",
           "target_entity_locations": [
@@ -7649,15 +7637,10 @@
               "line_start": 132,
               "line_end": 184
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-21T14:46:32+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E2",
       "tests": {
         "status": "passed",
         "files": [
@@ -7671,7 +7654,7 @@
       "substitution_tests": [
         {
           "status": "not_run",
-          "reason": "本文定義が省略記号を含む: validate_coordinates",
+          "reason": "本文は検証分岐の意図的な抜粋で、完全な関数定義ではない",
           "block_id": "B-09-018",
           "target_file": "scripts/ch09/coordinate_bugs.py"
         }
@@ -7681,8 +7664,8 @@
       "id": "B-09-019",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 440,
-      "line_end": 453,
+      "line_start": 463,
+      "line_end": 476,
       "lang": "python",
       "heading": "パス関連のバグ",
       "heading_path": [
@@ -7711,8 +7694,8 @@
       "id": "B-09-020",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 457,
-      "line_end": 467,
+      "line_start": 480,
+      "line_end": 491,
       "lang": "python",
       "heading": "パス関連のバグ",
       "heading_path": [
@@ -7720,8 +7703,8 @@
         "9-3. よくあるバグのパターン",
         "パス関連のバグ"
       ],
-      "sha256": "e41c22f79d3f2c4f7243b2a6e65472403c6b7199a853cc871a1a58944458e106",
-      "nonempty_lines": 8,
+      "sha256": "a296f89a37b615ecaeed6280aa4ed2d7ec467760516bc7d3201f697938710233",
+      "nonempty_lines": 9,
       "category": "implementation",
       "placement": "required_scripts",
       "category_reason": "名前付き実装定義",
@@ -7729,9 +7712,9 @@
         {
           "target_file": "scripts/ch09/path_bugs.py",
           "target_entity": "resolve_data_path",
-          "equivalence": "E3",
+          "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "同章・同名だがAST差",
+          "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
           "target_file_id": "S-09-058",
@@ -7743,15 +7726,10 @@
               "line_start": 49,
               "line_end": 73
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-21T14:46:32+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E1",
       "tests": {
         "status": "passed",
         "files": [
@@ -7784,8 +7762,8 @@
       "id": "B-09-021",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 473,
-      "line_end": 475,
+      "line_start": 497,
+      "line_end": 499,
       "lang": "none",
       "heading": "エンコーディングの問題",
       "heading_path": [
@@ -7814,8 +7792,8 @@
       "id": "B-09-022",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 487,
-      "line_end": 491,
+      "line_start": 511,
+      "line_end": 515,
       "lang": "bash",
       "heading": "エンコーディングの問題",
       "heading_path": [
@@ -7844,8 +7822,8 @@
       "id": "B-09-023",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 497,
-      "line_end": 512,
+      "line_start": 521,
+      "line_end": 536,
       "lang": "python",
       "heading": "型の不一致",
       "heading_path": [
@@ -7874,8 +7852,8 @@
       "id": "B-09-024",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 516,
-      "line_end": 526,
+      "line_start": 540,
+      "line_end": 550,
       "lang": "python",
       "heading": "型の不一致",
       "heading_path": [
@@ -7926,8 +7904,8 @@
       "id": "B-09-025",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 576,
-      "line_end": 585,
+      "line_start": 600,
+      "line_end": 609,
       "lang": "python",
       "heading": "並列処理のバグ",
       "heading_path": [
@@ -7956,8 +7934,8 @@
       "id": "B-09-026",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 609,
-      "line_end": 621,
+      "line_start": 633,
+      "line_end": 645,
       "lang": "python",
       "heading": "Python固有の落とし穴",
       "heading_path": [
@@ -8008,8 +7986,8 @@
       "id": "B-09-027",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 625,
-      "line_end": 634,
+      "line_start": 649,
+      "line_end": 658,
       "lang": "python",
       "heading": "Python固有の落とし穴",
       "heading_path": [
@@ -8060,8 +8038,8 @@
       "id": "B-09-028",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 638,
-      "line_end": 651,
+      "line_start": 662,
+      "line_end": 675,
       "lang": "python",
       "heading": "Python固有の落とし穴",
       "heading_path": [
@@ -8090,8 +8068,8 @@
       "id": "B-09-029",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 655,
-      "line_end": 660,
+      "line_start": 679,
+      "line_end": 684,
       "lang": "python",
       "heading": "Python固有の落とし穴",
       "heading_path": [
@@ -8142,8 +8120,8 @@
       "id": "B-09-030",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 664,
-      "line_end": 674,
+      "line_start": 688,
+      "line_end": 698,
       "lang": "python",
       "heading": "Python固有の落とし穴",
       "heading_path": [
@@ -8194,8 +8172,8 @@
       "id": "B-09-031",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 678,
-      "line_end": 688,
+      "line_start": 702,
+      "line_end": 712,
       "lang": "python",
       "heading": "Python固有の落とし穴",
       "heading_path": [
@@ -8246,8 +8224,8 @@
       "id": "B-09-032",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 731,
-      "line_end": 736,
+      "line_start": 755,
+      "line_end": 760,
       "lang": "none",
       "heading": "演習 9-1: traceback の読解 **[概念]**",
       "heading_path": [
@@ -8276,8 +8254,8 @@
       "id": "B-09-033",
       "chapter": "ch09",
       "path": "chapters/09_debug.md",
-      "line_start": 760,
-      "line_end": 763,
+      "line_start": 784,
+      "line_end": 787,
       "lang": "python",
       "heading": "演習 9-3: 座標変換の検証 **[レビュー]**",
       "heading_path": [
@@ -19863,14 +19841,19 @@
         {
           "test_file": "tests/ch01/test_gc_content.py",
           "evidence": "direct_import"
+        },
+        {
+          "test_file": "tests/ch08/test_gc_fixture.py",
+          "evidence": "direct_import"
         }
       ],
       "test_result": {
         "status": "passed",
         "files": [
-          "tests/ch01/test_gc_content.py"
+          "tests/ch01/test_gc_content.py",
+          "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 9,
+        "passed": 11,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -21162,7 +21145,7 @@
         "files": [
           "tests/ch08/test_reverse_complement.py"
         ],
-        "passed": 7,
+        "passed": 8,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -21192,7 +21175,7 @@
         "files": [
           "tests/ch08/test_seq_stats.py"
         ],
-        "passed": 11,
+        "passed": 12,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -21334,8 +21317,8 @@
       "id": "S-09-059",
       "path": "scripts/ch09/pdb_demo.py",
       "chapter": "ch09",
-      "sha256": "2f0692db5ed9a98d7204b7d1fdc023966761c59265efdd4bfedffe15c5d1ee03",
-      "line_count": 64,
+      "sha256": "2243a8caafff30cc71d5778a257db64ee6e9d677033194a2d9a2fd9319544ddb",
+      "line_count": 98,
       "role": "demo",
       "book_status": "body_correspondence",
       "body_block_ids": [
@@ -21354,7 +21337,7 @@
         "files": [
           "tests/ch09/test_pdb_demo.py"
         ],
-        "passed": 9,
+        "passed": 11,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -24528,7 +24511,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.319,
+        "duration_seconds": 0.33,
         "summary": "11 passed in 0.07s"
       }
     },
@@ -24547,8 +24530,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.443,
-        "summary": "9 passed in 0.26s"
+        "duration_seconds": 0.468,
+        "summary": "9 passed in 0.28s"
       }
     },
     {
@@ -24566,8 +24549,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.066,
-        "summary": "8 passed in 0.75s"
+        "duration_seconds": 1.115,
+        "summary": "8 passed in 0.81s"
       }
     },
     {
@@ -24588,9 +24571,7 @@
       "sha256": "c23106cc6a905e0f05a401183f53e9201c0816640e6540921eac2de8499fa656",
       "line_count": 52,
       "role": "pytest_file",
-      "body_block_ids": [
-        "B-08-007"
-      ],
+      "body_block_ids": [],
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
@@ -24598,7 +24579,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.199,
+        "duration_seconds": 0.219,
         "summary": "9 passed in 0.01s"
       }
     },
@@ -24617,7 +24598,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.206,
+        "duration_seconds": 0.213,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -24647,7 +24628,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.224,
+        "duration_seconds": 0.207,
         "summary": "12 passed in 0.02s"
       }
     },
@@ -24666,7 +24647,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.258,
+        "duration_seconds": 0.212,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -24685,7 +24666,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.189,
+        "duration_seconds": 0.205,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -24704,8 +24685,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.576,
-        "summary": "7 passed in 1.32s"
+        "duration_seconds": 1.676,
+        "summary": "7 passed in 1.42s"
       }
     },
     {
@@ -24723,7 +24704,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.211,
+        "duration_seconds": 0.222,
         "summary": "18 passed in 0.02s"
       }
     },
@@ -24753,7 +24734,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.202,
+        "duration_seconds": 0.201,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -24772,8 +24753,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.206,
-        "summary": "17 passed in 0.01s"
+        "duration_seconds": 0.381,
+        "summary": "17 passed in 0.02s"
       }
     },
     {
@@ -24791,8 +24772,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.293,
-        "summary": "12 passed in 0.08s"
+        "duration_seconds": 0.314,
+        "summary": "12 passed in 0.09s"
       }
     },
     {
@@ -24821,8 +24802,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.243,
-        "summary": "2 passed in 0.06s"
+        "duration_seconds": 0.216,
+        "summary": "2 passed in 0.02s"
       }
     },
     {
@@ -24840,7 +24821,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.19,
+        "duration_seconds": 0.195,
         "summary": "7 passed in 0.01s"
       }
     },
@@ -24859,7 +24840,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.21,
+        "duration_seconds": 0.219,
         "summary": "8 passed in 0.02s"
       }
     },
@@ -24878,7 +24859,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
+        "duration_seconds": 0.211,
         "summary": "13 passed in 0.01s"
       }
     },
@@ -24897,8 +24878,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.76,
-        "summary": "8 passed in 0.48s"
+        "duration_seconds": 0.912,
+        "summary": "8 passed in 0.62s"
       }
     },
     {
@@ -24916,7 +24897,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.223,
+        "duration_seconds": 0.215,
         "summary": "6 passed in 0.02s"
       }
     },
@@ -24946,8 +24927,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.366,
-        "summary": "21 passed in 0.15s"
+        "duration_seconds": 0.256,
+        "summary": "21 passed in 0.06s"
       }
     },
     {
@@ -24965,7 +24946,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.188,
+        "duration_seconds": 0.197,
         "summary": "10 passed in 0.01s"
       }
     },
@@ -24984,7 +24965,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.19,
+        "duration_seconds": 0.202,
         "summary": "6 passed in 0.01s"
       }
     },
@@ -25014,7 +24995,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.224,
+        "duration_seconds": 0.21,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -25033,7 +25014,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.206,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -25052,7 +25033,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.198,
+        "duration_seconds": 0.208,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -25071,7 +25052,7 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.202,
         "summary": "5 passed, 1 skipped in 0.02s"
       }
     },
@@ -25125,7 +25106,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.216,
+        "duration_seconds": 0.217,
         "summary": "7 passed in 0.03s"
       }
     },
@@ -25144,16 +25125,37 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
+        "duration_seconds": 0.212,
         "summary": "4 passed in 0.02s"
       }
     },
     {
       "id": "T-08-040",
+      "path": "tests/ch08/test_gc_fixture.py",
+      "chapter": "ch08",
+      "sha256": "818c1d27d515f634dac532a2c8162ecf51bb9034c109454234475289cdba5da8",
+      "line_count": 23,
+      "role": "pytest_file",
+      "body_block_ids": [
+        "B-08-007"
+      ],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.197,
+        "summary": "2 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-08-041",
       "path": "tests/ch08/test_reverse_complement.py",
       "chapter": "ch08",
-      "sha256": "9da992ff64a11b1c0788fa4eded51af0241e09e236b93c75f05f21a5fad6167c",
-      "line_count": 40,
+      "sha256": "3034808a2777309fc77eb1c7e759c4e6c77510be817f07781c43589e50643456",
+      "line_count": 47,
       "role": "pytest_file",
       "body_block_ids": [
         "B-08-001",
@@ -25164,20 +25166,20 @@
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
-        "passed": 7,
+        "passed": 8,
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.206,
-        "summary": "7 passed in 0.01s"
+        "duration_seconds": 0.209,
+        "summary": "8 passed in 0.01s"
       }
     },
     {
-      "id": "T-08-041",
+      "id": "T-08-042",
       "path": "tests/ch08/test_seq_stats.py",
       "chapter": "ch08",
-      "sha256": "02d3458640964dc0543491a5fffeb6f1e7e929d6384cbc9a374afcfafc004ba0",
-      "line_count": 90,
+      "sha256": "43bc8f567d789b29d2bc66e9f613179d3640c02afe3a511495e76154d19c2f28",
+      "line_count": 102,
       "role": "pytest_file",
       "body_block_ids": [
         "B-08-005",
@@ -25187,16 +25189,16 @@
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
-        "passed": 11,
+        "passed": 12,
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.408,
-        "summary": "11 passed in 0.19s"
+        "duration_seconds": 0.403,
+        "summary": "12 passed in 0.16s"
       }
     },
     {
-      "id": "T-08-042",
+      "id": "T-08-043",
       "path": "tests/ch08/test_shared_fixtures.py",
       "chapter": "ch08",
       "sha256": "cba2176a6809ea78c720d8b7e460ccaef5ac8386d13009748cff38b23082353c",
@@ -25210,12 +25212,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.329,
+        "duration_seconds": 0.312,
         "summary": "2 passed in 0.10s"
       }
     },
     {
-      "id": "T-09-043",
+      "id": "T-09-044",
       "path": "tests/ch09/__init__.py",
       "chapter": "ch09",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25226,7 +25228,7 @@
       "test_result": null
     },
     {
-      "id": "T-09-044",
+      "id": "T-09-045",
       "path": "tests/ch09/test_coordinate_bugs.py",
       "chapter": "ch09",
       "sha256": "5dd7b4ef87b29a2b2c88e9438c0cf2fdc29b63c4cbd253a29800654828c28166",
@@ -25240,12 +25242,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.209,
+        "duration_seconds": 0.204,
         "summary": "15 passed in 0.01s"
       }
     },
     {
-      "id": "T-09-045",
+      "id": "T-09-046",
       "path": "tests/ch09/test_debug_print_demo.py",
       "chapter": "ch09",
       "sha256": "7b28dd17097019aa2bd73bd16ddcea96671aa396c9347b2ec3f0950ca2349a17",
@@ -25259,12 +25261,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.195,
+        "duration_seconds": 0.22,
         "summary": "7 passed in 0.01s"
       }
     },
     {
-      "id": "T-09-046",
+      "id": "T-09-047",
       "path": "tests/ch09/test_path_bugs.py",
       "chapter": "ch09",
       "sha256": "5de685dc6e98c7c215a754e6b243d67796bd1a7973844b48b7a664906445caab",
@@ -25278,31 +25280,31 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
+        "duration_seconds": 0.206,
         "summary": "5 passed in 0.01s"
       }
     },
     {
-      "id": "T-09-047",
+      "id": "T-09-048",
       "path": "tests/ch09/test_pdb_demo.py",
       "chapter": "ch09",
-      "sha256": "c5d7c28b85944e8ece0ddc0a854478f2e31e5c694d6372a3f092d79bd56c1c56",
-      "line_count": 61,
+      "sha256": "168dd507266022109ebe9cce160dda78531e5aa6f3296ab8b37eb861ee4ad574",
+      "line_count": 99,
       "role": "pytest_file",
       "body_block_ids": [],
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
-        "passed": 9,
+        "passed": 11,
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.202,
-        "summary": "9 passed in 0.01s"
+        "duration_seconds": 0.208,
+        "summary": "11 passed in 0.01s"
       }
     },
     {
-      "id": "T-09-048",
+      "id": "T-09-049",
       "path": "tests/ch09/test_python_pitfalls.py",
       "chapter": "ch09",
       "sha256": "57f574610f65343158938d33f40a33186961df164b5431b6fabc9544a186011e",
@@ -25316,12 +25318,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.786,
-        "summary": "11 passed in 0.48s"
+        "duration_seconds": 0.591,
+        "summary": "11 passed in 0.31s"
       }
     },
     {
-      "id": "T-09-049",
+      "id": "T-09-050",
       "path": "tests/ch09/test_traceback_demo.py",
       "chapter": "ch09",
       "sha256": "9df95dfae657db3fe520bf9ca058668fc2589d59b14df890e4b398207d7daa45",
@@ -25335,12 +25337,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.247,
+        "duration_seconds": 0.215,
         "summary": "12 passed in 0.02s"
       }
     },
     {
-      "id": "T-09-050",
+      "id": "T-09-051",
       "path": "tests/ch09/test_type_bugs.py",
       "chapter": "ch09",
       "sha256": "fe61d28309b125d387dc070a3b335ca0ef151c3e1c04fd675aac70bbbd6bf78d",
@@ -25354,12 +25356,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.675,
-        "summary": "11 passed in 0.31s"
+        "duration_seconds": 0.575,
+        "summary": "11 passed in 0.29s"
       }
     },
     {
-      "id": "T-10-051",
+      "id": "T-10-052",
       "path": "tests/ch10/__init__.py",
       "chapter": "ch10",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25370,7 +25372,7 @@
       "test_result": null
     },
     {
-      "id": "T-10-052",
+      "id": "T-10-053",
       "path": "tests/ch10/test_config_example.py",
       "chapter": "ch10",
       "sha256": "5ddcf0d8255707dc63dd00d65906662bce76b51139b5f6e1f757b9ad230c893b",
@@ -25384,12 +25386,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.199,
+        "duration_seconds": 0.216,
         "summary": "5 passed in 0.02s"
       }
     },
     {
-      "id": "T-10-053",
+      "id": "T-10-054",
       "path": "tests/ch10/test_error_handling.py",
       "chapter": "ch10",
       "sha256": "ec5d4113cfcf81c13797752171783a48d6eca18bb3d3b7ab41dd67ac0382d76f",
@@ -25403,12 +25405,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.324,
+        "duration_seconds": 0.349,
         "summary": "15 passed in 0.11s"
       }
     },
     {
-      "id": "T-10-054",
+      "id": "T-10-055",
       "path": "tests/ch10/test_fail_fast_pipeline.py",
       "chapter": "ch10",
       "sha256": "d9516ec7f1035fa546dcfa03fad198222327e3fc756d809e697b4393c022d856",
@@ -25422,12 +25424,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.219,
+        "duration_seconds": 0.203,
         "summary": "3 passed in 0.01s"
       }
     },
     {
-      "id": "T-10-055",
+      "id": "T-10-056",
       "path": "tests/ch10/test_package_example.py",
       "chapter": "ch10",
       "sha256": "fdb9437069b125388badfd22ce2140ea54bef72d5e0a9f574f0f4327ed7ef3b7",
@@ -25441,12 +25443,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.229,
+        "duration_seconds": 0.24,
         "summary": "3 passed in 0.03s"
       }
     },
     {
-      "id": "T-11-056",
+      "id": "T-11-057",
       "path": "tests/ch11/__init__.py",
       "chapter": "ch11",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25457,7 +25459,7 @@
       "test_result": null
     },
     {
-      "id": "T-11-057",
+      "id": "T-11-058",
       "path": "tests/ch11/test_cli_argparse.py",
       "chapter": "ch11",
       "sha256": "c32105a64f23f30a0431fea85e192619cca3e7c00020e29e23e9ab8135a30a91",
@@ -25471,12 +25473,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.33,
+        "duration_seconds": 0.345,
         "summary": "7 passed in 0.11s"
       }
     },
     {
-      "id": "T-11-058",
+      "id": "T-11-059",
       "path": "tests/ch11/test_cli_click.py",
       "chapter": "ch11",
       "sha256": "eca5bb1afb5027065255d33021547e124a7f9bebd152f6dcb5f52a5b6f6699ad",
@@ -25490,12 +25492,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.351,
-        "summary": "9 passed in 0.12s"
+        "duration_seconds": 0.334,
+        "summary": "9 passed in 0.11s"
       }
     },
     {
-      "id": "T-11-059",
+      "id": "T-11-060",
       "path": "tests/ch11/test_logging_setup.py",
       "chapter": "ch11",
       "sha256": "ade0050b419f4ad6eeeda9ddf1a2b825da8fa9272ac39ada7326253d18b45ff4",
@@ -25514,7 +25516,7 @@
       }
     },
     {
-      "id": "T-11-060",
+      "id": "T-11-061",
       "path": "tests/ch11/test_seqtool.py",
       "chapter": "ch11",
       "sha256": "3657fb481b449bea3f8a0de88395bbc12121ee6f45a7d33d96507b69270e36e4",
@@ -25528,12 +25530,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.374,
-        "summary": "13 passed in 0.14s"
+        "duration_seconds": 0.396,
+        "summary": "13 passed in 0.13s"
       }
     },
     {
-      "id": "T-11-061",
+      "id": "T-11-062",
       "path": "tests/ch11/test_seqtool_streams.py",
       "chapter": "ch11",
       "sha256": "8cef5f49b8637973f46c96e16d3af05fce9954fa6091c984d32dafe24c0b0d06",
@@ -25547,12 +25549,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.323,
-        "summary": "3 passed in 0.11s"
+        "duration_seconds": 0.37,
+        "summary": "3 passed in 0.12s"
       }
     },
     {
-      "id": "T-12-062",
+      "id": "T-12-063",
       "path": "tests/ch12/__init__.py",
       "chapter": "ch12",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25563,7 +25565,7 @@
       "test_result": null
     },
     {
-      "id": "T-12-063",
+      "id": "T-12-064",
       "path": "tests/ch12/test_numpy_vectorize.py",
       "chapter": "ch12",
       "sha256": "2c5614c1017dac636d96ed2385fdbd7b008e91d65e6ee33b099a25053b388447",
@@ -25577,12 +25579,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.253,
+        "duration_seconds": 0.261,
         "summary": "13 passed in 0.05s"
       }
     },
     {
-      "id": "T-12-064",
+      "id": "T-12-065",
       "path": "tests/ch12/test_pandas_bio_ops.py",
       "chapter": "ch12",
       "sha256": "6e5db34b4203710539b33802b50c22036a467afcaa6e5f8e6a3d6d324e5cef1c",
@@ -25596,12 +25598,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.637,
-        "summary": "9 passed in 0.32s"
+        "duration_seconds": 0.627,
+        "summary": "9 passed in 0.33s"
       }
     },
     {
-      "id": "T-12-065",
+      "id": "T-12-066",
       "path": "tests/ch12/test_polars_bio_ops.py",
       "chapter": "ch12",
       "sha256": "263b8d4f4886002d86ed2fca6ba9e241190571d01c353cfcb6130aad78511ec5",
@@ -25615,12 +25617,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.426,
-        "summary": "10 passed in 0.18s"
+        "duration_seconds": 0.403,
+        "summary": "10 passed in 0.17s"
       }
     },
     {
-      "id": "T-12-066",
+      "id": "T-12-067",
       "path": "tests/ch12/test_scipy_stats_bio.py",
       "chapter": "ch12",
       "sha256": "90aaf980d73d8148acc71b1c0b8527a4b5b58f3c879ec8edadd84de36bde5924",
@@ -25634,12 +25636,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.045,
-        "summary": "19 passed in 0.75s"
+        "duration_seconds": 1.192,
+        "summary": "19 passed in 0.90s"
       }
     },
     {
-      "id": "T-13-067",
+      "id": "T-13-068",
       "path": "tests/ch13/__init__.py",
       "chapter": "ch13",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25650,7 +25652,7 @@
       "test_result": null
     },
     {
-      "id": "T-13-068",
+      "id": "T-13-069",
       "path": "tests/ch13/test_bio_plots.py",
       "chapter": "ch13",
       "sha256": "f4ae06e14f08f68cc77acb19dd1f6ee343f75bc854afc368534a538d00be8d5e",
@@ -25664,12 +25666,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 2.204,
-        "summary": "10 passed in 1.67s"
+        "duration_seconds": 2.194,
+        "summary": "10 passed in 1.66s"
       }
     },
     {
-      "id": "T-13-069",
+      "id": "T-13-070",
       "path": "tests/ch13/test_matplotlib_bindist.py",
       "chapter": "ch13",
       "sha256": "51cacb86ea71aa52bdf70f1244b11bdfbdcdf0ac1ea512e36efbcf84cfbc0d9e",
@@ -25683,12 +25685,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.679,
-        "summary": "6 passed in 0.39s"
+        "duration_seconds": 0.682,
+        "summary": "6 passed in 0.37s"
       }
     },
     {
-      "id": "T-13-070",
+      "id": "T-13-071",
       "path": "tests/ch13/test_plot_config.py",
       "chapter": "ch13",
       "sha256": "be20ab942be064bfefcab89397b1d242f6a5881b0a30bd081b4ef253ad2b3e43",
@@ -25702,12 +25704,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.485,
-        "summary": "1 passed in 0.22s"
+        "duration_seconds": 0.507,
+        "summary": "1 passed in 0.23s"
       }
     },
     {
-      "id": "T-13-071",
+      "id": "T-13-072",
       "path": "tests/ch13/test_seaborn_biodist.py",
       "chapter": "ch13",
       "sha256": "6b57388f9d8adf8ae59f1a59829a7552b2acdb744aa2780d23b60cb95853308d",
@@ -25721,15 +25723,548 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.873,
-        "summary": "5 passed in 1.33s"
+        "duration_seconds": 1.811,
+        "summary": "5 passed in 1.30s"
       }
     },
     {
-      "id": "T-13-072",
+      "id": "T-13-073",
       "path": "tests/ch13/test_tracks_config.py",
       "chapter": "ch13",
       "sha256": "210c4df55523e71b2044c63b8f05cca3b7332e397b4389e5e1644f286cbfd473",
+      "line_count": 24,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.217,
+        "summary": "1 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-14-074",
+      "path": "tests/ch14/__init__.py",
+      "chapter": "ch14",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "line_count": 1,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-14-075",
+      "path": "tests/ch14/test_validate_workflow.py",
+      "chapter": "ch14",
+      "sha256": "f32389d6a201b207ed8a07f3277f5bff55702a685fd8234060a715ab8c75c57f",
+      "line_count": 218,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.214,
+        "summary": "14 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-14-076",
+      "path": "tests/ch14/test_workflow_assets.py",
+      "chapter": "ch14",
+      "sha256": "a70b39987e194e80834eab41e7cf3db80e0430978d1e8df300794b13230daf50",
+      "line_count": 398,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 4,
+        "errors": 0,
+        "duration_seconds": 0.801,
+        "summary": "6 passed, 4 skipped in 0.61s"
+      }
+    },
+    {
+      "id": "T-15-077",
+      "path": "tests/ch15/__init__.py",
+      "chapter": "ch15",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "line_count": 1,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-15-078",
+      "path": "tests/ch15/test_container_examples.py",
+      "chapter": "ch15",
+      "sha256": "5e4b5a85e192df4d41ec46bad148cbe19b33bcd87c117f380b25adab575b1c63",
+      "line_count": 218,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 8,
+        "failed": 0,
+        "skipped": 5,
+        "errors": 0,
+        "duration_seconds": 0.251,
+        "summary": "8 passed, 5 skipped in 0.08s"
+      }
+    },
+    {
+      "id": "T-15-079",
+      "path": "tests/ch15/test_experiment_logger.py",
+      "chapter": "ch15",
+      "sha256": "435ea0645e05cd90dd3adf0268df5fc77b3102a9de2117a92ee6a1ada809fd89",
+      "line_count": 176,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 17,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.348,
+        "summary": "17 passed in 0.17s"
+      }
+    },
+    {
+      "id": "T-15-080",
+      "path": "tests/ch15/test_validate_dockerfile.py",
+      "chapter": "ch15",
+      "sha256": "19d298392b9ba3c7c89de4016b5e43fc3fb629f9475d2bd0ca3015adbe296237",
+      "line_count": 267,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 22,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.222,
+        "summary": "22 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-16-081",
+      "path": "tests/ch16/__init__.py",
+      "chapter": "ch16",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "line_count": 1,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-16-082",
+      "path": "tests/ch16/test_validate_slurm.py",
+      "chapter": "ch16",
+      "sha256": "719acf9e86f94d9e7ce16f72fa577dbc7410b4cd1df15453e218a5dd1c9e01f9",
+      "line_count": 369,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 31,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.234,
+        "summary": "31 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-17-083",
+      "path": "tests/ch17/__init__.py",
+      "chapter": "ch17",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "line_count": 0,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-17-084",
+      "path": "tests/ch17/test_chunk_processing.py",
+      "chapter": "ch17",
+      "sha256": "a85d8a86d620fa067d45dfed19c550af020f7e5385183f8e94d9d4096b824505",
+      "line_count": 82,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.662,
+        "summary": "4 passed in 0.35s"
+      }
+    },
+    {
+      "id": "T-17-085",
+      "path": "tests/ch17/test_file_format_bench.py",
+      "chapter": "ch17",
+      "sha256": "52830708c8224bd60a0d6a30046e1a841b535e797675e6c9281efa7a69b1ebb0",
+      "line_count": 89,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.724,
+        "summary": "6 passed in 0.42s"
+      }
+    },
+    {
+      "id": "T-17-086",
+      "path": "tests/ch17/test_generator_fastq.py",
+      "chapter": "ch17",
+      "sha256": "fe44b5bfc83b8c1c3d45e839396571c543d3cbbc0eac69578108cee6d0f8be1d",
+      "line_count": 109,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.346,
+        "summary": "7 passed in 0.12s"
+      }
+    },
+    {
+      "id": "T-17-087",
+      "path": "tests/ch17/test_memory_target.py",
+      "chapter": "ch17",
+      "sha256": "1cbc5a909ebda341b588c68fe1d41e658a59e1121735fd7638e7ee7fd0aff757",
+      "line_count": 13,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.272,
+        "summary": "1 passed in 0.06s"
+      }
+    },
+    {
+      "id": "T-17-088",
+      "path": "tests/ch17/test_parallel_gc.py",
+      "chapter": "ch17",
+      "sha256": "b62b728ea0b5810684279e855c4277066d308c5225464b9a8545ea1d7dea660e",
+      "line_count": 73,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.564,
+        "summary": "9 passed in 0.37s"
+      }
+    },
+    {
+      "id": "T-17-089",
+      "path": "tests/ch17/test_profiling_demo.py",
+      "chapter": "ch17",
+      "sha256": "a12ab057044e188df01b8ff8d85bde238b60922e2c51229c1de2448e5f4bab23",
+      "line_count": 71,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.294,
+        "summary": "6 passed in 0.07s"
+      }
+    },
+    {
+      "id": "T-17-090",
+      "path": "tests/ch17/test_streaming_fasta.py",
+      "chapter": "ch17",
+      "sha256": "8f2483150abd88ff0e4783a38eeb7c75e22c6f17aeb56031a5eace124ff9d52b",
+      "line_count": 22,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.317,
+        "summary": "2 passed in 0.10s"
+      }
+    },
+    {
+      "id": "T-18-091",
+      "path": "tests/ch18/__init__.py",
+      "chapter": "ch18",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "line_count": 1,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-18-092",
+      "path": "tests/ch18/test_docstring_checker.py",
+      "chapter": "ch18",
+      "sha256": "c1323857cede34fbf472d317558fbfc1fc7ab102d010539b6cd417077d92e189",
+      "line_count": 164,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.203,
+        "summary": "11 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-18-093",
+      "path": "tests/ch18/test_mermaid_helper.py",
+      "chapter": "ch18",
+      "sha256": "40eb9806b96c8dbb9a4ada88864f9649bac983c1bc826040dd01a9dfe4199524",
+      "line_count": 210,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.207,
+        "summary": "19 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-18-094",
+      "path": "tests/ch18/test_mkdocs_example.py",
+      "chapter": "ch18",
+      "sha256": "4cb8fe51265d125694df782e8390580cedc0c28825cec343a0a1786cbbf16037",
+      "line_count": 88,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 1,
+        "errors": 0,
+        "duration_seconds": 0.228,
+        "summary": "3 passed, 1 skipped in 0.02s"
+      }
+    },
+    {
+      "id": "T-18-095",
+      "path": "tests/ch18/test_validate_readme.py",
+      "chapter": "ch18",
+      "sha256": "91f92663b0370d349c2ec6d7254f34a53bae0d9f1cacfabdfe5bc8c08d3748f9",
+      "line_count": 257,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 18,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.201,
+        "summary": "18 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-19-096",
+      "path": "tests/ch19/__init__.py",
+      "chapter": "ch19",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "line_count": 1,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-19-097",
+      "path": "tests/ch19/test_checksum_verify.py",
+      "chapter": "ch19",
+      "sha256": "97dfdfad80a7506f440231e1b6ef5c42a26958a3a140a67e9b2746d5181a4f27",
+      "line_count": 153,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 13,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.225,
+        "summary": "13 passed in 0.03s"
+      }
+    },
+    {
+      "id": "T-19-098",
+      "path": "tests/ch19/test_entrez_fetch.py",
+      "chapter": "ch19",
+      "sha256": "9cf8a75da3c2cdfaf93165cf2256e82e70b34567b0521dce063d868848b4362d",
+      "line_count": 164,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.351,
+        "summary": "9 passed in 0.12s"
+      }
+    },
+    {
+      "id": "T-19-099",
+      "path": "tests/ch19/test_local_db.py",
+      "chapter": "ch19",
+      "sha256": "53730dc4aae9e45ef5f3066e3fbf4793887a85f68be32370340e81d03a0f76f5",
+      "line_count": 186,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 13,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.227,
+        "summary": "13 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-19-100",
+      "path": "tests/ch19/test_parse_flatfile.py",
+      "chapter": "ch19",
+      "sha256": "21455de745157da3199d517f05a86dee4435ff139f72820d3c69c71d27d10950",
+      "line_count": 188,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.36,
+        "summary": "12 passed in 0.11s"
+      }
+    },
+    {
+      "id": "T-19-101",
+      "path": "tests/ch19/test_sparql_query.py",
+      "chapter": "ch19",
+      "sha256": "231c5fded2390105bc0c79f3c527c0236fd0963f1ff36cad39f37039cfa5f7f2",
+      "line_count": 163,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.293,
+        "summary": "9 passed in 0.08s"
+      }
+    },
+    {
+      "id": "T-20-102",
+      "path": "tests/ch20/__init__.py",
+      "chapter": "ch20",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "line_count": 1,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
+      "id": "T-20-103",
+      "path": "tests/ch20/test_anonymize_metadata.py",
+      "chapter": "ch20",
+      "sha256": "25327b19a1106c912184f6b6977125f41b01b8f552c0a33657c2fee045c5f02e",
+      "line_count": 279,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 25,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.207,
+        "summary": "25 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-20-104",
+      "path": "tests/ch20/test_env_example.py",
+      "chapter": "ch20",
+      "sha256": "1cd385301e12f55d1d36cb96487087e72b678fd4943bd9c2428c823e3f30854e",
       "line_count": 24,
       "role": "pytest_file",
       "body_block_ids": [],
@@ -25745,540 +26280,7 @@
       }
     },
     {
-      "id": "T-14-073",
-      "path": "tests/ch14/__init__.py",
-      "chapter": "ch14",
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-      "line_count": 1,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-14-074",
-      "path": "tests/ch14/test_validate_workflow.py",
-      "chapter": "ch14",
-      "sha256": "f32389d6a201b207ed8a07f3277f5bff55702a685fd8234060a715ab8c75c57f",
-      "line_count": 218,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 14,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.203,
-        "summary": "14 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-14-075",
-      "path": "tests/ch14/test_workflow_assets.py",
-      "chapter": "ch14",
-      "sha256": "a70b39987e194e80834eab41e7cf3db80e0430978d1e8df300794b13230daf50",
-      "line_count": 398,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 6,
-        "failed": 0,
-        "skipped": 4,
-        "errors": 0,
-        "duration_seconds": 0.673,
-        "summary": "6 passed, 4 skipped in 0.49s"
-      }
-    },
-    {
-      "id": "T-15-076",
-      "path": "tests/ch15/__init__.py",
-      "chapter": "ch15",
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-      "line_count": 1,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-15-077",
-      "path": "tests/ch15/test_container_examples.py",
-      "chapter": "ch15",
-      "sha256": "5e4b5a85e192df4d41ec46bad148cbe19b33bcd87c117f380b25adab575b1c63",
-      "line_count": 218,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 8,
-        "failed": 0,
-        "skipped": 5,
-        "errors": 0,
-        "duration_seconds": 0.266,
-        "summary": "8 passed, 5 skipped in 0.08s"
-      }
-    },
-    {
-      "id": "T-15-078",
-      "path": "tests/ch15/test_experiment_logger.py",
-      "chapter": "ch15",
-      "sha256": "435ea0645e05cd90dd3adf0268df5fc77b3102a9de2117a92ee6a1ada809fd89",
-      "line_count": 176,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 17,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.339,
-        "summary": "17 passed in 0.15s"
-      }
-    },
-    {
-      "id": "T-15-079",
-      "path": "tests/ch15/test_validate_dockerfile.py",
-      "chapter": "ch15",
-      "sha256": "19d298392b9ba3c7c89de4016b5e43fc3fb629f9475d2bd0ca3015adbe296237",
-      "line_count": 267,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 22,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.205,
-        "summary": "22 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-16-080",
-      "path": "tests/ch16/__init__.py",
-      "chapter": "ch16",
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-      "line_count": 1,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-16-081",
-      "path": "tests/ch16/test_validate_slurm.py",
-      "chapter": "ch16",
-      "sha256": "719acf9e86f94d9e7ce16f72fa577dbc7410b4cd1df15453e218a5dd1c9e01f9",
-      "line_count": 369,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 31,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.195,
-        "summary": "31 passed in 0.02s"
-      }
-    },
-    {
-      "id": "T-17-082",
-      "path": "tests/ch17/__init__.py",
-      "chapter": "ch17",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "line_count": 0,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-17-083",
-      "path": "tests/ch17/test_chunk_processing.py",
-      "chapter": "ch17",
-      "sha256": "a85d8a86d620fa067d45dfed19c550af020f7e5385183f8e94d9d4096b824505",
-      "line_count": 82,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 4,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.609,
-        "summary": "4 passed in 0.33s"
-      }
-    },
-    {
-      "id": "T-17-084",
-      "path": "tests/ch17/test_file_format_bench.py",
-      "chapter": "ch17",
-      "sha256": "52830708c8224bd60a0d6a30046e1a841b535e797675e6c9281efa7a69b1ebb0",
-      "line_count": 89,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 6,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.783,
-        "summary": "6 passed in 0.47s"
-      }
-    },
-    {
-      "id": "T-17-085",
-      "path": "tests/ch17/test_generator_fastq.py",
-      "chapter": "ch17",
-      "sha256": "fe44b5bfc83b8c1c3d45e839396571c543d3cbbc0eac69578108cee6d0f8be1d",
-      "line_count": 109,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 7,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.338,
-        "summary": "7 passed in 0.12s"
-      }
-    },
-    {
-      "id": "T-17-086",
-      "path": "tests/ch17/test_memory_target.py",
-      "chapter": "ch17",
-      "sha256": "1cbc5a909ebda341b588c68fe1d41e658a59e1121735fd7638e7ee7fd0aff757",
-      "line_count": 13,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 1,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.256,
-        "summary": "1 passed in 0.06s"
-      }
-    },
-    {
-      "id": "T-17-087",
-      "path": "tests/ch17/test_parallel_gc.py",
-      "chapter": "ch17",
-      "sha256": "b62b728ea0b5810684279e855c4277066d308c5225464b9a8545ea1d7dea660e",
-      "line_count": 73,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 9,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.518,
-        "summary": "9 passed in 0.35s"
-      }
-    },
-    {
-      "id": "T-17-088",
-      "path": "tests/ch17/test_profiling_demo.py",
-      "chapter": "ch17",
-      "sha256": "a12ab057044e188df01b8ff8d85bde238b60922e2c51229c1de2448e5f4bab23",
-      "line_count": 71,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 6,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.275,
-        "summary": "6 passed in 0.06s"
-      }
-    },
-    {
-      "id": "T-17-089",
-      "path": "tests/ch17/test_streaming_fasta.py",
-      "chapter": "ch17",
-      "sha256": "8f2483150abd88ff0e4783a38eeb7c75e22c6f17aeb56031a5eace124ff9d52b",
-      "line_count": 22,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 2,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.336,
-        "summary": "2 passed in 0.12s"
-      }
-    },
-    {
-      "id": "T-18-090",
-      "path": "tests/ch18/__init__.py",
-      "chapter": "ch18",
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-      "line_count": 1,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-18-091",
-      "path": "tests/ch18/test_docstring_checker.py",
-      "chapter": "ch18",
-      "sha256": "c1323857cede34fbf472d317558fbfc1fc7ab102d010539b6cd417077d92e189",
-      "line_count": 164,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 11,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.204,
-        "summary": "11 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-18-092",
-      "path": "tests/ch18/test_mermaid_helper.py",
-      "chapter": "ch18",
-      "sha256": "40eb9806b96c8dbb9a4ada88864f9649bac983c1bc826040dd01a9dfe4199524",
-      "line_count": 210,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 19,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.207,
-        "summary": "19 passed in 0.02s"
-      }
-    },
-    {
-      "id": "T-18-093",
-      "path": "tests/ch18/test_mkdocs_example.py",
-      "chapter": "ch18",
-      "sha256": "4cb8fe51265d125694df782e8390580cedc0c28825cec343a0a1786cbbf16037",
-      "line_count": 88,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 3,
-        "failed": 0,
-        "skipped": 1,
-        "errors": 0,
-        "duration_seconds": 0.184,
-        "summary": "3 passed, 1 skipped in 0.02s"
-      }
-    },
-    {
-      "id": "T-18-094",
-      "path": "tests/ch18/test_validate_readme.py",
-      "chapter": "ch18",
-      "sha256": "91f92663b0370d349c2ec6d7254f34a53bae0d9f1cacfabdfe5bc8c08d3748f9",
-      "line_count": 257,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 18,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.192,
-        "summary": "18 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-19-095",
-      "path": "tests/ch19/__init__.py",
-      "chapter": "ch19",
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-      "line_count": 1,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-19-096",
-      "path": "tests/ch19/test_checksum_verify.py",
-      "chapter": "ch19",
-      "sha256": "97dfdfad80a7506f440231e1b6ef5c42a26958a3a140a67e9b2746d5181a4f27",
-      "line_count": 153,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 13,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.213,
-        "summary": "13 passed in 0.02s"
-      }
-    },
-    {
-      "id": "T-19-097",
-      "path": "tests/ch19/test_entrez_fetch.py",
-      "chapter": "ch19",
-      "sha256": "9cf8a75da3c2cdfaf93165cf2256e82e70b34567b0521dce063d868848b4362d",
-      "line_count": 164,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 9,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.333,
-        "summary": "9 passed in 0.11s"
-      }
-    },
-    {
-      "id": "T-19-098",
-      "path": "tests/ch19/test_local_db.py",
-      "chapter": "ch19",
-      "sha256": "53730dc4aae9e45ef5f3066e3fbf4793887a85f68be32370340e81d03a0f76f5",
-      "line_count": 186,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 13,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.204,
-        "summary": "13 passed in 0.02s"
-      }
-    },
-    {
-      "id": "T-19-099",
-      "path": "tests/ch19/test_parse_flatfile.py",
-      "chapter": "ch19",
-      "sha256": "21455de745157da3199d517f05a86dee4435ff139f72820d3c69c71d27d10950",
-      "line_count": 188,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 12,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.331,
-        "summary": "12 passed in 0.11s"
-      }
-    },
-    {
-      "id": "T-19-100",
-      "path": "tests/ch19/test_sparql_query.py",
-      "chapter": "ch19",
-      "sha256": "231c5fded2390105bc0c79f3c527c0236fd0963f1ff36cad39f37039cfa5f7f2",
-      "line_count": 163,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 9,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.283,
-        "summary": "9 passed in 0.08s"
-      }
-    },
-    {
-      "id": "T-20-101",
-      "path": "tests/ch20/__init__.py",
-      "chapter": "ch20",
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
-      "line_count": 1,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-20-102",
-      "path": "tests/ch20/test_anonymize_metadata.py",
-      "chapter": "ch20",
-      "sha256": "25327b19a1106c912184f6b6977125f41b01b8f552c0a33657c2fee045c5f02e",
-      "line_count": 279,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 25,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.216,
-        "summary": "25 passed in 0.02s"
-      }
-    },
-    {
-      "id": "T-20-103",
-      "path": "tests/ch20/test_env_example.py",
-      "chapter": "ch20",
-      "sha256": "1cd385301e12f55d1d36cb96487087e72b678fd4943bd9c2428c823e3f30854e",
-      "line_count": 24,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 1,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.184,
-        "summary": "1 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-20-104",
+      "id": "T-20-105",
       "path": "tests/ch20/test_secret_scanner.py",
       "chapter": "ch20",
       "sha256": "5f25b25c346367882081d9adce5ac5086b3f7210820d6723fd43f4f313e3911a",
@@ -26292,12 +26294,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.22,
+        "duration_seconds": 0.212,
         "summary": "21 passed in 0.02s"
       }
     },
     {
-      "id": "T-21-105",
+      "id": "T-21-106",
       "path": "tests/ch21/__init__.py",
       "chapter": "ch21",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -26308,7 +26310,7 @@
       "test_result": null
     },
     {
-      "id": "T-21-106",
+      "id": "T-21-107",
       "path": "tests/ch21/test_analysis_intake.py",
       "chapter": "ch21",
       "sha256": "5416be9c77b9962599c0a36835cd4020f0ffea4bdd1347c0ec925b818ac28cb5",
@@ -26322,12 +26324,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.192,
+        "duration_seconds": 0.207,
         "summary": "11 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-107",
+      "id": "T-21-108",
       "path": "tests/ch21/test_bioconda_recipe.py",
       "chapter": "ch21",
       "sha256": "bbd60b9c32da9265df2f6003e8aafd3ec78123a81d2159c808c298afe7b78fa7",
@@ -26341,12 +26343,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.205,
+        "duration_seconds": 0.21,
         "summary": "1 passed in 0.02s"
       }
     },
     {
-      "id": "T-21-108",
+      "id": "T-21-109",
       "path": "tests/ch21/test_check_urls_browser.py",
       "chapter": "ch21",
       "sha256": "4dbeca3637e27a8aa6d5a98ba5ff62296b7732699619a43f4b1c1406d1a82df5",
@@ -26360,12 +26362,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.19,
+        "duration_seconds": 0.226,
         "summary": "10 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-109",
+      "id": "T-21-110",
       "path": "tests/ch21/test_format_question.py",
       "chapter": "ch21",
       "sha256": "7621c45f86cd28928da8e1f2b36a13ae78de6e54487e133a081773be355d5c51",
@@ -26379,12 +26381,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.19,
+        "duration_seconds": 0.236,
         "summary": "5 passed in 0.02s"
       }
     },
     {
-      "id": "T-21-110",
+      "id": "T-21-111",
       "path": "tests/ch21/test_progress_report.py",
       "chapter": "ch21",
       "sha256": "d879e5761c0988910b9a435076ac3edf4cff0374a72ea010b5a70aa9225282fc",
@@ -26398,12 +26400,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.19,
+        "duration_seconds": 0.196,
         "summary": "8 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-111",
+      "id": "T-21-112",
       "path": "tests/ch21/test_reference_url_preference.py",
       "chapter": "ch21",
       "sha256": "d8b6233878ab7ed016ef5eda4abdc8a89d894f308e22b474fe5759007a704ae1",
@@ -26417,12 +26419,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.232,
+        "duration_seconds": 0.228,
         "summary": "13 passed in 0.04s"
       }
     },
     {
-      "id": "T-21-112",
+      "id": "T-21-113",
       "path": "tests/ch21/test_review_helper.py",
       "chapter": "ch21",
       "sha256": "feab14b15477a8664fd557e1767070634605f0090def46948a7f8ff7ac080716",
@@ -26436,7 +26438,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.206,
         "summary": "9 passed in 0.01s"
       }
     }
@@ -26448,7 +26450,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.319,
+      "duration_seconds": 0.33,
       "summary": "11 passed in 0.07s"
     },
     "tests/ch00/test_hmm_gene_predict.py": {
@@ -26457,8 +26459,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.443,
-      "summary": "9 passed in 0.26s"
+      "duration_seconds": 0.468,
+      "summary": "9 passed in 0.28s"
     },
     "tests/ch00/test_plot_orfs.py": {
       "returncode": 0,
@@ -26466,8 +26468,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.066,
-      "summary": "8 passed in 0.75s"
+      "duration_seconds": 1.115,
+      "summary": "8 passed in 0.81s"
     },
     "tests/ch01/test_gc_content.py": {
       "returncode": 0,
@@ -26475,7 +26477,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.199,
+      "duration_seconds": 0.219,
       "summary": "9 passed in 0.01s"
     },
     "tests/ch01/test_seq_filter.py": {
@@ -26484,7 +26486,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.206,
+      "duration_seconds": 0.213,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_env_check.py": {
@@ -26493,7 +26495,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.224,
+      "duration_seconds": 0.207,
       "summary": "12 passed in 0.02s"
     },
     "tests/ch02/test_fastq_gzip.py": {
@@ -26502,7 +26504,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.258,
+      "duration_seconds": 0.212,
       "summary": "11 passed in 0.02s"
     },
     "tests/ch02/test_regex_basics.py": {
@@ -26511,7 +26513,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.189,
+      "duration_seconds": 0.205,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_shell_scripts.py": {
@@ -26520,8 +26522,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.576,
-      "summary": "7 passed in 1.32s"
+      "duration_seconds": 1.676,
+      "summary": "7 passed in 1.42s"
     },
     "tests/ch02/test_text_processing.py": {
       "returncode": 0,
@@ -26529,7 +26531,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.211,
+      "duration_seconds": 0.222,
       "summary": "18 passed in 0.02s"
     },
     "tests/ch03/test_data_structure_bench.py": {
@@ -26538,7 +26540,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.202,
+      "duration_seconds": 0.201,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch03/test_float_pitfalls.py": {
@@ -26547,8 +26549,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.206,
-      "summary": "17 passed in 0.01s"
+      "duration_seconds": 0.381,
+      "summary": "17 passed in 0.02s"
     },
     "tests/ch03/test_random_reproducibility.py": {
       "returncode": 0,
@@ -26556,8 +26558,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.293,
-      "summary": "12 passed in 0.08s"
+      "duration_seconds": 0.314,
+      "summary": "12 passed in 0.09s"
     },
     "tests/ch04/test_config_examples.py": {
       "returncode": 0,
@@ -26565,172 +26567,10 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.243,
-      "summary": "2 passed in 0.06s"
+      "duration_seconds": 0.216,
+      "summary": "2 passed in 0.02s"
     },
     "tests/ch04/test_coordinate_convert.py": {
-      "returncode": 0,
-      "passed": 7,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.19,
-      "summary": "7 passed in 0.01s"
-    },
-    "tests/ch04/test_encoding_traps.py": {
-      "returncode": 0,
-      "passed": 8,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.21,
-      "summary": "8 passed in 0.02s"
-    },
-    "tests/ch04/test_messy_to_tidy.py": {
-      "returncode": 0,
-      "passed": 13,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.207,
-      "summary": "13 passed in 0.01s"
-    },
-    "tests/ch04/test_tidy_data_demo.py": {
-      "returncode": 0,
-      "passed": 8,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.76,
-      "summary": "8 passed in 0.48s"
-    },
-    "tests/ch04/test_tsv_csv_handling.py": {
-      "returncode": 0,
-      "passed": 6,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.223,
-      "summary": "6 passed in 0.02s"
-    },
-    "tests/ch05/test_module_demo.py": {
-      "returncode": 0,
-      "passed": 21,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.366,
-      "summary": "21 passed in 0.15s"
-    },
-    "tests/ch05/test_mylib_core.py": {
-      "returncode": 0,
-      "passed": 10,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.188,
-      "summary": "10 passed in 0.01s"
-    },
-    "tests/ch05/test_mylib_utils.py": {
-      "returncode": 0,
-      "passed": 6,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.19,
-      "summary": "6 passed in 0.01s"
-    },
-    "tests/ch06/test_check_environment.py": {
-      "returncode": 0,
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.224,
-      "summary": "11 passed in 0.02s"
-    },
-    "tests/ch06/test_dependency_examples.py": {
-      "returncode": 0,
-      "passed": 4,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.204,
-      "summary": "4 passed in 0.02s"
-    },
-    "tests/ch07/test_ci_minimal.py": {
-      "returncode": 0,
-      "passed": 4,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.198,
-      "summary": "4 passed in 0.02s"
-    },
-    "tests/ch07/test_citation_cff.py": {
-      "returncode": 0,
-      "passed": 5,
-      "failed": 0,
-      "skipped": 1,
-      "errors": 0,
-      "duration_seconds": 0.204,
-      "summary": "5 passed, 1 skipped in 0.02s"
-    },
-    "tests/ch08/test_ci_workflows.py": {
-      "returncode": 0,
-      "passed": 7,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.216,
-      "summary": "7 passed in 0.03s"
-    },
-    "tests/ch08/test_config_examples.py": {
-      "returncode": 0,
-      "passed": 4,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.214,
-      "summary": "4 passed in 0.02s"
-    },
-    "tests/ch08/test_reverse_complement.py": {
-      "returncode": 0,
-      "passed": 7,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.206,
-      "summary": "7 passed in 0.01s"
-    },
-    "tests/ch08/test_seq_stats.py": {
-      "returncode": 0,
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.408,
-      "summary": "11 passed in 0.19s"
-    },
-    "tests/ch08/test_shared_fixtures.py": {
-      "returncode": 0,
-      "passed": 2,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.329,
-      "summary": "2 passed in 0.10s"
-    },
-    "tests/ch09/test_coordinate_bugs.py": {
-      "returncode": 0,
-      "passed": 15,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.209,
-      "summary": "15 passed in 0.01s"
-    },
-    "tests/ch09/test_debug_print_demo.py": {
       "returncode": 0,
       "passed": 7,
       "failed": 0,
@@ -26739,23 +26579,194 @@
       "duration_seconds": 0.195,
       "summary": "7 passed in 0.01s"
     },
+    "tests/ch04/test_encoding_traps.py": {
+      "returncode": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.219,
+      "summary": "8 passed in 0.02s"
+    },
+    "tests/ch04/test_messy_to_tidy.py": {
+      "returncode": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.211,
+      "summary": "13 passed in 0.01s"
+    },
+    "tests/ch04/test_tidy_data_demo.py": {
+      "returncode": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.912,
+      "summary": "8 passed in 0.62s"
+    },
+    "tests/ch04/test_tsv_csv_handling.py": {
+      "returncode": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.215,
+      "summary": "6 passed in 0.02s"
+    },
+    "tests/ch05/test_module_demo.py": {
+      "returncode": 0,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.256,
+      "summary": "21 passed in 0.06s"
+    },
+    "tests/ch05/test_mylib_core.py": {
+      "returncode": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.197,
+      "summary": "10 passed in 0.01s"
+    },
+    "tests/ch05/test_mylib_utils.py": {
+      "returncode": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.202,
+      "summary": "6 passed in 0.01s"
+    },
+    "tests/ch06/test_check_environment.py": {
+      "returncode": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.21,
+      "summary": "11 passed in 0.02s"
+    },
+    "tests/ch06/test_dependency_examples.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.206,
+      "summary": "4 passed in 0.02s"
+    },
+    "tests/ch07/test_ci_minimal.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.208,
+      "summary": "4 passed in 0.02s"
+    },
+    "tests/ch07/test_citation_cff.py": {
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 1,
+      "errors": 0,
+      "duration_seconds": 0.202,
+      "summary": "5 passed, 1 skipped in 0.02s"
+    },
+    "tests/ch08/test_ci_workflows.py": {
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.217,
+      "summary": "7 passed in 0.03s"
+    },
+    "tests/ch08/test_config_examples.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.212,
+      "summary": "4 passed in 0.02s"
+    },
+    "tests/ch08/test_gc_fixture.py": {
+      "returncode": 0,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.197,
+      "summary": "2 passed in 0.01s"
+    },
+    "tests/ch08/test_reverse_complement.py": {
+      "returncode": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.209,
+      "summary": "8 passed in 0.01s"
+    },
+    "tests/ch08/test_seq_stats.py": {
+      "returncode": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.403,
+      "summary": "12 passed in 0.16s"
+    },
+    "tests/ch08/test_shared_fixtures.py": {
+      "returncode": 0,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.312,
+      "summary": "2 passed in 0.10s"
+    },
+    "tests/ch09/test_coordinate_bugs.py": {
+      "returncode": 0,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.204,
+      "summary": "15 passed in 0.01s"
+    },
+    "tests/ch09/test_debug_print_demo.py": {
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.22,
+      "summary": "7 passed in 0.01s"
+    },
     "tests/ch09/test_path_bugs.py": {
       "returncode": 0,
       "passed": 5,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.207,
+      "duration_seconds": 0.206,
       "summary": "5 passed in 0.01s"
     },
     "tests/ch09/test_pdb_demo.py": {
       "returncode": 0,
-      "passed": 9,
+      "passed": 11,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.202,
-      "summary": "9 passed in 0.01s"
+      "duration_seconds": 0.208,
+      "summary": "11 passed in 0.01s"
     },
     "tests/ch09/test_python_pitfalls.py": {
       "returncode": 0,
@@ -26763,8 +26774,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.786,
-      "summary": "11 passed in 0.48s"
+      "duration_seconds": 0.591,
+      "summary": "11 passed in 0.31s"
     },
     "tests/ch09/test_traceback_demo.py": {
       "returncode": 0,
@@ -26772,7 +26783,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.247,
+      "duration_seconds": 0.215,
       "summary": "12 passed in 0.02s"
     },
     "tests/ch09/test_type_bugs.py": {
@@ -26781,8 +26792,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.675,
-      "summary": "11 passed in 0.31s"
+      "duration_seconds": 0.575,
+      "summary": "11 passed in 0.29s"
     },
     "tests/ch10/test_config_example.py": {
       "returncode": 0,
@@ -26790,7 +26801,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.199,
+      "duration_seconds": 0.216,
       "summary": "5 passed in 0.02s"
     },
     "tests/ch10/test_error_handling.py": {
@@ -26799,7 +26810,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.324,
+      "duration_seconds": 0.349,
       "summary": "15 passed in 0.11s"
     },
     "tests/ch10/test_fail_fast_pipeline.py": {
@@ -26808,7 +26819,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.219,
+      "duration_seconds": 0.203,
       "summary": "3 passed in 0.01s"
     },
     "tests/ch10/test_package_example.py": {
@@ -26817,7 +26828,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.229,
+      "duration_seconds": 0.24,
       "summary": "3 passed in 0.03s"
     },
     "tests/ch11/test_cli_argparse.py": {
@@ -26826,7 +26837,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.33,
+      "duration_seconds": 0.345,
       "summary": "7 passed in 0.11s"
     },
     "tests/ch11/test_cli_click.py": {
@@ -26835,8 +26846,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.351,
-      "summary": "9 passed in 0.12s"
+      "duration_seconds": 0.334,
+      "summary": "9 passed in 0.11s"
     },
     "tests/ch11/test_logging_setup.py": {
       "returncode": 0,
@@ -26853,8 +26864,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.374,
-      "summary": "13 passed in 0.14s"
+      "duration_seconds": 0.396,
+      "summary": "13 passed in 0.13s"
     },
     "tests/ch11/test_seqtool_streams.py": {
       "returncode": 0,
@@ -26862,8 +26873,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.323,
-      "summary": "3 passed in 0.11s"
+      "duration_seconds": 0.37,
+      "summary": "3 passed in 0.12s"
     },
     "tests/ch12/test_numpy_vectorize.py": {
       "returncode": 0,
@@ -26871,7 +26882,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.253,
+      "duration_seconds": 0.261,
       "summary": "13 passed in 0.05s"
     },
     "tests/ch12/test_pandas_bio_ops.py": {
@@ -26880,8 +26891,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.637,
-      "summary": "9 passed in 0.32s"
+      "duration_seconds": 0.627,
+      "summary": "9 passed in 0.33s"
     },
     "tests/ch12/test_polars_bio_ops.py": {
       "returncode": 0,
@@ -26889,8 +26900,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.426,
-      "summary": "10 passed in 0.18s"
+      "duration_seconds": 0.403,
+      "summary": "10 passed in 0.17s"
     },
     "tests/ch12/test_scipy_stats_bio.py": {
       "returncode": 0,
@@ -26898,8 +26909,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.045,
-      "summary": "19 passed in 0.75s"
+      "duration_seconds": 1.192,
+      "summary": "19 passed in 0.90s"
     },
     "tests/ch13/test_bio_plots.py": {
       "returncode": 0,
@@ -26907,8 +26918,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 2.204,
-      "summary": "10 passed in 1.67s"
+      "duration_seconds": 2.194,
+      "summary": "10 passed in 1.66s"
     },
     "tests/ch13/test_matplotlib_bindist.py": {
       "returncode": 0,
@@ -26916,8 +26927,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.679,
-      "summary": "6 passed in 0.39s"
+      "duration_seconds": 0.682,
+      "summary": "6 passed in 0.37s"
     },
     "tests/ch13/test_plot_config.py": {
       "returncode": 0,
@@ -26925,8 +26936,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.485,
-      "summary": "1 passed in 0.22s"
+      "duration_seconds": 0.507,
+      "summary": "1 passed in 0.23s"
     },
     "tests/ch13/test_seaborn_biodist.py": {
       "returncode": 0,
@@ -26934,8 +26945,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.873,
-      "summary": "5 passed in 1.33s"
+      "duration_seconds": 1.811,
+      "summary": "5 passed in 1.30s"
     },
     "tests/ch13/test_tracks_config.py": {
       "returncode": 0,
@@ -26943,7 +26954,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.194,
+      "duration_seconds": 0.217,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch14/test_validate_workflow.py": {
@@ -26952,7 +26963,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.203,
+      "duration_seconds": 0.214,
       "summary": "14 passed in 0.01s"
     },
     "tests/ch14/test_workflow_assets.py": {
@@ -26961,8 +26972,8 @@
       "failed": 0,
       "skipped": 4,
       "errors": 0,
-      "duration_seconds": 0.673,
-      "summary": "6 passed, 4 skipped in 0.49s"
+      "duration_seconds": 0.801,
+      "summary": "6 passed, 4 skipped in 0.61s"
     },
     "tests/ch15/test_container_examples.py": {
       "returncode": 0,
@@ -26970,7 +26981,7 @@
       "failed": 0,
       "skipped": 5,
       "errors": 0,
-      "duration_seconds": 0.266,
+      "duration_seconds": 0.251,
       "summary": "8 passed, 5 skipped in 0.08s"
     },
     "tests/ch15/test_experiment_logger.py": {
@@ -26979,8 +26990,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.339,
-      "summary": "17 passed in 0.15s"
+      "duration_seconds": 0.348,
+      "summary": "17 passed in 0.17s"
     },
     "tests/ch15/test_validate_dockerfile.py": {
       "returncode": 0,
@@ -26988,8 +26999,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.205,
-      "summary": "22 passed in 0.01s"
+      "duration_seconds": 0.222,
+      "summary": "22 passed in 0.02s"
     },
     "tests/ch16/test_validate_slurm.py": {
       "returncode": 0,
@@ -26997,7 +27008,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.195,
+      "duration_seconds": 0.234,
       "summary": "31 passed in 0.02s"
     },
     "tests/ch17/test_chunk_processing.py": {
@@ -27006,8 +27017,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.609,
-      "summary": "4 passed in 0.33s"
+      "duration_seconds": 0.662,
+      "summary": "4 passed in 0.35s"
     },
     "tests/ch17/test_file_format_bench.py": {
       "returncode": 0,
@@ -27015,8 +27026,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.783,
-      "summary": "6 passed in 0.47s"
+      "duration_seconds": 0.724,
+      "summary": "6 passed in 0.42s"
     },
     "tests/ch17/test_generator_fastq.py": {
       "returncode": 0,
@@ -27024,7 +27035,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.338,
+      "duration_seconds": 0.346,
       "summary": "7 passed in 0.12s"
     },
     "tests/ch17/test_memory_target.py": {
@@ -27033,7 +27044,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.256,
+      "duration_seconds": 0.272,
       "summary": "1 passed in 0.06s"
     },
     "tests/ch17/test_parallel_gc.py": {
@@ -27042,8 +27053,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.518,
-      "summary": "9 passed in 0.35s"
+      "duration_seconds": 0.564,
+      "summary": "9 passed in 0.37s"
     },
     "tests/ch17/test_profiling_demo.py": {
       "returncode": 0,
@@ -27051,8 +27062,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.275,
-      "summary": "6 passed in 0.06s"
+      "duration_seconds": 0.294,
+      "summary": "6 passed in 0.07s"
     },
     "tests/ch17/test_streaming_fasta.py": {
       "returncode": 0,
@@ -27060,8 +27071,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.336,
-      "summary": "2 passed in 0.12s"
+      "duration_seconds": 0.317,
+      "summary": "2 passed in 0.10s"
     },
     "tests/ch18/test_docstring_checker.py": {
       "returncode": 0,
@@ -27069,7 +27080,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.203,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch18/test_mermaid_helper.py": {
@@ -27079,7 +27090,7 @@
       "skipped": 0,
       "errors": 0,
       "duration_seconds": 0.207,
-      "summary": "19 passed in 0.02s"
+      "summary": "19 passed in 0.01s"
     },
     "tests/ch18/test_mkdocs_example.py": {
       "returncode": 0,
@@ -27087,7 +27098,7 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.184,
+      "duration_seconds": 0.228,
       "summary": "3 passed, 1 skipped in 0.02s"
     },
     "tests/ch18/test_validate_readme.py": {
@@ -27096,7 +27107,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.192,
+      "duration_seconds": 0.201,
       "summary": "18 passed in 0.01s"
     },
     "tests/ch19/test_checksum_verify.py": {
@@ -27105,8 +27116,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.213,
-      "summary": "13 passed in 0.02s"
+      "duration_seconds": 0.225,
+      "summary": "13 passed in 0.03s"
     },
     "tests/ch19/test_entrez_fetch.py": {
       "returncode": 0,
@@ -27114,8 +27125,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.333,
-      "summary": "9 passed in 0.11s"
+      "duration_seconds": 0.351,
+      "summary": "9 passed in 0.12s"
     },
     "tests/ch19/test_local_db.py": {
       "returncode": 0,
@@ -27123,7 +27134,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.227,
       "summary": "13 passed in 0.02s"
     },
     "tests/ch19/test_parse_flatfile.py": {
@@ -27132,7 +27143,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.331,
+      "duration_seconds": 0.36,
       "summary": "12 passed in 0.11s"
     },
     "tests/ch19/test_sparql_query.py": {
@@ -27141,7 +27152,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.283,
+      "duration_seconds": 0.293,
       "summary": "9 passed in 0.08s"
     },
     "tests/ch20/test_anonymize_metadata.py": {
@@ -27150,7 +27161,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.216,
+      "duration_seconds": 0.207,
       "summary": "25 passed in 0.02s"
     },
     "tests/ch20/test_env_example.py": {
@@ -27159,7 +27170,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.184,
+      "duration_seconds": 0.194,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch20/test_secret_scanner.py": {
@@ -27168,7 +27179,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.22,
+      "duration_seconds": 0.212,
       "summary": "21 passed in 0.02s"
     },
     "tests/ch21/test_analysis_intake.py": {
@@ -27177,7 +27188,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.192,
+      "duration_seconds": 0.207,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch21/test_bioconda_recipe.py": {
@@ -27186,7 +27197,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.205,
+      "duration_seconds": 0.21,
       "summary": "1 passed in 0.02s"
     },
     "tests/ch21/test_check_urls_browser.py": {
@@ -27195,7 +27206,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.19,
+      "duration_seconds": 0.226,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch21/test_format_question.py": {
@@ -27204,7 +27215,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.19,
+      "duration_seconds": 0.236,
       "summary": "5 passed in 0.02s"
     },
     "tests/ch21/test_progress_report.py": {
@@ -27213,7 +27224,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.19,
+      "duration_seconds": 0.196,
       "summary": "8 passed in 0.01s"
     },
     "tests/ch21/test_reference_url_preference.py": {
@@ -27222,7 +27233,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.232,
+      "duration_seconds": 0.228,
       "summary": "13 passed in 0.04s"
     },
     "tests/ch21/test_review_helper.py": {
@@ -27231,7 +27242,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.206,
       "summary": "9 passed in 0.01s"
     },
     "tests/review/test_check_code_sync.py": {
@@ -27240,7 +27251,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.215,
+      "duration_seconds": 0.22,
       "summary": "45 passed in 0.04s"
     },
     "tests/review/test_code_correspondence.py": {
@@ -27249,14 +27260,14 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.915,
-      "summary": "18 passed in 0.72s"
+      "duration_seconds": 0.953,
+      "summary": "18 passed in 0.75s"
     }
   },
   "classification_review": {
     "pending_resolved": 91,
     "manual_category_overrides": 27,
-    "manual_relation_blocks": 109,
+    "manual_relation_blocks": 112,
     "note": "配置必須ブロック、対応ありブロック、全保留ブロックを本文前後と実体で目視",
     "goldset_method": "現在1件以上存在するE0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検",
     "goldset_change_history": "2026-07-27: E5解消計画の完了によりE5母集団が0件となったため、旧E5標本B-15-012/B-15-018を除外した。両ブロックは実体追加後のE0として全件対応表で監査する。",
@@ -27377,15 +27388,15 @@
         "tests/ch08/test_reverse_complement.py"
       ],
       "returncode": 0,
-      "passed": 7,
+      "passed": 8,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "7 passed in 0.01s"
+      "summary": "8 passed in 0.01s"
     },
     "B-09-001::scripts/ch09/traceback_demo.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: read_fasta_records",
+      "reason": "本文はread_text()までの意図的な抜粋で、完全な関数定義ではない",
       "block_id": "B-09-001",
       "target_file": "scripts/ch09/traceback_demo.py"
     },
@@ -27406,13 +27417,13 @@
     },
     "B-09-008::scripts/ch09/pdb_demo.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: calculate_gc_stats",
+      "reason": "本文はGC比計算ループの意図的な抜粋で、完全な関数定義ではない",
       "block_id": "B-09-008",
       "target_file": "scripts/ch09/pdb_demo.py"
     },
     "B-09-018::scripts/ch09/coordinate_bugs.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: validate_coordinates",
+      "reason": "本文は検証分岐の意図的な抜粋で、完全な関数定義ではない",
       "block_id": "B-09-018",
       "target_file": "scripts/ch09/coordinate_bugs.py"
     },

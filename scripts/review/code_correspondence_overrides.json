@@ -577,11 +577,11 @@
       "relations": [
         {
           "target_file": "scripts/ch08/reverse_complement.py",
-          "equivalence": "E3",
+          "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "基本処理は同じだが実体に空入力・不正塩基の検証があり例外仕様が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "実体の空入力早期returnは本文の空joinと同じ空文字列を返し、通常・小文字・不正塩基の戻り値と例外も一致",
+          "verification": "空入力、小文字、通常配列、無効塩基をpytestで検証し、分岐ごとの戻り値・例外を目視比較",
+          "target_entity": "reverse_complement",
           "cross_chapter": false
         }
       ]
@@ -605,11 +605,11 @@
       "relations": [
         {
           "target_file": "tests/ch08/test_seq_stats.py",
-          "equivalence": "E3",
-          "kind": "concept",
-          "evidence": "同じgc_content正常系だが入力配列・関数名・クラス構造が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "test_gc_content_typical関数のASTが本文と一致",
+          "verification": "pytest収集とpytest.approxによる期待値比較を実行",
+          "target_entity": "test_gc_content_typical",
           "cross_chapter": false
         }
       ]
@@ -632,12 +632,12 @@
       "block_sha256": "3d74c5f5c271be4aa60ea6cc10ef548a99596a56e8902db31900c8e51b5d1d12",
       "relations": [
         {
-          "target_file": "tests/ch01/test_gc_content.py",
-          "equivalence": "E3",
-          "kind": "concept",
-          "evidence": "fixtureとGCフィルタのテスト意図は同じだが、規約上の同章tests/ch08には存在しない",
-          "cross_chapter": true,
-          "verification": "manual",
+          "target_file": "tests/ch08/test_gc_fixture.py",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "fixtureと2つのテストを含むモジュールASTが本文と一致",
+          "cross_chapter": false,
+          "verification": "fixture注入、GC閾値、3レコードのフィルタ結果をpytestで検証",
           "target_entity": null
         }
       ]
@@ -805,6 +805,48 @@
           "kind": "excerpt",
           "evidence": "マトリクス設定が完全ワークフローの順序保存部分列",
           "verification": "Python 3.10から3.14の行列とsetup-pythonへの値引き渡しをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-001": {
+      "block_sha256": "b732595a1217369528b00a11de922f3ce57b249ece2c402abf0e75ce141f9d53",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/traceback_demo.py",
+          "target_entity": "read_fasta_records",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "実体の先頭にあるpath.read_text()を連続して抜粋し、以降の空入力検証・FASTAパース・戻り値を省略すると明示",
+          "verification": "ファイル欠落、空FASTA、単一・複数レコードをpytestで検証し、抜粋境界を目視確認",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-008": {
+      "block_sha256": "560b45d34cac0812ec092b96438bb7bcff257cbeb5f345661c863979f7db4eaa",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/pdb_demo.py",
+          "target_entity": "calculate_gc_stats_debug",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "実体のGC比計算ループとbreakpoint呼び出しを連続して抜粋し、空入力処理と集計returnの省略を明示",
+          "verification": "breakpointをmonkeypatchし、通常入力では配列ごとの呼び出し、空入力では非呼び出しをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-09-018": {
+      "block_sha256": "e88bbcb2ddffcc70de0fe3d68c749edf6dbfcc13de06640222e599ebee36aef7",
+      "relations": [
+        {
+          "target_file": "scripts/ch09/coordinate_bugs.py",
+          "target_entity": "validate_coordinates",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "BED・GFF・不明形式の検証分岐を実体どおり抜粋し、正常時のreturn Trueだけを省略すると明示",
+          "verification": "両座標系の境界、start > end、配列長超過、不明形式をpytestで検証",
           "cross_chapter": false
         }
       ]
@@ -1839,23 +1881,23 @@
         "tests/ch08/test_reverse_complement.py"
       ],
       "returncode": 0,
-      "passed": 7,
+      "passed": 8,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "7 passed in 0.01s",
+      "summary": "8 passed in 0.01s",
       "block_sha256": "6d305cc4420f6d54e98679cda1c8d9370ded96ba77e29a0192e9c0404ce593ef",
       "target_sha256": "313fd6b88f55970af522ad6f0c6f75f4b97bb77d02fccb9b31b31f9d23b698a1",
       "test_file_sha256": {
-        "tests/ch08/test_reverse_complement.py": "9da992ff64a11b1c0788fa4eded51af0241e09e236b93c75f05f21a5fad6167c"
+        "tests/ch08/test_reverse_complement.py": "3034808a2777309fc77eb1c7e759c4e6c77510be817f07781c43589e50643456"
       }
     },
     "B-09-001::scripts/ch09/traceback_demo.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: read_fasta_records",
+      "reason": "本文はread_text()までの意図的な抜粋で、完全な関数定義ではない",
       "block_id": "B-09-001",
       "target_file": "scripts/ch09/traceback_demo.py",
-      "block_sha256": "4a714526692eb3bef2316426b097d063c7d90ff65a1021ca0ac981996bad629b",
+      "block_sha256": "b732595a1217369528b00a11de922f3ce57b249ece2c402abf0e75ce141f9d53",
       "target_sha256": "19850418f12f98b711b5b852511c8c709228fb9f5cca5300332313867a2c3644",
       "test_file_sha256": {}
     },
@@ -1873,7 +1915,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "12 passed in 0.02s",
-      "block_sha256": "4dc559ce8bb1c5cbad2322c2dc83a63356ff22dde336867975d109c373d49dca",
+      "block_sha256": "5707596569d936e7ab7fef29e6c995a8b303c9cb9c8e760b3e4a571bc49e2ab3",
       "target_sha256": "19850418f12f98b711b5b852511c8c709228fb9f5cca5300332313867a2c3644",
       "test_file_sha256": {
         "tests/ch09/test_traceback_demo.py": "9df95dfae657db3fe520bf9ca058668fc2589d59b14df890e4b398207d7daa45"
@@ -1881,19 +1923,19 @@
     },
     "B-09-008::scripts/ch09/pdb_demo.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: calculate_gc_stats",
+      "reason": "本文はGC比計算ループの意図的な抜粋で、完全な関数定義ではない",
       "block_id": "B-09-008",
       "target_file": "scripts/ch09/pdb_demo.py",
-      "block_sha256": "c9ae1d56429071c374ba9d7d64b771fd53424955b6523a9a2009826ad547d280",
-      "target_sha256": "2f0692db5ed9a98d7204b7d1fdc023966761c59265efdd4bfedffe15c5d1ee03",
+      "block_sha256": "560b45d34cac0812ec092b96438bb7bcff257cbeb5f345661c863979f7db4eaa",
+      "target_sha256": "2243a8caafff30cc71d5778a257db64ee6e9d677033194a2d9a2fd9319544ddb",
       "test_file_sha256": {}
     },
     "B-09-018::scripts/ch09/coordinate_bugs.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: validate_coordinates",
+      "reason": "本文は検証分岐の意図的な抜粋で、完全な関数定義ではない",
       "block_id": "B-09-018",
       "target_file": "scripts/ch09/coordinate_bugs.py",
-      "block_sha256": "d21b2926d0b93e2973b354f8f56bffa46ab425f4897aed39444b29893ee9420a",
+      "block_sha256": "e88bbcb2ddffcc70de0fe3d68c749edf6dbfcc13de06640222e599ebee36aef7",
       "target_sha256": "ab3d9ffb68ba7000fcc6ebd9f31b7fa1800e41cd01747e43e769ee02a1e2fb5d",
       "test_file_sha256": {}
     },
@@ -1911,7 +1953,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "5 passed in 0.01s",
-      "block_sha256": "e41c22f79d3f2c4f7243b2a6e65472403c6b7199a853cc871a1a58944458e106",
+      "block_sha256": "a296f89a37b615ecaeed6280aa4ed2d7ec467760516bc7d3201f697938710233",
       "target_sha256": "53390c6fea3a225c2f32c4d3284ffc75bf82c37729ea43c7332ec4ccc5ad1ba2",
       "test_file_sha256": {
         "tests/ch09/test_path_bugs.py": "5de685dc6e98c7c215a754e6b243d67796bd1a7973844b48b7a664906445caab"

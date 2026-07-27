@@ -34,6 +34,40 @@ def calculate_gc_stats(
     }
 
 
+def calculate_gc_stats_debug(
+    sequences: list[str],
+) -> dict[str, float]:
+    """各配列のGC含量を計算するたびにデバッガを起動する.
+
+    Parameters
+    ----------
+    sequences : list[str]
+        塩基配列のリスト（A, T, G, C で構成）。
+
+    Returns
+    -------
+    dict[str, float]
+        "mean_gc", "min_gc", "max_gc" をキーとする統計値辞書。
+        空リストの場合は全て 0.0 を返す。
+    """
+    if not sequences:
+        return {"mean_gc": 0.0, "min_gc": 0.0, "max_gc": 0.0}
+
+    gc_ratios: list[float] = []
+    for seq in sequences:
+        upper = seq.upper()
+        gc_count = upper.count("G") + upper.count("C")
+        gc_ratio = gc_count / len(upper) if upper else 0.0
+        breakpoint()
+        gc_ratios.append(gc_ratio)
+
+    return {
+        "mean_gc": sum(gc_ratios) / len(gc_ratios),
+        "min_gc": min(gc_ratios),
+        "max_gc": max(gc_ratios),
+    }
+
+
 def find_motif_positions(sequence: str, motif: str) -> list[int]:
     """配列中のモチーフの出現位置をすべて返す.
 

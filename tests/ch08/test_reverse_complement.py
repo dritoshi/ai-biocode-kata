@@ -1,5 +1,7 @@
 """逆相補鎖計算のテスト — TDDのデモ."""
 
+import pytest
+
 from scripts.ch08.reverse_complement import reverse_complement
 
 
@@ -27,6 +29,11 @@ class TestReverseComplement:
     def test_case_insensitive(self) -> None:
         """小文字の入力も受け付ける."""
         assert reverse_complement("atgc") == "GCAT"
+
+    def test_invalid_base(self) -> None:
+        """A、T、G、C以外の塩基ではKeyErrorを送出する."""
+        with pytest.raises(KeyError):
+            reverse_complement("ATNG")
 
     def test_single_base(self) -> None:
         """1塩基の配列."""
