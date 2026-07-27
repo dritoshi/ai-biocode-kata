@@ -43,7 +43,7 @@ def cli(
     log_file: str | None,
 ) -> None:
     """配列解析ツール — FASTA配列の統計・フィルタリング・変換."""
-    # ログレベルの3層構造: CLI引数 > デフォルト値
+    # ログレベルの3層構造: --log-level > --verbose > デフォルト値
     if log_level is not None:
         effective_level = log_level.upper()
     elif verbose:

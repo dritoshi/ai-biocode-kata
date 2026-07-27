@@ -186,8 +186,8 @@ class TestOverrides:
         apply_category_overrides(blocks, overrides)
         relations = add_relations(PROJECT_ROOT, blocks, overrides)
         assert len(overrides["category_overrides"]) == 27
-        assert len(overrides["relation_overrides"]) == 114
-        assert len(overrides["substitution_tests"]) == 28
+        assert len(overrides["relation_overrides"]) == 116
+        assert len(overrides["substitution_tests"]) == 27
         assert len(relations) == 529
         assert overrides["category_overrides"]["B-12-002"] == {
             "block_sha256": (
@@ -200,7 +200,7 @@ class TestOverrides:
         relation = overrides["relation_overrides"]["B-11-024"]["relations"][0]
         assert relation["target_file"] == "scripts/ch11/seqtool.py"
         assert relation["target_entity"] == "filter_cmd"
-        assert relation["equivalence"] == "E3"
+        assert relation["equivalence"] == "E2"
 
     def test_asset_paths_ignore_tool_caches(self, tmp_path: Path) -> None:
         root = tmp_path / "repo"

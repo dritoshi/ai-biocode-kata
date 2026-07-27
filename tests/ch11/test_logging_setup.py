@@ -1,5 +1,6 @@
 """logging_setup モジュールのテスト."""
 
+import builtins
 import logging
 from pathlib import Path
 
@@ -108,3 +109,28 @@ def test_rich_handler() -> None:
     setup_logging(use_rich=True)
     root = logging.getLogger()
     assert len(root.handlers) == 1
+
+
+def test_rich_unavailable_falls_back(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Richをimportできない場合はstderrハンドラへフォールバックする."""
+    original_import = builtins.__import__
+
+    def reject_rich_logging(
+        name: str,
+        globals: dict[str, object] | None = None,
+        locals: dict[str, object] | None = None,
+        fromlist: tuple[str, ...] = (),
+        level: int = 0,
+    ) -> object:
+        if name == "rich.logging":
+            raise ImportError("Richを利用できません")
+        return original_import(name, globals, locals, fromlist, level)
+
+    monkeypatch.setattr(builtins, "__import__", reject_rich_logging)
+    setup_logging(use_rich=True)
+
+    root = logging.getLogger()
+    assert len(root.handlers) == 1
+    assert isinstance(root.handlers[0], logging.StreamHandler)

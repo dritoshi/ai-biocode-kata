@@ -122,4 +122,14 @@ def test_gc_filter_invalid_range() -> None:
         ["--min-gc", "1.5"],
         input=FASTA_DATA,
     )
-    assert result.exit_code != 0
+    assert result.exit_code == 2
+    assert "Invalid value" in result.stderr
+
+
+def test_gc_filter_empty_input_is_runtime_error() -> None:
+    """空入力は説明付きの終了コード1になる."""
+    runner = CliRunner()
+    result = runner.invoke(gc_filter, [], input="")
+
+    assert result.exit_code == 1
+    assert "FASTA配列が見つかりません" in result.stderr

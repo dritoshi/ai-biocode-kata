@@ -42,34 +42,49 @@ PythonでCLIを構築するライブラリは主に3つある。それぞれの�
 
 ```python
 import argparse
-import sys
 from pathlib import Path
 
-from Bio import SeqIO
-from mypackage.stats import gc_content
-
-
-def parse_args(argv=None):
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """コマンドライン引数をパースする."""
     parser = argparse.ArgumentParser(
         description="FASTA配列をGC含量でフィルタリングする",
     )
-    # argparse.FileType は Python 3.14 で非推奨。Path で受け取り、
-    # ファイルの開閉は main() 側で行う（省略時は stdin / stdout）。
     parser.add_argument(
-        "input", nargs="?",
-        type=Path, default=None,
+        "input",
+        nargs="?",
+        type=Path,
+        default=None,
         help="入力FASTAファイル（省略時はstdin）",
     )
     parser.add_argument(
-        "-o", "--output",
-        type=Path, default=None,
+        "-o",
+        "--output",
+        type=Path,
+        default=None,
         help="出力ファイル（省略時はstdout）",
     )
-    parser.add_argument("--min-gc", type=float, default=0.0)
-    parser.add_argument("--max-gc", type=float, default=1.0)
-    parser.add_argument("-v", "--verbose", action="store_true")
     parser.add_argument(
-        "--version", action="version", version="%(prog)s 0.1.0"
+        "--min-gc",
+        type=float,
+        default=0.0,
+        help="GC含量の下限（デフォルト: 0.0）",
+    )
+    parser.add_argument(
+        "--max-gc",
+        type=float,
+        default=1.0,
+        help="GC含量の上限（デフォルト: 1.0）",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="デバッグログを表示する",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="%(prog)s 0.1.0",
     )
     return parser.parse_args(argv)
 ```
@@ -80,29 +95,57 @@ Argparse は標準ライブラリに含まれており追加インストール�
 
 ```python
 import click
-from Bio import SeqIO
-from mypackage.stats import gc_content
 
 
 @click.command()
 @click.argument("input_file", type=click.File("r"), default="-")
-@click.option("-o", "--output", type=click.File("w"), default="-",
-              help="出力ファイル（省略時はstdout）")
-@click.option("--min-gc", type=click.FloatRange(0.0, 1.0),
-              default=0.0, show_default=True, help="GC含量の下限")
-@click.option("--max-gc", type=click.FloatRange(0.0, 1.0),
-              default=1.0, show_default=True, help="GC含量の上限")
-@click.option("-v", "--verbose", is_flag=True,
-              help="デバッグログを表示する")
+@click.option(
+    "-o",
+    "--output",
+    type=click.File("w"),
+    default="-",
+    help="出力ファイル（省略時はstdout）",
+)
+@click.option(
+    "--min-gc",
+    type=click.FloatRange(0.0, 1.0),
+    default=0.0,
+    show_default=True,
+    help="GC含量の下限",
+)
+@click.option(
+    "--max-gc",
+    type=click.FloatRange(0.0, 1.0),
+    default=1.0,
+    show_default=True,
+    help="GC含量の上限",
+)
+@click.option(
+    "-v",
+    "--verbose",
+    is_flag=True,
+    help="デバッグログを表示する",
+)
 @click.version_option("0.1.0", prog_name="gc-filter")
-def gc_filter(input_file, output, min_gc, max_gc, verbose):
-    """FASTA配列をGC含量でフィルタリングする."""
+def gc_filter(
+    input_file: click.utils.LazyFile,
+    output: click.utils.LazyFile,
+    min_gc: float,
+    max_gc: float,
+    verbose: bool,
+) -> None:
+    """FASTA配列をGC含量でフィルタリングする.
+
+    INPUT_FILE を読み込み、GC含量が指定範囲内の配列のみを出力する。
+    INPUT_FILE を省略するとstdinから読み込む。
+    """
+    # ロギング、入力検証、フィルタリング、出力処理は完全版を参照
     ...
 ```
 
 **デコレータ**とは、`@名前` の構文で関数やクラス定義に機能を付加するPythonの仕組みである。Click では `@click.command()` や `@click.option()` がデコレータで、関数をCLIコマンドとして登録し、引数やオプションの定義を追加している。
 
-Click はデコレータで引数とオプションを宣言するため、関数シグネチャがそのままインターフェース定義になる[1](https://click.palletsprojects.com/)。`click.FloatRange` による範囲バリデーション、`show_default=True` によるヘルプへのデフォルト値表示など、Argparse では追加実装が必要な機能が組み込みで提供される。[§10](./10_deliverables.md)で `pyproject.toml` に `click>=8.0` を追加済みであるため、本書では Click を一貫して使用する。
+Click はデコレータで引数とオプションを宣言するため、関数シグネチャがそのままインターフェース定義になる[1](https://click.palletsprojects.com/)。`click.FloatRange` による範囲バリデーション、`show_default=True` によるヘルプへのデフォルト値表示など、Argparse では追加実装が必要な機能が組み込みで提供される。[§10](./10_deliverables.md)で `pyproject.toml` に `click>=8.0` を追加済みであるため、本書では Click を一貫して使用する。上のコードは`scripts/ch11/cli_click.py`のデコレータ、シグネチャ、docstringを連続して示した抜粋であり、入力検証と処理本体は完全版に含まれる。
 
 #### Typer版
 
@@ -111,31 +154,39 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
-from Bio import SeqIO
-from mypackage.stats import gc_content
 
 app = typer.Typer(help="FASTA配列をGC含量でフィルタリングする")
 
 
 @app.command()
 def gc_filter(
-    input_file: Annotated[Path, typer.Argument(help="入力FASTAファイル")],
-    output: Annotated[Path | None,
-                      typer.Option("-o", "--output")] = None,
-    min_gc: Annotated[float,
-                      typer.Option(help="GC含量の下限",
-                                   min=0.0, max=1.0)] = 0.0,
-    max_gc: Annotated[float,
-                      typer.Option(help="GC含量の上限",
-                                   min=0.0, max=1.0)] = 1.0,
-    verbose: Annotated[bool,
-                       typer.Option("-v", "--verbose")] = False,
-):
+    input_file: Annotated[
+        Path,
+        typer.Argument(help="入力FASTAファイル"),
+    ],
+    output: Annotated[
+        Path | None,
+        typer.Option("-o", "--output", help="出力ファイル（省略時はstdout）"),
+    ] = None,
+    min_gc: Annotated[
+        float,
+        typer.Option(help="GC含量の下限", min=0.0, max=1.0),
+    ] = 0.0,
+    max_gc: Annotated[
+        float,
+        typer.Option(help="GC含量の上限", min=0.0, max=1.0),
+    ] = 1.0,
+    verbose: Annotated[
+        bool,
+        typer.Option("-v", "--verbose", help="デバッグログを表示する"),
+    ] = False,
+) -> None:
     """FASTA配列をGC含量でフィルタリングする."""
+    # ロギング、入力、フィルタリング、出力処理は完全版を参照
     ...
 ```
 
-Typer は Click の上に構築されたライブラリで、Python の型ヒントから引数定義を自動推論する[2](https://typer.tiangolo.com/)。`Annotated` を使うことで型ヒントとCLI定義を一体化でき、コードが最も簡潔になる。内部では Click が動いているため、Click の知識がそのまま活きる。小規模なツールや、型ヒントを徹底しているプロジェクトに適している。
+Typer は Click の上に構築されたライブラリで、Python の型ヒントから引数定義を自動推論する[2](https://typer.tiangolo.com/)。`Annotated` を使うことで型ヒントとCLI定義を一体化でき、コードが最も簡潔になる。内部では Click が動いているため、Click の知識がそのまま活きる。小規模なツールや、型ヒントを徹底しているプロジェクトに適している。上のコードは`scripts/ch11/cli_typer.py`のコマンド定義を処理本体の直前まで示した抜粋であり、完全版はhelp、正常入力、範囲外入力、ファイル出力をCLIテストで検証している。
 
 ### ClickによるCLI設計の実践
 
@@ -175,53 +226,132 @@ Click は型変換とバリデーションを宣言的に記述できる:
 
 #### `--help` と `--version`
 
-Click は関数の docstring から `--help` テキストを自動生成する。`@click.version_option` でバージョン表示も追加できる:
+Click は関数の docstring から `--help` テキストを自動生成する。`@click.version_option` でバージョン表示も追加できる。次は`scripts/ch11/cli_click.py`から、前段の`@click.command()`、引数、オプションのデコレータを省略し、バージョン指定からdocstringまでを連続して抜粋したものである:
 
 ```python
-@click.command()
 @click.version_option("0.1.0", prog_name="gc-filter")
-def gc_filter():
+def gc_filter(
+    input_file: click.utils.LazyFile,
+    output: click.utils.LazyFile,
+    min_gc: float,
+    max_gc: float,
+    verbose: bool,
+) -> None:
     """FASTA配列をGC含量でフィルタリングする.
 
     INPUT_FILE を読み込み、GC含量が指定範囲内の配列のみを出力する。
+    INPUT_FILE を省略するとstdinから読み込む。
     """
+    # 処理本体は完全版を参照
+    ...
 ```
 
 `--help` の出力が読みやすいツールは、ユーザーの信頼を得る第一歩である。
 
 ### サブコマンド設計
 
-ツールが成長して複数の機能を持つようになると、サブコマンド構成が有効である。`git commit`, `git push` のようなパターンだ。Click では `@click.group()` と `@group.command()` で実現する:
+ツールが成長して複数の機能を持つようになると、サブコマンド構成が有効である。`git commit`, `git push` のようなパターンだ。Click では `@click.group()` と `@group.command()` で実現する。以下は`scripts/ch11/seqtool.py`から、共通オプションを処理するグループ関数とサブコマンド登録部分を抜粋したものである。各サブコマンドのオプションと処理本体は省略している:
 
 ```python
 @click.group()
-@click.option("-v", "--verbose", is_flag=True)
-@click.option("--log-level",
-              type=click.Choice(["DEBUG", "INFO", "WARNING"]))
+@click.option(
+    "-v",
+    "--verbose",
+    is_flag=True,
+    help="デバッグログを表示する",
+)
+@click.option(
+    "--log-level",
+    type=click.Choice(
+        ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        case_sensitive=False,
+    ),
+    default=None,
+    help="ログレベルを指定する（--verboseより優先）",
+)
+@click.option(
+    "--log-file",
+    type=click.Path(),
+    default=None,
+    help="ログの出力先ファイル",
+)
+@click.version_option("0.1.0", prog_name="seqtool")
 @click.pass_context
-def cli(ctx, verbose, log_level):
-    """配列解析ツール."""
+def cli(
+    ctx: click.Context,
+    verbose: bool,
+    log_level: str | None,
+    log_file: str | None,
+) -> None:
+    """配列解析ツール — FASTA配列の統計・フィルタリング・変換."""
+    if log_level is not None:
+        effective_level = log_level.upper()
+    elif verbose:
+        effective_level = "DEBUG"
+    else:
+        effective_level = "WARNING"
+
+    setup_logging(level=effective_level, log_file=log_file)
     ctx.ensure_object(dict)
-    # グループレベルの共通設定
-    setup_logging(level=log_level or ("DEBUG" if verbose else "WARNING"))
+    ctx.obj["log_level"] = effective_level
 
 
 @cli.command()
 @click.argument("input_file", type=click.File("r"), default="-")
-def stats(input_file):
+@click.option(
+    "--format",
+    "output_format",
+    type=click.Choice(["table", "plain"], case_sensitive=False),
+    default="table",
+    show_default=True,
+    help="出力形式（tableはrich表示、plainはTSV）",
+)
+def stats(input_file: click.utils.LazyFile, output_format: str) -> None:
     """配列の統計情報を表示する."""
     ...
 
 
-@cli.command()
+@cli.command(name="filter")
 @click.argument("input_file", type=click.File("r"), default="-")
-@click.option("--min-gc", type=float, default=0.0)
-def filter(input_file, min_gc):
+@click.option(
+    "-o",
+    "--output",
+    type=click.File("w"),
+    default="-",
+    help="出力ファイル（省略時はstdout）",
+)
+@click.option(
+    "--min-gc",
+    type=click.FloatRange(0.0, 1.0),
+    default=0.0,
+    show_default=True,
+    help="GC含量の下限",
+)
+@click.option(
+    "--max-gc",
+    type=click.FloatRange(0.0, 1.0),
+    default=1.0,
+    show_default=True,
+    help="GC含量の上限",
+)
+@click.option(
+    "--progress/--no-progress",
+    default=True,
+    show_default=True,
+    help="プログレスバーを表示する",
+)
+def filter_cmd(
+    input_file: click.utils.LazyFile,
+    output: click.utils.LazyFile,
+    min_gc: float,
+    max_gc: float,
+    progress: bool,
+) -> None:
     """GC含量で配列をフィルタリングする."""
     ...
 ```
 
-これで `seqtool stats input.fasta` や `seqtool filter --min-gc 0.4 input.fasta` のように使える。共通オプション(`--verbose`, `--log-level`)をグループレベルに置くことで、すべてのサブコマンドで一貫したログ設定が使える。
+これで `seqtool stats input.fasta` や `seqtool filter --min-gc 0.4 input.fasta` のように使える。共通オプション(`--verbose`, `--log-level`)をグループレベルに置くことで、すべてのサブコマンドで一貫したログ設定が使える。完全版には`stats`、`filter`、`convert`の引数・オプション・処理本体があり、`--help`、`--version`、各サブコマンドをCLIテストで検証している。
 
 ### stdin/stdout対応の実装
 
@@ -282,17 +412,31 @@ CLIツールは、処理の成否を**終了コード**（exit status）で呼�
 
 Pythonでは `sys.exit(code)` で終了コードを指定する。引数なし（または `sys.exit(0)`）なら0、`sys.exit(1)` ならエラー終了である。未捕捉の例外でプログラムが落ちた場合も、Pythonは終了コード1で終了する。
 
-フレームワークを使えば、多くの場合は終了コードを自分で書く必要はない。argparse は不正な引数に対して自動的に終了コード2で終了する。click も同様で、オプションの誤りには2を、`raise click.ClickException("...")` には1を返す。実行時のエラーは `click.ClickException` を送出すれば、メッセージがstderrに出て終了コード1になる:
+フレームワークを使えば、多くの場合は終了コードを自分で書く必要はない。argparse は不正な引数に対して自動的に終了コード2で終了する。click も同様で、オプションの誤りには2を、`raise click.ClickException("...")` には1を返す。次は`scripts/ch11/cli_click.py`の`gc_filter()`から、FASTA入力の例外と空入力を実行時エラーへ変換する部分を抜粋したものである。後続のフィルタリングと出力は省略している:
 
 ```python
-@click.command()
-@click.argument("input_file", type=click.File("r"))
-def gc_filter(input_file):
-    if not looks_like_fasta(input_file):
-        # メッセージをstderrに出し、終了コード1で終了する
-        raise click.ClickException("FASTA形式ではありません")
+def gc_filter(
+    input_file: click.utils.LazyFile,
+    output: click.utils.LazyFile,
+    min_gc: float,
+    max_gc: float,
+    verbose: bool,
+) -> None:
+    """FASTA配列をGC含量でフィルタリングする."""
+    try:
+        records = list(SeqIO.parse(input_file, "fasta"))
+    except (OSError, ValueError) as exc:
+        msg = f"FASTAの読み込みに失敗しました: {exc}"
+        raise click.ClickException(msg) from exc
+
+    if not records:
+        raise click.ClickException("FASTA配列が見つかりません")
+
+    # フィルタリングと出力は完全版を参照
     ...
 ```
+
+この実装では正常処理が0、空入力などの実行時エラーが1、`click.FloatRange`が拒否する範囲外オプションが2になる。エラーメッセージはいずれもstderrへ送られる。
 
 なお、ユーザーが Ctrl-C で中断した場合、シェル上の終了コードは130になる（128 + 割り込みシグナル番号2）。パイプラインやCIのログで「130で終了」と見えたら、それは異常終了ではなく中断の合図である。
 
@@ -304,38 +448,28 @@ def gc_filter(input_file):
 コマンドライン引数 > 設定ファイル > デフォルト値
 ```
 
-この優先順位は、Click の `default` パラメータと設定ファイル読み込みを組み合わせて実現する:
+この優先順位は、Click の`default=None`と設定ファイル読み込みを組み合わせて実現する。`scripts/ch11/config_layering.py`では、デフォルト値とYAMLを`load_config()`で合成し、次の`resolve_config()`で明示されたCLI値だけを上書きする。YAML読込と入力検証を行う補助関数は完全版にあり、ここでは省略している:
 
 ```python
-import yaml
-
-def load_config(config_path):
-    """設定ファイルを読み込む."""
-    defaults = {"min_gc": 0.0, "max_gc": 1.0, "format": "fasta"}
-    if config_path and Path(config_path).exists():
-        with open(config_path) as f:
-            user_config = yaml.safe_load(f) or {}
-        defaults.update(user_config)
-    return defaults
-
-
-@click.command()
-@click.option("--config", type=click.Path(), default=None,
-              help="設定ファイル（YAML）")
-@click.option("--min-gc", type=float, default=None,
-              help="GC含量の下限（設定ファイルの値を上書き）")
-@click.pass_context
-def gc_filter(ctx, config, min_gc):
-    """3層構造: CLI引数 > 設定ファイル > デフォルト値."""
-    cfg = load_config(config)
-
-    # CLI引数がNoneでなければ（明示的に指定されていれば）上書き
+def resolve_config(
+    config_path: Path | None = None,
+    *,
+    min_gc: float | None = None,
+    max_gc: float | None = None,
+    output_format: str | None = None,
+) -> FilterConfig:
+    """YAML設定へ明示されたCLI値を上書きして返す."""
+    config: dict[str, object] = dict(load_config(config_path))
     if min_gc is not None:
-        cfg["min_gc"] = min_gc
-    ...
+        config["min_gc"] = min_gc
+    if max_gc is not None:
+        config["max_gc"] = max_gc
+    if output_format is not None:
+        config["format"] = output_format
+    return _validate_config(config)
 ```
 
-ポイントは、CLIオプションの `default=None` である。`None` が「ユーザーが指定しなかった」ことを意味し、設定ファイルやデフォルト値へのフォールバックを可能にする。この仕組みは、パラメータが増えても一貫したパターンで拡張できる。
+ポイントは、CLIオプションの `default=None` である。Clickから`resolve_config()`へ渡す`None`が「ユーザーが指定しなかった」ことを意味し、設定ファイルやデフォルト値へのフォールバックを可能にする。この仕組みは、パラメータが増えても一貫したパターンで拡張できる。完全版は設定ファイルの欠落、YAML構文エラー、未知のキー、不正なGC範囲も拒否する。
 
 > 🤖 **コラム: フォールバックと仲間たち — 障害対応の4つの概念**
 >
@@ -585,27 +719,42 @@ with console.status("フィルタリング中..."):
 
 ### stdoutとプログレスの棲み分け
 
-繰り返しになるが、**結果はstdout、プログレスはstderr**——これが鉄則である。以下に seqtool の filter コマンドでの実装パターンを示す:
+繰り返しになるが、**結果はstdout、プログレスはstderr**——これが鉄則である。以下は`scripts/ch11/seqtool.py`の`filter_cmd()`から、デコレータを省略して処理本体を抜粋したものである:
 
 ```python
-@cli.command(name="filter")  # サブコマンド名を "filter" に固定（関数名からは filter-sequences になる）
-@click.argument("input_file", type=click.File("r"), default="-")
-@click.option("-o", "--output", type=click.File("w"), default="-")
-@click.option("--min-gc", type=click.FloatRange(0.0, 1.0), default=0.0)
-@click.option("--max-gc", type=click.FloatRange(0.0, 1.0), default=1.0)
-@click.option("--progress/--no-progress", default=True)
-def filter_sequences(input_file, output, min_gc, max_gc, progress):
+def filter_cmd(
+    input_file: click.utils.LazyFile,
+    output: click.utils.LazyFile,
+    min_gc: float,
+    max_gc: float,
+    progress: bool,
+) -> None:
     """GC含量で配列をフィルタリングする."""
+    logger.info("フィルタ条件: GC含量 %.2f–%.2f", min_gc, max_gc)
+
     records = list(SeqIO.parse(input_file, "fasta"))
+
+    # プログレスバー付きフィルタリング
+    filtered = []
     iterator = records
     if progress and sys.stderr.isatty():
-        from tqdm import tqdm
-        iterator = tqdm(records, desc="フィルタリング", file=sys.stderr)
+        try:
+            from tqdm import tqdm
 
-    filtered = [r for r in iterator if min_gc <= gc_content(str(r.seq)) <= max_gc]
-    SeqIO.write(filtered, output, "fasta")
-    # ステータスメッセージもstderrに
-    click.echo(f"{len(filtered)}/{len(records)} 配列を出力", err=True)
+            iterator = tqdm(records, desc="フィルタリング", file=sys.stderr)
+        except ImportError:
+            pass
+
+    for record in iterator:
+        gc = gc_content(str(record.seq))
+        if min_gc <= gc <= max_gc:
+            filtered.append(record)
+
+    count = SeqIO.write(filtered, output, "fasta")
+    click.echo(
+        f"フィルタ結果: {len(records)} 配列中 {count} 配列を出力",
+        err=True,
+    )
 ```
 
 `sys.stderr.isatty()` のチェックに注目してほしい。パイプやリダイレクトで使われている場合（端末に接続されていない場合）はプログレスバーを自動的に非表示にする。これにより、ログファイルにプログレスバーの制御文字が混入するのを防げる。
@@ -711,20 +860,41 @@ handler.setFormatter(formatter)
 
 ### `--log-level` の実装
 
-§11-1のclickと統合し、[§10-4](./10_deliverables.md#10-4-設定管理)の3層構造でログレベルを制御する:
+§11-1のclickと統合し、[§10-4](./10_deliverables.md#10-4-設定管理)の3層構造でログレベルを制御する。以下は`scripts/ch11/seqtool.py`のグループ関数を抜粋したものであり、後続のサブコマンド定義は省略している:
 
 ```python
 @click.group()
-@click.option("-v", "--verbose", is_flag=True)
-@click.option("--log-level",
-              type=click.Choice(
-                  ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
-                  case_sensitive=False),
-              default=None)
-@click.option("--log-file", type=click.Path(), default=None)
-def cli(verbose, log_level, log_file):
-    """配列解析ツール."""
-    # 3層構造: CLI引数 > --verbose > デフォルト値
+@click.option(
+    "-v",
+    "--verbose",
+    is_flag=True,
+    help="デバッグログを表示する",
+)
+@click.option(
+    "--log-level",
+    type=click.Choice(
+        ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        case_sensitive=False,
+    ),
+    default=None,
+    help="ログレベルを指定する（--verboseより優先）",
+)
+@click.option(
+    "--log-file",
+    type=click.Path(),
+    default=None,
+    help="ログの出力先ファイル",
+)
+@click.version_option("0.1.0", prog_name="seqtool")
+@click.pass_context
+def cli(
+    ctx: click.Context,
+    verbose: bool,
+    log_level: str | None,
+    log_file: str | None,
+) -> None:
+    """配列解析ツール — FASTA配列の統計・フィルタリング・変換."""
+    # ログレベルの3層構造: --log-level > --verbose > デフォルト値
     if log_level is not None:
         effective_level = log_level.upper()
     elif verbose:
@@ -733,6 +903,8 @@ def cli(verbose, log_level, log_file):
         effective_level = "WARNING"
 
     setup_logging(level=effective_level, log_file=log_file)
+    ctx.ensure_object(dict)
+    ctx.obj["log_level"] = effective_level
 ```
 
 `--log-level` が `--verbose` より優先されるのは、3層構造の原則に従っている。具体的なレベル指定（`--log-level INFO`）はフラグ指定（`--verbose`）よりも明示的であり、より高い優先順位を持つ。
@@ -744,41 +916,70 @@ def cli(verbose, log_level, log_file):
 ```python
 import logging
 import sys
+from pathlib import Path
 
 
-def setup_logging(level="INFO", log_file=None, use_rich=False):
-    """アプリケーション全体のロギングを設定する."""
+def setup_logging(
+    level: str = "INFO",
+    log_file: str | Path | None = None,
+    use_rich: bool = False,
+) -> None:
+    """アプリケーション全体のロギングを設定する.
+
+    Parameters
+    ----------
+    level : str
+        ログレベル（DEBUG, INFO, WARNING, ERROR, CRITICAL）
+    log_file : str | Path | None
+        ログファイルのパス。Noneの場合はstderrのみに出力
+    use_rich : bool
+        Trueの場合、RichHandlerを使用してカラー出力を行う
+    """
     numeric_level = getattr(logging, level.upper(), None)
     if not isinstance(numeric_level, int):
-        raise ValueError(f"不正なログレベル: {level}")
+        msg = f"不正なログレベル: {level}"
+        raise ValueError(msg)
 
-    root = logging.getLogger()
-    root.setLevel(numeric_level)
-    root.handlers.clear()  # 重複防止
+    # ルートロガーを設定
+    root_logger = logging.getLogger()
+    root_logger.setLevel(numeric_level)
 
+    # 既存のハンドラをクリア（重複防止）
+    root_logger.handlers.clear()
+
+    # フォーマッタ（ISO 8601タイムスタンプ）
     formatter = logging.Formatter(
         fmt="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         datefmt="%Y-%m-%dT%H:%M:%S",
     )
 
-    # stderrハンドラ（richが利用可能ならRichHandler）
+    # stderrハンドラ
     if use_rich:
-        from rich.console import Console
-        from rich.logging import RichHandler
-        # console を渡さないと既定でstdoutに出力され、結果データにログが混入する
-        stderr_handler = RichHandler(
-            console=Console(stderr=True), show_time=True, show_path=False
-        )
+        try:
+            from rich.logging import RichHandler
+
+            stderr_handler: logging.Handler = RichHandler(
+                console=__import__("rich.console", fromlist=["Console"]).Console(
+                    stderr=True
+                ),
+                show_time=True,
+                show_path=False,
+            )
+        except ImportError:
+            # richが利用できない場合はStreamHandlerにフォールバック
+            stderr_handler = logging.StreamHandler(sys.stderr)
+            stderr_handler.setFormatter(formatter)
     else:
         stderr_handler = logging.StreamHandler(sys.stderr)
         stderr_handler.setFormatter(formatter)
 
-    root.addHandler(stderr_handler)
+    root_logger.addHandler(stderr_handler)
 
+    # ファイルハンドラ（オプション）
     if log_file is not None:
         file_handler = logging.FileHandler(log_file)
         file_handler.setFormatter(formatter)
-        root.addHandler(file_handler)
+        root_logger.addHandler(file_handler)
 ```
 
 各モジュールでは `logging.getLogger(__name__)` でモジュール固有のロガーを取得する。ロガーの名前にモジュールパスが入るため、どのモジュールからのログかが一目でわかる:

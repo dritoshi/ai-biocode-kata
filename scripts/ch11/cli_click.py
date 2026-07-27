@@ -56,9 +56,18 @@ def gc_filter(
     setup_logging(level="DEBUG" if verbose else "WARNING")
     logger.info("フィルタ条件: GC含量 %.2f–%.2f", min_gc, max_gc)
 
+    try:
+        records = list(SeqIO.parse(input_file, "fasta"))
+    except (OSError, ValueError) as exc:
+        msg = f"FASTAの読み込みに失敗しました: {exc}"
+        raise click.ClickException(msg) from exc
+
+    if not records:
+        raise click.ClickException("FASTA配列が見つかりません")
+
     # フィルタリング処理
     filtered = []
-    for record in SeqIO.parse(input_file, "fasta"):
+    for record in records:
         gc = gc_content(str(record.seq))
         if min_gc <= gc <= max_gc:
             filtered.append(record)
