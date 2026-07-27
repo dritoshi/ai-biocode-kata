@@ -7,6 +7,51 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 
 
+def filter_reads_list(path: Path, min_length: int) -> list[SeqRecord]:
+    """FASTQを全件読み込み、指定長以上のレコードをリストで返す.
+
+    Parameters
+    ----------
+    path : Path
+        FASTQファイルのパス
+    min_length : int
+        最小配列長（この値以上のレコードのみ通過）
+
+    Returns
+    -------
+    list[SeqRecord]
+        条件を満たすレコードのリスト
+    """
+    all_records = list(SeqIO.parse(path, "fastq"))
+    return [
+        record
+        for record in all_records
+        if len(record.seq) >= min_length  # type: ignore[arg-type]
+    ]
+
+
+def filter_reads_generator(
+    path: Path, min_length: int
+) -> Generator[SeqRecord, None, None]:
+    """FASTQを遅延読み込みし、指定長以上のレコードを逐次返す.
+
+    Parameters
+    ----------
+    path : Path
+        FASTQファイルのパス
+    min_length : int
+        最小配列長（この値以上のレコードのみ通過）
+
+    Yields
+    ------
+    SeqRecord
+        条件を満たすレコード
+    """
+    for record in SeqIO.parse(path, "fastq"):
+        if len(record.seq) >= min_length:  # type: ignore[arg-type]
+            yield record
+
+
 def read_fastq_records(path: Path) -> Generator[SeqRecord, None, None]:
     """FASTQファイルからレコードを1件ずつ読み出すジェネレータ.
 
@@ -46,7 +91,7 @@ def filter_by_length(
         条件を満たすレコード
     """
     for record in records:
-        if len(record.seq) >= min_length:
+        if len(record.seq) >= min_length:  # type: ignore[arg-type]
             yield record
 
 

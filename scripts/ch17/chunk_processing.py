@@ -80,7 +80,7 @@ def compute_stats_chunked(
             )
             n_total = new_count
 
-    if running_mean is None or n_total < 2:
+    if running_mean is None or running_m2 is None or n_total < 2:
         raise ValueError("統計量の計算には2サンプル以上が必要です")
 
     variance = running_m2 / (n_total - 1)

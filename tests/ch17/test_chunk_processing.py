@@ -80,3 +80,10 @@ class TestComputeStatsChunked:
         _create_expression_csv(csv_path, n_genes=5, n_samples=1)
         with pytest.raises(ValueError, match="2サンプル以上"):
             compute_stats_chunked(csv_path, chunksize=5)
+
+    def test_empty_input(self, tmp_path: Path) -> None:
+        """サンプル数が0の場合はエラーを返す."""
+        csv_path = tmp_path / "empty.csv"
+        _create_expression_csv(csv_path, n_genes=5, n_samples=0)
+        with pytest.raises(ValueError, match="2サンプル以上"):
+            compute_stats_chunked(csv_path, chunksize=5)

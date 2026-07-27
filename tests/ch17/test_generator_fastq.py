@@ -7,6 +7,8 @@ import pytest
 from scripts.ch17.generator_fastq import (
     filter_by_length,
     filter_by_quality,
+    filter_reads_generator,
+    filter_reads_list,
     process_pipeline,
     read_fastq_records,
 )
@@ -62,6 +64,40 @@ class TestReadFastqRecords:
         records = list(read_fastq_records(fastq_file))
         ids = [r.id for r in records]
         assert ids == ["read1", "read2", "read3", "read4"]
+
+
+class TestListAndGeneratorWrappers:
+    """本文で比較するpath入力APIのテスト."""
+
+    def test_return_same_records(self, fastq_file: Path) -> None:
+        """リスト版とジェネレータ版が同じレコードを返す."""
+        list_ids = [
+            record.id for record in filter_reads_list(fastq_file, min_length=6)
+        ]
+        generator_ids = [
+            record.id
+            for record in filter_reads_generator(fastq_file, min_length=6)
+        ]
+        assert list_ids == generator_ids == ["read1", "read3", "read4"]
+
+    def test_generator_is_lazy(self, tmp_path: Path) -> None:
+        """ジェネレータ版は要素を要求するまでファイルを開かない."""
+        missing_path = tmp_path / "missing.fastq"
+        records = filter_reads_generator(missing_path, min_length=1)
+
+        with pytest.raises(FileNotFoundError):
+            next(records)
+
+    def test_includes_threshold_boundary(self, fastq_file: Path) -> None:
+        """最小長ちょうどのレコードを両実装が含める."""
+        list_ids = [
+            record.id for record in filter_reads_list(fastq_file, min_length=8)
+        ]
+        generator_ids = [
+            record.id
+            for record in filter_reads_generator(fastq_file, min_length=8)
+        ]
+        assert list_ids == generator_ids == ["read1", "read3"]
 
 
 class TestFilterByLength:

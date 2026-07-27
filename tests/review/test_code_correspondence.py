@@ -186,7 +186,7 @@ class TestOverrides:
         apply_category_overrides(blocks, overrides)
         relations = add_relations(PROJECT_ROOT, blocks, overrides)
         assert len(overrides["category_overrides"]) == 27
-        assert len(overrides["relation_overrides"]) == 112
+        assert len(overrides["relation_overrides"]) == 114
         assert len(overrides["substitution_tests"]) == 28
         assert len(relations) == 529
         assert overrides["category_overrides"]["B-12-002"] == {

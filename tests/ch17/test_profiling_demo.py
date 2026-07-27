@@ -1,11 +1,20 @@
 """TPM正規化の正確性テスト."""
 
+import builtins
+import importlib.util
+from collections.abc import Callable
+from pathlib import Path
+from types import ModuleType
+
 import numpy as np
 
 from scripts.ch17.profiling_demo import (
+    main,
     normalize_tpm_fast,
     normalize_tpm_slow,
+    profile,
     profile_pipeline,
+    profiled_normalize_tpm_slow,
 )
 
 
@@ -35,6 +44,59 @@ class TestNormalizeTpmSlow:
         result = normalize_tpm_slow(counts, gene_lengths)
         # 1:3 の比率が保たれる
         np.testing.assert_allclose(result[0, 0] / result[1, 0], 1 / 3, rtol=1e-6)
+
+
+class TestLineProfilerIntegration:
+    """line_profiler用デコレータの切り替えを検証する."""
+
+    def test_fallback_is_no_op(self) -> None:
+        """通常import時のfallbackは関数を変更しない."""
+
+        def identity(value: int) -> int:
+            return value
+
+        assert profile(identity) is identity
+        assert profiled_normalize_tpm_slow is normalize_tpm_slow
+
+    def test_uses_kernprof_injected_decorator(
+        self, monkeypatch
+    ) -> None:
+        """builtinsへ注入されたデコレータを利用する."""
+        decorated: list[str] = []
+
+        def injected_profile(
+            func: Callable[..., object],
+        ) -> Callable[..., object]:
+            decorated.append(func.__name__)
+            return func
+
+        monkeypatch.setattr(
+            builtins,
+            "profile",
+            injected_profile,
+            raising=False,
+        )
+        module_path = (
+            Path(__file__).parents[2]
+            / "scripts"
+            / "ch17"
+            / "profiling_demo.py"
+        )
+        spec = importlib.util.spec_from_file_location(
+            "profiling_demo_with_kernprof",
+            module_path,
+        )
+        assert spec is not None
+        assert spec.loader is not None
+        module = importlib.util.module_from_spec(spec)
+        assert isinstance(module, ModuleType)
+        spec.loader.exec_module(module)
+
+        assert decorated == ["normalize_tpm_slow"]
+
+    def test_main_runs_profiled_calculation(self) -> None:
+        """最小main入口が計算を完了する."""
+        main()
 
 
 class TestNormalizeTpmFast:

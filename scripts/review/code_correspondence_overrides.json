@@ -147,10 +147,10 @@
       "reason": "Mermaid helperの利用例"
     },
     "B-19-022": {
-      "block_sha256": "92c24dc025430d79e3e46efbf1a5171503ac9d7f9d933f68e1dc051aa6e18956",
+      "block_sha256": "849108e3b459d09d3ce776f6bbee3a66be050c2d270081ffff3e17801396371c",
       "category": "implementation",
       "placement": "required_scripts",
-      "reason": "SQLite操作の完結した実装例"
+      "reason": "SQLite管理実体の公開関数を組み合わせる実装抜粋"
     },
     "B-20-010": {
       "block_sha256": "04ac461e286fec93c99eef0c6097b1d3a19d2abe9ad8cbc5964194ca88c04660",
@@ -1541,6 +1541,20 @@
         }
       ]
     },
+    "B-17-019": {
+      "block_sha256": "9c1abca25439bc3d0babbaecb956fc6c134c110bc13367d1ca147b69147f204c",
+      "relations": [
+        {
+          "target_file": "scripts/ch17/profiling_demo.py",
+          "target_entity": "normalize_tpm_slow",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は実体と同じno-op fallbackとデコレータ登録を示し、正規化関数本体とmain入口の省略境界を明記",
+          "verification": "通常import、fallback、注入デコレータ、計算結果をpytestで、kernprof 5.0.2の実行をsmoke testで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-17-022": {
       "block_sha256": "cc33d003bad9607b1b914f076eb58b30fab77ea7b1fe3c288fc83c1dafa00b73",
       "relations": [
@@ -1556,18 +1570,24 @@
       ]
     },
     "B-17-031": {
-      "block_sha256": "680965df45a17fdb4b9e41dd86f610783925155ff22b5f71f43edc1ea5576272",
+      "block_sha256": "2a638dde5dd5363308f6fd5dc73f442170244dfb4936e2652fb976cd824ce9e7",
       "relations": [
         {
           "target_file": "scripts/ch17/generator_fastq.py",
-          "equivalence": "E3",
-          "kind": "concept",
-          "evidence": "generator版はfilter_by_lengthと同じ目的だがAPIが異なり、list版の実体は無い",
-          "unmatched_components": [
-            "filter_reads_list"
-          ],
-          "verification": "manual",
-          "target_entity": null,
+          "target_entity": "filter_reads_list",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "filter_reads_list関数のASTが本文と一致",
+          "verification": "両実装の結果一致、閾値境界をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "target_file": "scripts/ch17/generator_fastq.py",
+          "target_entity": "filter_reads_generator",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "filter_reads_generator関数のASTが本文と一致",
+          "verification": "両実装の結果一致、遅延評価、閾値境界をpytestで確認",
           "cross_chapter": false
         }
       ]
@@ -1589,6 +1609,20 @@
     "B-17-035": {
       "block_sha256": "06a2acd3a1787744cd749e224e4b40a8f045c7e3eb004d67a0419a6de7e91464",
       "relations": []
+    },
+    "B-17-037": {
+      "block_sha256": "6b9cd7128eeb6e42a3990844b5222c68ecd827cd332edec7333f65b9de5d7e4f",
+      "relations": [
+        {
+          "target_file": "scripts/ch17/chunk_processing.py",
+          "target_entity": "compute_stats_chunked",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "compute_stats_chunked関数のASTが本文と一致",
+          "verification": "0件、1件、複数件、複数チャンクをpytestで確認",
+          "cross_chapter": false
+        }
+      ]
     },
     "B-17-036": {
       "block_sha256": "91b314cde4f995cf7a85c3792486650232ab829d13c4ea35abc1651f505ae97d",
@@ -1689,14 +1723,14 @@
       ]
     },
     "B-19-022": {
-      "block_sha256": "92c24dc025430d79e3e46efbf1a5171503ac9d7f9d933f68e1dc051aa6e18956",
+      "block_sha256": "849108e3b459d09d3ce776f6bbee3a66be050c2d270081ffff3e17801396371c",
       "relations": [
         {
           "target_file": "scripts/ch19/local_db.py",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "同じSQLite処理だが実体は関数分割・追加列・ロギングを持ち、本文は直書き",
-          "verification": "manual",
+          "evidence": "本文は実体の公開関数を初期化、CSV読込、条件別集計の順に呼び、パス取得と関数内部を省略した抜粋",
+          "verification": "schema、初期化の再実行、挿入、検索、集計をpytestで確認",
           "target_entity": null,
           "cross_chapter": false
         }
@@ -1717,29 +1751,29 @@
       ]
     },
     "B-20-004": {
-      "block_sha256": "a75e34d4d8cf6d4d1a996ceb18b73d82ba2004aa0c8bfc756a77532a781d60d0",
+      "block_sha256": "65e8783ad612e0d6ba6e2f24566208bb3cab0285a8e4662aa96bd0af675de1dc",
       "relations": [
         {
           "target_file": "scripts/ch20/secret_scanner.py",
-          "equivalence": "E3",
+          "target_entity": "scan_content",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "同名scan_contentだが戻り値・パターン・引数・除外処理に差がある",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は全パターンとdocstringを除くscan_content関数を実体どおり示し、import、データクラス、詳細docstring、ファイル除外処理の省略境界を明記",
+          "verification": "複数パターン、行番号、偽陽性、filepath、戻り値をpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-20-009": {
-      "block_sha256": "710baae93d3924f5423f139954e26bc9a34987e502d9cca17dd195f6f8a9feb9",
+      "block_sha256": "5ff75cb11ce8e02391221bea27c9edcf29d7edab963f5aa94ad40dfdb00240c1",
       "relations": [
         {
           "target_file": "scripts/ch20/anonymize_metadata.py",
           "target_entity": "generalize_age",
-          "equivalence": "E3",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "年代化の基本式は同じだが実体に入力検証とエラー仕様がある",
-          "verification": "manual",
+          "evidence": "generalize_age関数のASTが本文と一致",
+          "verification": "年齢境界、負の年齢、0以下のbin_sizeをpytestで確認",
           "cross_chapter": false
         }
       ]
@@ -1810,9 +1844,9 @@
       "reason": "初期化・バックトレースを省略し、そのままでは同じ動作にならない"
     },
     {
-      "block_id": "B-17-037",
+      "block_id": "B-00-001",
       "expected": "E3",
-      "reason": "同名関数だが入力検証に差がある"
+      "reason": "逆鎖処理と終止コドン探索の引数を省略し、そのままでは同じ動作にならない"
     },
     {
       "block_id": "B-13-006",
@@ -2139,45 +2173,32 @@
       }
     },
     "B-17-019::scripts/ch17/profiling_demo.py": {
-      "status": "failed",
-      "reason": "置換定義: normalize_tpm_slow",
+      "status": "not_run",
+      "reason": "本文が正規化関数本体とmain入口を明示的に省略したE2抜粋",
       "block_id": "B-17-019",
       "target_file": "scripts/ch17/profiling_demo.py",
-      "test_files": [
-        "tests/ch17/test_profiling_demo.py"
-      ],
-      "returncode": 2,
-      "passed": 0,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 1,
-      "summary": "1 error in 0.11s",
-      "failure_cause": "本文はline_profiler注入前提の@profileを使い、通常import時の代替定義がない",
-      "block_sha256": "6ac87f54a7b06628a96a63e87555ae00affef5fddbeb08c016fb01b2af775209",
-      "target_sha256": "59160c986523c302c0b8fe85199258c4cbc1590618de0d34fb1d1c97ac406251",
-      "test_file_sha256": {
-        "tests/ch17/test_profiling_demo.py": "a12ab057044e188df01b8ff8d85bde238b60922e2c51229c1de2448e5f4bab23"
-      }
+      "block_sha256": "9c1abca25439bc3d0babbaecb956fc6c134c110bc13367d1ca147b69147f204c",
+      "target_sha256": "eeb0d4be9b0fbec7e58c7bd60aae7e3acf76a2ab3ec8764dddc63015258d9179",
+      "test_file_sha256": {}
     },
     "B-17-037::scripts/ch17/chunk_processing.py": {
-      "status": "failed",
+      "status": "passed",
       "reason": "置換定義: compute_stats_chunked",
       "block_id": "B-17-037",
       "target_file": "scripts/ch17/chunk_processing.py",
       "test_files": [
         "tests/ch17/test_chunk_processing.py"
       ],
-      "returncode": 1,
-      "passed": 3,
-      "failed": 1,
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "1 failed, 3 passed in 0.36s",
-      "failure_cause": "本文には2サンプル未満を拒否する入力検証がない",
-      "block_sha256": "2670c81c0f483e149dd15eaacbf7132e9f3adb5dcee7d28da28849779903ccfd",
-      "target_sha256": "d83e64d082f49c393b69e3f36c8e9e50291535adf4b3cecc987a45953219f82d",
+      "summary": "5 passed in 0.48s",
+      "block_sha256": "6b9cd7128eeb6e42a3990844b5222c68ecd827cd332edec7333f65b9de5d7e4f",
+      "target_sha256": "2456fb66549a365d80bc7391e48afab6a3bc29b82b6da306d554d0452e48f214",
       "test_file_sha256": {
-        "tests/ch17/test_chunk_processing.py": "a85d8a86d620fa067d45dfed19c550af020f7e5385183f8e94d9d4096b824505"
+        "tests/ch17/test_chunk_processing.py": "64b104a17802e0ce6c5eaddce044c885543735b1ca1cda03deb6ded24c418106"
       }
     },
     "B-19-022::scripts/ch19/local_db.py": {
@@ -2185,7 +2206,7 @@
       "reason": "同名のトップレベル定義がない",
       "block_id": "B-19-022",
       "target_file": "scripts/ch19/local_db.py",
-      "block_sha256": "92c24dc025430d79e3e46efbf1a5171503ac9d7f9d933f68e1dc051aa6e18956",
+      "block_sha256": "849108e3b459d09d3ce776f6bbee3a66be050c2d270081ffff3e17801396371c",
       "target_sha256": "d550c7da47cfad8393431934b28f9323154efdefed424bf092d68ba9a423a490",
       "test_file_sha256": {}
     },
@@ -2203,31 +2224,30 @@
       "skipped": 0,
       "errors": 0,
       "summary": "21 passed in 0.03s",
-      "block_sha256": "a75e34d4d8cf6d4d1a996ceb18b73d82ba2004aa0c8bfc756a77532a781d60d0",
+      "block_sha256": "65e8783ad612e0d6ba6e2f24566208bb3cab0285a8e4662aa96bd0af675de1dc",
       "target_sha256": "51343e9e175ebb4518792dc79e44f50a1918fef8048ffb7c81f9f82f26e47de3",
       "test_file_sha256": {
         "tests/ch20/test_secret_scanner.py": "5f25b25c346367882081d9adce5ac5086b3f7210820d6723fd43f4f313e3911a"
       }
     },
     "B-20-009::scripts/ch20/anonymize_metadata.py": {
-      "status": "failed",
+      "status": "passed",
       "reason": "置換定義: generalize_age",
       "block_id": "B-20-009",
       "target_file": "scripts/ch20/anonymize_metadata.py",
       "test_files": [
         "tests/ch20/test_anonymize_metadata.py"
       ],
-      "returncode": 1,
-      "passed": 23,
-      "failed": 2,
+      "returncode": 0,
+      "passed": 26,
+      "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "2 failed, 23 passed in 0.04s",
-      "failure_cause": "本文には負の年齢と0以下のbin_sizeを拒否する入力検証がない",
-      "block_sha256": "710baae93d3924f5423f139954e26bc9a34987e502d9cca17dd195f6f8a9feb9",
+      "summary": "26 passed in 0.04s",
+      "block_sha256": "5ff75cb11ce8e02391221bea27c9edcf29d7edab963f5aa94ad40dfdb00240c1",
       "target_sha256": "4f5fa0e6d06548f6373c3b632bda97908ec928c99b83046048f41f9011148a8b",
       "test_file_sha256": {
-        "tests/ch20/test_anonymize_metadata.py": "25327b19a1106c912184f6b6977125f41b01b8f552c0a33657c2fee045c5f02e"
+        "tests/ch20/test_anonymize_metadata.py": "78ce85738d9439340e5a4cfd448bf3c717cb2837b8b8462f1a14bbfed585f05c"
       }
     },
     "B-21-004::scripts/ch21/format_question.py": {
