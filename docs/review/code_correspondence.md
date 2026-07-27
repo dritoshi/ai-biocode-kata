@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
-- 生成日: 2026-07-27
-- 対象コミット: `2fe954ba900fcc1c24656e771e7a3ea36156ebf6`
+- 生成日: 2026-07-28
+- 対象コミット: `2d6b03653c5d5284133aa63c62e1f005d482fbb5`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - 全件表: [`code_correspondence.json`](./code_correspondence.json)
@@ -14,10 +14,10 @@
 
 | 判定 | 件数 | 意味 |
 |---|---:|---|
-| E0 | 40 | コメント・空白を除いて同一 |
-| E1 | 38 | docstringや説明上の差を除けば同じ処理 |
+| E0 | 41 | コメント・空白を除いて同一 |
+| E1 | 42 | docstringや説明上の差を除けば同じ処理 |
 | E2 | 19 | 実体と矛盾しない抜粋 |
-| E3 | 37 | 対応はあるが構造または振る舞いに差がある |
+| E3 | 32 | 対応はあるが構造または振る舞いに差がある |
 | E5 | 0 | 配置が必要だが対応実体がない |
 | EN | 395 | 規約上、対応実体は不要 |
 | **合計** | **529** | 全本文ブロック |
@@ -43,7 +43,7 @@
 | ch10 | 35 | 8 | 5 | 3 | 0 | 0 | 0 | 0 | 27 |
 | ch11 | 34 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 24 |
 | ch12 | 20 | 14 | 0 | 14 | 0 | 0 | 0 | 0 | 6 |
-| ch13 | 11 | 6 | 2 | 3 | 0 | 1 | 0 | 0 | 5 |
+| ch13 | 11 | 6 | 3 | 3 | 0 | 0 | 0 | 0 | 5 |
 | ch14 | 23 | 14 | 6 | 0 | 4 | 4 | 0 | 0 | 9 |
 | ch15 | 32 | 9 | 7 | 0 | 2 | 0 | 0 | 0 | 23 |
 | ch16 | 26 | 6 | 3 | 0 | 2 | 1 | 0 | 0 | 20 |
@@ -51,8 +51,8 @@
 | ch18 | 30 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 29 |
 | ch19 | 24 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 23 |
 | ch20 | 12 | 4 | 1 | 0 | 1 | 2 | 0 | 0 | 8 |
-| ch21 | 14 | 5 | 1 | 0 | 0 | 4 | 0 | 0 | 9 |
-| **合計** | **529** | **134** | **40** | **38** | **19** | **37** | **0** | **0** | **395** |
+| ch21 | 14 | 5 | 1 | 4 | 0 | 0 | 0 | 0 | 9 |
+| **合計** | **529** | **134** | **41** | **42** | **19** | **32** | **0** | **0** | **395** |
 
 ## 3. 対応実体がないブロック
 
@@ -87,7 +87,6 @@
 | `B-11-030` | `scripts/ch11/seqtool.py` | 1 failed, 12 passed in 0.16s | 同章・同名だがAST差 |
 | `B-11-031` | `scripts/ch11/logging_setup.py` | 10 passed in 0.04s | 同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある |
 | `B-11-031` | `scripts/ch11/progress_demo.py` | 10 passed in 0.03s | 同じsetup_loggingの別実体にも対応する多対多関係 |
-| `B-13-005` | `scripts/ch13/seaborn_biodist.py` | 5 passed in 1.68s | 同章・同名だがAST差 |
 | `B-14-002` | `scripts/ch14/Snakefile` | 対象外 | 処理は同じだがthreadsが定数4とconfig参照で異なる |
 | `B-14-014` | `scripts/ch14/Makefile` | 対象外 | 依存関係は同じだが本文URLが省略記号で実行不能、変数・clean処理にも差がある |
 | `B-14-017` | `scripts/ch14/Snakefile` | 対象外 | protectedとtemp、BAMパスが異なるため動作上の差がある |
@@ -99,10 +98,6 @@
 | `B-19-022` | `scripts/ch19/local_db.py` | 未実行: 同名のトップレベル定義がない | 同じSQLite処理だが実体は関数分割・追加列・ロギングを持ち、本文は直書き |
 | `B-20-004` | `scripts/ch20/secret_scanner.py` | 21 passed in 0.03s | 同名scan_contentだが戻り値・パターン・引数・除外処理に差がある |
 | `B-20-009` | `scripts/ch20/anonymize_metadata.py` | 2 failed, 23 passed in 0.04s | 年代化の基本式は同じだが実体に入力検証とエラー仕様がある |
-| `B-21-004` | `scripts/ch21/format_question.py` | 5 passed in 0.03s | 同章・同名だがAST差 |
-| `B-21-007` | `scripts/ch21/review_helper.py` | 9 passed in 0.02s | 同章・同名だがAST差 |
-| `B-21-012` | `scripts/ch21/progress_report.py` | 8 passed in 0.02s | 同章・同名だがAST差 |
-| `B-21-014` | `scripts/ch21/analysis_intake.py` | 11 passed in 0.02s | 同章・同名だがAST差 |
 
 ## 5. テスト状況
 
