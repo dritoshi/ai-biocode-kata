@@ -209,17 +209,44 @@ def expression_heatmap(
 
 SeabornはMatplotlib上に構築された統計的可視化ライブラリである。最大の特徴は**tidy data**（long form）を前提としている点で、[§4 データフォーマットの選び方](./04_data_formats.md)で学んだ `melt()` によるlong form変換が、そのままSeabornの入力になる。
 
-バイオリンプロットは、カテゴリ別の分布形状を比較するのに適している。ボックスプロットでは見えない分布の「形」（双峰性、裾の長さなど）を可視化できる:
+バイオリンプロットは、カテゴリ別の分布形状を比較するのに適している。ボックスプロットでは見えない分布の「形」（双峰性、裾の長さなど）を可視化できる。`output_path`に保存先を渡すと、300 dpiの画像として保存する:
 
 ```python
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
+from matplotlib.figure import Figure
+
 
 def expression_violin(
     expression_df: pd.DataFrame,
     category_col: str = "category",
     value_col: str = "expression",
+    output_path: Path | None = None,
 ) -> Figure:
-    """カテゴリ別発現量のバイオリンプロットを作成する."""
+    """カテゴリ別発現量のバイオリンプロットを作成する.
+
+    tidy data（long form）形式のDataFrameを受け取り、
+    カテゴリごとの分布をバイオリンプロットで表示する。
+
+    Parameters
+    ----------
+    expression_df : pd.DataFrame
+        tidy format のDataFrame（カテゴリ列と値列を含む）
+    category_col : str
+        カテゴリのカラム名
+    value_col : str
+        値のカラム名
+    output_path : Path | None
+        保存先パス（Noneなら保存しない）
+
+    Returns
+    -------
+    Figure
+        matplotlib Figureオブジェクト
+    """
     fig, ax = plt.subplots(figsize=(8, 6))
 
     sns.violinplot(
@@ -236,6 +263,9 @@ def expression_violin(
     ax.set_xlabel(category_col.replace("_", " ").title())
     ax.set_ylabel(value_col.replace("_", " ").title())
     ax.set_title("Expression Distribution by Category")
+
+    if output_path is not None:
+        fig.savefig(output_path, dpi=300, bbox_inches="tight")
 
     return fig
 ```
