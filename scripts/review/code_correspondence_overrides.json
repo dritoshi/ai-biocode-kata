@@ -1136,8 +1136,18 @@
       ]
     },
     "B-14-006": {
-      "block_sha256": "d94c9972096fbf255ff71a793f70e400dc46275be8ae2487bc1532e01b6850f4",
-      "relations": []
+      "block_sha256": "f788eab0dbf39eefd2c1c3c3db061da7e6aa90dd0728eaeb57ee3464c4593621",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/Snakefile.conda",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "deseq2 ruleの正規化行列が実体と一致",
+          "verification": "dry-run・R構文解析・最小count fixtureの出力をpytestで検証",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-14-007": {
       "block_sha256": "e65fca3d797148dc8051dd227a7b5bbc9a129d00522d6c1944f52cfa9865e8ce",
@@ -1154,20 +1164,60 @@
       ]
     },
     "B-14-008": {
-      "block_sha256": "fc79e2e5b2f662e846246779ba91d6bdde578f457e06fe4d98b1378fd7d388ed",
-      "relations": []
+      "block_sha256": "3369348928f6ae81160a3fbf41c822ca2630e8a0903aee9925012a5855f3e409",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/fastqc.nf",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "DSL2ワークフローの正規化行列が実体と一致",
+          "verification": "代替FastQCによるfixture smoke testをpytestで検証",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-14-010": {
-      "block_sha256": "4ad9132ea4acb24a38be90ab3f6c7b85f477a04385c059d48373bc3b761c12ea",
-      "relations": []
+      "block_sha256": "4cf0ed2eb3257a471f84f341f580c00eeaeab5e899db3a82b6f7e09a35836dc0",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/fastp_filter.cwl",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "fastp CommandLineToolの正規化行列が実体と一致",
+          "verification": "cwltool validateと代替fastpによるfixture smoke testをpytestで検証",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-14-011": {
-      "block_sha256": "8c9d0bbe3a8fad82d486fc8c012735127e00d8790a164ad036aa19951e86d575",
-      "relations": []
+      "block_sha256": "a2ee7ad8d94f427af9a83d986e3c8d8258f6574e67ebc88c1750b3329a724394",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/rnaseq_pipeline.cwl",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "RNA-seq Workflowの正規化行列が実体と一致",
+          "verification": "cwltool validateと2 step接続のfixture smoke testをpytestで検証",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-14-012": {
-      "block_sha256": "a6497b617e414e82a4737328921ee857bba1616cda9f27e6db6585396424ae52",
-      "relations": []
+      "block_sha256": "89d453f0b0923d6cf693fe91f7bb622446f354db09c4f3b04b20c486fb289b33",
+      "relations": [
+        {
+          "target_file": "scripts/ch14/inputs.yml",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "Workflow入力YAMLの正規化行列が実体と一致",
+          "verification": "全入力キー・File・Directory実在とCWL fixture実行をpytestで検証",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-14-014": {
       "block_sha256": "291410a9a73eed52bf10f5670c0318f609452790d21c0553899cc2cbacdd4751",
@@ -1673,14 +1723,14 @@
       "reason": "同名関数だが入力検証に差がある"
     },
     {
-      "block_id": "B-14-006",
+      "block_id": "B-15-012",
       "expected": "E5",
-      "reason": "配置必須のSnakemake conda/container統合設定だが対応するscripts資産がない"
+      "reason": "配置必須のSnakemake container ruleだが対応するscripts資産がない"
     },
     {
-      "block_id": "B-14-010",
+      "block_id": "B-18-021",
       "expected": "E5",
-      "reason": "配置必須のCWL定義だが対応するscripts資産がない"
+      "reason": "配置必須のmkdocs設定だが対応するscripts資産がない"
     },
     {
       "block_id": "B-13-006",

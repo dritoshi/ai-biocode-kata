@@ -1,0 +1,10 @@
+fastq_r1:
+  class: File
+  location: data/cwl/sample_A_R1.fastq
+fastq_r2:
+  class: File
+  location: data/cwl/sample_A_R2.fastq
+sample_name: sample_A
+genome_index:
+  class: Directory
+  location: data/cwl/hisat2_index

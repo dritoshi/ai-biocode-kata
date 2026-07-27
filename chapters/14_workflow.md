@@ -193,16 +193,19 @@ Snakemakeはルールごとにconda環境やコンテナを指定できる:
 ```python
 rule deseq2:
     input:
-        counts=expand("results/counts/{sample}_counts.txt", sample=SAMPLES),
+        counts="data/deseq2/counts.tsv",
+        samples="data/deseq2/samples.tsv",
     output:
-        "results/deg/deseq2_results.csv",
+        results="results/deg/deseq2_results.csv",
     log:
         "logs/deseq2.log",
     conda:
-        "envs/deseq2.yaml"  # このルール専用のconda環境
+        "envs/deseq2.yaml"
     script:
-        "scripts/run_deseq2.R"
+        "run_deseq2.R"
 ```
+
+`input:`ではカウント行列とサンプル情報を別々に受け取り、`script:`でDESeq2解析を実装したRスクリプトを呼び出している。完全な実装は、[Snakefile.conda](../scripts/ch14/Snakefile.conda)、[deseq2.yaml](../scripts/ch14/envs/deseq2.yaml)、[run_deseq2.R](../scripts/ch14/run_deseq2.R)に配置している。
 
 `conda:` ディレクティブを使うと、`snakemake --use-conda`（新しめの版では `--software-deployment-method conda`、短縮形 `--sdm conda` も使える）実行時にルールごとに隔離された環境が自動作成される。これらの conda 環境の多くは Bioconda[6](https://doi.org/10.1038/s41592-018-0046-7) から提供される。これは[§15 コンテナによるソフトウェア環境の再現](./15_container.md)で詳しく扱う再現性確保の第一歩である。`container:` ディレクティブでDockerやApptainerイメージを指定することもできる。
 
@@ -296,32 +299,42 @@ Nextflow[2](https://doi.org/10.1038/nbt.3820)[5](https://docs.seqera.io/nextflow
 Snakemakeのfastqcルールに対応するNextflowのprocess定義を示す:
 
 ```groovy
-// fastqc.nf — Nextflow DSL2
+// 単一または複数のFASTQからFastQCレポートを生成するDSL2ワークフロー
 
-params.samples = ["SRR1234501", "SRR1234502", "SRR1234503"]
-params.outdir  = "results"
+nextflow.enable.dsl = 2
+
+params.reads = "data/raw/*.fastq.gz"
+params.outdir = "results"
 
 process FASTQC {
-    publishDir "${params.outdir}/qc", mode: 'copy'
+    tag "${sample_id}"
+    publishDir "${params.outdir}/qc", mode: "copy"
 
     input:
-    path(fastq)
+    tuple val(sample_id), path(fastq)
 
     output:
-    path("*_fastqc.html"), emit: html
-    path("*_fastqc.zip"),  emit: zip
+    tuple val(sample_id),
+        path("${sample_id}_fastqc.html"),
+        path("${sample_id}_fastqc.zip"),
+        emit: reports
 
     script:
     """
-    fastqc ${fastq} --outdir .
+    fastqc "${fastq}" --outdir .
     """
 }
 
 workflow {
-    ch_fastq = Channel.fromPath("data/raw/*.fastq.gz")
-    FASTQC(ch_fastq)
+    reads_ch = Channel
+        .fromPath(params.reads, checkIfExists: true)
+        .map { fastq -> tuple(fastq.simpleName, fastq) }
+
+    FASTQC(reads_ch)
 }
 ```
+
+`Channel.fromPath()`は`params.reads`に一致するFASTQを読み込み、`map`でサンプル名とファイルのタプルへ変換する。`FASTQC`プロセスはそのタプルを受け取り、HTMLとZIPを同じサンプル名に結び付けて出力する。完全な実装は[fastqc.nf](../scripts/ch14/fastqc.nf)に配置している。
 
 Nextflowのチャネルモデルは、データの流れが直感的に追いやすい一方で、ファイル名に基づく柔軟なパターンマッチはSnakemakeに比べてやや冗長になる場合がある。Snakemake の HPC 連携に使う CLI は版によって差がある。`--cluster`、`--slurm`、executor / profile ベースの指定のどれを使うかは、使用している版の公式ドキュメントを確認すること[4](https://snakemake.readthedocs.io/)。各ツールの設計思想の違いについては、本節末尾の「ツール選択の判断基準」で対比表にまとめている。
 
@@ -384,12 +397,16 @@ CWLが特に重要になるのは、[§20 コードとデータのセキュリ�
 CWLでは、個々のコマンドラインツールを**CommandLineTool**として定義する。以下はFASTQファイルの品質フィルタリング（fastp）をCWLで記述した例である:
 
 ```yaml
-# fastp_filter.cwl — FASTQの品質フィルタリング
+#!/usr/bin/env cwl-runner
 cwlVersion: v1.2
 class: CommandLineTool
+label: paired-end FASTQ filtering with fastp
 baseCommand: fastp
 
 requirements:
+  InlineJavascriptRequirement: {}
+
+hints:
   DockerRequirement:
     dockerPull: quay.io/biocontainers/fastp:0.23.4--h125f33a_5
 
@@ -405,6 +422,14 @@ inputs:
   sample_name:
     type: string
 
+arguments:
+  - prefix: --out1
+    valueFrom: $(inputs.sample_name)_filtered_R1.fastq.gz
+  - prefix: --out2
+    valueFrom: $(inputs.sample_name)_filtered_R2.fastq.gz
+  - prefix: --html
+    valueFrom: $(inputs.sample_name)_fastp.html
+
 outputs:
   filtered_r1:
     type: File
@@ -418,26 +443,19 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.sample_name)_fastp.html
-
-arguments:
-  - prefix: --out1
-    valueFrom: $(inputs.sample_name)_filtered_R1.fastq.gz
-  - prefix: --out2
-    valueFrom: $(inputs.sample_name)_filtered_R2.fastq.gz
-  - prefix: --html
-    valueFrom: $(inputs.sample_name)_fastp.html
 ```
 
-Snakemakeの`rule`やNextflowの`process`と対比すると構造がわかりやすい。`inputs`が入力、`outputs`が出力、`baseCommand`が実行コマンド、`DockerRequirement`がコンテナ指定に対応する。CWLではこれらをすべてYAML形式で宣言的に記述する。
+Snakemakeの`rule`やNextflowの`process`と対比すると構造がわかりやすい。`inputs`が入力、`outputs`が出力、`baseCommand`が実行コマンド、`DockerRequirement`がコンテナ指定に対応する。この例では`DockerRequirement`を`hints:`に置き、コンテナを使えない検証環境ではホスト側の`fastp`へ差し替えられるようにしている。CWLではこれらをすべてYAML形式で宣言的に記述する。完全な実装は[fastp_filter.cwl](../scripts/ch14/fastp_filter.cwl)に配置している。
 
 #### Workflowの定義
 
 複数のCommandLineToolを組み合わせてパイプラインを構成するには、`class: Workflow`を使う:
 
 ```yaml
-# rnaseq_pipeline.cwl — RNA-seq解析ワークフロー
+#!/usr/bin/env cwl-runner
 cwlVersion: v1.2
 class: Workflow
+label: minimal paired-end RNA-seq workflow
 
 inputs:
   fastq_r1: File
@@ -472,24 +490,23 @@ steps:
     out: [bam_output]
 ```
 
-`steps`の各ステップが`in`と`out`でデータの流れを定義する。Nextflowのチャネルに似た構造だが、CWLではYAMLの中で明示的にステップ間の接続を記述する。
+`steps`の各ステップが`in`と`out`でデータの流れを定義する。`filter`の`filtered_r1`と`filtered_r2`が`align`の入力へ接続され、最終的なBAMとfastpレポートがワークフローの出力になる。Nextflowのチャネルに似た構造だが、CWLではYAMLの中で明示的にステップ間の接続を記述する。完全な実装は[rnaseq_pipeline.cwl](../scripts/ch14/rnaseq_pipeline.cwl)に、アラインメント処理は[hisat2_align.cwl](../scripts/ch14/hisat2_align.cwl)に配置している。
 
 #### 入力ファイル（ジョブファイル）
 
 CWLの大きな特徴は、ワークフロー定義（`.cwl`）と入力パラメータ（`.yml`）が**完全に分離**されていることである:
 
 ```yaml
-# inputs.yml — 入力パラメータ
 fastq_r1:
   class: File
-  location: data/raw/sample_A_R1.fastq.gz
+  location: data/cwl/sample_A_R1.fastq
 fastq_r2:
   class: File
-  location: data/raw/sample_A_R2.fastq.gz
+  location: data/cwl/sample_A_R2.fastq
 sample_name: sample_A
 genome_index:
   class: Directory
-  location: data/ref/hisat2_index/
+  location: data/cwl/hisat2_index
 ```
 
 実行は以下のコマンドで行う:
@@ -499,7 +516,7 @@ genome_index:
 cwltool rnaseq_pipeline.cwl inputs.yml
 ```
 
-ワークフロー定義を変えずに入力ファイルだけを差し替えられるため、同じパイプラインを異なるサンプルやデータセットに繰り返し適用しやすい。これはTRE環境で標準化されたパイプラインを多数のサンプルに適用する運用と相性がよい。
+ワークフロー定義を変えずに入力ファイルだけを差し替えられるため、同じパイプラインを異なるサンプルやデータセットに繰り返し適用しやすい。完全な入力例は[inputs.yml](../scripts/ch14/inputs.yml)に配置している。付属するFASTQとインデックス用ディレクトリは接続確認用の小さなfixtureであり、実解析では実データと構築済みHISAT2インデックスへ差し替える。これはTRE環境で標準化されたパイプラインを多数のサンプルに適用する運用と相性がよい。
 
 #### CWLを使う場面
 

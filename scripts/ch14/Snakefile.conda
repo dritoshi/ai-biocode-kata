@@ -1,0 +1,20 @@
+# DESeq2をルール固有のconda環境で実行する最小ワークフロー
+
+
+rule all:
+    input:
+        "results/deg/deseq2_results.csv",
+
+
+rule deseq2:
+    input:
+        counts="data/deseq2/counts.tsv",
+        samples="data/deseq2/samples.tsv",
+    output:
+        results="results/deg/deseq2_results.csv",
+    log:
+        "logs/deseq2.log",
+    conda:
+        "envs/deseq2.yaml"
+    script:
+        "run_deseq2.R"
