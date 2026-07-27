@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-07-28T01:51:42+09:00",
+  "generated_at": "2026-07-28T03:10:37+09:00",
   "method": "docs/review/2026-07-25_code_correspondence_reaudit_plan.md",
-  "source_commit": "d01340fceec35aa0c9c28fd405a60a245abb37ec",
-  "source_snapshot_sha256": "ad3744992b9104bc6f9549e88c9efcf6de6602591507bdc8934f110da16fff9c",
+  "source_commit": "2594abe4da68f7bba77fc2b898222e2e817594e6",
+  "source_snapshot_sha256": "907e3238ba2d1070fa8991b1340c858986e4fcc9e273a15b85043250af31f1c7",
   "environment": {
     "python": "3.14.6",
     "pytest": "pytest 9.0.3",
@@ -12,8 +12,8 @@
   "summary": {
     "chapters": 22,
     "book_blocks": 529,
-    "script_files": 174,
-    "test_files_under_chapters": 113,
+    "script_files": 175,
+    "test_files_under_chapters": 116,
     "languages": {
       "python": 227,
       "text": 2,
@@ -51,33 +51,33 @@
       "required_tests": 8
     },
     "correspondence_all": {
-      "E3": 24,
+      "E3": 18,
       "EN": 395,
       "E1": 45,
-      "E2": 22,
-      "E0": 43
+      "E2": 25,
+      "E0": 46
     },
     "correspondence_required": {
-      "E3": 24,
+      "E3": 18,
       "E1": 45,
-      "E2": 22,
-      "E0": 43
+      "E2": 25,
+      "E0": 46
     },
     "script_book_status": {
       "script_only": 33,
-      "body_correspondence": 98,
+      "body_correspondence": 99,
       "reference_only": 43
     },
     "script_test_status": {
-      "no_direct_test": 56,
-      "passed": 91,
+      "no_direct_test": 52,
+      "passed": 96,
       "passed_with_skip": 27
     },
     "test_run": {
-      "files": 91,
-      "chapter_test_files": 89,
+      "files": 94,
+      "chapter_test_files": 92,
       "review_test_files": 2,
-      "passed": 908,
+      "passed": 914,
       "failed": 0,
       "skipped": 11,
       "errors": 0
@@ -1462,7 +1462,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-02-016",
+          "target_file_id": "S-02-017",
           "target_entity_locations": []
         }
       ],
@@ -1887,27 +1887,24 @@
       "category_reason": "SSH configの設定定義",
       "relations": [
         {
-          "target_file": "scripts/ch16/ssh_config.example",
-          "equivalence": "E3",
+          "target_file": "scripts/ch02/ssh_config.example",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "同じSSH configだがホスト名・利用者・ProxyJump構成が異なる章横断候補",
-          "verification": "manual",
+          "evidence": "基本HPC接続用SSH設定の正規化行列が本文と一致",
+          "verification": "ssh -G -FでHost別名、HostName、User、IdentityFileを展開してpytest検証",
           "target_entity": null,
-          "cross_chapter": true,
-          "target_file_id": "S-16-138",
-          "target_entity_locations": [],
-          "history": {
-            "book_last_update": "2026-03-19T19:44:33+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          "cross_chapter": false,
+          "target_file_id": "S-02-016",
+          "target_entity_locations": []
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E0",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch02/test_ssh_config.py"
+        ],
+        "passed": 1,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -2091,7 +2088,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-03-018",
+          "target_file_id": "S-03-019",
           "target_entity_locations": []
         }
       ],
@@ -2350,7 +2347,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-03-019",
+          "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
       ],
@@ -2394,7 +2391,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-03-019",
+          "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
       ],
@@ -2498,7 +2495,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-03-019",
+          "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
       ],
@@ -2542,7 +2539,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-03-019",
+          "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
       ],
@@ -2676,10 +2673,10 @@
           "evidence": "関数名とNumPy型注釈だけが異なり、default_rng→choice→添字抽出はAST上同じ",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-03-022",
+          "target_file_id": "S-03-023",
           "target_entity_locations": [
             {
-              "id": "S-03-022-E001",
+              "id": "S-03-023-E001",
               "name": "subsample_with_seed",
               "kind": "FunctionDef",
               "line_start": 11,
@@ -2999,7 +2996,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-04-030",
+          "target_file_id": "S-04-031",
           "target_entity_locations": []
         }
       ],
@@ -3103,7 +3100,7 @@
           "evidence": "環境固有パスを除いた本文同期後のYAMLが正規化行列で一致",
           "verification": "実資産のYAML構文・必須値・相対パスをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-04-024",
+          "target_file_id": "S-04-025",
           "target_entity_locations": []
         }
       ],
@@ -3147,7 +3144,7 @@
           "evidence": "PEP 621のdependencies配列へ修正後のTOMLが正規化行列で一致",
           "verification": "実資産をtomllibで読み、依存配列をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-04-028",
+          "target_file_id": "S-04-029",
           "target_entity_locations": []
         }
       ],
@@ -3254,10 +3251,10 @@
           "evidence": "utf-8-sigによるBOM除去は同じだが本文はトップレベル、実体はPath入力の関数",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-04-026",
+          "target_file_id": "S-04-027",
           "target_entity_locations": [
             {
-              "id": "S-04-026-E001",
+              "id": "S-04-027-E001",
               "name": "read_csv_with_bom_handling",
               "kind": "FunctionDef",
               "line_start": 12,
@@ -3307,10 +3304,10 @@
           "evidence": "Unicode正規化の題材が同じで、本文は比較デモ、実体は再利用関数",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-04-026",
+          "target_file_id": "S-04-027",
           "target_entity_locations": [
             {
-              "id": "S-04-026-E002",
+              "id": "S-04-027-E002",
               "name": "normalize_filename_nfc",
               "kind": "FunctionDef",
               "line_start": 34,
@@ -3543,7 +3540,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-04-027",
+          "target_file_id": "S-04-028",
           "target_entity_locations": []
         }
       ],
@@ -3587,7 +3584,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-04-029",
+          "target_file_id": "S-04-030",
           "target_entity_locations": []
         }
       ],
@@ -3751,7 +3748,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-032",
+          "target_file_id": "S-05-033",
           "target_entity_locations": []
         }
       ],
@@ -3825,7 +3822,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-034",
+          "target_file_id": "S-05-035",
           "target_entity_locations": []
         },
         {
@@ -3836,7 +3833,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-035",
+          "target_file_id": "S-05-036",
           "target_entity_locations": []
         }
       ],
@@ -3882,7 +3879,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-033",
+          "target_file_id": "S-05-034",
           "target_entity_locations": []
         },
         {
@@ -3893,7 +3890,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-034",
+          "target_file_id": "S-05-035",
           "target_entity_locations": []
         }
       ],
@@ -3968,7 +3965,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-032",
+          "target_file_id": "S-05-033",
           "target_entity_locations": []
         }
       ],
@@ -4042,7 +4039,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-05-034",
+          "target_file_id": "S-05-035",
           "target_entity_locations": []
         }
       ],
@@ -4568,10 +4565,10 @@
           "evidence": "sys.prefix/base_prefixによる仮想環境判定は同じだが、実体はdataclassへ集約",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-06-037",
+          "target_file_id": "S-06-038",
           "target_entity_locations": [
             {
-              "id": "S-06-037-E002",
+              "id": "S-06-038-E002",
               "name": "get_environment_info",
               "kind": "FunctionDef",
               "line_start": 26,
@@ -4680,7 +4677,7 @@
           "evidence": "requirements.txtの正規化行列が一致",
           "verification": "実資産の依存指定と上下限をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-06-041",
+          "target_file_id": "S-06-042",
           "target_entity_locations": []
         }
       ],
@@ -4724,7 +4721,7 @@
           "evidence": "コメントを除くpyproject.tomlの正規化行列が一致",
           "verification": "実資産をtomllibで読み、必須メタデータと依存配列をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-06-040",
+          "target_file_id": "S-06-041",
           "target_entity_locations": []
         }
       ],
@@ -4768,7 +4765,7 @@
           "evidence": "defaults除去後のenvironment.ymlが正規化行列で一致",
           "verification": "実資産のチャネル順・依存・pip節をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-06-039",
+          "target_file_id": "S-06-040",
           "target_entity_locations": []
         }
       ],
@@ -4902,7 +4899,7 @@
           "evidence": "condarc.exampleの正規化行列が一致",
           "verification": "実資産のチャネル順とstrict優先度をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-06-038",
+          "target_file_id": "S-06-039",
           "target_entity_locations": []
         }
       ],
@@ -5369,7 +5366,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-07-044",
+          "target_file_id": "S-07-045",
           "target_entity_locations": []
         }
       ],
@@ -5471,7 +5468,7 @@
           "verification": "本文と実体の正規化比較、およびtests/ch07/test_ci_minimal.pyによる構造検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-07-043",
+          "target_file_id": "S-07-044",
           "target_entity_locations": []
         }
       ],
@@ -5515,7 +5512,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-07-042",
+          "target_file_id": "S-07-043",
           "target_entity_locations": []
         }
       ],
@@ -5770,7 +5767,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
+          "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
       ],
@@ -5815,10 +5812,10 @@
           "verification": "空入力、小文字、通常配列、無効塩基をpytestで検証し、分岐ごとの戻り値・例外を目視比較",
           "target_entity": "reverse_complement",
           "cross_chapter": false,
-          "target_file_id": "S-08-052",
+          "target_file_id": "S-08-053",
           "target_entity_locations": [
             {
-              "id": "S-08-052-E001",
+              "id": "S-08-053-E001",
               "name": "reverse_complement",
               "kind": "FunctionDef",
               "line_start": 11,
@@ -5884,7 +5881,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
+          "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
       ],
@@ -5960,10 +5957,10 @@
           "verification": "pytest収集とpytest.approxによる期待値比較を実行",
           "target_entity": "test_gc_content_typical",
           "cross_chapter": false,
-          "target_file_id": "T-08-042",
+          "target_file_id": "T-08-043",
           "target_entity_locations": [
             {
-              "id": "T-08-042-E001",
+              "id": "T-08-043-E001",
               "name": "test_gc_content_typical",
               "kind": "FunctionDef",
               "line_start": 10,
@@ -6013,7 +6010,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
+          "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
       ],
@@ -6057,7 +6054,7 @@
           "cross_chapter": false,
           "verification": "fixture注入、GC閾値、3レコードのフィルタ結果をpytestで検証",
           "target_entity": null,
-          "target_file_id": "T-08-040",
+          "target_file_id": "T-08-041",
           "target_entity_locations": []
         }
       ],
@@ -6102,10 +6099,10 @@
           "evidence": "test_data_dirフィクスチャのASTが本文と一致",
           "verification": "共有フィクスチャを実テストから利用し、返却パスをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "T-08-036",
+          "target_file_id": "T-08-037",
           "target_entity_locations": [
             {
-              "id": "T-08-036-E001",
+              "id": "T-08-037-E001",
               "name": "test_data_dir",
               "kind": "FunctionDef",
               "line_start": 9,
@@ -6121,10 +6118,10 @@
           "evidence": "sample_fastaフィクスチャのASTが本文と一致",
           "verification": "実FASTA資産をBio.SeqIOで読み、内容をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "T-08-036",
+          "target_file_id": "T-08-037",
           "target_entity_locations": [
             {
-              "id": "T-08-036-E002",
+              "id": "T-08-037-E002",
               "name": "sample_fasta",
               "kind": "FunctionDef",
               "line_start": 15,
@@ -6171,7 +6168,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-041",
+          "target_file_id": "T-08-042",
           "target_entity_locations": []
         },
         {
@@ -6182,7 +6179,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-042",
+          "target_file_id": "T-08-043",
           "target_entity_locations": []
         }
       ],
@@ -6287,7 +6284,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "T-08-042",
+          "target_file_id": "T-08-043",
           "target_entity_locations": []
         }
       ],
@@ -6362,7 +6359,7 @@
           "evidence": "Ruff基本設定が統合pyproject.tomlの順序保存部分列",
           "verification": "実資産をtomllibで読み、Ruff設定をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-051",
+          "target_file_id": "S-08-052",
           "target_entity_locations": []
         }
       ],
@@ -6407,7 +6404,7 @@
           "evidence": "per-file-ignores設定が統合pyproject.tomlの順序保存部分列",
           "verification": "実資産をtomllibで読み、tests向けD除外をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-051",
+          "target_file_id": "S-08-052",
           "target_entity_locations": []
         }
       ],
@@ -6542,10 +6539,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-08-053",
+          "target_file_id": "S-08-054",
           "target_entity_locations": [
             {
-              "id": "S-08-053-E001",
+              "id": "S-08-054-E001",
               "name": "gc_content",
               "kind": "FunctionDef",
               "line_start": 8,
@@ -6595,7 +6592,7 @@
           "evidence": "mypy設定が統合pyproject.tomlの順序保存部分列",
           "verification": "実資産をtomllibで読み、mypy設定をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-051",
+          "target_file_id": "S-08-052",
           "target_entity_locations": []
         }
       ],
@@ -6669,7 +6666,7 @@
           "evidence": "pre-commit設定の正規化行列が一致",
           "verification": "公式repoの実在タグと実資産のhook構造を確認し、pytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-050",
+          "target_file_id": "S-08-051",
           "target_entity_locations": []
         }
       ],
@@ -6774,7 +6771,7 @@
           "evidence": "Claude Code用PostToolUse設定がJSONとして一致",
           "verification": "Anthropic公式schemaを確認し、実資産をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-048",
+          "target_file_id": "S-08-049",
           "target_entity_locations": []
         },
         {
@@ -6785,7 +6782,7 @@
           "evidence": "Codex CLI用PostToolUse設定が同じイベント構造で一致",
           "verification": "OpenAI公式Hooks文書を確認し、実資産をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-049",
+          "target_file_id": "S-08-050",
           "target_entity_locations": []
         }
       ],
@@ -6829,7 +6826,7 @@
           "evidence": "単一Python版ワークフローの正規化行列が実体と一致",
           "verification": "トリガー・権限・アクション参照・uvコマンドをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-047",
+          "target_file_id": "S-08-048",
           "target_entity_locations": []
         }
       ],
@@ -6873,7 +6870,7 @@
           "evidence": "マトリクス設定が完全ワークフローの順序保存部分列",
           "verification": "Python 3.10から3.14の行列とsetup-pythonへの値引き渡しをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-08-046",
+          "target_file_id": "S-08-047",
           "target_entity_locations": []
         }
       ],
@@ -6978,10 +6975,10 @@
           "evidence": "実体の先頭にあるpath.read_text()を連続して抜粋し、以降の空入力検証・FASTAパース・戻り値を省略すると明示",
           "verification": "ファイル欠落、空FASTA、単一・複数レコードをpytestで検証し、抜粋境界を目視確認",
           "cross_chapter": false,
-          "target_file_id": "S-09-061",
+          "target_file_id": "S-09-062",
           "target_entity_locations": [
             {
-              "id": "S-09-061-E001",
+              "id": "S-09-062-E001",
               "name": "read_fasta_records",
               "kind": "FunctionDef",
               "line_start": 6,
@@ -7067,10 +7064,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-09-061",
+          "target_file_id": "S-09-062",
           "target_entity_locations": [
             {
-              "id": "S-09-061-E002",
+              "id": "S-09-062-E002",
               "name": "parse_gene_expression",
               "kind": "FunctionDef",
               "line_start": 61,
@@ -7149,10 +7146,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-09-061",
+          "target_file_id": "S-09-062",
           "target_entity_locations": [
             {
-              "id": "S-09-061-E003",
+              "id": "S-09-062-E003",
               "name": "lookup_gene_annotation",
               "kind": "FunctionDef",
               "line_start": 94,
@@ -7247,10 +7244,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-09-056",
+          "target_file_id": "S-09-057",
           "target_entity_locations": [
             {
-              "id": "S-09-056-E002",
+              "id": "S-09-057-E002",
               "name": "filter_sequences_logging_debug",
               "kind": "FunctionDef",
               "line_start": 35,
@@ -7299,10 +7296,10 @@
           "evidence": "実体のGC比計算ループとbreakpoint呼び出しを連続して抜粋し、空入力処理と集計returnの省略を明示",
           "verification": "breakpointをmonkeypatchし、通常入力では配列ごとの呼び出し、空入力では非呼び出しをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-09-059",
+          "target_file_id": "S-09-060",
           "target_entity_locations": [
             {
-              "id": "S-09-059-E002",
+              "id": "S-09-060-E002",
               "name": "calculate_gc_stats_debug",
               "kind": "FunctionDef",
               "line_start": 37,
@@ -7628,10 +7625,10 @@
           "evidence": "BED・GFF・不明形式の検証分岐を実体どおり抜粋し、正常時のreturn Trueだけを省略すると明示",
           "verification": "両座標系の境界、start > end、配列長超過、不明形式をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-09-055",
+          "target_file_id": "S-09-056",
           "target_entity_locations": [
             {
-              "id": "S-09-055-E005",
+              "id": "S-09-056-E005",
               "name": "validate_coordinates",
               "kind": "FunctionDef",
               "line_start": 132,
@@ -7717,10 +7714,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-09-058",
+          "target_file_id": "S-09-059",
           "target_entity_locations": [
             {
-              "id": "S-09-058-E003",
+              "id": "S-09-059-E003",
               "name": "resolve_data_path",
               "kind": "FunctionDef",
               "line_start": 49,
@@ -7875,10 +7872,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-09-062",
+          "target_file_id": "S-09-063",
           "target_entity_locations": [
             {
-              "id": "S-09-062-E003",
+              "id": "S-09-063-E003",
               "name": "safe_mean",
               "kind": "FunctionDef",
               "line_start": 57,
@@ -7957,10 +7954,10 @@
           "evidence": "ミュータブルデフォルト引数のバグ関数がdocstring差を除いて同じ",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-09-060",
+          "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
-              "id": "S-09-060-E001",
+              "id": "S-09-061-E001",
               "name": "add_gene_buggy",
               "kind": "FunctionDef",
               "line_start": 9,
@@ -8009,10 +8006,10 @@
           "evidence": "浅いコピーでネストしたlistが共有される同じ挙動を関数化",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-09-060",
+          "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
-              "id": "S-09-060-E003",
+              "id": "S-09-061-E003",
               "name": "shallow_copy_demo",
               "kind": "FunctionDef",
               "line_start": 54,
@@ -8091,10 +8088,10 @@
           "evidence": "str.replaceの戻り値代入という同じ修正を関数化",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-09-060",
+          "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
-              "id": "S-09-060-E006",
+              "id": "S-09-061-E006",
               "name": "remove_n_fixed",
               "kind": "FunctionDef",
               "line_start": 109,
@@ -8143,10 +8140,10 @@
           "evidence": "chained assignment回避のloc利用を再利用関数として実装",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-09-060",
+          "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
-              "id": "S-09-060-E007",
+              "id": "S-09-061-E007",
               "name": "filter_with_loc",
               "kind": "FunctionDef",
               "line_start": 126,
@@ -8195,10 +8192,10 @@
           "evidence": "NumPy view/copyの共有挙動を同じ配列例で関数化",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-09-060",
+          "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
-              "id": "S-09-060-E008",
+              "id": "S-09-061-E008",
               "name": "demonstrate_numpy_view",
               "kind": "FunctionDef",
               "line_start": 149,
@@ -8397,7 +8394,7 @@
           "evidence": "パッケージ用pyproject.tomlの正規化行列が一致",
           "verification": "PEP 621・build backend・実在CLI entry pointをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-10-068",
+          "target_file_id": "S-10-069",
           "target_entity_locations": []
         }
       ],
@@ -8982,7 +8979,7 @@
           "evidence": "config.yamlの正規化行列が一致",
           "verification": "既存load_configで実資産を読み、値のマージをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-10-064",
+          "target_file_id": "S-10-065",
           "target_entity_locations": []
         }
       ],
@@ -9026,10 +9023,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-10-065",
+          "target_file_id": "S-10-066",
           "target_entity_locations": [
             {
-              "id": "S-10-065-E001",
+              "id": "S-10-066-E001",
               "name": "load_config",
               "kind": "FunctionDef",
               "line_start": 9,
@@ -9139,10 +9136,10 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-10-066",
+          "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
-              "id": "S-10-066-E001",
+              "id": "S-10-067-E001",
               "name": "BiofilterError",
               "kind": "ClassDef",
               "line_start": 9,
@@ -9191,10 +9188,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-10-066",
+          "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
-              "id": "S-10-066-E008",
+              "id": "S-10-067-E008",
               "name": "load_min_quality",
               "kind": "FunctionDef",
               "line_start": 101,
@@ -9243,10 +9240,10 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-10-066",
+          "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
-              "id": "S-10-066-E006",
+              "id": "S-10-067-E006",
               "name": "_load_effective_fasta_text",
               "kind": "FunctionDef",
               "line_start": 37,
@@ -9325,10 +9322,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-10-066",
+          "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
-              "id": "S-10-066-E009",
+              "id": "S-10-067-E009",
               "name": "count_records_with_cleanup",
               "kind": "FunctionDef",
               "line_start": 133,
@@ -9407,10 +9404,10 @@
           "evidence": "run_pipeline関数のASTが本文と一致",
           "verification": "入力・参照の早期失敗と検証後の出力作成をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-10-067",
+          "target_file_id": "S-10-068",
           "target_entity_locations": [
             {
-              "id": "S-10-067-E001",
+              "id": "S-10-068-E001",
               "name": "run_pipeline",
               "kind": "FunctionDef",
               "line_start": 6,
@@ -9520,10 +9517,10 @@
           "evidence": "同章・同名だがAST差",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-11-072",
+          "target_file_id": "S-11-073",
           "target_entity_locations": [
             {
-              "id": "S-11-072-E001",
+              "id": "S-11-073-E001",
               "name": "parse_args",
               "kind": "FunctionDef",
               "line_start": 15,
@@ -9594,7 +9591,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-11-073",
+          "target_file_id": "S-11-074",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-03-19T17:47:01+09:00",
@@ -9651,7 +9648,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-11-074",
+          "target_file_id": "S-11-075",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-05-26T22:15:31+09:00",
@@ -9768,7 +9765,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-11-073",
+          "target_file_id": "S-11-074",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-03-19T17:47:01+09:00",
@@ -9834,10 +9831,10 @@
           "evidence": "同章・同名だがAST差",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-11-077",
+          "target_file_id": "S-11-078",
           "target_entity_locations": [
             {
-              "id": "S-11-077-E001",
+              "id": "S-11-078-E001",
               "name": "cli",
               "kind": "FunctionDef",
               "line_start": 39,
@@ -9999,7 +9996,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-11-073",
+          "target_file_id": "S-11-074",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-07-24T23:29:57+09:00",
@@ -10085,10 +10082,10 @@
           "evidence": "load_configは章横断候補だがdefaultsと戻り値仕様が異なる",
           "cross_chapter": true,
           "verification": "manual",
-          "target_file_id": "S-10-065",
+          "target_file_id": "S-10-066",
           "target_entity_locations": [
             {
-              "id": "S-10-065-E001",
+              "id": "S-10-066-E001",
               "name": "load_config",
               "kind": "FunctionDef",
               "line_start": 9,
@@ -10109,7 +10106,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-11-073",
+          "target_file_id": "S-11-074",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-03-19T17:47:01+09:00",
@@ -10472,10 +10469,10 @@
           "evidence": "同じfilter CLI処理だが、関数名、内包表記とループ、ステータスメッセージに差がある",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-11-077",
+          "target_file_id": "S-11-078",
           "target_entity_locations": [
             {
-              "id": "S-11-077-E003",
+              "id": "S-11-078-E003",
               "name": "filter_cmd",
               "kind": "FunctionDef",
               "line_start": 145,
@@ -10680,10 +10677,10 @@
           "evidence": "同章・同名だがAST差",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-11-077",
+          "target_file_id": "S-11-078",
           "target_entity_locations": [
             {
-              "id": "S-11-077-E001",
+              "id": "S-11-078-E001",
               "name": "cli",
               "kind": "FunctionDef",
               "line_start": 39,
@@ -10755,10 +10752,10 @@
           "evidence": "同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-11-075",
+          "target_file_id": "S-11-076",
           "target_entity_locations": [
             {
-              "id": "S-11-075-E001",
+              "id": "S-11-076-E001",
               "name": "setup_logging",
               "kind": "FunctionDef",
               "line_start": 8,
@@ -10779,10 +10776,10 @@
           "evidence": "同じsetup_loggingの別実体にも対応する多対多関係",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-11-076",
+          "target_file_id": "S-11-077",
           "target_entity_locations": [
             {
-              "id": "S-11-076-E001",
+              "id": "S-11-077-E001",
               "name": "setup_logging",
               "kind": "FunctionDef",
               "line_start": 22,
@@ -10958,10 +10955,10 @@
           "evidence": "定義名を伏せたAST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-081",
+          "target_file_id": "S-12-082",
           "target_entity_locations": [
             {
-              "id": "S-12-081-E001",
+              "id": "S-12-082-E001",
               "name": "_gc_per_base_loop",
               "kind": "FunctionDef",
               "line_start": 31,
@@ -11038,10 +11035,10 @@
           "evidence": "定義名を伏せたAST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-081",
+          "target_file_id": "S-12-082",
           "target_entity_locations": [
             {
-              "id": "S-12-081-E003",
+              "id": "S-12-082-E003",
               "name": "_gc_per_seq_numpy",
               "kind": "FunctionDef",
               "line_start": 48,
@@ -11088,10 +11085,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-079",
+          "target_file_id": "S-12-080",
           "target_entity_locations": [
             {
-              "id": "S-12-079-E001",
+              "id": "S-12-080-E001",
               "name": "gc_content_vectorized",
               "kind": "FunctionDef",
               "line_start": 6,
@@ -11140,10 +11137,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-079",
+          "target_file_id": "S-12-080",
           "target_entity_locations": [
             {
-              "id": "S-12-079-E002",
+              "id": "S-12-080-E002",
               "name": "normalize_cpm",
               "kind": "FunctionDef",
               "line_start": 41,
@@ -11192,10 +11189,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-079",
+          "target_file_id": "S-12-080",
           "target_entity_locations": [
             {
-              "id": "S-12-079-E003",
+              "id": "S-12-080-E003",
               "name": "filter_by_quality",
               "kind": "FunctionDef",
               "line_start": 66,
@@ -11245,10 +11242,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-080",
+          "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
-              "id": "S-12-080-E001",
+              "id": "S-12-081-E001",
               "name": "load_deg_results",
               "kind": "FunctionDef",
               "line_start": 8,
@@ -11298,10 +11295,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-080",
+          "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
-              "id": "S-12-080-E002",
+              "id": "S-12-081-E002",
               "name": "filter_significant_genes",
               "kind": "FunctionDef",
               "line_start": 33,
@@ -11351,10 +11348,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-080",
+          "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
-              "id": "S-12-080-E003",
+              "id": "S-12-081-E003",
               "name": "merge_with_metadata",
               "kind": "FunctionDef",
               "line_start": 61,
@@ -11404,10 +11401,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-080",
+          "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
-              "id": "S-12-080-E004",
+              "id": "S-12-081-E004",
               "name": "summarize_by_category",
               "kind": "FunctionDef",
               "line_start": 85,
@@ -11486,10 +11483,10 @@
           "evidence": "Polars lazyのfilter・方向列・group_byは同じだが、本文はCSV読込からcollectまでの利用例",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-12-082",
+          "target_file_id": "S-12-083",
           "target_entity_locations": [
             {
-              "id": "S-12-082-E002",
+              "id": "S-12-083-E002",
               "name": "summarize_by_direction_lazy",
               "kind": "FunctionDef",
               "line_start": 36,
@@ -11568,10 +11565,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-083",
+          "target_file_id": "S-12-084",
           "target_entity_locations": [
             {
-              "id": "S-12-083-E001",
+              "id": "S-12-084-E001",
               "name": "compare_expression",
               "kind": "FunctionDef",
               "line_start": 8,
@@ -11620,10 +11617,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-083",
+          "target_file_id": "S-12-084",
           "target_entity_locations": [
             {
-              "id": "S-12-083-E002",
+              "id": "S-12-084-E002",
               "name": "correct_pvalues",
               "kind": "FunctionDef",
               "line_start": 34,
@@ -11672,10 +11669,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-083",
+          "target_file_id": "S-12-084",
           "target_entity_locations": [
             {
-              "id": "S-12-083-E004",
+              "id": "S-12-084-E004",
               "name": "correct_pvalues_scipy",
               "kind": "FunctionDef",
               "line_start": 96,
@@ -11724,10 +11721,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-083",
+          "target_file_id": "S-12-084",
           "target_entity_locations": [
             {
-              "id": "S-12-083-E005",
+              "id": "S-12-084-E005",
               "name": "distance_matrix_naive",
               "kind": "FunctionDef",
               "line_start": 117,
@@ -11776,10 +11773,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-12-083",
+          "target_file_id": "S-12-084",
           "target_entity_locations": [
             {
-              "id": "S-12-083-E003",
+              "id": "S-12-084-E003",
               "name": "expression_distance_matrix",
               "kind": "FunctionDef",
               "line_start": 75,
@@ -11918,10 +11915,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-13-087",
+          "target_file_id": "S-13-088",
           "target_entity_locations": [
             {
-              "id": "S-13-087-E001",
+              "id": "S-13-088-E001",
               "name": "gc_histogram",
               "kind": "FunctionDef",
               "line_start": 14,
@@ -11971,10 +11968,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-13-085",
+          "target_file_id": "S-13-086",
           "target_entity_locations": [
             {
-              "id": "S-13-085-E001",
+              "id": "S-13-086-E001",
               "name": "volcano_plot",
               "kind": "FunctionDef",
               "line_start": 18,
@@ -12024,10 +12021,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-13-085",
+          "target_file_id": "S-13-086",
           "target_entity_locations": [
             {
-              "id": "S-13-085-E002",
+              "id": "S-13-086-E002",
               "name": "expression_heatmap",
               "kind": "FunctionDef",
               "line_start": 98,
@@ -12076,10 +12073,10 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-13-090",
+          "target_file_id": "S-13-091",
           "target_entity_locations": [
             {
-              "id": "S-13-090-E001",
+              "id": "S-13-091-E001",
               "name": "expression_violin",
               "kind": "FunctionDef",
               "line_start": 15,
@@ -12205,10 +12202,10 @@
           "evidence": "apply_project_style関数のASTが本文と一致",
           "verification": "6項目のMatplotlib rcParams更新をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-13-089",
+          "target_file_id": "S-13-090",
           "target_entity_locations": [
             {
-              "id": "S-13-089-E001",
+              "id": "S-13-090-E001",
               "name": "apply_project_style",
               "kind": "FunctionDef",
               "line_start": 6,
@@ -12289,7 +12286,7 @@
           "evidence": "pyGenomeTracks設定の正規化行列が一致",
           "verification": "実資産のINI構文と3トラックの必須値をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-13-091",
+          "target_file_id": "S-13-092",
           "target_entity_locations": []
         }
       ],
@@ -12381,7 +12378,7 @@
         "Snakemake — Pythonベースのワークフロー言語",
         "ruleの基本構造"
       ],
-      "sha256": "d37852040ec0636f36b24e6ae6ccd024a02fa6ef164f1193f6fd0b0508768830",
+      "sha256": "4e4a5972a644a9a1ed4d5a3ce9668d40055128d7a855fd07610fff13bdda19ba",
       "nonempty_lines": 11,
       "category": "config_workflow",
       "placement": "required_scripts",
@@ -12390,33 +12387,30 @@
         {
           "target_file": "scripts/ch14/Snakefile",
           "target_entity": "rule fastqc",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "処理は同じだがthreadsが定数4とconfig参照で異なる",
-          "verification": "manual",
+          "evidence": "fastqc ruleを設定参照、入出力、ログ、shellを保って実体から連続抜粋",
+          "verification": "config値の静的検証とSnakemake 9.23.1のdry-runで3サンプルのDAGを確認",
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": [
             {
-              "id": "S-14-093-RULE-fastqc",
+              "id": "S-14-094-RULE-fastqc",
               "name": "rule fastqc",
               "kind": "SnakefileRule",
               "line_start": 17,
               "line_end": 17
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-20T18:37:26+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -12427,8 +12421,8 @@
       "id": "B-14-003",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 130,
-      "line_end": 135,
+      "line_start": 131,
+      "line_end": 136,
       "lang": "python",
       "heading": "ruleの基本構造",
       "heading_path": [
@@ -12451,10 +12445,10 @@
           "evidence": "コメント・空白を除くrule内容が一致",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": [
             {
-              "id": "S-14-093-RULE-all",
+              "id": "S-14-094-RULE-all",
               "name": "rule all",
               "kind": "SnakefileRule",
               "line_start": 9,
@@ -12465,9 +12459,11 @@
       ],
       "correspondence": "E0",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -12478,8 +12474,8 @@
       "id": "B-14-004",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 141,
-      "line_end": 151,
+      "line_start": 142,
+      "line_end": 152,
       "lang": "python",
       "heading": "wildcards — サンプル展開の自動化",
       "heading_path": [
@@ -12502,15 +12498,17 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": []
         }
       ],
       "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -12521,8 +12519,8 @@
       "id": "B-14-005",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 165,
-      "line_end": 185,
+      "line_start": 166,
+      "line_end": 186,
       "lang": "yaml",
       "heading": "設定ファイル — パラメータの外出し",
       "heading_path": [
@@ -12545,15 +12543,17 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-096",
+          "target_file_id": "S-14-097",
           "target_entity_locations": []
         }
       ],
       "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -12564,8 +12564,8 @@
       "id": "B-14-006",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 193,
-      "line_end": 206,
+      "line_start": 194,
+      "line_end": 207,
       "lang": "python",
       "heading": "conda / container統合",
       "heading_path": [
@@ -12588,7 +12588,7 @@
           "verification": "dry-run・R構文解析・最小count fixtureの出力をpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-094",
+          "target_file_id": "S-14-095",
           "target_entity_locations": []
         }
       ],
@@ -12609,8 +12609,8 @@
       "id": "B-14-007",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 216,
-      "line_end": 271,
+      "line_start": 217,
+      "line_end": 272,
       "lang": "python",
       "heading": "Snakefileの完全な例",
       "heading_path": [
@@ -12633,15 +12633,17 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": []
         }
       ],
       "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -12652,8 +12654,8 @@
       "id": "B-14-008",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 301,
-      "line_end": 335,
+      "line_start": 302,
+      "line_end": 336,
       "lang": "groovy",
       "heading": "DSL2の基本構文",
       "heading_path": [
@@ -12676,7 +12678,7 @@
           "verification": "代替FastQCによるfixture smoke testをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-104",
+          "target_file_id": "S-14-105",
           "target_entity_locations": []
         }
       ],
@@ -12697,8 +12699,8 @@
       "id": "B-14-009",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 345,
-      "line_end": 352,
+      "line_start": 346,
+      "line_end": 353,
       "lang": "bash",
       "heading": "nf-core — 既存パイプライン群の活用",
       "heading_path": [
@@ -12728,8 +12730,8 @@
       "id": "B-14-010",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 399,
-      "line_end": 446,
+      "line_start": 400,
+      "line_end": 447,
       "lang": "yaml",
       "heading": "CommandLineToolの基本構造",
       "heading_path": [
@@ -12752,7 +12754,7 @@
           "verification": "cwltool validateと代替fastpによるfixture smoke testをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-103",
+          "target_file_id": "S-14-104",
           "target_entity_locations": []
         }
       ],
@@ -12773,8 +12775,8 @@
       "id": "B-14-011",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 454,
-      "line_end": 491,
+      "line_start": 455,
+      "line_end": 492,
       "lang": "yaml",
       "heading": "Workflowの定義",
       "heading_path": [
@@ -12797,7 +12799,7 @@
           "verification": "cwltool validateと2 step接続のfixture smoke testをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-107",
+          "target_file_id": "S-14-108",
           "target_entity_locations": []
         }
       ],
@@ -12818,8 +12820,8 @@
       "id": "B-14-012",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 499,
-      "line_end": 510,
+      "line_start": 500,
+      "line_end": 511,
       "lang": "yaml",
       "heading": "入力ファイル（ジョブファイル）",
       "heading_path": [
@@ -12842,7 +12844,7 @@
           "verification": "全入力キー・File・Directory実在とCWL fixture実行をpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-106",
+          "target_file_id": "S-14-107",
           "target_entity_locations": []
         }
       ],
@@ -12863,8 +12865,8 @@
       "id": "B-14-013",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 514,
-      "line_end": 517,
+      "line_start": 515,
+      "line_end": 518,
       "lang": "bash",
       "heading": "入力ファイル（ジョブファイル）",
       "heading_path": [
@@ -12894,8 +12896,8 @@
       "id": "B-14-014",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 544,
-      "line_end": 563,
+      "line_start": 545,
+      "line_end": 571,
       "lang": "makefile",
       "heading": "make — 古典的だが今も有用",
       "heading_path": [
@@ -12903,34 +12905,31 @@
         "14-2. ワークフロー言語",
         "make — 古典的だが今も有用"
       ],
-      "sha256": "291410a9a73eed52bf10f5670c0318f609452790d21c0553899cc2cbacdd4751",
-      "nonempty_lines": 13,
+      "sha256": "e3e738d0b1f2c30ec0d926ee7df166a00ba400b01c66dc9c6678b14caed64899",
+      "nonempty_lines": 19,
       "category": "config_workflow",
       "placement": "required_scripts",
       "category_reason": "makefile の設定・ワークフロー",
       "relations": [
         {
           "target_file": "scripts/ch14/Makefile",
-          "equivalence": "E3",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "依存関係は同じだが本文URLが省略記号で実行不能、変数・clean処理にも差がある",
-          "verification": "manual",
+          "evidence": "URL、変数、依存関係、cleanを含むMakefileの正規化行列が本文と一致",
+          "verification": "make -n all/cleanで依存順と削除対象をpytest検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-14-092",
-          "target_entity_locations": [],
-          "history": {
-            "book_last_update": "2026-07-24T17:17:05+09:00",
-            "target_last_update": "2026-07-24T17:17:05+09:00",
-            "target_granularity": "file"
-          }
+          "target_file_id": "S-14-093",
+          "target_entity_locations": []
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E0",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -12941,8 +12940,8 @@
       "id": "B-14-015",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 616,
-      "line_end": 628,
+      "line_start": 624,
+      "line_end": 636,
       "lang": "none",
       "heading": "入力データは読み取り専用",
       "heading_path": [
@@ -12971,8 +12970,8 @@
       "id": "B-14-016",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 636,
-      "line_end": 643,
+      "line_start": 644,
+      "line_end": 651,
       "lang": "python",
       "heading": "中間ファイルと最終出力の分離",
       "heading_path": [
@@ -12994,10 +12993,10 @@
           "evidence": "input/output/temp指定が実体ruleの連続した抜粋",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": [
             {
-              "id": "S-14-093-RULE-trimmomatic",
+              "id": "S-14-094-RULE-trimmomatic",
               "name": "rule trimmomatic",
               "kind": "SnakefileRule",
               "line_start": 30,
@@ -13008,9 +13007,11 @@
       ],
       "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -13021,8 +13022,8 @@
       "id": "B-14-017",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 649,
-      "line_end": 654,
+      "line_start": 657,
+      "line_end": 662,
       "lang": "python",
       "heading": "中間ファイルと最終出力の分離",
       "heading_path": [
@@ -13030,7 +13031,7 @@
         "14-3. ワークフローのベストプラクティス",
         "中間ファイルと最終出力の分離"
       ],
-      "sha256": "ec124d0494209257740b7d877e0c48792ba2c345ef1621fe4f80bf45f11f2a9f",
+      "sha256": "920e259a0ea5a4b8b71dc90939e1bd4980564114dbe3c152288110ac3a65e8eb",
       "nonempty_lines": 4,
       "category": "config_workflow",
       "placement": "required_scripts",
@@ -13039,33 +13040,30 @@
         {
           "target_file": "scripts/ch14/Snakefile",
           "target_entity": "rule star_align",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "protectedとtemp、BAMパスが異なるため動作上の差がある",
-          "verification": "manual",
+          "evidence": "star_alignの中間BAMに対するtemp指定と完全な出力パスを実体から抜粋",
+          "verification": "実体のtemp指定をpytestで読み、Snakemake dry-runでfeaturecounts後の一時出力削除計画を確認",
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": [
             {
-              "id": "S-14-093-RULE-star_align",
+              "id": "S-14-094-RULE-star_align",
               "name": "rule star_align",
               "kind": "SnakefileRule",
               "line_start": 55,
               "line_end": 55
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-20T18:37:26+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -13076,8 +13074,8 @@
       "id": "B-14-018",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 660,
-      "line_end": 672,
+      "line_start": 670,
+      "line_end": 682,
       "lang": "python",
       "heading": "パラメータの設定ファイル化",
       "heading_path": [
@@ -13106,8 +13104,8 @@
       "id": "B-14-019",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 678,
-      "line_end": 684,
+      "line_start": 688,
+      "line_end": 703,
       "lang": "python",
       "heading": "ログの保存",
       "heading_path": [
@@ -13115,8 +13113,8 @@
         "14-3. ワークフローのベストプラクティス",
         "ログの保存"
       ],
-      "sha256": "4a5f869cd6aa2c8e09991d1d48367485b4701897732d69a70190d1c418aa953e",
-      "nonempty_lines": 5,
+      "sha256": "e98f8902a60754b6c12ea06c89fcb90c280ba09cdbeb9c232577ac0e40063fed",
+      "nonempty_lines": 14,
       "category": "config_workflow",
       "placement": "required_scripts",
       "category_reason": "Snakefileの規則",
@@ -13124,33 +13122,30 @@
         {
           "target_file": "scripts/ch14/Snakefile",
           "target_entity": "rule star_align",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "logの意図は同じだがshell文字列が説明用省略形",
-          "verification": "manual",
+          "evidence": "star_alignのlog、threads、完全なshell文字列を実体末尾から連続抜粋",
+          "verification": "ログパスとshellの{log}参照をpytestで読み、Snakemake dry-runで展開を確認",
           "cross_chapter": false,
-          "target_file_id": "S-14-093",
+          "target_file_id": "S-14-094",
           "target_entity_locations": [
             {
-              "id": "S-14-093-RULE-star_align",
+              "id": "S-14-094-RULE-star_align",
               "name": "rule star_align",
               "kind": "SnakefileRule",
               "line_start": 55,
               "line_end": 55
             }
-          ],
-          "history": {
-            "book_last_update": "2026-03-20T18:37:26+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          ]
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E2",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -13161,8 +13156,8 @@
       "id": "B-14-020",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 692,
-      "line_end": 698,
+      "line_start": 711,
+      "line_end": 717,
       "lang": "bash",
       "heading": "`--dry-run` / `--dag` による事前確認",
       "heading_path": [
@@ -13191,8 +13186,8 @@
       "id": "B-14-021",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 706,
-      "line_end": 712,
+      "line_start": 725,
+      "line_end": 731,
       "lang": "bash",
       "heading": "テスト用の小規模データ",
       "heading_path": [
@@ -13221,8 +13216,8 @@
       "id": "B-14-022",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 720,
-      "line_end": 730,
+      "line_start": 739,
+      "line_end": 749,
       "lang": "python",
       "heading": "ベストプラクティスの自動チェック",
       "heading_path": [
@@ -13244,7 +13239,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-14-109",
+          "target_file_id": "S-14-110",
           "target_entity_locations": []
         }
       ],
@@ -13265,8 +13260,8 @@
       "id": "B-14-023",
       "chapter": "ch14",
       "path": "chapters/14_workflow.md",
-      "line_start": 804,
-      "line_end": 817,
+      "line_start": 823,
+      "line_end": 836,
       "lang": "python",
       "heading": "演習 14-2: Snakefile のレビュー **[レビュー]**",
       "heading_path": [
@@ -13318,7 +13313,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-110",
+          "target_file_id": "S-15-111",
           "target_entity_locations": []
         }
       ],
@@ -13393,7 +13388,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-110",
+          "target_file_id": "S-15-111",
           "target_entity_locations": []
         }
       ],
@@ -13467,7 +13462,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-113",
+          "target_file_id": "S-15-114",
           "target_entity_locations": []
         }
       ],
@@ -13569,7 +13564,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-116",
+          "target_file_id": "S-15-117",
           "target_entity_locations": []
         }
       ],
@@ -13704,7 +13699,7 @@
           "verification": "本文同期と必須フィールドをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-121",
+          "target_file_id": "S-15-122",
           "target_entity_locations": []
         }
       ],
@@ -13778,7 +13773,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-115",
+          "target_file_id": "S-15-116",
           "target_entity_locations": []
         }
       ],
@@ -13910,7 +13905,7 @@
           "verification": "Dockerfile構文、digest、起動命令をpytestで検証し、Podman buildで確認",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-112",
+          "target_file_id": "S-15-113",
           "target_entity_locations": []
         }
       ],
@@ -13954,7 +13949,7 @@
           "verification": "Dockerfile構文とlinux-64/linux-aarch64 lockをpytestで検証し、Podman buildで確認",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-111",
+          "target_file_id": "S-15-112",
           "target_entity_locations": []
         }
       ],
@@ -14058,7 +14053,7 @@
           "verification": "3方式の分離、lock/hash、Dockerfile構文をpytestで検証し、各Podman buildで確認",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-15-123",
+          "target_file_id": "S-15-124",
           "target_entity_locations": []
         }
       ],
@@ -14162,7 +14157,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-15-122",
+          "target_file_id": "S-15-123",
           "target_entity_locations": []
         }
       ],
@@ -14301,7 +14296,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-15-119",
+          "target_file_id": "S-15-120",
           "target_entity_locations": []
         }
       ],
@@ -14467,7 +14462,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-134",
+          "target_file_id": "S-16-135",
           "target_entity_locations": []
         }
       ],
@@ -14539,7 +14534,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-133",
+          "target_file_id": "S-16-134",
           "target_entity_locations": []
         }
       ],
@@ -14611,7 +14606,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-136",
+          "target_file_id": "S-16-137",
           "target_entity_locations": []
         }
       ],
@@ -14713,7 +14708,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-135",
+          "target_file_id": "S-16-136",
           "target_entity_locations": []
         }
       ],
@@ -14785,7 +14780,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-135",
+          "target_file_id": "S-16-136",
           "target_entity_locations": []
         }
       ],
@@ -14941,26 +14936,23 @@
       "relations": [
         {
           "target_file": "scripts/ch16/ssh_config.example",
-          "equivalence": "E3",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "ProxyJump構造は同じだがHost別名とHostNameが異なる",
-          "verification": "manual",
+          "evidence": "bastionとhpcのProxyJump設定の正規化行列が本文と一致",
+          "verification": "ssh -G -Fで両Hostの接続先、User、ProxyJump、ServerAliveIntervalをpytest検証",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-138",
-          "target_entity_locations": [],
-          "history": {
-            "book_last_update": "2026-03-21T10:45:53+09:00",
-            "target_last_update": "2026-03-22T17:23:06+09:00",
-            "target_granularity": "file"
-          }
+          "target_file_id": "S-16-139",
+          "target_entity_locations": []
         }
       ],
-      "correspondence": "E3",
+      "correspondence": "E0",
       "tests": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch16/test_ssh_config.py"
+        ],
+        "passed": 2,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -15234,7 +15226,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-16-137",
+          "target_file_id": "S-16-138",
           "target_entity_locations": []
         }
       ],
@@ -15768,10 +15760,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-17-148",
+          "target_file_id": "S-17-149",
           "target_entity_locations": [
             {
-              "id": "S-17-148-E001",
+              "id": "S-17-149-E001",
               "name": "normalize_tpm_slow",
               "kind": "FunctionDef",
               "line_start": 10,
@@ -15880,10 +15872,10 @@
           "evidence": "同章・同名だがAST差",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-17-148",
+          "target_file_id": "S-17-149",
           "target_entity_locations": [
             {
-              "id": "S-17-148-E001",
+              "id": "S-17-149-E001",
               "name": "normalize_tpm_slow",
               "kind": "FunctionDef",
               "line_start": 10,
@@ -16014,10 +16006,10 @@
           "evidence": "load_large_data関数のASTが本文と一致",
           "verification": "小規模入力で再現可能な列平均と戻り値形状をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-17-144",
+          "target_file_id": "S-17-145",
           "target_entity_locations": [
             {
-              "id": "S-17-144-E001",
+              "id": "S-17-145-E001",
               "name": "load_large_data",
               "kind": "FunctionDef",
               "line_start": 6,
@@ -16246,10 +16238,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-17-148",
+          "target_file_id": "S-17-149",
           "target_entity_locations": [
             {
-              "id": "S-17-148-E002",
+              "id": "S-17-149-E002",
               "name": "normalize_tpm_fast",
               "kind": "FunctionDef",
               "line_start": 55,
@@ -16299,10 +16291,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-17-145",
+          "target_file_id": "S-17-146",
           "target_entity_locations": [
             {
-              "id": "S-17-145-E001",
+              "id": "S-17-146-E001",
               "name": "gc_content_single",
               "kind": "FunctionDef",
               "line_start": 6,
@@ -16355,7 +16347,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-17-143",
+          "target_file_id": "S-17-144",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-03-21T12:27:30+09:00",
@@ -16405,7 +16397,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-17-143",
+          "target_file_id": "S-17-144",
           "target_entity_locations": []
         }
       ],
@@ -16540,10 +16532,10 @@
           "evidence": "count_long_sequences関数のASTが本文と一致",
           "verification": "境界長を含むFASTAと空FASTAをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-17-149",
+          "target_file_id": "S-17-150",
           "target_entity_locations": [
             {
-              "id": "S-17-149-E001",
+              "id": "S-17-150-E001",
               "name": "count_long_sequences",
               "kind": "FunctionDef",
               "line_start": 8,
@@ -16592,10 +16584,10 @@
           "evidence": "同章・同名だがAST差",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-17-141",
+          "target_file_id": "S-17-142",
           "target_entity_locations": [
             {
-              "id": "S-17-141-E002",
+              "id": "S-17-142-E002",
               "name": "compute_stats_chunked",
               "kind": "FunctionDef",
               "line_start": 32,
@@ -16667,10 +16659,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-17-142",
+          "target_file_id": "S-17-143",
           "target_entity_locations": [
             {
-              "id": "S-17-142-E001",
+              "id": "S-17-143-E001",
               "name": "save_as_csv",
               "kind": "FunctionDef",
               "line_start": 9,
@@ -17266,7 +17258,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-18-152",
+          "target_file_id": "S-18-153",
           "target_entity_locations": []
         }
       ],
@@ -17369,7 +17361,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-18-158",
+          "target_file_id": "S-18-159",
           "target_entity_locations": []
         }
       ],
@@ -17473,7 +17465,7 @@
           "evidence": "本文のMkDocs設定全体が実体と一致",
           "verification": "YAML・参照パス・API関数をpytestで検証し、mkdocs build --strictを実行",
           "cross_chapter": false,
-          "target_file_id": "S-18-155",
+          "target_file_id": "S-18-156",
           "target_entity_locations": []
         }
       ],
@@ -17577,7 +17569,7 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
-          "target_file_id": "S-18-151",
+          "target_file_id": "S-18-152",
           "target_entity_locations": []
         }
       ],
@@ -17950,7 +17942,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-19-161",
+          "target_file_id": "S-19-162",
           "target_entity_locations": []
         }
       ],
@@ -17994,7 +17986,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-19-164",
+          "target_file_id": "S-19-165",
           "target_entity_locations": []
         }
       ],
@@ -18377,7 +18369,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-19-163",
+          "target_file_id": "S-19-164",
           "target_entity_locations": []
         }
       ],
@@ -18484,7 +18476,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-19-162",
+          "target_file_id": "S-19-163",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-03-21T20:40:48+09:00",
@@ -18633,7 +18625,7 @@
           "evidence": ".env.exampleの正規化行列が一致",
           "verification": "必須キー・placeholder・シークレット不在をpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-20-165",
+          "target_file_id": "S-20-166",
           "target_entity_locations": []
         }
       ],
@@ -18709,7 +18701,7 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
-          "target_file_id": "S-20-168",
+          "target_file_id": "S-20-169",
           "target_entity_locations": [],
           "history": {
             "book_last_update": "2026-07-24T21:25:39+09:00",
@@ -18900,10 +18892,10 @@
           "evidence": "年代化の基本式は同じだが実体に入力検証とエラー仕様がある",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-20-167",
+          "target_file_id": "S-20-168",
           "target_entity_locations": [
             {
-              "id": "S-20-167-E002",
+              "id": "S-20-168-E002",
               "name": "generalize_age",
               "kind": "FunctionDef",
               "line_start": 46,
@@ -18975,10 +18967,10 @@
           "evidence": "本文がrows準備・空入力・列検証・統計項目を明示的に省略した抜粋",
           "verification": "manual",
           "cross_chapter": false,
-          "target_file_id": "S-20-167",
+          "target_file_id": "S-20-168",
           "target_entity_locations": [
             {
-              "id": "S-20-167-E006",
+              "id": "S-20-168-E006",
               "name": "check_k_anonymity",
               "kind": "FunctionDef",
               "line_start": 210,
@@ -19181,10 +19173,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-21-172",
+          "target_file_id": "S-21-173",
           "target_entity_locations": [
             {
-              "id": "S-21-172-E001",
+              "id": "S-21-173-E001",
               "name": "collect_environment",
               "kind": "FunctionDef",
               "line_start": 27,
@@ -19312,10 +19304,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-21-174",
+          "target_file_id": "S-21-175",
           "target_entity_locations": [
             {
-              "id": "S-21-174-E003",
+              "id": "S-21-175-E003",
               "name": "check_type_hints",
               "kind": "FunctionDef",
               "line_start": 69,
@@ -19412,7 +19404,7 @@
           "evidence": "置換前テンプレートとして同期したBiocondaレシピが一致",
           "verification": "実資産の必須section・placeholder・test commandをpytestで検証",
           "cross_chapter": false,
-          "target_file_id": "S-21-171",
+          "target_file_id": "S-21-172",
           "target_entity_locations": []
         }
       ],
@@ -19519,10 +19511,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-21-173",
+          "target_file_id": "S-21-174",
           "target_entity_locations": [
             {
-              "id": "S-21-173-E002",
+              "id": "S-21-174-E002",
               "name": "parse_git_log",
               "kind": "FunctionDef",
               "line_start": 53,
@@ -19619,10 +19611,10 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
-          "target_file_id": "S-21-170",
+          "target_file_id": "S-21-171",
           "target_entity_locations": [
             {
-              "id": "S-21-170-E002",
+              "id": "S-21-171-E002",
               "name": "validate_metadata",
               "kind": "FunctionDef",
               "line_start": 168,
@@ -20096,6 +20088,36 @@
     },
     {
       "id": "S-02-016",
+      "path": "scripts/ch02/ssh_config.example",
+      "chapter": "ch02",
+      "sha256": "f9ea4006a6a173c3b24668aab1e5f0ba2ce5c705403aec307e536e4b54924731",
+      "line_count": 5,
+      "role": "template_support",
+      "book_status": "body_correspondence",
+      "body_block_ids": [
+        "B-02-031"
+      ],
+      "reference_block_ids": [],
+      "mentioned_in_chapter_prose": false,
+      "tests": [
+        {
+          "test_file": "tests/ch02/test_ssh_config.py",
+          "evidence": "direct_path_reference"
+        }
+      ],
+      "test_result": {
+        "status": "passed",
+        "files": [
+          "tests/ch02/test_ssh_config.py"
+        ],
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0
+      }
+    },
+    {
+      "id": "S-02-017",
       "path": "scripts/ch02/text_processing.py",
       "chapter": "ch02",
       "sha256": "411cd4edf4ee366bdaef855ccc91dfb5ed8dd884a5a0bd92a3245b3dd9928c4f",
@@ -20125,7 +20147,7 @@
       }
     },
     {
-      "id": "S-03-017",
+      "id": "S-03-018",
       "path": "scripts/ch03/__init__.py",
       "chapter": "ch03",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -20146,7 +20168,7 @@
       }
     },
     {
-      "id": "S-03-018",
+      "id": "S-03-019",
       "path": "scripts/ch03/data_structure_bench.py",
       "chapter": "ch03",
       "sha256": "89115a6e8df218f0b868126ce87de2a7f5602c881f4ebcdf538c87304563b3c2",
@@ -20176,7 +20198,7 @@
       }
     },
     {
-      "id": "S-03-019",
+      "id": "S-03-020",
       "path": "scripts/ch03/float_pitfalls.py",
       "chapter": "ch03",
       "sha256": "547cb00b2b9c45fafbca1dd34bbb77b6eaf0e8fa4847d2d54129c5b2489b8fcd",
@@ -20209,7 +20231,7 @@
       }
     },
     {
-      "id": "S-03-020",
+      "id": "S-03-021",
       "path": "scripts/ch03/plot_bench.py",
       "chapter": "ch03",
       "sha256": "3686541378c2de28b346ad2a4e639f8aaf64a2eb81bf9c18777b0fcbf2a9b1eb",
@@ -20230,7 +20252,7 @@
       }
     },
     {
-      "id": "S-03-021",
+      "id": "S-03-022",
       "path": "scripts/ch03/plot_complexity.py",
       "chapter": "ch03",
       "sha256": "2dbe9694b93cb7a30fd01c540b452e479efb890f7785c493732cfc281eec50eb",
@@ -20251,7 +20273,7 @@
       }
     },
     {
-      "id": "S-03-022",
+      "id": "S-03-023",
       "path": "scripts/ch03/random_reproducibility.py",
       "chapter": "ch03",
       "sha256": "af0e630ade0688a9df957b1b4379ed0812836e50a695b6b90ceb8cedb12b605f",
@@ -20281,7 +20303,7 @@
       }
     },
     {
-      "id": "S-04-023",
+      "id": "S-04-024",
       "path": "scripts/ch04/__init__.py",
       "chapter": "ch04",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -20302,7 +20324,7 @@
       }
     },
     {
-      "id": "S-04-024",
+      "id": "S-04-025",
       "path": "scripts/ch04/config_example.yaml",
       "chapter": "ch04",
       "sha256": "d5f7be9e1c1135069f22559fe188f0c20627c01a9687e2fb8cc536c5b8fb12c3",
@@ -20332,7 +20354,7 @@
       }
     },
     {
-      "id": "S-04-025",
+      "id": "S-04-026",
       "path": "scripts/ch04/coordinate_convert.py",
       "chapter": "ch04",
       "sha256": "6d42817e5343ffbba9ec78b28fa0a38834ed7bf528bc72543e3a393e2aa97944",
@@ -20360,7 +20382,7 @@
       }
     },
     {
-      "id": "S-04-026",
+      "id": "S-04-027",
       "path": "scripts/ch04/encoding_traps.py",
       "chapter": "ch04",
       "sha256": "bf10d6b541f29c05ac9ba734e16a4f202336fc4d3817b048db2c728e606425d0",
@@ -20391,7 +20413,7 @@
       }
     },
     {
-      "id": "S-04-027",
+      "id": "S-04-028",
       "path": "scripts/ch04/messy_to_tidy.py",
       "chapter": "ch04",
       "sha256": "c96e43ca548e65f1e205b917b3dbbaacdfa34c6b8f23509c1a22025c73c0b9a4",
@@ -20421,7 +20443,7 @@
       }
     },
     {
-      "id": "S-04-028",
+      "id": "S-04-029",
       "path": "scripts/ch04/pyproject_example.toml",
       "chapter": "ch04",
       "sha256": "76306ccaf8106cc4a6a088e1cc395dc1a45f50ea9edd3f6d859428634163ffbd",
@@ -20451,7 +20473,7 @@
       }
     },
     {
-      "id": "S-04-029",
+      "id": "S-04-030",
       "path": "scripts/ch04/tidy_data_demo.py",
       "chapter": "ch04",
       "sha256": "dbbf54c935f546456c6406cac7f9089f3f1bc19238118dd8242ff29dc733f896",
@@ -20481,7 +20503,7 @@
       }
     },
     {
-      "id": "S-04-030",
+      "id": "S-04-031",
       "path": "scripts/ch04/tsv_csv_handling.py",
       "chapter": "ch04",
       "sha256": "e73f5213756381f3711518d62e8173d9044bc978baffd8d9807ede15ef939c80",
@@ -20511,7 +20533,7 @@
       }
     },
     {
-      "id": "S-05-031",
+      "id": "S-05-032",
       "path": "scripts/ch05/__init__.py",
       "chapter": "ch05",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -20532,7 +20554,7 @@
       }
     },
     {
-      "id": "S-05-032",
+      "id": "S-05-033",
       "path": "scripts/ch05/module_demo.py",
       "chapter": "ch05",
       "sha256": "e7fa11803d1a4b9a843f649d3df4ea529c6f7ba8f2731c3b755e22ece76e5e92",
@@ -20563,7 +20585,7 @@
       }
     },
     {
-      "id": "S-05-033",
+      "id": "S-05-034",
       "path": "scripts/ch05/mylib/__init__.py",
       "chapter": "ch05",
       "sha256": "4a2f04d0739dcb4cd7c96dc300c1c3ae67319c9ac03ec7e5ca3c1edd2b7c349a",
@@ -20593,7 +20615,7 @@
       }
     },
     {
-      "id": "S-05-034",
+      "id": "S-05-035",
       "path": "scripts/ch05/mylib/core.py",
       "chapter": "ch05",
       "sha256": "046b1ae348e6c512613dbb55548a33d4a51f39be2ba6d02b9b3290521eeca79a",
@@ -20630,7 +20652,7 @@
       }
     },
     {
-      "id": "S-05-035",
+      "id": "S-05-036",
       "path": "scripts/ch05/mylib/utils.py",
       "chapter": "ch05",
       "sha256": "33b3cad134b5d7a3ab6d01c65a69821327a1884a01698d8678abd6c7f3782a89",
@@ -20665,7 +20687,7 @@
       }
     },
     {
-      "id": "S-06-036",
+      "id": "S-06-037",
       "path": "scripts/ch06/__init__.py",
       "chapter": "ch06",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -20686,7 +20708,7 @@
       }
     },
     {
-      "id": "S-06-037",
+      "id": "S-06-038",
       "path": "scripts/ch06/check_environment.py",
       "chapter": "ch06",
       "sha256": "988417b434efb386cf54d58cf3eb6b37aae4ce0e5e9872bc3032214812202a45",
@@ -20716,7 +20738,7 @@
       }
     },
     {
-      "id": "S-06-038",
+      "id": "S-06-039",
       "path": "scripts/ch06/examples/condarc.example",
       "chapter": "ch06",
       "sha256": "299b857a02daacc4534cf60b8f712d2db06d8bf798d599545f38649366087f0e",
@@ -20746,7 +20768,7 @@
       }
     },
     {
-      "id": "S-06-039",
+      "id": "S-06-040",
       "path": "scripts/ch06/examples/environment.yml",
       "chapter": "ch06",
       "sha256": "295cc361e8f14fea8fef4ca55c9d42f69c48e10eaf801ce0d916aa71d2627b40",
@@ -20776,7 +20798,7 @@
       }
     },
     {
-      "id": "S-06-040",
+      "id": "S-06-041",
       "path": "scripts/ch06/examples/pyproject.toml",
       "chapter": "ch06",
       "sha256": "c4a2c374edf48dfcad19426392f0ec01e2556541037caa202acd7319d9be4785",
@@ -20806,7 +20828,7 @@
       }
     },
     {
-      "id": "S-06-041",
+      "id": "S-06-042",
       "path": "scripts/ch06/examples/requirements.txt",
       "chapter": "ch06",
       "sha256": "cebfd2da96d054e007f5b2b8c8cbef755d1a44518ea380f574c6996cc19368eb",
@@ -20836,7 +20858,7 @@
       }
     },
     {
-      "id": "S-07-042",
+      "id": "S-07-043",
       "path": "scripts/ch07/CITATION.cff.template",
       "chapter": "ch07",
       "sha256": "9e1e076f373d3aa1459658e01a68018342d32fcd52eb8b2b9645dc0bb78888cc",
@@ -20866,7 +20888,7 @@
       }
     },
     {
-      "id": "S-07-043",
+      "id": "S-07-044",
       "path": "scripts/ch07/ci_minimal.yml",
       "chapter": "ch07",
       "sha256": "6b53dad0c8ab7253a20f62e6d82d32fdc096a3cb70d293b2c8bbdd5230315e00",
@@ -20896,7 +20918,7 @@
       }
     },
     {
-      "id": "S-07-044",
+      "id": "S-07-045",
       "path": "scripts/ch07/gitignore_bioinfo.template",
       "chapter": "ch07",
       "sha256": "21bb2a61b0b4d880644ad818a4f1f44270daddfd5501bc4d7dd7051f6dde5757",
@@ -20919,7 +20941,7 @@
       }
     },
     {
-      "id": "S-08-045",
+      "id": "S-08-046",
       "path": "scripts/ch08/__init__.py",
       "chapter": "ch08",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -20940,7 +20962,7 @@
       }
     },
     {
-      "id": "S-08-046",
+      "id": "S-08-047",
       "path": "scripts/ch08/examples/ci-matrix.yml",
       "chapter": "ch08",
       "sha256": "74145c7268225e7453e4793692d67d19e22096f5ed2132aabc5ac385fd8d9df8",
@@ -20970,7 +20992,7 @@
       }
     },
     {
-      "id": "S-08-047",
+      "id": "S-08-048",
       "path": "scripts/ch08/examples/ci.yml",
       "chapter": "ch08",
       "sha256": "b23004202fcdf9495ab7f750cee9ec75e3574343c037fca6ec61138d91cc2a41",
@@ -21000,7 +21022,7 @@
       }
     },
     {
-      "id": "S-08-048",
+      "id": "S-08-049",
       "path": "scripts/ch08/examples/claude-settings.json",
       "chapter": "ch08",
       "sha256": "0553349bbe224deb05870b0cfe0e88081b6b044e6b2fe87bad358ea5711481fc",
@@ -21030,7 +21052,7 @@
       }
     },
     {
-      "id": "S-08-049",
+      "id": "S-08-050",
       "path": "scripts/ch08/examples/codex-hooks.json",
       "chapter": "ch08",
       "sha256": "0553349bbe224deb05870b0cfe0e88081b6b044e6b2fe87bad358ea5711481fc",
@@ -21060,7 +21082,7 @@
       }
     },
     {
-      "id": "S-08-050",
+      "id": "S-08-051",
       "path": "scripts/ch08/examples/pre-commit-config.yaml",
       "chapter": "ch08",
       "sha256": "4807410d329863fbc56ae9eb6592636a4b29ff2d4081a83793b83d810c6395d5",
@@ -21090,7 +21112,7 @@
       }
     },
     {
-      "id": "S-08-051",
+      "id": "S-08-052",
       "path": "scripts/ch08/examples/pyproject.toml",
       "chapter": "ch08",
       "sha256": "279e3f81ff4a595e8296c31690d42f3ea5a7cc2255c5fdf7e8da33c8e68df26a",
@@ -21122,7 +21144,7 @@
       }
     },
     {
-      "id": "S-08-052",
+      "id": "S-08-053",
       "path": "scripts/ch08/reverse_complement.py",
       "chapter": "ch08",
       "sha256": "313fd6b88f55970af522ad6f0c6f75f4b97bb77d02fccb9b31b31f9d23b698a1",
@@ -21152,7 +21174,7 @@
       }
     },
     {
-      "id": "S-08-053",
+      "id": "S-08-054",
       "path": "scripts/ch08/seq_stats.py",
       "chapter": "ch08",
       "sha256": "36ee7d2a60f05e43bf2c0cd76e6b652c060d88d2c6ce4e402f363fce43a2e1cf",
@@ -21182,7 +21204,7 @@
       }
     },
     {
-      "id": "S-09-054",
+      "id": "S-09-055",
       "path": "scripts/ch09/__init__.py",
       "chapter": "ch09",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -21203,7 +21225,7 @@
       }
     },
     {
-      "id": "S-09-055",
+      "id": "S-09-056",
       "path": "scripts/ch09/coordinate_bugs.py",
       "chapter": "ch09",
       "sha256": "ab3d9ffb68ba7000fcc6ebd9f31b7fa1800e41cd01747e43e769ee02a1e2fb5d",
@@ -21233,7 +21255,7 @@
       }
     },
     {
-      "id": "S-09-056",
+      "id": "S-09-057",
       "path": "scripts/ch09/debug_print_demo.py",
       "chapter": "ch09",
       "sha256": "43e52460f7ea6b1691bf3ec4f062020d1ace066e0e45c99bbeb942ef876d6317",
@@ -21263,7 +21285,7 @@
       }
     },
     {
-      "id": "S-09-057",
+      "id": "S-09-058",
       "path": "scripts/ch09/generate_traceback.py",
       "chapter": "ch09",
       "sha256": "f71bf846581971098f706f2a37a675f727aaaf510f098f22c14b2fbf63e53f36",
@@ -21284,7 +21306,7 @@
       }
     },
     {
-      "id": "S-09-058",
+      "id": "S-09-059",
       "path": "scripts/ch09/path_bugs.py",
       "chapter": "ch09",
       "sha256": "53390c6fea3a225c2f32c4d3284ffc75bf82c37729ea43c7332ec4ccc5ad1ba2",
@@ -21314,7 +21336,7 @@
       }
     },
     {
-      "id": "S-09-059",
+      "id": "S-09-060",
       "path": "scripts/ch09/pdb_demo.py",
       "chapter": "ch09",
       "sha256": "2243a8caafff30cc71d5778a257db64ee6e9d677033194a2d9a2fd9319544ddb",
@@ -21344,7 +21366,7 @@
       }
     },
     {
-      "id": "S-09-060",
+      "id": "S-09-061",
       "path": "scripts/ch09/python_pitfalls.py",
       "chapter": "ch09",
       "sha256": "c642b6cfc8b94419a908f4fb71692ff449d6c2431a94a43fdb0ea4084d677e0b",
@@ -21378,7 +21400,7 @@
       }
     },
     {
-      "id": "S-09-061",
+      "id": "S-09-062",
       "path": "scripts/ch09/traceback_demo.py",
       "chapter": "ch09",
       "sha256": "19850418f12f98b711b5b852511c8c709228fb9f5cca5300332313867a2c3644",
@@ -21410,7 +21432,7 @@
       }
     },
     {
-      "id": "S-09-062",
+      "id": "S-09-063",
       "path": "scripts/ch09/type_bugs.py",
       "chapter": "ch09",
       "sha256": "8c2fd11a639c53131df6840887eb481b93767455bd8fbb98468b12da6df49a11",
@@ -21440,7 +21462,7 @@
       }
     },
     {
-      "id": "S-10-063",
+      "id": "S-10-064",
       "path": "scripts/ch10/__init__.py",
       "chapter": "ch10",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -21461,7 +21483,7 @@
       }
     },
     {
-      "id": "S-10-064",
+      "id": "S-10-065",
       "path": "scripts/ch10/config.yaml",
       "chapter": "ch10",
       "sha256": "87c07e062ffba39ef0e884a5f44f5e72a7f71c9f5503c7cf3a9e96c479a32d6d",
@@ -21491,7 +21513,7 @@
       }
     },
     {
-      "id": "S-10-065",
+      "id": "S-10-066",
       "path": "scripts/ch10/config_example.py",
       "chapter": "ch10",
       "sha256": "e245f7cd1c0a77928af44ae88586de2f6fb009938d92111388b6e11155071303",
@@ -21527,7 +21549,7 @@
       }
     },
     {
-      "id": "S-10-066",
+      "id": "S-10-067",
       "path": "scripts/ch10/error_handling.py",
       "chapter": "ch10",
       "sha256": "eac7afbdc05252c6c263799df3bdd0ba1ca17db2c759a40ad0f0eb2c9e1f3371",
@@ -21560,7 +21582,7 @@
       }
     },
     {
-      "id": "S-10-067",
+      "id": "S-10-068",
       "path": "scripts/ch10/fail_fast_pipeline.py",
       "chapter": "ch10",
       "sha256": "581330abb6b44af7f3d1c924eb7e9063c3260d8f2f6d944d95ece8d8d90976f9",
@@ -21590,7 +21612,7 @@
       }
     },
     {
-      "id": "S-10-068",
+      "id": "S-10-069",
       "path": "scripts/ch10/package_example/pyproject.toml",
       "chapter": "ch10",
       "sha256": "7b629564872f3eada36091f1b019e08276d28b0dbdb7b843f4d8ad78b623e2ac",
@@ -21620,7 +21642,7 @@
       }
     },
     {
-      "id": "S-10-069",
+      "id": "S-10-070",
       "path": "scripts/ch10/package_example/src/my_tool/__init__.py",
       "chapter": "ch10",
       "sha256": "bf6dbf3bc336d0b10ceb47c4a9815a7ed259f29bf44bf40dc8988cbd574415d5",
@@ -21641,7 +21663,7 @@
       }
     },
     {
-      "id": "S-10-070",
+      "id": "S-10-071",
       "path": "scripts/ch10/package_example/src/my_tool/cli.py",
       "chapter": "ch10",
       "sha256": "07624876be899786c0f41f76d364b154332537f8e568f9a06a92dccea77b5fa5",
@@ -21662,7 +21684,7 @@
       }
     },
     {
-      "id": "S-11-071",
+      "id": "S-11-072",
       "path": "scripts/ch11/__init__.py",
       "chapter": "ch11",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -21683,7 +21705,7 @@
       }
     },
     {
-      "id": "S-11-072",
+      "id": "S-11-073",
       "path": "scripts/ch11/cli_argparse.py",
       "chapter": "ch11",
       "sha256": "e502871fa1c235ae455c69693a4b8c271863d05475b5a9f51f29be82831c55ab",
@@ -21713,7 +21735,7 @@
       }
     },
     {
-      "id": "S-11-073",
+      "id": "S-11-074",
       "path": "scripts/ch11/cli_click.py",
       "chapter": "ch11",
       "sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
@@ -21746,7 +21768,7 @@
       }
     },
     {
-      "id": "S-11-074",
+      "id": "S-11-075",
       "path": "scripts/ch11/cli_typer.py",
       "chapter": "ch11",
       "sha256": "20e0c83d7ba90f4b1fc43b137bdbf5587990a57a80e204b07dfefc2f376ef5a0",
@@ -21769,7 +21791,7 @@
       }
     },
     {
-      "id": "S-11-075",
+      "id": "S-11-076",
       "path": "scripts/ch11/logging_setup.py",
       "chapter": "ch11",
       "sha256": "d2801550996f1bc75471adb24c6ea940fcd8bdace4a1813d4cd82ec97097556e",
@@ -21799,7 +21821,7 @@
       }
     },
     {
-      "id": "S-11-076",
+      "id": "S-11-077",
       "path": "scripts/ch11/progress_demo.py",
       "chapter": "ch11",
       "sha256": "299cd3acf3fa2eb0cdcbceefcefb4e8f0a4e191e9bc98fc0e77bc526eb1ec9b6",
@@ -21822,7 +21844,7 @@
       }
     },
     {
-      "id": "S-11-077",
+      "id": "S-11-078",
       "path": "scripts/ch11/seqtool.py",
       "chapter": "ch11",
       "sha256": "ef19b33e85394455652c4b324c6c2ed859d951318351592306d56de7f9f55f52",
@@ -21859,7 +21881,7 @@
       }
     },
     {
-      "id": "S-12-078",
+      "id": "S-12-079",
       "path": "scripts/ch12/__init__.py",
       "chapter": "ch12",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -21880,7 +21902,7 @@
       }
     },
     {
-      "id": "S-12-079",
+      "id": "S-12-080",
       "path": "scripts/ch12/numpy_vectorize.py",
       "chapter": "ch12",
       "sha256": "8df2f64fc48c095d1edc9a7a8f49f104f2864a8c2494457285f35aafaa060dc3",
@@ -21912,7 +21934,7 @@
       }
     },
     {
-      "id": "S-12-080",
+      "id": "S-12-081",
       "path": "scripts/ch12/pandas_bio_ops.py",
       "chapter": "ch12",
       "sha256": "a189c9f0a03e15512fc77eeb2423cb5eca3714aff55f1702144e7c24479511a3",
@@ -21945,7 +21967,7 @@
       }
     },
     {
-      "id": "S-12-081",
+      "id": "S-12-082",
       "path": "scripts/ch12/plot_vectorize_bench.py",
       "chapter": "ch12",
       "sha256": "28c6fb8ea8eed217e40052a16f32180da5247ca5e04fdc7cd5efbc3e3c0a30c7",
@@ -21969,7 +21991,7 @@
       }
     },
     {
-      "id": "S-12-082",
+      "id": "S-12-083",
       "path": "scripts/ch12/polars_bio_ops.py",
       "chapter": "ch12",
       "sha256": "e0cbc9dd351427cca35a8427e959f0a4acb4f0409a46a0fe0f82e15f6bd0da17",
@@ -21999,7 +22021,7 @@
       }
     },
     {
-      "id": "S-12-083",
+      "id": "S-12-084",
       "path": "scripts/ch12/scipy_stats_bio.py",
       "chapter": "ch12",
       "sha256": "9b28cfe15860364d8b226fd79ccf61f5cf7315b17cd6759a568b3df911af9e26",
@@ -22033,7 +22055,7 @@
       }
     },
     {
-      "id": "S-13-084",
+      "id": "S-13-085",
       "path": "scripts/ch13/__init__.py",
       "chapter": "ch13",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -22054,7 +22076,7 @@
       }
     },
     {
-      "id": "S-13-085",
+      "id": "S-13-086",
       "path": "scripts/ch13/bio_plots.py",
       "chapter": "ch13",
       "sha256": "3b527a58ecf127d9f5892078f02d6282f65bae17bf3a4fea0d18b80b91bf5221",
@@ -22085,7 +22107,7 @@
       }
     },
     {
-      "id": "S-13-086",
+      "id": "S-13-087",
       "path": "scripts/ch13/generate_figures.py",
       "chapter": "ch13",
       "sha256": "3ae59d58b37b7e3dacb2079689247f437596d3d9735f4eb901fdd935b8c740ef",
@@ -22106,7 +22128,7 @@
       }
     },
     {
-      "id": "S-13-087",
+      "id": "S-13-088",
       "path": "scripts/ch13/matplotlib_bindist.py",
       "chapter": "ch13",
       "sha256": "0b1b31931660dc24a9a4f1bba4393c1547f46744654432ece1ebe456e4d513e5",
@@ -22136,7 +22158,7 @@
       }
     },
     {
-      "id": "S-13-088",
+      "id": "S-13-089",
       "path": "scripts/ch13/plot_colormap_comparison.py",
       "chapter": "ch13",
       "sha256": "649ba11117ccbbdba0ad2f0d1b2d5f5a6237a028d5162186ea565181298a898f",
@@ -22157,7 +22179,7 @@
       }
     },
     {
-      "id": "S-13-089",
+      "id": "S-13-090",
       "path": "scripts/ch13/plot_config.py",
       "chapter": "ch13",
       "sha256": "4bd13f26db86475861eb8c476188d938bf7f3498142b09e508161d5872428304",
@@ -22187,7 +22209,7 @@
       }
     },
     {
-      "id": "S-13-090",
+      "id": "S-13-091",
       "path": "scripts/ch13/seaborn_biodist.py",
       "chapter": "ch13",
       "sha256": "db231b74c3f1295b531620224100a9b7a32931ddc6664b86e09de05783f098b9",
@@ -22217,7 +22239,7 @@
       }
     },
     {
-      "id": "S-13-091",
+      "id": "S-13-092",
       "path": "scripts/ch13/tracks.ini",
       "chapter": "ch13",
       "sha256": "829fcdf6fdae4346705ab7c2a407f52f5b3ad49ab4216c376953db17eaddb762",
@@ -22247,7 +22269,7 @@
       }
     },
     {
-      "id": "S-14-092",
+      "id": "S-14-093",
       "path": "scripts/ch14/Makefile",
       "chapter": "ch14",
       "sha256": "0264179cb2ba9e6d3b0056f09fd04a46a83834a4b977fc36413f9eb761ab67a0",
@@ -22259,18 +22281,25 @@
       ],
       "reference_block_ids": [],
       "mentioned_in_chapter_prose": true,
-      "tests": [],
+      "tests": [
+        {
+          "test_file": "tests/ch14/test_config_workflow_assets.py",
+          "evidence": "direct_path_reference"
+        }
+      ],
       "test_result": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
       }
     },
     {
-      "id": "S-14-093",
+      "id": "S-14-094",
       "path": "scripts/ch14/Snakefile",
       "chapter": "ch14",
       "sha256": "6a98a70b272bbb944f961a2da7481c43db9a2895b6efb333250328fb1c579c79",
@@ -22288,18 +22317,25 @@
       ],
       "reference_block_ids": [],
       "mentioned_in_chapter_prose": true,
-      "tests": [],
+      "tests": [
+        {
+          "test_file": "tests/ch14/test_config_workflow_assets.py",
+          "evidence": "direct_path_reference"
+        }
+      ],
       "test_result": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
       }
     },
     {
-      "id": "S-14-094",
+      "id": "S-14-095",
       "path": "scripts/ch14/Snakefile.conda",
       "chapter": "ch14",
       "sha256": "aaff555804d596098331c3245a205e9d585847e6a197d686f596fd844ee200d6",
@@ -22329,7 +22365,7 @@
       }
     },
     {
-      "id": "S-14-095",
+      "id": "S-14-096",
       "path": "scripts/ch14/__init__.py",
       "chapter": "ch14",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -22350,7 +22386,7 @@
       }
     },
     {
-      "id": "S-14-096",
+      "id": "S-14-097",
       "path": "scripts/ch14/config.yaml",
       "chapter": "ch14",
       "sha256": "20e3a6ca41edf7fdabf823751e1119d8e6cb9d9464038b432acea97c47f062d6",
@@ -22362,18 +22398,25 @@
       ],
       "reference_block_ids": [],
       "mentioned_in_chapter_prose": true,
-      "tests": [],
+      "tests": [
+        {
+          "test_file": "tests/ch14/test_config_workflow_assets.py",
+          "evidence": "direct_path_reference"
+        }
+      ],
       "test_result": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch14/test_config_workflow_assets.py"
+        ],
+        "passed": 3,
         "failed": 0,
         "skipped": 0,
         "errors": 0
       }
     },
     {
-      "id": "S-14-097",
+      "id": "S-14-098",
       "path": "scripts/ch14/data/cwl/hisat2_index/README.txt",
       "chapter": "ch14",
       "sha256": "7a3dfc5082c2f7e072eb20cfefc6cfc51e02935343175cf28091451ec6849006",
@@ -22394,7 +22437,7 @@
       }
     },
     {
-      "id": "S-14-098",
+      "id": "S-14-099",
       "path": "scripts/ch14/data/cwl/sample_A_R1.fastq",
       "chapter": "ch14",
       "sha256": "07360e285658caf08e13d46522f16ed5286c40eb6bb353399005d325cc80a419",
@@ -22415,7 +22458,7 @@
       }
     },
     {
-      "id": "S-14-099",
+      "id": "S-14-100",
       "path": "scripts/ch14/data/cwl/sample_A_R2.fastq",
       "chapter": "ch14",
       "sha256": "581a9541c888808eea1e3d86f0465d1a92938674d6e89f8ef07701988fbb2154",
@@ -22436,7 +22479,7 @@
       }
     },
     {
-      "id": "S-14-100",
+      "id": "S-14-101",
       "path": "scripts/ch14/data/deseq2/counts.tsv",
       "chapter": "ch14",
       "sha256": "2a4c87283584b49f84812d645202c3529641daccb175ef3b6ace3bceaa1dc85d",
@@ -22464,7 +22507,7 @@
       }
     },
     {
-      "id": "S-14-101",
+      "id": "S-14-102",
       "path": "scripts/ch14/data/deseq2/samples.tsv",
       "chapter": "ch14",
       "sha256": "eeddd70cbddd57c3184442b7551591742bb107335abf08a42af30987a41809cb",
@@ -22492,7 +22535,7 @@
       }
     },
     {
-      "id": "S-14-102",
+      "id": "S-14-103",
       "path": "scripts/ch14/envs/deseq2.yaml",
       "chapter": "ch14",
       "sha256": "8bedb0cb1181862c1d0bad6a3c0deee11ba2a3f131bfc0f8f182a24ba508c0a1",
@@ -22520,7 +22563,7 @@
       }
     },
     {
-      "id": "S-14-103",
+      "id": "S-14-104",
       "path": "scripts/ch14/fastp_filter.cwl",
       "chapter": "ch14",
       "sha256": "9a14d8061d17f5cc0312d36bdcdbb903baae6f8ffa065f05c4d2df5eeaec44d7",
@@ -22550,7 +22593,7 @@
       }
     },
     {
-      "id": "S-14-104",
+      "id": "S-14-105",
       "path": "scripts/ch14/fastqc.nf",
       "chapter": "ch14",
       "sha256": "c7ae0f4b3671535a85cbc0868e68dd9a28cad950ee7d89f80a38de2d627b1a3c",
@@ -22580,7 +22623,7 @@
       }
     },
     {
-      "id": "S-14-105",
+      "id": "S-14-106",
       "path": "scripts/ch14/hisat2_align.cwl",
       "chapter": "ch14",
       "sha256": "58b320ac13e64f0ab91df9b25e33d59f497bf3b6a0ed6b3ed9f8ef152beb9b5d",
@@ -22608,7 +22651,7 @@
       }
     },
     {
-      "id": "S-14-106",
+      "id": "S-14-107",
       "path": "scripts/ch14/inputs.yml",
       "chapter": "ch14",
       "sha256": "72d08f97b0ff5e4aeee809ae947ea8e45bf60b1201ff3c004560f609bd0d13d9",
@@ -22638,7 +22681,7 @@
       }
     },
     {
-      "id": "S-14-107",
+      "id": "S-14-108",
       "path": "scripts/ch14/rnaseq_pipeline.cwl",
       "chapter": "ch14",
       "sha256": "231109a58076350b09c76b650225ded30e52a4e0e8d98ccedb24bd20e63fc62f",
@@ -22668,7 +22711,7 @@
       }
     },
     {
-      "id": "S-14-108",
+      "id": "S-14-109",
       "path": "scripts/ch14/run_deseq2.R",
       "chapter": "ch14",
       "sha256": "e8d4d2aef58b640a2d77ac34ba833c138ef450545d8c721495e6b8ff34663096",
@@ -22696,7 +22739,7 @@
       }
     },
     {
-      "id": "S-14-109",
+      "id": "S-14-110",
       "path": "scripts/ch14/validate_workflow.py",
       "chapter": "ch14",
       "sha256": "4095e5051c0622e4280ceff8782d32d46365fb5b5ca0ccf68bf92f93cf8af422",
@@ -22726,7 +22769,7 @@
       }
     },
     {
-      "id": "S-15-110",
+      "id": "S-15-111",
       "path": "scripts/ch15/Dockerfile",
       "chapter": "ch15",
       "sha256": "93b9eaa47878376679b158d3f988d51e905168c22ffa4c2349373693fd883ebc",
@@ -22757,7 +22800,7 @@
       }
     },
     {
-      "id": "S-15-111",
+      "id": "S-15-112",
       "path": "scripts/ch15/Dockerfile.conda-lock",
       "chapter": "ch15",
       "sha256": "467f6f68b56e43db7f3fc2d5547972791027ee14eec07aa8e420936eae4c93c4",
@@ -22787,7 +22830,7 @@
       }
     },
     {
-      "id": "S-15-112",
+      "id": "S-15-113",
       "path": "scripts/ch15/Dockerfile.gpu",
       "chapter": "ch15",
       "sha256": "0c3e0fcb89de547fe6158b5af0c74b3d5e6b4fcd681b9214273549f4af803a8c",
@@ -22817,7 +22860,7 @@
       }
     },
     {
-      "id": "S-15-113",
+      "id": "S-15-114",
       "path": "scripts/ch15/Dockerfile.multistage",
       "chapter": "ch15",
       "sha256": "a23300d98eb6dda06ac2bf6828ebeccfa0b130d4799e524b8c79a5840713fcb3",
@@ -22840,7 +22883,7 @@
       }
     },
     {
-      "id": "S-15-114",
+      "id": "S-15-115",
       "path": "scripts/ch15/__init__.py",
       "chapter": "ch15",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -22861,7 +22904,7 @@
       }
     },
     {
-      "id": "S-15-115",
+      "id": "S-15-116",
       "path": "scripts/ch15/apptainer.def",
       "chapter": "ch15",
       "sha256": "9d5ac9ce21c76d711e3c5b3cab1932d7826b1e61ac2077128cf32f37e87d0b8d",
@@ -22884,7 +22927,7 @@
       }
     },
     {
-      "id": "S-15-116",
+      "id": "S-15-117",
       "path": "scripts/ch15/docker-compose.yml",
       "chapter": "ch15",
       "sha256": "64b1a4bfb4ed25a1e3d4db37b41bbe21b3493fa2dc484fc3d01d7ab502118156",
@@ -22907,7 +22950,7 @@
       }
     },
     {
-      "id": "S-15-117",
+      "id": "S-15-118",
       "path": "scripts/ch15/environment.lock.yml",
       "chapter": "ch15",
       "sha256": "39396c966c8dee206628167cb9c80304c51395fad473f842e5af5252ada948a1",
@@ -22928,7 +22971,7 @@
       }
     },
     {
-      "id": "S-15-118",
+      "id": "S-15-119",
       "path": "scripts/ch15/environment.yml",
       "chapter": "ch15",
       "sha256": "db3a6a508f0ec0c89e0bfa89b4fb6edb68820dac03732ca1767ed67ff2d70734",
@@ -22949,7 +22992,7 @@
       }
     },
     {
-      "id": "S-15-119",
+      "id": "S-15-120",
       "path": "scripts/ch15/experiment_logger.py",
       "chapter": "ch15",
       "sha256": "3f4986eef53836eaba251e5967fe063f30fda82c01a2167a3de958d1c02d36a0",
@@ -22979,7 +23022,7 @@
       }
     },
     {
-      "id": "S-15-120",
+      "id": "S-15-121",
       "path": "scripts/ch15/rnaseq.conda-lock.yml",
       "chapter": "ch15",
       "sha256": "1d85c59123cd9eb4b421cfdc593e4432e22c226d8078f6b270c806ac888c9f8c",
@@ -23007,7 +23050,7 @@
       }
     },
     {
-      "id": "S-15-121",
+      "id": "S-15-122",
       "path": "scripts/ch15/samtools_sort.smk",
       "chapter": "ch15",
       "sha256": "25fb9e778fd33fa0ccae7ed1e67b84e3e1949bbe41f27187731fa904f7c390ed",
@@ -23037,7 +23080,7 @@
       }
     },
     {
-      "id": "S-15-122",
+      "id": "S-15-123",
       "path": "scripts/ch15/validate_dockerfile.py",
       "chapter": "ch15",
       "sha256": "966e126d9dc8528da4045504886e6d44781c78d9fc21ccb6d6ab88eba2c3c568",
@@ -23072,7 +23115,7 @@
       }
     },
     {
-      "id": "S-15-123",
+      "id": "S-15-124",
       "path": "scripts/ch15/version_pinning/conda_lock/Dockerfile",
       "chapter": "ch15",
       "sha256": "5d574f14c2c5c42e3f07baf44bfe35a4181d8d9354d7f58323858fba7e083edd",
@@ -23102,7 +23145,7 @@
       }
     },
     {
-      "id": "S-15-124",
+      "id": "S-15-125",
       "path": "scripts/ch15/version_pinning/conda_lock/environment.yml",
       "chapter": "ch15",
       "sha256": "39396c966c8dee206628167cb9c80304c51395fad473f842e5af5252ada948a1",
@@ -23123,7 +23166,7 @@
       }
     },
     {
-      "id": "S-15-125",
+      "id": "S-15-126",
       "path": "scripts/ch15/version_pinning/conda_lock/rnaseq.conda-lock.yml",
       "chapter": "ch15",
       "sha256": "80a6cdf73d325643b600af18bc77fa18c834e24f5d03a91bfcebc518cff2e9da",
@@ -23151,7 +23194,7 @@
       }
     },
     {
-      "id": "S-15-126",
+      "id": "S-15-127",
       "path": "scripts/ch15/version_pinning/requirements/Dockerfile",
       "chapter": "ch15",
       "sha256": "b695da48d540ac28e29acf4d26e7bd31395a0e608376fcfb1f2438fabbe7f0cb",
@@ -23179,7 +23222,7 @@
       }
     },
     {
-      "id": "S-15-127",
+      "id": "S-15-128",
       "path": "scripts/ch15/version_pinning/requirements/requirements.in",
       "chapter": "ch15",
       "sha256": "276df64b6a9790b0b325dc25e7ea4763e853aad114eb2cf23d2388eae525f733",
@@ -23200,7 +23243,7 @@
       }
     },
     {
-      "id": "S-15-128",
+      "id": "S-15-129",
       "path": "scripts/ch15/version_pinning/requirements/requirements.txt",
       "chapter": "ch15",
       "sha256": "b03ed8d9ea747ffc646710dda3039750a1d28d12b2e94c3b999d4c6093af79e3",
@@ -23228,7 +23271,7 @@
       }
     },
     {
-      "id": "S-15-129",
+      "id": "S-15-130",
       "path": "scripts/ch15/version_pinning/uv/Dockerfile",
       "chapter": "ch15",
       "sha256": "d14853368a71d4a642115f26f9008fefae40e5aeb5abfacf58aa3cf3ea1c5216",
@@ -23256,7 +23299,7 @@
       }
     },
     {
-      "id": "S-15-130",
+      "id": "S-15-131",
       "path": "scripts/ch15/version_pinning/uv/pyproject.toml",
       "chapter": "ch15",
       "sha256": "1939e6288426dbd03dc739e74e788c9e6e01160531eb250ff8e63eda5cac5f99",
@@ -23284,7 +23327,7 @@
       }
     },
     {
-      "id": "S-15-131",
+      "id": "S-15-132",
       "path": "scripts/ch15/version_pinning/uv/uv.lock",
       "chapter": "ch15",
       "sha256": "d30de087ba027e9548341d40f6769133479e8247fe7308f215bdbc1426f878e3",
@@ -23312,7 +23355,7 @@
       }
     },
     {
-      "id": "S-16-132",
+      "id": "S-16-133",
       "path": "scripts/ch16/__init__.py",
       "chapter": "ch16",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23333,7 +23376,7 @@
       }
     },
     {
-      "id": "S-16-133",
+      "id": "S-16-134",
       "path": "scripts/ch16/array_job.sh",
       "chapter": "ch16",
       "sha256": "30ae549a53d571784a35255dc2348111b75daace5b6c3c7c84d89da58ff8e425",
@@ -23356,7 +23399,7 @@
       }
     },
     {
-      "id": "S-16-134",
+      "id": "S-16-135",
       "path": "scripts/ch16/basic_job.sh",
       "chapter": "ch16",
       "sha256": "0d681813bb82ea19f3f56288ede36e8d0a5e650ca8a30fe9374f17e31d4f1000",
@@ -23379,7 +23422,7 @@
       }
     },
     {
-      "id": "S-16-135",
+      "id": "S-16-136",
       "path": "scripts/ch16/gpu_train_job.sh",
       "chapter": "ch16",
       "sha256": "21c68436d152085ebd25a0888df33d94819601b1e34b9f1cdb63279600c361e1",
@@ -23403,7 +23446,7 @@
       }
     },
     {
-      "id": "S-16-136",
+      "id": "S-16-137",
       "path": "scripts/ch16/pipeline_submit.sh",
       "chapter": "ch16",
       "sha256": "85977fe3bf2c18c4741f237dc7d71a42c3ae2e2ecec35629738ed57dc4d7890b",
@@ -23426,7 +23469,7 @@
       }
     },
     {
-      "id": "S-16-137",
+      "id": "S-16-138",
       "path": "scripts/ch16/project_readme_template.md",
       "chapter": "ch16",
       "sha256": "ca43e0d06397a21cf784b10e3891dd1d934ef991ae07adbd61108855a9c9dedb",
@@ -23449,31 +23492,37 @@
       }
     },
     {
-      "id": "S-16-138",
+      "id": "S-16-139",
       "path": "scripts/ch16/ssh_config.example",
       "chapter": "ch16",
-      "sha256": "8d9fbbf36a4303c42fe9cc838857bc023f99662e5ef887722233fd2995f8f0a1",
-      "line_count": 46,
+      "sha256": "c95fe157f37b71e31f2d2d69954104931c17f9b1b4822d1ee769f31e3f75979a",
+      "line_count": 16,
       "role": "template_support",
       "book_status": "body_correspondence",
       "body_block_ids": [
-        "B-02-031",
         "B-16-016"
       ],
       "reference_block_ids": [],
       "mentioned_in_chapter_prose": false,
-      "tests": [],
+      "tests": [
+        {
+          "test_file": "tests/ch16/test_ssh_config.py",
+          "evidence": "direct_path_reference"
+        }
+      ],
       "test_result": {
-        "status": "no_direct_test",
-        "files": [],
-        "passed": 0,
+        "status": "passed",
+        "files": [
+          "tests/ch16/test_ssh_config.py"
+        ],
+        "passed": 2,
         "failed": 0,
         "skipped": 0,
         "errors": 0
       }
     },
     {
-      "id": "S-16-139",
+      "id": "S-16-140",
       "path": "scripts/ch16/validate_slurm.py",
       "chapter": "ch16",
       "sha256": "d68b03464c8183655efd70b767dcedd565a3d8907d23ee59395b32cea0cd49be",
@@ -23501,7 +23550,7 @@
       }
     },
     {
-      "id": "S-17-140",
+      "id": "S-17-141",
       "path": "scripts/ch17/__init__.py",
       "chapter": "ch17",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -23522,7 +23571,7 @@
       }
     },
     {
-      "id": "S-17-141",
+      "id": "S-17-142",
       "path": "scripts/ch17/chunk_processing.py",
       "chapter": "ch17",
       "sha256": "d83e64d082f49c393b69e3f36c8e9e50291535adf4b3cecc987a45953219f82d",
@@ -23552,7 +23601,7 @@
       }
     },
     {
-      "id": "S-17-142",
+      "id": "S-17-143",
       "path": "scripts/ch17/file_format_bench.py",
       "chapter": "ch17",
       "sha256": "07b06337e07bb20398c18a3e89bae241ee9a4237761c13ffc4edf7150e084f8e",
@@ -23582,7 +23631,7 @@
       }
     },
     {
-      "id": "S-17-143",
+      "id": "S-17-144",
       "path": "scripts/ch17/generator_fastq.py",
       "chapter": "ch17",
       "sha256": "8eda02b69923fbe3897c6b5ea4c1ff66bca3a6d44f62cf57dcc100929cb788ae",
@@ -23613,7 +23662,7 @@
       }
     },
     {
-      "id": "S-17-144",
+      "id": "S-17-145",
       "path": "scripts/ch17/memory_target.py",
       "chapter": "ch17",
       "sha256": "a37c5ce11fccf4889f543a71c43a693f9505e2f88686c2e510b42c125640ea68",
@@ -23643,7 +23692,7 @@
       }
     },
     {
-      "id": "S-17-145",
+      "id": "S-17-146",
       "path": "scripts/ch17/parallel_gc.py",
       "chapter": "ch17",
       "sha256": "64f076c08f7706b915ac938eebab8998c36875764b561f7c89f4264c837f45d2",
@@ -23673,7 +23722,7 @@
       }
     },
     {
-      "id": "S-17-146",
+      "id": "S-17-147",
       "path": "scripts/ch17/plot_amdahl.py",
       "chapter": "ch17",
       "sha256": "c778b406921472a601f84bada2249d7d51d9438be55a96c20729f4544a2bb430",
@@ -23694,7 +23743,7 @@
       }
     },
     {
-      "id": "S-17-147",
+      "id": "S-17-148",
       "path": "scripts/ch17/plot_profiling.py",
       "chapter": "ch17",
       "sha256": "c473f026a017289e064affb34aba033aed6ca2760f2e26e3f6d79208c520ac4e",
@@ -23715,7 +23764,7 @@
       }
     },
     {
-      "id": "S-17-148",
+      "id": "S-17-149",
       "path": "scripts/ch17/profiling_demo.py",
       "chapter": "ch17",
       "sha256": "59160c986523c302c0b8fe85199258c4cbc1590618de0d34fb1d1c97ac406251",
@@ -23747,7 +23796,7 @@
       }
     },
     {
-      "id": "S-17-149",
+      "id": "S-17-150",
       "path": "scripts/ch17/streaming_fasta.py",
       "chapter": "ch17",
       "sha256": "bd33c0d5decf6c4c077d0d24625d8639f8219fd1993a497158fff17b0cfb99b4",
@@ -23777,7 +23826,7 @@
       }
     },
     {
-      "id": "S-18-150",
+      "id": "S-18-151",
       "path": "scripts/ch18/__init__.py",
       "chapter": "ch18",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -23798,7 +23847,7 @@
       }
     },
     {
-      "id": "S-18-151",
+      "id": "S-18-152",
       "path": "scripts/ch18/docstring_checker.py",
       "chapter": "ch18",
       "sha256": "21106d9a38b108f14c7d6de77809159585f10362501b8e1519e69bb2974397ff",
@@ -23828,7 +23877,7 @@
       }
     },
     {
-      "id": "S-18-152",
+      "id": "S-18-153",
       "path": "scripts/ch18/mermaid_helper.py",
       "chapter": "ch18",
       "sha256": "e65c65569e16139a66e3022cca7805e95c3f9075c9d52a5cb77b26b2f0bc16c3",
@@ -23858,7 +23907,7 @@
       }
     },
     {
-      "id": "S-18-153",
+      "id": "S-18-154",
       "path": "scripts/ch18/mkdocs_example/docs/api.md",
       "chapter": "ch18",
       "sha256": "74374788e9d531be4ce4637504d808e8518a2335d031cbe1e0d983809a4e7d45",
@@ -23886,7 +23935,7 @@
       }
     },
     {
-      "id": "S-18-154",
+      "id": "S-18-155",
       "path": "scripts/ch18/mkdocs_example/docs/index.md",
       "chapter": "ch18",
       "sha256": "d0efefb3f04570e1ad975c8128502a31c83f41c71636d3d3b2fc8f91bb595a07",
@@ -23907,7 +23956,7 @@
       }
     },
     {
-      "id": "S-18-155",
+      "id": "S-18-156",
       "path": "scripts/ch18/mkdocs_example/mkdocs.yml",
       "chapter": "ch18",
       "sha256": "69fae8197a2cef521b9ffe5337debb99ead13404b8a86f1f1d4ec6f077b9422f",
@@ -23937,7 +23986,7 @@
       }
     },
     {
-      "id": "S-18-156",
+      "id": "S-18-157",
       "path": "scripts/ch18/mkdocs_example/src/my_tool/__init__.py",
       "chapter": "ch18",
       "sha256": "1287447d6528d09407677df17ce3776a2738d1705441a5a83f4c12fdf49d97e1",
@@ -23958,7 +24007,7 @@
       }
     },
     {
-      "id": "S-18-157",
+      "id": "S-18-158",
       "path": "scripts/ch18/mkdocs_example/src/my_tool/core.py",
       "chapter": "ch18",
       "sha256": "752cd5ab052a16f1c5494092944be2d089172045b44e09409414d1f35ff9d55f",
@@ -23986,7 +24035,7 @@
       }
     },
     {
-      "id": "S-18-158",
+      "id": "S-18-159",
       "path": "scripts/ch18/validate_readme.py",
       "chapter": "ch18",
       "sha256": "3e38d3020cfaa63d4bcb5ff134bdd289b74db839a814572f9e327c1c7113ddbe",
@@ -24016,7 +24065,7 @@
       }
     },
     {
-      "id": "S-19-159",
+      "id": "S-19-160",
       "path": "scripts/ch19/__init__.py",
       "chapter": "ch19",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -24037,7 +24086,7 @@
       }
     },
     {
-      "id": "S-19-160",
+      "id": "S-19-161",
       "path": "scripts/ch19/checksum_verify.py",
       "chapter": "ch19",
       "sha256": "83f78d9e066bcc9e89d31754dbf64117553e235d48af91e0bd4ea92ec7230805",
@@ -24065,7 +24114,7 @@
       }
     },
     {
-      "id": "S-19-161",
+      "id": "S-19-162",
       "path": "scripts/ch19/entrez_fetch.py",
       "chapter": "ch19",
       "sha256": "77db38e29fc34a50a6e001cb8a734177d1fe6dd47bfe60517ddaf558cda4028d",
@@ -24095,7 +24144,7 @@
       }
     },
     {
-      "id": "S-19-162",
+      "id": "S-19-163",
       "path": "scripts/ch19/local_db.py",
       "chapter": "ch19",
       "sha256": "d550c7da47cfad8393431934b28f9323154efdefed424bf092d68ba9a423a490",
@@ -24125,7 +24174,7 @@
       }
     },
     {
-      "id": "S-19-163",
+      "id": "S-19-164",
       "path": "scripts/ch19/parse_flatfile.py",
       "chapter": "ch19",
       "sha256": "7822702d6a34f5dcf86aa87e04753d35fe51f1d617697d246ebdbd09a662bce1",
@@ -24155,7 +24204,7 @@
       }
     },
     {
-      "id": "S-19-164",
+      "id": "S-19-165",
       "path": "scripts/ch19/sparql_query.py",
       "chapter": "ch19",
       "sha256": "a325b71edd6b4aec44391af7b420d538553b61a39132605042eb6c7dd306c8d4",
@@ -24185,7 +24234,7 @@
       }
     },
     {
-      "id": "S-20-165",
+      "id": "S-20-166",
       "path": "scripts/ch20/.env.example",
       "chapter": "ch20",
       "sha256": "94f8ee58c61d86e8abb48bc3fe1878b7dde26500a9424ac18d2ca54cae8ca44d",
@@ -24215,7 +24264,7 @@
       }
     },
     {
-      "id": "S-20-166",
+      "id": "S-20-167",
       "path": "scripts/ch20/__init__.py",
       "chapter": "ch20",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -24236,7 +24285,7 @@
       }
     },
     {
-      "id": "S-20-167",
+      "id": "S-20-168",
       "path": "scripts/ch20/anonymize_metadata.py",
       "chapter": "ch20",
       "sha256": "4f5fa0e6d06548f6373c3b632bda97908ec928c99b83046048f41f9011148a8b",
@@ -24267,7 +24316,7 @@
       }
     },
     {
-      "id": "S-20-168",
+      "id": "S-20-169",
       "path": "scripts/ch20/secret_scanner.py",
       "chapter": "ch20",
       "sha256": "51343e9e175ebb4518792dc79e44f50a1918fef8048ffb7c81f9f82f26e47de3",
@@ -24302,7 +24351,7 @@
       }
     },
     {
-      "id": "S-21-169",
+      "id": "S-21-170",
       "path": "scripts/ch21/__init__.py",
       "chapter": "ch21",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -24323,7 +24372,7 @@
       }
     },
     {
-      "id": "S-21-170",
+      "id": "S-21-171",
       "path": "scripts/ch21/analysis_intake.py",
       "chapter": "ch21",
       "sha256": "31db200a598357214bbbe6c47348e7869dae3718bef63d1ff42ea7630ec8298e",
@@ -24353,7 +24402,7 @@
       }
     },
     {
-      "id": "S-21-171",
+      "id": "S-21-172",
       "path": "scripts/ch21/bioconda_recipe/meta.yaml.template",
       "chapter": "ch21",
       "sha256": "3d092db4eccc6886570c04dd620b2c6038f24d64d9c814e8df4a9bcc7fe8d28e",
@@ -24383,7 +24432,7 @@
       }
     },
     {
-      "id": "S-21-172",
+      "id": "S-21-173",
       "path": "scripts/ch21/format_question.py",
       "chapter": "ch21",
       "sha256": "dc4d003911ccf3d7cd510c940a17c52817bdba98119c6901134d5aa485555813",
@@ -24413,7 +24462,7 @@
       }
     },
     {
-      "id": "S-21-173",
+      "id": "S-21-174",
       "path": "scripts/ch21/progress_report.py",
       "chapter": "ch21",
       "sha256": "befe2a44ad2fcef75fb97059ba70ccc60abdc03980243a76bd90367b92ca1de9",
@@ -24443,7 +24492,7 @@
       }
     },
     {
-      "id": "S-21-174",
+      "id": "S-21-175",
       "path": "scripts/ch21/review_helper.py",
       "chapter": "ch21",
       "sha256": "c2a86e6ee349fcd259193d878618615881be0b64d3bfc81674accec4a7e21ec1",
@@ -24511,7 +24560,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.33,
+        "duration_seconds": 0.345,
         "summary": "11 passed in 0.07s"
       }
     },
@@ -24530,8 +24579,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.468,
-        "summary": "9 passed in 0.28s"
+        "duration_seconds": 0.448,
+        "summary": "9 passed in 0.26s"
       }
     },
     {
@@ -24549,8 +24598,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.115,
-        "summary": "8 passed in 0.81s"
+        "duration_seconds": 1.472,
+        "summary": "8 passed in 1.08s"
       }
     },
     {
@@ -24579,7 +24628,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.219,
+        "duration_seconds": 0.211,
         "summary": "9 passed in 0.01s"
       }
     },
@@ -24598,7 +24647,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.213,
+        "duration_seconds": 0.233,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -24628,7 +24677,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
+        "duration_seconds": 0.224,
         "summary": "12 passed in 0.02s"
       }
     },
@@ -24647,7 +24696,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.212,
+        "duration_seconds": 0.245,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -24666,7 +24715,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.205,
+        "duration_seconds": 0.228,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -24685,12 +24734,31 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.676,
-        "summary": "7 passed in 1.42s"
+        "duration_seconds": 1.022,
+        "summary": "7 passed in 0.76s"
       }
     },
     {
       "id": "T-02-014",
+      "path": "tests/ch02/test_ssh_config.py",
+      "chapter": "ch02",
+      "sha256": "de930db96c6ae4a4d414d90624af66c33c65ad8143da56237f6e089b5ea19890",
+      "line_count": 41,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.231,
+        "summary": "1 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-02-015",
       "path": "tests/ch02/test_text_processing.py",
       "chapter": "ch02",
       "sha256": "9301d796d09736fd12f4f9aab091bffb18cc7253e7c5bbb36ab076f39ba539fc",
@@ -24704,12 +24772,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.222,
+        "duration_seconds": 0.237,
         "summary": "18 passed in 0.02s"
       }
     },
     {
-      "id": "T-03-015",
+      "id": "T-03-016",
       "path": "tests/ch03/__init__.py",
       "chapter": "ch03",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -24720,7 +24788,7 @@
       "test_result": null
     },
     {
-      "id": "T-03-016",
+      "id": "T-03-017",
       "path": "tests/ch03/test_data_structure_bench.py",
       "chapter": "ch03",
       "sha256": "4f9e00007c8ce1b1c85ccf3748828a3b980dff78ad36985d2cd1798d100a2a12",
@@ -24734,12 +24802,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.201,
+        "duration_seconds": 0.269,
         "summary": "11 passed in 0.01s"
       }
     },
     {
-      "id": "T-03-017",
+      "id": "T-03-018",
       "path": "tests/ch03/test_float_pitfalls.py",
       "chapter": "ch03",
       "sha256": "818df3be55906842fe07e8890ad817fd8a94fa303c55a5a35cd9066f1bb55c73",
@@ -24753,12 +24821,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.381,
-        "summary": "17 passed in 0.02s"
+        "duration_seconds": 0.241,
+        "summary": "17 passed in 0.01s"
       }
     },
     {
-      "id": "T-03-018",
+      "id": "T-03-019",
       "path": "tests/ch03/test_random_reproducibility.py",
       "chapter": "ch03",
       "sha256": "8e38ea460d58c50b1106d2b376a66308e02354de277d2b1e3ec95ff7f9d33862",
@@ -24772,12 +24840,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.314,
-        "summary": "12 passed in 0.09s"
+        "duration_seconds": 0.368,
+        "summary": "12 passed in 0.14s"
       }
     },
     {
-      "id": "T-04-019",
+      "id": "T-04-020",
       "path": "tests/ch04/__init__.py",
       "chapter": "ch04",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -24788,7 +24856,7 @@
       "test_result": null
     },
     {
-      "id": "T-04-020",
+      "id": "T-04-021",
       "path": "tests/ch04/test_config_examples.py",
       "chapter": "ch04",
       "sha256": "2ebb1d7f02a3a46c8850d37cbb507d5bad8ad36ca55e2690a6f29a4fd1519cff",
@@ -24802,12 +24870,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.216,
+        "duration_seconds": 0.206,
         "summary": "2 passed in 0.02s"
       }
     },
     {
-      "id": "T-04-021",
+      "id": "T-04-022",
       "path": "tests/ch04/test_coordinate_convert.py",
       "chapter": "ch04",
       "sha256": "a8fb1acf306ce432171f9395915bdf5eef02043af6abc63f50d44953443b4fec",
@@ -24821,12 +24889,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.195,
+        "duration_seconds": 0.192,
         "summary": "7 passed in 0.01s"
       }
     },
     {
-      "id": "T-04-022",
+      "id": "T-04-023",
       "path": "tests/ch04/test_encoding_traps.py",
       "chapter": "ch04",
       "sha256": "6ceb0e2fcf5cd56ece05f19eec69349da037e88a30c8ae537091787d5a01367c",
@@ -24840,12 +24908,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.219,
-        "summary": "8 passed in 0.02s"
+        "duration_seconds": 0.201,
+        "summary": "8 passed in 0.01s"
       }
     },
     {
-      "id": "T-04-023",
+      "id": "T-04-024",
       "path": "tests/ch04/test_messy_to_tidy.py",
       "chapter": "ch04",
       "sha256": "a093f00b09a864af54b35c696ea3e33e1a79675873a0325b72d4f93d5cffe51d",
@@ -24859,12 +24927,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.211,
+        "duration_seconds": 0.208,
         "summary": "13 passed in 0.01s"
       }
     },
     {
-      "id": "T-04-024",
+      "id": "T-04-025",
       "path": "tests/ch04/test_tidy_data_demo.py",
       "chapter": "ch04",
       "sha256": "c1e2162734b79f977fecc0deca24c3a0ed7bb179c4bc53a3ecf397fa48c09dfb",
@@ -24878,12 +24946,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.912,
-        "summary": "8 passed in 0.62s"
+        "duration_seconds": 1.081,
+        "summary": "8 passed in 0.80s"
       }
     },
     {
-      "id": "T-04-025",
+      "id": "T-04-026",
       "path": "tests/ch04/test_tsv_csv_handling.py",
       "chapter": "ch04",
       "sha256": "ab7096d14dac872b2e31148041dbf3008c08819dfb9c73f068838466152bd0d8",
@@ -24897,12 +24965,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.215,
+        "duration_seconds": 0.285,
         "summary": "6 passed in 0.02s"
       }
     },
     {
-      "id": "T-05-026",
+      "id": "T-05-027",
       "path": "tests/ch05/__init__.py",
       "chapter": "ch05",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -24913,7 +24981,7 @@
       "test_result": null
     },
     {
-      "id": "T-05-027",
+      "id": "T-05-028",
       "path": "tests/ch05/test_module_demo.py",
       "chapter": "ch05",
       "sha256": "3437a5d74ed763a3939c74970b5ee1e329d652529a3f1d7d5d53d7a0b3b7fd41",
@@ -24927,12 +24995,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.256,
+        "duration_seconds": 0.252,
         "summary": "21 passed in 0.06s"
       }
     },
     {
-      "id": "T-05-028",
+      "id": "T-05-029",
       "path": "tests/ch05/test_mylib_core.py",
       "chapter": "ch05",
       "sha256": "c4d8cd30bf3e2fb4006d95aebde887d018fb732e90c84f87268789bff1429488",
@@ -24946,12 +25014,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.197,
+        "duration_seconds": 0.186,
         "summary": "10 passed in 0.01s"
       }
     },
     {
-      "id": "T-05-029",
+      "id": "T-05-030",
       "path": "tests/ch05/test_mylib_utils.py",
       "chapter": "ch05",
       "sha256": "62c5ba3852e79fccaa25affb2255202b9a38d4a2a1287542a82d0e35458656c5",
@@ -24965,12 +25033,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.202,
+        "duration_seconds": 0.192,
         "summary": "6 passed in 0.01s"
       }
     },
     {
-      "id": "T-06-030",
+      "id": "T-06-031",
       "path": "tests/ch06/__init__.py",
       "chapter": "ch06",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -24981,7 +25049,7 @@
       "test_result": null
     },
     {
-      "id": "T-06-031",
+      "id": "T-06-032",
       "path": "tests/ch06/test_check_environment.py",
       "chapter": "ch06",
       "sha256": "c88be352e9e7bcebfd0e0f285f1153cdcd3d9ea23109edcfb44e04b2aad64ae1",
@@ -24995,12 +25063,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.21,
+        "duration_seconds": 0.231,
         "summary": "11 passed in 0.02s"
       }
     },
     {
-      "id": "T-06-032",
+      "id": "T-06-033",
       "path": "tests/ch06/test_dependency_examples.py",
       "chapter": "ch06",
       "sha256": "99fd011c0ed77dad11706922ae4f69e54d43f184fc25a596609b9e936a6511f2",
@@ -25014,12 +25082,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.206,
+        "duration_seconds": 0.221,
         "summary": "4 passed in 0.02s"
       }
     },
     {
-      "id": "T-07-033",
+      "id": "T-07-034",
       "path": "tests/ch07/test_ci_minimal.py",
       "chapter": "ch07",
       "sha256": "91d685aca139d7dff8987b8c16c22a5cbbb532ad7e0f390080eef5fc62e18d73",
@@ -25033,12 +25101,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.208,
+        "duration_seconds": 0.212,
         "summary": "4 passed in 0.02s"
       }
     },
     {
-      "id": "T-07-034",
+      "id": "T-07-035",
       "path": "tests/ch07/test_citation_cff.py",
       "chapter": "ch07",
       "sha256": "c088751c52d42cafb486f3f62e44c3ce53c851f4dd35838a6a00a0c87b33f5e5",
@@ -25052,12 +25120,12 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.202,
-        "summary": "5 passed, 1 skipped in 0.02s"
+        "duration_seconds": 0.222,
+        "summary": "5 passed, 1 skipped in 0.03s"
       }
     },
     {
-      "id": "T-08-035",
+      "id": "T-08-036",
       "path": "tests/ch08/__init__.py",
       "chapter": "ch08",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25068,7 +25136,7 @@
       "test_result": null
     },
     {
-      "id": "T-08-036",
+      "id": "T-08-037",
       "path": "tests/ch08/conftest.py",
       "chapter": "ch08",
       "sha256": "9296edfec3fcf9dd56b0d8ae7058ecbbf415c48984813d8c68e688e5879edc6a",
@@ -25081,7 +25149,7 @@
       "test_result": null
     },
     {
-      "id": "T-08-037",
+      "id": "T-08-038",
       "path": "tests/ch08/data/sample.fasta",
       "chapter": "ch08",
       "sha256": "c7acd98676a67f1361470c703f2c2a6a0306adcfa6f32d195a37258508f48b97",
@@ -25092,7 +25160,7 @@
       "test_result": null
     },
     {
-      "id": "T-08-038",
+      "id": "T-08-039",
       "path": "tests/ch08/test_ci_workflows.py",
       "chapter": "ch08",
       "sha256": "81220365199fd6d035fab9a5f934084c4e19caabd392b13185c82324dc9dcee5",
@@ -25111,7 +25179,7 @@
       }
     },
     {
-      "id": "T-08-039",
+      "id": "T-08-040",
       "path": "tests/ch08/test_config_examples.py",
       "chapter": "ch08",
       "sha256": "810e6d0a0e74fd1324a1f2da2e5b904b2d0c477d0fc5894e6f3ba31de5f99fb2",
@@ -25125,12 +25193,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.212,
+        "duration_seconds": 0.223,
         "summary": "4 passed in 0.02s"
       }
     },
     {
-      "id": "T-08-040",
+      "id": "T-08-041",
       "path": "tests/ch08/test_gc_fixture.py",
       "chapter": "ch08",
       "sha256": "818c1d27d515f634dac532a2c8162ecf51bb9034c109454234475289cdba5da8",
@@ -25146,12 +25214,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.197,
+        "duration_seconds": 0.218,
         "summary": "2 passed in 0.01s"
       }
     },
     {
-      "id": "T-08-041",
+      "id": "T-08-042",
       "path": "tests/ch08/test_reverse_complement.py",
       "chapter": "ch08",
       "sha256": "3034808a2777309fc77eb1c7e759c4e6c77510be817f07781c43589e50643456",
@@ -25170,12 +25238,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.209,
+        "duration_seconds": 0.247,
         "summary": "8 passed in 0.01s"
       }
     },
     {
-      "id": "T-08-042",
+      "id": "T-08-043",
       "path": "tests/ch08/test_seq_stats.py",
       "chapter": "ch08",
       "sha256": "43bc8f567d789b29d2bc66e9f613179d3640c02afe3a511495e76154d19c2f28",
@@ -25193,12 +25261,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.403,
-        "summary": "12 passed in 0.16s"
+        "duration_seconds": 0.444,
+        "summary": "12 passed in 0.21s"
       }
     },
     {
-      "id": "T-08-043",
+      "id": "T-08-044",
       "path": "tests/ch08/test_shared_fixtures.py",
       "chapter": "ch08",
       "sha256": "cba2176a6809ea78c720d8b7e460ccaef5ac8386d13009748cff38b23082353c",
@@ -25212,12 +25280,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.312,
-        "summary": "2 passed in 0.10s"
+        "duration_seconds": 0.336,
+        "summary": "2 passed in 0.11s"
       }
     },
     {
-      "id": "T-09-044",
+      "id": "T-09-045",
       "path": "tests/ch09/__init__.py",
       "chapter": "ch09",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25228,7 +25296,7 @@
       "test_result": null
     },
     {
-      "id": "T-09-045",
+      "id": "T-09-046",
       "path": "tests/ch09/test_coordinate_bugs.py",
       "chapter": "ch09",
       "sha256": "5dd7b4ef87b29a2b2c88e9438c0cf2fdc29b63c4cbd253a29800654828c28166",
@@ -25242,12 +25310,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.22,
         "summary": "15 passed in 0.01s"
       }
     },
     {
-      "id": "T-09-046",
+      "id": "T-09-047",
       "path": "tests/ch09/test_debug_print_demo.py",
       "chapter": "ch09",
       "sha256": "7b28dd17097019aa2bd73bd16ddcea96671aa396c9347b2ec3f0950ca2349a17",
@@ -25261,121 +25329,15 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.22,
+        "duration_seconds": 0.202,
         "summary": "7 passed in 0.01s"
       }
     },
     {
-      "id": "T-09-047",
+      "id": "T-09-048",
       "path": "tests/ch09/test_path_bugs.py",
       "chapter": "ch09",
       "sha256": "5de685dc6e98c7c215a754e6b243d67796bd1a7973844b48b7a664906445caab",
-      "line_count": 55,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 5,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.206,
-        "summary": "5 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-09-048",
-      "path": "tests/ch09/test_pdb_demo.py",
-      "chapter": "ch09",
-      "sha256": "168dd507266022109ebe9cce160dda78531e5aa6f3296ab8b37eb861ee4ad574",
-      "line_count": 99,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 11,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.208,
-        "summary": "11 passed in 0.01s"
-      }
-    },
-    {
-      "id": "T-09-049",
-      "path": "tests/ch09/test_python_pitfalls.py",
-      "chapter": "ch09",
-      "sha256": "57f574610f65343158938d33f40a33186961df164b5431b6fabc9544a186011e",
-      "line_count": 105,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 11,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.591,
-        "summary": "11 passed in 0.31s"
-      }
-    },
-    {
-      "id": "T-09-050",
-      "path": "tests/ch09/test_traceback_demo.py",
-      "chapter": "ch09",
-      "sha256": "9df95dfae657db3fe520bf9ca058668fc2589d59b14df890e4b398207d7daa45",
-      "line_count": 101,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 12,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.215,
-        "summary": "12 passed in 0.02s"
-      }
-    },
-    {
-      "id": "T-09-051",
-      "path": "tests/ch09/test_type_bugs.py",
-      "chapter": "ch09",
-      "sha256": "fe61d28309b125d387dc070a3b335ca0ef151c3e1c04fd675aac70bbbd6bf78d",
-      "line_count": 94,
-      "role": "pytest_file",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": {
-        "returncode": 0,
-        "passed": 11,
-        "failed": 0,
-        "skipped": 0,
-        "errors": 0,
-        "duration_seconds": 0.575,
-        "summary": "11 passed in 0.29s"
-      }
-    },
-    {
-      "id": "T-10-052",
-      "path": "tests/ch10/__init__.py",
-      "chapter": "ch10",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "line_count": 0,
-      "role": "package_support",
-      "body_block_ids": [],
-      "reference_block_ids": [],
-      "test_result": null
-    },
-    {
-      "id": "T-10-053",
-      "path": "tests/ch10/test_config_example.py",
-      "chapter": "ch10",
-      "sha256": "5ddcf0d8255707dc63dd00d65906662bce76b51139b5f6e1f757b9ad230c893b",
       "line_count": 55,
       "role": "pytest_file",
       "body_block_ids": [],
@@ -25391,7 +25353,113 @@
       }
     },
     {
+      "id": "T-09-049",
+      "path": "tests/ch09/test_pdb_demo.py",
+      "chapter": "ch09",
+      "sha256": "168dd507266022109ebe9cce160dda78531e5aa6f3296ab8b37eb861ee4ad574",
+      "line_count": 99,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.201,
+        "summary": "11 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-09-050",
+      "path": "tests/ch09/test_python_pitfalls.py",
+      "chapter": "ch09",
+      "sha256": "57f574610f65343158938d33f40a33186961df164b5431b6fabc9544a186011e",
+      "line_count": 105,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.595,
+        "summary": "11 passed in 0.30s"
+      }
+    },
+    {
+      "id": "T-09-051",
+      "path": "tests/ch09/test_traceback_demo.py",
+      "chapter": "ch09",
+      "sha256": "9df95dfae657db3fe520bf9ca058668fc2589d59b14df890e4b398207d7daa45",
+      "line_count": 101,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.209,
+        "summary": "12 passed in 0.01s"
+      }
+    },
+    {
+      "id": "T-09-052",
+      "path": "tests/ch09/test_type_bugs.py",
+      "chapter": "ch09",
+      "sha256": "fe61d28309b125d387dc070a3b335ca0ef151c3e1c04fd675aac70bbbd6bf78d",
+      "line_count": 94,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.598,
+        "summary": "11 passed in 0.30s"
+      }
+    },
+    {
+      "id": "T-10-053",
+      "path": "tests/ch10/__init__.py",
+      "chapter": "ch10",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "line_count": 0,
+      "role": "package_support",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": null
+    },
+    {
       "id": "T-10-054",
+      "path": "tests/ch10/test_config_example.py",
+      "chapter": "ch10",
+      "sha256": "5ddcf0d8255707dc63dd00d65906662bce76b51139b5f6e1f757b9ad230c893b",
+      "line_count": 55,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.221,
+        "summary": "5 passed in 0.02s"
+      }
+    },
+    {
+      "id": "T-10-055",
       "path": "tests/ch10/test_error_handling.py",
       "chapter": "ch10",
       "sha256": "ec5d4113cfcf81c13797752171783a48d6eca18bb3d3b7ab41dd67ac0382d76f",
@@ -25406,11 +25474,11 @@
         "skipped": 0,
         "errors": 0,
         "duration_seconds": 0.349,
-        "summary": "15 passed in 0.11s"
+        "summary": "15 passed in 0.12s"
       }
     },
     {
-      "id": "T-10-055",
+      "id": "T-10-056",
       "path": "tests/ch10/test_fail_fast_pipeline.py",
       "chapter": "ch10",
       "sha256": "d9516ec7f1035fa546dcfa03fad198222327e3fc756d809e697b4393c022d856",
@@ -25424,12 +25492,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.203,
+        "duration_seconds": 0.224,
         "summary": "3 passed in 0.01s"
       }
     },
     {
-      "id": "T-10-056",
+      "id": "T-10-057",
       "path": "tests/ch10/test_package_example.py",
       "chapter": "ch10",
       "sha256": "fdb9437069b125388badfd22ce2140ea54bef72d5e0a9f574f0f4327ed7ef3b7",
@@ -25443,12 +25511,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.24,
+        "duration_seconds": 0.252,
         "summary": "3 passed in 0.03s"
       }
     },
     {
-      "id": "T-11-057",
+      "id": "T-11-058",
       "path": "tests/ch11/__init__.py",
       "chapter": "ch11",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25459,7 +25527,7 @@
       "test_result": null
     },
     {
-      "id": "T-11-058",
+      "id": "T-11-059",
       "path": "tests/ch11/test_cli_argparse.py",
       "chapter": "ch11",
       "sha256": "c32105a64f23f30a0431fea85e192619cca3e7c00020e29e23e9ab8135a30a91",
@@ -25473,12 +25541,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.345,
+        "duration_seconds": 0.339,
         "summary": "7 passed in 0.11s"
       }
     },
     {
-      "id": "T-11-059",
+      "id": "T-11-060",
       "path": "tests/ch11/test_cli_click.py",
       "chapter": "ch11",
       "sha256": "eca5bb1afb5027065255d33021547e124a7f9bebd152f6dcb5f52a5b6f6699ad",
@@ -25492,12 +25560,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.334,
-        "summary": "9 passed in 0.11s"
+        "duration_seconds": 0.372,
+        "summary": "9 passed in 0.12s"
       }
     },
     {
-      "id": "T-11-060",
+      "id": "T-11-061",
       "path": "tests/ch11/test_logging_setup.py",
       "chapter": "ch11",
       "sha256": "ade0050b419f4ad6eeeda9ddf1a2b825da8fa9272ac39ada7326253d18b45ff4",
@@ -25511,12 +25579,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.223,
-        "summary": "10 passed in 0.03s"
+        "duration_seconds": 0.298,
+        "summary": "10 passed in 0.04s"
       }
     },
     {
-      "id": "T-11-061",
+      "id": "T-11-062",
       "path": "tests/ch11/test_seqtool.py",
       "chapter": "ch11",
       "sha256": "3657fb481b449bea3f8a0de88395bbc12121ee6f45a7d33d96507b69270e36e4",
@@ -25530,12 +25598,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.396,
-        "summary": "13 passed in 0.13s"
+        "duration_seconds": 0.42,
+        "summary": "13 passed in 0.15s"
       }
     },
     {
-      "id": "T-11-062",
+      "id": "T-11-063",
       "path": "tests/ch11/test_seqtool_streams.py",
       "chapter": "ch11",
       "sha256": "8cef5f49b8637973f46c96e16d3af05fce9954fa6091c984d32dafe24c0b0d06",
@@ -25549,12 +25617,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.37,
-        "summary": "3 passed in 0.12s"
+        "duration_seconds": 0.347,
+        "summary": "3 passed in 0.11s"
       }
     },
     {
-      "id": "T-12-063",
+      "id": "T-12-064",
       "path": "tests/ch12/__init__.py",
       "chapter": "ch12",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25565,7 +25633,7 @@
       "test_result": null
     },
     {
-      "id": "T-12-064",
+      "id": "T-12-065",
       "path": "tests/ch12/test_numpy_vectorize.py",
       "chapter": "ch12",
       "sha256": "2c5614c1017dac636d96ed2385fdbd7b008e91d65e6ee33b099a25053b388447",
@@ -25579,12 +25647,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.261,
+        "duration_seconds": 0.269,
         "summary": "13 passed in 0.05s"
       }
     },
     {
-      "id": "T-12-065",
+      "id": "T-12-066",
       "path": "tests/ch12/test_pandas_bio_ops.py",
       "chapter": "ch12",
       "sha256": "6e5db34b4203710539b33802b50c22036a467afcaa6e5f8e6a3d6d324e5cef1c",
@@ -25598,12 +25666,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.627,
+        "duration_seconds": 0.639,
         "summary": "9 passed in 0.33s"
       }
     },
     {
-      "id": "T-12-066",
+      "id": "T-12-067",
       "path": "tests/ch12/test_polars_bio_ops.py",
       "chapter": "ch12",
       "sha256": "263b8d4f4886002d86ed2fca6ba9e241190571d01c353cfcb6130aad78511ec5",
@@ -25617,12 +25685,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.403,
-        "summary": "10 passed in 0.17s"
+        "duration_seconds": 0.454,
+        "summary": "10 passed in 0.21s"
       }
     },
     {
-      "id": "T-12-067",
+      "id": "T-12-068",
       "path": "tests/ch12/test_scipy_stats_bio.py",
       "chapter": "ch12",
       "sha256": "90aaf980d73d8148acc71b1c0b8527a4b5b58f3c879ec8edadd84de36bde5924",
@@ -25636,12 +25704,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.192,
-        "summary": "19 passed in 0.90s"
+        "duration_seconds": 1.667,
+        "summary": "19 passed in 1.36s"
       }
     },
     {
-      "id": "T-13-068",
+      "id": "T-13-069",
       "path": "tests/ch13/__init__.py",
       "chapter": "ch13",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25652,7 +25720,7 @@
       "test_result": null
     },
     {
-      "id": "T-13-069",
+      "id": "T-13-070",
       "path": "tests/ch13/test_bio_plots.py",
       "chapter": "ch13",
       "sha256": "f4ae06e14f08f68cc77acb19dd1f6ee343f75bc854afc368534a538d00be8d5e",
@@ -25666,12 +25734,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 2.194,
-        "summary": "10 passed in 1.66s"
+        "duration_seconds": 2.342,
+        "summary": "10 passed in 1.84s"
       }
     },
     {
-      "id": "T-13-070",
+      "id": "T-13-071",
       "path": "tests/ch13/test_matplotlib_bindist.py",
       "chapter": "ch13",
       "sha256": "51cacb86ea71aa52bdf70f1244b11bdfbdcdf0ac1ea512e36efbcf84cfbc0d9e",
@@ -25685,12 +25753,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.682,
-        "summary": "6 passed in 0.37s"
+        "duration_seconds": 0.725,
+        "summary": "6 passed in 0.40s"
       }
     },
     {
-      "id": "T-13-071",
+      "id": "T-13-072",
       "path": "tests/ch13/test_plot_config.py",
       "chapter": "ch13",
       "sha256": "be20ab942be064bfefcab89397b1d242f6a5881b0a30bd081b4ef253ad2b3e43",
@@ -25704,12 +25772,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.507,
-        "summary": "1 passed in 0.23s"
+        "duration_seconds": 0.54,
+        "summary": "1 passed in 0.25s"
       }
     },
     {
-      "id": "T-13-072",
+      "id": "T-13-073",
       "path": "tests/ch13/test_seaborn_biodist.py",
       "chapter": "ch13",
       "sha256": "6b57388f9d8adf8ae59f1a59829a7552b2acdb744aa2780d23b60cb95853308d",
@@ -25723,12 +25791,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.811,
-        "summary": "5 passed in 1.30s"
+        "duration_seconds": 1.816,
+        "summary": "5 passed in 1.29s"
       }
     },
     {
-      "id": "T-13-073",
+      "id": "T-13-074",
       "path": "tests/ch13/test_tracks_config.py",
       "chapter": "ch13",
       "sha256": "210c4df55523e71b2044c63b8f05cca3b7332e397b4389e5e1644f286cbfd473",
@@ -25742,12 +25810,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.217,
+        "duration_seconds": 0.231,
         "summary": "1 passed in 0.01s"
       }
     },
     {
-      "id": "T-14-074",
+      "id": "T-14-075",
       "path": "tests/ch14/__init__.py",
       "chapter": "ch14",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25758,7 +25826,26 @@
       "test_result": null
     },
     {
-      "id": "T-14-075",
+      "id": "T-14-076",
+      "path": "tests/ch14/test_config_workflow_assets.py",
+      "chapter": "ch14",
+      "sha256": "af9e55778cfe9b63c697a3b80c085f6630b9746008dd63a6684f16c417738569",
+      "line_count": 72,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.255,
+        "summary": "3 passed in 0.07s"
+      }
+    },
+    {
+      "id": "T-14-077",
       "path": "tests/ch14/test_validate_workflow.py",
       "chapter": "ch14",
       "sha256": "f32389d6a201b207ed8a07f3277f5bff55702a685fd8234060a715ab8c75c57f",
@@ -25772,12 +25859,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
+        "duration_seconds": 0.211,
         "summary": "14 passed in 0.01s"
       }
     },
     {
-      "id": "T-14-076",
+      "id": "T-14-078",
       "path": "tests/ch14/test_workflow_assets.py",
       "chapter": "ch14",
       "sha256": "a70b39987e194e80834eab41e7cf3db80e0430978d1e8df300794b13230daf50",
@@ -25791,12 +25878,12 @@
         "failed": 0,
         "skipped": 4,
         "errors": 0,
-        "duration_seconds": 0.801,
-        "summary": "6 passed, 4 skipped in 0.61s"
+        "duration_seconds": 0.664,
+        "summary": "6 passed, 4 skipped in 0.47s"
       }
     },
     {
-      "id": "T-15-077",
+      "id": "T-15-079",
       "path": "tests/ch15/__init__.py",
       "chapter": "ch15",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25807,7 +25894,7 @@
       "test_result": null
     },
     {
-      "id": "T-15-078",
+      "id": "T-15-080",
       "path": "tests/ch15/test_container_examples.py",
       "chapter": "ch15",
       "sha256": "5e4b5a85e192df4d41ec46bad148cbe19b33bcd87c117f380b25adab575b1c63",
@@ -25821,12 +25908,12 @@
         "failed": 0,
         "skipped": 5,
         "errors": 0,
-        "duration_seconds": 0.251,
+        "duration_seconds": 0.253,
         "summary": "8 passed, 5 skipped in 0.08s"
       }
     },
     {
-      "id": "T-15-079",
+      "id": "T-15-081",
       "path": "tests/ch15/test_experiment_logger.py",
       "chapter": "ch15",
       "sha256": "435ea0645e05cd90dd3adf0268df5fc77b3102a9de2117a92ee6a1ada809fd89",
@@ -25840,12 +25927,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.348,
+        "duration_seconds": 0.362,
         "summary": "17 passed in 0.17s"
       }
     },
     {
-      "id": "T-15-080",
+      "id": "T-15-082",
       "path": "tests/ch15/test_validate_dockerfile.py",
       "chapter": "ch15",
       "sha256": "19d298392b9ba3c7c89de4016b5e43fc3fb629f9475d2bd0ca3015adbe296237",
@@ -25859,12 +25946,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.222,
+        "duration_seconds": 0.23,
         "summary": "22 passed in 0.02s"
       }
     },
     {
-      "id": "T-16-081",
+      "id": "T-16-083",
       "path": "tests/ch16/__init__.py",
       "chapter": "ch16",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -25875,7 +25962,26 @@
       "test_result": null
     },
     {
-      "id": "T-16-082",
+      "id": "T-16-084",
+      "path": "tests/ch16/test_ssh_config.py",
+      "chapter": "ch16",
+      "sha256": "52eb9285cf18a9e419678fec730925d6cb70a928156a3f1c04c9b05b3a7b1cc8",
+      "line_count": 51,
+      "role": "pytest_file",
+      "body_block_ids": [],
+      "reference_block_ids": [],
+      "test_result": {
+        "returncode": 0,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "errors": 0,
+        "duration_seconds": 0.223,
+        "summary": "2 passed in 0.03s"
+      }
+    },
+    {
+      "id": "T-16-085",
       "path": "tests/ch16/test_validate_slurm.py",
       "chapter": "ch16",
       "sha256": "719acf9e86f94d9e7ce16f72fa577dbc7410b4cd1df15453e218a5dd1c9e01f9",
@@ -25889,12 +25995,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
+        "duration_seconds": 0.204,
         "summary": "31 passed in 0.02s"
       }
     },
     {
-      "id": "T-17-083",
+      "id": "T-17-086",
       "path": "tests/ch17/__init__.py",
       "chapter": "ch17",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -25905,7 +26011,7 @@
       "test_result": null
     },
     {
-      "id": "T-17-084",
+      "id": "T-17-087",
       "path": "tests/ch17/test_chunk_processing.py",
       "chapter": "ch17",
       "sha256": "a85d8a86d620fa067d45dfed19c550af020f7e5385183f8e94d9d4096b824505",
@@ -25919,12 +26025,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.662,
-        "summary": "4 passed in 0.35s"
+        "duration_seconds": 0.648,
+        "summary": "4 passed in 0.34s"
       }
     },
     {
-      "id": "T-17-085",
+      "id": "T-17-088",
       "path": "tests/ch17/test_file_format_bench.py",
       "chapter": "ch17",
       "sha256": "52830708c8224bd60a0d6a30046e1a841b535e797675e6c9281efa7a69b1ebb0",
@@ -25938,12 +26044,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.724,
-        "summary": "6 passed in 0.42s"
+        "duration_seconds": 0.784,
+        "summary": "6 passed in 0.49s"
       }
     },
     {
-      "id": "T-17-086",
+      "id": "T-17-089",
       "path": "tests/ch17/test_generator_fastq.py",
       "chapter": "ch17",
       "sha256": "fe44b5bfc83b8c1c3d45e839396571c543d3cbbc0eac69578108cee6d0f8be1d",
@@ -25957,12 +26063,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.346,
-        "summary": "7 passed in 0.12s"
+        "duration_seconds": 0.364,
+        "summary": "7 passed in 0.14s"
       }
     },
     {
-      "id": "T-17-087",
+      "id": "T-17-090",
       "path": "tests/ch17/test_memory_target.py",
       "chapter": "ch17",
       "sha256": "1cbc5a909ebda341b588c68fe1d41e658a59e1121735fd7638e7ee7fd0aff757",
@@ -25976,12 +26082,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.272,
+        "duration_seconds": 0.295,
         "summary": "1 passed in 0.06s"
       }
     },
     {
-      "id": "T-17-088",
+      "id": "T-17-091",
       "path": "tests/ch17/test_parallel_gc.py",
       "chapter": "ch17",
       "sha256": "b62b728ea0b5810684279e855c4277066d308c5225464b9a8545ea1d7dea660e",
@@ -25995,12 +26101,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.564,
-        "summary": "9 passed in 0.37s"
+        "duration_seconds": 0.943,
+        "summary": "9 passed in 0.65s"
       }
     },
     {
-      "id": "T-17-089",
+      "id": "T-17-092",
       "path": "tests/ch17/test_profiling_demo.py",
       "chapter": "ch17",
       "sha256": "a12ab057044e188df01b8ff8d85bde238b60922e2c51229c1de2448e5f4bab23",
@@ -26014,12 +26120,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.294,
-        "summary": "6 passed in 0.07s"
+        "duration_seconds": 0.593,
+        "summary": "6 passed in 0.13s"
       }
     },
     {
-      "id": "T-17-090",
+      "id": "T-17-093",
       "path": "tests/ch17/test_streaming_fasta.py",
       "chapter": "ch17",
       "sha256": "8f2483150abd88ff0e4783a38eeb7c75e22c6f17aeb56031a5eace124ff9d52b",
@@ -26033,12 +26139,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.317,
-        "summary": "2 passed in 0.10s"
+        "duration_seconds": 0.956,
+        "summary": "2 passed in 0.28s"
       }
     },
     {
-      "id": "T-18-091",
+      "id": "T-18-094",
       "path": "tests/ch18/__init__.py",
       "chapter": "ch18",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -26049,7 +26155,7 @@
       "test_result": null
     },
     {
-      "id": "T-18-092",
+      "id": "T-18-095",
       "path": "tests/ch18/test_docstring_checker.py",
       "chapter": "ch18",
       "sha256": "c1323857cede34fbf472d317558fbfc1fc7ab102d010539b6cd417077d92e189",
@@ -26063,12 +26169,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.203,
+        "duration_seconds": 0.228,
         "summary": "11 passed in 0.01s"
       }
     },
     {
-      "id": "T-18-093",
+      "id": "T-18-096",
       "path": "tests/ch18/test_mermaid_helper.py",
       "chapter": "ch18",
       "sha256": "40eb9806b96c8dbb9a4ada88864f9649bac983c1bc826040dd01a9dfe4199524",
@@ -26082,12 +26188,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
-        "summary": "19 passed in 0.01s"
+        "duration_seconds": 0.215,
+        "summary": "19 passed in 0.02s"
       }
     },
     {
-      "id": "T-18-094",
+      "id": "T-18-097",
       "path": "tests/ch18/test_mkdocs_example.py",
       "chapter": "ch18",
       "sha256": "4cb8fe51265d125694df782e8390580cedc0c28825cec343a0a1786cbbf16037",
@@ -26101,12 +26207,12 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.228,
+        "duration_seconds": 0.232,
         "summary": "3 passed, 1 skipped in 0.02s"
       }
     },
     {
-      "id": "T-18-095",
+      "id": "T-18-098",
       "path": "tests/ch18/test_validate_readme.py",
       "chapter": "ch18",
       "sha256": "91f92663b0370d349c2ec6d7254f34a53bae0d9f1cacfabdfe5bc8c08d3748f9",
@@ -26120,12 +26226,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.201,
-        "summary": "18 passed in 0.01s"
+        "duration_seconds": 0.256,
+        "summary": "18 passed in 0.02s"
       }
     },
     {
-      "id": "T-19-096",
+      "id": "T-19-099",
       "path": "tests/ch19/__init__.py",
       "chapter": "ch19",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -26136,7 +26242,7 @@
       "test_result": null
     },
     {
-      "id": "T-19-097",
+      "id": "T-19-100",
       "path": "tests/ch19/test_checksum_verify.py",
       "chapter": "ch19",
       "sha256": "97dfdfad80a7506f440231e1b6ef5c42a26958a3a140a67e9b2746d5181a4f27",
@@ -26150,12 +26256,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.225,
+        "duration_seconds": 0.244,
         "summary": "13 passed in 0.03s"
       }
     },
     {
-      "id": "T-19-098",
+      "id": "T-19-101",
       "path": "tests/ch19/test_entrez_fetch.py",
       "chapter": "ch19",
       "sha256": "9cf8a75da3c2cdfaf93165cf2256e82e70b34567b0521dce063d868848b4362d",
@@ -26169,12 +26275,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.351,
+        "duration_seconds": 0.359,
         "summary": "9 passed in 0.12s"
       }
     },
     {
-      "id": "T-19-099",
+      "id": "T-19-102",
       "path": "tests/ch19/test_local_db.py",
       "chapter": "ch19",
       "sha256": "53730dc4aae9e45ef5f3066e3fbf4793887a85f68be32370340e81d03a0f76f5",
@@ -26188,12 +26294,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.227,
+        "duration_seconds": 0.233,
         "summary": "13 passed in 0.02s"
       }
     },
     {
-      "id": "T-19-100",
+      "id": "T-19-103",
       "path": "tests/ch19/test_parse_flatfile.py",
       "chapter": "ch19",
       "sha256": "21455de745157da3199d517f05a86dee4435ff139f72820d3c69c71d27d10950",
@@ -26207,12 +26313,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.36,
+        "duration_seconds": 0.351,
         "summary": "12 passed in 0.11s"
       }
     },
     {
-      "id": "T-19-101",
+      "id": "T-19-104",
       "path": "tests/ch19/test_sparql_query.py",
       "chapter": "ch19",
       "sha256": "231c5fded2390105bc0c79f3c527c0236fd0963f1ff36cad39f37039cfa5f7f2",
@@ -26226,12 +26332,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.293,
-        "summary": "9 passed in 0.08s"
+        "duration_seconds": 0.3,
+        "summary": "9 passed in 0.09s"
       }
     },
     {
-      "id": "T-20-102",
+      "id": "T-20-105",
       "path": "tests/ch20/__init__.py",
       "chapter": "ch20",
       "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
@@ -26242,7 +26348,7 @@
       "test_result": null
     },
     {
-      "id": "T-20-103",
+      "id": "T-20-106",
       "path": "tests/ch20/test_anonymize_metadata.py",
       "chapter": "ch20",
       "sha256": "25327b19a1106c912184f6b6977125f41b01b8f552c0a33657c2fee045c5f02e",
@@ -26256,12 +26362,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
+        "duration_seconds": 0.206,
         "summary": "25 passed in 0.02s"
       }
     },
     {
-      "id": "T-20-104",
+      "id": "T-20-107",
       "path": "tests/ch20/test_env_example.py",
       "chapter": "ch20",
       "sha256": "1cd385301e12f55d1d36cb96487087e72b678fd4943bd9c2428c823e3f30854e",
@@ -26275,12 +26381,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.194,
+        "duration_seconds": 0.191,
         "summary": "1 passed in 0.01s"
       }
     },
     {
-      "id": "T-20-105",
+      "id": "T-20-108",
       "path": "tests/ch20/test_secret_scanner.py",
       "chapter": "ch20",
       "sha256": "5f25b25c346367882081d9adce5ac5086b3f7210820d6723fd43f4f313e3911a",
@@ -26294,12 +26400,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.212,
+        "duration_seconds": 0.222,
         "summary": "21 passed in 0.02s"
       }
     },
     {
-      "id": "T-21-106",
+      "id": "T-21-109",
       "path": "tests/ch21/__init__.py",
       "chapter": "ch21",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -26310,7 +26416,7 @@
       "test_result": null
     },
     {
-      "id": "T-21-107",
+      "id": "T-21-110",
       "path": "tests/ch21/test_analysis_intake.py",
       "chapter": "ch21",
       "sha256": "5416be9c77b9962599c0a36835cd4020f0ffea4bdd1347c0ec925b818ac28cb5",
@@ -26324,12 +26430,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
+        "duration_seconds": 0.218,
         "summary": "11 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-108",
+      "id": "T-21-111",
       "path": "tests/ch21/test_bioconda_recipe.py",
       "chapter": "ch21",
       "sha256": "bbd60b9c32da9265df2f6003e8aafd3ec78123a81d2159c808c298afe7b78fa7",
@@ -26343,12 +26449,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.21,
+        "duration_seconds": 0.215,
         "summary": "1 passed in 0.02s"
       }
     },
     {
-      "id": "T-21-109",
+      "id": "T-21-112",
       "path": "tests/ch21/test_check_urls_browser.py",
       "chapter": "ch21",
       "sha256": "4dbeca3637e27a8aa6d5a98ba5ff62296b7732699619a43f4b1c1406d1a82df5",
@@ -26362,12 +26468,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.226,
+        "duration_seconds": 0.224,
         "summary": "10 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-110",
+      "id": "T-21-113",
       "path": "tests/ch21/test_format_question.py",
       "chapter": "ch21",
       "sha256": "7621c45f86cd28928da8e1f2b36a13ae78de6e54487e133a081773be355d5c51",
@@ -26381,12 +26487,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.236,
-        "summary": "5 passed in 0.02s"
+        "duration_seconds": 0.289,
+        "summary": "5 passed in 0.03s"
       }
     },
     {
-      "id": "T-21-111",
+      "id": "T-21-114",
       "path": "tests/ch21/test_progress_report.py",
       "chapter": "ch21",
       "sha256": "d879e5761c0988910b9a435076ac3edf4cff0374a72ea010b5a70aa9225282fc",
@@ -26400,12 +26506,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.196,
+        "duration_seconds": 0.203,
         "summary": "8 passed in 0.01s"
       }
     },
     {
-      "id": "T-21-112",
+      "id": "T-21-115",
       "path": "tests/ch21/test_reference_url_preference.py",
       "chapter": "ch21",
       "sha256": "d8b6233878ab7ed016ef5eda4abdc8a89d894f308e22b474fe5759007a704ae1",
@@ -26419,12 +26525,12 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.228,
+        "duration_seconds": 0.23,
         "summary": "13 passed in 0.04s"
       }
     },
     {
-      "id": "T-21-113",
+      "id": "T-21-116",
       "path": "tests/ch21/test_review_helper.py",
       "chapter": "ch21",
       "sha256": "feab14b15477a8664fd557e1767070634605f0090def46948a7f8ff7ac080716",
@@ -26438,7 +26544,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.206,
+        "duration_seconds": 0.203,
         "summary": "9 passed in 0.01s"
       }
     }
@@ -26450,7 +26556,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.33,
+      "duration_seconds": 0.345,
       "summary": "11 passed in 0.07s"
     },
     "tests/ch00/test_hmm_gene_predict.py": {
@@ -26459,8 +26565,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.468,
-      "summary": "9 passed in 0.28s"
+      "duration_seconds": 0.448,
+      "summary": "9 passed in 0.26s"
     },
     "tests/ch00/test_plot_orfs.py": {
       "returncode": 0,
@@ -26468,8 +26574,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.115,
-      "summary": "8 passed in 0.81s"
+      "duration_seconds": 1.472,
+      "summary": "8 passed in 1.08s"
     },
     "tests/ch01/test_gc_content.py": {
       "returncode": 0,
@@ -26477,7 +26583,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.219,
+      "duration_seconds": 0.211,
       "summary": "9 passed in 0.01s"
     },
     "tests/ch01/test_seq_filter.py": {
@@ -26486,7 +26592,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.213,
+      "duration_seconds": 0.233,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_env_check.py": {
@@ -26495,7 +26601,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.207,
+      "duration_seconds": 0.224,
       "summary": "12 passed in 0.02s"
     },
     "tests/ch02/test_fastq_gzip.py": {
@@ -26504,7 +26610,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.212,
+      "duration_seconds": 0.245,
       "summary": "11 passed in 0.02s"
     },
     "tests/ch02/test_regex_basics.py": {
@@ -26513,7 +26619,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.205,
+      "duration_seconds": 0.228,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_shell_scripts.py": {
@@ -26522,8 +26628,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.676,
-      "summary": "7 passed in 1.42s"
+      "duration_seconds": 1.022,
+      "summary": "7 passed in 0.76s"
+    },
+    "tests/ch02/test_ssh_config.py": {
+      "returncode": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.231,
+      "summary": "1 passed in 0.02s"
     },
     "tests/ch02/test_text_processing.py": {
       "returncode": 0,
@@ -26531,7 +26646,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.222,
+      "duration_seconds": 0.237,
       "summary": "18 passed in 0.02s"
     },
     "tests/ch03/test_data_structure_bench.py": {
@@ -26540,7 +26655,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.201,
+      "duration_seconds": 0.269,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch03/test_float_pitfalls.py": {
@@ -26549,8 +26664,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.381,
-      "summary": "17 passed in 0.02s"
+      "duration_seconds": 0.241,
+      "summary": "17 passed in 0.01s"
     },
     "tests/ch03/test_random_reproducibility.py": {
       "returncode": 0,
@@ -26558,8 +26673,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.314,
-      "summary": "12 passed in 0.09s"
+      "duration_seconds": 0.368,
+      "summary": "12 passed in 0.14s"
     },
     "tests/ch04/test_config_examples.py": {
       "returncode": 0,
@@ -26567,7 +26682,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.216,
+      "duration_seconds": 0.206,
       "summary": "2 passed in 0.02s"
     },
     "tests/ch04/test_coordinate_convert.py": {
@@ -26576,7 +26691,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.195,
+      "duration_seconds": 0.192,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch04/test_encoding_traps.py": {
@@ -26585,8 +26700,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.219,
-      "summary": "8 passed in 0.02s"
+      "duration_seconds": 0.201,
+      "summary": "8 passed in 0.01s"
     },
     "tests/ch04/test_messy_to_tidy.py": {
       "returncode": 0,
@@ -26594,7 +26709,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.211,
+      "duration_seconds": 0.208,
       "summary": "13 passed in 0.01s"
     },
     "tests/ch04/test_tidy_data_demo.py": {
@@ -26603,8 +26718,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.912,
-      "summary": "8 passed in 0.62s"
+      "duration_seconds": 1.081,
+      "summary": "8 passed in 0.80s"
     },
     "tests/ch04/test_tsv_csv_handling.py": {
       "returncode": 0,
@@ -26612,7 +26727,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.215,
+      "duration_seconds": 0.285,
       "summary": "6 passed in 0.02s"
     },
     "tests/ch05/test_module_demo.py": {
@@ -26621,7 +26736,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.256,
+      "duration_seconds": 0.252,
       "summary": "21 passed in 0.06s"
     },
     "tests/ch05/test_mylib_core.py": {
@@ -26630,7 +26745,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.197,
+      "duration_seconds": 0.186,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch05/test_mylib_utils.py": {
@@ -26639,7 +26754,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.202,
+      "duration_seconds": 0.192,
       "summary": "6 passed in 0.01s"
     },
     "tests/ch06/test_check_environment.py": {
@@ -26648,7 +26763,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.21,
+      "duration_seconds": 0.231,
       "summary": "11 passed in 0.02s"
     },
     "tests/ch06/test_dependency_examples.py": {
@@ -26657,7 +26772,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.206,
+      "duration_seconds": 0.221,
       "summary": "4 passed in 0.02s"
     },
     "tests/ch07/test_ci_minimal.py": {
@@ -26666,7 +26781,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.208,
+      "duration_seconds": 0.212,
       "summary": "4 passed in 0.02s"
     },
     "tests/ch07/test_citation_cff.py": {
@@ -26675,8 +26790,8 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.202,
-      "summary": "5 passed, 1 skipped in 0.02s"
+      "duration_seconds": 0.222,
+      "summary": "5 passed, 1 skipped in 0.03s"
     },
     "tests/ch08/test_ci_workflows.py": {
       "returncode": 0,
@@ -26693,7 +26808,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.212,
+      "duration_seconds": 0.223,
       "summary": "4 passed in 0.02s"
     },
     "tests/ch08/test_gc_fixture.py": {
@@ -26702,7 +26817,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.197,
+      "duration_seconds": 0.218,
       "summary": "2 passed in 0.01s"
     },
     "tests/ch08/test_reverse_complement.py": {
@@ -26711,7 +26826,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.209,
+      "duration_seconds": 0.247,
       "summary": "8 passed in 0.01s"
     },
     "tests/ch08/test_seq_stats.py": {
@@ -26720,8 +26835,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.403,
-      "summary": "12 passed in 0.16s"
+      "duration_seconds": 0.444,
+      "summary": "12 passed in 0.21s"
     },
     "tests/ch08/test_shared_fixtures.py": {
       "returncode": 0,
@@ -26729,8 +26844,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.312,
-      "summary": "2 passed in 0.10s"
+      "duration_seconds": 0.336,
+      "summary": "2 passed in 0.11s"
     },
     "tests/ch09/test_coordinate_bugs.py": {
       "returncode": 0,
@@ -26738,7 +26853,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.22,
       "summary": "15 passed in 0.01s"
     },
     "tests/ch09/test_debug_print_demo.py": {
@@ -26747,7 +26862,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.22,
+      "duration_seconds": 0.202,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch09/test_path_bugs.py": {
@@ -26756,8 +26871,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.206,
-      "summary": "5 passed in 0.01s"
+      "duration_seconds": 0.216,
+      "summary": "5 passed in 0.02s"
     },
     "tests/ch09/test_pdb_demo.py": {
       "returncode": 0,
@@ -26765,8 +26880,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.208,
-      "summary": "11 passed in 0.01s"
+      "duration_seconds": 0.201,
+      "summary": "11 passed in 0.02s"
     },
     "tests/ch09/test_python_pitfalls.py": {
       "returncode": 0,
@@ -26774,8 +26889,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.591,
-      "summary": "11 passed in 0.31s"
+      "duration_seconds": 0.595,
+      "summary": "11 passed in 0.30s"
     },
     "tests/ch09/test_traceback_demo.py": {
       "returncode": 0,
@@ -26783,8 +26898,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.215,
-      "summary": "12 passed in 0.02s"
+      "duration_seconds": 0.209,
+      "summary": "12 passed in 0.01s"
     },
     "tests/ch09/test_type_bugs.py": {
       "returncode": 0,
@@ -26792,8 +26907,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.575,
-      "summary": "11 passed in 0.29s"
+      "duration_seconds": 0.598,
+      "summary": "11 passed in 0.30s"
     },
     "tests/ch10/test_config_example.py": {
       "returncode": 0,
@@ -26801,7 +26916,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.216,
+      "duration_seconds": 0.221,
       "summary": "5 passed in 0.02s"
     },
     "tests/ch10/test_error_handling.py": {
@@ -26811,7 +26926,7 @@
       "skipped": 0,
       "errors": 0,
       "duration_seconds": 0.349,
-      "summary": "15 passed in 0.11s"
+      "summary": "15 passed in 0.12s"
     },
     "tests/ch10/test_fail_fast_pipeline.py": {
       "returncode": 0,
@@ -26819,7 +26934,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.203,
+      "duration_seconds": 0.224,
       "summary": "3 passed in 0.01s"
     },
     "tests/ch10/test_package_example.py": {
@@ -26828,7 +26943,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.24,
+      "duration_seconds": 0.252,
       "summary": "3 passed in 0.03s"
     },
     "tests/ch11/test_cli_argparse.py": {
@@ -26837,7 +26952,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.345,
+      "duration_seconds": 0.339,
       "summary": "7 passed in 0.11s"
     },
     "tests/ch11/test_cli_click.py": {
@@ -26846,8 +26961,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.334,
-      "summary": "9 passed in 0.11s"
+      "duration_seconds": 0.372,
+      "summary": "9 passed in 0.12s"
     },
     "tests/ch11/test_logging_setup.py": {
       "returncode": 0,
@@ -26855,8 +26970,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.223,
-      "summary": "10 passed in 0.03s"
+      "duration_seconds": 0.298,
+      "summary": "10 passed in 0.04s"
     },
     "tests/ch11/test_seqtool.py": {
       "returncode": 0,
@@ -26864,8 +26979,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.396,
-      "summary": "13 passed in 0.13s"
+      "duration_seconds": 0.42,
+      "summary": "13 passed in 0.15s"
     },
     "tests/ch11/test_seqtool_streams.py": {
       "returncode": 0,
@@ -26873,8 +26988,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.37,
-      "summary": "3 passed in 0.12s"
+      "duration_seconds": 0.347,
+      "summary": "3 passed in 0.11s"
     },
     "tests/ch12/test_numpy_vectorize.py": {
       "returncode": 0,
@@ -26882,7 +26997,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.261,
+      "duration_seconds": 0.269,
       "summary": "13 passed in 0.05s"
     },
     "tests/ch12/test_pandas_bio_ops.py": {
@@ -26891,7 +27006,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.627,
+      "duration_seconds": 0.639,
       "summary": "9 passed in 0.33s"
     },
     "tests/ch12/test_polars_bio_ops.py": {
@@ -26900,8 +27015,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.403,
-      "summary": "10 passed in 0.17s"
+      "duration_seconds": 0.454,
+      "summary": "10 passed in 0.21s"
     },
     "tests/ch12/test_scipy_stats_bio.py": {
       "returncode": 0,
@@ -26909,8 +27024,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.192,
-      "summary": "19 passed in 0.90s"
+      "duration_seconds": 1.667,
+      "summary": "19 passed in 1.36s"
     },
     "tests/ch13/test_bio_plots.py": {
       "returncode": 0,
@@ -26918,8 +27033,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 2.194,
-      "summary": "10 passed in 1.66s"
+      "duration_seconds": 2.342,
+      "summary": "10 passed in 1.84s"
     },
     "tests/ch13/test_matplotlib_bindist.py": {
       "returncode": 0,
@@ -26927,8 +27042,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.682,
-      "summary": "6 passed in 0.37s"
+      "duration_seconds": 0.725,
+      "summary": "6 passed in 0.40s"
     },
     "tests/ch13/test_plot_config.py": {
       "returncode": 0,
@@ -26936,8 +27051,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.507,
-      "summary": "1 passed in 0.23s"
+      "duration_seconds": 0.54,
+      "summary": "1 passed in 0.25s"
     },
     "tests/ch13/test_seaborn_biodist.py": {
       "returncode": 0,
@@ -26945,8 +27060,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.811,
-      "summary": "5 passed in 1.30s"
+      "duration_seconds": 1.816,
+      "summary": "5 passed in 1.29s"
     },
     "tests/ch13/test_tracks_config.py": {
       "returncode": 0,
@@ -26954,8 +27069,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.217,
+      "duration_seconds": 0.231,
       "summary": "1 passed in 0.01s"
+    },
+    "tests/ch14/test_config_workflow_assets.py": {
+      "returncode": 0,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.255,
+      "summary": "3 passed in 0.07s"
     },
     "tests/ch14/test_validate_workflow.py": {
       "returncode": 0,
@@ -26963,7 +27087,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.214,
+      "duration_seconds": 0.211,
       "summary": "14 passed in 0.01s"
     },
     "tests/ch14/test_workflow_assets.py": {
@@ -26972,8 +27096,8 @@
       "failed": 0,
       "skipped": 4,
       "errors": 0,
-      "duration_seconds": 0.801,
-      "summary": "6 passed, 4 skipped in 0.61s"
+      "duration_seconds": 0.664,
+      "summary": "6 passed, 4 skipped in 0.47s"
     },
     "tests/ch15/test_container_examples.py": {
       "returncode": 0,
@@ -26981,7 +27105,7 @@
       "failed": 0,
       "skipped": 5,
       "errors": 0,
-      "duration_seconds": 0.251,
+      "duration_seconds": 0.253,
       "summary": "8 passed, 5 skipped in 0.08s"
     },
     "tests/ch15/test_experiment_logger.py": {
@@ -26990,7 +27114,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.348,
+      "duration_seconds": 0.362,
       "summary": "17 passed in 0.17s"
     },
     "tests/ch15/test_validate_dockerfile.py": {
@@ -26999,8 +27123,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.222,
+      "duration_seconds": 0.23,
       "summary": "22 passed in 0.02s"
+    },
+    "tests/ch16/test_ssh_config.py": {
+      "returncode": 0,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.223,
+      "summary": "2 passed in 0.03s"
     },
     "tests/ch16/test_validate_slurm.py": {
       "returncode": 0,
@@ -27008,7 +27141,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.234,
+      "duration_seconds": 0.204,
       "summary": "31 passed in 0.02s"
     },
     "tests/ch17/test_chunk_processing.py": {
@@ -27017,8 +27150,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.662,
-      "summary": "4 passed in 0.35s"
+      "duration_seconds": 0.648,
+      "summary": "4 passed in 0.34s"
     },
     "tests/ch17/test_file_format_bench.py": {
       "returncode": 0,
@@ -27026,8 +27159,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.724,
-      "summary": "6 passed in 0.42s"
+      "duration_seconds": 0.784,
+      "summary": "6 passed in 0.49s"
     },
     "tests/ch17/test_generator_fastq.py": {
       "returncode": 0,
@@ -27035,8 +27168,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.346,
-      "summary": "7 passed in 0.12s"
+      "duration_seconds": 0.364,
+      "summary": "7 passed in 0.14s"
     },
     "tests/ch17/test_memory_target.py": {
       "returncode": 0,
@@ -27044,7 +27177,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.272,
+      "duration_seconds": 0.295,
       "summary": "1 passed in 0.06s"
     },
     "tests/ch17/test_parallel_gc.py": {
@@ -27053,8 +27186,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.564,
-      "summary": "9 passed in 0.37s"
+      "duration_seconds": 0.943,
+      "summary": "9 passed in 0.65s"
     },
     "tests/ch17/test_profiling_demo.py": {
       "returncode": 0,
@@ -27062,8 +27195,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.294,
-      "summary": "6 passed in 0.07s"
+      "duration_seconds": 0.593,
+      "summary": "6 passed in 0.13s"
     },
     "tests/ch17/test_streaming_fasta.py": {
       "returncode": 0,
@@ -27071,8 +27204,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.317,
-      "summary": "2 passed in 0.10s"
+      "duration_seconds": 0.956,
+      "summary": "2 passed in 0.28s"
     },
     "tests/ch18/test_docstring_checker.py": {
       "returncode": 0,
@@ -27080,7 +27213,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.203,
+      "duration_seconds": 0.228,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch18/test_mermaid_helper.py": {
@@ -27089,8 +27222,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.207,
-      "summary": "19 passed in 0.01s"
+      "duration_seconds": 0.215,
+      "summary": "19 passed in 0.02s"
     },
     "tests/ch18/test_mkdocs_example.py": {
       "returncode": 0,
@@ -27098,7 +27231,7 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.228,
+      "duration_seconds": 0.232,
       "summary": "3 passed, 1 skipped in 0.02s"
     },
     "tests/ch18/test_validate_readme.py": {
@@ -27107,8 +27240,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.201,
-      "summary": "18 passed in 0.01s"
+      "duration_seconds": 0.256,
+      "summary": "18 passed in 0.02s"
     },
     "tests/ch19/test_checksum_verify.py": {
       "returncode": 0,
@@ -27116,7 +27249,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.225,
+      "duration_seconds": 0.244,
       "summary": "13 passed in 0.03s"
     },
     "tests/ch19/test_entrez_fetch.py": {
@@ -27125,7 +27258,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.351,
+      "duration_seconds": 0.359,
       "summary": "9 passed in 0.12s"
     },
     "tests/ch19/test_local_db.py": {
@@ -27134,7 +27267,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.227,
+      "duration_seconds": 0.233,
       "summary": "13 passed in 0.02s"
     },
     "tests/ch19/test_parse_flatfile.py": {
@@ -27143,7 +27276,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.36,
+      "duration_seconds": 0.351,
       "summary": "12 passed in 0.11s"
     },
     "tests/ch19/test_sparql_query.py": {
@@ -27152,8 +27285,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.293,
-      "summary": "9 passed in 0.08s"
+      "duration_seconds": 0.3,
+      "summary": "9 passed in 0.09s"
     },
     "tests/ch20/test_anonymize_metadata.py": {
       "returncode": 0,
@@ -27161,7 +27294,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.207,
+      "duration_seconds": 0.206,
       "summary": "25 passed in 0.02s"
     },
     "tests/ch20/test_env_example.py": {
@@ -27170,7 +27303,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.194,
+      "duration_seconds": 0.191,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch20/test_secret_scanner.py": {
@@ -27179,7 +27312,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.212,
+      "duration_seconds": 0.222,
       "summary": "21 passed in 0.02s"
     },
     "tests/ch21/test_analysis_intake.py": {
@@ -27188,7 +27321,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.207,
+      "duration_seconds": 0.218,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch21/test_bioconda_recipe.py": {
@@ -27197,7 +27330,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.21,
+      "duration_seconds": 0.215,
       "summary": "1 passed in 0.02s"
     },
     "tests/ch21/test_check_urls_browser.py": {
@@ -27206,7 +27339,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.226,
+      "duration_seconds": 0.224,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch21/test_format_question.py": {
@@ -27215,8 +27348,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.236,
-      "summary": "5 passed in 0.02s"
+      "duration_seconds": 0.289,
+      "summary": "5 passed in 0.03s"
     },
     "tests/ch21/test_progress_report.py": {
       "returncode": 0,
@@ -27224,7 +27357,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.196,
+      "duration_seconds": 0.203,
       "summary": "8 passed in 0.01s"
     },
     "tests/ch21/test_reference_url_preference.py": {
@@ -27233,7 +27366,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.228,
+      "duration_seconds": 0.23,
       "summary": "13 passed in 0.04s"
     },
     "tests/ch21/test_review_helper.py": {
@@ -27242,7 +27375,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.206,
+      "duration_seconds": 0.203,
       "summary": "9 passed in 0.01s"
     },
     "tests/review/test_check_code_sync.py": {
@@ -27260,8 +27393,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.953,
-      "summary": "18 passed in 0.75s"
+      "duration_seconds": 0.941,
+      "summary": "18 passed in 0.73s"
     }
   },
   "classification_review": {
