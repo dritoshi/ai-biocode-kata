@@ -2,7 +2,11 @@
 
 import pytest
 
-from scripts.ch09.pdb_demo import calculate_gc_stats, find_motif_positions
+from scripts.ch09.pdb_demo import (
+    calculate_gc_stats,
+    calculate_gc_stats_debug,
+    find_motif_positions,
+)
 
 
 class TestCalculateGcStats:
@@ -30,6 +34,40 @@ class TestCalculateGcStats:
         """大文字・小文字を区別しない."""
         stats = calculate_gc_stats(["gcgc", "GCGC"])
         assert stats["mean_gc"] == pytest.approx(1.0)
+
+
+class TestCalculateGcStatsDebug:
+    """calculate_gc_stats_debug のテスト."""
+
+    def test_breakpoint_runs_for_each_sequence(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """各配列の計算後にbreakpointを1回ずつ呼ぶ."""
+        breakpoint_calls: list[bool] = []
+
+        def fake_breakpoint() -> None:
+            breakpoint_calls.append(True)
+
+        monkeypatch.setattr("builtins.breakpoint", fake_breakpoint)
+
+        stats = calculate_gc_stats_debug(["GCGC", "ATAT"])
+
+        assert stats["mean_gc"] == pytest.approx(0.5)
+        assert len(breakpoint_calls) == 2
+
+    def test_empty_list_does_not_start_debugger(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """空リストではデバッガを起動せずゼロ値を返す."""
+
+        def fail_if_called() -> None:
+            pytest.fail("空リストでbreakpointが呼ばれた")
+
+        monkeypatch.setattr("builtins.breakpoint", fail_if_called)
+
+        stats = calculate_gc_stats_debug([])
+
+        assert stats == {"mean_gc": 0.0, "min_gc": 0.0, "max_gc": 0.0}
 
 
 class TestFindMotifPositions:

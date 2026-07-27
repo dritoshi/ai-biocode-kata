@@ -7,6 +7,18 @@ import pytest
 from scripts.ch08.seq_stats import filter_fasta_by_gc, gc_content
 
 
+def test_gc_content_typical() -> None:
+    # Arrange: テストデータを準備する
+    seq = "ATGCATGC"
+    expected = 0.5
+
+    # Act: テスト対象の関数を呼び出す
+    result = gc_content(seq)
+
+    # Assert: 結果を検証する
+    assert result == pytest.approx(expected)
+
+
 class TestGcContent:
     """gc_content() のテスト."""
 

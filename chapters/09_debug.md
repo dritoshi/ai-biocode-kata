@@ -31,13 +31,13 @@ tracebackの構造は次のとおりである。
 
 つまり、**最終行から読む**のが最も効率的である。最終行でエラーの種類を把握し、その上の行でエラーが発生したコードの場所を確認する。
 
-典型的なtracebackの例を見てみよう。以下の `read_fasta_records` 関数は、存在しないファイルを読もうとすると `FileNotFoundError` を発生させる。
+典型的なtracebackの例を見てみよう。以下は `read_fasta_records` 関数から、`FileNotFoundError` が発生するファイル読込部分だけを抜粋したものである。空ファイルの検証、FASTAのパース、戻り値の生成は省略している。
 
 ```python
-# FASTAファイルを読み込み、ヘッダと配列のリストを返す関数
+# scripts/ch09/traceback_demo.py — read_fasta_records() の冒頭（抜粋）
 def read_fasta_records(path: Path) -> list[dict[str, str]]:
     text = path.read_text()  # ← ファイルが存在しないとここでエラー
-    ...
+    # 以降の空ファイル検証とFASTAパースは省略
 ```
 
 この関数に存在しないパスを渡すと、次のようなtracebackが表示される。
@@ -85,7 +85,9 @@ ValueError: インデックス 1 の値 'N/A' を数値に変換できません
 ```python
 # 遺伝子IDからアノテーション情報を検索する関数
 # 存在しないIDが指定されると KeyError を送出する
-def lookup_gene_annotation(gene_id: str, db: dict) -> dict:
+def lookup_gene_annotation(
+    gene_id: str, db: dict[str, dict[str, str]]
+) -> dict[str, str]:
     if gene_id not in db:
         msg = f"遺伝子ID '{gene_id}' がデータベースに見つかりません"
         raise KeyError(msg)
@@ -205,8 +207,10 @@ def filter_sequences_logging_debug(
 
 `print()` やログでは追いきれない複雑なバグには、**対話型デバッガ**を使う。Python 3.7以降では、組み込み関数 `breakpoint()` を呼ぶだけでデバッガが起動する[4](https://docs.python.org/3/library/sys.html#sys.breakpointhook)。
 
+以下はデバッグ専用の `calculate_gc_stats_debug` 関数から、各配列のGC含量を計算して停止するループ部分を抜粋したものである。空入力の処理と集計値を返す処理は省略している。
+
 ```python
-def calculate_gc_stats(sequences: list[str]) -> dict[str, float]:
+def calculate_gc_stats_debug(sequences: list[str]) -> dict[str, float]:
     """複数の塩基配列のGC含量統計を計算する."""
     gc_ratios: list[float] = []
     for seq in sequences:
@@ -216,7 +220,7 @@ def calculate_gc_stats(sequences: list[str]) -> dict[str, float]:
         # ここでデバッガを起動し、変数の値を確認できる
         breakpoint()  # ← 実行がここで一時停止する
         gc_ratios.append(gc_ratio)
-    ...
+    # 以降の集計値を返す処理は省略
 ```
 
 `breakpoint()` を挿入してスクリプトを実行すると、その行で実行が一時停止し、pdb（Python Debugger）のプロンプトが表示される[1](https://docs.python.org/3/library/pdb.html)。
@@ -400,21 +404,40 @@ def bed_to_gff_correct(chrom, bed_start, bed_end):
     return (chrom, gff_start, gff_end)
 ```
 
-座標変換のバグを防ぐには、`assert` による検証が有効である。
+座標変換のバグを防ぐには、入力座標を明示的に検証する関数が有効である。以下は検証分岐の抜粋であり、すべての検証を通過した場合の `return True` は省略している。
 
 ```python
-# 座標の妥当性を検証する関数
-# 座標系ごとに開始位置の最小値と start ≤ end を確認する
-def validate_coordinates(start, end, seq_length, coordinate_system="bed"):
+def validate_coordinates(
+    start: int,
+    end: int,
+    seq_length: int,
+    coordinate_system: str = "bed",
+) -> bool:
+    """座標が有効範囲内かを検証する."""
     if coordinate_system == "bed":
         if start < 0:
-            raise ValueError(f"BED start は 0 以上: {start}")
+            msg = f"BED start は 0 以上: {start}"
+            raise ValueError(msg)
         if end > seq_length:
-            raise ValueError(f"BED end が配列長 {seq_length} を超過: {end}")
+            msg = f"BED end が配列長 {seq_length} を超過: {end}"
+            raise ValueError(msg)
+        if start > end:
+            msg = f"BED start ({start}) > end ({end})"
+            raise ValueError(msg)
     elif coordinate_system == "gff":
         if start < 1:
-            raise ValueError(f"GFF start は 1 以上: {start}")
-    ...
+            msg = f"GFF start は 1 以上: {start}"
+            raise ValueError(msg)
+        if end > seq_length:
+            msg = f"GFF end が配列長 {seq_length} を超過: {end}"
+            raise ValueError(msg)
+        if start > end:
+            msg = f"GFF start ({start}) > end ({end})"
+            raise ValueError(msg)
+    else:
+        msg = f"不明な座標系: {coordinate_system!r}"
+        raise ValueError(msg)
+    # 正常時の return True は省略
 ```
 
 > 🧬 **バイオインフォ座標系の罠**
@@ -462,7 +485,8 @@ from pathlib import Path
 def resolve_data_path(path_str: str) -> Path:
     path = Path(path_str).expanduser().resolve()
     if not path.exists():
-        raise FileNotFoundError(f"ファイルが見つかりません: {path}")
+        msg = f"ファイルが見つかりません: {path}"
+        raise FileNotFoundError(msg)
     return path
 ```
 
