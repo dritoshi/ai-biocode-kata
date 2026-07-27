@@ -1,0 +1,5 @@
+# ~/.ssh/config
+Host hpc
+    HostName hpc.university.ac.jp
+    User tanaka
+    IdentityFile ~/.ssh/id_ed25519

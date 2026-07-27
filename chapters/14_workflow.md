@@ -113,7 +113,7 @@ rule fastqc:
         zip="results/qc/{sample}_fastqc.zip",
     log:
         "logs/fastqc/{sample}.log",
-    threads: 4
+    threads: config["params"]["fastqc"]["threads"]
     shell:
         "fastqc {input} --outdir results/qc --threads {threads} 2> {log}"
 ```
@@ -123,7 +123,8 @@ rule fastqc:
 - **入力**: `data/raw/{sample}.fastq.gz` — `{sample}` はwildcard（後述）
 - **出力**: `results/qc/` 以下にFastQCのHTML・ZIPレポート
 - **ログ**: `logs/fastqc/{sample}.log` — 標準エラー出力を保存
-- **実行**: `fastqc` コマンドを4スレッドで実行
+- **スレッド数**: `config.yaml` の `params.fastqc.threads` から取得（付属設定のデフォルトは4）
+- **実行**: `fastqc` コマンドを設定されたスレッド数で実行
 
 Snakemakeは「出力ファイルから逆算して」必要なルールを決定する。最終的に欲しい出力を `rule all` の `input` に列挙する:
 
@@ -543,23 +544,30 @@ GNU make はソフトウェアビルドのために設計されたツールだ�
 
 ```makefile
 # Makefile — リファレンスゲノムの取得とインデックス構築
-GENOME_URL := https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/...
+GENOME_URL := https://ftp.ensembl.org/pub/release-116/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
 GENOME_DIR := data/raw/genome
-GENOME_FA  := $(GENOME_DIR)/GRCh38.fa
+GENOME_FA := $(GENOME_DIR)/GRCh38.fa
+GENOME_INDEX := $(GENOME_DIR)/GRCh38.fa.fai
 
 .PHONY: all clean
 
-all: $(GENOME_FA).fai
+all: $(GENOME_INDEX)
 
+# ゲノムFASTAのダウンロード
 $(GENOME_FA).gz:
 	mkdir -p $(GENOME_DIR)
 	curl -L -o $@ $(GENOME_URL)
 
+# 解凍
 $(GENOME_FA): $(GENOME_FA).gz
 	gunzip -k $<
 
-$(GENOME_FA).fai: $(GENOME_FA)
+# samtools indexの構築
+$(GENOME_INDEX): $(GENOME_FA)
 	samtools faidx $<
+
+clean:
+	rm -f $(GENOME_FA) $(GENOME_FA).gz $(GENOME_INDEX)
 ```
 
 `make all` を実行するとダウンロード → 解凍 → インデックス構築が依存順に実行される。途中で止まっても、完了済みのステップはスキップされる。
@@ -644,14 +652,16 @@ rule trimmomatic:
 
 `temp()` を使わない場合、RNA-seqの全中間ファイルがディスクに残り続ける。BAMファイルは1サンプルあたり数GBになることもあり、サンプル数が増えるとディスク容量を圧迫する。
 
-`protected()` は逆に、誤って削除されないようにファイルを保護する。計算コストの高いステップの出力に付けるとよい:
+付属ワークフローでは、STARが生成するBAMも後続のfeatureCountsが消費する中間ファイルであるため、`temp()`を付けている。以下は `star_align` ルールの出力部分の抜粋である:
 
 ```python
 rule star_align:
     output:
-        bam=protected("results/aligned/{sample}.bam"),
-    # ...
+        bam=temp("results/aligned/{sample}_Aligned.sortedByCoord.out.bam"),
+    # input、log、threads、shellは省略
 ```
+
+`protected()` は逆に、誤って削除されないようにファイルを保護する。計算コストが高く、再生成を避けたい最終出力に付けるとよい。
 
 ### パラメータの設定ファイル化
 
@@ -673,14 +683,23 @@ rule star_align:
 
 ### ログの保存
 
-[§11 コマンドラインツールの設計と実装](./11_cli.md)で学んだロギングの原則はワークフローにも適用される。Snakemakeの `log:` ディレクティブは、各ルールの実行ログを指定したパスに保存する:
+[§11 コマンドラインツールの設計と実装](./11_cli.md)で学んだロギングの原則はワークフローにも適用される。Snakemakeの `log:` ディレクティブは、各ルールの実行ログを指定したパスに保存する。以下は `star_align` ルールの入力・出力部分を省略し、ログ以降を抜粋したものである:
 
 ```python
 rule star_align:
     log:
         "logs/star/{sample}.log",
+    threads: config["params"]["star"]["threads"]
     shell:
-        "STAR ... 2> {log}"
+        """
+        STAR --runThreadN {threads} \
+             --genomeDir {input.index} \
+             --readFilesIn {input.fastq} \
+             --readFilesCommand zcat \
+             --outSAMtype BAM SortedByCoordinate \
+             --outFileNamePrefix results/aligned/{wildcards.sample}_ \
+             2> {log}
+        """
 ```
 
 `log:` ディレクティブのないルールでは、エラー発生時に原因特定が困難になる。本書のサンプルSnakefileでは、`rule all` を除くすべてのルールに `log:` を付けている。
