@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
 - 生成日: 2026-07-27
-- 対象コミット: `e585e1df4f1909719ff3db53421d4ab6651544ed`
+- 対象コミット: `2fe954ba900fcc1c24656e771e7a3ea36156ebf6`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - 全件表: [`code_correspondence.json`](./code_correspondence.json)
@@ -113,8 +113,8 @@
 | テストファイル | 90 |
 | 章別テストファイル | 88 |
 | レビュー用テストファイル | 2 |
-| passed | 906 |
-| skipped | 7 |
+| passed | 902 |
+| skipped | 11 |
 | failed | 0 |
 | errors | 0 |
 
