@@ -101,7 +101,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 374,
+      "line": 405,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **「送ってよいか迷う時点で送らない」**",
@@ -109,7 +109,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 393,
+      "line": 424,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **Anthropic（Claude / Claude Code）**",
@@ -117,7 +117,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 397,
+      "line": 428,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **OpenAI（ChatGPT / Codex CLI / API）**",
@@ -125,7 +125,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 400,
+      "line": 431,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **GitHub（Copilot）**",
@@ -133,7 +133,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 403,
+      "line": 434,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **Google（Gemini / Gemini CLI / Vertex AI）**",
@@ -141,7 +141,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 413,
+      "line": 444,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **Claude（Consumer）**",
@@ -149,7 +149,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 414,
+      "line": 445,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **Claude（API / Enterprise）**",
@@ -157,7 +157,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 415,
+      "line": 446,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **ChatGPT / Codex CLI（Consumer）**",
@@ -165,7 +165,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 417,
+      "line": 448,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **GitHub Copilot（Individual）**",
@@ -173,7 +173,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 418,
+      "line": 449,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **GitHub Copilot（Business / Enterprise）**",
@@ -181,7 +181,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 419,
+      "line": 450,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **Gemini（個人）**",
@@ -189,7 +189,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 420,
+      "line": 451,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **Gemini（Workspace / Vertex AI）**",
@@ -197,7 +197,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 424,
+      "line": 455,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **「いずれか一つでも該当すれば送信しない」**",
@@ -205,7 +205,7 @@
     },
     {
       "file": "chapters/20_security_ethics.md",
-      "line": 432,
+      "line": 463,
       "severity": "MINOR",
       "type": "bold_bracket",
       "message": "太字内にカッコ/カギ括弧を含む: **規制対象ではないが個人情報（氏名・連絡先・被験者ID 等）を含むか**",
