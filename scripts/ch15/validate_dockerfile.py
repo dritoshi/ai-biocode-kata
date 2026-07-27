@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 
 
 @dataclass
@@ -290,3 +291,19 @@ def validate(text: str) -> ValidationResult:
             result.warnings.append(issue)
 
     return result
+
+
+def validate_file(path: Path) -> ValidationResult:
+    """Dockerfileを読み込み、ベストプラクティスを検証する.
+
+    Parameters
+    ----------
+    path : Path
+        検証するDockerfileのパス
+
+    Returns
+    -------
+    ValidationResult
+        検証結果
+    """
+    return validate(path.read_text(encoding="utf-8"))

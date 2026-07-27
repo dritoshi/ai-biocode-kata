@@ -1332,8 +1332,18 @@
       ]
     },
     "B-15-012": {
-      "block_sha256": "14f812664e18a4a0563022b4c5d74a2bb36d5f18448a02aab525a9665637d630",
-      "relations": []
+      "block_sha256": "1c828433eea520abcd4416960956a2f703aa6681b5d8cd44c1276c81648a1677",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/samtools_sort.smk",
+          "equivalence": "E0",
+          "kind": "complete",
+          "evidence": "入出力、container URI、shell命令を含む完全なSnakemake ruleが一致",
+          "verification": "本文同期と必須フィールドをpytestで検証",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-15-014": {
       "block_sha256": "1f3f7da931fe141afcb82678870f670e5ff33cb9bcf936cccfee1de0a4f516ce",
@@ -1350,16 +1360,46 @@
       ]
     },
     "B-15-018": {
-      "block_sha256": "4399691fe22001863621550ecc8014b6da1db3c1170b399aa1823b6761e05ab1",
-      "relations": []
+      "block_sha256": "c94010c303d6fa31150ed754196f43921a325d8469d42cbc5ab2199865f799af",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/Dockerfile.gpu",
+          "equivalence": "E0",
+          "kind": "complete",
+          "evidence": "実在するCUDAイメージのタグ・digestと最小起動命令が一致",
+          "verification": "Dockerfile構文、digest、起動命令をpytestで検証し、Podman buildで確認",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-15-019": {
-      "block_sha256": "3a4d59c12fd4c337e1568aabbab728a374846b79ea329e6ad913529e22a91134",
-      "relations": []
+      "block_sha256": "e4b45bc73262e0382d20ef350bb1c3b0175311d527864a0e5f6c9af81c15db38",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/Dockerfile.conda-lock",
+          "equivalence": "E0",
+          "kind": "complete",
+          "evidence": "conda-lock導入、lock COPY、環境作成、PATH、起動命令が一致",
+          "verification": "Dockerfile構文とlinux-64/linux-aarch64 lockをpytestで検証し、Podman buildで確認",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-15-022": {
-      "block_sha256": "f7f2345be1ef20cd29867ae9eff06cce0959d78ec4e6d81b980b495b0614bd8c",
-      "relations": []
+      "block_sha256": "8c2cc44c8c247c16448d9a0e230b28da9681674bf5be672cbe32d15e9595cb40",
+      "relations": [
+        {
+          "target_file": "scripts/ch15/version_pinning/conda_lock/Dockerfile",
+          "equivalence": "E0",
+          "kind": "complete",
+          "evidence": "digest固定したマルチステージconda-lock Dockerfileが一致",
+          "verification": "3方式の分離、lock/hash、Dockerfile構文をpytestで検証し、各Podman buildで確認",
+          "target_entity": null,
+          "cross_chapter": false
+        }
+      ]
     },
     "B-16-002": {
       "block_sha256": "6fd15df31beeae9a72282c9632ab3b7548c862aae343d7e6d1b927a7613f67d7",
@@ -1731,16 +1771,6 @@
       "block_id": "B-17-037",
       "expected": "E3",
       "reason": "同名関数だが入力検証に差がある"
-    },
-    {
-      "block_id": "B-15-012",
-      "expected": "E5",
-      "reason": "配置必須のSnakemake container ruleだが対応するscripts資産がない"
-    },
-    {
-      "block_id": "B-15-018",
-      "expected": "E5",
-      "reason": "配置必須のGPUコンテナ定義だが対応するscripts資産がない"
     },
     {
       "block_id": "B-13-006",
@@ -2247,6 +2277,7 @@
   "review_metadata": {
     "pending_resolved": 91,
     "note": "配置必須ブロック、対応ありブロック、全保留ブロックを本文前後と実体で目視",
-    "goldset_method": "E0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検"
+    "goldset_method": "現在1件以上存在するE0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検",
+    "goldset_change_history": "2026-07-27: E5解消計画の完了によりE5母集団が0件となったため、旧E5標本B-15-012/B-15-018を除外した。両ブロックは実体追加後のE0として全件対応表で監査する。"
   }
 }

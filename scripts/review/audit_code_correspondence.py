@@ -19,6 +19,7 @@ IGNORED_ASSET_DIRS = {
     ".pytest_cache",
     ".ruff_cache",
 }
+GOLDSET_STAGES = ("E0", "E1", "E2", "E3", "E5", "EN")
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -123,6 +124,18 @@ def _negative_normalizer_checks() -> dict[str, bool]:
         name: _normalized(code) != original
         for name, code in mutations.items()
     }
+
+
+def _populated_goldset_stages(
+    correspondence: Counter[str],
+) -> tuple[str, ...]:
+    """母集団が存在する分類だけを層化監査の対象にする."""
+
+    return tuple(
+        stage
+        for stage in GOLDSET_STAGES
+        if correspondence.get(stage, 0) > 0
+    )
 
 
 def audit(
@@ -332,6 +345,7 @@ def audit(
     requires_stratified_goldset = bool(
         data["classification_review"].get("goldset_method")
     )
+    populated_stages = _populated_goldset_stages(correspondence)
     checks["goldset"] = (
         all(
             item["matched"]
@@ -343,7 +357,7 @@ def audit(
             not requires_stratified_goldset
             or all(
                 expected_stages[stage] == 2
-                for stage in ("E0", "E1", "E2", "E3", "E5", "EN")
+                for stage in populated_stages
             )
         )
     )
@@ -374,7 +388,7 @@ def audit(
         f"| failed | {test_totals['failed']} |",
         f"| errors | {test_totals['errors']} |",
     ]
-    for stage in ("E0", "E1", "E2", "E3", "E5", "EN"):
+    for stage in GOLDSET_STAGES:
         markers.append(
             f"| {stage} | {correspondence.get(stage, 0)} |"
         )

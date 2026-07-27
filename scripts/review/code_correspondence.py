@@ -1752,6 +1752,9 @@ def build_inventory(
             ),
             "note": str(metadata.get("note", "")),
             "goldset_method": str(metadata.get("goldset_method", "")),
+            "goldset_change_history": str(
+                metadata.get("goldset_change_history", "")
+            ),
             "goldset": goldset,
         },
         "substitution_tests": substitution_results,

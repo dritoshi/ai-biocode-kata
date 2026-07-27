@@ -388,12 +388,17 @@ Dockerfileの構築は、一発で成功することは稀である。特にバ�
 >
 > ```python
 > rule samtools_sort:
+>     input:
+>         "results/{sample}.bam"
+>     output:
+>         "results/{sample}.sorted.bam"
 >     container:
 >         "docker://quay.io/biocontainers/samtools:1.20--h50ea8bc_0"
->     # ...
+>     shell:
+>         "samtools sort -o {output} {input}"
 > ```
 >
-> 自前でDockerfileを書く前に、まずBioContainersに該当ツールのイメージがないか確認するとよい。
+> このルールは、入力BAMを受け取り、BioContainers内の`samtools sort`でソート済みBAMを生成する。実行可能な全体は[`scripts/ch15/samtools_sort.smk`](../scripts/ch15/samtools_sort.smk)に配置している。自前でDockerfileを書く前に、まずBioContainersに該当ツールのイメージがないか確認するとよい。
 
 #### エージェントへの指示例
 
@@ -525,14 +530,15 @@ apptainer run --nv myimage.sif python train.py
 >
 > ホストのドライバが古すぎて、コンテナのCUDAメジャーバージョンに満たない場合（たとえばCUDA 11系までしか対応しないドライバでCUDA 12系のコンテナを実行する場合）は動作しない。一方、同一メジャー内（たとえばドライバがCUDA 12.2相当、コンテナがCUDA 12.4）であれば、minor version compatibilityにより多くの場合そのまま動作する。
 >
-> NVIDIAが提供するNGC（NVIDIA GPU Cloud）のベースイメージを使うと、CUDA・cuDNN・NCCLの互換性が保証される:
+> まず構築経路だけを確認するときは、NVIDIA公式CUDAイメージの軽量な`base`バリアントを利用できる[19](https://hub.docker.com/r/nvidia/cuda)。タグに加えて実在するマルチアーキテクチャのダイジェストを固定した最小例を示す:
 >
 > ```dockerfile
-> # NGCベースイメージ（CUDA, cuDNN, NCCL同梱）
-> FROM nvcr.io/nvidia/pytorch:24.01-py3
+> FROM nvidia/cuda:12.3.2-base-ubuntu22.04@sha256:8cecfe099315f73127d6d5cc43fce32c7ffff4ea0460eefac48f2b7d811ce857
+>
+> CMD ["bash", "-lc", "echo CUDA_VERSION=${CUDA_VERSION}"]
 > ```
 >
-> GPUコンテナの構築はエージェントに任せられるが、ホストのドライババージョンとの互換性チェックは人間が行うべきである。`nvidia-smi`の出力を確認してから、適切なベースイメージを選択する。
+> 実行可能な全体は[`scripts/ch15/Dockerfile.gpu`](../scripts/ch15/Dockerfile.gpu)に配置している。このイメージのpullとbuildはApple Siliconでも確認できるが、NVIDIA GPUの接続とCUDA計算の実行確認にはNVIDIA GPU、対応ドライバ、NVIDIA Container Toolkitが揃ったLinuxホストが必要である[20](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/)。PyTorch、cuDNN、NCCLまで含む実解析では、必要なフレームワーク版に対応するNGCイメージを別途選ぶ。GPUコンテナの構築はエージェントに任せられるが、`nvidia-smi`の出力とライブラリの要件を照合し、ホストとの互換性を判断するのは人間の役割である。
 
 #### エージェントへの指示例
 
@@ -567,27 +573,27 @@ HPC環境でのコンテナ利用をエージェントに相談する場合:
 
 ### 両方を併用する戦略
 
-condaのロックファイルとDockerfileは排他的ではない。Dockerfile内でロックファイルを使うことで、両方の利点を得られる:
+condaのロックファイルとDockerfileは排他的ではない。`conda-lock`は、対象プラットフォームごとの依存パッケージURLとハッシュを記録したロックファイルを生成できる[21](https://conda.github.io/conda-lock/output/)。Dockerfile内でそのロックファイルを使うことで、両方の利点を得られる:
 
 ```dockerfile
-FROM condaforge/miniforge3:24.3.0-0
+FROM condaforge/miniforge3:24.3.0-0 AS runtime
 
-# conda-lockで生成したロックファイルを使用（conda-lockは先に導入する）
-COPY conda-lock.yml /tmp/conda-lock.yml
-RUN mamba install -y -n base conda-lock && \
-    conda-lock install -n rnaseq /tmp/conda-lock.yml && \
+RUN python -m pip install --no-cache-dir conda-lock==4.0.0
+COPY rnaseq.conda-lock.yml /tmp/rnaseq.conda-lock.yml
+RUN conda-lock install --prefix /opt/rnaseq /tmp/rnaseq.conda-lock.yml && \
     mamba clean --all --yes
 
-ENV PATH="/opt/conda/envs/rnaseq/bin:$PATH"
+ENV PATH="/opt/rnaseq/bin:$PATH"
+CMD ["python", "-c", "import Bio; print(Bio.__version__)"]
 ```
 
 この構成では:
 
-- `conda-lock.yml`により、conda環境内のパッケージバージョンがハッシュレベルで固定される
+- `rnaseq.conda-lock.yml`により、conda環境内のパッケージバージョンがハッシュレベルで固定される
 - Dockerfileにより、OS・システムライブラリが固定される
 - ベースイメージのタグ（またはダイジェスト）により、ベースOSが固定される
 
-ロックファイルの生成と管理は[§6 Python環境の構築](./06_dev_environment.md#ロックファイル--再現性の鍵)で学んだ手法をそのまま使える。
+実行可能な全体は[`scripts/ch15/Dockerfile.conda-lock`](../scripts/ch15/Dockerfile.conda-lock)に、入力定義は[`scripts/ch15/environment.lock.yml`](../scripts/ch15/environment.lock.yml)に、生成済みロックファイルは[`scripts/ch15/rnaseq.conda-lock.yml`](../scripts/ch15/rnaseq.conda-lock.yml)に配置している。ロックファイルの生成と管理は[§6 Python環境の構築](./06_dev_environment.md#ロックファイル--再現性の鍵)で学んだ手法をそのまま使える。
 
 #### エージェントへの指示例
 
@@ -643,24 +649,21 @@ docker push ghcr.io/username/rnaseq-pipeline:v1.0
 Dockerfile内でバージョン固定を徹底する:
 
 ```dockerfile
-FROM condaforge/miniforge3:24.3.0-0@sha256:abc123...
+FROM condaforge/miniforge3:24.3.0-0@sha256:f412616c712b00c09b4fdfd3001941d1876dfed5ab821bcf1e48ada60b70b7cb AS builder
 
-# conda-lockによる完全固定（conda-lockは先に導入する）
-COPY conda-lock.yml /tmp/conda-lock.yml
-RUN mamba install -y -n base conda-lock && \
-    conda-lock install -n rnaseq /tmp/conda-lock.yml
+RUN python -m pip install --no-cache-dir conda-lock==4.0.0
+COPY rnaseq.conda-lock.yml /tmp/rnaseq.conda-lock.yml
+RUN conda-lock install --prefix /opt/rnaseq /tmp/rnaseq.conda-lock.yml
 
-# または pip freeze + requirements.txt
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt
-
-# または uv.lock（uvは先に導入する）
-COPY pyproject.toml uv.lock /tmp/
-RUN mamba install -y -n base uv && \
-    uv sync --frozen --no-cache
+FROM condaforge/miniforge3:24.3.0-0@sha256:f412616c712b00c09b4fdfd3001941d1876dfed5ab821bcf1e48ada60b70b7cb
+COPY --from=builder /opt/rnaseq /opt/rnaseq
+ENV PATH="/opt/rnaseq/bin:$PATH"
+CMD ["python", "-c", "import Bio; print(Bio.__version__)"]
 ```
 
-これら3つの方法はいずれも、インストール時期によらず同一のパッケージセットを再現する。プロジェクトで使用しているパッケージマネージャに合わせて選択する。
+この例では、実在するマルチアーキテクチャのベースイメージダイジェスト、`conda-lock`自体の版、依存パッケージのURLとハッシュを固定している。ビルド用ステージから環境だけを最終ステージへコピーするため、`conda-lock`は最終イメージに残らない。全体は[`scripts/ch15/version_pinning/conda_lock/`](../scripts/ch15/version_pinning/conda_lock/)に配置している。
+
+固定方法は1つのDockerfile内で混在させず、プロジェクトのパッケージマネージャに合わせて選ぶ。Python依存だけを固定する場合は、pipのハッシュ検証モード[22](https://pip.pypa.io/en/stable/topics/secure-installs/#hash-checking-mode)を使う[`requirements.txt`版](../scripts/ch15/version_pinning/requirements/)か、`uv sync --frozen`でロックファイルを書き換えずに同期する[23](https://docs.astral.sh/uv/concepts/projects/sync/) [`uv.lock`版](../scripts/ch15/version_pinning/uv/)を利用できる。3方式はいずれも個別のDockerfile、ロックファイル、起動確認コマンドを備えている。
 
 ### 論文レビュー対応
 
@@ -1144,3 +1147,13 @@ CMD ["python", "analysis.py"]
 [17] Docker. "Docker Desktop License Agreement". [https://docs.docker.com/subscription/desktop-license/](https://docs.docker.com/subscription/desktop-license/) (参照日: 2026-07-24)
 
 [18] Docker. "Multi-platform builds". [https://docs.docker.com/build/building/multi-platform/](https://docs.docker.com/build/building/multi-platform/) (参照日: 2026-07-24)
+
+[19] NVIDIA. "CUDA container images". [https://hub.docker.com/r/nvidia/cuda](https://hub.docker.com/r/nvidia/cuda) (参照日: 2026-07-27)
+
+[20] NVIDIA. "NVIDIA Container Toolkit Documentation". [https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/) (参照日: 2026-07-27)
+
+[21] conda-lock Contributors. "Lockfile specification". [https://conda.github.io/conda-lock/output/](https://conda.github.io/conda-lock/output/) (参照日: 2026-07-27)
+
+[22] Python Packaging Authority. "Secure installs". [https://pip.pypa.io/en/stable/topics/secure-installs/#hash-checking-mode](https://pip.pypa.io/en/stable/topics/secure-installs/#hash-checking-mode) (参照日: 2026-07-27)
+
+[23] Astral. "Locking and syncing". [https://docs.astral.sh/uv/concepts/projects/sync/](https://docs.astral.sh/uv/concepts/projects/sync/) (参照日: 2026-07-27)

@@ -1,0 +1,9 @@
+FROM condaforge/miniforge3:24.3.0-0 AS runtime
+
+RUN python -m pip install --no-cache-dir conda-lock==4.0.0
+COPY rnaseq.conda-lock.yml /tmp/rnaseq.conda-lock.yml
+RUN conda-lock install --prefix /opt/rnaseq /tmp/rnaseq.conda-lock.yml && \
+    mamba clean --all --yes
+
+ENV PATH="/opt/rnaseq/bin:$PATH"
+CMD ["python", "-c", "import Bio; print(Bio.__version__)"]

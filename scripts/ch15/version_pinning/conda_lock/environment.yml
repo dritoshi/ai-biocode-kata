@@ -1,0 +1,6 @@
+name: rnaseq
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - biopython=1.85
