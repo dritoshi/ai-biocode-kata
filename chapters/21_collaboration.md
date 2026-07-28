@@ -863,7 +863,7 @@ MITライセンスの自作プロジェクトに、GPL-3.0ライセンスのラ�
 
 ### 質問の技術
 
-- **Raymond, E. S. "How To Ask Questions The Smart Way". 2014.** https://www.catb.org/~esr/faqs/smart-questions.html — 技術コミュニティでの質問の作法の原典。本章で扱った「良い質問の構造」の背景にある考え方を学べる。日本語訳も公開されている。
+- **Raymond, E. S. "How To Ask Questions The Smart Way". 2014.** [How-To-Ask-Questions-The-Smart-Way.md](https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md) — 技術コミュニティでの質問の作法の原典。本章で扱った「良い質問の構造」の背景にある考え方を学べる。日本語訳も公開されている。
 
 ### GitHubでのコントリビューション
 

@@ -38,11 +38,11 @@
 
 - ページタイトル: 取得不能
 - 最終URL: 取得不能（ブラウザが`ERR_BLOCKED_BY_CLIENT`で表示を中止）
-- 用途との一致: 確認不能
+- 用途との一致: ブラウザでは確認不能。ユーザーの手動確認では一致
 - ログイン要求: 確認不能
 - 削除済み表示: 確認不能
 - 別ページへの転送: 確認不能
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://doi.org/10.1093/comjnl/27.2.97](https://doi.org/10.1093/comjnl/27.2.97)
 
@@ -68,11 +68,11 @@
 
 - ページタイトル: `しばらくお待ちください...`
 - 最終URL: [https://dl.acm.org/doi/10.1145/3287560.3287596](https://dl.acm.org/doi/10.1145/3287560.3287596)
-- 用途との一致: Cloudflareのセキュリティ検証画面のため確認不能
+- 用途との一致: ブラウザではCloudflareのセキュリティ検証画面のため確認不能。ユーザーの手動確認では一致
 - ログイン要求: なし。セキュリティ検証で停止
 - 削除済み表示: 確認不能
 - 別ページへの転送: DOIからACM Digital Libraryの同一DOIページへの転送は確認したが、論文本文は確認不能
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://doi.org/10.1162/tacl_a_00638](https://doi.org/10.1162/tacl_a_00638)
 
@@ -102,11 +102,11 @@
 
 - ページタイトル: `Just a moment...`
 - 最終URL: 指定URLにCloudflareの検証用クエリが付加されたURL
-- 用途との一致: セキュリティ検証画面のため確認不能
+- 用途との一致: ブラウザではセキュリティ検証画面のため確認不能。ユーザーの手動確認では一致
 - ログイン要求: なし。セキュリティ検証で停止
 - 削除済み表示: 確認不能
 - 別ページへの転送: 確認不能
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/gds](https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/gds)
 
@@ -118,11 +118,11 @@
 
 - ページタイトル: `Just a moment...`
 - 最終URL: 指定URLにCloudflareの検証用クエリが付加されたURL
-- 用途との一致: セキュリティ検証画面のため確認不能
+- 用途との一致: ブラウザではセキュリティ検証画面のため確認不能。ユーザーの手動確認では一致
 - ログイン要求: なし。セキュリティ検証で停止
 - 削除済み表示: 確認不能
 - 別ページへの転送: 確認不能
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
 
@@ -134,11 +134,11 @@
 
 - ページタイトル: `Introduction to Algorithms`
 - 最終URL: [https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
-- 用途との一致: タイトルとメタデータは書籍「Introduction to Algorithms」と一致したが、ナビゲーションがタイムアウトし、ページ本文は表示できなかった
+- 用途との一致: タイトルとメタデータは書籍「Introduction to Algorithms」と一致した。ブラウザではページ本文を表示できなかったが、ユーザーの手動確認では一致
 - ログイン要求: 確認不能
 - 削除済み表示: 確認不能
 - 別ページへの転送: なし
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://rsync.samba.org/tech_report/](https://rsync.samba.org/tech_report/)
 
@@ -166,11 +166,11 @@
 
 - ページタイトル: `Just a moment...`
 - 最終URL: 指定URLにCloudflareの検証用クエリが付加されたURL
-- 用途との一致: セキュリティ検証画面のため確認不能
+- 用途との一致: ブラウザではセキュリティ検証画面のため確認不能。ユーザーの手動確認では一致
 - ログイン要求: なし。セキュリティ検証で停止
 - 削除済み表示: 確認不能
 - 別ページへの転送: 確認不能
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://www.collinsdictionary.com/us/woty/](https://www.collinsdictionary.com/us/woty/)
 
@@ -182,11 +182,11 @@
 
 - ページタイトル: `しばらくお待ちください...`
 - 最終URL: [https://www.collinsdictionary.com/us/woty/](https://www.collinsdictionary.com/us/woty/)
-- 用途との一致: Cloudflareのセキュリティ検証画面のため確認不能
+- 用途との一致: ブラウザではCloudflareのセキュリティ検証画面のため確認不能。ユーザーの手動確認では一致
 - ログイン要求: なし。セキュリティ検証で停止
 - 削除済み表示: 確認不能
 - 別ページへの転送: なし
-- 判定: `manual_review_required`
+- 判定: `manual_confirmed`
 
 #### [https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html](https://www.hhs.gov/hipaa/for-professionals/faq/2075/may-a-hipaa-covered-entity-or-business-associate-use-cloud-service-to-store-or-process-ephi/index.html)
 
@@ -220,23 +220,25 @@
 - 別ページへの転送: なし
 - 判定: `manual_confirmed`
 
-### 接続タイムアウト
+### 手動修正
 
-#### [https://www.catb.org/~esr/faqs/smart-questions.html](https://www.catb.org/~esr/faqs/smart-questions.html)
+#### [https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md](https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md)
 
 - 原稿内の出現箇所: [§21 共同開発の実践](../../chapters/21_collaboration.md) 866行
 - BibTeX: [references/ch21.bib](../../references/ch21.bib) 80行
 - URL周辺の文章:
 
-> **Raymond, E. S. "How To Ask Questions The Smart Way". 2014.** https://www.catb.org/~esr/faqs/smart-questions.html — 技術コミュニティでの質問の作法の原典。本章で扱った「良い質問の構造」の背景にある考え方を学べる。日本語訳も公開されている。
+> **Raymond, E. S. "How To Ask Questions The Smart Way". 2014.** [How-To-Ask-Questions-The-Smart-Way.md](https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md) — 技術コミュニティでの質問の作法の原典。本章で扱った「良い質問の構造」の背景にある考え方を学べる。日本語訳も公開されている。
 
-- ページタイトル: 取得不能
-- 最終URL: 指定URLへの移動を開始したが、接続タイムアウト
-- 用途との一致: 確認不能
-- ログイン要求: 確認不能
-- 削除済み表示: 確認不能
-- 別ページへの転送: 確認不能
-- 判定: `manual_review_required`
+- ページタイトル: `How-To-Ask-Questions-The-Smart-Way/How-To-Ask-Questions-The-Smart-Way.md at master · selfteaching/How-To-Ask-Questions-The-Smart-Way · GitHub`
+- 最終URL: [https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md](https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md)
+- 用途との一致: 一致。Eric S. RaymondとRick Moenによる「How To Ask Questions The Smart Way」が表示された
+- ログイン要求: なし
+- 削除済み表示: なし
+- 別ページへの転送: なし
+- 判定: `manual_confirmed`
+
+### 接続タイムアウト
 
 #### [https://www.catb.org/~esr/writings/taoup/html/](https://www.catb.org/~esr/writings/taoup/html/)
 
