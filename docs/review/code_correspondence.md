@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
 - 生成日: 2026-07-28
-- 対象コミット: `a8000ddfc686f342c9c6c9b6a407586e521a6744`
+- 対象コミット: `01d526086e33700ba3f02eafae16e3ca0b3dbf39`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - 全件表: [`code_correspondence.json`](./code_correspondence.json)
@@ -14,17 +14,17 @@
 
 | 判定 | 件数 | 意味 |
 |---|---:|---|
-| E0 | 49 | コメント・空白を除いて同一 |
+| E0 | 51 | コメント・空白を除いて同一 |
 | E1 | 45 | docstringや説明上の差を除けば同じ処理 |
-| E2 | 28 | 実体と矛盾しない抜粋 |
-| E3 | 12 | 対応はあるが構造または振る舞いに差がある |
+| E2 | 36 | 実体と矛盾しない抜粋 |
+| E3 | 2 | 対応はあるが構造または振る舞いに差がある |
 | E5 | 0 | 配置が必要だが対応実体がない |
 | EN | 395 | 規約上、対応実体は不要 |
 | **合計** | **529** | 全本文ブロック |
 
 配置が必要なブロックは134件である。E5は0件であり、具体的な解消順序はE5解消計画に記録した。
 
-`scripts/ch*` 側は全175ファイルで、本文コードと直接対応99件、本文から参照のみ43件、本文コードとの対応なし33件である。
+`scripts/ch*` 側は全176ファイルで、本文コードと直接対応99件、本文から参照のみ43件、本文コードとの対応なし34件である。
 
 ## 2. 章別集計
 
@@ -41,7 +41,7 @@
 | ch08 | 29 | 17 | 6 | 6 | 5 | 0 | 0 | 0 | 12 |
 | ch09 | 33 | 8 | 0 | 5 | 3 | 0 | 0 | 0 | 25 |
 | ch10 | 35 | 8 | 5 | 3 | 0 | 0 | 0 | 0 | 27 |
-| ch11 | 34 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | 24 |
+| ch11 | 34 | 10 | 2 | 0 | 8 | 0 | 0 | 0 | 24 |
 | ch12 | 20 | 14 | 0 | 14 | 0 | 0 | 0 | 0 | 6 |
 | ch13 | 11 | 6 | 3 | 3 | 0 | 0 | 0 | 0 | 5 |
 | ch14 | 23 | 14 | 7 | 0 | 7 | 0 | 0 | 0 | 9 |
@@ -52,7 +52,7 @@
 | ch19 | 24 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 23 |
 | ch20 | 12 | 4 | 2 | 0 | 2 | 0 | 0 | 0 | 8 |
 | ch21 | 14 | 5 | 1 | 4 | 0 | 0 | 0 | 0 | 9 |
-| **合計** | **529** | **134** | **49** | **45** | **28** | **12** | **0** | **0** | **395** |
+| **合計** | **529** | **134** | **51** | **45** | **36** | **2** | **0** | **0** | **395** |
 
 ## 3. 対応実体がないブロック
 
@@ -66,18 +66,6 @@
 |---|---|---|---|
 | `B-00-001` | `scripts/ch00/find_orfs.py` | 11 failed, 17 passed in 0.76s | ORFとfind_all_orfsは同題材だが入力検証・探索仕様に差がある |
 | `B-00-003` | `scripts/ch00/hmm_gene_predict.py` | 8 failed, 1 passed in 0.11s | viterbiの初期化・バックトレースを本文が省略し、そのままでは同じ動作にならない |
-| `B-11-001` | `scripts/ch11/cli_argparse.py` | 7 passed in 0.13s | 同章・同名だがAST差 |
-| `B-11-002` | `scripts/ch11/cli_click.py` | 未実行: 本文定義が省略記号を含む: gc_filter | Click版に対応するが、実体は型ヒント・version・ログ・戻り値等を追加 |
-| `B-11-003` | `scripts/ch11/cli_typer.py` | 未実行: 対応スクリプトに直接テストがない | Typer版に対応するが引数・出力・例外処理に差がある |
-| `B-11-006` | `scripts/ch11/cli_click.py` | 6 failed, 3 passed in 0.15s | version/helpデコレータ例だが実体のgc_filterシグネチャと処理が異なる |
-| `B-11-007` | `scripts/ch11/seqtool.py` | 1 failed, 12 passed in 0.17s | 同章・同名だがAST差 |
-| `B-11-011` | `scripts/ch11/cli_click.py` | 未実行: 本文定義が省略記号を含む: gc_filter | 終了コードの例と実体のCLIで入力検証・終了処理が異なる |
-| `B-11-013` | `scripts/ch10/config_example.py` | 対象外 | load_configは章横断候補だがdefaultsと戻り値仕様が異なる |
-| `B-11-013` | `scripts/ch11/cli_click.py` | 未実行: 本文定義が省略記号を含む: gc_filter | 設定をCLIへ合成する処理は同題材だが実体のオプション・検証が異なる |
-| `B-11-024` | `scripts/ch11/seqtool.py` | 対象外 | 同じfilter CLI処理だが、関数名、内包表記とループ、ステータスメッセージに差がある |
-| `B-11-030` | `scripts/ch11/seqtool.py` | 1 failed, 12 passed in 0.16s | 同章・同名だがAST差 |
-| `B-11-031` | `scripts/ch11/logging_setup.py` | 10 passed in 0.04s | 同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある |
-| `B-11-031` | `scripts/ch11/progress_demo.py` | 10 passed in 0.03s | 同じsetup_loggingの別実体にも対応する多対多関係 |
 
 ## 5. テスト状況
 
@@ -85,17 +73,17 @@
 
 | 項目 | 結果 |
 |---|---:|
-| テストファイル | 94 |
-| 章別テストファイル | 92 |
+| テストファイル | 96 |
+| 章別テストファイル | 94 |
 | レビュー用テストファイル | 2 |
-| passed | 922 |
+| passed | 937 |
 | skipped | 11 |
 | failed | 0 |
 | errors | 0 |
 
 ## 6. 多対多対応
 
-1ブロックから複数ファイルへの対応は8件ある。
+1ブロックから複数ファイルへの対応は6件ある。
 
 | 本文ブロック | 対応先 |
 |---|---|
@@ -104,18 +92,17 @@
 | `B-08-008` | `tests/ch08/conftest.py`、`tests/ch08/conftest.py` |
 | `B-08-009` | `tests/ch08/test_reverse_complement.py`、`tests/ch08/test_seq_stats.py` |
 | `B-08-025` | `scripts/ch08/examples/claude-settings.json`、`scripts/ch08/examples/codex-hooks.json` |
-| `B-11-013` | `scripts/ch10/config_example.py`、`scripts/ch11/cli_click.py` |
-| `B-11-031` | `scripts/ch11/logging_setup.py`、`scripts/ch11/progress_demo.py` |
 | `B-17-031` | `scripts/ch17/generator_fastq.py`、`scripts/ch17/generator_fastq.py` |
 
 ## 7. 実体側だけにあるファイル
 
-本文コードとの対応がない資産は33件である。
+本文コードとの対応がない資産は34件である。
 個別の役割とテスト結果は全件表の`scripts`に記録した。
 
 | 役割 | ファイル数 |
 |---|---:|
 | data_support | 2 |
+| demo | 1 |
 | figure_generation | 8 |
 | implementation | 2 |
 | package_support | 20 |
@@ -130,7 +117,7 @@
 5. import、命名、直接パス参照から実体とテストを対応付けた
 6. 独立監査でソースハッシュ、ID、参照先、集計、Markdownを再計算する
 
-分類overrideは27件、関係overrideは114件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
+分類overrideは27件、関係overrideは116件である。override対象の本文ハッシュが変わった場合、生成処理は停止する。
 
 ## 9. 全件表の読み方
 

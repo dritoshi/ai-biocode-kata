@@ -964,117 +964,127 @@
       ]
     },
     "B-11-002": {
-      "block_sha256": "316d8d571bd63c15ed0ba047314e5be4d5c125610c4751782456cdcbcd4493ba",
+      "block_sha256": "fa1718bc561b2fa3dc496604b46121f34c4bb0ecdc2ab6eace85c4a37a50da24",
       "relations": [
         {
           "target_file": "scripts/ch11/cli_click.py",
-          "equivalence": "E3",
+          "target_entity": "gc_filter",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "Click版に対応するが、実体は型ヒント・version・ログ・戻り値等を追加",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のデコレータ、型付きシグネチャ、docstringを順序どおり示し、入力検証と処理本体の省略境界を明記",
+          "verification": "help、version、範囲検証、stdin/stdout、ファイル入出力をpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-11-003": {
-      "block_sha256": "3b656658b9fbba582efecf7d29bd3aae3427096b5c7c67fab4ebdd73a0402988",
+      "block_sha256": "e6e83774fefbab248e527194c3f75794795234db981b4833d2d20dddc03260fa",
       "relations": [
         {
           "target_file": "scripts/ch11/cli_typer.py",
-          "equivalence": "E3",
+          "target_entity": "gc_filter",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "Typer版に対応するが引数・出力・例外処理に差がある",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のTyperアプリ、デコレータ、Annotatedシグネチャを示し、処理本体の省略境界を明記",
+          "verification": "help、正常入力、範囲外入力、ファイル出力を直接CLIテストで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-11-006": {
-      "block_sha256": "61139200c57242d6f4e0e3fde68d71bb0a6629f2ce221078c0b5f8595242764e",
+      "block_sha256": "14c5dbece10eeaf554f4621fa2db9b6542a0f97246dafce66aee72b402b7a0e1",
       "relations": [
         {
           "target_file": "scripts/ch11/cli_click.py",
-          "equivalence": "E3",
+          "target_entity": "gc_filter",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "version/helpデコレータ例だが実体のgc_filterシグネチャと処理が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のversionデコレータから型付きシグネチャとhelp用docstringまでを連続して抜粋",
+          "verification": "help本文、version、CLI本体の入出力をpytestで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-007": {
+      "block_sha256": "500198ab61ff0bbade4df9d92be3efc39177da8b449c6638b7860209d3256fd3",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/seqtool.py",
+          "target_entity": "cli",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文はversionを含む実体のグループ関数とstats・filterの登録部を示し、各サブコマンド本体とconvertを省略",
+          "verification": "help、version、stats、filter、convertをpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-11-011": {
-      "block_sha256": "4db97d31b78d14dac51a3b00bbeb221010632a4786dbf5826ab95261e9eac527",
+      "block_sha256": "1bb46c9006dc3a85d16aac8bebf2ac72265e54c1e43c3fc98d66bad66ba9f12a",
       "relations": [
         {
           "target_file": "scripts/ch11/cli_click.py",
-          "equivalence": "E3",
+          "target_entity": "gc_filter",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "終了コードの例と実体のCLIで入力検証・終了処理が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のFASTA読込例外と空入力をClickExceptionへ変換する部分を示し、後続処理を省略",
+          "verification": "正常終了0、実行時エラー1、オプション誤り2とstderrをpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-11-013": {
-      "block_sha256": "ec210a5eb78aeeb5f988b1f4d666fabc9faa68406fa434e3162accaeab3fce17",
+      "block_sha256": "f555de8c7b4ffbffc58fe321f45cac6b5161fc24b69dd7d506324790cc117ca3",
       "relations": [
         {
-          "target_file": "scripts/ch10/config_example.py",
-          "target_entity": "load_config",
-          "equivalence": "E3",
-          "kind": "concept",
-          "evidence": "load_configは章横断候補だがdefaultsと戻り値仕様が異なる",
-          "cross_chapter": true,
-          "verification": "manual"
-        },
-        {
-          "target_file": "scripts/ch11/cli_click.py",
-          "equivalence": "E3",
+          "target_file": "scripts/ch11/config_layering.py",
+          "target_entity": "resolve_config",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "設定をCLIへ合成する処理は同題材だが実体のオプション・検証が異なる",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のCLI上書き関数を完全に示し、デフォルト・YAML読込・検証を行う補助定義の省略境界を明記",
+          "verification": "デフォルト、YAML、CLI上書き、欠落・不正設定をpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-11-024": {
-      "block_sha256": "a8e00a69c34a4418ebf3cbd038ef2ba7baf2115d476b903ab58de4f9da40a71b",
+      "block_sha256": "b80efcc1c98c7882127a59155458fd59ec097b6cd65b98a7ba10b24b888bf5ba",
       "relations": [
         {
           "target_file": "scripts/ch11/seqtool.py",
           "target_entity": "filter_cmd",
-          "equivalence": "E3",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "同じfilter CLI処理だが、関数名、内包表記とループ、ステータスメッセージに差がある",
-          "verification": "manual",
+          "evidence": "本文はデコレータを省略し、実体のfilter_cmdシグネチャと処理本体を順序どおり抜粋",
+          "verification": "TTY有無、progress有無、stdoutとstderrの分離をpytestで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-11-030": {
+      "block_sha256": "e581dd0d62f24ec5247af360f4765cadc49df921592594d2297cb171d915a6e3",
+      "relations": [
+        {
+          "target_file": "scripts/ch11/seqtool.py",
+          "target_entity": "cli",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文はversionとlog-fileを含む実体のグループ関数を示し、後続サブコマンドを省略",
+          "verification": "log-level優先順位、verbose、versionをpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-11-031": {
-      "block_sha256": "ca3b7c2d3377c56225c6d9ba8f8b976fec75825974d6537ac08f3bfbc854f193",
+      "block_sha256": "39aa1c5e08672946006c259d619434c5700cf856cb5f495fa13c95619be0a25a",
       "relations": [
         {
           "target_file": "scripts/ch11/logging_setup.py",
           "target_entity": "setup_logging",
-          "equivalence": "E3",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "同名ロギング設定だが引数、ハンドラ再設定、Rich対応に差がある",
-          "verification": "manual",
-          "cross_chapter": false
-        },
-        {
-          "target_file": "scripts/ch11/progress_demo.py",
-          "target_entity": "setup_logging",
-          "equivalence": "E3",
-          "kind": "excerpt",
-          "evidence": "同じsetup_loggingの別実体にも対応する多対多関係",
-          "verification": "manual",
+          "evidence": "setup_logging関数のASTが本文と一致",
+          "verification": "不正level、stderr、file、Rich有無、handler重複をpytestで確認",
           "cross_chapter": false
         }
       ]
@@ -2007,7 +2017,7 @@
       "skipped": 0,
       "errors": 0,
       "summary": "7 passed in 0.13s",
-      "block_sha256": "05e0c0008c75fce98ac8fa74dd1b423b33fd606f4b4add6435b106207dbc7e43",
+      "block_sha256": "0eaf98941b4ff2fbc77c5e1804439a6817939e3ee4180980e14486ceb944dbed",
       "target_sha256": "e502871fa1c235ae455c69693a4b8c271863d05475b5a9f51f29be82831c55ab",
       "test_file_sha256": {
         "tests/ch11/test_cli_argparse.py": "c32105a64f23f30a0431fea85e192619cca3e7c00020e29e23e9ab8135a30a91"
@@ -2015,101 +2025,98 @@
     },
     "B-11-002::scripts/ch11/cli_click.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: gc_filter",
+      "reason": "本文が処理本体を省略したE2抜粋",
       "block_id": "B-11-002",
       "target_file": "scripts/ch11/cli_click.py",
-      "block_sha256": "316d8d571bd63c15ed0ba047314e5be4d5c125610c4751782456cdcbcd4493ba",
-      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
+      "block_sha256": "fa1718bc561b2fa3dc496604b46121f34c4bb0ecdc2ab6eace85c4a37a50da24",
+      "target_sha256": "4297e562f46719dba6ea5c93bfa9d0e47f5ccbf185ad8acf4e1b1004cccfb562",
       "test_file_sha256": {}
     },
     "B-11-003::scripts/ch11/cli_typer.py": {
       "status": "not_run",
-      "reason": "対応スクリプトに直接テストがない",
+      "reason": "本文が処理本体を省略したE2抜粋",
       "block_id": "B-11-003",
       "target_file": "scripts/ch11/cli_typer.py",
-      "block_sha256": "3b656658b9fbba582efecf7d29bd3aae3427096b5c7c67fab4ebdd73a0402988",
+      "block_sha256": "e6e83774fefbab248e527194c3f75794795234db981b4833d2d20dddc03260fa",
       "target_sha256": "20e0c83d7ba90f4b1fc43b137bdbf5587990a57a80e204b07dfefc2f376ef5a0",
       "test_file_sha256": {}
     },
     "B-11-006::scripts/ch11/cli_click.py": {
-      "status": "failed",
-      "reason": "置換定義: gc_filter",
+      "status": "not_run",
+      "reason": "本文が前段のデコレータと処理本体を省略したE2抜粋",
       "block_id": "B-11-006",
       "target_file": "scripts/ch11/cli_click.py",
-      "test_files": [
-        "tests/ch11/test_cli_click.py"
-      ],
-      "returncode": 1,
-      "passed": 3,
-      "failed": 6,
-      "skipped": 0,
-      "errors": 0,
-      "summary": "6 failed, 3 passed in 0.15s",
-      "failure_cause": "本文の--version用断片では実体CLIの入力・出力・フィルタ処理を保持できない",
-      "block_sha256": "61139200c57242d6f4e0e3fde68d71bb0a6629f2ce221078c0b5f8595242764e",
-      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
-      "test_file_sha256": {
-        "tests/ch11/test_cli_click.py": "eca5bb1afb5027065255d33021547e124a7f9bebd152f6dcb5f52a5b6f6699ad"
-      }
+      "block_sha256": "14c5dbece10eeaf554f4621fa2db9b6542a0f97246dafce66aee72b402b7a0e1",
+      "target_sha256": "4297e562f46719dba6ea5c93bfa9d0e47f5ccbf185ad8acf4e1b1004cccfb562",
+      "test_file_sha256": {}
     },
     "B-11-007::scripts/ch11/seqtool.py": {
-      "status": "failed",
+      "status": "passed",
       "reason": "置換定義: cli",
       "block_id": "B-11-007",
       "target_file": "scripts/ch11/seqtool.py",
       "test_files": [
         "tests/ch11/test_seqtool.py"
       ],
-      "returncode": 1,
-      "passed": 12,
-      "failed": 1,
+      "returncode": 0,
+      "passed": 15,
+      "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "1 failed, 12 passed in 0.17s",
-      "failure_cause": "本文のcli定義には実体が持つ--version処理がない",
-      "block_sha256": "8f7a919dfd3383384c844a55c8c80116543861ade9f4f8acd0dddf9705c7729d",
-      "target_sha256": "ef19b33e85394455652c4b324c6c2ed859d951318351592306d56de7f9f55f52",
+      "summary": "15 passed in 0.15s",
+      "block_sha256": "500198ab61ff0bbade4df9d92be3efc39177da8b449c6638b7860209d3256fd3",
+      "target_sha256": "f70463ddf201da4b976e2f59beca4e2c997d6638f1fb87c3c8919691702dc4e3",
       "test_file_sha256": {
-        "tests/ch11/test_seqtool.py": "3657fb481b449bea3f8a0de88395bbc12121ee6f45a7d33d96507b69270e36e4"
+        "tests/ch11/test_seqtool.py": "bd24aa34951996380974fdd5adb988a7ea12a235d3005a62686b26244188c25c"
       }
     },
     "B-11-011::scripts/ch11/cli_click.py": {
       "status": "not_run",
-      "reason": "本文定義が省略記号を含む: gc_filter",
+      "reason": "本文が前後の処理を省略したE2抜粋",
       "block_id": "B-11-011",
       "target_file": "scripts/ch11/cli_click.py",
-      "block_sha256": "4db97d31b78d14dac51a3b00bbeb221010632a4786dbf5826ab95261e9eac527",
-      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
+      "block_sha256": "1bb46c9006dc3a85d16aac8bebf2ac72265e54c1e43c3fc98d66bad66ba9f12a",
+      "target_sha256": "4297e562f46719dba6ea5c93bfa9d0e47f5ccbf185ad8acf4e1b1004cccfb562",
       "test_file_sha256": {}
     },
-    "B-11-013::scripts/ch11/cli_click.py": {
-      "status": "not_run",
-      "reason": "本文定義が省略記号を含む: gc_filter",
+    "B-11-013::scripts/ch11/config_layering.py": {
+      "status": "passed",
+      "reason": "置換定義: resolve_config",
       "block_id": "B-11-013",
-      "target_file": "scripts/ch11/cli_click.py",
-      "block_sha256": "ec210a5eb78aeeb5f988b1f4d666fabc9faa68406fa434e3162accaeab3fce17",
-      "target_sha256": "f55359884d3e25801ea1802c54cc5e39370252309dedc41aa6595ea45df44966",
-      "test_file_sha256": {}
+      "target_file": "scripts/ch11/config_layering.py",
+      "test_files": [
+        "tests/ch11/test_config_layering.py"
+      ],
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "summary": "7 passed in 0.04s",
+      "block_sha256": "f555de8c7b4ffbffc58fe321f45cac6b5161fc24b69dd7d506324790cc117ca3",
+      "target_sha256": "880e42bfc8314e5af8aa26a3178792d40607a0d9b2e81e967142f08fb43cb9ef",
+      "test_file_sha256": {
+        "tests/ch11/test_config_layering.py": "2b586a9675620bda615285a628739ffd66bd149c19ec50570c7c6810260707c6"
+      }
     },
     "B-11-030::scripts/ch11/seqtool.py": {
-      "status": "failed",
+      "status": "passed",
       "reason": "置換定義: cli",
       "block_id": "B-11-030",
       "target_file": "scripts/ch11/seqtool.py",
       "test_files": [
         "tests/ch11/test_seqtool.py"
       ],
-      "returncode": 1,
-      "passed": 12,
-      "failed": 1,
+      "returncode": 0,
+      "passed": 15,
+      "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "1 failed, 12 passed in 0.16s",
-      "failure_cause": "本文のcli定義には実体が持つ--version処理がない",
-      "block_sha256": "9fbc8d4277a51c134f1fa7adcd39ddf6ff5b8987cf50318e4ef78fb8643f37d6",
-      "target_sha256": "ef19b33e85394455652c4b324c6c2ed859d951318351592306d56de7f9f55f52",
+      "summary": "15 passed in 0.15s",
+      "block_sha256": "e581dd0d62f24ec5247af360f4765cadc49df921592594d2297cb171d915a6e3",
+      "target_sha256": "f70463ddf201da4b976e2f59beca4e2c997d6638f1fb87c3c8919691702dc4e3",
       "test_file_sha256": {
-        "tests/ch11/test_seqtool.py": "3657fb481b449bea3f8a0de88395bbc12121ee6f45a7d33d96507b69270e36e4"
+        "tests/ch11/test_seqtool.py": "bd24aa34951996380974fdd5adb988a7ea12a235d3005a62686b26244188c25c"
       }
     },
     "B-11-031::scripts/ch11/logging_setup.py": {
@@ -2121,35 +2128,15 @@
         "tests/ch11/test_logging_setup.py"
       ],
       "returncode": 0,
-      "passed": 10,
+      "passed": 11,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "10 passed in 0.04s",
-      "block_sha256": "ca3b7c2d3377c56225c6d9ba8f8b976fec75825974d6537ac08f3bfbc854f193",
+      "summary": "11 passed in 0.04s",
+      "block_sha256": "39aa1c5e08672946006c259d619434c5700cf856cb5f495fa13c95619be0a25a",
       "target_sha256": "d2801550996f1bc75471adb24c6ea940fcd8bdace4a1813d4cd82ec97097556e",
       "test_file_sha256": {
-        "tests/ch11/test_logging_setup.py": "ade0050b419f4ad6eeeda9ddf1a2b825da8fa9272ac39ada7326253d18b45ff4"
-      }
-    },
-    "B-11-031::scripts/ch11/progress_demo.py": {
-      "status": "passed",
-      "reason": "置換定義: setup_logging",
-      "block_id": "B-11-031",
-      "target_file": "scripts/ch11/progress_demo.py",
-      "test_files": [
-        "tests/ch11/test_logging_setup.py"
-      ],
-      "returncode": 0,
-      "passed": 10,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "summary": "10 passed in 0.03s",
-      "block_sha256": "ca3b7c2d3377c56225c6d9ba8f8b976fec75825974d6537ac08f3bfbc854f193",
-      "target_sha256": "299cd3acf3fa2eb0cdcbceefcefb4e8f0a4e191e9bc98fc0e77bc526eb1ec9b6",
-      "test_file_sha256": {
-        "tests/ch11/test_logging_setup.py": "ade0050b419f4ad6eeeda9ddf1a2b825da8fa9272ac39ada7326253d18b45ff4"
+        "tests/ch11/test_logging_setup.py": "9d26e7ba80d1740948395384e9704d8416c8539c6aa09e64540b145854a5607d"
       }
     },
     "B-13-005::scripts/ch13/seaborn_biodist.py": {

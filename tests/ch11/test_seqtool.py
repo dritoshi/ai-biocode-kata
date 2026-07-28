@@ -1,8 +1,13 @@
 """seqtool モジュールのテスト."""
 
+from pathlib import Path
+
+import pytest
 from click.testing import CliRunner
 
-from scripts.ch11.seqtool import cli
+from scripts.ch11 import seqtool
+
+cli = seqtool.cli
 
 # テスト用FASTAデータ
 FASTA_DATA = """\
@@ -179,3 +184,65 @@ def test_log_level_option(tmp_path) -> None:
         ],
     )
     assert result.exit_code == 0
+
+
+def test_log_level_overrides_verbose(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """--log-levelが--verboseより優先される."""
+    configured: list[str] = []
+
+    def capture_setup(
+        level: str = "INFO",
+        log_file: str | Path | None = None,
+        use_rich: bool = False,
+    ) -> None:
+        configured.append(level)
+
+    monkeypatch.setattr(seqtool, "setup_logging", capture_setup)
+    input_file = tmp_path / "input.fasta"
+    input_file.write_text(FASTA_DATA, encoding="utf-8")
+
+    result = CliRunner().invoke(
+        cli,
+        [
+            "--verbose",
+            "--log-level",
+            "info",
+            "stats",
+            str(input_file),
+            "--format",
+            "plain",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert configured == ["INFO"]
+
+
+def test_verbose_selects_debug(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """--log-level未指定時の--verboseはDEBUGを選ぶ."""
+    configured: list[str] = []
+
+    def capture_setup(
+        level: str = "INFO",
+        log_file: str | Path | None = None,
+        use_rich: bool = False,
+    ) -> None:
+        configured.append(level)
+
+    monkeypatch.setattr(seqtool, "setup_logging", capture_setup)
+    input_file = tmp_path / "input.fasta"
+    input_file.write_text(FASTA_DATA, encoding="utf-8")
+
+    result = CliRunner().invoke(
+        cli,
+        ["--verbose", "stats", str(input_file), "--format", "plain"],
+    )
+
+    assert result.exit_code == 0
+    assert configured == ["DEBUG"]
