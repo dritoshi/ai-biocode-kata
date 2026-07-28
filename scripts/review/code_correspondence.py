@@ -2112,30 +2112,28 @@ def render_report(data: dict[str, Any]) -> str:
 def normalized_for_determinism(data: dict[str, Any]) -> dict[str, Any]:
     """日時・所要時間などを除いた再現性比較用のコピーを返す."""
 
+    def normalize_test_result(result: object) -> None:
+        if not isinstance(result, dict):
+            return
+        result.pop("duration_seconds", None)
+        summary = result.get("summary")
+        if isinstance(summary, str):
+            result["summary"] = re.sub(
+                r" in \d+(?:\.\d+)?s$",
+                "",
+                summary,
+            )
+
     copied = deepcopy(data)
     copied.pop("generated_at", None)
     copied.pop("source_commit", None)
     for result in copied.get("test_files", {}).values():
-        result.pop("duration_seconds", None)
-        if "summary" in result:
-            result["summary"] = re.sub(
-                r" in \d+(?:\.\d+)?s$",
-                "",
-                result["summary"],
-            )
+        normalize_test_result(result)
+    for asset in copied.get("test_assets", []):
+        normalize_test_result(asset.get("test_result"))
     for result in copied.get("substitution_tests", {}).values():
-        if "summary" in result:
-            result["summary"] = re.sub(
-                r" in \d+(?:\.\d+)?s$",
-                "",
-                result["summary"],
-            )
+        normalize_test_result(result)
     for block in copied.get("blocks", []):
         for substitution in block.get("substitution_tests", []):
-            if "summary" in substitution:
-                substitution["summary"] = re.sub(
-                    r" in \d+(?:\.\d+)?s$",
-                    "",
-                    substitution["summary"],
-                )
+            normalize_test_result(substitution)
     return copied

@@ -383,6 +383,8 @@ class TestBuildAndAudit:
             generated_at="2026-07-26T00:00:00+09:00",
             include_history=False,
         )
+        # JSON再読込後はtest_filesとtest_assetsの共有参照が失われる
+        first = json.loads(json.dumps(first))
         second = deepcopy(first)
         second["generated_at"] = "2026-07-27T00:00:00+09:00"
         second["source_commit"] = "different"
@@ -392,6 +394,9 @@ class TestBuildAndAudit:
         second["test_files"]["tests/ch01/test_add.py"][
             "summary"
         ] = "1 passed in 99.0s"
+        test_asset_result = second["test_assets"][0]["test_result"]
+        test_asset_result["duration_seconds"] = 99.0
+        test_asset_result["summary"] = "1 passed in 99.0s"
         assert normalized_for_determinism(
             first
         ) == normalized_for_determinism(second)
