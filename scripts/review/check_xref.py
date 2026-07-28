@@ -5,6 +5,7 @@ chapters/ ディレクトリ内の全Markdownファイルを対象に:
 - 章間リンク (](./NN_name.md) 形式) のリンク先ファイル存在確認
 - #anchor 付きリンクのアンカー照合 (GitHub形式)
 - ../figures/ 参照の画像ファイル存在確認
+- ../scripts/ と ../tests/ 参照のコード成果物存在確認
 
 結果を JSON に保存する。既定の出力先は docs/review/xref_check.json。
 """
@@ -133,7 +134,7 @@ def extract_links(filepath: Path) -> list[dict]:
     -------
         list of dict: 各リンクの情報（line, column, raw_link, link_file, anchor）
     """
-    links = []
+    links: list[dict] = []
     in_code_block = False
 
     try:
@@ -181,6 +182,17 @@ def extract_links(filepath: Path) -> list[dict]:
                     "column": col,
                     "raw_link": url,
                     "type": "figure_link",
+                    "link_file": url,
+                    "anchor": None,
+                })
+
+            # コード成果物リンク: ../scripts/... or ../tests/...
+            elif url.startswith(('../scripts/', '../tests/')):
+                links.append({
+                    "line": line_no,
+                    "column": col,
+                    "raw_link": url,
+                    "type": "artifact_link",
                     "link_file": url,
                     "anchor": None,
                 })
@@ -263,6 +275,35 @@ def check_figure_link(source_file: Path, link_info: dict) -> dict | None:
     return None
 
 
+def check_artifact_link(source_file: Path, link_info: dict) -> dict | None:
+    """コード成果物への相対リンクがプロジェクト内の実在パスを指すか確認する。"""
+    raw_link = link_info["raw_link"]
+    target_path = (source_file.parent / raw_link).resolve()
+    try:
+        target_path.relative_to(PROJECT_ROOT.resolve())
+    except ValueError:
+        return {
+            "file": str(source_file.relative_to(PROJECT_ROOT)),
+            "line": link_info["line"],
+            "severity": "CRITICAL",
+            "type": "artifact_link_outside_project",
+            "message": f"コード成果物リンクがプロジェクト外を指す: {raw_link}",
+            "raw_link": raw_link,
+        }
+
+    if not target_path.exists():
+        return {
+            "file": str(source_file.relative_to(PROJECT_ROOT)),
+            "line": link_info["line"],
+            "severity": "CRITICAL",
+            "type": "broken_artifact_link",
+            "message": f"コード成果物が存在しない: {raw_link}",
+            "raw_link": raw_link,
+        }
+
+    return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -282,9 +323,11 @@ def main() -> None:
         "total_files_checked": 0,
         "total_chapter_links": 0,
         "total_figure_links": 0,
+        "total_artifact_links": 0,
         "broken_file_links": 0,
         "broken_anchors": 0,
         "broken_figure_links": 0,
+        "broken_artifact_links": 0,
     }
 
     for md_file in md_files:
@@ -309,6 +352,13 @@ def main() -> None:
                     issues.append(issue)
                     stats["broken_figure_links"] += 1
 
+            elif link_info["type"] == "artifact_link":
+                stats["total_artifact_links"] += 1
+                issue = check_artifact_link(md_file, link_info)
+                if issue:
+                    issues.append(issue)
+                    stats["broken_artifact_links"] += 1
+
     # 重大度でソート
     severity_order = {"CRITICAL": 0, "MAJOR": 1, "MINOR": 2}
     issues.sort(key=lambda x: (severity_order.get(x["severity"], 99), x["file"], x["line"]))
@@ -328,10 +378,12 @@ def main() -> None:
     print(f"チェック対象ファイル数: {stats['total_files_checked']}")
     print(f"章間リンク数: {stats['total_chapter_links']}")
     print(f"画像リンク数: {stats['total_figure_links']}")
+    print(f"コード成果物リンク数: {stats['total_artifact_links']}")
     print("")
     print(f"問題件数: {len(issues)}")
     print(f"  CRITICAL (リンク先ファイル不在): {stats['broken_file_links']}")
     print(f"  CRITICAL (画像ファイル不在):     {stats['broken_figure_links']}")
+    print(f"  CRITICAL (コード成果物不在等):   {stats['broken_artifact_links']}")
     print(f"  MAJOR    (アンカー不一致):       {stats['broken_anchors']}")
     print()
 
@@ -339,7 +391,14 @@ def main() -> None:
         severity = issue["severity"]
         print(f"[{severity}] {issue['file']}:{issue['line']} — {issue['message']}")
 
-    print(f"\n結果を {output_path.relative_to(PROJECT_ROOT)} に保存しました。")
+    try:
+        display_path = output_path.relative_to(PROJECT_ROOT)
+    except ValueError:
+        display_path = output_path
+    print(f"\n結果を {display_path} に保存しました。")
+
+    if issues:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

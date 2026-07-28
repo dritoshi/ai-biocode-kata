@@ -8,9 +8,21 @@ import ast
 import hashlib
 import json
 import re
+import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from scripts.review.e1_remediation import (  # noqa: E402
+    git_snapshot_sha256,
+    load_fixture,
+    source_snapshot_files,
+    validate_e1_inventory,
+)
 
 FENCE_RE = re.compile(r"^\s*(?:>\s*)*(`{3,}|~{3,})\s*([^\s`]*)")
 IGNORED_ASSET_DIRS = {
@@ -153,17 +165,20 @@ def audit(
         *sorted((root / "tests").glob("ch[0-9][0-9]/test_*.py")),
         *sorted((root / "tests/review").glob("test_*.py")),
     ]
-    source_paths = [
-        *sorted((root / "chapters").glob("[0-9][0-9]_*.md")),
-        *script_paths,
-        *test_asset_paths,
-    ]
+    source_paths = [root / path for path in data["source_snapshot_files"]]
     checks: dict[str, bool] = {}
     blocks = data["blocks"]
     scripts = data["scripts"]
     test_assets = data["test_assets"]
 
-    checks["schema_version"] = data.get("schema_version") == 3
+    checks["schema_version"] = data.get("schema_version") == 4
+    checks["method"] = (
+        data.get("method")
+        == "docs/review/2026-07-28_e1_remediation_plan.md"
+    )
+    checks["source_snapshot_files"] = data["source_snapshot_files"] == [
+        str(path.relative_to(root)) for path in source_snapshot_files(root)
+    ]
     checks["chapter_count"] = (
         len(list((root / "chapters").glob("[0-9][0-9]_*.md")))
         == data["summary"]["chapters"]
@@ -280,6 +295,29 @@ def audit(
         for block in blocks
         for relation in block["relations"]
     )
+    checks["relation_source_entity_locations_resolve"] = all(
+        (
+            relation.get("source_entity_id") is None
+            and relation.get("source_entity") is None
+            and not relation.get("source_entity_locations")
+        )
+        or (
+            relation.get("source_entity_id")
+            and relation.get("source_entity")
+            and relation.get("source_entity_locations")
+            and all(
+                location["id"] == relation["source_entity_id"]
+                and location["name"] == relation["source_entity"]
+                and block["line_start"]
+                < location["line_start"]
+                <= location["line_end"]
+                < block["line_end"]
+                for location in relation["source_entity_locations"]
+            )
+        )
+        for block in blocks
+        for relation in block["relations"]
+    )
 
     placements = Counter(item["placement"] for item in blocks)
     correspondence = Counter(item["correspondence"] for item in blocks)
@@ -379,6 +417,27 @@ def audit(
         dict(Counter(item["test_result"]["status"] for item in scripts))
         == data["summary"]["script_test_status"]
     )
+
+    if data.get("remediation_scope"):
+        try:
+            fixture = load_fixture(root)
+            batch = int(data["remediation_scope"]["completed_batch"])
+            validate_e1_inventory(root, data, fixture, batch)
+        except (KeyError, TypeError, ValueError):
+            checks["e1_inventory"] = False
+        else:
+            checks["e1_inventory"] = True
+        try:
+            checks["source_commit_snapshot"] = (
+                git_snapshot_sha256(
+                    root,
+                    data["source_commit"],
+                    data["source_snapshot_files"],
+                )
+                == data["source_snapshot_sha256"]
+            )
+        except ValueError:
+            checks["source_commit_snapshot"] = False
 
     markers = [
         "# 本文コード ↔ `scripts/ch*` 対応関係の再監査",

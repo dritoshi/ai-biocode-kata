@@ -39,6 +39,21 @@ REQUIRED_SECTIONS = ["## まとめ", "## 演習問題", "## さらに学びた�
 VALID_EXERCISE_TYPES = {"レビュー", "指示設計", "設計判断", "実践", "概念"}
 
 
+def issue_key(issue: dict) -> tuple[str, str, str]:
+    """行番号に左右されない既知問題の比較キーを返す。"""
+    return (
+        str(issue.get("file", "")),
+        str(issue.get("type", "")),
+        str(issue.get("message", "")),
+    )
+
+
+def find_new_issues(current: list[dict], baseline: list[dict]) -> list[dict]:
+    """ベースラインに存在しない新規問題だけを返す。"""
+    baseline_keys = {issue_key(issue) for issue in baseline}
+    return [issue for issue in current if issue_key(issue) not in baseline_keys]
+
+
 def read_file_lines(filepath: Path) -> list[str]:
     """ファイルを読み込み行のリストを返す。"""
     try:
@@ -49,7 +64,7 @@ def read_file_lines(filepath: Path) -> list[str]:
 
 def check_required_sections(filepath: Path, lines: list[str]) -> list[dict]:
     """必須セクションの存在と順序を確認する。"""
-    issues = []
+    issues: list[dict] = []
     rel_path = str(filepath.relative_to(PROJECT_ROOT))
 
     # 各必須セクションの行番号を検出
@@ -113,7 +128,7 @@ def check_bold_brackets(filepath: Path, lines: list[str]) -> list[dict]:
 
     パターン: **...（...** or **...(...** or **...「...** or **...」...**
     """
-    issues = []
+    issues: list[dict] = []
     rel_path = str(filepath.relative_to(PROJECT_ROOT))
     in_code_block = False
 
@@ -151,7 +166,7 @@ def check_bold_brackets(filepath: Path, lines: list[str]) -> list[dict]:
 
 def check_math_fullwidth_brackets(filepath: Path, lines: list[str]) -> list[dict]:
     """$...$ 直前/直後に全角カッコが隣接していないかチェックする。"""
-    issues = []
+    issues: list[dict] = []
     rel_path = str(filepath.relative_to(PROJECT_ROOT))
     in_code_block = False
 
@@ -198,7 +213,7 @@ def check_exercises(filepath: Path, lines: list[str]) -> list[dict]:
     - 類型ラベルが5種のいずれかであること
     - 章番号Xがファイル名と一致すること
     """
-    issues = []
+    issues: list[dict] = []
     rel_path = str(filepath.relative_to(PROJECT_ROOT))
     filename = filepath.name
 
@@ -314,6 +329,11 @@ def main() -> None:
         default=DEFAULT_OUTPUT,
         help="JSON 出力先。既定は docs/review/structure_check.json",
     )
+    parser.add_argument(
+        "--baseline",
+        type=Path,
+        help="既知問題を含むJSON。file/type/messageが一致する問題は失敗対象外",
+    )
     args = parser.parse_args()
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -376,6 +396,19 @@ def main() -> None:
         "issues": all_issues,
     }
 
+    baseline_issues: list[dict] = []
+    if args.baseline:
+        baseline_data = json.loads(args.baseline.read_text(encoding="utf-8"))
+        raw_baseline_issues = baseline_data.get("issues", [])
+        if not isinstance(raw_baseline_issues, list):
+            parser.error("--baseline の issues は配列である必要があります")
+        baseline_issues = raw_baseline_issues
+
+    new_issues = find_new_issues(all_issues, baseline_issues)
+    result["baseline"] = str(args.baseline) if args.baseline else None
+    result["new_issue_count"] = len(new_issues)
+    result["new_issues"] = new_issues
+
     output_path = args.output
     output_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -396,7 +429,17 @@ def main() -> None:
         line_info = f":{issue['line']}" if issue["line"] > 0 else ""
         print(f"[{severity}] {issue['file']}{line_info} — {issue['message']}")
 
-    print(f"\n結果を {output_path.relative_to(PROJECT_ROOT)} に保存しました。")
+    if args.baseline:
+        print(f"新規問題件数: {len(new_issues)}")
+
+    try:
+        display_path = output_path.relative_to(PROJECT_ROOT)
+    except ValueError:
+        display_path = output_path
+    print(f"\n結果を {display_path} に保存しました。")
+
+    if new_issues:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

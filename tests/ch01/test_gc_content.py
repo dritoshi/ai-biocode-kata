@@ -23,6 +23,10 @@ class TestGcContent:
     def test_case_insensitive(self) -> None:
         assert gc_content("atgc") == pytest.approx(0.5)
 
+    def test_ambiguous_bases_are_included_in_denominator(self) -> None:
+        assert gc_content("NNNN") == pytest.approx(0.0)
+        assert gc_content("GCNN") == pytest.approx(0.5)
+
     def test_long_sequence(self) -> None:
         seq = "GGGCCC" + "AAAA"  # G=3, C=3, A=4 → 10bp, GC=60%
         assert gc_content(seq) == pytest.approx(0.6)
@@ -50,3 +54,12 @@ class TestFilterSequencesByGc:
     def test_no_filter(self, sequences: dict[str, str]) -> None:
         result = filter_sequences_by_gc(sequences)
         assert len(result) == 3
+
+    def test_inclusive_boundaries(self, sequences: dict[str, str]) -> None:
+        result = filter_sequences_by_gc(sequences, min_gc=0.5, max_gc=0.5)
+        assert result == {"seq2": "ATGC"}
+
+    def test_filter_sequence_with_ambiguous_base(self) -> None:
+        sequences = {"ambiguous": "GCNN", "low": "ATNN"}
+        result = filter_sequences_by_gc(sequences, min_gc=0.5)
+        assert result == {"ambiguous": "GCNN"}

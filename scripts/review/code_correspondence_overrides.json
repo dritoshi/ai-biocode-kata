@@ -194,6 +194,51 @@
         }
       ]
     },
+    "B-01-004": {
+      "block_sha256": "2e7d9d30448b69ec47e820c833413c070f03cebebc2ee951a612ea360208a9df",
+      "relations": [
+        {
+          "source_entity_id": "B-01-004-E01",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "SequenceRecord",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のSequenceRecordはdocstring以外のASTが一致",
+          "verification": "lengthプロパティと不変dataclassをpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-01-004-E03",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "parse_fasta_string",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は入力責務を示すスタブであり、実体はBio.SeqIOによる完全実装",
+          "verification": "空入力、複数行配列、複数レコード、SeqIO利用をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-01-004-E04",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "filter_by_length",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は処理責務を示すスタブであり、実体は境界を含む完全実装",
+          "verification": "最小長、最大長、上限なしをpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-01-004-E05",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "format_as_tsv",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は出力責務を示すスタブであり、実体はヘッダーを含む完全実装",
+          "verification": "空レコードと複数レコードのTSV出力をpytestで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-02-021": {
       "block_sha256": "15058fe9f0c473affc78b98708836987933546bc764f5c1e645c4a4e571f53e8",
       "relations": [
@@ -349,15 +394,16 @@
       ]
     },
     "B-03-019": {
-      "block_sha256": "a5679bd3d403543d47aa293e324de53d554703b76c185a0cdf2c1af27ec17229",
+      "block_sha256": "08af50f599765ac6016ce16e4a9cffdc0ad087fe98a0342e33adc1034d3f6d42",
       "relations": [
         {
+          "source_entity_id": "B-03-019-E01",
           "target_file": "scripts/ch03/random_reproducibility.py",
           "target_entity": "subsample_with_seed",
-          "equivalence": "E1",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "関数名とNumPy型注釈だけが異なり、default_rng→choice→添字抽出はAST上同じ",
-          "verification": "manual",
+          "evidence": "公開名、NumPy型注釈、docstring、処理本体のASTが完全一致",
+          "verification": "同一・異なるseed、サイズ境界、不正サイズをpytestで確認",
           "cross_chapter": false
         }
       ]
@@ -1829,9 +1875,9 @@
       "reason": "Dockerfileの正規化命令列が一致"
     },
     {
-      "block_id": "B-03-019",
+      "block_id": "B-01-001",
       "expected": "E1",
-      "reason": "処理順が同じで関数名とNumPy型注釈だけが異なる"
+      "reason": "KISSの短いdocstringを意図的に残し、docstring除去後のASTが一致"
     },
     {
       "block_id": "B-12-004",
@@ -2315,6 +2361,343 @@
     "pending_resolved": 91,
     "note": "配置必須ブロック、対応ありブロック、全保留ブロックを本文前後と実体で目視",
     "goldset_method": "現在1件以上存在するE0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検",
-    "goldset_change_history": "2026-07-27: E5解消計画の完了によりE5母集団が0件となったため、旧E5標本B-15-012/B-15-018を除外した。両ブロックは実体追加後のE0として全件対応表で監査する。"
+    "goldset_change_history": "2026-07-27: E5解消計画の完了によりE5母集団が0件となったため、旧E5標本B-15-012/B-15-018を除外した。両ブロックは実体追加後のE0として全件対応表で監査する。2026-07-28: B-03-019がE0へ移行したため、E1標本をB-01-001へ変更した。",
+    "remediation_scope": {
+      "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
+      "baseline_e1_sha256": "88b2e73514c0a9a78f7b9a82c1feea4083ec98de9bd1edaae3fb4f87304d1dd8",
+      "completed_batch": 1
+    },
+    "comment_sync": [
+      {
+        "block_id": "B-01-001",
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
+      },
+      {
+        "block_id": "B-01-003",
+        "status": "satisfied_existing",
+        "reason": "gc_contentを再利用するDRYの実装判断を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/01_design.md",
+            "line_start": 69,
+            "line_end": 69,
+            "sha256": "5d37179212e165490ee5cb69f079cdc831aaef8f404aa28f60c86ca0817c6454"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch01/gc_content.py",
+            "scope": "entity",
+            "entity": "filter_sequences_by_gc",
+            "line_start": 45,
+            "line_end": 45,
+            "sha256": "06ba1fb55e8150f85e602d64d679f97a150e724761e9c0aa56250a3851c9d5cd"
+          }
+        ]
+      },
+      {
+        "block_id": "B-01-004",
+        "status": "satisfied_existing",
+        "reason": "入力・処理・出力の責務分離を本文コメントと実体のモジュールdocstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/01_design.md",
+            "line_start": 130,
+            "line_end": 130,
+            "sha256": "c704015981f2f94aa846dd7926297409247d27af5e811d398bf5d0083b0f7438"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch01/seq_filter.py",
+            "scope": "file",
+            "entity": null,
+            "line_start": 1,
+            "line_end": 7,
+            "sha256": "87ee336d8829a3cb711d8b49d782764f5020dffb39363b66e271e4198da534dd"
+          }
+        ]
+      },
+      {
+        "block_id": "B-03-019",
+        "status": "added",
+        "reason": "グローバル乱数状態を避ける実装判断を実体へ追加し本文と同期した",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/03_cs_basics.md",
+            "line_start": 520,
+            "line_end": 520,
+            "sha256": "ec61c85fec13a3ba343331b8ca35c0b2980bb019a1c04ef50acade2e3d492906"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch03/random_reproducibility.py",
+            "scope": "entity",
+            "entity": "subsample_with_seed",
+            "line_start": 32,
+            "line_end": 32,
+            "sha256": "ec61c85fec13a3ba343331b8ca35c0b2980bb019a1c04ef50acade2e3d492906"
+          }
+        ]
+      },
+      {
+        "block_id": "B-08-001",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-08-002",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-08-003",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-08-006",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-08-009",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-08-019",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "body_only"
+      },
+      {
+        "block_id": "B-09-003",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-09-005",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-09-007",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-09-020",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-09-024",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "added"
+      },
+      {
+        "block_id": "B-10-024",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-10-028",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-10-031",
+        "status": "pending",
+        "scheduled_batch": 2,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-001",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-003",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-004",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-005",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-006",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-007",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "added"
+      },
+      {
+        "block_id": "B-12-008",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-12-009",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-12-010",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-12-014",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-12-015",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-12-016",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-12-017",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-12-018",
+        "status": "pending",
+        "scheduled_batch": 3,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-13-002",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-13-003",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "added"
+      },
+      {
+        "block_id": "B-13-004",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-17-016",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-17-029",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-17-030",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-17-032",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-17-038",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-17-039",
+        "status": "pending",
+        "scheduled_batch": 4,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-21-004",
+        "status": "pending",
+        "scheduled_batch": 5,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-21-007",
+        "status": "pending",
+        "scheduled_batch": 5,
+        "expected_terminal_status": "not_applicable"
+      },
+      {
+        "block_id": "B-21-012",
+        "status": "pending",
+        "scheduled_batch": 5,
+        "expected_terminal_status": "satisfied_existing"
+      },
+      {
+        "block_id": "B-21-014",
+        "status": "pending",
+        "scheduled_batch": 5,
+        "expected_terminal_status": "satisfied_existing"
+      }
+    ]
   }
 }
