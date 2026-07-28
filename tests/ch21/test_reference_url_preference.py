@@ -1,12 +1,18 @@
 """参考文献 URL 抽出の優先順位テスト."""
 
+import urllib.error
+
 import scripts.build_review_artifacts as build_review_artifacts
 import scripts.review.check_urls_all as check_urls_all
 from scripts.reference_usage import (
     extract_chapter_reference_items,
     find_missing_chapter_reference_items,
 )
-from scripts.review.check_urls_all import extract_urls_from_bib, extract_urls_from_md
+from scripts.review.check_urls_all import (
+    check_single_url,
+    extract_urls_from_bib,
+    extract_urls_from_md,
+)
 
 
 def test_extract_urls_from_bib_prefers_explicit_url(tmp_path) -> None:
@@ -78,7 +84,9 @@ def test_scan_reference_files_uses_doi_when_url_missing(tmp_path, monkeypatch) -
 
     assert len(rows) == 1
     assert rows[0]["source_kind"] == "bib_doi"
-    assert rows[0]["normalized_target"] == "https://doi.org/10.1093/bioinformatics/btp163"
+    assert (
+        rows[0]["normalized_target"] == "https://doi.org/10.1093/bioinformatics/btp163"
+    )
 
 
 def test_extract_urls_from_bib_supports_howpublished_url_command(tmp_path) -> None:
@@ -166,6 +174,68 @@ track 行: bigDataUrl=https://...
     )
 
     assert extract_urls_from_md(md_file) == []
+
+
+def test_extract_urls_from_md_skips_placeholder_doi(tmp_path) -> None:
+    md_file = tmp_path / "sample.md"
+    md_file.write_text(
+        "DOIの形式例: https://doi.org/10.xxxx/xxxxx\n",
+        encoding="utf-8",
+    )
+
+    assert extract_urls_from_md(md_file) == []
+
+
+def test_check_single_url_retries_get_after_head_forbidden(monkeypatch) -> None:
+    calls: list[str] = []
+
+    class FakeResponse:
+        def getcode(self) -> int:
+            return 200
+
+        def geturl(self) -> str:
+            return "https://example.org/resource"
+
+    def fake_urlopen(request, **_kwargs):
+        method = request.get_method()
+        calls.append(method)
+        if method == "HEAD":
+            raise urllib.error.HTTPError(
+                request.full_url,
+                403,
+                "Forbidden",
+                {},
+                None,
+            )
+        return FakeResponse()
+
+    monkeypatch.setattr(check_urls_all.urllib.request, "urlopen", fake_urlopen)
+
+    result = check_single_url("https://example.org/resource")
+
+    assert calls == ["HEAD", "GET"]
+    assert result["category"] == "ok"
+    assert result["status_code"] == 200
+
+
+def test_check_single_url_classifies_redirect_loop_as_redirect(monkeypatch) -> None:
+    def fake_urlopen(request, **_kwargs):
+        raise urllib.error.HTTPError(
+            request.full_url,
+            302,
+            "Found",
+            {"Location": "https://publisher.example/article"},
+            None,
+        )
+
+    monkeypatch.setattr(check_urls_all.urllib.request, "urlopen", fake_urlopen)
+
+    result = check_single_url("https://doi.org/10.1234/example")
+
+    assert result["category"] == "redirect"
+    assert result["status_code"] == 302
+    assert result["final_url"] == "https://publisher.example/article"
+    assert result["error"] is None
 
 
 def test_scan_reference_files_skips_unused_entry_for_repo_pair(

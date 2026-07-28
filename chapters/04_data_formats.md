@@ -650,7 +650,7 @@ wide form と long form のどちらが適切かは、下流の処理によっ�
 > **🧬 コラム: 座標系の罠 — 0-based vs 1-based**
 >
 > なぜ同じゲノム位置を指すのに2つの座標系が存在するのか。
-> 歴史的に、UCSCゲノムブラウザ[14](https://doi.org/10.1101/gr.229102)が採用したBED形式はC言語や
+> 歴史的に、UCSCゲノムブラウザ[14](https://pubmed.ncbi.nlm.nih.gov/12045153/)が採用したBED形式はC言語や
 > Pythonと同じ0-based indexingを使い、区間を半開区間
 > [start, end) で表す。一方、GFFやVCFは生物学者にとって直感的な
 > 1-based closed区間 [start, end] を採用した。
@@ -891,7 +891,7 @@ df = pd.read_csv('data.csv')
 
 [13] SAM/BAM Format Specification Working Group. "Sequence Alignment/Map Format Specification". [https://samtools.github.io/hts-specs/SAMv1.pdf](https://samtools.github.io/hts-specs/SAMv1.pdf) (参照日: 2026-03-18)
 
-[14] Kent, W. J. et al. "The Human Genome Browser at UCSC". *Genome Research*, 12(6), 996–1006, 2002. [https://doi.org/10.1101/gr.229102](https://doi.org/10.1101/gr.229102)
+[14] Kent, W. J. et al. "The Human Genome Browser at UCSC". *Genome Research*, 12(6), 996–1006, 2002. [https://pubmed.ncbi.nlm.nih.gov/12045153/](https://pubmed.ncbi.nlm.nih.gov/12045153/)
 
 [15] Dasu, T., Johnson, T. *Exploratory Data Mining and Data Cleaning*. Wiley, 2003. [https://doi.org/10.1002/0471448354](https://doi.org/10.1002/0471448354)
 

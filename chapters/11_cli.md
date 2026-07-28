@@ -386,7 +386,7 @@ cat input.fasta | gc-filter -o output.fasta
 
 `-` で始まる名前のファイルや文字列を引数として渡したいとき、CLIはそれをオプションと誤解する。たとえば `-weird.fasta` という名前のファイルを入力に渡すと、多くのツールは `-w` オプションと解釈してエラーになる。バイオインフォマティクスでは、外部由来のサンプル名やアクセッションがハイフンで始まることがあり、この問題に出くわす。
 
-Unixのコマンドライン慣習では、`--`（ハイフン2つ）が**オプションの終わり**を意味する[10](http://www.catb.org/esr/writings/taoup/html/)。`--` より後ろの引数は、たとえ `-` で始まっていても、すべて位置引数として扱われる:
+Unixのコマンドライン慣習では、`--`（ハイフン2つ）が**オプションの終わり**を意味する[10](https://www.catb.org/~esr/writings/taoup/html/)。`--` より後ろの引数は、たとえ `-` で始まっていても、すべて位置引数として扱われる:
 
 ```bash
 # -weird.fasta をオプションではなく入力ファイル名として渡す
@@ -402,7 +402,7 @@ argparse も click も、この `--` 慣習を標準で解釈する（getopt互�
 
 CLIツールは、処理の成否を**終了コード**（exit status）で呼び出し側に伝える。シェルの `&&`・`||`、`set -e`、Snakemake や Nextflow、CIのステップは、この終了コードを見て次に進むか止まるかを判断する。終了コードを正しく返さないツールは、パイプラインの中で「失敗したのに成功扱い」され、誤った結果を下流に流してしまう。
 
-慣習的な終了コードは次のとおりである[10](http://www.catb.org/esr/writings/taoup/html/):
+慣習的な終了コードは次のとおりである[10](https://www.catb.org/~esr/writings/taoup/html/):
 
 | 終了コード | 意味 | 例 |
 |---|---|---|
@@ -1108,7 +1108,7 @@ python tool.py file1.fastq file2.fastq 30 0.5 true output.tsv
 
 ### CLI設計の原則
 
-- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — UNIX哲学に基づくCLIツール設計の原典。特に Chapter 10（Configuration）と Chapter 11（Interfaces）が本章と直結する。全文がオンラインで公開されている: http://www.catb.org/esr/writings/taoup/html/ 。
+- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — UNIX哲学に基づくCLIツール設計の原典。特に Chapter 10（Configuration）と Chapter 11（Interfaces）が本章と直結する。全文がオンラインで公開されている: https://www.catb.org/~esr/writings/taoup/html/ 。
 - **"Command Line Interface Guidelines".** https://clig.dev/ — モダンなCLIツール設計のガイドライン。ヘルプメッセージ、出力のフォーマット、エラー処理の作法を体系的にまとめている。本章で学んだ原則を実際のツール設計に適用する際の実践的な参考になる。
 
 ### コマンドラインでのデータ処理
@@ -1141,6 +1141,6 @@ python tool.py file1.fastq file2.fastq 30 0.5 true output.tsv
 
 [9] Quinlan, A. R., Hall, I. M. "BEDTools: a flexible suite of utilities for comparing genomic features." *Bioinformatics*, 26(6), 841–842, 2010. [https://pubmed.ncbi.nlm.nih.gov/20110278/](https://pubmed.ncbi.nlm.nih.gov/20110278/)
 
-[10] Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003. [http://www.catb.org/esr/writings/taoup/html/](http://www.catb.org/esr/writings/taoup/html/)
+[10] Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003. [https://www.catb.org/~esr/writings/taoup/html/](https://www.catb.org/~esr/writings/taoup/html/)
 
 [11] Meta Research. "Hydra: A framework for elegantly configuring complex applications". [https://hydra.cc/](https://hydra.cc/) (参照日: 2026-03-19)

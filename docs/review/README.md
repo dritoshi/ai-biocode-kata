@@ -15,7 +15,7 @@
 * 2026-03-25 にネットワーク制限のない環境で URL 到達性チェックを再実行し、`error` / `timeout` / `connection_error` が 0 件であることを確認した
 * DOI 直リンクで `anti-bot` になっていたバイオ系論文のうち、PubMed に PMID があるものは PubMed 抄録ページへリンク先を切り替えた
 * `anti-bot` に分類された URL については、必要に応じてヘッドレスブラウザ再確認スクリプトで補助確認できるようにした
-* 2026-03-26 に URL 抽出を改善し、Markdown のベタ書き URL を含めて再実行した結果、現行 [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) は `ok = 306`, `anti-bot = 20`, `error` / `timeout` / `connection_error = 0` となった
+* 2026-07-29 に原稿440 URLを再検査し、[url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) は `ok = 422`, `redirect = 1`, `anti-bot = 13`, `connection_error = 4`, `error = 0`, `timeout = 0` となった。非`ok`項目は[監査記録](./2026-07-29_url_audit.md)で一次情報・過去の手動確認・別経路の取得結果と突き合わせた
 * PubMed 優先化後のブラウザ再確認では、`browser_ok = 1`, `browser_blocked = 19`, `browser_error = 1` を記録した
 * 非 DOI 系 `anti-bot` 8 件は 2026-03-26 にユーザーが手動ブラウザ確認し、レビュー上 `manual_confirmed` として閉じた
 * 2026-03-26 に URL レビュー方針を更新し、原稿に出てこない URL は `unused_in_manuscript` として除外し、PubMed に変換できない DOI 系 `anti-bot` は `manual_review_required` として手動確認へ回すことにした

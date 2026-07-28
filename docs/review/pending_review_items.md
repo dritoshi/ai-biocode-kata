@@ -4,7 +4,7 @@
 
 ## 未達成レビュー
 
-- なし。現行 [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) は `summary.ok = 306`, `summary.anti-bot = 20` であり、`error` / `timeout` / `connection_error` は 0 件である。`anti-bot` 20 件のうち、非 DOI 系 8 件と PubMed に変換できない DOI 系 11 件は手動確認済みであり、`https://doi.org/10.1002/0471448354` はブラウザ再確認で到達確認済みである。したがって、URL 到達性レビューとしての残件はない。
+- なし。2026-07-29の原稿URL監査では440 URLを再検査し、`error = 0`, `timeout = 0` となった。`anti-bot` と `connection_error` は一次情報・過去の手動確認・別経路の取得結果で有効性を確認した。著者researchmapページ1件は[任意のブラウザ確認](./2026-07-29_url_browser_handoff.md)へ引き継いだが、原稿修正の必須残件ではない。詳細は[監査記録](./2026-07-29_url_audit.md)を参照。
 
 ## 未完了修正
 

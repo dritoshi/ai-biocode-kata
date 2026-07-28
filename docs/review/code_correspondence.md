@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
 - 生成日: 2026-07-29
-- 対象コミット: `73d5b5bd6c5514d655ea03d1a35fb6e1fd43f4ac`
+- 対象コミット: `e24842c3ce369eda4264ba539874c681d6faaabf`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - E1解消計画: [`2026-07-28_e1_remediation_plan.md`](./2026-07-28_e1_remediation_plan.md)
@@ -77,7 +77,7 @@ E1解消バッチ5時点で、基準45件の定義単位関係は56件である�
 | テストファイル | 104 |
 | 章別テストファイル | 95 |
 | レビュー用テストファイル | 9 |
-| passed | 1024 |
+| passed | 1027 |
 | skipped | 10 |
 | failed | 0 |
 | errors | 0 |

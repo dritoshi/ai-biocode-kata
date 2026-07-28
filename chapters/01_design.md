@@ -197,7 +197,7 @@ SRPはオブジェクト指向設計の5原則**SOLID**の最初の文字（S）
 
 UNIX哲学は1978年のBell Labsに遡る設計思想であり[1](https://doi.org/10.1002/j.1538-7305.1978.tb02135.x)、その核心は驚くほどシンプルである:
 
-> 一つのことをうまくやるプログラムを書け。協調して動くプログラムを書け。テキストストリームを扱うプログラムを書け。[7](http://www.catb.org/esr/writings/taoup/html/)
+> 一つのことをうまくやるプログラムを書け。協調して動くプログラムを書け。テキストストリームを扱うプログラムを書け。[7](https://www.catb.org/~esr/writings/taoup/html/)
 
 この思想は、バイオインフォマティクスのツール群（SAMtools[8](https://pubmed.ncbi.nlm.nih.gov/19505943/)、BEDTools[9](https://pubmed.ncbi.nlm.nih.gov/20110278/) 等）の設計に色濃く反映されている。
 
@@ -427,7 +427,7 @@ def process_fastq(file_path):
 
 ### UNIX哲学
 
-- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — 本章の参考文献 [7] で引用したUNIX哲学の原典。全文がオンラインで公開されている: http://www.catb.org/esr/writings/taoup/html/ 。特に Rule of Modularity、Rule of Composition の章が本章の内容と直結する。
+- **Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003.** — 本章の参考文献 [7] で引用したUNIX哲学の原典。全文がオンラインで公開されている: https://www.catb.org/~esr/writings/taoup/html/ 。特に Rule of Modularity、Rule of Composition の章が本章の内容と直結する。
 
 ---
 
@@ -445,7 +445,7 @@ def process_fastq(file_path):
 
 [6] Martin, R. C. *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall, 2008. ISBN 978-0132350884
 
-[7] Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003. [http://www.catb.org/esr/writings/taoup/html/](http://www.catb.org/esr/writings/taoup/html/)
+[7] Raymond, E. S. *The Art of UNIX Programming*. Addison-Wesley, 2003. [https://www.catb.org/~esr/writings/taoup/html/](https://www.catb.org/~esr/writings/taoup/html/)
 
 [8] Li, H. et al. "The Sequence Alignment/Map format and SAMtools". *Bioinformatics*, 25(16), 2078–2079, 2009. [https://pubmed.ncbi.nlm.nih.gov/19505943/](https://pubmed.ncbi.nlm.nih.gov/19505943/)
 

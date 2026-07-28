@@ -54,7 +54,7 @@ AIコーディングエージェント（Claude Code、Codex等）は、Python�
 | 安全側に倒す | 「〜のリスクがあるため、〜を推奨します」 |
 | 代替案を必ず出す | 「〜もありますが、〜という選択肢もあります」 |
 
-※ 上記は Claude Opus 4.6 以前で目立つ傾向である。[Claude Opus 4.7](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-7) 以降は「長文化しやすい」「安全側に倒す」「代替案を必ず出す」が抑制方向に振られ、より直接的で必要な指摘に絞った応答が出やすい。逆に必要な検証や代替提案が省かれる場合もあるため、欲しい挙動は明示的に指示するとよい。
+※ 上記は Claude Opus 4.6 以前で目立つ傾向である。[Claude Opus 4.7](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) 以降は「長文化しやすい」「安全側に倒す」「代替案を必ず出す」が抑制方向に振られ、より直接的で必要な指摘に絞った応答が出やすい。逆に必要な検証や代替提案が省かれる場合もあるため、欲しい挙動は明示的に指示するとよい。
 
 ### ChatGPT/Codex特有の傾向
 
