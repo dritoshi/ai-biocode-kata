@@ -13,6 +13,8 @@ NumPyを使っても str.count より遅くなる」ことを可視化する点�
 ``scripts.ch12.numpy_vectorize.gc_content_vectorized`` を計測する。
 """
 
+import logging
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -26,9 +28,10 @@ import numpy as np
 from scripts.ch12.numpy_vectorize import gc_content_vectorized
 
 FIGURES_DIR = Path(__file__).resolve().parents[2] / "figures"
+logger = logging.getLogger(__name__)
 
 
-def _gc_per_base_loop(sequences: list[str]) -> list[float]:
+def gc_contents_slow(sequences: list[str]) -> list[float]:
     """1塩基ずつのネストしたPythonループ（最も遅い）."""
     results = []
     for seq in sequences:
@@ -45,9 +48,9 @@ def _gc_str_count(sequences: list[str]) -> list[float]:
     return [(s.count("G") + s.count("C")) / len(s) for s in sequences]
 
 
-def _gc_per_seq_numpy(sequences: list[str]) -> np.ndarray:
+def gc_content_per_seq(sequences: list[str]) -> np.ndarray:
     """配列ごとに np.frombuffer するループ版（ベクトル化に見えるが遅い）."""
-    results = np.empty(len(sequences), dtype=np.float64)
+    results: np.ndarray = np.empty(len(sequences), dtype=np.float64)
     for i, seq in enumerate(sequences):
         arr = np.frombuffer(seq.upper().encode("ascii"), dtype=np.uint8)
         results[i] = ((arr == ord("G")) | (arr == ord("C"))).mean()
@@ -76,9 +79,9 @@ def benchmark_gc_calculation(
         "".join(bases[rng.integers(0, 4, size=seq_length)]) for _ in range(n_sequences)
     ]
     return {
-        "per-base\nloop": _best_ms(_gc_per_base_loop, sequences),
+        "per-base\nloop": _best_ms(gc_contents_slow, sequences),
         "str.count": _best_ms(_gc_str_count, sequences),
-        "per-seq\nNumPy": _best_ms(_gc_per_seq_numpy, sequences),
+        "per-seq\nNumPy": _best_ms(gc_content_per_seq, sequences),
         "batch\nNumPy": _best_ms(gc_content_vectorized, sequences),
     }
 
@@ -126,8 +129,14 @@ def plot_vectorize_bench(output_path: Path | None = None) -> plt.Figure:
     return fig
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """図を生成して保存先をログへ記録する."""
+    logging.basicConfig(level=logging.INFO)
     output = FIGURES_DIR / "ch12_vectorize_bench.png"
     fig = plot_vectorize_bench(output_path=output)
-    print(f"Saved: {output}")
+    logger.info("Saved: %s", output)
     plt.close(fig)
+
+
+if __name__ == "__main__":
+    main()

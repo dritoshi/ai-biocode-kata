@@ -22,12 +22,25 @@ def load_deg_results(path: Path) -> pd.DataFrame:
         カラム: gene, baseMean, log2FoldChange, pvalue, padj
     """
     sep = "\t" if path.suffix in (".tsv", ".txt") else ","
-    return pd.read_csv(
+    df = pd.read_csv(
         path,
         sep=sep,
         na_values=["NA", "na", ""],
         dtype={"gene": str},
     )
+    # DEG解析で後続処理に必要な5列がそろっていることを確認する
+    required_columns = {
+        "gene",
+        "baseMean",
+        "log2FoldChange",
+        "pvalue",
+        "padj",
+    }
+    missing = required_columns - set(df.columns)
+    if missing:
+        names = ", ".join(sorted(missing))
+        raise ValueError(f"DEG結果に必須列がありません: {names}")
+    return df
 
 
 def filter_significant_genes(

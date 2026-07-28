@@ -23,7 +23,7 @@ def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
         各配列のGC含量（0.0〜1.0）。空配列の場合は 0.0。
     """
     n = len(sequences)
-    results = np.zeros(n, dtype=np.float64)
+    results: np.ndarray = np.zeros(n, dtype=np.float64)
     lengths = np.fromiter((len(s) for s in sequences), dtype=np.int64, count=n)
     if n == 0 or lengths.sum() == 0:
         return results

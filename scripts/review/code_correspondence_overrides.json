@@ -2381,7 +2381,7 @@
     "remediation_scope": {
       "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
       "baseline_e1_sha256": "88b2e73514c0a9a78f7b9a82c1feea4083ec98de9bd1edaae3fb4f87304d1dd8",
-      "completed_batch": 2
+      "completed_batch": 3
     },
     "comment_sync": [
       {
@@ -2763,87 +2763,241 @@
       },
       {
         "block_id": "B-12-001",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "塩基ごとのPythonループが性能上の比較対象であることを本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "performance_intent",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 28,
+            "line_end": 28,
+            "sha256": "0a9d471fa74605cab9259e8ab10e39b39cf78e3eca2e07ab1bb0a568800afeb8"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/plot_vectorize_bench.py",
+            "scope": "entity",
+            "entity": "gc_contents_slow",
+            "line_start": 35,
+            "line_end": 35,
+            "sha256": "c4c065b9c343e3380eadda1a22d8bf2ae95ff64d353974a64e9babf1e4b77f1b"
+          }
+        ]
       },
       {
         "block_id": "B-12-003",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "配列ごとのPythonループが残る性能上の罠を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "performance_intent",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 71,
+            "line_end": 71,
+            "sha256": "58c370f8004f4d3c2405a5749905ebbde6f700094dc7852c1134a68c2a5bee39"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/plot_vectorize_bench.py",
+            "scope": "entity",
+            "entity": "gc_content_per_seq",
+            "line_start": 52,
+            "line_end": 52,
+            "sha256": "31e39e193c7d1b21777b17a61f3a79f19d624e5b2d0a43be701ef83cb00ebb98"
+          }
+        ]
       },
       {
         "block_id": "B-12-004",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "全配列を連結してGC判定を一括実行する性能意図を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "performance_intent",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 91,
+            "line_end": 91,
+            "sha256": "09fee344275bac5831d57c0b860472db229e8144ac7afff1a587a2a4df85b6db"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/numpy_vectorize.py",
+            "scope": "entity",
+            "entity": "gc_content_vectorized",
+            "line_start": 30,
+            "line_end": 30,
+            "sha256": "089025090fc9d94cfc5448d4cd61622b9a1a94ef955b971dbe8855dd0955a452"
+          }
+        ]
       },
       {
         "block_id": "B-12-005",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "合計0のサンプル列でゼロ除算を避ける境界処理を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "unit_shape_boundary",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 121,
+            "line_end": 123,
+            "sha256": "3bdc55cb7d190d2792e8b7c8ad33a05cfc19962b8aa1ffa7ed5d412b9b28d77c"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/numpy_vectorize.py",
+            "scope": "entity",
+            "entity": "normalize_cpm",
+            "line_start": 60,
+            "line_end": 60,
+            "sha256": "57b0e1d78d6280694eac339a6bab896681d5874d9547b6bc54b6ebb2d2bef18a"
+          }
+        ]
       },
       {
         "block_id": "B-12-006",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "ブーリアンマスクで閾値以上を残す境界条件を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "unit_shape_boundary",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 153,
+            "line_end": 154,
+            "sha256": "26a7e92881843f0affe822a58653f45032a71c119e5e9cd41456af49158d9afa"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/numpy_vectorize.py",
+            "scope": "entity",
+            "entity": "filter_by_quality",
+            "line_start": 67,
+            "line_end": 70,
+            "sha256": "09b2129d60e3c335daf6025f8fe111e454d6ce65879429454dd5dd3f998884ca"
+          }
+        ]
       },
       {
         "block_id": "B-12-007",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "added"
+        "status": "added",
+        "reason": "DEG後続処理に必要な5列というデータ前提を実体コメントへ追加して同期した",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "biological_data_assumption",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 209,
+            "line_end": 209,
+            "sha256": "73a888c6a5f8f35486c8fbce2f4091c217d083e0d6196173cfdb28e793076fd8"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/pandas_bio_ops.py",
+            "scope": "entity",
+            "entity": "load_deg_results",
+            "line_start": 31,
+            "line_end": 31,
+            "sha256": "73a888c6a5f8f35486c8fbce2f4091c217d083e0d6196173cfdb28e793076fd8"
+          }
+        ]
       },
       {
         "block_id": "B-12-008",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-12-009",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-12-010",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-12-014",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-12-015",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "BH法の補正と単調性保証という実装判断を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/12_data_processing.md",
+            "line_start": 478,
+            "line_end": 480,
+            "sha256": "098c3858179b9a9a8821486b9c311c6c1655d12c24828cef43fc099f23440a2a"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch12/scipy_stats_bio.py",
+            "scope": "entity",
+            "entity": "correct_pvalues",
+            "line_start": 60,
+            "line_end": 64,
+            "sha256": "972d6cf5be2b3ec01217f2d4c9cfed71fdf4b9ed44c06288765630f6a7112ea7"
+          }
+        ]
       },
       {
         "block_id": "B-12-016",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-12-017",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内にはdocstringだけがあり同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-12-018",
-        "status": "pending",
-        "scheduled_batch": 3,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-13-002",
