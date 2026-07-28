@@ -281,20 +281,6 @@
         }
       ]
     },
-    "B-02-026": {
-      "block_sha256": "91dc4b049ad050f9d2901d84edeb0a99e002e0723dcdddaa33b8fb7d05a17d99",
-      "relations": [
-        {
-          "target_file": "scripts/ch02/fastqc_pipeline.sh",
-          "target_entity": null,
-          "equivalence": "E0",
-          "kind": "excerpt",
-          "evidence": "基本構造の正規化行列が実体と一致",
-          "verification": "出力ディレクトリ作成・標準出力・FASTQC引数をpytestで検証",
-          "cross_chapter": false
-        }
-      ]
-    },
     "B-02-028": {
       "block_sha256": "b8427ce9f1e8a29a9a5574e5b8589813a8a5998f323cb2f842a2f6db734cbce3",
       "relations": [
@@ -319,20 +305,6 @@
           "kind": "excerpt",
           "evidence": "2つのループが安全設定と出力準備を補った実体の順序保存部分列",
           "verification": "3サンプルのFASTQC呼び出しとBAM索引作成をスタブでpytest検証",
-          "cross_chapter": false
-        }
-      ]
-    },
-    "B-02-031": {
-      "block_sha256": "33a64ca6dfb6ee7f71d581c71bda31d050f8c98ad494fe6d486ffcb21b351a5d",
-      "relations": [
-        {
-          "target_file": "scripts/ch02/ssh_config.example",
-          "equivalence": "E0",
-          "kind": "excerpt",
-          "evidence": "基本HPC接続用SSH設定の正規化行列が本文と一致",
-          "verification": "ssh -G -FでHost別名、HostName、User、IdentityFileを展開してpytest検証",
-          "target_entity": null,
           "cross_chapter": false
         }
       ]
@@ -1917,6 +1889,31 @@
         }
       ]
     },
+    "B-21-004": {
+      "block_sha256": "3f730b1da3a8c0adfa0da9d644de1893cca3f56f2cd9a632a0ed9637cfc39edc",
+      "relations": [
+        {
+          "source_entity_id": "B-21-004-E01",
+          "target_file": "scripts/ch21/format_question.py",
+          "target_entity": "collect_environment",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のcollect_environmentはdocstring以外のASTが一致",
+          "verification": "OS・Python・パッケージ版と未導入パッケージをpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-21-004-E02",
+          "target_file": "scripts/ch21/format_question.py",
+          "target_entity": "format_biostars_question",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は質問整形の入出力責務を示すスタブで、実体はMarkdownテンプレートの完全実装",
+          "verification": "タイトル、本文、エラー、環境情報を含む出力をpytestで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-21-009": {
       "block_sha256": "287dee99e64a840216bb58f71f4baaf461b56e55e97d3ba359c8203bac254301",
       "relations": [
@@ -1927,6 +1924,31 @@
           "kind": "excerpt",
           "evidence": "置換前テンプレートとして同期したBiocondaレシピが一致",
           "verification": "実資産の必須section・placeholder・test commandをpytestで検証",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-21-012": {
+      "block_sha256": "db61ef5aa0382d2ef01d97061610871ed4f9b4d04986cda06750aa9a8986bb89",
+      "relations": [
+        {
+          "source_entity_id": "B-21-012-E01",
+          "target_file": "scripts/ch21/progress_report.py",
+          "target_entity": "parse_git_log",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のparse_git_logはdocstring以外のASTが一致",
+          "verification": "正常・空・不正なgit log行をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-21-012-E02",
+          "target_file": "scripts/ch21/progress_report.py",
+          "target_entity": "generate_report",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は報告生成の責務を示すスタブで、実体は分類・集計・Markdown整形の完全実装",
+          "verification": "期間、カテゴリ、件数、短縮ハッシュ、空入力をpytestで確認",
           "cross_chapter": false
         }
       ]
@@ -2095,7 +2117,7 @@
         "tests/ch09/test_path_bugs.py"
       ],
       "returncode": 0,
-      "passed": 5,
+      "passed": 6,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
@@ -2353,11 +2375,11 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "5 passed in 0.03s",
+      "summary": "6 passed in 0.03s",
       "block_sha256": "3f730b1da3a8c0adfa0da9d644de1893cca3f56f2cd9a632a0ed9637cfc39edc",
       "target_sha256": "dc4d003911ccf3d7cd510c940a17c52817bdba98119c6901134d5aa485555813",
       "test_file_sha256": {
-        "tests/ch21/test_format_question.py": "7621c45f86cd28928da8e1f2b36a13ae78de6e54487e133a081773be355d5c51"
+        "tests/ch21/test_format_question.py": "b329bb1d5a2e00eba1232ef39613357974ff1dce62e45a2499ac93076180ed49"
       }
     },
     "B-21-007::scripts/ch21/review_helper.py": {
@@ -2389,15 +2411,15 @@
         "tests/ch21/test_progress_report.py"
       ],
       "returncode": 0,
-      "passed": 8,
+      "passed": 9,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "8 passed in 0.02s",
+      "summary": "9 passed in 0.01s",
       "block_sha256": "db61ef5aa0382d2ef01d97061610871ed4f9b4d04986cda06750aa9a8986bb89",
       "target_sha256": "befe2a44ad2fcef75fb97059ba70ccc60abdc03980243a76bd90367b92ca1de9",
       "test_file_sha256": {
-        "tests/ch21/test_progress_report.py": "d879e5761c0988910b9a435076ac3edf4cff0374a72ea010b5a70aa9225282fc"
+        "tests/ch21/test_progress_report.py": "9cb119e7f480065cc5088105bb5a343f186ea2edc81f7188f67973de86af755d"
       }
     },
     "B-21-014::scripts/ch21/analysis_intake.py": {
@@ -2434,7 +2456,7 @@
     "remediation_scope": {
       "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
       "baseline_e1_sha256": "88b2e73514c0a9a78f7b9a82c1feea4083ec98de9bd1edaae3fb4f87304d1dd8",
-      "completed_batch": 4
+      "completed_batch": 5
     },
     "comment_sync": [
       {
@@ -3277,27 +3299,101 @@
       },
       {
         "block_id": "B-21-004",
-        "status": "pending",
-        "scheduled_batch": 5,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "主要パッケージの版と未導入状態を収集する実装判断を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/21_collaboration.md",
+            "line_start": 98,
+            "line_end": 98,
+            "sha256": "adef0450e45e3928547ff1738c5ee24e293272a58f47fa0651d088d9277fe0b0"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch21/format_question.py",
+            "scope": "entity",
+            "entity": "collect_environment",
+            "line_start": 32,
+            "line_end": 35,
+            "sha256": "9ff1e025e6d4811a43ec98e6f35b7cba182899f7ae5e6d9477d2991d5e50f5b4"
+          }
+        ]
       },
       {
         "block_id": "B-21-007",
-        "status": "pending",
-        "scheduled_batch": 5,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-21-012",
-        "status": "pending",
-        "scheduled_batch": 5,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "git logの固定出力形式をパース入力にする実装判断を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/21_collaboration.md",
+            "line_start": 558,
+            "line_end": 558,
+            "sha256": "abb99c46037213d358ab14cc17d1868a26d2c92c0337cf0530a384c60f6d9977"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch21/progress_report.py",
+            "scope": "entity",
+            "entity": "parse_git_log",
+            "line_start": 54,
+            "line_end": 64,
+            "sha256": "fc037952fd54120da7c32281e8279d0f904a860ecf35ff4efae283211693ec9d"
+          }
+        ]
       },
       {
         "block_id": "B-21-014",
-        "status": "pending",
-        "scheduled_batch": 5,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "先頭行の必須カラムと全行の空セルを別々に検査する境界条件を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "unit_shape_boundary",
+        "source_evidence": [
+          {
+            "file": "chapters/21_collaboration.md",
+            "line_start": 698,
+            "line_end": 698,
+            "sha256": "bfeeb41b124590774d714259eaf8ce9044d896450fd31fe946f2ab09bcdf0a86"
+          },
+          {
+            "file": "chapters/21_collaboration.md",
+            "line_start": 704,
+            "line_end": 704,
+            "sha256": "ded5c0720136109299d5f399cfd1e19ad851eaaae577c1e5912a706f7595f78b"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch21/analysis_intake.py",
+            "scope": "entity",
+            "entity": "validate_metadata",
+            "line_start": 192,
+            "line_end": 192,
+            "sha256": "bfeeb41b124590774d714259eaf8ce9044d896450fd31fe946f2ab09bcdf0a86"
+          },
+          {
+            "file": "scripts/ch21/analysis_intake.py",
+            "scope": "entity",
+            "entity": "validate_metadata",
+            "line_start": 198,
+            "line_end": 198,
+            "sha256": "ded5c0720136109299d5f399cfd1e19ad851eaaae577c1e5912a706f7595f78b"
+          }
+        ]
       }
     ]
   }
