@@ -3,6 +3,8 @@
 from pathlib import Path
 
 import pytest
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 
 from scripts.ch17.generator_fastq import (
     filter_by_length,
@@ -65,6 +67,22 @@ class TestReadFastqRecords:
         ids = [r.id for r in records]
         assert ids == ["read1", "read2", "read3", "read4"]
 
+    def test_truncated_record_is_rejected(self, tmp_path: Path) -> None:
+        """途中で切れたFASTQレコードをBio.SeqIOが拒否する."""
+        path = tmp_path / "truncated.fastq"
+        path.write_text("@read1\nATGC\n+\n", encoding="utf-8")
+
+        with pytest.raises(ValueError, match="Unexpected end of file"):
+            list(read_fastq_records(path))
+
+    def test_is_lazy(self, tmp_path: Path) -> None:
+        """要素を要求するまで存在しないファイルを開かない."""
+        path = tmp_path / "missing.fastq"
+        records = read_fastq_records(path)
+
+        with pytest.raises(FileNotFoundError):
+            next(records)
+
 
 class TestListAndGeneratorWrappers:
     """本文で比較するpath入力APIのテスト."""
@@ -116,6 +134,12 @@ class TestFilterByLength:
         filtered = list(filter_by_length(records, min_length=100))
         assert len(filtered) == 0
 
+    def test_includes_length_boundary(self, fastq_file: Path) -> None:
+        """最小長と同じ長さのレコードを含める."""
+        records = read_fastq_records(fastq_file)
+        ids = [record.id for record in filter_by_length(records, min_length=8)]
+        assert ids == ["read1", "read3"]
+
 
 class TestFilterByQuality:
     """filter_by_quality のテスト."""
@@ -127,6 +151,23 @@ class TestFilterByQuality:
         ids = [r.id for r in filtered]
         # read1(品質30), read3(品質25) が通過。read2(品質10), read4(平均15)は除外
         assert ids == ["read1", "read3"]
+
+    def test_includes_quality_boundary(self, fastq_file: Path) -> None:
+        """平均品質と閾値が等しいレコードを含める."""
+        records = read_fastq_records(fastq_file)
+        ids = [
+            record.id
+            for record in filter_by_quality(records, min_avg_quality=25)
+        ]
+        assert ids == ["read1", "read3"]
+
+    def test_empty_quality_is_filtered_without_division(self) -> None:
+        """品質値が空のレコードをゼロ除算せず除外する."""
+        record = SeqRecord(Seq(""), id="empty")
+        record.letter_annotations["phred_quality"] = []
+        records = (item for item in [record])
+
+        assert list(filter_by_quality(records, min_avg_quality=0)) == []
 
 
 class TestProcessPipeline:

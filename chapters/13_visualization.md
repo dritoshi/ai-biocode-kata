@@ -59,6 +59,8 @@ def gc_histogram(
     return fig
 ```
 
+[実行可能な完全版](../scripts/ch13/matplotlib_bindist.py)ではFigure/Axes、ビン数、空入力、保存を扱い、[直接テスト](../tests/ch13/test_matplotlib_bindist.py)で暗黙的Axesと分離されることも確認している。
+
 ![GC含量のヒストグラム: 大腸菌ゲノム断片のGC含量分布](../figures/ch13_gc_histogram.png)
 
 このパターンのポイントは3つある:
@@ -150,6 +152,8 @@ def volcano_plot(
     return fig
 ```
 
+[実行可能な完全版](../scripts/ch13/bio_plots.py)と[直接テスト](../tests/ch13/test_bio_plots.py)では、上昇・下降・非有意の3分類、閾値境界、Axes、保存を確認している。
+
 ![Volcano plot: 赤が上昇発現、青が減少発現、灰が非有意の遺伝子](../figures/ch13_volcano_plot.png)
 
 入力は[§12-2](./12_data_processing.md#12-2-pandasとpolarsによるテーブルデータ処理)で扱った `filter_significant_genes()` と同じDEGテーブル（カラム: `gene`, `log2FoldChange`, `padj`）である。`np.select()` で3カテゴリに分類し、カテゴリごとに色を変えて `ax.scatter()` でプロットする。`ax.axhline()` と `ax.axvline()` で閾値線を引くことで、どの遺伝子が有意かを視覚的に判別できる。
@@ -198,6 +202,8 @@ def expression_heatmap(
 
     return g
 ```
+
+[実行可能な完全版](../scripts/ch13/bio_plots.py)と[直接テスト](../tests/ch13/test_bio_plots.py)では、距離行列の形状、サンプルラベル、空入力、`ClusterGrid`の戻り値を確認している。
 
 ![発現距離ヒートマップ: サンプル間の距離行列と階層クラスタリング](../figures/ch13_expression_heatmap.png)
 

@@ -66,7 +66,7 @@ class TestVolcanoPlot:
         assert legend is not None
         plt.close(fig)
 
-    def test_savefig(self, deg_df, tmp_path) -> None:
+    def test_savefig(self, deg_df: pd.DataFrame, tmp_path) -> None:
         """ファイルに保存できる."""
         output = tmp_path / "volcano.png"
         fig = volcano_plot(deg_df, output_path=output)
@@ -102,6 +102,29 @@ class TestVolcanoPlot:
         assert isinstance(fig, Figure)
         plt.close(fig)
 
+    def test_classifies_three_categories_and_draws_thresholds(self) -> None:
+        """上昇・下降・非有意を分け、3本の閾値線を描く."""
+        df = pd.DataFrame(
+            {
+                "log2FoldChange": [1.0, -1.0, 0.0],
+                "padj": [0.049, 0.049, 0.05],
+            }
+        )
+        fig = volcano_plot(
+            df,
+            padj_threshold=0.05,
+            log2fc_threshold=1.0,
+        )
+        ax = fig.axes[0]
+
+        assert {collection.get_label() for collection in ax.collections} == {
+            "Up-regulated",
+            "Down-regulated",
+            "Not significant",
+        }
+        assert len(ax.lines) == 3
+        plt.close(fig)
+
 
 class TestExpressionHeatmap:
     """expression_heatmap のテスト."""
@@ -116,7 +139,10 @@ class TestExpressionHeatmap:
         """ラベル付きで動作する."""
         labels = [f"Sample{i}" for i in range(len(distance_matrix))]
         g = expression_heatmap(distance_matrix, sample_labels=labels)
-        assert isinstance(g, sns.matrix.ClusterGrid)
+        xlabels = [tick.get_text() for tick in g.ax_heatmap.get_xticklabels()]
+        ylabels = [tick.get_text() for tick in g.ax_heatmap.get_yticklabels()]
+        assert sorted(xlabels) == sorted(labels)
+        assert sorted(ylabels) == sorted(labels)
         plt.close(g.figure)
 
     def test_heatmap_has_xlabel(self, distance_matrix) -> None:
@@ -132,3 +158,8 @@ class TestExpressionHeatmap:
         g = expression_heatmap(mat, sample_labels=["A", "B"])
         assert isinstance(g, sns.matrix.ClusterGrid)
         plt.close(g.figure)
+
+    def test_empty_matrix_is_rejected(self) -> None:
+        """空の距離行列はクラスタリング対象として拒否される."""
+        with pytest.raises(ValueError, match="empty distance matrix"):
+            expression_heatmap(np.empty((0, 0)))
