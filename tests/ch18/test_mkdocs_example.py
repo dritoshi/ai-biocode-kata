@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import runpy
 import shutil
 import subprocess
@@ -14,6 +15,9 @@ import yaml
 PROJECT_ROOT = Path(__file__).parents[2]
 EXAMPLE_DIR = PROJECT_ROOT / "scripts" / "ch18" / "mkdocs_example"
 CONFIG_PATH = EXAMPLE_DIR / "mkdocs.yml"
+RUN_EXTERNAL_RUNTIME_TESTS = (
+    os.environ.get("RUN_EXTERNAL_RUNTIME_TESTS") == "1"
+)
 
 
 def _load_config() -> dict[str, Any]:
@@ -60,9 +64,13 @@ def test_documented_example_function() -> None:
     assert sequence_length("") == 0
 
 
+@pytest.mark.runtime_smoke
 @pytest.mark.skipif(
-    shutil.which("mkdocs") is None,
-    reason="MkDocsがインストールされていない",
+    not RUN_EXTERNAL_RUNTIME_TESTS or shutil.which("mkdocs") is None,
+    reason=(
+        "MkDocsテストはRUN_EXTERNAL_RUNTIME_TESTS=1かつ"
+        "実行環境がある場合に実行する"
+    ),
 )
 def test_mkdocs_build_strict(tmp_path: Path) -> None:
     site_dir = tmp_path / "site"

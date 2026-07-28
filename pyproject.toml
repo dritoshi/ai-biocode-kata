@@ -75,3 +75,7 @@ convention = "numpy"
 # リポジトリルートを import パスに含める。
 pythonpath = ["."]
 testpaths = ["tests"]
+markers = [
+    "runtime_smoke: 外部ワークフロー・文書生成・コンテナー実行環境を使う任意スモークテスト",
+    "container_build: Podmanによる実ビルドを行う高コストなスモークテスト",
+]

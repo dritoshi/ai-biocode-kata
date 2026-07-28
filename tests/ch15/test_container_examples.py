@@ -179,6 +179,8 @@ CONTAINER_CASES = [
 ]
 
 
+@pytest.mark.runtime_smoke
+@pytest.mark.container_build
 @pytest.mark.skipif(
     os.environ.get("RUN_CONTAINER_BUILDS") != "1"
     or shutil.which("podman") is None,
