@@ -88,40 +88,44 @@ Codex CLI の `-s read-only` はサンドボックス設定、`-a ...` は承認
 
 > 「このDNA配列ファイル（FASTA形式）から、6フレームすべてのORF（Open Reading Frame）を検出して、開始位置・終了位置・フレーム・翻訳後のタンパク質配列を表示するPythonスクリプトを作って」
 
-エージェントがコードを生成し、承認を求めてくる。承認ありモードであれば、ファイルの作成やコマンドの実行のたびに確認が入る。内容を眺めて承認し、実行してみよう。エージェントが以下のようなコードを生成した。
+エージェントがコードを生成し、承認を求めてくる。承認ありモードであれば、ファイルの作成やコマンドの実行のたびに確認が入る。内容を眺めて承認し、実行してみよう。以下は`scripts/ch00/find_orfs.py`の完全版から、6フレーム探索を制御する`find_all_orfs()`を抜粋したものである。`ORF`データクラス、逆相補鎖、翻訳、各フレームの走査を担う補助定義は省略している。
 
 ```python
-from dataclasses import dataclass
-
-STOP_CODONS = {"TAA", "TAG", "TGA"}
-
-@dataclass(frozen=True)
-class ORF:
-    """Open Reading Frameを表すデータクラス."""
-    start: int    # 開始位置（0-based）
-    end: int      # 終了位置
-    frame: int    # 読み枠（+1, +2, +3, -1, -2, -3）
-    protein: str  # 翻訳後のアミノ酸配列
-
 def find_all_orfs(sequence: str, min_length: int = 100) -> list[ORF]:
-    """6フレームすべてのORFを検出する."""
+    """6フレームすべてのORFを検出する.
+
+    Parameters
+    ----------
+    sequence : str
+        DNA配列（A, T, G, Cのみ）
+    min_length : int
+        最小ORF長（塩基数）。デフォルト100 bp。
+
+    Returns
+    -------
+    list[ORF]
+        検出されたORFのリスト（開始位置でソート）
+    """
+    if not sequence:
+        return []
+
     seq = sequence.upper()
-    orfs = []
+    genome_len = len(seq)
+    orfs: list[ORF] = []
+
     # 順鎖（+1, +2, +3フレーム）
     for offset in range(3):
         frame = offset + 1
-        pos = offset
-        while pos + 3 <= len(seq):
-            if seq[pos:pos+3] == "ATG":
-                # ATGから終止コドンまでスキャン
-                end = _find_stop(seq, pos + 3)
-                if end and (end - pos) >= min_length:
-                    protein = _translate(seq[pos:end])
-                    orfs.append(ORF(pos, end, frame, protein))
-            pos += 3
-    # 逆鎖（-1, -2, -3フレーム）も同様に処理
+        orfs.extend(_scan_frame(seq, offset, frame, genome_len, min_length))
+
+    # 逆鎖（-1, -2, -3フレーム）
     rc = reverse_complement(seq)
-    # ...（逆鎖の処理は順鎖と同じロジック）
+    for offset in range(3):
+        frame = -(offset + 1)
+        orfs.extend(
+            _scan_frame_reverse(rc, offset, frame, genome_len, min_length)
+        )
+
     return sorted(orfs, key=lambda o: o.start)
 ```
 
@@ -152,39 +156,64 @@ def find_all_orfs(sequence: str, min_length: int = 100) -> list[ORF]:
 
 > 「コドン使用頻度の偏りを利用して、コーディング領域を隠れマルコフモデル（HMM）のViterbiアルゴリズムで予測するように改良して。コーディング領域と非コーディング領域の2状態モデルで、各状態のコドン出力確率を学習データから推定して」
 
-エージェントが以下のコードを生成した（抜粋。全体は `scripts/ch00/hmm_gene_predict.py`）。
+エージェントが以下のコードを生成した。次は`scripts/ch00/hmm_gene_predict.py`の完全版から、初期化、再帰、バックトレースを含む`viterbi()`を抜粋したものである。`math`のインポートと、コドン頻度、状態一覧、初期確率、遷移確率、放出確率を定義する`CODING_CODON_FREQ`、`STATES`、`LOG_INIT`、`LOG_TRANS`、`_log_emit()`は省略している。
 
 ```python
-# E. coli K-12のコドン使用頻度（コーディング領域）
-CODING_CODON_FREQ = {
-    "TTT": 0.0218, "TTC": 0.0169, "TTA": 0.0133, "TTG": 0.0133,
-    "CTT": 0.0108, "CTC": 0.0110, "CTA": 0.0038, "CTG": 0.0530,
-    # ...（全64コドンの頻度）
-}
-
-# HMMの遷移確率
-LOG_TRANS = {
-    ("C", "C"): log(0.997),  # コーディング→コーディング
-    ("C", "N"): log(0.003),  # コーディング→非コーディング
-    ("N", "N"): log(0.98),   # 非コーディング→非コーディング
-    ("N", "C"): log(0.02),   # 非コーディング→コーディング
-}
-
 def viterbi(sequence: str) -> list[str]:
-    """2状態HMMのViterbiアルゴリズム（初期化とバックトレースは省略した抜粋）."""
+    """2状態HMMのViterbiアルゴリズムでコーディング領域を予測する.
+
+    Parameters
+    ----------
+    sequence : str
+        DNA配列
+
+    Returns
+    -------
+    list[str]
+        各コドン位置の状態ラベル（'C': コーディング、'N': 非コーディング）
+    """
     seq = sequence.upper()
-    codons = [seq[i*3:(i+1)*3] for i in range(len(seq) // 3)]
-    # 動的計画法で v[t][state]（コドン位置 t で状態 state に至る最尤スコア）を更新する
-    for t in range(1, len(codons)):
-        for state in ("C", "N"):
-            emit = log_emit(state, codons[t])          # 状態ごとのコドン頻度から放出確率を計算
-            best = max(
-                v[t-1][prev] + LOG_TRANS[(prev, state)]
-                for prev in ("C", "N")
-            )
-            v[t][state] = best + emit
-    # バックトレースで最適パスを復元
-    return path  # 各コドン位置の状態 ("C" or "N")
+    n_codons = len(seq) // 3
+    if n_codons == 0:
+        return []
+
+    codons = [seq[i * 3 : (i + 1) * 3] for i in range(n_codons)]
+
+    # Viterbiテーブル
+    v: list[dict[str, float]] = []
+    backpointer: list[dict[str, str]] = []
+
+    # 初期化
+    first_emit = {s: _log_emit(s, codons[0]) for s in STATES}
+    v.append({s: LOG_INIT[s] + first_emit[s] for s in STATES})
+    backpointer.append({s: "" for s in STATES})
+
+    # 再帰
+    for t in range(1, n_codons):
+        vt: dict[str, float] = {}
+        bpt: dict[str, str] = {}
+        for s in STATES:
+            emit = _log_emit(s, codons[t])
+            best_score = -math.inf
+            best_prev = STATES[0]
+            for prev_s in STATES:
+                score = v[t - 1][prev_s] + LOG_TRANS[(prev_s, s)] + emit
+                if score > best_score:
+                    best_score = score
+                    best_prev = prev_s
+            vt[s] = best_score
+            bpt[s] = best_prev
+        v.append(vt)
+        backpointer.append(bpt)
+
+    # バックトレース
+    path: list[str] = [""] * n_codons
+    last_state = max(STATES, key=lambda s: v[-1][s])
+    path[-1] = last_state
+    for t in range(n_codons - 2, -1, -1):
+        path[t] = backpointer[t + 1][path[t + 1]]
+
+    return path
 ```
 
 承認して実行すると、今度は19個の遺伝子候補に絞られる。

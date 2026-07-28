@@ -1,7 +1,25 @@
 """HMM遺伝子予測のテスト."""
 
+from itertools import product
+
 from scripts.ch00.find_orfs import find_all_orfs
-from scripts.ch00.hmm_gene_predict import predict_genes, viterbi
+from scripts.ch00.hmm_gene_predict import (
+    LOG_INIT,
+    LOG_TRANS,
+    STATES,
+    _log_emit,
+    predict_genes,
+    viterbi,
+)
+
+
+def _path_score(path: tuple[str, ...], codons: list[str]) -> float:
+    """状態列の対数尤度を計算する."""
+    score = LOG_INIT[path[0]] + _log_emit(path[0], codons[0])
+    for index in range(1, len(path)):
+        score += LOG_TRANS[(path[index - 1], path[index])]
+        score += _log_emit(path[index], codons[index])
+    return score
 
 
 class TestViterbi:
@@ -30,6 +48,16 @@ class TestViterbi:
         """返される状態はCまたはNのみ."""
         path = viterbi("ATGGCTATGCGT")
         assert all(s in ("C", "N") for s in path)
+
+    def test_restores_optimal_path(self) -> None:
+        """バックトレースが全経路中の最尤状態列を復元する."""
+        codons = ["ATG", "GCT", "TTT", "CCC"]
+        predicted = tuple(viterbi("".join(codons)))
+        candidates = list(product(STATES, repeat=len(codons)))
+
+        assert _path_score(predicted, codons) == max(
+            _path_score(candidate, codons) for candidate in candidates
+        )
 
 
 class TestPredictGenes:
