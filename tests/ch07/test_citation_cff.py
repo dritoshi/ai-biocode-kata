@@ -6,9 +6,10 @@ cffconvert を使って CITATION.cff の形式が正しいことを検証する�
 from __future__ import annotations
 
 import subprocess
+import sys
 from pathlib import Path
+from shutil import which
 
-import pytest
 import yaml
 
 # テンプレートファイルのパス
@@ -66,26 +67,17 @@ def test_template_authors_structure() -> None:
         )
 
 
-def _cffconvert_available() -> bool:
-    """cffconvert コマンドが利用可能か確認する。"""
-    try:
-        result = subprocess.run(
-            ["cffconvert", "--version"],
-            capture_output=True,
-        )
-        return result.returncode == 0
-    except FileNotFoundError:
-        return False
+def _cffconvert_command() -> str:
+    """現在のPython環境にインストールされたcffconvertを返す。"""
+    command = which("cffconvert", path=str(Path(sys.executable).parent))
+    assert command is not None, "cffconvert が現在のPython環境に見つからない"
+    return command
 
 
-@pytest.mark.skipif(
-    not _cffconvert_available(),
-    reason="cffconvert がインストールされていない",
-)
 def test_template_validates_with_cffconvert() -> None:
     """cffconvert によるバリデーションが通る。"""
     result = subprocess.run(
-        ["cffconvert", "--validate", "-i", str(TEMPLATE_PATH)],
+        [_cffconvert_command(), "--validate", "-i", str(TEMPLATE_PATH)],
         capture_output=True,
         text=True,
     )
