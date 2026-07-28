@@ -186,7 +186,7 @@ class TestOverrides:
         apply_category_overrides(blocks, overrides)
         relations = add_relations(PROJECT_ROOT, blocks, overrides)
         assert len(overrides["category_overrides"]) == 27
-        assert len(overrides["relation_overrides"]) == 116
+        assert len(overrides["relation_overrides"]) == 117
         assert len(overrides["substitution_tests"]) == 27
         assert len(relations) == 529
         assert overrides["category_overrides"]["B-12-002"] == {
@@ -201,6 +201,15 @@ class TestOverrides:
         assert relation["target_file"] == "scripts/ch11/seqtool.py"
         assert relation["target_entity"] == "filter_cmd"
         assert relation["equivalence"] == "E2"
+        assert len(relations["B-01-004"]) == 4
+        assert {
+            item["source_entity_id"] for item in relations["B-01-004"]
+        } == {
+            "B-01-004-E01",
+            "B-01-004-E03",
+            "B-01-004-E04",
+            "B-01-004-E05",
+        }
 
     def test_asset_paths_ignore_tool_caches(self, tmp_path: Path) -> None:
         root = tmp_path / "repo"
@@ -268,7 +277,15 @@ class TestBuildAndAudit:
         block = data["blocks"][0]
         assert block["correspondence"] == "E1"
         assert block["relations"][0]["target_file"] == "scripts/ch01/add.py"
+        assert block["relations"][0]["source_entity_id"] == "B-01-001-E01"
+        assert block["relations"][0]["source_entity"] == "add"
+        assert block["relations"][0]["source_entity_locations"]
         assert block["tests"]["files"] == ["tests/ch01/test_add.py"]
+        assert data["schema_version"] == 4
+        assert data["method"] == (
+            "docs/review/2026-07-28_e1_remediation_plan.md"
+        )
+        assert data["source_snapshot_files"]
         assert data["summary"]["book_blocks"] == 1
         assert data["summary"]["script_files"] == 1
 

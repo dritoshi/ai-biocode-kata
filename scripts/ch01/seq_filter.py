@@ -7,6 +7,9 @@
 """
 
 from dataclasses import dataclass
+from io import StringIO
+
+from Bio import SeqIO
 
 
 @dataclass(frozen=True)
@@ -38,30 +41,15 @@ def parse_fasta_string(fasta_text: str) -> list[SequenceRecord]:
     list[SequenceRecord]
         パースされた配列レコードのリスト
     """
-    records: list[SequenceRecord] = []
-    current_id = ""
-    current_seq_parts: list[str] = []
+    if not fasta_text.strip():
+        return []
 
-    for line in fasta_text.strip().splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        if line.startswith(">"):
-            if current_id:
-                records.append(
-                    SequenceRecord(id=current_id, sequence="".join(current_seq_parts))
-                )
-            current_id = line[1:].strip()
-            current_seq_parts = []
-        else:
-            current_seq_parts.append(line)
-
-    if current_id:
-        records.append(
-            SequenceRecord(id=current_id, sequence="".join(current_seq_parts))
-        )
-
-    return records
+    # FASTAの構文解釈は検証済みのBio.SeqIOへ委譲する
+    records = SeqIO.parse(StringIO(fasta_text.strip()), "fasta")
+    return [
+        SequenceRecord(id=record.description, sequence=str(record.seq))
+        for record in records
+    ]
 
 
 # --- フィルタリング（処理の関心） ---

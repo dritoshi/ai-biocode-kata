@@ -29,6 +29,7 @@ def subsample_with_seed(
     NDArray[np.float64]
         サブサンプル
     """
+    # 関数ごとに独立した乱数生成器を作り、グローバル状態への依存を避ける
     rng = np.random.default_rng(seed)
     indices = rng.choice(len(data), size=n, replace=False)
     return data[indices]

@@ -39,6 +39,18 @@ class TestSubsampleWithSeed:
         for val in result:
             assert val in data
 
+    def test_size_boundaries(self, data: np.ndarray) -> None:
+        assert subsample_with_seed(data, n=0, seed=42).size == 0
+        result = subsample_with_seed(data, n=len(data), seed=42)
+        np.testing.assert_array_equal(np.sort(result), data)
+
+    @pytest.mark.parametrize("invalid_size", [-1, 101])
+    def test_invalid_size_raises(
+        self, data: np.ndarray, invalid_size: int
+    ) -> None:
+        with pytest.raises(ValueError):
+            subsample_with_seed(data, n=invalid_size, seed=42)
+
 
 class TestBootstrapMean:
     """bootstrap_mean() のテスト."""

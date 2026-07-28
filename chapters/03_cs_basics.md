@@ -489,16 +489,43 @@ print(sample2)  # 上とは異なる10個の数値
 **重要**: 古いコードでは `np.random.seed(42)` というグローバルなシード固定を見かけるが、これはレガシーな方式であり、新しいコードでは避けるべきとされている。`DeprecationWarning` は出ないので気づきにくいが、NumPy公式は `default_rng()` を推奨している。`default_rng()` を使い、関数ごとに独立した乱数生成器を渡す設計が現在のベストプラクティスである。
 
 ```python
+from numpy.typing import NDArray
+
 # レガシー（非推奨）: グローバルなシード固定
 np.random.seed(42)
 result = np.random.choice(100, 10)  # グローバル状態に依存
 
 # 推奨: 関数ごとに独立したRNGを渡す
-def subsample(data: np.ndarray, n: int, seed: int) -> np.ndarray:
+def subsample_with_seed(
+    data: NDArray[np.float64],
+    n: int,
+    seed: int,
+) -> NDArray[np.float64]:
+    """シード固定でランダムサブサンプリングする.
+
+    Parameters
+    ----------
+    data : NDArray[np.float64]
+        サンプリング対象の配列
+    n : int
+        サンプル数
+    seed : int
+        乱数シード
+
+    Returns
+    -------
+    NDArray[np.float64]
+        サブサンプル
+    """
+    # 関数ごとに独立した乱数生成器を作り、グローバル状態への依存を避ける
     rng = np.random.default_rng(seed)
     indices = rng.choice(len(data), size=n, replace=False)
     return data[indices]
 ```
+
+この関数の[完全な実装](../scripts/ch03/random_reproducibility.py)と
+[テスト](../tests/ch03/test_random_reproducibility.py)では、同じシードによる再現性に加えて
+サンプル数の境界値と不正値も確認している。
 
 ### 論文にシード値を記録する
 

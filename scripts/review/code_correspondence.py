@@ -17,6 +17,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from scripts.review.e1_remediation import (
+    assert_worktree_matches_head,
+    baseline_e1_ids,
+    load_fixture,
+    relation_summaries,
+    snapshot_sha256,
+    source_snapshot_files,
+)
+
 FENCE_RE = re.compile(r"^\s*(?:>\s*)*(`{3,}|~{3,})\s*([^\s`]*)")
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 SKIP_MARKER_RE = re.compile(
@@ -936,6 +945,7 @@ def imported_script_paths(root: Path, code: str) -> list[str]:
 
 def _relation_from_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     return {
+        "source_entity_id": candidate.get("source_entity_id"),
         "target_file": candidate["target_file"],
         "target_entity": candidate["target_entity"],
         "equivalence": candidate["relation_candidate"],
@@ -1004,6 +1014,7 @@ def add_relations(
             for path in imported_script_paths(root, block.code):
                 relations.append(
                     {
+                        "source_entity_id": None,
                         "target_file": path,
                         "target_entity": None,
                         "equivalence": "EN",
@@ -1023,6 +1034,7 @@ def add_relations(
                     f"不正なequivalence: {block.id}: {equivalence}"
                 )
             relation.setdefault("target_entity", None)
+            relation.setdefault("source_entity_id", None)
             relation.setdefault(
                 "cross_chapter",
                 not relation["target_file"].startswith(
@@ -1427,6 +1439,7 @@ def build_inventory(
 
     file_by_path = {item["path"]: item for item in files}
     file_id_by_path = {path: item["id"] for path, item in file_by_path.items()}
+    book_entity_by_id = {entity.id: entity for entity in book_entities}
     entity_locations: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(
         list
     )
@@ -1445,6 +1458,39 @@ def build_inventory(
     for block in blocks:
         relations = relation_by_block[block.id]
         for relation in relations:
+            source_entity_id = relation.get("source_entity_id")
+            if source_entity_id is None:
+                top_level_ids = [
+                    entity_id
+                    for entity_id in block.entity_ids
+                    if "." not in book_entity_by_id[entity_id].name
+                ]
+                if len(top_level_ids) == 1 and len(relations) == 1:
+                    source_entity_id = top_level_ids[0]
+                    relation["source_entity_id"] = source_entity_id
+            if source_entity_id is not None:
+                if (
+                    source_entity_id not in book_entity_by_id
+                    or source_entity_id not in block.entity_ids
+                ):
+                    raise ValueError(
+                        f"relationのsource_entity_idが解決できない: "
+                        f"{block.id}: {source_entity_id}"
+                    )
+                source_entity = book_entity_by_id[source_entity_id]
+                relation["source_entity"] = source_entity.name
+                relation["source_entity_locations"] = [
+                    {
+                        "id": source_entity.id,
+                        "name": source_entity.name,
+                        "kind": source_entity.kind,
+                        "line_start": source_entity.line_start,
+                        "line_end": source_entity.line_end,
+                    }
+                ]
+            else:
+                relation["source_entity"] = None
+                relation["source_entity_locations"] = []
             target_file = relation["target_file"]
             if target_file not in file_id_by_path:
                 raise ValueError(
@@ -1483,6 +1529,11 @@ def build_inventory(
                     )
                 ]
             relation["target_entity_locations"] = locations
+            if target_entity and not locations:
+                raise ValueError(
+                    f"relationのtarget_entityが解決できない: "
+                    f"{block.id}: {target_file}:{target_entity}"
+                )
         record = asdict(block)
         record["relations"] = relations
         record["correspondence"] = correspondence_of(
@@ -1680,11 +1731,7 @@ def build_inventory(
         "skipped": sum(int(item["skipped"]) for item in test_results.values()),
         "errors": sum(int(item["errors"]) for item in test_results.values()),
     }
-    source_paths = [
-        *sorted((root / "chapters").glob("[0-9][0-9]_*.md")),
-        *asset_paths(root, "scripts"),
-        *asset_paths(root, "tests"),
-    ]
+    source_paths = source_snapshot_files(root)
     pytest_binary = root / ".venv/bin/pytest"
     pytest_version = (
         subprocess.run(
@@ -1698,15 +1745,43 @@ def build_inventory(
         else "not available"
     )
     metadata = overrides.get("review_metadata", {})
+    remediation_scope = deepcopy(metadata.get("remediation_scope", {}))
+    source_commit = _current_commit(root)
+    if remediation_scope:
+        fixture = load_fixture(root)
+        expected_ids = baseline_e1_ids(fixture)
+        remediation_scope = {
+            "baseline_commit": remediation_scope.get("baseline_commit"),
+            "baseline_e1_ids": expected_ids,
+            "baseline_e1_sha256": remediation_scope.get(
+                "baseline_e1_sha256"
+            ),
+            "completed_batch": remediation_scope.get("completed_batch"),
+        }
+        source_commit = assert_worktree_matches_head(
+            root,
+            [str(path.relative_to(root)) for path in source_paths],
+        )
+        tracked_ids = set(expected_ids)
+        relations_by_parent, relations_by_equivalence, relation_count = (
+            relation_summaries(block_records, tracked_ids)
+        )
+    else:
+        relations_by_parent = {}
+        relations_by_equivalence = {}
+        relation_count = 0
     output = {
-        "schema_version": 3,
+        "schema_version": 4,
         "generated_at": generated_at
         or datetime.now().astimezone().isoformat(timespec="seconds"),
-        "method": (
-            "docs/review/2026-07-25_code_correspondence_reaudit_plan.md"
-        ),
-        "source_commit": _current_commit(root),
-        "source_snapshot_sha256": source_snapshot(root, source_paths),
+        "method": "docs/review/2026-07-28_e1_remediation_plan.md",
+        "source_commit": source_commit,
+        "source_snapshot_files": [
+            str(path.relative_to(root)) for path in source_paths
+        ],
+        "source_snapshot_sha256": snapshot_sha256(root, source_paths),
+        "remediation_scope": remediation_scope,
+        "comment_sync": deepcopy(metadata.get("comment_sync", [])),
         "environment": {
             "python": platform.python_version(),
             "pytest": pytest_version,
@@ -1737,6 +1812,11 @@ def build_inventory(
                     for result in substitution_results.values()
                 )
             ),
+            "e1_relation_count": relation_count,
+            "relations_by_parent_block_correspondence": (
+                relations_by_parent
+            ),
+            "relations_by_equivalence": relations_by_equivalence,
         },
         "blocks": block_records,
         "scripts": script_views,
@@ -1788,6 +1868,9 @@ def render_report(data: dict[str, Any]) -> str:
         "- E5解消計画: "
         "[`2026-07-25_e5_remediation_plan.md`]"
         "(./2026-07-25_e5_remediation_plan.md)",
+        "- E1解消計画: "
+        "[`2026-07-28_e1_remediation_plan.md`]"
+        "(./2026-07-28_e1_remediation_plan.md)",
         "- 全件表: [`code_correspondence.json`](./code_correspondence.json)",
         "",
         "本書の配置規約を先に適用し、その後に対応と本質的一致を判定した。",
@@ -1819,6 +1902,11 @@ def render_report(data: dict[str, Any]) -> str:
             f"配置が必要なブロックは{required_total}件である。"
             f"E5は{correspondence.get('E5', 0)}件であり、"
             "具体的な解消順序はE5解消計画に記録した。",
+            (
+                f"E1解消バッチ{data.get('remediation_scope', {}).get('completed_batch', 0)}"
+                f"時点で、基準45件の定義単位関係は"
+                f"{summary.get('e1_relation_count', 0)}件である。"
+            ),
             "",
             f"`scripts/ch*` 側は全{summary['script_files']}ファイルで、"
             f"本文コードと直接対応"

@@ -1,5 +1,7 @@
 """配列フィルタリング（関心の分離デモ）のテスト."""
 
+import inspect
+
 from scripts.ch01.seq_filter import (
     SequenceRecord,
     filter_by_length,
@@ -45,6 +47,18 @@ class TestParseFastaString:
         fasta = ">seq1\nATGC\nATGC\n"
         records = parse_fasta_string(fasta)
         assert records[0].sequence == "ATGCATGC"
+
+    def test_blank_lines_are_ignored(self) -> None:
+        fasta = "\n>seq1\nATGC\n\n>seq2\nGGCC\n"
+        records = parse_fasta_string(fasta)
+        assert [(record.id, record.sequence) for record in records] == [
+            ("seq1", "ATGC"),
+            ("seq2", "GGCC"),
+        ]
+
+    def test_delegates_fasta_parsing_to_seqio(self) -> None:
+        source = inspect.getsource(parse_fasta_string)
+        assert "SeqIO.parse" in source
 
 
 class TestFilterByLength:
