@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+import subprocess
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -16,6 +18,55 @@ from scripts.review.e1_remediation import (
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
+
+def _git(root: Path, *args: str) -> str:
+    completed = subprocess.run(
+        ["git", *args],
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    return completed.stdout.strip()
+
+
+def _batch0_repository(
+    tmp_path: Path,
+    fixture: dict[str, Any],
+) -> tuple[Path, str]:
+    """CIの浅いcheckoutに依存しないschema v3基準refを作る."""
+    root = tmp_path / "repo"
+    review = root / "docs/review"
+    review.mkdir(parents=True)
+    ids = sorted(fixture["comment_expectations"])
+    blocks = [
+        {
+            "id": block_id,
+            "placement": fixture["placements"][block_id],
+            "correspondence": "E1",
+            "relations": [{}] * (2 if index == 0 else 1),
+        }
+        for index, block_id in enumerate(ids)
+    ]
+    data = {
+        "schema_version": 3,
+        "source_commit": fixture["baseline_source_commit"],
+        "summary": {
+            "correspondence_all": fixture["batches"]["0"]["correspondence"],
+        },
+        "blocks": blocks,
+    }
+    (review / "code_correspondence.json").write_text(
+        json.dumps(data, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    _git(root, "init")
+    _git(root, "config", "user.email", "test@example.com")
+    _git(root, "config", "user.name", "Test")
+    _git(root, "add", ".")
+    _git(root, "commit", "-m", "schema v3 baseline")
+    return root, _git(root, "rev-parse", "HEAD")
 
 
 def _state(fixture: dict[str, Any], batch: int) -> dict[str, Any]:
@@ -37,12 +88,12 @@ def _state(fixture: dict[str, Any], batch: int) -> dict[str, Any]:
     }
 
 
-def test_batch0_generation_is_deterministic() -> None:
+def test_batch0_generation_is_deterministic(tmp_path: Path) -> None:
     fixture = load_fixture(PROJECT_ROOT)
-    baseline_ref = fixture["baseline_ref"]
+    root, baseline_ref = _batch0_repository(tmp_path, fixture)
 
-    first = build_batch0_state(PROJECT_ROOT, baseline_ref, fixture)
-    second = build_batch0_state(PROJECT_ROOT, baseline_ref, fixture)
+    first = build_batch0_state(root, baseline_ref, fixture)
+    second = build_batch0_state(root, baseline_ref, fixture)
 
     assert first == second
     assert first["remediation_scope"]["completed_batch"] == 0
@@ -61,11 +112,7 @@ def test_batch0_generation_is_deterministic() -> None:
 @pytest.mark.parametrize("batch", range(1, 6))
 def test_allows_only_scheduled_batch_transition(batch: int) -> None:
     fixture = load_fixture(PROJECT_ROOT)
-    previous = (
-        build_batch0_state(PROJECT_ROOT, fixture["baseline_ref"], fixture)
-        if batch == 1
-        else _state(fixture, batch - 1)
-    )
+    previous = _state(fixture, batch - 1)
     current = _state(fixture, batch)
 
     validate_transition(previous, current, fixture, batch)
@@ -89,11 +136,7 @@ def test_rejects_rewrite_of_completed_record() -> None:
 
 def test_rejects_extra_pending_field() -> None:
     fixture = load_fixture(PROJECT_ROOT)
-    previous = build_batch0_state(
-        PROJECT_ROOT,
-        fixture["baseline_ref"],
-        fixture,
-    )
+    previous = _state(fixture, 0)
     current = _state(fixture, 1)
     pending = next(
         item
