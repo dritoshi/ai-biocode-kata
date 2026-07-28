@@ -258,6 +258,22 @@ uv run ruff format scripts/ tests/
 
 Python 3.10 以上が必要である（`pyproject.toml` の `requires-python`）。
 
+### 外部実行環境を使うスモークテスト
+
+通常の `uv run pytest` では、Snakemake、DESeq2、Nextflow、CWL、Podman、MkDocsを使う10件を意図的にskipする。これらを通常の開発依存へ含めると、R/Bioconductor環境、Javaランタイム、Linux VM、コンテナーイメージなどが必要になり、初回実行が大幅に重くなるためである。
+
+外部ツールを用意した環境では、`runtime_smoke` マーカーで対象を選択できる。ワークフローと文書生成のテストには `RUN_EXTERNAL_RUNTIME_TESTS=1`、Podman実ビルドには `RUN_CONTAINER_BUILDS=1` を明示する。
+
+```bash
+# 外部ワークフロー・文書生成環境を用意した後に実行
+RUN_EXTERNAL_RUNTIME_TESTS=1 uv run pytest -m runtime_smoke
+
+# Podman VMを起動した後に、5種類の実ビルドだけを実行
+RUN_CONTAINER_BUILDS=1 uv run pytest -m container_build
+```
+
+Apple Silicon上で使用した隔離環境、固定バージョン、ダウンロード量、個別の再現コマンドは、[外部実行環境skip監査](docs/review/2026-07-29_external_runtime_skip_audit.md)に記録している。
+
 ## 免責事項
 
 本書の情報は 2026年4月時点のものであり、AIコーディングエージェントの仕様・プライバシーポリシー・関連法規制は今後変更されうる。プライバシー設定や利用規約は各プロバイダの公式ドキュメントで読者自身が最新版を必ず確認すること。制限付きデータ（dbGaP・JGA・EGA 等の DUA 対象データ）や未発表データ（査読中原稿・未公開配列・特許出願前情報・NDA/MTA 対象物）の取り扱いは、所属機関の情報セキュリティ部門・研究倫理審査委員会・法務部門への事前相談が必要である。本書の記述に従って生じた情報漏洩・規約違反・知財流出等について、著者および出版元は一切の責任を負わない。詳細は [本書の利用について（免責事項）](chapters/notice.md) を参照。

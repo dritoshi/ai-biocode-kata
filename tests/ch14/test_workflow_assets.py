@@ -14,6 +14,9 @@ import yaml
 
 PROJECT_ROOT = Path(__file__).parents[2]
 CH14_DIR = PROJECT_ROOT / "scripts" / "ch14"
+RUN_EXTERNAL_RUNTIME_TESTS = (
+    os.environ.get("RUN_EXTERNAL_RUNTIME_TESTS") == "1"
+)
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -237,9 +240,13 @@ def test_cwl_job_has_all_inputs_and_existing_locations() -> None:
         assert (CH14_DIR / item["location"]).exists()
 
 
+@pytest.mark.runtime_smoke
 @pytest.mark.skipif(
-    shutil.which("snakemake") is None,
-    reason="Snakemakeがインストールされていない",
+    not RUN_EXTERNAL_RUNTIME_TESTS or shutil.which("snakemake") is None,
+    reason=(
+        "SnakemakeテストはRUN_EXTERNAL_RUNTIME_TESTS=1かつ"
+        "実行環境がある場合に実行する"
+    ),
 )
 def test_snakemake_dry_run(tmp_path: Path) -> None:
     workflow_dir = tmp_path / "workflow"
@@ -288,9 +295,13 @@ def test_r_script_parses() -> None:
     )
 
 
+@pytest.mark.runtime_smoke
 @pytest.mark.skipif(
-    not _r_has_deseq2(),
-    reason="DESeq2を読み込めるR環境がインストールされていない",
+    not RUN_EXTERNAL_RUNTIME_TESTS or not _r_has_deseq2(),
+    reason=(
+        "DESeq2テストはRUN_EXTERNAL_RUNTIME_TESTS=1かつ"
+        "実行環境がある場合に実行する"
+    ),
 )
 def test_deseq2_smoke(tmp_path: Path) -> None:
     output_path = tmp_path / "deseq2_results.csv"
@@ -325,9 +336,13 @@ def test_deseq2_smoke(tmp_path: Path) -> None:
     assert "20遺伝子の結果を保存した" in log_path.read_text(encoding="utf-8")
 
 
+@pytest.mark.runtime_smoke
 @pytest.mark.skipif(
-    shutil.which("nextflow") is None,
-    reason="Nextflowがインストールされていない",
+    not RUN_EXTERNAL_RUNTIME_TESTS or shutil.which("nextflow") is None,
+    reason=(
+        "NextflowテストはRUN_EXTERNAL_RUNTIME_TESTS=1かつ"
+        "実行環境がある場合に実行する"
+    ),
 )
 def test_nextflow_smoke(tmp_path: Path) -> None:
     fastq = tmp_path / "sample.fastq"
@@ -359,9 +374,13 @@ def test_nextflow_smoke(tmp_path: Path) -> None:
     assert (outdir / "qc" / "sample_fastqc.zip").is_file()
 
 
+@pytest.mark.runtime_smoke
 @pytest.mark.skipif(
-    shutil.which("cwltool") is None,
-    reason="cwltoolがインストールされていない",
+    not RUN_EXTERNAL_RUNTIME_TESTS or shutil.which("cwltool") is None,
+    reason=(
+        "CWLテストはRUN_EXTERNAL_RUNTIME_TESTS=1かつ"
+        "実行環境がある場合に実行する"
+    ),
 )
 def test_cwl_validate_and_smoke(tmp_path: Path) -> None:
     for filename in (
