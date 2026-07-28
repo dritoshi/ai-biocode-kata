@@ -219,5 +219,8 @@
       "message": "太字内にカッコ/カギ括弧を含む: **東京大学「Pythonプログラミング入門」**",
       "found_char": "「"
     }
-  ]
+  ],
+  "baseline": "docs/review/structure_check.json",
+  "new_issue_count": 0,
+  "new_issues": []
 }

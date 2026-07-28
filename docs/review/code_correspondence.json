@@ -1,9 +1,742 @@
 {
-  "schema_version": 3,
-  "generated_at": "2026-07-28T10:16:53+09:00",
-  "method": "docs/review/2026-07-25_code_correspondence_reaudit_plan.md",
-  "source_commit": "943697e2a9b90aa53268b10159c8a20ab507030b",
-  "source_snapshot_sha256": "bb099520c438e258491ed3bd0d700f2197b95433b443382a4e0deb5641604b42",
+  "schema_version": 4,
+  "generated_at": "2026-07-28T16:32:52+09:00",
+  "method": "docs/review/2026-07-28_e1_remediation_plan.md",
+  "source_commit": "572fa899b9e81ea6976ae36fc19c94321eb30734",
+  "source_snapshot_files": [
+    "chapters/00_ai_agent.md",
+    "chapters/01_design.md",
+    "chapters/02_terminal.md",
+    "chapters/03_cs_basics.md",
+    "chapters/04_data_formats.md",
+    "chapters/05_software_components.md",
+    "chapters/06_dev_environment.md",
+    "chapters/07_git.md",
+    "chapters/08_testing.md",
+    "chapters/09_debug.md",
+    "chapters/10_deliverables.md",
+    "chapters/11_cli.md",
+    "chapters/12_data_processing.md",
+    "chapters/13_visualization.md",
+    "chapters/14_workflow.md",
+    "chapters/15_container.md",
+    "chapters/16_hpc.md",
+    "chapters/17_performance.md",
+    "chapters/18_documentation.md",
+    "chapters/19_database_api.md",
+    "chapters/20_security_ethics.md",
+    "chapters/21_collaboration.md",
+    "docs/review/2026-07-28_e1_remediation_plan.md",
+    "scripts/ch00/__init__.py",
+    "scripts/ch00/data/ecoli_k12_fragment.fasta",
+    "scripts/ch00/find_orfs.py",
+    "scripts/ch00/hmm_gene_predict.py",
+    "scripts/ch00/plot_orfs.py",
+    "scripts/ch01/__init__.py",
+    "scripts/ch01/gc_content.py",
+    "scripts/ch01/seq_filter.py",
+    "scripts/ch02/__init__.py",
+    "scripts/ch02/batch_process.sh",
+    "scripts/ch02/check_fastq.sh",
+    "scripts/ch02/env_check.py",
+    "scripts/ch02/fastq_gzip.py",
+    "scripts/ch02/fastqc_pipeline.sh",
+    "scripts/ch02/regex_basics.py",
+    "scripts/ch02/ssh_config.example",
+    "scripts/ch02/text_processing.py",
+    "scripts/ch03/__init__.py",
+    "scripts/ch03/data_structure_bench.py",
+    "scripts/ch03/float_pitfalls.py",
+    "scripts/ch03/plot_bench.py",
+    "scripts/ch03/plot_complexity.py",
+    "scripts/ch03/random_reproducibility.py",
+    "scripts/ch04/__init__.py",
+    "scripts/ch04/config_example.yaml",
+    "scripts/ch04/coordinate_convert.py",
+    "scripts/ch04/encoding_traps.py",
+    "scripts/ch04/messy_to_tidy.py",
+    "scripts/ch04/pyproject_example.toml",
+    "scripts/ch04/tidy_data_demo.py",
+    "scripts/ch04/tsv_csv_handling.py",
+    "scripts/ch05/__init__.py",
+    "scripts/ch05/module_demo.py",
+    "scripts/ch05/mylib/__init__.py",
+    "scripts/ch05/mylib/core.py",
+    "scripts/ch05/mylib/utils.py",
+    "scripts/ch06/__init__.py",
+    "scripts/ch06/check_environment.py",
+    "scripts/ch06/examples/condarc.example",
+    "scripts/ch06/examples/environment.yml",
+    "scripts/ch06/examples/pyproject.toml",
+    "scripts/ch06/examples/requirements.txt",
+    "scripts/ch07/CITATION.cff.template",
+    "scripts/ch07/ci_minimal.yml",
+    "scripts/ch07/gitignore_bioinfo.template",
+    "scripts/ch08/__init__.py",
+    "scripts/ch08/examples/ci-matrix.yml",
+    "scripts/ch08/examples/ci.yml",
+    "scripts/ch08/examples/claude-settings.json",
+    "scripts/ch08/examples/codex-hooks.json",
+    "scripts/ch08/examples/pre-commit-config.yaml",
+    "scripts/ch08/examples/pyproject.toml",
+    "scripts/ch08/reverse_complement.py",
+    "scripts/ch08/seq_stats.py",
+    "scripts/ch09/__init__.py",
+    "scripts/ch09/coordinate_bugs.py",
+    "scripts/ch09/debug_print_demo.py",
+    "scripts/ch09/generate_traceback.py",
+    "scripts/ch09/path_bugs.py",
+    "scripts/ch09/pdb_demo.py",
+    "scripts/ch09/python_pitfalls.py",
+    "scripts/ch09/traceback_demo.py",
+    "scripts/ch09/type_bugs.py",
+    "scripts/ch10/__init__.py",
+    "scripts/ch10/config.yaml",
+    "scripts/ch10/config_example.py",
+    "scripts/ch10/error_handling.py",
+    "scripts/ch10/fail_fast_pipeline.py",
+    "scripts/ch10/package_example/pyproject.toml",
+    "scripts/ch10/package_example/src/my_tool/__init__.py",
+    "scripts/ch10/package_example/src/my_tool/cli.py",
+    "scripts/ch11/__init__.py",
+    "scripts/ch11/cli_argparse.py",
+    "scripts/ch11/cli_click.py",
+    "scripts/ch11/cli_typer.py",
+    "scripts/ch11/config_layering.py",
+    "scripts/ch11/logging_setup.py",
+    "scripts/ch11/progress_demo.py",
+    "scripts/ch11/seqtool.py",
+    "scripts/ch12/__init__.py",
+    "scripts/ch12/numpy_vectorize.py",
+    "scripts/ch12/pandas_bio_ops.py",
+    "scripts/ch12/plot_vectorize_bench.py",
+    "scripts/ch12/polars_bio_ops.py",
+    "scripts/ch12/scipy_stats_bio.py",
+    "scripts/ch13/__init__.py",
+    "scripts/ch13/bio_plots.py",
+    "scripts/ch13/generate_figures.py",
+    "scripts/ch13/matplotlib_bindist.py",
+    "scripts/ch13/plot_colormap_comparison.py",
+    "scripts/ch13/plot_config.py",
+    "scripts/ch13/seaborn_biodist.py",
+    "scripts/ch13/tracks.ini",
+    "scripts/ch14/Makefile",
+    "scripts/ch14/Snakefile",
+    "scripts/ch14/Snakefile.conda",
+    "scripts/ch14/__init__.py",
+    "scripts/ch14/config.yaml",
+    "scripts/ch14/data/cwl/hisat2_index/README.txt",
+    "scripts/ch14/data/cwl/sample_A_R1.fastq",
+    "scripts/ch14/data/cwl/sample_A_R2.fastq",
+    "scripts/ch14/data/deseq2/counts.tsv",
+    "scripts/ch14/data/deseq2/samples.tsv",
+    "scripts/ch14/envs/deseq2.yaml",
+    "scripts/ch14/fastp_filter.cwl",
+    "scripts/ch14/fastqc.nf",
+    "scripts/ch14/hisat2_align.cwl",
+    "scripts/ch14/inputs.yml",
+    "scripts/ch14/rnaseq_pipeline.cwl",
+    "scripts/ch14/run_deseq2.R",
+    "scripts/ch14/validate_workflow.py",
+    "scripts/ch15/Dockerfile",
+    "scripts/ch15/Dockerfile.conda-lock",
+    "scripts/ch15/Dockerfile.gpu",
+    "scripts/ch15/Dockerfile.multistage",
+    "scripts/ch15/__init__.py",
+    "scripts/ch15/apptainer.def",
+    "scripts/ch15/docker-compose.yml",
+    "scripts/ch15/environment.lock.yml",
+    "scripts/ch15/environment.yml",
+    "scripts/ch15/experiment_logger.py",
+    "scripts/ch15/rnaseq.conda-lock.yml",
+    "scripts/ch15/samtools_sort.smk",
+    "scripts/ch15/validate_dockerfile.py",
+    "scripts/ch15/version_pinning/conda_lock/Dockerfile",
+    "scripts/ch15/version_pinning/conda_lock/environment.yml",
+    "scripts/ch15/version_pinning/conda_lock/rnaseq.conda-lock.yml",
+    "scripts/ch15/version_pinning/requirements/Dockerfile",
+    "scripts/ch15/version_pinning/requirements/requirements.in",
+    "scripts/ch15/version_pinning/requirements/requirements.txt",
+    "scripts/ch15/version_pinning/uv/Dockerfile",
+    "scripts/ch15/version_pinning/uv/pyproject.toml",
+    "scripts/ch15/version_pinning/uv/uv.lock",
+    "scripts/ch16/__init__.py",
+    "scripts/ch16/array_job.sh",
+    "scripts/ch16/basic_job.sh",
+    "scripts/ch16/gpu_train_job.sh",
+    "scripts/ch16/pipeline_submit.sh",
+    "scripts/ch16/project_readme_template.md",
+    "scripts/ch16/ssh_config.example",
+    "scripts/ch16/validate_slurm.py",
+    "scripts/ch17/__init__.py",
+    "scripts/ch17/chunk_processing.py",
+    "scripts/ch17/file_format_bench.py",
+    "scripts/ch17/generator_fastq.py",
+    "scripts/ch17/memory_target.py",
+    "scripts/ch17/parallel_gc.py",
+    "scripts/ch17/plot_amdahl.py",
+    "scripts/ch17/plot_profiling.py",
+    "scripts/ch17/profiling_demo.py",
+    "scripts/ch17/streaming_fasta.py",
+    "scripts/ch18/__init__.py",
+    "scripts/ch18/docstring_checker.py",
+    "scripts/ch18/mermaid_helper.py",
+    "scripts/ch18/mkdocs_example/docs/api.md",
+    "scripts/ch18/mkdocs_example/docs/index.md",
+    "scripts/ch18/mkdocs_example/mkdocs.yml",
+    "scripts/ch18/mkdocs_example/src/my_tool/__init__.py",
+    "scripts/ch18/mkdocs_example/src/my_tool/core.py",
+    "scripts/ch18/validate_readme.py",
+    "scripts/ch19/__init__.py",
+    "scripts/ch19/checksum_verify.py",
+    "scripts/ch19/entrez_fetch.py",
+    "scripts/ch19/local_db.py",
+    "scripts/ch19/parse_flatfile.py",
+    "scripts/ch19/sparql_query.py",
+    "scripts/ch20/.env.example",
+    "scripts/ch20/__init__.py",
+    "scripts/ch20/anonymize_metadata.py",
+    "scripts/ch20/secret_scanner.py",
+    "scripts/ch21/__init__.py",
+    "scripts/ch21/analysis_intake.py",
+    "scripts/ch21/bioconda_recipe/meta.yaml.template",
+    "scripts/ch21/format_question.py",
+    "scripts/ch21/progress_report.py",
+    "scripts/ch21/review_helper.py",
+    "scripts/review/__init__.py",
+    "scripts/review/audit_code_correspondence.py",
+    "scripts/review/build_code_correspondence.py",
+    "scripts/review/build_e1_batch0_state.py",
+    "scripts/review/check_code_samples.py",
+    "scripts/review/check_code_sync.py",
+    "scripts/review/check_correspondence_provenance.py",
+    "scripts/review/check_e1_merged_state.py",
+    "scripts/review/check_e1_source_scope.py",
+    "scripts/review/check_e1_transition.py",
+    "scripts/review/check_structure.py",
+    "scripts/review/check_urls_all.py",
+    "scripts/review/check_urls_browser.py",
+    "scripts/review/check_xref.py",
+    "scripts/review/code_correspondence.py",
+    "scripts/review/code_correspondence_overrides.json",
+    "scripts/review/create_e1_pr.py",
+    "scripts/review/e1_remediation.py",
+    "scripts/review/finalize_e1_artifacts.py",
+    "scripts/review/requirements-browser.txt",
+    "scripts/review/run_e1_batch_gates.py",
+    "tests/ch00/__init__.py",
+    "tests/ch00/conftest.py",
+    "tests/ch00/test_find_orfs.py",
+    "tests/ch00/test_hmm_gene_predict.py",
+    "tests/ch00/test_plot_orfs.py",
+    "tests/ch01/__init__.py",
+    "tests/ch01/test_gc_content.py",
+    "tests/ch01/test_seq_filter.py",
+    "tests/ch02/__init__.py",
+    "tests/ch02/test_env_check.py",
+    "tests/ch02/test_fastq_gzip.py",
+    "tests/ch02/test_regex_basics.py",
+    "tests/ch02/test_shell_scripts.py",
+    "tests/ch02/test_ssh_config.py",
+    "tests/ch02/test_text_processing.py",
+    "tests/ch03/__init__.py",
+    "tests/ch03/test_data_structure_bench.py",
+    "tests/ch03/test_float_pitfalls.py",
+    "tests/ch03/test_random_reproducibility.py",
+    "tests/ch04/__init__.py",
+    "tests/ch04/test_config_examples.py",
+    "tests/ch04/test_coordinate_convert.py",
+    "tests/ch04/test_encoding_traps.py",
+    "tests/ch04/test_messy_to_tidy.py",
+    "tests/ch04/test_tidy_data_demo.py",
+    "tests/ch04/test_tsv_csv_handling.py",
+    "tests/ch05/__init__.py",
+    "tests/ch05/test_module_demo.py",
+    "tests/ch05/test_mylib_core.py",
+    "tests/ch05/test_mylib_utils.py",
+    "tests/ch06/__init__.py",
+    "tests/ch06/test_check_environment.py",
+    "tests/ch06/test_dependency_examples.py",
+    "tests/ch07/test_ci_minimal.py",
+    "tests/ch07/test_citation_cff.py",
+    "tests/ch08/__init__.py",
+    "tests/ch08/conftest.py",
+    "tests/ch08/data/sample.fasta",
+    "tests/ch08/test_ci_workflows.py",
+    "tests/ch08/test_config_examples.py",
+    "tests/ch08/test_gc_fixture.py",
+    "tests/ch08/test_reverse_complement.py",
+    "tests/ch08/test_seq_stats.py",
+    "tests/ch08/test_shared_fixtures.py",
+    "tests/ch09/__init__.py",
+    "tests/ch09/test_coordinate_bugs.py",
+    "tests/ch09/test_debug_print_demo.py",
+    "tests/ch09/test_path_bugs.py",
+    "tests/ch09/test_pdb_demo.py",
+    "tests/ch09/test_python_pitfalls.py",
+    "tests/ch09/test_traceback_demo.py",
+    "tests/ch09/test_type_bugs.py",
+    "tests/ch10/__init__.py",
+    "tests/ch10/test_config_example.py",
+    "tests/ch10/test_error_handling.py",
+    "tests/ch10/test_fail_fast_pipeline.py",
+    "tests/ch10/test_package_example.py",
+    "tests/ch11/__init__.py",
+    "tests/ch11/test_cli_argparse.py",
+    "tests/ch11/test_cli_click.py",
+    "tests/ch11/test_cli_typer.py",
+    "tests/ch11/test_config_layering.py",
+    "tests/ch11/test_logging_setup.py",
+    "tests/ch11/test_seqtool.py",
+    "tests/ch11/test_seqtool_streams.py",
+    "tests/ch12/__init__.py",
+    "tests/ch12/test_numpy_vectorize.py",
+    "tests/ch12/test_pandas_bio_ops.py",
+    "tests/ch12/test_polars_bio_ops.py",
+    "tests/ch12/test_scipy_stats_bio.py",
+    "tests/ch13/__init__.py",
+    "tests/ch13/test_bio_plots.py",
+    "tests/ch13/test_matplotlib_bindist.py",
+    "tests/ch13/test_plot_config.py",
+    "tests/ch13/test_seaborn_biodist.py",
+    "tests/ch13/test_tracks_config.py",
+    "tests/ch14/__init__.py",
+    "tests/ch14/test_config_workflow_assets.py",
+    "tests/ch14/test_validate_workflow.py",
+    "tests/ch14/test_workflow_assets.py",
+    "tests/ch15/__init__.py",
+    "tests/ch15/test_container_examples.py",
+    "tests/ch15/test_experiment_logger.py",
+    "tests/ch15/test_validate_dockerfile.py",
+    "tests/ch16/__init__.py",
+    "tests/ch16/test_ssh_config.py",
+    "tests/ch16/test_validate_slurm.py",
+    "tests/ch17/__init__.py",
+    "tests/ch17/test_chunk_processing.py",
+    "tests/ch17/test_file_format_bench.py",
+    "tests/ch17/test_generator_fastq.py",
+    "tests/ch17/test_memory_target.py",
+    "tests/ch17/test_parallel_gc.py",
+    "tests/ch17/test_profiling_demo.py",
+    "tests/ch17/test_streaming_fasta.py",
+    "tests/ch18/__init__.py",
+    "tests/ch18/test_docstring_checker.py",
+    "tests/ch18/test_mermaid_helper.py",
+    "tests/ch18/test_mkdocs_example.py",
+    "tests/ch18/test_validate_readme.py",
+    "tests/ch19/__init__.py",
+    "tests/ch19/test_checksum_verify.py",
+    "tests/ch19/test_entrez_fetch.py",
+    "tests/ch19/test_local_db.py",
+    "tests/ch19/test_parse_flatfile.py",
+    "tests/ch19/test_sparql_query.py",
+    "tests/ch20/__init__.py",
+    "tests/ch20/test_anonymize_metadata.py",
+    "tests/ch20/test_env_example.py",
+    "tests/ch20/test_secret_scanner.py",
+    "tests/ch21/__init__.py",
+    "tests/ch21/test_analysis_intake.py",
+    "tests/ch21/test_bioconda_recipe.py",
+    "tests/ch21/test_check_urls_browser.py",
+    "tests/ch21/test_format_question.py",
+    "tests/ch21/test_progress_report.py",
+    "tests/ch21/test_reference_url_preference.py",
+    "tests/ch21/test_review_helper.py",
+    "tests/review/__init__.py",
+    "tests/review/fixtures/e1_expected_relations.json",
+    "tests/review/test_check_code_sync.py",
+    "tests/review/test_code_correspondence.py",
+    "tests/review/test_correspondence_provenance.py",
+    "tests/review/test_create_e1_pr.py",
+    "tests/review/test_e1_merged_state.py",
+    "tests/review/test_e1_transition.py",
+    "tests/review/test_review_checks.py"
+  ],
+  "source_snapshot_sha256": "4281fd96ba6f92cd8ec9f2055d308f742aa71a5bd0acbe22e49cbe397bc9ef46",
+  "remediation_scope": {
+    "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
+    "baseline_e1_ids": [
+      "B-01-001",
+      "B-01-003",
+      "B-01-004",
+      "B-03-019",
+      "B-08-001",
+      "B-08-002",
+      "B-08-003",
+      "B-08-006",
+      "B-08-009",
+      "B-08-019",
+      "B-09-003",
+      "B-09-005",
+      "B-09-007",
+      "B-09-020",
+      "B-09-024",
+      "B-10-024",
+      "B-10-028",
+      "B-10-031",
+      "B-12-001",
+      "B-12-003",
+      "B-12-004",
+      "B-12-005",
+      "B-12-006",
+      "B-12-007",
+      "B-12-008",
+      "B-12-009",
+      "B-12-010",
+      "B-12-014",
+      "B-12-015",
+      "B-12-016",
+      "B-12-017",
+      "B-12-018",
+      "B-13-002",
+      "B-13-003",
+      "B-13-004",
+      "B-17-016",
+      "B-17-029",
+      "B-17-030",
+      "B-17-032",
+      "B-17-038",
+      "B-17-039",
+      "B-21-004",
+      "B-21-007",
+      "B-21-012",
+      "B-21-014"
+    ],
+    "baseline_e1_sha256": "88b2e73514c0a9a78f7b9a82c1feea4083ec98de9bd1edaae3fb4f87304d1dd8",
+    "completed_batch": 1
+  },
+  "comment_sync": [
+    {
+      "block_id": "B-01-001",
+      "status": "not_applicable",
+      "reason": "本文コードブロック内に同期対象の行コメントがない",
+      "source_evidence_type": "none",
+      "semantic_category": "none",
+      "source_evidence": [],
+      "target_evidence": []
+    },
+    {
+      "block_id": "B-01-003",
+      "status": "satisfied_existing",
+      "reason": "gc_contentを再利用するDRYの実装判断を本文と実体の既存コメントが説明する",
+      "source_evidence_type": "line_comment",
+      "semantic_category": "implementation_decision",
+      "source_evidence": [
+        {
+          "file": "chapters/01_design.md",
+          "line_start": 69,
+          "line_end": 69,
+          "sha256": "5d37179212e165490ee5cb69f079cdc831aaef8f404aa28f60c86ca0817c6454"
+        }
+      ],
+      "target_evidence": [
+        {
+          "file": "scripts/ch01/gc_content.py",
+          "scope": "entity",
+          "entity": "filter_sequences_by_gc",
+          "line_start": 45,
+          "line_end": 45,
+          "sha256": "06ba1fb55e8150f85e602d64d679f97a150e724761e9c0aa56250a3851c9d5cd"
+        }
+      ]
+    },
+    {
+      "block_id": "B-01-004",
+      "status": "satisfied_existing",
+      "reason": "入力・処理・出力の責務分離を本文コメントと実体のモジュールdocstringが説明する",
+      "source_evidence_type": "line_comment",
+      "semantic_category": "implementation_decision",
+      "source_evidence": [
+        {
+          "file": "chapters/01_design.md",
+          "line_start": 130,
+          "line_end": 130,
+          "sha256": "c704015981f2f94aa846dd7926297409247d27af5e811d398bf5d0083b0f7438"
+        }
+      ],
+      "target_evidence": [
+        {
+          "file": "scripts/ch01/seq_filter.py",
+          "scope": "file",
+          "entity": null,
+          "line_start": 1,
+          "line_end": 7,
+          "sha256": "87ee336d8829a3cb711d8b49d782764f5020dffb39363b66e271e4198da534dd"
+        }
+      ]
+    },
+    {
+      "block_id": "B-03-019",
+      "status": "added",
+      "reason": "グローバル乱数状態を避ける実装判断を実体へ追加し本文と同期した",
+      "source_evidence_type": "line_comment",
+      "semantic_category": "implementation_decision",
+      "source_evidence": [
+        {
+          "file": "chapters/03_cs_basics.md",
+          "line_start": 520,
+          "line_end": 520,
+          "sha256": "ec61c85fec13a3ba343331b8ca35c0b2980bb019a1c04ef50acade2e3d492906"
+        }
+      ],
+      "target_evidence": [
+        {
+          "file": "scripts/ch03/random_reproducibility.py",
+          "scope": "entity",
+          "entity": "subsample_with_seed",
+          "line_start": 32,
+          "line_end": 32,
+          "sha256": "ec61c85fec13a3ba343331b8ca35c0b2980bb019a1c04ef50acade2e3d492906"
+        }
+      ]
+    },
+    {
+      "block_id": "B-08-001",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-08-002",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-08-003",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-08-006",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-08-009",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-08-019",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "body_only"
+    },
+    {
+      "block_id": "B-09-003",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-09-005",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-09-007",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-09-020",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-09-024",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "added"
+    },
+    {
+      "block_id": "B-10-024",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-10-028",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-10-031",
+      "status": "pending",
+      "scheduled_batch": 2,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-001",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-003",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-004",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-005",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-006",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-007",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "added"
+    },
+    {
+      "block_id": "B-12-008",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-12-009",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-12-010",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-12-014",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-12-015",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-12-016",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-12-017",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-12-018",
+      "status": "pending",
+      "scheduled_batch": 3,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-13-002",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-13-003",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "added"
+    },
+    {
+      "block_id": "B-13-004",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-17-016",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-17-029",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-17-030",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-17-032",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-17-038",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-17-039",
+      "status": "pending",
+      "scheduled_batch": 4,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-21-004",
+      "status": "pending",
+      "scheduled_batch": 5,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-21-007",
+      "status": "pending",
+      "scheduled_batch": 5,
+      "expected_terminal_status": "not_applicable"
+    },
+    {
+      "block_id": "B-21-012",
+      "status": "pending",
+      "scheduled_batch": 5,
+      "expected_terminal_status": "satisfied_existing"
+    },
+    {
+      "block_id": "B-21-014",
+      "status": "pending",
+      "scheduled_batch": 5,
+      "expected_terminal_status": "satisfied_existing"
+    }
+  ],
   "environment": {
     "python": "3.14.6",
     "pytest": "pytest 9.0.3",
@@ -51,15 +784,15 @@
       "required_tests": 8
     },
     "correspondence_all": {
-      "E2": 38,
+      "E2": 39,
       "EN": 395,
-      "E1": 45,
-      "E0": 51
+      "E1": 43,
+      "E0": 52
     },
     "correspondence_required": {
-      "E2": 38,
-      "E1": 45,
-      "E0": 51
+      "E2": 39,
+      "E1": 43,
+      "E0": 52
     },
     "script_book_status": {
       "script_only": 34,
@@ -72,10 +805,10 @@
       "passed_with_skip": 27
     },
     "test_run": {
-      "files": 96,
+      "files": 101,
       "chapter_test_files": 94,
-      "review_test_files": 2,
-      "passed": 939,
+      "review_test_files": 7,
+      "passed": 973,
       "failed": 0,
       "skipped": 11,
       "errors": 0
@@ -83,6 +816,17 @@
     "substitution_test_status": {
       "passed": 18,
       "not_run": 9
+    },
+    "e1_relation_count": 49,
+    "relations_by_parent_block_correspondence": {
+      "E0": 1,
+      "E1": 44,
+      "E2": 4
+    },
+    "relations_by_equivalence": {
+      "E0": 1,
+      "E1": 45,
+      "E2": 3
     }
   },
   "blocks": [
@@ -114,6 +858,17 @@
           "evidence": "本文は実体のfind_all_orfs関数を完全に示し、ORF・逆相補鎖・翻訳・フレーム走査の補助定義を省略すると明記",
           "verification": "順鎖・逆鎖の座標、6フレーム探索、最小長、空入力をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-00-001-E01",
+          "source_entity": "find_all_orfs",
+          "source_entity_locations": [
+            {
+              "id": "B-00-001-E01",
+              "name": "find_all_orfs",
+              "kind": "FunctionDef",
+              "line_start": 94,
+              "line_end": 129
+            }
+          ],
           "target_file_id": "S-00-003",
           "target_entity_locations": [
             {
@@ -218,6 +973,17 @@
           "evidence": "本文は実体のviterbi関数を初期化・再帰・バックトレースまで完全に示し、確率表と放出関数の省略境界を明記",
           "verification": "空・1コドン・複数コドンと全経路比較による最尤経路復元をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-00-003-E01",
+          "source_entity": "viterbi",
+          "source_entity_locations": [
+            {
+              "id": "B-00-003-E01",
+              "name": "viterbi",
+              "kind": "FunctionDef",
+              "line_start": 162,
+              "line_end": 216
+            }
+          ],
           "target_file_id": "S-00-004",
           "target_entity_locations": [
             {
@@ -521,6 +1287,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-01-001-E01",
           "target_file": "scripts/ch01/gc_content.py",
           "target_entity": "gc_content",
           "equivalence": "E1",
@@ -528,6 +1295,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_content",
+          "source_entity_locations": [
+            {
+              "id": "B-01-001-E01",
+              "name": "gc_content",
+              "kind": "FunctionDef",
+              "line_start": 30,
+              "line_end": 36
+            }
+          ],
           "target_file_id": "S-01-007",
           "target_entity_locations": [
             {
@@ -547,7 +1324,7 @@
           "tests/ch01/test_gc_content.py",
           "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 11,
+        "passed": 14,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -558,8 +1335,8 @@
       "id": "B-01-002",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 43,
-      "line_end": 54,
+      "line_start": 45,
+      "line_end": 56,
       "lang": "python",
       "heading": "KISS原則（Keep It Simple, Stupid）",
       "heading_path": [
@@ -588,8 +1365,8 @@
       "id": "B-01-003",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 66,
-      "line_end": 79,
+      "line_start": 68,
+      "line_end": 81,
       "lang": "python",
       "heading": "DRY原則（Don't Repeat Yourself）",
       "heading_path": [
@@ -604,6 +1381,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-01-003-E01",
           "target_file": "scripts/ch01/gc_content.py",
           "target_entity": "filter_sequences_by_gc",
           "equivalence": "E1",
@@ -611,6 +1389,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "filter_sequences_by_gc",
+          "source_entity_locations": [
+            {
+              "id": "B-01-003-E01",
+              "name": "filter_sequences_by_gc",
+              "kind": "FunctionDef",
+              "line_start": 70,
+              "line_end": 80
+            }
+          ],
           "target_file_id": "S-01-007",
           "target_entity_locations": [
             {
@@ -630,7 +1418,7 @@
           "tests/ch01/test_gc_content.py",
           "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 11,
+        "passed": 14,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -641,8 +1429,8 @@
       "id": "B-01-004",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 107,
-      "line_end": 140,
+      "line_start": 115,
+      "line_end": 148,
       "lang": "python",
       "heading": "関心の分離（Separation of Concerns）",
       "heading_path": [
@@ -657,32 +1445,133 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-01-004-E01",
           "target_file": "scripts/ch01/seq_filter.py",
           "target_entity": "SequenceRecord",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "docstring除去AST一致",
-          "verification": "AST/順序比較後に章・対象名を目視",
+          "evidence": "本文と実体のSequenceRecordはdocstring以外のASTが一致",
+          "verification": "lengthプロパティと不変dataclassをpytestで確認",
           "cross_chapter": false,
+          "source_entity": "SequenceRecord",
+          "source_entity_locations": [
+            {
+              "id": "B-01-004-E01",
+              "name": "SequenceRecord",
+              "kind": "ClassDef",
+              "line_start": 120,
+              "line_end": 127
+            }
+          ],
           "target_file_id": "S-01-008",
           "target_entity_locations": [
             {
               "id": "S-01-008-E001",
               "name": "SequenceRecord",
               "kind": "ClassDef",
-              "line_start": 13,
-              "line_end": 22
+              "line_start": 16,
+              "line_end": 25
+            }
+          ]
+        },
+        {
+          "source_entity_id": "B-01-004-E03",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "parse_fasta_string",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は入力責務を示すスタブであり、実体はBio.SeqIOによる完全実装",
+          "verification": "空入力、複数行配列、複数レコード、SeqIO利用をpytestで確認",
+          "cross_chapter": false,
+          "source_entity": "parse_fasta_string",
+          "source_entity_locations": [
+            {
+              "id": "B-01-004-E03",
+              "name": "parse_fasta_string",
+              "kind": "FunctionDef",
+              "line_start": 131,
+              "line_end": 133
+            }
+          ],
+          "target_file_id": "S-01-008",
+          "target_entity_locations": [
+            {
+              "id": "S-01-008-E003",
+              "name": "parse_fasta_string",
+              "kind": "FunctionDef",
+              "line_start": 31,
+              "line_end": 52
+            }
+          ]
+        },
+        {
+          "source_entity_id": "B-01-004-E04",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "filter_by_length",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は処理責務を示すスタブであり、実体は境界を含む完全実装",
+          "verification": "最小長、最大長、上限なしをpytestで確認",
+          "cross_chapter": false,
+          "source_entity": "filter_by_length",
+          "source_entity_locations": [
+            {
+              "id": "B-01-004-E04",
+              "name": "filter_by_length",
+              "kind": "FunctionDef",
+              "line_start": 136,
+              "line_end": 142
+            }
+          ],
+          "target_file_id": "S-01-008",
+          "target_entity_locations": [
+            {
+              "id": "S-01-008-E004",
+              "name": "filter_by_length",
+              "kind": "FunctionDef",
+              "line_start": 58,
+              "line_end": 84
+            }
+          ]
+        },
+        {
+          "source_entity_id": "B-01-004-E05",
+          "target_file": "scripts/ch01/seq_filter.py",
+          "target_entity": "format_as_tsv",
+          "equivalence": "E2",
+          "kind": "excerpt",
+          "evidence": "本文は出力責務を示すスタブであり、実体はヘッダーを含む完全実装",
+          "verification": "空レコードと複数レコードのTSV出力をpytestで確認",
+          "cross_chapter": false,
+          "source_entity": "format_as_tsv",
+          "source_entity_locations": [
+            {
+              "id": "B-01-004-E05",
+              "name": "format_as_tsv",
+              "kind": "FunctionDef",
+              "line_start": 145,
+              "line_end": 147
+            }
+          ],
+          "target_file_id": "S-01-008",
+          "target_entity_locations": [
+            {
+              "id": "S-01-008-E005",
+              "name": "format_as_tsv",
+              "kind": "FunctionDef",
+              "line_start": 90,
+              "line_end": 106
             }
           ]
         }
       ],
-      "correspondence": "E1",
+      "correspondence": "E2",
       "tests": {
         "status": "passed",
         "files": [
           "tests/ch01/test_seq_filter.py"
         ],
-        "passed": 11,
+        "passed": 13,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -693,8 +1582,8 @@
       "id": "B-01-005",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 208,
-      "line_end": 211,
+      "line_start": 216,
+      "line_end": 219,
       "lang": "bash",
       "heading": "テキストストリームとパイプ",
       "heading_path": [
@@ -723,8 +1612,8 @@
       "id": "B-01-006",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 229,
-      "line_end": 232,
+      "line_start": 237,
+      "line_end": 240,
       "lang": "bash",
       "heading": "リダイレクション",
       "heading_path": [
@@ -753,8 +1642,8 @@
       "id": "B-01-007",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 238,
-      "line_end": 244,
+      "line_start": 246,
+      "line_end": 252,
       "lang": "bash",
       "heading": "終了ステータス（Exit Code）",
       "heading_path": [
@@ -783,8 +1672,8 @@
       "id": "B-01-008",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 311,
-      "line_end": 318,
+      "line_start": 319,
+      "line_end": 326,
       "lang": "none",
       "heading": "🤖 AIエージェントとの会話で使うと効果的なフレーズ集",
       "heading_path": [
@@ -813,8 +1702,8 @@
       "id": "B-01-009",
       "chapter": "ch01",
       "path": "chapters/01_design.md",
-      "line_start": 350,
-      "line_end": 379,
+      "line_start": 358,
+      "line_end": 387,
       "lang": "python",
       "heading": "演習 1-1: コードに潜む設計原則違反を見つけよ **[レビュー]**",
       "heading_path": [
@@ -1128,6 +2017,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch02/fastq_gzip.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -1135,6 +2025,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-013",
           "target_entity_locations": []
         }
@@ -1382,6 +2274,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch02/env_check.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -1389,6 +2282,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-012",
           "target_entity_locations": []
         }
@@ -1456,6 +2351,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch02/text_processing.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -1463,6 +2359,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-017",
           "target_entity_locations": []
         }
@@ -1508,6 +2406,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-015",
           "target_entity_locations": []
         }
@@ -1553,6 +2454,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-015",
           "target_entity_locations": []
         }
@@ -1659,6 +2563,9 @@
           "evidence": "安全設定2行が実行可能なFASTQCスクリプトの先頭部分と一致",
           "verification": "bash -nと外部ツールのスタブ実行をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-014",
           "target_entity_locations": []
         }
@@ -1703,6 +2610,9 @@
           "evidence": "基本構造の正規化行列が実体と一致",
           "verification": "出力ディレクトリ作成・標準出力・FASTQC引数をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-014",
           "target_entity_locations": []
         }
@@ -1777,6 +2687,9 @@
           "evidence": "条件分岐が引数設定を補った実体の順序保存部分列",
           "verification": "FASTQの存在・不在と出力ディレクトリ作成をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-011",
           "target_entity_locations": []
         }
@@ -1821,6 +2734,9 @@
           "evidence": "2つのループが安全設定と出力準備を補った実体の順序保存部分列",
           "verification": "3サンプルのFASTQC呼び出しとBAM索引作成をスタブでpytest検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-010",
           "target_entity_locations": []
         }
@@ -1895,6 +2811,9 @@
           "verification": "ssh -G -FでHost別名、HostName、User、IdentityFileを展開してpytest検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-02-016",
           "target_entity_locations": []
         }
@@ -2082,6 +3001,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch03/data_structure_bench.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -2089,6 +3009,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-03-019",
           "target_entity_locations": []
         }
@@ -2348,6 +3270,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
@@ -2392,6 +3317,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
@@ -2496,6 +3424,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
@@ -2540,6 +3471,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-03-020",
           "target_entity_locations": []
         }
@@ -2652,7 +3586,7 @@
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
       "line_start": 491,
-      "line_end": 501,
+      "line_end": 524,
       "lang": "python",
       "heading": "シード固定の実践",
       "heading_path": [
@@ -2660,20 +3594,31 @@
         "3-4. 乱数と再現性",
         "シード固定の実践"
       ],
-      "sha256": "a5679bd3d403543d47aa293e324de53d554703b76c185a0cdf2c1af27ec17229",
-      "nonempty_lines": 8,
+      "sha256": "08af50f599765ac6016ce16e4a9cffdc0ad087fe98a0342e33adc1034d3f6d42",
+      "nonempty_lines": 28,
       "category": "implementation",
       "placement": "required_scripts",
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-03-019-E01",
           "target_file": "scripts/ch03/random_reproducibility.py",
           "target_entity": "subsample_with_seed",
-          "equivalence": "E1",
+          "equivalence": "E0",
           "kind": "excerpt",
-          "evidence": "関数名とNumPy型注釈だけが異なり、default_rng→choice→添字抽出はAST上同じ",
-          "verification": "manual",
+          "evidence": "公開名、NumPy型注釈、docstring、処理本体のASTが完全一致",
+          "verification": "同一・異なるseed、サイズ境界、不正サイズをpytestで確認",
           "cross_chapter": false,
+          "source_entity": "subsample_with_seed",
+          "source_entity_locations": [
+            {
+              "id": "B-03-019-E01",
+              "name": "subsample_with_seed",
+              "kind": "FunctionDef",
+              "line_start": 499,
+              "line_end": 523
+            }
+          ],
           "target_file_id": "S-03-023",
           "target_entity_locations": [
             {
@@ -2681,18 +3626,18 @@
               "name": "subsample_with_seed",
               "kind": "FunctionDef",
               "line_start": 11,
-              "line_end": 34
+              "line_end": 35
             }
           ]
         }
       ],
-      "correspondence": "E1",
+      "correspondence": "E0",
       "tests": {
         "status": "passed",
         "files": [
           "tests/ch03/test_random_reproducibility.py"
         ],
-        "passed": 12,
+        "passed": 15,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -2703,8 +3648,8 @@
       "id": "B-03-020",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 511,
-      "line_end": 516,
+      "line_start": 538,
+      "line_end": 543,
       "lang": "python",
       "heading": "論文にシード値を記録する",
       "heading_path": [
@@ -2733,8 +3678,8 @@
       "id": "B-03-021",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 529,
-      "line_end": 532,
+      "line_start": 556,
+      "line_end": 559,
       "lang": "python",
       "heading": "エージェントへの指示例",
       "heading_path": [
@@ -2764,8 +3709,8 @@
       "id": "B-03-022",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 564,
-      "line_end": 572,
+      "line_start": 591,
+      "line_end": 599,
       "lang": "python",
       "heading": "行優先（C order）vs 列優先（Fortran order）",
       "heading_path": [
@@ -2794,8 +3739,8 @@
       "id": "B-03-023",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 618,
-      "line_end": 620,
+      "line_start": 645,
+      "line_end": 647,
       "lang": "bash",
       "heading": "ネットワークファイルシステム",
       "heading_path": [
@@ -2824,8 +3769,8 @@
       "id": "B-03-024",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 652,
-      "line_end": 671,
+      "line_start": 679,
+      "line_end": 698,
       "lang": "python",
       "heading": "基本型と関数シグネチャ",
       "heading_path": [
@@ -2854,8 +3799,8 @@
       "id": "B-03-025",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 694,
-      "line_end": 698,
+      "line_start": 721,
+      "line_end": 725,
       "lang": "python",
       "heading": "`Optional`と`Union` — 値がないかもしれない場合",
       "heading_path": [
@@ -2884,8 +3829,8 @@
       "id": "B-03-026",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 702,
-      "line_end": 708,
+      "line_start": 729,
+      "line_end": 735,
       "lang": "python",
       "heading": "`Optional`と`Union` — 値がないかもしれない場合",
       "heading_path": [
@@ -2914,8 +3859,8 @@
       "id": "B-03-027",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 764,
-      "line_end": 772,
+      "line_start": 791,
+      "line_end": 799,
       "lang": "python",
       "heading": "演習 3-1: データ構造の選択ミス **[レビュー]**",
       "heading_path": [
@@ -2944,8 +3889,8 @@
       "id": "B-03-028",
       "chapter": "ch03",
       "path": "chapters/03_cs_basics.md",
-      "line_start": 780,
-      "line_end": 783,
+      "line_start": 807,
+      "line_end": 810,
       "lang": "python",
       "heading": "演習 3-2: 浮動小数点の罠 **[概念]**",
       "heading_path": [
@@ -2997,6 +3942,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-031",
           "target_entity_locations": []
         }
@@ -3101,6 +4049,9 @@
           "evidence": "環境固有パスを除いた本文同期後のYAMLが正規化行列で一致",
           "verification": "実資産のYAML構文・必須値・相対パスをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-025",
           "target_entity_locations": []
         }
@@ -3145,6 +4096,9 @@
           "evidence": "PEP 621のdependencies配列へ修正後のTOMLが正規化行列で一致",
           "verification": "実資産をtomllibで読み、依存配列をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-029",
           "target_entity_locations": []
         }
@@ -3252,6 +4206,9 @@
           "evidence": "utf-8-sigによるBOM除去は同じだが本文はトップレベル、実体はPath入力の関数",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-027",
           "target_entity_locations": [
             {
@@ -3305,6 +4262,9 @@
           "evidence": "Unicode正規化の題材が同じで、本文は比較デモ、実体は再利用関数",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-027",
           "target_entity_locations": [
             {
@@ -3534,6 +4494,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch04/messy_to_tidy.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3541,6 +4502,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-028",
           "target_entity_locations": []
         }
@@ -3585,6 +4548,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-04-030",
           "target_entity_locations": []
         }
@@ -3742,6 +4708,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/module_demo.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3749,6 +4716,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-033",
           "target_entity_locations": []
         }
@@ -3816,6 +4785,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/mylib/core.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3823,10 +4793,13 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-035",
           "target_entity_locations": []
         },
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/mylib/utils.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3834,6 +4807,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-036",
           "target_entity_locations": []
         }
@@ -3873,6 +4848,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/mylib/__init__.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3880,10 +4856,13 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-034",
           "target_entity_locations": []
         },
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/mylib/core.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3891,6 +4870,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-035",
           "target_entity_locations": []
         }
@@ -3959,6 +4940,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/module_demo.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -3966,6 +4948,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-033",
           "target_entity_locations": []
         }
@@ -4033,6 +5017,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch05/mylib/core.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -4040,6 +5025,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-05-035",
           "target_entity_locations": []
         }
@@ -4566,6 +5553,9 @@
           "evidence": "sys.prefix/base_prefixによる仮想環境判定は同じだが、実体はdataclassへ集約",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-06-038",
           "target_entity_locations": [
             {
@@ -4678,6 +5668,9 @@
           "evidence": "requirements.txtの正規化行列が一致",
           "verification": "実資産の依存指定と上下限をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-06-042",
           "target_entity_locations": []
         }
@@ -4722,6 +5715,9 @@
           "evidence": "コメントを除くpyproject.tomlの正規化行列が一致",
           "verification": "実資産をtomllibで読み、必須メタデータと依存配列をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-06-041",
           "target_entity_locations": []
         }
@@ -4766,6 +5762,9 @@
           "evidence": "defaults除去後のenvironment.ymlが正規化行列で一致",
           "verification": "実資産のチャネル順・依存・pip節をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-06-040",
           "target_entity_locations": []
         }
@@ -4900,6 +5899,9 @@
           "evidence": "condarc.exampleの正規化行列が一致",
           "verification": "実資産のチャネル順とstrict優先度をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-06-039",
           "target_entity_locations": []
         }
@@ -5367,6 +6369,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-07-045",
           "target_entity_locations": []
         }
@@ -5469,6 +6474,9 @@
           "verification": "本文と実体の正規化比較、およびtests/ch07/test_ci_minimal.pyによる構造検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-07-044",
           "target_entity_locations": []
         }
@@ -5513,6 +6521,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-07-043",
           "target_entity_locations": []
         }
@@ -5768,6 +6779,17 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": "B-08-001-E01",
+          "source_entity": "test_simple_sequence",
+          "source_entity_locations": [
+            {
+              "id": "B-08-001-E01",
+              "name": "test_simple_sequence",
+              "kind": "FunctionDef",
+              "line_start": 49,
+              "line_end": 51
+            }
+          ],
           "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
@@ -5813,6 +6835,17 @@
           "verification": "空入力、小文字、通常配列、無効塩基をpytestで検証し、分岐ごとの戻り値・例外を目視比較",
           "target_entity": "reverse_complement",
           "cross_chapter": false,
+          "source_entity_id": "B-08-002-E01",
+          "source_entity": "reverse_complement",
+          "source_entity_locations": [
+            {
+              "id": "B-08-002-E01",
+              "name": "reverse_complement",
+              "kind": "FunctionDef",
+              "line_start": 64,
+              "line_end": 66
+            }
+          ],
           "target_file_id": "S-08-053",
           "target_entity_locations": [
             {
@@ -5882,6 +6915,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
@@ -5958,6 +6994,17 @@
           "verification": "pytest収集とpytest.approxによる期待値比較を実行",
           "target_entity": "test_gc_content_typical",
           "cross_chapter": false,
+          "source_entity_id": "B-08-005-E01",
+          "source_entity": "test_gc_content_typical",
+          "source_entity_locations": [
+            {
+              "id": "B-08-005-E01",
+              "name": "test_gc_content_typical",
+              "kind": "FunctionDef",
+              "line_start": 143,
+              "line_end": 152
+            }
+          ],
           "target_file_id": "T-08-043",
           "target_entity_locations": [
             {
@@ -6011,6 +7058,17 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": "B-08-006-E01",
+          "source_entity": "TestReverseComplement",
+          "source_entity_locations": [
+            {
+              "id": "B-08-006-E01",
+              "name": "TestReverseComplement",
+              "kind": "ClassDef",
+              "line_start": 162,
+              "line_end": 173
+            }
+          ],
           "target_file_id": "T-08-042",
           "target_entity_locations": []
         }
@@ -6055,6 +7113,9 @@
           "cross_chapter": false,
           "verification": "fixture注入、GC閾値、3レコードのフィルタ結果をpytestで検証",
           "target_entity": null,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "T-08-041",
           "target_entity_locations": []
         }
@@ -6100,6 +7161,9 @@
           "evidence": "test_data_dirフィクスチャのASTが本文と一致",
           "verification": "共有フィクスチャを実テストから利用し、返却パスをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "T-08-037",
           "target_entity_locations": [
             {
@@ -6119,6 +7183,9 @@
           "evidence": "sample_fastaフィクスチャのASTが本文と一致",
           "verification": "実FASTA資産をBio.SeqIOで読み、内容をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "T-08-037",
           "target_entity_locations": [
             {
@@ -6169,6 +7236,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "T-08-042",
           "target_entity_locations": []
         },
@@ -6180,6 +7250,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "T-08-043",
           "target_entity_locations": []
         }
@@ -6285,6 +7358,17 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": "B-08-012-E01",
+          "source_entity": "test_fasta_filter_pipeline",
+          "source_entity_locations": [
+            {
+              "id": "B-08-012-E01",
+              "name": "test_fasta_filter_pipeline",
+              "kind": "FunctionDef",
+              "line_start": 288,
+              "line_end": 302
+            }
+          ],
           "target_file_id": "T-08-043",
           "target_entity_locations": []
         }
@@ -6360,6 +7444,9 @@
           "evidence": "Ruff基本設定が統合pyproject.tomlの順序保存部分列",
           "verification": "実資産をtomllibで読み、Ruff設定をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-052",
           "target_entity_locations": []
         }
@@ -6405,6 +7492,9 @@
           "evidence": "per-file-ignores設定が統合pyproject.tomlの順序保存部分列",
           "verification": "実資産をtomllibで読み、tests向けD除外をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-052",
           "target_entity_locations": []
         }
@@ -6533,6 +7623,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-08-019-E01",
           "target_file": "scripts/ch08/seq_stats.py",
           "target_entity": "gc_content",
           "equivalence": "E1",
@@ -6540,6 +7631,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_content",
+          "source_entity_locations": [
+            {
+              "id": "B-08-019-E01",
+              "name": "gc_content",
+              "kind": "FunctionDef",
+              "line_start": 434,
+              "line_end": 439
+            }
+          ],
           "target_file_id": "S-08-054",
           "target_entity_locations": [
             {
@@ -6593,6 +7694,9 @@
           "evidence": "mypy設定が統合pyproject.tomlの順序保存部分列",
           "verification": "実資産をtomllibで読み、mypy設定をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-052",
           "target_entity_locations": []
         }
@@ -6667,6 +7771,9 @@
           "evidence": "pre-commit設定の正規化行列が一致",
           "verification": "公式repoの実在タグと実資産のhook構造を確認し、pytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-051",
           "target_entity_locations": []
         }
@@ -6772,6 +7879,9 @@
           "evidence": "Claude Code用PostToolUse設定がJSONとして一致",
           "verification": "Anthropic公式schemaを確認し、実資産をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-049",
           "target_entity_locations": []
         },
@@ -6783,6 +7893,9 @@
           "evidence": "Codex CLI用PostToolUse設定が同じイベント構造で一致",
           "verification": "OpenAI公式Hooks文書を確認し、実資産をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-050",
           "target_entity_locations": []
         }
@@ -6827,6 +7940,9 @@
           "evidence": "単一Python版ワークフローの正規化行列が実体と一致",
           "verification": "トリガー・権限・アクション参照・uvコマンドをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-048",
           "target_entity_locations": []
         }
@@ -6871,6 +7987,9 @@
           "evidence": "マトリクス設定が完全ワークフローの順序保存部分列",
           "verification": "Python 3.10から3.14の行列とsetup-pythonへの値引き渡しをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-08-047",
           "target_entity_locations": []
         }
@@ -6976,6 +8095,17 @@
           "evidence": "実体の先頭にあるpath.read_text()を連続して抜粋し、以降の空入力検証・FASTAパース・戻り値を省略すると明示",
           "verification": "ファイル欠落、空FASTA、単一・複数レコードをpytestで検証し、抜粋境界を目視確認",
           "cross_chapter": false,
+          "source_entity_id": "B-09-001-E01",
+          "source_entity": "read_fasta_records",
+          "source_entity_locations": [
+            {
+              "id": "B-09-001-E01",
+              "name": "read_fasta_records",
+              "kind": "FunctionDef",
+              "line_start": 38,
+              "line_end": 39
+            }
+          ],
           "target_file_id": "S-09-062",
           "target_entity_locations": [
             {
@@ -7058,6 +8188,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-09-003-E01",
           "target_file": "scripts/ch09/traceback_demo.py",
           "target_entity": "parse_gene_expression",
           "equivalence": "E1",
@@ -7065,6 +8196,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "parse_gene_expression",
+          "source_entity_locations": [
+            {
+              "id": "B-09-003-E01",
+              "name": "parse_gene_expression",
+              "kind": "FunctionDef",
+              "line_start": 66,
+              "line_end": 74
+            }
+          ],
           "target_file_id": "S-09-062",
           "target_entity_locations": [
             {
@@ -7140,6 +8281,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-09-005-E01",
           "target_file": "scripts/ch09/traceback_demo.py",
           "target_entity": "lookup_gene_annotation",
           "equivalence": "E1",
@@ -7147,6 +8289,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "lookup_gene_annotation",
+          "source_entity_locations": [
+            {
+              "id": "B-09-005-E01",
+              "name": "lookup_gene_annotation",
+              "kind": "FunctionDef",
+              "line_start": 88,
+              "line_end": 94
+            }
+          ],
           "target_file_id": "S-09-062",
           "target_entity_locations": [
             {
@@ -7238,6 +8390,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-09-007-E01",
           "target_file": "scripts/ch09/debug_print_demo.py",
           "target_entity": "filter_sequences_logging_debug",
           "equivalence": "E1",
@@ -7245,6 +8398,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "filter_sequences_logging_debug",
+          "source_entity_locations": [
+            {
+              "id": "B-09-007-E01",
+              "name": "filter_sequences_logging_debug",
+              "kind": "FunctionDef",
+              "line_start": 186,
+              "line_end": 201
+            }
+          ],
           "target_file_id": "S-09-057",
           "target_entity_locations": [
             {
@@ -7297,6 +8460,17 @@
           "evidence": "実体のGC比計算ループとbreakpoint呼び出しを連続して抜粋し、空入力処理と集計returnの省略を明示",
           "verification": "breakpointをmonkeypatchし、通常入力では配列ごとの呼び出し、空入力では非呼び出しをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": "B-09-008-E01",
+          "source_entity": "calculate_gc_stats_debug",
+          "source_entity_locations": [
+            {
+              "id": "B-09-008-E01",
+              "name": "calculate_gc_stats_debug",
+              "kind": "FunctionDef",
+              "line_start": 213,
+              "line_end": 222
+            }
+          ],
           "target_file_id": "S-09-060",
           "target_entity_locations": [
             {
@@ -7626,6 +8800,17 @@
           "evidence": "BED・GFF・不明形式の検証分岐を実体どおり抜粋し、正常時のreturn Trueだけを省略すると明示",
           "verification": "両座標系の境界、start > end、配列長超過、不明形式をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": "B-09-018-E01",
+          "source_entity": "validate_coordinates",
+          "source_entity_locations": [
+            {
+              "id": "B-09-018-E01",
+              "name": "validate_coordinates",
+              "kind": "FunctionDef",
+              "line_start": 410,
+              "line_end": 439
+            }
+          ],
           "target_file_id": "S-09-056",
           "target_entity_locations": [
             {
@@ -7708,6 +8893,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-09-020-E01",
           "target_file": "scripts/ch09/path_bugs.py",
           "target_entity": "resolve_data_path",
           "equivalence": "E1",
@@ -7715,6 +8901,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "resolve_data_path",
+          "source_entity_locations": [
+            {
+              "id": "B-09-020-E01",
+              "name": "resolve_data_path",
+              "kind": "FunctionDef",
+              "line_start": 485,
+              "line_end": 490
+            }
+          ],
           "target_file_id": "S-09-059",
           "target_entity_locations": [
             {
@@ -7866,6 +9062,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-09-024-E01",
           "target_file": "scripts/ch09/type_bugs.py",
           "target_entity": "safe_mean",
           "equivalence": "E1",
@@ -7873,6 +9070,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "safe_mean",
+          "source_entity_locations": [
+            {
+              "id": "B-09-024-E01",
+              "name": "safe_mean",
+              "kind": "FunctionDef",
+              "line_start": 545,
+              "line_end": 549
+            }
+          ],
           "target_file_id": "S-09-063",
           "target_entity_locations": [
             {
@@ -7955,6 +9162,9 @@
           "evidence": "ミュータブルデフォルト引数のバグ関数がdocstring差を除いて同じ",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
@@ -8007,6 +9217,9 @@
           "evidence": "浅いコピーでネストしたlistが共有される同じ挙動を関数化",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
@@ -8089,6 +9302,9 @@
           "evidence": "str.replaceの戻り値代入という同じ修正を関数化",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
@@ -8141,6 +9357,9 @@
           "evidence": "chained assignment回避のloc利用を再利用関数として実装",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
@@ -8193,6 +9412,9 @@
           "evidence": "NumPy view/copyの共有挙動を同じ配列例で関数化",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-09-061",
           "target_entity_locations": [
             {
@@ -8395,6 +9617,9 @@
           "evidence": "パッケージ用pyproject.tomlの正規化行列が一致",
           "verification": "PEP 621・build backend・実在CLI entry pointをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-10-069",
           "target_entity_locations": []
         }
@@ -8980,6 +10205,9 @@
           "evidence": "config.yamlの正規化行列が一致",
           "verification": "既存load_configで実資産を読み、値のマージをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-10-065",
           "target_entity_locations": []
         }
@@ -9017,6 +10245,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-10-024-E01",
           "target_file": "scripts/ch10/config_example.py",
           "target_entity": "load_config",
           "equivalence": "E1",
@@ -9024,6 +10253,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "load_config",
+          "source_entity_locations": [
+            {
+              "id": "B-10-024-E01",
+              "name": "load_config",
+              "kind": "FunctionDef",
+              "line_start": 634,
+              "line_end": 658
+            }
+          ],
           "target_file_id": "S-10-066",
           "target_entity_locations": [
             {
@@ -9130,6 +10369,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-10-027-E01",
           "target_file": "scripts/ch10/error_handling.py",
           "target_entity": "BiofilterError",
           "equivalence": "E0",
@@ -9137,6 +10377,16 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "BiofilterError",
+          "source_entity_locations": [
+            {
+              "id": "B-10-027-E01",
+              "name": "BiofilterError",
+              "kind": "ClassDef",
+              "line_start": 735,
+              "line_end": 736
+            }
+          ],
           "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
@@ -9182,6 +10432,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-10-028-E01",
           "target_file": "scripts/ch10/error_handling.py",
           "target_entity": "load_min_quality",
           "equivalence": "E1",
@@ -9189,6 +10440,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "load_min_quality",
+          "source_entity_locations": [
+            {
+              "id": "B-10-028-E01",
+              "name": "load_min_quality",
+              "kind": "FunctionDef",
+              "line_start": 772,
+              "line_end": 782
+            }
+          ],
           "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
@@ -9234,6 +10495,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-10-029-E01",
           "target_file": "scripts/ch10/error_handling.py",
           "target_entity": "_load_effective_fasta_text",
           "equivalence": "E0",
@@ -9241,6 +10503,16 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "_load_effective_fasta_text",
+          "source_entity_locations": [
+            {
+              "id": "B-10-029-E01",
+              "name": "_load_effective_fasta_text",
+              "kind": "FunctionDef",
+              "line_start": 800,
+              "line_end": 809
+            }
+          ],
           "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
@@ -9316,6 +10588,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-10-031-E01",
           "target_file": "scripts/ch10/error_handling.py",
           "target_entity": "count_records_with_cleanup",
           "equivalence": "E1",
@@ -9323,6 +10596,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "count_records_with_cleanup",
+          "source_entity_locations": [
+            {
+              "id": "B-10-031-E01",
+              "name": "count_records_with_cleanup",
+              "kind": "FunctionDef",
+              "line_start": 899,
+              "line_end": 909
+            }
+          ],
           "target_file_id": "S-10-067",
           "target_entity_locations": [
             {
@@ -9405,6 +10688,17 @@
           "evidence": "run_pipeline関数のASTが本文と一致",
           "verification": "入力・参照の早期失敗と検証後の出力作成をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": "B-10-033-E01",
+          "source_entity": "run_pipeline",
+          "source_entity_locations": [
+            {
+              "id": "B-10-033-E01",
+              "name": "run_pipeline",
+              "kind": "FunctionDef",
+              "line_start": 933,
+              "line_end": 951
+            }
+          ],
           "target_file_id": "S-10-068",
           "target_entity_locations": [
             {
@@ -9511,6 +10805,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-11-001-E01",
           "target_file": "scripts/ch11/cli_argparse.py",
           "target_entity": "parse_args",
           "equivalence": "E0",
@@ -9518,6 +10813,16 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "parse_args",
+          "source_entity_locations": [
+            {
+              "id": "B-11-001-E01",
+              "name": "parse_args",
+              "kind": "FunctionDef",
+              "line_start": 47,
+              "line_end": 89
+            }
+          ],
           "target_file_id": "S-11-073",
           "target_entity_locations": [
             {
@@ -9587,6 +10892,17 @@
           "evidence": "本文は実体のデコレータ、型付きシグネチャ、docstringを順序どおり示し、入力検証と処理本体の省略境界を明記",
           "verification": "help、version、範囲検証、stdin/stdout、ファイル入出力をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-002-E01",
+          "source_entity": "gc_filter",
+          "source_entity_locations": [
+            {
+              "id": "B-11-002-E01",
+              "name": "gc_filter",
+              "kind": "FunctionDef",
+              "line_start": 130,
+              "line_end": 143
+            }
+          ],
           "target_file_id": "S-11-074",
           "target_entity_locations": [
             {
@@ -9647,6 +10963,17 @@
           "evidence": "本文は実体のTyperアプリ、デコレータ、Annotatedシグネチャを示し、処理本体の省略境界を明記",
           "verification": "help、正常入力、範囲外入力、ファイル出力を直接CLIテストで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-003-E01",
+          "source_entity": "gc_filter",
+          "source_entity_locations": [
+            {
+              "id": "B-11-003-E01",
+              "name": "gc_filter",
+              "kind": "FunctionDef",
+              "line_start": 162,
+              "line_end": 186
+            }
+          ],
           "target_file_id": "S-11-075",
           "target_entity_locations": [
             {
@@ -9769,6 +11096,17 @@
           "evidence": "本文は実体のversionデコレータから型付きシグネチャとhelp用docstringまでを連続して抜粋",
           "verification": "help本文、version、CLI本体の入出力をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-006-E01",
+          "source_entity": "gc_filter",
+          "source_entity_locations": [
+            {
+              "id": "B-11-006-E01",
+              "name": "gc_filter",
+              "kind": "FunctionDef",
+              "line_start": 233,
+              "line_end": 246
+            }
+          ],
           "target_file_id": "S-11-074",
           "target_entity_locations": [
             {
@@ -9828,6 +11166,9 @@
           "evidence": "本文はversionを含む実体のグループ関数とstats・filterの登録部を示し、各サブコマンド本体とconvertを省略",
           "verification": "help、version、stats、filter、convertをpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-11-079",
           "target_entity_locations": [
             {
@@ -9987,6 +11328,17 @@
           "evidence": "本文は実体のFASTA読込例外と空入力をClickExceptionへ変換する部分を示し、後続処理を省略",
           "verification": "正常終了0、実行時エラー1、オプション誤り2とstderrをpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-011-E01",
+          "source_entity": "gc_filter",
+          "source_entity_locations": [
+            {
+              "id": "B-11-011-E01",
+              "name": "gc_filter",
+              "kind": "FunctionDef",
+              "line_start": 418,
+              "line_end": 436
+            }
+          ],
           "target_file_id": "S-11-074",
           "target_entity_locations": [
             {
@@ -10076,6 +11428,17 @@
           "evidence": "本文は実体のCLI上書き関数を完全に示し、デフォルト・YAML読込・検証を行う補助定義の省略境界を明記",
           "verification": "デフォルト、YAML、CLI上書き、欠落・不正設定をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-013-E01",
+          "source_entity": "resolve_config",
+          "source_entity_locations": [
+            {
+              "id": "B-11-013-E01",
+              "name": "resolve_config",
+              "kind": "FunctionDef",
+              "line_start": 454,
+              "line_end": 469
+            }
+          ],
           "target_file_id": "S-11-076",
           "target_entity_locations": [
             {
@@ -10449,6 +11812,17 @@
           "evidence": "本文はデコレータを省略し、実体のfilter_cmdシグネチャと処理本体を順序どおり抜粋",
           "verification": "TTY有無、progress有無、stdoutとstderrの分離をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-024-E01",
+          "source_entity": "filter_cmd",
+          "source_entity_locations": [
+            {
+              "id": "B-11-024-E01",
+              "name": "filter_cmd",
+              "kind": "FunctionDef",
+              "line_start": 725,
+              "line_end": 757
+            }
+          ],
           "target_file_id": "S-11-079",
           "target_entity_locations": [
             {
@@ -10652,6 +12026,17 @@
           "evidence": "本文はversionとlog-fileを含む実体のグループ関数を示し、後続サブコマンドを省略",
           "verification": "log-level優先順位、verbose、versionをpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-030-E01",
+          "source_entity": "cli",
+          "source_entity_locations": [
+            {
+              "id": "B-11-030-E01",
+              "name": "cli",
+              "kind": "FunctionDef",
+              "line_start": 890,
+              "line_end": 907
+            }
+          ],
           "target_file_id": "S-11-079",
           "target_entity_locations": [
             {
@@ -10721,6 +12106,17 @@
           "evidence": "setup_logging関数のASTが本文と一致",
           "verification": "不正level、stderr、file、Rich有無、handler重複をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-11-031-E01",
+          "source_entity": "setup_logging",
+          "source_entity_locations": [
+            {
+              "id": "B-11-031-E01",
+              "name": "setup_logging",
+              "kind": "FunctionDef",
+              "line_start": 922,
+              "line_end": 982
+            }
+          ],
           "target_file_id": "S-11-077",
           "target_entity_locations": [
             {
@@ -10873,6 +12269,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-001-E01",
           "target_file": "scripts/ch12/plot_vectorize_bench.py",
           "target_entity": "_gc_per_base_loop",
           "equivalence": "E1",
@@ -10880,6 +12277,16 @@
           "evidence": "定義名を伏せたAST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_contents_slow",
+          "source_entity_locations": [
+            {
+              "id": "B-12-001-E01",
+              "name": "gc_contents_slow",
+              "kind": "FunctionDef",
+              "line_start": 23,
+              "line_end": 31
+            }
+          ],
           "target_file_id": "S-12-083",
           "target_entity_locations": [
             {
@@ -10953,6 +12360,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-003-E01",
           "target_file": "scripts/ch12/plot_vectorize_bench.py",
           "target_entity": "_gc_per_seq_numpy",
           "equivalence": "E1",
@@ -10960,6 +12368,16 @@
           "evidence": "定義名を伏せたAST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_content_per_seq",
+          "source_entity_locations": [
+            {
+              "id": "B-12-003-E01",
+              "name": "gc_content_per_seq",
+              "kind": "FunctionDef",
+              "line_start": 65,
+              "line_end": 70
+            }
+          ],
           "target_file_id": "S-12-083",
           "target_entity_locations": [
             {
@@ -11003,6 +12421,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-004-E01",
           "target_file": "scripts/ch12/numpy_vectorize.py",
           "target_entity": "gc_content_vectorized",
           "equivalence": "E1",
@@ -11010,6 +12429,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_content_vectorized",
+          "source_entity_locations": [
+            {
+              "id": "B-12-004-E01",
+              "name": "gc_content_vectorized",
+              "kind": "FunctionDef",
+              "line_start": 78,
+              "line_end": 93
+            }
+          ],
           "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
@@ -11055,6 +12484,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-005-E01",
           "target_file": "scripts/ch12/numpy_vectorize.py",
           "target_entity": "normalize_cpm",
           "equivalence": "E1",
@@ -11062,6 +12492,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "normalize_cpm",
+          "source_entity_locations": [
+            {
+              "id": "B-12-005-E01",
+              "name": "normalize_cpm",
+              "kind": "FunctionDef",
+              "line_start": 107,
+              "line_end": 120
+            }
+          ],
           "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
@@ -11107,6 +12547,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-006-E01",
           "target_file": "scripts/ch12/numpy_vectorize.py",
           "target_entity": "filter_by_quality",
           "equivalence": "E1",
@@ -11114,6 +12555,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "filter_by_quality",
+          "source_entity_locations": [
+            {
+              "id": "B-12-006-E01",
+              "name": "filter_by_quality",
+              "kind": "FunctionDef",
+              "line_start": 141,
+              "line_end": 144
+            }
+          ],
           "target_file_id": "S-12-081",
           "target_entity_locations": [
             {
@@ -11160,6 +12611,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-007-E01",
           "target_file": "scripts/ch12/pandas_bio_ops.py",
           "target_entity": "load_deg_results",
           "equivalence": "E1",
@@ -11167,6 +12619,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "load_deg_results",
+          "source_entity_locations": [
+            {
+              "id": "B-12-007-E01",
+              "name": "load_deg_results",
+              "kind": "FunctionDef",
+              "line_start": 188,
+              "line_end": 196
+            }
+          ],
           "target_file_id": "S-12-082",
           "target_entity_locations": [
             {
@@ -11213,6 +12675,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-008-E01",
           "target_file": "scripts/ch12/pandas_bio_ops.py",
           "target_entity": "filter_significant_genes",
           "equivalence": "E1",
@@ -11220,6 +12683,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "filter_significant_genes",
+          "source_entity_locations": [
+            {
+              "id": "B-12-008-E01",
+              "name": "filter_significant_genes",
+              "kind": "FunctionDef",
+              "line_start": 206,
+              "line_end": 214
+            }
+          ],
           "target_file_id": "S-12-082",
           "target_entity_locations": [
             {
@@ -11266,6 +12739,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-009-E01",
           "target_file": "scripts/ch12/pandas_bio_ops.py",
           "target_entity": "merge_with_metadata",
           "equivalence": "E1",
@@ -11273,6 +12747,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "merge_with_metadata",
+          "source_entity_locations": [
+            {
+              "id": "B-12-009-E01",
+              "name": "merge_with_metadata",
+              "kind": "FunctionDef",
+              "line_start": 224,
+              "line_end": 230
+            }
+          ],
           "target_file_id": "S-12-082",
           "target_entity_locations": [
             {
@@ -11319,6 +12803,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-010-E01",
           "target_file": "scripts/ch12/pandas_bio_ops.py",
           "target_entity": "summarize_by_category",
           "equivalence": "E1",
@@ -11326,6 +12811,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "summarize_by_category",
+          "source_entity_locations": [
+            {
+              "id": "B-12-010-E01",
+              "name": "summarize_by_category",
+              "kind": "FunctionDef",
+              "line_start": 240,
+              "line_end": 250
+            }
+          ],
           "target_file_id": "S-12-082",
           "target_entity_locations": [
             {
@@ -11408,6 +12903,9 @@
           "evidence": "Polars lazyのfilter・方向列・group_byは同じだが、本文はCSV読込からcollectまでの利用例",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-12-084",
           "target_entity_locations": [
             {
@@ -11483,6 +12981,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-014-E01",
           "target_file": "scripts/ch12/scipy_stats_bio.py",
           "target_entity": "compare_expression",
           "equivalence": "E1",
@@ -11490,6 +12989,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "compare_expression",
+          "source_entity_locations": [
+            {
+              "id": "B-12-014-E01",
+              "name": "compare_expression",
+              "kind": "FunctionDef",
+              "line_start": 419,
+              "line_end": 425
+            }
+          ],
           "target_file_id": "S-12-085",
           "target_entity_locations": [
             {
@@ -11535,6 +13044,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-015-E01",
           "target_file": "scripts/ch12/scipy_stats_bio.py",
           "target_entity": "correct_pvalues",
           "equivalence": "E1",
@@ -11542,6 +13052,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "correct_pvalues",
+          "source_entity_locations": [
+            {
+              "id": "B-12-015-E01",
+              "name": "correct_pvalues",
+              "kind": "FunctionDef",
+              "line_start": 435,
+              "line_end": 453
+            }
+          ],
           "target_file_id": "S-12-085",
           "target_entity_locations": [
             {
@@ -11587,6 +13107,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-016-E01",
           "target_file": "scripts/ch12/scipy_stats_bio.py",
           "target_entity": "correct_pvalues_scipy",
           "equivalence": "E1",
@@ -11594,6 +13115,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "correct_pvalues_scipy",
+          "source_entity_locations": [
+            {
+              "id": "B-12-016-E01",
+              "name": "correct_pvalues_scipy",
+              "kind": "FunctionDef",
+              "line_start": 459,
+              "line_end": 463
+            }
+          ],
           "target_file_id": "S-12-085",
           "target_entity_locations": [
             {
@@ -11639,6 +13170,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-017-E01",
           "target_file": "scripts/ch12/scipy_stats_bio.py",
           "target_entity": "distance_matrix_naive",
           "equivalence": "E1",
@@ -11646,6 +13178,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "distance_matrix_naive",
+          "source_entity_locations": [
+            {
+              "id": "B-12-017-E01",
+              "name": "distance_matrix_naive",
+              "kind": "FunctionDef",
+              "line_start": 475,
+              "line_end": 484
+            }
+          ],
           "target_file_id": "S-12-085",
           "target_entity_locations": [
             {
@@ -11691,6 +13233,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-12-018-E01",
           "target_file": "scripts/ch12/scipy_stats_bio.py",
           "target_entity": "expression_distance_matrix",
           "equivalence": "E1",
@@ -11698,6 +13241,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "expression_distance_matrix",
+          "source_entity_locations": [
+            {
+              "id": "B-12-018-E01",
+              "name": "expression_distance_matrix",
+              "kind": "FunctionDef",
+              "line_start": 492,
+              "line_end": 495
+            }
+          ],
           "target_file_id": "S-12-085",
           "target_entity_locations": [
             {
@@ -11833,6 +13386,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-13-002-E01",
           "target_file": "scripts/ch13/matplotlib_bindist.py",
           "target_entity": "gc_histogram",
           "equivalence": "E1",
@@ -11840,6 +13394,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_histogram",
+          "source_entity_locations": [
+            {
+              "id": "B-13-002-E01",
+              "name": "gc_histogram",
+              "kind": "FunctionDef",
+              "line_start": 44,
+              "line_end": 59
+            }
+          ],
           "target_file_id": "S-13-089",
           "target_entity_locations": [
             {
@@ -11886,6 +13450,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-13-003-E01",
           "target_file": "scripts/ch13/bio_plots.py",
           "target_entity": "volcano_plot",
           "equivalence": "E1",
@@ -11893,6 +13458,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "volcano_plot",
+          "source_entity_locations": [
+            {
+              "id": "B-13-003-E01",
+              "name": "volcano_plot",
+              "kind": "FunctionDef",
+              "line_start": 88,
+              "line_end": 150
+            }
+          ],
           "target_file_id": "S-13-087",
           "target_entity_locations": [
             {
@@ -11939,6 +13514,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-13-004-E01",
           "target_file": "scripts/ch13/bio_plots.py",
           "target_entity": "expression_heatmap",
           "equivalence": "E1",
@@ -11946,6 +13522,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "expression_heatmap",
+          "source_entity_locations": [
+            {
+              "id": "B-13-004-E01",
+              "name": "expression_heatmap",
+              "kind": "FunctionDef",
+              "line_start": 168,
+              "line_end": 199
+            }
+          ],
           "target_file_id": "S-13-087",
           "target_entity_locations": [
             {
@@ -11991,6 +13577,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-13-005-E01",
           "target_file": "scripts/ch13/seaborn_biodist.py",
           "target_entity": "expression_violin",
           "equivalence": "E0",
@@ -11998,6 +13585,16 @@
           "evidence": "AST完全一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "expression_violin",
+          "source_entity_locations": [
+            {
+              "id": "B-13-005-E01",
+              "name": "expression_violin",
+              "kind": "FunctionDef",
+              "line_start": 223,
+              "line_end": 270
+            }
+          ],
           "target_file_id": "S-13-092",
           "target_entity_locations": [
             {
@@ -12127,6 +13724,17 @@
           "evidence": "apply_project_style関数のASTが本文と一致",
           "verification": "6項目のMatplotlib rcParams更新をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": "B-13-008-E01",
+          "source_entity": "apply_project_style",
+          "source_entity_locations": [
+            {
+              "id": "B-13-008-E01",
+              "name": "apply_project_style",
+              "kind": "FunctionDef",
+              "line_start": 449,
+              "line_end": 458
+            }
+          ],
           "target_file_id": "S-13-091",
           "target_entity_locations": [
             {
@@ -12211,6 +13819,9 @@
           "evidence": "pyGenomeTracks設定の正規化行列が一致",
           "verification": "実資産のINI構文と3トラックの必須値をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-13-093",
           "target_entity_locations": []
         }
@@ -12317,6 +13928,9 @@
           "evidence": "fastqc ruleを設定参照、入出力、ログ、shellを保って実体から連続抜粋",
           "verification": "config値の静的検証とSnakemake 9.23.1のdry-runで3サンプルのDAGを確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": [
             {
@@ -12370,6 +13984,9 @@
           "evidence": "コメント・空白を除くrule内容が一致",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": [
             {
@@ -12423,6 +14040,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": []
         }
@@ -12468,6 +14088,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-098",
           "target_entity_locations": []
         }
@@ -12513,6 +14136,9 @@
           "verification": "dry-run・R構文解析・最小count fixtureの出力をpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-096",
           "target_entity_locations": []
         }
@@ -12558,6 +14184,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": []
         }
@@ -12603,6 +14232,9 @@
           "verification": "代替FastQCによるfixture smoke testをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-106",
           "target_entity_locations": []
         }
@@ -12679,6 +14311,9 @@
           "verification": "cwltool validateと代替fastpによるfixture smoke testをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-105",
           "target_entity_locations": []
         }
@@ -12724,6 +14359,9 @@
           "verification": "cwltool validateと2 step接続のfixture smoke testをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-109",
           "target_entity_locations": []
         }
@@ -12769,6 +14407,9 @@
           "verification": "全入力キー・File・Directory実在とCWL fixture実行をpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-108",
           "target_entity_locations": []
         }
@@ -12844,6 +14485,9 @@
           "verification": "make -n all/cleanで依存順と削除対象をpytest検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-094",
           "target_entity_locations": []
         }
@@ -12918,6 +14562,9 @@
           "evidence": "input/output/temp指定が実体ruleの連続した抜粋",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": [
             {
@@ -12970,6 +14617,9 @@
           "evidence": "star_alignの中間BAMに対するtemp指定と完全な出力パスを実体から抜粋",
           "verification": "実体のtemp指定をpytestで読み、Snakemake dry-runでfeaturecounts後の一時出力削除計画を確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": [
             {
@@ -13052,6 +14702,9 @@
           "evidence": "star_alignのlog、threads、完全なshell文字列を実体末尾から連続抜粋",
           "verification": "ログパスとshellの{log}参照をpytestで読み、Snakemake dry-runで展開を確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-095",
           "target_entity_locations": [
             {
@@ -13157,6 +14810,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch14/validate_workflow.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -13164,6 +14818,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-14-111",
           "target_entity_locations": []
         }
@@ -13238,6 +14894,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-112",
           "target_entity_locations": []
         }
@@ -13313,6 +14972,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-112",
           "target_entity_locations": []
         }
@@ -13387,6 +15049,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-115",
           "target_entity_locations": []
         }
@@ -13489,6 +15154,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-118",
           "target_entity_locations": []
         }
@@ -13624,6 +15292,9 @@
           "verification": "本文同期と必須フィールドをpytestで検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-123",
           "target_entity_locations": []
         }
@@ -13698,6 +15369,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-117",
           "target_entity_locations": []
         }
@@ -13830,6 +15504,9 @@
           "verification": "Dockerfile構文、digest、起動命令をpytestで検証し、Podman buildで確認",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-114",
           "target_entity_locations": []
         }
@@ -13874,6 +15551,9 @@
           "verification": "Dockerfile構文とlinux-64/linux-aarch64 lockをpytestで検証し、Podman buildで確認",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-113",
           "target_entity_locations": []
         }
@@ -13978,6 +15658,9 @@
           "verification": "3方式の分離、lock/hash、Dockerfile構文をpytestで検証し、各Podman buildで確認",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-125",
           "target_entity_locations": []
         }
@@ -14075,6 +15758,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch15/validate_dockerfile.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -14082,6 +15766,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-124",
           "target_entity_locations": []
         }
@@ -14214,6 +15900,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch15/experiment_logger.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -14221,6 +15908,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-15-121",
           "target_entity_locations": []
         }
@@ -14387,6 +16076,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-136",
           "target_entity_locations": []
         }
@@ -14459,6 +16151,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-135",
           "target_entity_locations": []
         }
@@ -14531,6 +16226,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-138",
           "target_entity_locations": []
         }
@@ -14633,6 +16331,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-137",
           "target_entity_locations": []
         }
@@ -14705,6 +16406,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-137",
           "target_entity_locations": []
         }
@@ -14867,6 +16571,9 @@
           "verification": "ssh -G -Fで両Hostの接続先、User、ProxyJump、ServerAliveIntervalをpytest検証",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-140",
           "target_entity_locations": []
         }
@@ -15151,6 +16858,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-16-139",
           "target_entity_locations": []
         }
@@ -15678,6 +17388,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-17-016-E01",
           "target_file": "scripts/ch17/profiling_demo.py",
           "target_entity": "normalize_tpm_slow",
           "equivalence": "E1",
@@ -15685,6 +17396,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "normalize_tpm_slow",
+          "source_entity_locations": [
+            {
+              "id": "B-17-016-E01",
+              "name": "normalize_tpm_slow",
+              "kind": "FunctionDef",
+              "line_start": 251,
+              "line_end": 274
+            }
+          ],
           "target_file_id": "S-17-150",
           "target_entity_locations": [
             {
@@ -15797,6 +17518,9 @@
           "evidence": "本文は実体と同じno-op fallbackとデコレータ登録を示し、正規化関数本体とmain入口の省略境界を明記",
           "verification": "通常import、fallback、注入デコレータ、計算結果をpytestで、kernprof 5.0.2の実行をsmoke testで確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-17-150",
           "target_entity_locations": [
             {
@@ -15916,6 +17640,17 @@
           "evidence": "load_large_data関数のASTが本文と一致",
           "verification": "小規模入力で再現可能な列平均と戻り値形状をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": "B-17-022-E01",
+          "source_entity": "load_large_data",
+          "source_entity_locations": [
+            {
+              "id": "B-17-022-E01",
+              "name": "load_large_data",
+              "kind": "FunctionDef",
+              "line_start": 385,
+              "line_end": 395
+            }
+          ],
           "target_file_id": "S-17-146",
           "target_entity_locations": [
             {
@@ -16141,6 +17876,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-17-029-E01",
           "target_file": "scripts/ch17/profiling_demo.py",
           "target_entity": "normalize_tpm_fast",
           "equivalence": "E1",
@@ -16148,6 +17884,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "normalize_tpm_fast",
+          "source_entity_locations": [
+            {
+              "id": "B-17-029-E01",
+              "name": "normalize_tpm_fast",
+              "kind": "FunctionDef",
+              "line_start": 521,
+              "line_end": 536
+            }
+          ],
           "target_file_id": "S-17-150",
           "target_entity_locations": [
             {
@@ -16194,6 +17940,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-17-030-E01",
           "target_file": "scripts/ch17/parallel_gc.py",
           "target_entity": "gc_content_single",
           "equivalence": "E1",
@@ -16201,6 +17948,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "gc_content_single",
+          "source_entity_locations": [
+            {
+              "id": "B-17-030-E01",
+              "name": "gc_content_single",
+              "kind": "FunctionDef",
+              "line_start": 574,
+              "line_end": 580
+            }
+          ],
           "target_file_id": "S-17-147",
           "target_entity_locations": [
             {
@@ -16254,6 +18011,9 @@
           "evidence": "filter_reads_list関数のASTが本文と一致",
           "verification": "両実装の結果一致、閾値境界をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-17-145",
           "target_entity_locations": [
             {
@@ -16273,6 +18033,9 @@
           "evidence": "filter_reads_generator関数のASTが本文と一致",
           "verification": "両実装の結果一致、遅延評価、閾値境界をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-17-145",
           "target_entity_locations": [
             {
@@ -16326,6 +18089,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-17-145",
           "target_entity_locations": []
         }
@@ -16461,6 +18227,17 @@
           "evidence": "count_long_sequences関数のASTが本文と一致",
           "verification": "境界長を含むFASTAと空FASTAをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": "B-17-036-E01",
+          "source_entity": "count_long_sequences",
+          "source_entity_locations": [
+            {
+              "id": "B-17-036-E01",
+              "name": "count_long_sequences",
+              "kind": "FunctionDef",
+              "line_start": 843,
+              "line_end": 853
+            }
+          ],
           "target_file_id": "S-17-151",
           "target_entity_locations": [
             {
@@ -16513,6 +18290,17 @@
           "evidence": "compute_stats_chunked関数のASTが本文と一致",
           "verification": "0件、1件、複数件、複数チャンクをpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-17-037-E01",
+          "source_entity": "compute_stats_chunked",
+          "source_entity_locations": [
+            {
+              "id": "B-17-037-E01",
+              "name": "compute_stats_chunked",
+              "kind": "FunctionDef",
+              "line_start": 871,
+              "line_end": 930
+            }
+          ],
           "target_file_id": "S-17-143",
           "target_entity_locations": [
             {
@@ -16575,6 +18363,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-17-038-E01",
           "target_file": "scripts/ch17/file_format_bench.py",
           "target_entity": "save_as_csv",
           "equivalence": "E1",
@@ -16582,6 +18371,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "save_as_csv",
+          "source_entity_locations": [
+            {
+              "id": "B-17-038-E01",
+              "name": "save_as_csv",
+              "kind": "FunctionDef",
+              "line_start": 964,
+              "line_end": 966
+            }
+          ],
           "target_file_id": "S-17-144",
           "target_entity_locations": [
             {
@@ -16634,6 +18433,17 @@
           "evidence": "章をまたぐ改名・変数名差のみでgzip行数÷4の処理は同じ",
           "cross_chapter": true,
           "verification": "manual",
+          "source_entity_id": "B-17-039-E01",
+          "source_entity": "count_reads_gzip",
+          "source_entity_locations": [
+            {
+              "id": "B-17-039-E01",
+              "name": "count_reads_gzip",
+              "kind": "FunctionDef",
+              "line_start": 1019,
+              "line_end": 1030
+            }
+          ],
           "target_file_id": "S-02-013",
           "target_entity_locations": [
             {
@@ -17181,6 +18991,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-18-154",
           "target_entity_locations": []
         }
@@ -17277,6 +19090,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch18/validate_readme.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -17284,6 +19098,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-18-160",
           "target_entity_locations": []
         }
@@ -17388,6 +19204,9 @@
           "evidence": "本文のMkDocs設定全体が実体と一致",
           "verification": "YAML・参照パス・API関数をpytestで検証し、mkdocs build --strictを実行",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-18-157",
           "target_entity_locations": []
         }
@@ -17485,6 +19304,7 @@
       "category_reason": "`scripts/` を呼び出す例",
       "relations": [
         {
+          "source_entity_id": null,
           "target_file": "scripts/ch18/docstring_checker.py",
           "target_entity": null,
           "equivalence": "EN",
@@ -17492,6 +19312,8 @@
           "evidence": "本文コードが対象モジュールをimportして呼び出す",
           "verification": "AST import解析",
           "cross_chapter": false,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-18-153",
           "target_entity_locations": []
         }
@@ -17865,6 +19687,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-19-163",
           "target_entity_locations": []
         }
@@ -17909,6 +19734,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-19-166",
           "target_entity_locations": []
         }
@@ -18292,6 +20120,9 @@
           "verification": "manual",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-19-165",
           "target_entity_locations": []
         }
@@ -18399,6 +20230,9 @@
           "verification": "schema、初期化の再実行、挿入、検索、集計をpytestで確認",
           "target_entity": null,
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-19-164",
           "target_entity_locations": []
         }
@@ -18543,6 +20377,9 @@
           "evidence": ".env.exampleの正規化行列が一致",
           "verification": "必須キー・placeholder・シークレット不在をpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-20-167",
           "target_entity_locations": []
         }
@@ -18619,6 +20456,17 @@
           "evidence": "本文は全パターンとdocstringを除くscan_content関数を実体どおり示し、import、データクラス、詳細docstring、ファイル除外処理の省略境界を明記",
           "verification": "複数パターン、行番号、偽陽性、filepath、戻り値をpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-20-004-E01",
+          "source_entity": "scan_content",
+          "source_entity_locations": [
+            {
+              "id": "B-20-004-E01",
+              "name": "scan_content",
+              "kind": "FunctionDef",
+              "line_start": 130,
+              "line_end": 161
+            }
+          ],
           "target_file_id": "S-20-170",
           "target_entity_locations": [
             {
@@ -18813,6 +20661,17 @@
           "evidence": "generalize_age関数のASTが本文と一致",
           "verification": "年齢境界、負の年齢、0以下のbin_sizeをpytestで確認",
           "cross_chapter": false,
+          "source_entity_id": "B-20-009-E01",
+          "source_entity": "generalize_age",
+          "source_entity_locations": [
+            {
+              "id": "B-20-009-E01",
+              "name": "generalize_age",
+              "kind": "FunctionDef",
+              "line_start": 575,
+              "line_end": 604
+            }
+          ],
           "target_file_id": "S-20-169",
           "target_entity_locations": [
             {
@@ -18882,6 +20741,9 @@
           "evidence": "本文がrows準備・空入力・列検証・統計項目を明示的に省略した抜粋",
           "verification": "manual",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-20-169",
           "target_entity_locations": [
             {
@@ -19081,6 +20943,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-21-004-E01",
           "target_file": "scripts/ch21/format_question.py",
           "target_entity": "collect_environment",
           "equivalence": "E1",
@@ -19088,6 +20951,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "collect_environment",
+          "source_entity_locations": [
+            {
+              "id": "B-21-004-E01",
+              "name": "collect_environment",
+              "kind": "FunctionDef",
+              "line_start": 92,
+              "line_end": 105
+            }
+          ],
           "target_file_id": "S-21-174",
           "target_entity_locations": [
             {
@@ -19212,6 +21085,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-21-007-E01",
           "target_file": "scripts/ch21/review_helper.py",
           "target_entity": "check_type_hints",
           "equivalence": "E1",
@@ -19219,6 +21093,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "check_type_hints",
+          "source_entity_locations": [
+            {
+              "id": "B-21-007-E01",
+              "name": "check_type_hints",
+              "kind": "FunctionDef",
+              "line_start": 318,
+              "line_end": 333
+            }
+          ],
           "target_file_id": "S-21-176",
           "target_entity_locations": [
             {
@@ -19319,6 +21203,9 @@
           "evidence": "置換前テンプレートとして同期したBiocondaレシピが一致",
           "verification": "実資産の必須section・placeholder・test commandをpytestで検証",
           "cross_chapter": false,
+          "source_entity_id": null,
+          "source_entity": null,
+          "source_entity_locations": [],
           "target_file_id": "S-21-173",
           "target_entity_locations": []
         }
@@ -19419,6 +21306,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-21-012-E01",
           "target_file": "scripts/ch21/progress_report.py",
           "target_entity": "parse_git_log",
           "equivalence": "E1",
@@ -19426,6 +21314,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "parse_git_log",
+          "source_entity_locations": [
+            {
+              "id": "B-21-012-E01",
+              "name": "parse_git_log",
+              "kind": "FunctionDef",
+              "line_start": 560,
+              "line_end": 579
+            }
+          ],
           "target_file_id": "S-21-175",
           "target_entity_locations": [
             {
@@ -19519,6 +21417,7 @@
       "category_reason": "名前付き実装定義",
       "relations": [
         {
+          "source_entity_id": "B-21-014-E01",
           "target_file": "scripts/ch21/analysis_intake.py",
           "target_entity": "validate_metadata",
           "equivalence": "E1",
@@ -19526,6 +21425,16 @@
           "evidence": "docstring除去AST一致",
           "verification": "AST/順序比較後に章・対象名を目視",
           "cross_chapter": false,
+          "source_entity": "validate_metadata",
+          "source_entity_locations": [
+            {
+              "id": "B-21-014-E01",
+              "name": "validate_metadata",
+              "kind": "FunctionDef",
+              "line_start": 687,
+              "line_end": 713
+            }
+          ],
           "target_file_id": "S-21-172",
           "target_entity_locations": [
             {
@@ -19743,7 +21652,7 @@
         "B-01-003"
       ],
       "reference_block_ids": [],
-      "mentioned_in_chapter_prose": false,
+      "mentioned_in_chapter_prose": true,
       "tests": [
         {
           "test_file": "tests/ch01/test_gc_content.py",
@@ -19760,7 +21669,7 @@
           "tests/ch01/test_gc_content.py",
           "tests/ch08/test_gc_fixture.py"
         ],
-        "passed": 11,
+        "passed": 14,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -19770,8 +21679,8 @@
       "id": "S-01-008",
       "path": "scripts/ch01/seq_filter.py",
       "chapter": "ch01",
-      "sha256": "9fd76ce8abb5360ff5767bd52c52f9acde328220f298fba0b037a71cfc4f9ff7",
-      "line_count": 118,
+      "sha256": "d4004e7e1e6b7a20e16e16b1794e38b387ba71c87a3abc75ee52d3f3c4bc57d1",
+      "line_count": 106,
       "role": "implementation",
       "book_status": "body_correspondence",
       "body_block_ids": [
@@ -19790,7 +21699,7 @@
         "files": [
           "tests/ch01/test_seq_filter.py"
         ],
-        "passed": 11,
+        "passed": 13,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -20191,15 +22100,15 @@
       "id": "S-03-023",
       "path": "scripts/ch03/random_reproducibility.py",
       "chapter": "ch03",
-      "sha256": "af0e630ade0688a9df957b1b4379ed0812836e50a695b6b90ceb8cedb12b605f",
-      "line_count": 93,
+      "sha256": "83aafa7b18d1538d43c5aee7a09e58edae5b5e865ca18889a96f21a92e2a1e2e",
+      "line_count": 94,
       "role": "implementation",
       "book_status": "body_correspondence",
       "body_block_ids": [
         "B-03-019"
       ],
       "reference_block_ids": [],
-      "mentioned_in_chapter_prose": false,
+      "mentioned_in_chapter_prose": true,
       "tests": [
         {
           "test_file": "tests/ch03/test_random_reproducibility.py",
@@ -20211,7 +22120,7 @@
         "files": [
           "tests/ch03/test_random_reproducibility.py"
         ],
-        "passed": 12,
+        "passed": 15,
         "failed": 0,
         "skipped": 0,
         "errors": 0
@@ -24515,8 +26424,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.402,
-        "summary": "12 passed in 0.08s"
+        "duration_seconds": 0.28,
+        "summary": "12 passed in 0.07s"
       }
     },
     {
@@ -24534,8 +26443,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.551,
-        "summary": "10 passed in 0.30s"
+        "duration_seconds": 0.484,
+        "summary": "10 passed in 0.28s"
       }
     },
     {
@@ -24553,8 +26462,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.416,
-        "summary": "8 passed in 0.99s"
+        "duration_seconds": 1.041,
+        "summary": "8 passed in 0.71s"
       }
     },
     {
@@ -24572,38 +26481,38 @@
       "id": "T-01-007",
       "path": "tests/ch01/test_gc_content.py",
       "chapter": "ch01",
-      "sha256": "c23106cc6a905e0f05a401183f53e9201c0816640e6540921eac2de8499fa656",
-      "line_count": 52,
+      "sha256": "63c1a4da131555a4819f8bbc43b4d3c1c84b32709854e7710f1e2a2165165087",
+      "line_count": 65,
       "role": "pytest_file",
       "body_block_ids": [],
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
-        "passed": 9,
+        "passed": 12,
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.272,
-        "summary": "9 passed in 0.01s"
+        "duration_seconds": 0.23,
+        "summary": "12 passed in 0.01s"
       }
     },
     {
       "id": "T-01-008",
       "path": "tests/ch01/test_seq_filter.py",
       "chapter": "ch01",
-      "sha256": "8a470854d0069b619bcb41aefb460c8e1bd4767bf3496a93887e00732ca6f550",
-      "line_count": 88,
+      "sha256": "51f528375ba2016ee841e6178d9cad6396e99f734841526d0604a51aebd66c2a",
+      "line_count": 102,
       "role": "pytest_file",
       "body_block_ids": [],
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
-        "passed": 11,
+        "passed": 13,
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.25,
-        "summary": "11 passed in 0.01s"
+        "duration_seconds": 0.329,
+        "summary": "13 passed in 0.12s"
       }
     },
     {
@@ -24632,8 +26541,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.264,
-        "summary": "12 passed in 0.02s"
+        "duration_seconds": 0.197,
+        "summary": "12 passed in 0.01s"
       }
     },
     {
@@ -24651,7 +26560,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.309,
+        "duration_seconds": 0.288,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -24670,8 +26579,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.301,
-        "summary": "11 passed in 0.02s"
+        "duration_seconds": 0.198,
+        "summary": "11 passed in 0.01s"
       }
     },
     {
@@ -24689,8 +26598,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.553,
-        "summary": "7 passed in 1.26s"
+        "duration_seconds": 0.913,
+        "summary": "7 passed in 0.62s"
       }
     },
     {
@@ -24708,8 +26617,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.507,
-        "summary": "1 passed in 0.25s"
+        "duration_seconds": 0.213,
+        "summary": "1 passed in 0.02s"
       }
     },
     {
@@ -24727,8 +26636,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.286,
-        "summary": "18 passed in 0.03s"
+        "duration_seconds": 0.233,
+        "summary": "18 passed in 0.02s"
       }
     },
     {
@@ -24757,8 +26666,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.302,
-        "summary": "11 passed in 0.02s"
+        "duration_seconds": 0.214,
+        "summary": "11 passed in 0.01s"
       }
     },
     {
@@ -24776,27 +26685,27 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.277,
-        "summary": "17 passed in 0.02s"
+        "duration_seconds": 0.21,
+        "summary": "17 passed in 0.01s"
       }
     },
     {
       "id": "T-03-019",
       "path": "tests/ch03/test_random_reproducibility.py",
       "chapter": "ch03",
-      "sha256": "8e38ea460d58c50b1106d2b376a66308e02354de277d2b1e3ec95ff7f9d33862",
-      "line_count": 92,
+      "sha256": "52658e24b0ff3851de91a2ea1f4f486eda07af3e12a57dbb792e117ba97def77",
+      "line_count": 104,
       "role": "pytest_file",
       "body_block_ids": [],
       "reference_block_ids": [],
       "test_result": {
         "returncode": 0,
-        "passed": 12,
+        "passed": 15,
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.369,
-        "summary": "12 passed in 0.10s"
+        "duration_seconds": 0.318,
+        "summary": "15 passed in 0.09s"
       }
     },
     {
@@ -24825,7 +26734,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.273,
+        "duration_seconds": 0.2,
         "summary": "2 passed in 0.02s"
       }
     },
@@ -24844,7 +26753,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.246,
+        "duration_seconds": 0.198,
         "summary": "7 passed in 0.01s"
       }
     },
@@ -24863,8 +26772,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.255,
-        "summary": "8 passed in 0.02s"
+        "duration_seconds": 0.204,
+        "summary": "8 passed in 0.01s"
       }
     },
     {
@@ -24882,7 +26791,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.264,
+        "duration_seconds": 0.258,
         "summary": "13 passed in 0.01s"
       }
     },
@@ -24901,8 +26810,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.939,
-        "summary": "8 passed in 0.61s"
+        "duration_seconds": 0.738,
+        "summary": "8 passed in 0.40s"
       }
     },
     {
@@ -24920,7 +26829,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.242,
+        "duration_seconds": 0.217,
         "summary": "6 passed in 0.02s"
       }
     },
@@ -24950,8 +26859,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.302,
-        "summary": "21 passed in 0.09s"
+        "duration_seconds": 0.252,
+        "summary": "21 passed in 0.04s"
       }
     },
     {
@@ -24969,7 +26878,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.221,
+        "duration_seconds": 0.29,
         "summary": "10 passed in 0.01s"
       }
     },
@@ -24988,7 +26897,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.224,
+        "duration_seconds": 0.225,
         "summary": "6 passed in 0.01s"
       }
     },
@@ -25018,7 +26927,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.242,
+        "duration_seconds": 0.239,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -25037,7 +26946,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.226,
+        "duration_seconds": 0.243,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -25056,7 +26965,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.242,
+        "duration_seconds": 0.223,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -25075,7 +26984,7 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.252,
+        "duration_seconds": 0.207,
         "summary": "5 passed, 1 skipped in 0.02s"
       }
     },
@@ -25129,8 +27038,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
-        "summary": "7 passed in 0.03s"
+        "duration_seconds": 0.263,
+        "summary": "7 passed in 0.04s"
       }
     },
     {
@@ -25148,7 +27057,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.239,
+        "duration_seconds": 0.201,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -25169,7 +27078,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.22,
+        "duration_seconds": 0.188,
         "summary": "2 passed in 0.01s"
       }
     },
@@ -25193,7 +27102,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.229,
+        "duration_seconds": 0.215,
         "summary": "8 passed in 0.01s"
       }
     },
@@ -25216,8 +27125,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.379,
-        "summary": "12 passed in 0.14s"
+        "duration_seconds": 0.344,
+        "summary": "12 passed in 0.12s"
       }
     },
     {
@@ -25235,8 +27144,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.358,
-        "summary": "2 passed in 0.11s"
+        "duration_seconds": 0.328,
+        "summary": "2 passed in 0.10s"
       }
     },
     {
@@ -25265,8 +27174,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
-        "summary": "15 passed in 0.01s"
+        "duration_seconds": 0.207,
+        "summary": "15 passed in 0.02s"
       }
     },
     {
@@ -25284,7 +27193,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.219,
+        "duration_seconds": 0.188,
         "summary": "7 passed in 0.01s"
       }
     },
@@ -25303,8 +27212,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.236,
-        "summary": "5 passed in 0.02s"
+        "duration_seconds": 0.195,
+        "summary": "5 passed in 0.01s"
       }
     },
     {
@@ -25322,7 +27231,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.233,
+        "duration_seconds": 0.198,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -25341,8 +27250,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.718,
-        "summary": "11 passed in 0.36s"
+        "duration_seconds": 0.643,
+        "summary": "11 passed in 0.35s"
       }
     },
     {
@@ -25360,7 +27269,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
+        "duration_seconds": 0.215,
         "summary": "12 passed in 0.02s"
       }
     },
@@ -25379,8 +27288,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.693,
-        "summary": "11 passed in 0.37s"
+        "duration_seconds": 0.768,
+        "summary": "11 passed in 0.33s"
       }
     },
     {
@@ -25409,7 +27318,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.241,
+        "duration_seconds": 0.239,
         "summary": "5 passed in 0.02s"
       }
     },
@@ -25428,8 +27337,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.372,
-        "summary": "15 passed in 0.12s"
+        "duration_seconds": 0.368,
+        "summary": "15 passed in 0.11s"
       }
     },
     {
@@ -25447,7 +27356,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
+        "duration_seconds": 0.239,
         "summary": "3 passed in 0.01s"
       }
     },
@@ -25466,8 +27375,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.266,
-        "summary": "3 passed in 0.03s"
+        "duration_seconds": 0.28,
+        "summary": "3 passed in 0.05s"
       }
     },
     {
@@ -25496,8 +27405,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.443,
-        "summary": "7 passed in 0.15s"
+        "duration_seconds": 0.382,
+        "summary": "7 passed in 0.12s"
       }
     },
     {
@@ -25515,8 +27424,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.463,
-        "summary": "10 passed in 0.14s"
+        "duration_seconds": 0.338,
+        "summary": "10 passed in 0.11s"
       }
     },
     {
@@ -25534,8 +27443,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.499,
-        "summary": "4 passed in 0.20s"
+        "duration_seconds": 0.429,
+        "summary": "4 passed in 0.18s"
       }
     },
     {
@@ -25553,8 +27462,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.238,
-        "summary": "7 passed in 0.03s"
+        "duration_seconds": 0.22,
+        "summary": "7 passed in 0.02s"
       }
     },
     {
@@ -25572,7 +27481,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.268,
+        "duration_seconds": 0.237,
         "summary": "11 passed in 0.03s"
       }
     },
@@ -25591,7 +27500,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.466,
+        "duration_seconds": 0.448,
         "summary": "15 passed in 0.17s"
       }
     },
@@ -25610,7 +27519,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.445,
+        "duration_seconds": 0.373,
         "summary": "3 passed in 0.13s"
       }
     },
@@ -25640,7 +27549,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.291,
+        "duration_seconds": 0.264,
         "summary": "13 passed in 0.05s"
       }
     },
@@ -25659,8 +27568,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.704,
-        "summary": "9 passed in 0.36s"
+        "duration_seconds": 0.583,
+        "summary": "9 passed in 0.31s"
       }
     },
     {
@@ -25678,8 +27587,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.483,
-        "summary": "10 passed in 0.23s"
+        "duration_seconds": 0.439,
+        "summary": "10 passed in 0.17s"
       }
     },
     {
@@ -25697,8 +27606,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.258,
-        "summary": "19 passed in 0.89s"
+        "duration_seconds": 1.047,
+        "summary": "19 passed in 0.72s"
       }
     },
     {
@@ -25727,8 +27636,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 2.556,
-        "summary": "10 passed in 1.95s"
+        "duration_seconds": 2.286,
+        "summary": "10 passed in 1.77s"
       }
     },
     {
@@ -25746,8 +27655,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.765,
-        "summary": "6 passed in 0.43s"
+        "duration_seconds": 0.707,
+        "summary": "6 passed in 0.40s"
       }
     },
     {
@@ -25765,8 +27674,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.583,
-        "summary": "1 passed in 0.26s"
+        "duration_seconds": 0.499,
+        "summary": "1 passed in 0.22s"
       }
     },
     {
@@ -25784,8 +27693,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 2.013,
-        "summary": "5 passed in 1.43s"
+        "duration_seconds": 2.015,
+        "summary": "5 passed in 1.53s"
       }
     },
     {
@@ -25803,7 +27712,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.232,
+        "duration_seconds": 0.234,
         "summary": "1 passed in 0.01s"
       }
     },
@@ -25833,8 +27742,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.29,
-        "summary": "3 passed in 0.06s"
+        "duration_seconds": 0.294,
+        "summary": "3 passed in 0.07s"
       }
     },
     {
@@ -25852,8 +27761,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.23,
-        "summary": "14 passed in 0.02s"
+        "duration_seconds": 0.183,
+        "summary": "14 passed in 0.01s"
       }
     },
     {
@@ -25871,8 +27780,8 @@
         "failed": 0,
         "skipped": 4,
         "errors": 0,
-        "duration_seconds": 0.745,
-        "summary": "6 passed, 4 skipped in 0.53s"
+        "duration_seconds": 0.618,
+        "summary": "6 passed, 4 skipped in 0.43s"
       }
     },
     {
@@ -25901,7 +27810,7 @@
         "failed": 0,
         "skipped": 5,
         "errors": 0,
-        "duration_seconds": 0.295,
+        "duration_seconds": 0.262,
         "summary": "8 passed, 5 skipped in 0.08s"
       }
     },
@@ -25920,8 +27829,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.425,
-        "summary": "17 passed in 0.18s"
+        "duration_seconds": 0.368,
+        "summary": "17 passed in 0.17s"
       }
     },
     {
@@ -25939,7 +27848,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.232,
+        "duration_seconds": 0.234,
         "summary": "22 passed in 0.02s"
       }
     },
@@ -25969,7 +27878,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.247,
+        "duration_seconds": 0.242,
         "summary": "2 passed in 0.03s"
       }
     },
@@ -25988,7 +27897,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.226,
+        "duration_seconds": 0.206,
         "summary": "31 passed in 0.02s"
       }
     },
@@ -26018,8 +27927,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.737,
-        "summary": "5 passed in 0.37s"
+        "duration_seconds": 0.61,
+        "summary": "5 passed in 0.32s"
       }
     },
     {
@@ -26037,8 +27946,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.018,
-        "summary": "6 passed in 0.67s"
+        "duration_seconds": 0.667,
+        "summary": "6 passed in 0.37s"
       }
     },
     {
@@ -26056,8 +27965,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.415,
-        "summary": "10 passed in 0.14s"
+        "duration_seconds": 0.338,
+        "summary": "10 passed in 0.12s"
       }
     },
     {
@@ -26075,7 +27984,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.29,
+        "duration_seconds": 0.266,
         "summary": "1 passed in 0.06s"
       }
     },
@@ -26094,8 +28003,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.627,
-        "summary": "9 passed in 0.41s"
+        "duration_seconds": 0.524,
+        "summary": "9 passed in 0.33s"
       }
     },
     {
@@ -26113,8 +28022,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.336,
-        "summary": "9 passed in 0.08s"
+        "duration_seconds": 0.292,
+        "summary": "9 passed in 0.07s"
       }
     },
     {
@@ -26132,8 +28041,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.389,
-        "summary": "2 passed in 0.11s"
+        "duration_seconds": 0.317,
+        "summary": "2 passed in 0.10s"
       }
     },
     {
@@ -26162,7 +28071,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.226,
+        "duration_seconds": 0.2,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -26181,8 +28090,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.237,
-        "summary": "19 passed in 0.02s"
+        "duration_seconds": 0.192,
+        "summary": "19 passed in 0.01s"
       }
     },
     {
@@ -26200,7 +28109,7 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.212,
+        "duration_seconds": 0.205,
         "summary": "3 passed, 1 skipped in 0.02s"
       }
     },
@@ -26219,8 +28128,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.229,
-        "summary": "18 passed in 0.01s"
+        "duration_seconds": 0.223,
+        "summary": "18 passed in 0.02s"
       }
     },
     {
@@ -26249,7 +28158,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.232,
+        "duration_seconds": 0.216,
         "summary": "13 passed in 0.02s"
       }
     },
@@ -26268,8 +28177,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.382,
-        "summary": "9 passed in 0.12s"
+        "duration_seconds": 0.319,
+        "summary": "9 passed in 0.10s"
       }
     },
     {
@@ -26287,7 +28196,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.246,
+        "duration_seconds": 0.237,
         "summary": "13 passed in 0.02s"
       }
     },
@@ -26306,8 +28215,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.382,
-        "summary": "12 passed in 0.13s"
+        "duration_seconds": 0.338,
+        "summary": "12 passed in 0.11s"
       }
     },
     {
@@ -26325,8 +28234,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.375,
-        "summary": "9 passed in 0.11s"
+        "duration_seconds": 0.286,
+        "summary": "9 passed in 0.08s"
       }
     },
     {
@@ -26355,7 +28264,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.241,
+        "duration_seconds": 0.21,
         "summary": "26 passed in 0.02s"
       }
     },
@@ -26374,7 +28283,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.216,
+        "duration_seconds": 0.179,
         "summary": "1 passed in 0.01s"
       }
     },
@@ -26393,8 +28302,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.243,
-        "summary": "21 passed in 0.03s"
+        "duration_seconds": 0.232,
+        "summary": "21 passed in 0.02s"
       }
     },
     {
@@ -26423,7 +28332,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.24,
+        "duration_seconds": 0.203,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -26442,7 +28351,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.23,
+        "duration_seconds": 0.212,
         "summary": "1 passed in 0.02s"
       }
     },
@@ -26461,7 +28370,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.222,
+        "duration_seconds": 0.191,
         "summary": "10 passed in 0.01s"
       }
     },
@@ -26480,8 +28389,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.249,
-        "summary": "5 passed in 0.03s"
+        "duration_seconds": 0.201,
+        "summary": "5 passed in 0.02s"
       }
     },
     {
@@ -26499,7 +28408,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.231,
+        "duration_seconds": 0.198,
         "summary": "8 passed in 0.01s"
       }
     },
@@ -26518,7 +28427,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.268,
+        "duration_seconds": 0.23,
         "summary": "13 passed in 0.04s"
       }
     },
@@ -26537,7 +28446,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.249,
+        "duration_seconds": 0.197,
         "summary": "9 passed in 0.01s"
       }
     }
@@ -26549,8 +28458,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.402,
-      "summary": "12 passed in 0.08s"
+      "duration_seconds": 0.28,
+      "summary": "12 passed in 0.07s"
     },
     "tests/ch00/test_hmm_gene_predict.py": {
       "returncode": 0,
@@ -26558,8 +28467,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.551,
-      "summary": "10 passed in 0.30s"
+      "duration_seconds": 0.484,
+      "summary": "10 passed in 0.28s"
     },
     "tests/ch00/test_plot_orfs.py": {
       "returncode": 0,
@@ -26567,26 +28476,26 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.416,
-      "summary": "8 passed in 0.99s"
+      "duration_seconds": 1.041,
+      "summary": "8 passed in 0.71s"
     },
     "tests/ch01/test_gc_content.py": {
       "returncode": 0,
-      "passed": 9,
+      "passed": 12,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.272,
-      "summary": "9 passed in 0.01s"
+      "duration_seconds": 0.23,
+      "summary": "12 passed in 0.01s"
     },
     "tests/ch01/test_seq_filter.py": {
       "returncode": 0,
-      "passed": 11,
+      "passed": 13,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.25,
-      "summary": "11 passed in 0.01s"
+      "duration_seconds": 0.329,
+      "summary": "13 passed in 0.12s"
     },
     "tests/ch02/test_env_check.py": {
       "returncode": 0,
@@ -26594,8 +28503,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.264,
-      "summary": "12 passed in 0.02s"
+      "duration_seconds": 0.197,
+      "summary": "12 passed in 0.01s"
     },
     "tests/ch02/test_fastq_gzip.py": {
       "returncode": 0,
@@ -26603,7 +28512,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.309,
+      "duration_seconds": 0.288,
       "summary": "11 passed in 0.02s"
     },
     "tests/ch02/test_regex_basics.py": {
@@ -26612,8 +28521,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.301,
-      "summary": "11 passed in 0.02s"
+      "duration_seconds": 0.198,
+      "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_shell_scripts.py": {
       "returncode": 0,
@@ -26621,8 +28530,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.553,
-      "summary": "7 passed in 1.26s"
+      "duration_seconds": 0.913,
+      "summary": "7 passed in 0.62s"
     },
     "tests/ch02/test_ssh_config.py": {
       "returncode": 0,
@@ -26630,8 +28539,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.507,
-      "summary": "1 passed in 0.25s"
+      "duration_seconds": 0.213,
+      "summary": "1 passed in 0.02s"
     },
     "tests/ch02/test_text_processing.py": {
       "returncode": 0,
@@ -26639,8 +28548,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.286,
-      "summary": "18 passed in 0.03s"
+      "duration_seconds": 0.233,
+      "summary": "18 passed in 0.02s"
     },
     "tests/ch03/test_data_structure_bench.py": {
       "returncode": 0,
@@ -26648,8 +28557,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.302,
-      "summary": "11 passed in 0.02s"
+      "duration_seconds": 0.214,
+      "summary": "11 passed in 0.01s"
     },
     "tests/ch03/test_float_pitfalls.py": {
       "returncode": 0,
@@ -26657,17 +28566,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.277,
-      "summary": "17 passed in 0.02s"
+      "duration_seconds": 0.21,
+      "summary": "17 passed in 0.01s"
     },
     "tests/ch03/test_random_reproducibility.py": {
       "returncode": 0,
-      "passed": 12,
+      "passed": 15,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.369,
-      "summary": "12 passed in 0.10s"
+      "duration_seconds": 0.318,
+      "summary": "15 passed in 0.09s"
     },
     "tests/ch04/test_config_examples.py": {
       "returncode": 0,
@@ -26675,7 +28584,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.273,
+      "duration_seconds": 0.2,
       "summary": "2 passed in 0.02s"
     },
     "tests/ch04/test_coordinate_convert.py": {
@@ -26684,7 +28593,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.246,
+      "duration_seconds": 0.198,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch04/test_encoding_traps.py": {
@@ -26693,8 +28602,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.255,
-      "summary": "8 passed in 0.02s"
+      "duration_seconds": 0.204,
+      "summary": "8 passed in 0.01s"
     },
     "tests/ch04/test_messy_to_tidy.py": {
       "returncode": 0,
@@ -26702,7 +28611,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.264,
+      "duration_seconds": 0.258,
       "summary": "13 passed in 0.01s"
     },
     "tests/ch04/test_tidy_data_demo.py": {
@@ -26711,8 +28620,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.939,
-      "summary": "8 passed in 0.61s"
+      "duration_seconds": 0.738,
+      "summary": "8 passed in 0.40s"
     },
     "tests/ch04/test_tsv_csv_handling.py": {
       "returncode": 0,
@@ -26720,7 +28629,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.242,
+      "duration_seconds": 0.217,
       "summary": "6 passed in 0.02s"
     },
     "tests/ch05/test_module_demo.py": {
@@ -26729,8 +28638,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.302,
-      "summary": "21 passed in 0.09s"
+      "duration_seconds": 0.252,
+      "summary": "21 passed in 0.04s"
     },
     "tests/ch05/test_mylib_core.py": {
       "returncode": 0,
@@ -26738,7 +28647,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.221,
+      "duration_seconds": 0.29,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch05/test_mylib_utils.py": {
@@ -26747,7 +28656,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.224,
+      "duration_seconds": 0.225,
       "summary": "6 passed in 0.01s"
     },
     "tests/ch06/test_check_environment.py": {
@@ -26756,7 +28665,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.242,
+      "duration_seconds": 0.239,
       "summary": "11 passed in 0.02s"
     },
     "tests/ch06/test_dependency_examples.py": {
@@ -26765,7 +28674,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.226,
+      "duration_seconds": 0.243,
       "summary": "4 passed in 0.02s"
     },
     "tests/ch07/test_ci_minimal.py": {
@@ -26774,7 +28683,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.242,
+      "duration_seconds": 0.223,
       "summary": "4 passed in 0.02s"
     },
     "tests/ch07/test_citation_cff.py": {
@@ -26783,7 +28692,7 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.252,
+      "duration_seconds": 0.207,
       "summary": "5 passed, 1 skipped in 0.02s"
     },
     "tests/ch08/test_ci_workflows.py": {
@@ -26792,8 +28701,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.234,
-      "summary": "7 passed in 0.03s"
+      "duration_seconds": 0.263,
+      "summary": "7 passed in 0.04s"
     },
     "tests/ch08/test_config_examples.py": {
       "returncode": 0,
@@ -26801,7 +28710,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.239,
+      "duration_seconds": 0.201,
       "summary": "4 passed in 0.02s"
     },
     "tests/ch08/test_gc_fixture.py": {
@@ -26810,7 +28719,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.22,
+      "duration_seconds": 0.188,
       "summary": "2 passed in 0.01s"
     },
     "tests/ch08/test_reverse_complement.py": {
@@ -26819,7 +28728,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.229,
+      "duration_seconds": 0.215,
       "summary": "8 passed in 0.01s"
     },
     "tests/ch08/test_seq_stats.py": {
@@ -26828,8 +28737,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.379,
-      "summary": "12 passed in 0.14s"
+      "duration_seconds": 0.344,
+      "summary": "12 passed in 0.12s"
     },
     "tests/ch08/test_shared_fixtures.py": {
       "returncode": 0,
@@ -26837,8 +28746,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.358,
-      "summary": "2 passed in 0.11s"
+      "duration_seconds": 0.328,
+      "summary": "2 passed in 0.10s"
     },
     "tests/ch09/test_coordinate_bugs.py": {
       "returncode": 0,
@@ -26846,8 +28755,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.234,
-      "summary": "15 passed in 0.01s"
+      "duration_seconds": 0.207,
+      "summary": "15 passed in 0.02s"
     },
     "tests/ch09/test_debug_print_demo.py": {
       "returncode": 0,
@@ -26855,7 +28764,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.219,
+      "duration_seconds": 0.188,
       "summary": "7 passed in 0.01s"
     },
     "tests/ch09/test_path_bugs.py": {
@@ -26864,8 +28773,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.236,
-      "summary": "5 passed in 0.02s"
+      "duration_seconds": 0.195,
+      "summary": "5 passed in 0.01s"
     },
     "tests/ch09/test_pdb_demo.py": {
       "returncode": 0,
@@ -26873,7 +28782,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.233,
+      "duration_seconds": 0.198,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch09/test_python_pitfalls.py": {
@@ -26882,8 +28791,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.718,
-      "summary": "11 passed in 0.36s"
+      "duration_seconds": 0.643,
+      "summary": "11 passed in 0.35s"
     },
     "tests/ch09/test_traceback_demo.py": {
       "returncode": 0,
@@ -26891,7 +28800,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.234,
+      "duration_seconds": 0.215,
       "summary": "12 passed in 0.02s"
     },
     "tests/ch09/test_type_bugs.py": {
@@ -26900,8 +28809,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.693,
-      "summary": "11 passed in 0.37s"
+      "duration_seconds": 0.768,
+      "summary": "11 passed in 0.33s"
     },
     "tests/ch10/test_config_example.py": {
       "returncode": 0,
@@ -26909,7 +28818,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.241,
+      "duration_seconds": 0.239,
       "summary": "5 passed in 0.02s"
     },
     "tests/ch10/test_error_handling.py": {
@@ -26918,8 +28827,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.372,
-      "summary": "15 passed in 0.12s"
+      "duration_seconds": 0.368,
+      "summary": "15 passed in 0.11s"
     },
     "tests/ch10/test_fail_fast_pipeline.py": {
       "returncode": 0,
@@ -26927,7 +28836,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.234,
+      "duration_seconds": 0.239,
       "summary": "3 passed in 0.01s"
     },
     "tests/ch10/test_package_example.py": {
@@ -26936,8 +28845,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.266,
-      "summary": "3 passed in 0.03s"
+      "duration_seconds": 0.28,
+      "summary": "3 passed in 0.05s"
     },
     "tests/ch11/test_cli_argparse.py": {
       "returncode": 0,
@@ -26945,8 +28854,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.443,
-      "summary": "7 passed in 0.15s"
+      "duration_seconds": 0.382,
+      "summary": "7 passed in 0.12s"
     },
     "tests/ch11/test_cli_click.py": {
       "returncode": 0,
@@ -26954,8 +28863,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.463,
-      "summary": "10 passed in 0.14s"
+      "duration_seconds": 0.338,
+      "summary": "10 passed in 0.11s"
     },
     "tests/ch11/test_cli_typer.py": {
       "returncode": 0,
@@ -26963,8 +28872,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.499,
-      "summary": "4 passed in 0.20s"
+      "duration_seconds": 0.429,
+      "summary": "4 passed in 0.18s"
     },
     "tests/ch11/test_config_layering.py": {
       "returncode": 0,
@@ -26972,8 +28881,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.238,
-      "summary": "7 passed in 0.03s"
+      "duration_seconds": 0.22,
+      "summary": "7 passed in 0.02s"
     },
     "tests/ch11/test_logging_setup.py": {
       "returncode": 0,
@@ -26981,7 +28890,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.268,
+      "duration_seconds": 0.237,
       "summary": "11 passed in 0.03s"
     },
     "tests/ch11/test_seqtool.py": {
@@ -26990,7 +28899,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.466,
+      "duration_seconds": 0.448,
       "summary": "15 passed in 0.17s"
     },
     "tests/ch11/test_seqtool_streams.py": {
@@ -26999,7 +28908,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.445,
+      "duration_seconds": 0.373,
       "summary": "3 passed in 0.13s"
     },
     "tests/ch12/test_numpy_vectorize.py": {
@@ -27008,7 +28917,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.291,
+      "duration_seconds": 0.264,
       "summary": "13 passed in 0.05s"
     },
     "tests/ch12/test_pandas_bio_ops.py": {
@@ -27017,8 +28926,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.704,
-      "summary": "9 passed in 0.36s"
+      "duration_seconds": 0.583,
+      "summary": "9 passed in 0.31s"
     },
     "tests/ch12/test_polars_bio_ops.py": {
       "returncode": 0,
@@ -27026,8 +28935,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.483,
-      "summary": "10 passed in 0.23s"
+      "duration_seconds": 0.439,
+      "summary": "10 passed in 0.17s"
     },
     "tests/ch12/test_scipy_stats_bio.py": {
       "returncode": 0,
@@ -27035,8 +28944,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.258,
-      "summary": "19 passed in 0.89s"
+      "duration_seconds": 1.047,
+      "summary": "19 passed in 0.72s"
     },
     "tests/ch13/test_bio_plots.py": {
       "returncode": 0,
@@ -27044,8 +28953,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 2.556,
-      "summary": "10 passed in 1.95s"
+      "duration_seconds": 2.286,
+      "summary": "10 passed in 1.77s"
     },
     "tests/ch13/test_matplotlib_bindist.py": {
       "returncode": 0,
@@ -27053,8 +28962,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.765,
-      "summary": "6 passed in 0.43s"
+      "duration_seconds": 0.707,
+      "summary": "6 passed in 0.40s"
     },
     "tests/ch13/test_plot_config.py": {
       "returncode": 0,
@@ -27062,8 +28971,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.583,
-      "summary": "1 passed in 0.26s"
+      "duration_seconds": 0.499,
+      "summary": "1 passed in 0.22s"
     },
     "tests/ch13/test_seaborn_biodist.py": {
       "returncode": 0,
@@ -27071,8 +28980,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 2.013,
-      "summary": "5 passed in 1.43s"
+      "duration_seconds": 2.015,
+      "summary": "5 passed in 1.53s"
     },
     "tests/ch13/test_tracks_config.py": {
       "returncode": 0,
@@ -27080,7 +28989,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.232,
+      "duration_seconds": 0.234,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch14/test_config_workflow_assets.py": {
@@ -27089,8 +28998,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.29,
-      "summary": "3 passed in 0.06s"
+      "duration_seconds": 0.294,
+      "summary": "3 passed in 0.07s"
     },
     "tests/ch14/test_validate_workflow.py": {
       "returncode": 0,
@@ -27098,8 +29007,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.23,
-      "summary": "14 passed in 0.02s"
+      "duration_seconds": 0.183,
+      "summary": "14 passed in 0.01s"
     },
     "tests/ch14/test_workflow_assets.py": {
       "returncode": 0,
@@ -27107,8 +29016,8 @@
       "failed": 0,
       "skipped": 4,
       "errors": 0,
-      "duration_seconds": 0.745,
-      "summary": "6 passed, 4 skipped in 0.53s"
+      "duration_seconds": 0.618,
+      "summary": "6 passed, 4 skipped in 0.43s"
     },
     "tests/ch15/test_container_examples.py": {
       "returncode": 0,
@@ -27116,7 +29025,7 @@
       "failed": 0,
       "skipped": 5,
       "errors": 0,
-      "duration_seconds": 0.295,
+      "duration_seconds": 0.262,
       "summary": "8 passed, 5 skipped in 0.08s"
     },
     "tests/ch15/test_experiment_logger.py": {
@@ -27125,8 +29034,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.425,
-      "summary": "17 passed in 0.18s"
+      "duration_seconds": 0.368,
+      "summary": "17 passed in 0.17s"
     },
     "tests/ch15/test_validate_dockerfile.py": {
       "returncode": 0,
@@ -27134,7 +29043,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.232,
+      "duration_seconds": 0.234,
       "summary": "22 passed in 0.02s"
     },
     "tests/ch16/test_ssh_config.py": {
@@ -27143,7 +29052,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.247,
+      "duration_seconds": 0.242,
       "summary": "2 passed in 0.03s"
     },
     "tests/ch16/test_validate_slurm.py": {
@@ -27152,7 +29061,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.226,
+      "duration_seconds": 0.206,
       "summary": "31 passed in 0.02s"
     },
     "tests/ch17/test_chunk_processing.py": {
@@ -27161,8 +29070,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.737,
-      "summary": "5 passed in 0.37s"
+      "duration_seconds": 0.61,
+      "summary": "5 passed in 0.32s"
     },
     "tests/ch17/test_file_format_bench.py": {
       "returncode": 0,
@@ -27170,8 +29079,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.018,
-      "summary": "6 passed in 0.67s"
+      "duration_seconds": 0.667,
+      "summary": "6 passed in 0.37s"
     },
     "tests/ch17/test_generator_fastq.py": {
       "returncode": 0,
@@ -27179,8 +29088,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.415,
-      "summary": "10 passed in 0.14s"
+      "duration_seconds": 0.338,
+      "summary": "10 passed in 0.12s"
     },
     "tests/ch17/test_memory_target.py": {
       "returncode": 0,
@@ -27188,7 +29097,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.29,
+      "duration_seconds": 0.266,
       "summary": "1 passed in 0.06s"
     },
     "tests/ch17/test_parallel_gc.py": {
@@ -27197,8 +29106,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.627,
-      "summary": "9 passed in 0.41s"
+      "duration_seconds": 0.524,
+      "summary": "9 passed in 0.33s"
     },
     "tests/ch17/test_profiling_demo.py": {
       "returncode": 0,
@@ -27206,8 +29115,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.336,
-      "summary": "9 passed in 0.08s"
+      "duration_seconds": 0.292,
+      "summary": "9 passed in 0.07s"
     },
     "tests/ch17/test_streaming_fasta.py": {
       "returncode": 0,
@@ -27215,8 +29124,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.389,
-      "summary": "2 passed in 0.11s"
+      "duration_seconds": 0.317,
+      "summary": "2 passed in 0.10s"
     },
     "tests/ch18/test_docstring_checker.py": {
       "returncode": 0,
@@ -27224,7 +29133,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.226,
+      "duration_seconds": 0.2,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch18/test_mermaid_helper.py": {
@@ -27233,8 +29142,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.237,
-      "summary": "19 passed in 0.02s"
+      "duration_seconds": 0.192,
+      "summary": "19 passed in 0.01s"
     },
     "tests/ch18/test_mkdocs_example.py": {
       "returncode": 0,
@@ -27242,7 +29151,7 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.212,
+      "duration_seconds": 0.205,
       "summary": "3 passed, 1 skipped in 0.02s"
     },
     "tests/ch18/test_validate_readme.py": {
@@ -27251,8 +29160,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.229,
-      "summary": "18 passed in 0.01s"
+      "duration_seconds": 0.223,
+      "summary": "18 passed in 0.02s"
     },
     "tests/ch19/test_checksum_verify.py": {
       "returncode": 0,
@@ -27260,7 +29169,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.232,
+      "duration_seconds": 0.216,
       "summary": "13 passed in 0.02s"
     },
     "tests/ch19/test_entrez_fetch.py": {
@@ -27269,8 +29178,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.382,
-      "summary": "9 passed in 0.12s"
+      "duration_seconds": 0.319,
+      "summary": "9 passed in 0.10s"
     },
     "tests/ch19/test_local_db.py": {
       "returncode": 0,
@@ -27278,7 +29187,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.246,
+      "duration_seconds": 0.237,
       "summary": "13 passed in 0.02s"
     },
     "tests/ch19/test_parse_flatfile.py": {
@@ -27287,8 +29196,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.382,
-      "summary": "12 passed in 0.13s"
+      "duration_seconds": 0.338,
+      "summary": "12 passed in 0.11s"
     },
     "tests/ch19/test_sparql_query.py": {
       "returncode": 0,
@@ -27296,8 +29205,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.375,
-      "summary": "9 passed in 0.11s"
+      "duration_seconds": 0.286,
+      "summary": "9 passed in 0.08s"
     },
     "tests/ch20/test_anonymize_metadata.py": {
       "returncode": 0,
@@ -27305,7 +29214,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.241,
+      "duration_seconds": 0.21,
       "summary": "26 passed in 0.02s"
     },
     "tests/ch20/test_env_example.py": {
@@ -27314,7 +29223,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.216,
+      "duration_seconds": 0.179,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch20/test_secret_scanner.py": {
@@ -27323,8 +29232,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.243,
-      "summary": "21 passed in 0.03s"
+      "duration_seconds": 0.232,
+      "summary": "21 passed in 0.02s"
     },
     "tests/ch21/test_analysis_intake.py": {
       "returncode": 0,
@@ -27332,7 +29241,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.24,
+      "duration_seconds": 0.203,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch21/test_bioconda_recipe.py": {
@@ -27341,7 +29250,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.23,
+      "duration_seconds": 0.212,
       "summary": "1 passed in 0.02s"
     },
     "tests/ch21/test_check_urls_browser.py": {
@@ -27350,7 +29259,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.222,
+      "duration_seconds": 0.191,
       "summary": "10 passed in 0.01s"
     },
     "tests/ch21/test_format_question.py": {
@@ -27359,8 +29268,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.249,
-      "summary": "5 passed in 0.03s"
+      "duration_seconds": 0.201,
+      "summary": "5 passed in 0.02s"
     },
     "tests/ch21/test_progress_report.py": {
       "returncode": 0,
@@ -27368,7 +29277,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.231,
+      "duration_seconds": 0.198,
       "summary": "8 passed in 0.01s"
     },
     "tests/ch21/test_reference_url_preference.py": {
@@ -27377,7 +29286,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.268,
+      "duration_seconds": 0.23,
       "summary": "13 passed in 0.04s"
     },
     "tests/ch21/test_review_helper.py": {
@@ -27386,7 +29295,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.249,
+      "duration_seconds": 0.197,
       "summary": "9 passed in 0.01s"
     },
     "tests/review/test_check_code_sync.py": {
@@ -27395,7 +29304,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.253,
+      "duration_seconds": 0.224,
       "summary": "45 passed in 0.04s"
     },
     "tests/review/test_code_correspondence.py": {
@@ -27404,17 +29313,62 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.037,
-      "summary": "18 passed in 0.81s"
+      "duration_seconds": 0.941,
+      "summary": "18 passed in 0.75s"
+    },
+    "tests/review/test_correspondence_provenance.py": {
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.87,
+      "summary": "5 passed in 0.68s"
+    },
+    "tests/review/test_create_e1_pr.py": {
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.193,
+      "summary": "5 passed in 0.01s"
+    },
+    "tests/review/test_e1_merged_state.py": {
+      "returncode": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.385,
+      "summary": "1 passed in 0.17s"
+    },
+    "tests/review/test_e1_transition.py": {
+      "returncode": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.352,
+      "summary": "8 passed in 0.18s"
+    },
+    "tests/review/test_review_checks.py": {
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.214,
+      "summary": "7 passed in 0.02s"
     }
   },
   "classification_review": {
     "pending_resolved": 91,
     "manual_category_overrides": 27,
-    "manual_relation_blocks": 116,
+    "manual_relation_blocks": 117,
     "note": "配置必須ブロック、対応ありブロック、全保留ブロックを本文前後と実体で目視",
     "goldset_method": "現在1件以上存在するE0/E1/E2/E3/E5/ENから2件ずつ層化固定選択。既存レポート確認後のため非盲検",
-    "goldset_change_history": "2026-07-27: E5解消計画の完了によりE5母集団が0件となったため、旧E5標本B-15-012/B-15-018を除外した。両ブロックは実体追加後のE0として全件対応表で監査する。",
+    "goldset_change_history": "2026-07-27: E5解消計画の完了によりE5母集団が0件となったため、旧E5標本B-15-012/B-15-018を除外した。両ブロックは実体追加後のE0として全件対応表で監査する。2026-07-28: B-03-019がE0へ移行したため、E1標本をB-01-001へ変更した。",
     "goldset": [
       {
         "block_id": "B-07-014",
@@ -27431,11 +29385,11 @@
         "reason": "Dockerfileの正規化命令列が一致"
       },
       {
-        "block_id": "B-03-019",
+        "block_id": "B-01-001",
         "expected": "E1",
         "actual": "E1",
         "matched": true,
-        "reason": "処理順が同じで関数名とNumPy型注釈だけが異なる"
+        "reason": "KISSの短いdocstringを意図的に残し、docstring除去後のASTが一致"
       },
       {
         "block_id": "B-12-004",
