@@ -21,22 +21,18 @@ CHAPTERS_DIR = PROJECT_ROOT / "chapters"
 DEFAULT_OUTPUT = PROJECT_ROOT / "docs" / "review" / "structure_check.json"
 
 # 通常の章ファイル（必須セクションチェック対象）
-# hajimeni.md、付録、glossary.md、roadmap.md は除外
-EXCLUDED_FILES = {
-    "hajimeni.md",
-    "roadmap.md",
-    "glossary.md",
-    "appendix_a_learning_patterns.md",
-    "appendix_b_cli_reference.md",
-    "appendix_c_checklist.md",
-    "appendix_d_agent_vocabulary.md",
-}
+CHAPTER_FILENAME_RE = re.compile(r"^\d{2}_.+\.md$")
 
 # 必須セクション（出現すべき順序）
 REQUIRED_SECTIONS = ["## まとめ", "## 演習問題", "## さらに学びたい読者へ", "## 参考文献"]
 
 # 演習問題の類型ラベル
 VALID_EXERCISE_TYPES = {"レビュー", "指示設計", "設計判断", "実践", "概念"}
+
+
+def is_chapter_file(filepath: Path) -> bool:
+    """番号付きの通常章ファイルだけを判定する."""
+    return CHAPTER_FILENAME_RE.fullmatch(filepath.name) is not None
 
 
 def issue_key(issue: dict) -> tuple[str, str, str]:
@@ -357,8 +353,7 @@ def main() -> None:
         if not lines:
             continue
 
-        filename = md_file.name
-        is_chapter = filename not in EXCLUDED_FILES
+        is_chapter = is_chapter_file(md_file)
 
         # 全ファイル共通チェック
         bold_issues = check_bold_brackets(md_file, lines)
