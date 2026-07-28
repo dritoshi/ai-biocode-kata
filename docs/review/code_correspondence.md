@@ -1,7 +1,7 @@
 # 本文コード ↔ `scripts/ch*` 対応関係の再監査
 
 - 生成日: 2026-07-28
-- 対象コミット: `690c35d78e6185d2a6bf79fdc5d29b18785616d5`
+- 対象コミット: `234dee86442a83be9b4ccc8285a3523b31022837`
 - 調査計画: [`2026-07-25_code_correspondence_reaudit_plan.md`](./2026-07-25_code_correspondence_reaudit_plan.md)
 - E5解消計画: [`2026-07-25_e5_remediation_plan.md`](./2026-07-25_e5_remediation_plan.md)
 - E1解消計画: [`2026-07-28_e1_remediation_plan.md`](./2026-07-28_e1_remediation_plan.md)
