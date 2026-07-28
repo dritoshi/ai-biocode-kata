@@ -32,6 +32,7 @@ dev = [
     "pytest",
     "ruff",
     "mypy",
+    "cffconvert>=2.0.0,<3",
 ]
 
 [tool.uv]
