@@ -429,8 +429,8 @@ AI コーディングエージェントのプライバシー設定は、**サイ
   - Enterprise Privacy（API・Enterprise での学習利用と保持）[29](https://openai.com/enterprise-privacy/)
   - How your data is used to improve model performance（Consumer プランの opt-out 手順）[30](https://help.openai.com/en/articles/5722486)
 - **GitHub**（Copilot）:
-  - GitHub Copilot Trust Center[31](https://resources.github.com/copilot-trust-center/)
-  - About GitHub Copilot privacy（Individual / Business の差異と設定）[32](https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/privacy)
+  - GitHub Copilot Trust Center[31](https://copilot.github.trust.page/)
+  - GitHub Terms of Service — AI Features, Training, and Your Data（Individual / Business の差異と設定）[32](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#j-ai-features-training-and-your-data)
 - **Google**（Gemini / Gemini CLI / Vertex AI）:
   - Gemini Apps Privacy Hub（個人アカウントのアクティビティ設定）[33](https://support.google.com/gemini/answer/13594961)
   - Generative AI and data governance on Vertex AI（Workspace / Vertex AI の既定挙動）[34](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance)
@@ -700,7 +700,7 @@ DMP要件は科研費だけのものではない。2021年4月に内閣府が策
 
 海外の制限付きデータベースを利用する場合は、その資金機関のポリシーも確認する。とくに **NIH**（米国国立衛生研究所）は Data Management and Sharing (DMS) Policy と Genomic Data Sharing (GDS) Policy を持ち、dbGaP 等の管理アクセスデータを使う研究者に遵守を求める。近年は管理が段階的に厳格化されており、NOT-OD-25-083（2025年4月4日発効）は、懸念国に所在する機関による管理アクセスデータへのアクセスを**禁止**した（懸念国は中国・ロシア・イラン・北朝鮮・キューバ・ベネズエラ等）[37](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-083.html)。
 
-NIH は生成AIとの関係についても明確な指針を示している。管理アクセスデータやその派生データ（data derivatives）を公開の生成AIツールにプロンプトやアップロードで渡すことは**禁止**されており、そのデータで生成AIモデルを学習させるには NIH の承認が必要で、プロジェクト終了後はモデル（パラメータを含む）を保持してはならない[38](https://sharing.nih.gov/genomic-data-sharing-policy)。これは[§20-2-1 ヒトデータの法規制と利用規約](#20-2-1-ヒトデータの法規制と利用規約)で述べた「制限付きデータをクラウドAIに送信しない」原則が、単なる入力にとどまらず**モデルの学習・ファインチューニングにまで及ぶ**ことを意味する。
+NIH は生成AIとの関係についても明確な指針を示している。管理アクセスデータやその派生データ（data derivatives）を公開の生成AIツールにプロンプトやアップロードで渡すことは**禁止**されており、そのデータで生成AIモデルを学習させるには NIH の承認が必要で、プロジェクト終了後はモデル（パラメータを含む）を保持してはならない[38](https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/gds)。これは[§20-2-1 ヒトデータの法規制と利用規約](#20-2-1-ヒトデータの法規制と利用規約)で述べた「制限付きデータをクラウドAIに送信しない」原則が、単なる入力にとどまらず**モデルの学習・ファインチューニングにまで及ぶ**ことを意味する。
 
 各機関の手続きの詳細は改定が頻繁であるため、申請時には必ず各機関の公式サイトで最新の要件を確認すること。
 
@@ -873,9 +873,9 @@ __pycache__/
 
 [30] OpenAI. "How your data is used to improve model performance". https://help.openai.com/en/articles/5722486 (参照日: 2026-04-10)
 
-[31] GitHub. "GitHub Copilot Trust Center". https://resources.github.com/copilot-trust-center/ (参照日: 2026-04-10)
+[31] GitHub. "GitHub Copilot Trust Center". https://copilot.github.trust.page/ (参照日: 2026-07-29)
 
-[32] GitHub. "About GitHub Copilot privacy". https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/privacy (参照日: 2026-04-10)
+[32] GitHub. "GitHub Terms of Service — AI Features, Training, and Your Data". https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#j-ai-features-training-and-your-data (参照日: 2026-07-29)
 
 [33] Google. "Gemini Apps Privacy Hub". https://support.google.com/gemini/answer/13594961 (参照日: 2026-04-10)
 
@@ -887,7 +887,7 @@ __pycache__/
 
 [37] NIH. "Implementation Update: Enhancing Security Measures for NIH Controlled-Access Data (NOT-OD-25-083)". https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-083.html (参照日: 2026-07-24)
 
-[38] NIH. "NIH Genomic Data Sharing Policy". https://sharing.nih.gov/genomic-data-sharing-policy (参照日: 2026-07-24)
+[38] NIH. "NIH Genomic Data Sharing Policy". https://grants.nih.gov/policy-and-compliance/policy-topics/sharing-policies/gds (参照日: 2026-07-29)
 
 [39] Science Media Centre. "expert reaction to the Oversight Committee report into data security at UK Biobank". https://www.sciencemediacentre.org/expert-reaction-to-the-oversight-committee-report-into-data-security-at-uk-biobank/ (参照日: 2026-07-25)
 

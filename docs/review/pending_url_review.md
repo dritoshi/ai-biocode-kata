@@ -11,18 +11,12 @@
 ## 現在の状態
 
 - 現行の生データは [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) にある
-- 2026-03-31 の再チェック結果は `summary.ok = 353`, `summary.anti-bot = 22`, `summary.error = 1` である（376 unique URLs, 1049 total occurrences）
-- 2026-03-31 に追記分（前提知識ガイド、CWL、クラウド基礎、TRE、DMP、ホスティング等）で 50 URL が新規追加された
-  - 47 件 ok、2 件 anti-bot、1 件 error
-  - error 1 件は用語集のダミー URL（`https://doi.org/10.xxxx/xxxxx`）であり実害なし
-  - anti-bot 2 件は Science 誌 DOI (`doi.org/10.1126/science.ado9336`) と bioRxiv (`biorxiv.org/content/10.1101/2025.05.30.656746v1`) であり、前回同ドメインで `manual_confirmed` 済みのため今回も確認済みとする
-- 2026-03-26 の現行結果は `summary.ok = 306`, `summary.anti-bot = 20` であり、`error` / `timeout` / `connection_error` は 0 件であった
-- 2026-03-26 に Markdown のベタ書き URL も抽出対象に含めるよう修正し、現行原稿 326 URL を再チェックした
-- DOI 直リンクで `anti-bot` になっていたバイオ系論文のうち、PubMed に PMID があるものは本文・参考文献の閲覧用リンクを PubMed に切り替えた
-- 同日に `check_urls_browser.py` で `anti-bot` 21 件を再確認し、`browser_ok = 1`, `browser_blocked = 19`, `browser_error = 1` を記録した
-- 2026-03-26 に非 DOI 系 `anti-bot` 8 件はユーザーが手動ブラウザ確認し、レビュー上の状態を `manual_confirmed` とした
-- `https://doi.org/10.1002/0471448354` はブラウザ再確認で到達確認済みである
-- 404 だった旧 URL と機械的 `error` は本文・参考文献側で修正済みであり、残件は手動確認待ち DOI のみである
+- 2026-07-29 の再チェック結果は `ok = 422`, `redirect = 1`, `anti-bot = 13`, `connection_error = 4`, `error = 0`, `timeout = 0` である（440 unique URLs, 1,324 total occurrences）
+- `anti-bot` 13件のうち12件は一次情報または過去の手動確認で有効性を確認済みである
+- `connection_error` 4件は検索サービスで公式ページを取得でき、実行経路固有のタイムアウトと判定した
+- 著者researchmapページ1件だけを任意のブラウザ確認へ引き継いだ。原稿修正の必須残件ではない
+- 詳細は[2026-07-29監査記録](./2026-07-29_url_audit.md)、確認手順は[ブラウザ確認引き継ぎ](./2026-07-29_url_browser_handoff.md)に記録した
+- 2026-03-26以前の手動確認記録は、本メモ後半に履歴として残している
 
 ## 今後の運用ポリシー（2026-03-26 更新）
 
@@ -198,6 +192,7 @@ python3 scripts/review/check_urls_browser.py
 ## 完了条件
 
 - ネットワーク制限のない環境で `check_urls_all.py` を再実行済みである
-- `error` / `timeout` / `connection_error` が 0 件である
+- `error` / `timeout` が 0 件である
+- `connection_error` は別経路で実在性を確認する
 - 404 だった旧 URL を本文または参考文献で修正済みである
 - DOI 系 `manual_review_required` は 0 件である

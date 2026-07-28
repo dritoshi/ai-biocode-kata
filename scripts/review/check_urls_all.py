@@ -21,7 +21,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from http.client import RemoteDisconnected
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 # --- 定数 ---
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -61,6 +61,7 @@ DUMMY_PATTERNS = [
     "my-repo",
     "your-repo",
     "yourname",
+    "doi.org/10.xxxx/",
 ]
 
 # Anti-bot ステータスコード
@@ -83,6 +84,8 @@ ANGLE_URL_RE = re.compile(r"<(https?://[^>]+)>")
 # Bare URL: https://example.org/path
 # Markdown 記法や日本語本文を巻き込まないよう、URL として妥当な ASCII のみ許容する。
 BARE_URL_RE = re.compile(r"(https?://[A-Za-z0-9._~:/?#@!$&'*+,;=%-]+)")
+
+
 def is_dummy_url(url: str) -> bool:
     """ダミー/プレースホルダ URL かどうか判定."""
     parsed = urlparse(url)
@@ -183,8 +186,6 @@ def get_rate_limit_key(url: str) -> str | None:
 def check_single_url(url: str) -> dict[str, Any]:
     """単一URLの到達性をチェック."""
     ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
 
     headers = {
         "User-Agent": (
@@ -207,7 +208,7 @@ def check_single_url(url: str) -> dict[str, Any]:
     is_doi = "doi.org/" in url
 
     # まず HEAD を試す (DOI以外)
-    for method in (["GET"] if is_doi else ["HEAD", "GET"]):
+    for method in ["GET"] if is_doi else ["HEAD", "GET"]:
         req = urllib.request.Request(url, headers=headers, method=method)
 
         try:
@@ -229,16 +230,25 @@ def check_single_url(url: str) -> dict[str, Any]:
 
         except urllib.error.HTTPError as e:
             result["status_code"] = e.code
+            if method == "HEAD":
+                # HEADだけを403等で拒否するサイトもあるのでGETにフォールバック
+                continue
+
+            if 300 <= e.code < 400:
+                # リダイレクト先がCookieや認証ループを起こしても、元URLは実在する。
+                location = e.headers.get("Location")
+                result["category"] = "redirect"
+                if location:
+                    result["final_url"] = urljoin(url, location)
+                return result
+
             if e.code in ANTI_BOT_CODES:
                 result["category"] = "anti-bot"
                 return result
-            elif method == "HEAD":
-                # HEAD が拒否されるサイトがあるので GET にフォールバック
-                continue
-            else:
-                result["category"] = "error"
-                result["error"] = f"HTTP {e.code}"
-                return result
+
+            result["category"] = "error"
+            result["error"] = f"HTTP {e.code}"
+            return result
 
         except urllib.error.URLError as e:
             result["error"] = str(e.reason)
@@ -287,7 +297,9 @@ def check_urls_with_rate_limit(
     # レート制限対象を逐次処理
     for domain, domain_urls in rate_limited_groups.items():
         interval = RATE_LIMITS[domain]
-        print(f"  Checking {len(domain_urls)} URLs for {domain} (interval={interval}s)...")
+        print(
+            f"  Checking {len(domain_urls)} URLs for {domain} (interval={interval}s)..."
+        )
         for url in domain_urls:
             results[url] = check_single_url(url)
             checked += 1
@@ -343,7 +355,9 @@ def main() -> None:
     unique_urls = sorted(url_index.keys())
     total_occurrences = sum(len(locs) for locs in url_index.values())
 
-    print(f"Found {len(unique_urls)} unique URLs ({total_occurrences} total occurrences)")
+    print(
+        f"Found {len(unique_urls)} unique URLs ({total_occurrences} total occurrences)"
+    )
     print()
 
     # URLチェック
@@ -400,7 +414,8 @@ def main() -> None:
 
     # エラー詳細表示
     error_entries = [
-        e for e in output["urls"]
+        e
+        for e in output["urls"]
         if e["category"] in ("error", "connection_error", "timeout")
     ]
     if error_entries:
@@ -416,9 +431,7 @@ def main() -> None:
                 print(f"    -> {loc['file']}:{loc['line']}")
 
     # Anti-bot 表示
-    anti_bot_entries = [
-        e for e in output["urls"] if e["category"] == "anti-bot"
-    ]
+    anti_bot_entries = [e for e in output["urls"] if e["category"] == "anti-bot"]
     if anti_bot_entries:
         print()
         print("=" * 60)
@@ -431,8 +444,7 @@ def main() -> None:
 
     # リダイレクト (DOI等) 表示
     redirect_entries = [
-        e for e in output["urls"]
-        if e.get("final_url") and e["final_url"] != e["url"]
+        e for e in output["urls"] if e.get("final_url") and e["final_url"] != e["url"]
     ]
     if redirect_entries:
         print()
