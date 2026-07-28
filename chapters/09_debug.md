@@ -74,6 +74,8 @@ def parse_gene_expression(raw_data: list[str]) -> list[float]:
     return results
 ```
 
+この例ではtracebackの発生箇所を読みやすくするため説明を絞っている。入力が数値文字列のリストであることと、変換不能値で `ValueError` を送出する契約は[実行可能な完全版](../scripts/ch09/traceback_demo.py)に、正常値・異常値・空入力の確認は[対応するテスト](../tests/ch09/test_traceback_demo.py)に記載している。
+
 `parse_gene_expression(["1.5", "N/A", "2.0"])` を呼ぶと、次のtracebackが表示される。
 
 ```
@@ -93,6 +95,8 @@ def lookup_gene_annotation(
         raise KeyError(msg)
     return db[gene_id]
 ```
+
+検索の成否に関する完全な契約は[実行可能な実装](../scripts/ch09/traceback_demo.py)に、存在するIDと存在しないIDの両方は[対応するテスト](../tests/ch09/test_traceback_demo.py)に記載している。
 
 **ライブラリ内部フレームの読み飛ばし方**: tracebackには、自分のコードだけでなくライブラリ内部のフレームも表示される。`site-packages/` や標準ライブラリのパスが含まれるフレームは、通常読み飛ばしてよい。自分のコードが含まれるフレーム（プロジェクトのディレクトリパス）に注目しよう。
 
@@ -200,6 +204,8 @@ def filter_sequences_logging_debug(
     logger.debug("フィルタ完了: %d → %d 配列", len(sequences), len(filtered))
     return filtered
 ```
+
+ログ設定を含む[実行可能な完全版](../scripts/ch09/debug_print_demo.py)と[対応するテスト](../tests/ch09/test_debug_print_demo.py)では、DEBUGログの有効・無効と長さの閾値境界を確認している。
 
 `logging.debug()` は `print()` と違い、本番では出力されない。ログレベルを `DEBUG` に設定したときだけ表示される。消し忘れを心配する必要がなく、デバッグ情報をコードに残しておける。
 
@@ -490,6 +496,8 @@ def resolve_data_path(path_str: str) -> Path:
     return path
 ```
 
+この順序を含む[実行可能な完全版](../scripts/ch09/path_bugs.py)と[対応するテスト](../tests/ch09/test_path_bugs.py)では、チルダ、相対パス、絶対パスを解決した後に存在確認する動作を検証している。
+
 ### エンコーディングの問題
 
 テキストファイルの文字エンコーディングの不一致は、`UnicodeDecodeError` を引き起こす。
@@ -548,6 +556,8 @@ def safe_mean(values: list[float | None]) -> float | None:
         return None
     return sum(valid) / len(valid)
 ```
+
+`None` とNaNを平均の対象外とする判断は[実行可能な完全版](../scripts/ch09/type_bugs.py)にもコメントで残している。[対応するテスト](../tests/ch09/test_type_bugs.py)では通常値、空入力、`None`、NaNをそれぞれ確認している。
 
 型の不一致バグを事前に防ぐには、[§8 コードの正しさを守るテスト技法](./08_testing.md)で紹介した型チェッカ（mypy）が有効である。
 

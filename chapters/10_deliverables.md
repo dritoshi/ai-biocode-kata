@@ -658,7 +658,7 @@ def load_config(config_path: Path) -> dict[str, Any]:
     return defaults
 ```
 
-ポイントはデフォルト値を関数内に定義し、設定ファイルの値で上書きする2層構造である。設定ファイルが存在しなくてもデフォルト値で動作するため、ユーザーは設定を変更したい項目だけを記述すればよい。
+ポイントはデフォルト値を関数内に定義し、設定ファイルの値で上書きする2層構造である。設定ファイルが存在しなくてもデフォルト値で動作するため、ユーザーは設定を変更したい項目だけを記述すればよい。[実行可能な完全版](../scripts/ch10/config_example.py)と[対応するテスト](../tests/ch10/test_config_example.py)では、通常のYAML、空ファイル、不正なYAML、ファイル欠落を確認している。
 
 ### コマンドライン引数による上書き
 
@@ -781,6 +781,8 @@ def load_min_quality(config: dict[str, str]) -> float:
             f"20 のような数値を指定してください"
         ) from exc
 ```
+
+例外仕様を含む[実行可能な完全版](../scripts/ch10/error_handling.py)と[対応するテスト](../tests/ch10/test_error_handling.py)では、正常な数値変換、`BiofilterError`、元の `ValueError` が `__cause__` に保持されることを確認している。
 
 `from exc` を付けると、トレースバックに「The above exception was the direct cause of the following exception」と表示され、元の `ValueError`（数値変換の失敗）と、それを包んだ `BiofilterError`（設定値が不正）の両方をたどれる。「分かりやすい上位のエラー」と「本当に何が起きたかの下位のエラー」の両方が残るので、デバッグ時に原因を見失わずに済む[7](https://docs.python.org/3/tutorial/errors.html)。
 
@@ -909,7 +911,7 @@ def count_records_with_cleanup(records: list[str], work_dir: Path) -> int:
         marker.unlink(missing_ok=True)
 ```
 
-`records` が空で `ValueError` が送出されても、`finally` 節が走って一時ファイル（`processing.lock`）は削除される。もし後始末を `return` の手前に書いていたら、例外で処理が中断されたときに一時ファイルが残り、次の実行を妨げるゴミになる。
+`records` が空で `ValueError` が送出されても、`finally` 節が走って一時ファイル（`processing.lock`）は削除される。もし後始末を `return` の手前に書いていたら、例外で処理が中断されたときに一時ファイルが残り、次の実行を妨げるゴミになる。[実行可能な完全版](../scripts/ch10/error_handling.py)と[対応するテスト](../tests/ch10/test_error_handling.py)では、正常終了と途中例外のどちらでも削除されることを確認している。
 
 ただし、ファイルのように「開いたら閉じる」対象には、`try/finally` を手書きするより `with` 文（コンテキストマネージャ）を使うのが定石である:
 

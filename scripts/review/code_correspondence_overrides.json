@@ -608,12 +608,13 @@
       "block_sha256": "ec5fd33a18fcb003b046acc363b225e7712e5d224e0b32919e2f6a6c14e86996",
       "relations": [
         {
+          "source_entity_id": "B-08-001-E01",
           "target_file": "tests/ch08/test_reverse_complement.py",
+          "target_entity": "TestReverseComplement.test_simple_sequence",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "同じ入力・期待値のテストがクラスメソッド名だけを変えて存在",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "Red段階の単独テストと完成版のクラスメソッドは、定義名以外のASTが一致",
+          "verification": "現行完成版で同じassertが成功し、実装前にはimport先が存在せずRedになる時間軸を本文で確認",
           "cross_chapter": false
         }
       ]
@@ -622,12 +623,13 @@
       "block_sha256": "6d305cc4420f6d54e98679cda1c8d9370ded96ba77e29a0192e9c0404ce593ef",
       "relations": [
         {
+          "source_entity_id": "B-08-002-E01",
           "target_file": "scripts/ch08/reverse_complement.py",
+          "target_entity": "reverse_complement",
           "equivalence": "E1",
           "kind": "excerpt",
           "evidence": "実体の空入力早期returnは本文の空joinと同じ空文字列を返し、通常・小文字・不正塩基の戻り値と例外も一致",
           "verification": "空入力、小文字、通常配列、無効塩基をpytestで検証し、分岐ごとの戻り値・例外を目視比較",
-          "target_entity": "reverse_complement",
           "cross_chapter": false
         }
       ]
@@ -636,12 +638,23 @@
       "block_sha256": "d3fae32e3c4162c044dfeef93968b2b48cb75ac78f439f570ce9b300516ed445",
       "relations": [
         {
+          "source_entity_id": "B-08-003-E01",
           "target_file": "tests/ch08/test_reverse_complement.py",
+          "target_entity": "TestReverseComplement.test_empty_sequence",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "空入力・小文字の同じassertがテストクラス内に存在",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "追加段階の空入力テストと完成版のクラスメソッドは、定義名以外のASTが一致",
+          "verification": "空入力と既存正常系をpytestで検証",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-08-003-E02",
+          "target_file": "tests/ch08/test_reverse_complement.py",
+          "target_entity": "TestReverseComplement.test_case_insensitive",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "追加段階の小文字テストと完成版のクラスメソッドは、定義名以外のASTが一致",
+          "verification": "小文字入力と既存正常系をpytestで検証",
           "cross_chapter": false
         }
       ]
@@ -664,12 +677,13 @@
       "block_sha256": "fd77ea1851f3be3e9cb6f47d6f4bee26f88381b81f10ba11c6b5cb2e258d46a2",
       "relations": [
         {
+          "source_entity_id": "B-08-006-E01",
           "target_file": "tests/ch08/test_reverse_complement.py",
-          "equivalence": "E1",
+          "target_entity": "TestReverseComplement",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "simple/palindrome/emptyの同じ振る舞いを実体のテストクラスが検証",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文はsimple・palindrome・emptyだけを示す完成テストクラスの教育的抜粋",
+          "verification": "3つの本文対応ケースと、完全版にのみある追加ケースをpytestで検証",
           "cross_chapter": false
         }
       ]
@@ -712,24 +726,26 @@
       ]
     },
     "B-08-009": {
-      "block_sha256": "5d5090b751097d12d6a8482d3c6234b008c3e01378bcaa44d39358765881ebd8",
+      "block_sha256": "d8cbc4f238b2ffe94a0b9c2602c55e94c4fe4328875fb1a6249d93281c333af4",
       "relations": [
         {
-          "target_file": "tests/ch08/test_reverse_complement.py",
+          "source_entity_id": "B-08-009-E01",
+          "target_file": "tests/ch08/test_seq_stats.py",
+          "target_entity": "TestGcContent.test_with_n",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "single-baseのassertが存在",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "Nを分母に含める仮定と正確な期待値2/5が完成版テストと一致",
+          "verification": "Nを含む配列の正確値と空配列をpytestで検証",
           "cross_chapter": false
         },
         {
+          "source_entity_id": "B-08-009-E02",
           "target_file": "tests/ch08/test_seq_stats.py",
+          "target_entity": "TestGcContent.test_single_base",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "Nを含むGC含量とsingle-baseのassertが存在",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "1塩基のGとAに対するassertが完成版テストと一致",
+          "verification": "1塩基の境界値をpytestで検証",
           "cross_chapter": false
         }
       ]
@@ -2365,7 +2381,7 @@
     "remediation_scope": {
       "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
       "baseline_e1_sha256": "88b2e73514c0a9a78f7b9a82c1feea4083ec98de9bd1edaae3fb4f87304d1dd8",
-      "completed_batch": 1
+      "completed_batch": 2
     },
     "comment_sync": [
       {
@@ -2454,87 +2470,296 @@
       },
       {
         "block_id": "B-08-001",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の教育的な行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-08-002",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内のコメントはファイルパスだけであり同期対象ではない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-08-003",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-08-006",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "回文配列では逆相補鎖が元配列と一致するという前提を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "biological_data_assumption",
+        "source_evidence": [
+          {
+            "file": "chapters/08_testing.md",
+            "line_start": 170,
+            "line_end": 170,
+            "sha256": "424004fbf2e90b2e1c50e141108b3d24359ce4743f4fe061363a52ed858225ef"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "tests/ch08/test_reverse_complement.py",
+            "scope": "entity",
+            "entity": "TestReverseComplement.test_palindrome",
+            "line_start": 21,
+            "line_end": 21,
+            "sha256": "0af076da2b3709ce11fff0cce57b2f362c35420cec7c9549a04df07de3a8ce8a"
+          }
+        ]
       },
       {
         "block_id": "B-08-009",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "不明塩基NをGCには数えず分母へ含める前提を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "biological_data_assumption",
+        "source_evidence": [
+          {
+            "file": "chapters/08_testing.md",
+            "line_start": 246,
+            "line_end": 246,
+            "sha256": "b4a5564e3e7c1cbf15be075a99bde31fd9a77e5979fa2711f82ee09392eb90b2"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "tests/ch08/test_seq_stats.py",
+            "scope": "entity",
+            "entity": "TestGcContent.test_with_n",
+            "line_start": 52,
+            "line_end": 52,
+            "sha256": "f6cc7aabaef14d007eaaa2bf9be6e65e495acd0ae666138cfc5ad81bbdcf477e"
+          }
+        ]
       },
       {
         "block_id": "B-08-019",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "body_only"
+        "status": "body_only",
+        "reason": "mypyの意図的な型エラーと期待診断を示す章内注釈であり、正しい実体へは移さない",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "chapter_context",
+        "source_evidence": [
+          {
+            "file": "chapters/08_testing.md",
+            "line_start": 445,
+            "line_end": 447,
+            "sha256": "9654295afe9ad805a5f90e74f6931ad9f107b6e68fed4d7831f0c1cfe754c86b"
+          }
+        ],
+        "target_evidence": []
       },
       {
         "block_id": "B-09-003",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "数値文字列の入力境界と変換不能値の例外条件を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "unit_shape_boundary",
+        "source_evidence": [
+          {
+            "file": "chapters/09_debug.md",
+            "line_start": 64,
+            "line_end": 65,
+            "sha256": "836cc7323a39f4ec3b6d076c1334a643079f122cf3b24d3ff9608a790db8a19e"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch09/traceback_demo.py",
+            "scope": "entity",
+            "entity": "parse_gene_expression",
+            "line_start": 64,
+            "line_end": 65,
+            "sha256": "568ec0166ae9b34a0dcb088ffa4e732df512f821a08707d99666bdafae31a19b"
+          }
+        ]
       },
       {
         "block_id": "B-09-005",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "遺伝子IDが検索対象にない場合のKeyError条件を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "unit_shape_boundary",
+        "source_evidence": [
+          {
+            "file": "chapters/09_debug.md",
+            "line_start": 88,
+            "line_end": 89,
+            "sha256": "b7905cb432ddc54dbdeed6cf381956f76b0ec7007249167aca7dfa529b9efe70"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch09/traceback_demo.py",
+            "scope": "entity",
+            "entity": "lookup_gene_annotation",
+            "line_start": 113,
+            "line_end": 114,
+            "sha256": "4da228edf17aa1739e9fc69d9c3d2c46ea683a89190a2588bedccc3d4769cbe3"
+          }
+        ]
       },
       {
         "block_id": "B-09-007",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "DEBUGログをログレベルで制御する実装判断を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/09_debug.md",
+            "line_start": 194,
+            "line_end": 195,
+            "sha256": "0d72f67d0ba05b592ba674e658c0cb77357aedc97eb689ac6c0640e9815e7f8e"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch09/debug_print_demo.py",
+            "scope": "entity",
+            "entity": "filter_sequences_logging_debug",
+            "line_start": 40,
+            "line_end": 41,
+            "sha256": "3a144e33e4695f74687e69e8d8c48544ec0b4c93353ddf3a76f703be15901e99"
+          }
+        ]
       },
       {
         "block_id": "B-09-020",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "チルダ展開後に絶対パス化する順序を本文コメントと実体docstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/09_debug.md",
+            "line_start": 489,
+            "line_end": 490,
+            "sha256": "a9f16ddf96bca306001dafc4d72d82dc85af3bfc3a9d1302f40fb53fa4a32e6a"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch09/path_bugs.py",
+            "scope": "entity",
+            "entity": "resolve_data_path",
+            "line_start": 50,
+            "line_end": 52,
+            "sha256": "aa4dec14aa90343957044956b54c7253f1ab382441a0cae40f6096e7db937468"
+          }
+        ]
       },
       {
         "block_id": "B-09-024",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "added"
+        "status": "added",
+        "reason": "NoneとNaNを平均対象から除外する生物データ上の判断を実体コメントへ追加して同期した",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "biological_data_assumption",
+        "source_evidence": [
+          {
+            "file": "chapters/09_debug.md",
+            "line_start": 551,
+            "line_end": 552,
+            "sha256": "7feff9e2e568366218a4b19be93666051681b558a7c79ef2abdaaf95cd4eaa5c"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch09/type_bugs.py",
+            "scope": "entity",
+            "entity": "safe_mean",
+            "line_start": 70,
+            "line_end": 70,
+            "sha256": "9e7cf038fb925559a0e9a1208e15637c30fee31c58a83aad25c14223fc2f2f93"
+          }
+        ]
       },
       {
         "block_id": "B-10-024",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "ユーザー設定でデフォルトを上書きする実装判断を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/10_deliverables.md",
+            "line_start": 651,
+            "line_end": 651,
+            "sha256": "e002b636bd166af0ba08d499c41ba96530a7110ff9a5ab075a208cacf6616561"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch10/config_example.py",
+            "scope": "entity",
+            "entity": "load_config",
+            "line_start": 37,
+            "line_end": 37,
+            "sha256": "e002b636bd166af0ba08d499c41ba96530a7110ff9a5ab075a208cacf6616561"
+          }
+        ]
       },
       {
         "block_id": "B-10-028",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "from excで元の例外を保持する実装判断を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/10_deliverables.md",
+            "line_start": 778,
+            "line_end": 778,
+            "sha256": "1050f058427c4a61046c6949cc0d14ee062a663171bcd9f27d2140a11159f8fc"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch10/error_handling.py",
+            "scope": "entity",
+            "entity": "load_min_quality",
+            "line_start": 126,
+            "line_end": 126,
+            "sha256": "1050f058427c4a61046c6949cc0d14ee062a663171bcd9f27d2140a11159f8fc"
+          }
+        ]
       },
       {
         "block_id": "B-10-031",
-        "status": "pending",
-        "scheduled_batch": 2,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "成功・失敗にかかわらず後始末する実装判断を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/10_deliverables.md",
+            "line_start": 910,
+            "line_end": 910,
+            "sha256": "4bb248e450539994d9d87428b06c574fe89b03b31d148c44fda5046f78bf7c0a"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch10/error_handling.py",
+            "scope": "entity",
+            "entity": "count_records_with_cleanup",
+            "line_start": 163,
+            "line_end": 163,
+            "sha256": "4bb248e450539994d9d87428b06c574fe89b03b31d148c44fda5046f78bf7c0a"
+          }
+        ]
       },
       {
         "block_id": "B-12-001",
