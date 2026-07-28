@@ -6,6 +6,7 @@ import logging
 from pathlib import Path
 
 import pytest
+from click.utils import strip_ansi
 from typer.testing import CliRunner
 
 from scripts.ch11.cli_typer import app
@@ -43,8 +44,9 @@ def test_help() -> None:
     result = CliRunner().invoke(app, ["--help"])
 
     assert result.exit_code == 0
-    assert "入力FASTAファイル" in result.stdout
-    assert "--min-gc" in result.stdout
+    help_text = strip_ansi(result.stdout)
+    assert "入力FASTAファイル" in help_text
+    assert "--min-gc" in help_text
 
 
 def test_filters_to_stdout(tmp_path: Path) -> None:
