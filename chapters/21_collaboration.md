@@ -112,7 +112,7 @@ def format_biostars_question(
     ...  # タイトル・質問内容・エラーメッセージ・実行環境を節に分けて整形
 ```
 
-完全なコードは`scripts/ch21/format_question.py`にある。
+[実行可能な完全版](../scripts/ch21/format_question.py)と[直接テスト](../tests/ch21/test_format_question.py)では、OS・Python・主要パッケージの環境収集、未導入パッケージ、質問テンプレートの整形を確認している。本文の `format_biostars_question()` は、完全版の入出力責務だけを示すスタブである。
 
 #### エージェントへの指示例
 
@@ -333,7 +333,7 @@ def check_type_hints(added_lines: list[str]) -> list[str]:
     return issues
 ```
 
-完全なコードは`scripts/ch21/review_helper.py`にある。
+[実行可能な完全版](../scripts/ch21/review_helper.py)と[直接テスト](../tests/ch21/test_review_helper.py)では、型ヒントの有無、インデント、複数関数が混在する差分を確認している。
 
 #### エージェントへの指示例
 
@@ -585,7 +585,7 @@ def generate_report(commits: list[Commit], period: str) -> str:
     ...  # カテゴリ別の変更一覧と統計を組み立てて返す
 ```
 
-完全なコードは`scripts/ch21/progress_report.py`にある。
+[実行可能な完全版](../scripts/ch21/progress_report.py)と[直接テスト](../tests/ch21/test_progress_report.py)では、正常・空・不正なgit log行と、分類済み進捗レポートの生成を確認している。本文の `generate_report()` は、完全版で行う分類・集計・Markdown整形を省略したスタブである。
 
 #### エージェントへの指示例
 
@@ -715,7 +715,7 @@ def validate_metadata(
 
 [§20-2 データの倫理](./20_security_ethics.md#20-2-データの倫理)のデータ管理計画（DMP）で定めた共有ルールに従い、ヒトデータの場合は倫理審査の承認やDUAの確認も解析前チェックリストに含める。
 
-完全なコードは`scripts/ch21/analysis_intake.py`にある。
+[実行可能な完全版](../scripts/ch21/analysis_intake.py)と[直接テスト](../tests/ch21/test_analysis_intake.py)では、空入力、必須カラムの欠落、空セル、複数エラーの集約を確認している。
 
 #### エージェントへの指示例
 

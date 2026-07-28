@@ -4,6 +4,10 @@
 レポート生成を検証する。
 """
 
+import logging
+
+import pytest
+
 from scripts.ch21.progress_report import (
     Commit,
     categorize_commits,
@@ -71,6 +75,21 @@ class TestParseGitLog:
         commits = parse_git_log(log)
         assert len(commits) == 1
         assert commits[0].subject == "fix: バグ修正"
+
+    def test_parse_git_log_skips_invalid_line(
+        self, caplog: pytest.LogCaptureFixture
+    ) -> None:
+        """区切りが不足した行を警告してスキップする."""
+        log = (
+            "invalid line\n"
+            "abc123|docs: README更新|2024-01-01 00:00:00 +0900\n"
+        )
+
+        with caplog.at_level(logging.WARNING):
+            commits = parse_git_log(log)
+
+        assert [commit.hash for commit in commits] == ["abc123"]
+        assert "不正な形式の行をスキップ" in caplog.text
 
 
 # --- categorize_commits ---

@@ -3,6 +3,11 @@
 実行環境の自動収集と質問テンプレート生成を検証する。
 """
 
+from importlib.metadata import PackageNotFoundError
+
+import pytest
+
+from scripts.ch21 import format_question
 from scripts.ch21.format_question import (
     collect_environment,
     format_biostars_question,
@@ -28,6 +33,22 @@ class TestCollectEnvironment:
         assert "numpy" in env
         assert "pandas" in env
         assert "biopython" in env
+
+    def test_collect_environment_marks_missing_package(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """未導入パッケージを例外にせずnot installedと記録する."""
+
+        def fake_version(package: str) -> str:
+            if package == "biopython":
+                raise PackageNotFoundError(package)
+            return "1.2.3"
+
+        monkeypatch.setattr(format_question, "version", fake_version)
+        env = collect_environment()
+
+        assert env["biopython"] == "not installed"
+        assert env["numpy"] == "1.2.3"
 
 
 # --- format_biostars_question ---
