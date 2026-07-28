@@ -2,6 +2,9 @@
 
 from pathlib import Path
 
+import pytest
+import yaml
+
 from scripts.ch10.config_example import load_config
 
 
@@ -53,3 +56,12 @@ def test_load_config_new_section(tmp_path: Path) -> None:
     assert config["logging"]["level"] == "DEBUG"
     # デフォルトセクションも維持される
     assert config["filtering"]["min_qual"] == 20
+
+
+def test_load_config_invalid_yaml(tmp_path: Path) -> None:
+    """不正なYAMLでは解析エラーを呼び出し側へ伝える."""
+    config_file = tmp_path / "config.yaml"
+    config_file.write_text("filtering: [\n", encoding="utf-8")
+
+    with pytest.raises(yaml.YAMLError):
+        load_config(config_file)

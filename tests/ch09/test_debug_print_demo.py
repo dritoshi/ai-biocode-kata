@@ -2,6 +2,8 @@
 
 import logging
 
+import pytest
+
 from scripts.ch09.debug_print_demo import (
     filter_sequences_logging_debug,
     filter_sequences_print_debug,
@@ -56,3 +58,16 @@ class TestFilterSequencesLoggingDebug:
         assert "フィルタ完了" in caplog.text
         assert "採用" in caplog.text
         assert "除外" in caplog.text
+
+    def test_debug_logging_is_hidden_at_info(
+        self, caplog: pytest.LogCaptureFixture
+    ) -> None:
+        """INFOレベルではDEBUGログを表示しない."""
+        with caplog.at_level(logging.INFO):
+            filter_sequences_logging_debug(["ATCG", "AT"], min_length=3)
+        assert caplog.text == ""
+
+    def test_threshold_is_inclusive(self) -> None:
+        """最小長と同じ長さの配列を採用する."""
+        result = filter_sequences_logging_debug(["ATG", "AT"], min_length=3)
+        assert result == ["ATG"]

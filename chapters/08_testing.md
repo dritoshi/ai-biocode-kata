@@ -52,6 +52,7 @@ def test_simple_sequence() -> None:
 ```
 
 この時点では `reverse_complement` 関数はまだ存在しないため、テストは失敗する（Red）。
+ここで示した単独テストは実装前の時間軸を再現したものであり、完成後は[テストクラス内の対応メソッド](../tests/ch08/test_reverse_complement.py)として同じ期待値を検証している。現在のリポジトリでは実装済みなので成功するが、Redの時点ではimport先の関数が存在しないため失敗する。
 
 **Step 2: Green — テストが通る最小限のコードを書く**
 
@@ -66,7 +67,7 @@ def reverse_complement(seq: str) -> str:
     return "".join(COMPLEMENT[base] for base in reversed(seq.upper()))
 ```
 
-テストを実行すると、今度は成功する（Green）。
+テストを実行すると、今度は成功する（Green）。このコードは最初のテストを通すための最小実装である。[完成版の実装](../scripts/ch08/reverse_complement.py)には空入力を明示的に扱う早期リターンもあるが、通常配列に対する結果は同じである。[完成版のテスト](../tests/ch08/test_reverse_complement.py)では通常配列に加えて、空入力、小文字、不正塩基も検証している。
 
 **Step 3: Refactor — 必要に応じて整理する**
 
@@ -82,7 +83,7 @@ def test_case_insensitive() -> None:
     assert reverse_complement("atgc") == "GCAT"
 ```
 
-新しいテストケースを追加したら、再びテストを実行して全てが通ることを確認する。このサイクルを繰り返しながら、エッジケース（空入力、小文字入力など）にも対応していく。
+新しいテストケースを追加したら、再びテストを実行して全てが通ることを確認する。この段階では追加順序を見せるため単独関数としているが、完成後は[テストクラス内の2メソッド](../tests/ch08/test_reverse_complement.py)に整理されている。このサイクルを繰り返しながら、エッジケース（空入力、小文字入力など）にも対応していく。
 
 ### 「テストが通る最小限のコード」を書く規律
 
@@ -156,7 +157,7 @@ def test_gc_content_typical() -> None:
 
 #### テストクラスによるグループ化
 
-関連するテストをクラスでまとめると、テストの構造が明確になる:
+関連するテストをクラスでまとめると、テストの構造が明確になる。以下はグループ化の要点だけを示す抜粋であり、[完成版のテストクラス](../tests/ch08/test_reverse_complement.py)には同一塩基、小文字、不正塩基、1塩基、長い配列のケースと、もう1つの回文配列のassertも含まれる:
 
 ```python
 class TestReverseComplement:
@@ -245,12 +246,15 @@ def test_sequence_with_n() -> None:
     # N は GC にも AT にもカウントされないが、分母（配列長）には含まれる（"ATNGC" なら 2/5 = 0.4）
     result = gc_content("ATNGC")
     assert 0.0 <= result <= 1.0
+    assert result == pytest.approx(2 / 5)
 
 def test_single_base() -> None:
     """1塩基の配列."""
     assert gc_content("G") == pytest.approx(1.0)
     assert gc_content("A") == pytest.approx(0.0)
 ```
+
+実行可能な[GC含量の実装](../scripts/ch08/seq_stats.py)と[対応する完成版テスト](../tests/ch08/test_seq_stats.py)では、空配列を含む追加の境界値も検証している。
 
 ### テストカバレッジの計測
 
@@ -442,6 +446,8 @@ def gc_content(seq: str) -> float:
 result: int = gc_content("ATGC")  # error: Incompatible types in assignment
 #                                  #        (expression has type "float", variable has type "int")
 ```
+
+このブロックはmypyの診断を示すため、末尾に意図的な型エラーを含む。正しく実行できる関数は[GC含量の完全版](../scripts/ch08/seq_stats.py)、通常入力と空入力の確認は[対応するテスト](../tests/ch08/test_seq_stats.py)に分けている。
 
 型ヒントの最大の利点は、コードの意図を明示することで読みやすさが向上し、AIコーディングエージェントにとっても文脈の理解が容易になることである。
 

@@ -67,6 +67,7 @@ def safe_mean(values: list[float | None]) -> float | None:
     float | None
         有効な数値の平均。全て None の場合は None を返す。
     """
+    # None と NaN は表現が異なるが、どちらも平均の対象外とする
     valid = [v for v in values if v is not None and not math.isnan(v)]
     if not valid:
         return None
