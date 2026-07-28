@@ -7,7 +7,11 @@ from pathlib import Path
 import pytest
 
 from scripts.review import check_xref
-from scripts.review.check_structure import find_new_issues, issue_key
+from scripts.review.check_structure import (
+    find_new_issues,
+    is_chapter_file,
+    issue_key,
+)
 from scripts.review.e1_remediation import (
     load_fixture,
     normalized_evidence_bytes,
@@ -93,6 +97,25 @@ def test_structure_baseline_ignores_line_number_changes() -> None:
 
     assert issue_key(baseline[0]) == issue_key(current[0])
     assert find_new_issues(current, baseline) == [current[1]]
+
+
+@pytest.mark.parametrize(
+    ("filename", "expected"),
+    [
+        ("00_ai_agent.md", True),
+        ("21_collaboration.md", True),
+        ("hajimeni.md", False),
+        ("notice.md", False),
+        ("author.md", False),
+        ("appendix_a_learning_patterns.md", False),
+    ],
+)
+def test_structure_identifies_numbered_chapters_only(
+    filename: str,
+    expected: bool,
+) -> None:
+    """必須セクション検査は番号付き章だけを対象にする."""
+    assert is_chapter_file(Path(filename)) is expected
 
 
 def test_e1_fixture_keeps_all_normative_anchors() -> None:

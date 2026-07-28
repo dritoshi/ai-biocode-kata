@@ -402,7 +402,7 @@ DUAの禁止事項はデータセットごとに異なるため、新しいデ�
 - **NDA・MTA・共同研究契約の対象物**: 契約で守秘義務が課された情報はすべて対象。該当するかの判断に迷う場合は、所属機関の産学連携・知財部門に照会する
 - **所属機関の内部コード・設定ファイル**: ライセンスが未整理の社内ツール、退職者が残したコード、認証情報を含む設定ファイルなどは、公開を前提としていない。誤って学習用途に使われれば取り戻せない
 
-これらはヒトゲノムデータと異なり、明文化された規制がない場合が多い。だからこそ、**「送ってよいか迷う時点で送らない」**という消極的な判断を基本姿勢とすべきである。
+これらはヒトゲノムデータと異なり、明文化された規制がない場合が多い。だからこそ、「**送ってよいか迷う時点で送らない**」という消極的な判断を基本姿勢とすべきである。
 
 ##### プロバイダ別のプライバシー設定（2026年7月現在）
 
@@ -421,17 +421,17 @@ AI コーディングエージェントのプライバシー設定は、**サイ
 
 上記の表は概要にすぎない。実際の運用にあたっては、各自が以下の公式ドキュメントを読み、最新のポリシーと自分の契約プランでの既定挙動を確認すること。
 
-- **Anthropic（Claude / Claude Code）**:
+- **Anthropic**（Claude / Claude Code）:
   - Privacy Policy[27](https://www.anthropic.com/legal/privacy)
   - Commercial Terms of Service（API・商用利用の既定挙動）[28](https://www.anthropic.com/legal/commercial-terms)
   - Data usage（Claude Code 単位での学習の既定・保持期間・ZDR）: https://code.claude.com/docs/en/data-usage
-- **OpenAI（ChatGPT / Codex CLI / API）**:
+- **OpenAI**（ChatGPT / Codex CLI / API）:
   - Enterprise Privacy（API・Enterprise での学習利用と保持）[29](https://openai.com/enterprise-privacy/)
   - How your data is used to improve model performance（Consumer プランの opt-out 手順）[30](https://help.openai.com/en/articles/5722486)
-- **GitHub（Copilot）**:
+- **GitHub**（Copilot）:
   - GitHub Copilot Trust Center[31](https://resources.github.com/copilot-trust-center/)
   - About GitHub Copilot privacy（Individual / Business の差異と設定）[32](https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features/privacy)
-- **Google（Gemini / Gemini CLI / Vertex AI）**:
+- **Google**（Gemini / Gemini CLI / Vertex AI）:
   - Gemini Apps Privacy Hub（個人アカウントのアクティビティ設定）[33](https://support.google.com/gemini/answer/13594961)
   - Generative AI and data governance on Vertex AI（Workspace / Vertex AI の既定挙動）[34](https://cloud.google.com/vertex-ai/generative-ai/docs/data-governance)
 
@@ -441,18 +441,18 @@ AI コーディングエージェントのプライバシー設定は、**サイ
 
 プライバシー設定は「既定」と「ユーザー設定」の両方で決まる。既定が望ましくない場合は、アカウント画面から opt-out や履歴削除が可能なことが多い。以下はメニュー階層の概略である（UI は頻繁に変わるため、詳細は上記公式ドキュメントを参照）。
 
-- **Claude（Consumer）**: claude.ai にサインイン → 右上のプロフィールアイコン → Settings → Privacy タブ → 学習利用と履歴の設定を確認
-- **Claude（API / Enterprise）**: console.anthropic.com → Organization Settings → 管理者がワークスペース単位でデータポリシーと ZDR 相談窓口を設定
-- **ChatGPT / Codex CLI（Consumer）**: chatgpt.com → 右下のプロフィール → Settings → Data Controls → 「Improve the model for everyone」を OFF、必要に応じて履歴と学習を無効化
+- **Claude**（Consumer）: claude.ai にサインイン → 右上のプロフィールアイコン → Settings → Privacy タブ → 学習利用と履歴の設定を確認
+- **Claude**（API / Enterprise）: console.anthropic.com → Organization Settings → 管理者がワークスペース単位でデータポリシーと ZDR 相談窓口を設定
+- **ChatGPT / Codex CLI**（Consumer）: chatgpt.com → 右下のプロフィール → Settings → Data Controls → 「Improve the model for everyone」を OFF、必要に応じて履歴と学習を無効化
 - **OpenAI API**: platform.openai.com → Settings → Data Controls → 組織単位の学習利用・保持期間・ZDR 相談を確認
-- **GitHub Copilot（Individual）**: github.com → Settings → Copilot → Policies → 「Suggestions matching public code」「Allow GitHub to use my code snippets for product improvements」を必要に応じて OFF
-- **GitHub Copilot（Business / Enterprise）**: 組織管理者が Enterprise / Organization 設定でポリシーを強制。個人では変更不可
-- **Gemini（個人）**: myactivity.google.com → Gemini Apps Activity → 保持期間とアクティビティ履歴を設定。人によるレビュー対象から外す設定もここ
-- **Gemini（Workspace / Vertex AI）**: 組織管理者が管理コンソールで設定。個人では変更不可
+- **GitHub Copilot**（Individual）: github.com → Settings → Copilot → Policies → 「Suggestions matching public code」「Allow GitHub to use my code snippets for product improvements」を必要に応じて OFF
+- **GitHub Copilot**（Business / Enterprise）: 組織管理者が Enterprise / Organization 設定でポリシーを強制。個人では変更不可
+- **Gemini**（個人）: myactivity.google.com → Gemini Apps Activity → 保持期間とアクティビティ履歴を設定。人によるレビュー対象から外す設定もここ
+- **Gemini**（Workspace / Vertex AI）: 組織管理者が管理コンソールで設定。個人では変更不可
 
 ##### 判断フローチャート: このデータを CLI エージェントに見せてよいか
 
-迷ったときに参照できるよう、これまでの内容を5ステップのフローとしてまとめる。**「いずれか一つでも該当すれば送信しない」**が基本方針である。
+迷ったときに参照できるよう、これまでの内容を5ステップのフローとしてまとめる。「**いずれか一つでも該当すれば送信しない**」が基本方針である。
 
 1. **ヒト由来の識別情報を含むか**（ゲノム配列・臨床情報・画像を含む）
    - Yes → 原則送信しない。DAC と情報セキュリティ部門の承認がない限り、ローカル LLM を使う
@@ -460,7 +460,7 @@ AI コーディングエージェントのプライバシー設定は、**サイ
    - Yes → 契約条文を確認。明示的に許容されていない限り送信しない
 3. **査読中原稿・特許出願前情報・未公開配列・embargo 中データか**
    - Yes → ZDR 契約済みの Enterprise プラン、もしくはローカル LLM を選択する
-4. **規制対象ではないが個人情報（氏名・連絡先・被験者ID 等）を含むか**
+4. **規制対象ではないが個人情報**（氏名・連絡先・被験者ID 等）**を含むか**
    - Yes → 個人情報保護法を確認し、匿名化してから扱う
 5. **上記のいずれにも該当しないか**
    - Yes → 現行契約プランで学習非利用と保持期間が許容範囲かを確認の上、利用してよい

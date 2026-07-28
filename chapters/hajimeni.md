@@ -88,7 +88,7 @@ Pythonの文法は教えない。アラインメントアルゴリズムの理�
 変数、関数定義（`def`）、制御構文（`if` / `for` / `while`）、リスト・辞書の操作、`import`文が読めること。自分でゼロから書ける必要はないが、AIエージェントが生成したコードを読んで「何をしているか」がわかるレベルを想定する。
 
 - **Python公式チュートリアル**（日本語）[24](https://docs.python.org/ja/3/tutorial/) — §3「形式ばらない入門」から§6「モジュール」までが本書の前提範囲。無料
-- **東京大学「Pythonプログラミング入門」**[25](https://utokyo-ipp.github.io/) — 大学1年生向けの講義資料。Jupyter Notebook形式で手を動かしながら学べる。無料
+- **東京大学**「**Pythonプログラミング入門**」[25](https://utokyo-ipp.github.io/) — 大学1年生向けの講義資料。Jupyter Notebook形式で手を動かしながら学べる。無料
 - **改訂 独習Pythonバイオ情報解析**（実験医学別冊, 羊土社, 2025）[26](https://www.yodosha.co.jp/yodobook/book/9784758122788/) — 生命科学研究者向けにJupyter、NumPy、pandas、Scanpyの基礎を解説。本書と併読すると効果的
 
 ### ターミナルとLinuxの基本操作
@@ -170,4 +170,3 @@ AIコーディングエージェントは、コードを「書く」作業を劇
 - [29](https://togotv.dbcls.jp/) DBCLS. "統合TV". https://togotv.dbcls.jp/ (参照日: 2026-03-31)
 - [30](https://www.amazon.co.jp/dp/4815731063) 坊農秀雅. "生命科学研究のためのデジタルツール入門 第2版 — 結果に差がつく使いこなし術". メディカル・サイエンス・インターナショナル, 2024. https://www.amazon.co.jp/dp/4815731063
 - [31](https://www.amazon.co.jp/dp/4895929019) 坊農秀雅. "Dr. Bonoの生命科学データ解析". メディカル・サイエンス・インターナショナル, 2017. https://www.amazon.co.jp/dp/4895929019
-
