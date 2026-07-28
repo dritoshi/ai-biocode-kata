@@ -2,6 +2,7 @@
 
 import pytest
 
+from scripts.ch17 import parallel_gc
 from scripts.ch17.parallel_gc import (
     gc_content_parallel,
     gc_content_sequential,
@@ -71,3 +72,29 @@ class TestGcContentParallel:
         result = gc_content_parallel(sequences, n_workers=2)
         expected = [1.0, 0.0, 1.0, 0.0]
         assert result == pytest.approx(expected)
+
+    def test_single_worker_uses_sequential_fallback(self) -> None:
+        """ワーカー1件ではプロセスを作らず入力順に計算する."""
+        sequences = ["ATGC", "GGGG", "AAAA"]
+        result = gc_content_parallel(sequences, n_workers=1)
+        assert result == pytest.approx([0.5, 1.0, 0.0])
+
+    def test_process_pool_error_falls_back(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """プロセスプールを作れない環境では逐次計算へ戻る."""
+
+        class UnavailableExecutor:
+            """初期化時に環境制約を再現するテスト用Executor."""
+
+            def __init__(self, max_workers: int) -> None:
+                raise PermissionError(max_workers)
+
+        monkeypatch.setattr(
+            parallel_gc,
+            "ProcessPoolExecutor",
+            UnavailableExecutor,
+        )
+        sequences = ["GC", "AT", "GCGC"]
+        result = gc_content_parallel(sequences, n_workers=2)
+        assert result == pytest.approx([1.0, 0.0, 1.0])

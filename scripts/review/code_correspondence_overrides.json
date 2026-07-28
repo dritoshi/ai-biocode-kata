@@ -393,21 +393,6 @@
         }
       ]
     },
-    "B-03-019": {
-      "block_sha256": "08af50f599765ac6016ce16e4a9cffdc0ad087fe98a0342e33adc1034d3f6d42",
-      "relations": [
-        {
-          "source_entity_id": "B-03-019-E01",
-          "target_file": "scripts/ch03/random_reproducibility.py",
-          "target_entity": "subsample_with_seed",
-          "equivalence": "E0",
-          "kind": "excerpt",
-          "evidence": "公開名、NumPy型注釈、docstring、処理本体のASTが完全一致",
-          "verification": "同一・異なるseed、サイズ境界、不正サイズをpytestで確認",
-          "cross_chapter": false
-        }
-      ]
-    },
     "B-04-001": {
       "block_sha256": "8ba99bd9707ceedfc77b5ff90eaf7929b5745e66c372554aedcbae9dcda9012c",
       "relations": [
@@ -1641,6 +1626,31 @@
         }
       ]
     },
+    "B-17-030": {
+      "block_sha256": "d511f6ba614c177173e815cd1792f9939075b03dff3689478e91231dbfcc75c5",
+      "relations": [
+        {
+          "source_entity_id": "B-17-030-E01",
+          "target_file": "scripts/ch17/parallel_gc.py",
+          "target_entity": "gc_content_single",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のgc_content_singleはdocstring以外のASTが一致",
+          "verification": "値、空入力、小文字をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-17-030-E02",
+          "target_file": "scripts/ch17/parallel_gc.py",
+          "target_entity": "gc_content_parallel",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のgc_content_parallelはdocstring以外のASTが一致",
+          "verification": "並列・逐次一致、順序、空入力、プロセス生成失敗をpytestで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
     "B-17-031": {
       "block_sha256": "2a638dde5dd5363308f6fd5dc73f442170244dfb4936e2652fb976cd824ce9e7",
       "relations": [
@@ -1665,22 +1675,39 @@
       ]
     },
     "B-17-032": {
-      "block_sha256": "460820490b28c39f0db72a8285bddc3ad99377980fe0f80c79618768e074a9d1",
+      "block_sha256": "105a8603a73a4799a2f6e6a161d6f48cfdd9627e2b0143793a93285ddeb137ae",
       "relations": [
         {
+          "source_entity_id": "B-17-032-E01",
           "target_file": "scripts/ch17/generator_fastq.py",
+          "target_entity": "read_fastq_records",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "関数名・docstring差を除き3つのジェネレータ処理がAST上同じ",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文と実体のread_fastq_recordsはdocstring以外のASTが一致",
+          "verification": "正常・途中切れFASTQと遅延評価をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-17-032-E02",
+          "target_file": "scripts/ch17/generator_fastq.py",
+          "target_entity": "filter_by_length",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のfilter_by_lengthはdocstring以外のASTが一致",
+          "verification": "長さ境界と除外結果をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-17-032-E03",
+          "target_file": "scripts/ch17/generator_fastq.py",
+          "target_entity": "filter_by_quality",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のfilter_by_qualityはdocstring以外のASTが一致",
+          "verification": "品質境界と空品質値ガードをpytestで確認",
           "cross_chapter": false
         }
       ]
-    },
-    "B-17-035": {
-      "block_sha256": "06a2acd3a1787744cd749e224e4b40a8f045c7e3eb004d67a0419a6de7e91464",
-      "relations": []
     },
     "B-17-037": {
       "block_sha256": "6b9cd7128eeb6e42a3990844b5222c68ecd827cd332edec7333f65b9de5d7e4f",
@@ -1710,17 +1737,43 @@
         }
       ]
     },
-    "B-17-039": {
-      "block_sha256": "b161f9b849b37d2655e2619e671ce5852376d2c1511086be85fc7724bb699d6b",
+    "B-17-038": {
+      "block_sha256": "cbcebd896f47d0778b88f4cc5f87077d73b23099ad35fbd23416a099a5592017",
       "relations": [
         {
-          "target_file": "scripts/ch02/fastq_gzip.py",
-          "target_entity": "count_reads_in_gzip",
+          "source_entity_id": "B-17-038-E01",
+          "target_file": "scripts/ch17/file_format_bench.py",
+          "target_entity": "save_as_csv",
           "equivalence": "E1",
           "kind": "excerpt",
-          "evidence": "章をまたぐ改名・変数名差のみでgzip行数÷4の処理は同じ",
+          "evidence": "本文と実体のsave_as_csvはdocstring以外のASTが一致",
+          "verification": "CSV再読込、索引、列型、欠損値をpytestで確認",
+          "cross_chapter": false
+        },
+        {
+          "source_entity_id": "B-17-038-E02",
+          "target_file": "scripts/ch17/file_format_bench.py",
+          "target_entity": "save_as_parquet",
+          "equivalence": "E1",
+          "kind": "excerpt",
+          "evidence": "本文と実体のsave_as_parquetはdocstring以外のASTが一致",
+          "verification": "Parquet再読込、索引、列型、欠損値をpytestで確認",
+          "cross_chapter": false
+        }
+      ]
+    },
+    "B-17-039": {
+      "block_sha256": "fe0706434b618843090db7bfda2bea364d1d19c9c4830c6043256ee9560f864d",
+      "relations": [
+        {
+          "source_entity_id": "B-17-039-E01",
+          "target_file": "scripts/ch02/fastq_gzip.py",
+          "target_entity": "count_reads_in_gzip",
+          "equivalence": "E0",
+          "kind": "excerpt",
+          "evidence": "本文と§2実体のcount_reads_in_gzipはdocstringを含むASTが一致",
           "cross_chapter": true,
-          "verification": "manual"
+          "verification": "正常、空、4行未満、複数レコードをpytestで確認"
         }
       ]
     },
@@ -2381,7 +2434,7 @@
     "remediation_scope": {
       "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
       "baseline_e1_sha256": "88b2e73514c0a9a78f7b9a82c1feea4083ec98de9bd1edaae3fb4f87304d1dd8",
-      "completed_batch": 3
+      "completed_batch": 4
     },
     "comment_sync": [
       {
@@ -3001,57 +3054,226 @@
       },
       {
         "block_id": "B-13-002",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "明示的Figure/Axes APIを選ぶ実装判断を本文コメントと実体のモジュールdocstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/13_visualization.md",
+            "line_start": 38,
+            "line_end": 38,
+            "sha256": "bdbfc08e931a144ad7e6fadc96b11f20040b8bffa0bbec33350d5212e69374e9"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch13/matplotlib_bindist.py",
+            "scope": "file",
+            "entity": null,
+            "line_start": 1,
+            "line_end": 1,
+            "sha256": "d45763244f3ccc147f073d9d383e35199efe85db05515850c35349e3e2f672ea"
+          }
+        ]
       },
       {
         "block_id": "B-13-003",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "added"
+        "status": "added",
+        "reason": "np.selectの条件・値・既定分類という実装判断を実体コメントへ追加して同期した",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/13_visualization.md",
+            "line_start": 109,
+            "line_end": 111,
+            "sha256": "a6a120749c12c1e6c50606cf593e4aed8ef33d1bfe8e119ac217aadb11d06370"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch13/bio_plots.py",
+            "scope": "entity",
+            "entity": "volcano_plot",
+            "line_start": 58,
+            "line_end": 60,
+            "sha256": "a6a120749c12c1e6c50606cf593e4aed8ef33d1bfe8e119ac217aadb11d06370"
+          }
+        ]
       },
       {
         "block_id": "B-13-004",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "距離行列を凝縮形式へ変換して明示的linkageを渡す実装判断を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/13_visualization.md",
+            "line_start": 186,
+            "line_end": 188,
+            "sha256": "79ced3fd866faf7370cb94525442cc7f65abc92498b2d8ecb0b0e531e8db20f1"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch13/bio_plots.py",
+            "scope": "entity",
+            "entity": "expression_heatmap",
+            "line_start": 130,
+            "line_end": 132,
+            "sha256": "79ced3fd866faf7370cb94525442cc7f65abc92498b2d8ecb0b0e531e8db20f1"
+          }
+        ]
       },
       {
         "block_id": "B-17-016",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "RPKをPythonループで計算する比較実装の性能意図を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "performance_intent",
+        "source_evidence": [
+          {
+            "file": "chapters/17_performance.md",
+            "line_start": 258,
+            "line_end": 258,
+            "sha256": "2150cc64bbecf89ac30bcd1d6cc67aaabfeadbbd148fd5cae99a2fe47d5922f4"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch17/profiling_demo.py",
+            "scope": "entity",
+            "entity": "normalize_tpm_slow",
+            "line_start": 64,
+            "line_end": 64,
+            "sha256": "aba902f089751f12f211bb21f5727bf803cc680f7425d11885543e4792013dc1"
+          }
+        ]
       },
       {
         "block_id": "B-17-029",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "遺伝子長を列ベクトル化してブロードキャストする性能意図を本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "performance_intent",
+        "source_evidence": [
+          {
+            "file": "chapters/17_performance.md",
+            "line_start": 527,
+            "line_end": 528,
+            "sha256": "846f28c5f5fa9a3f932b3ffcf4eec96f12b8d91ae4ade1d7eb6ac846a5d2b3a6"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch17/profiling_demo.py",
+            "scope": "entity",
+            "entity": "normalize_tpm_fast",
+            "line_start": 107,
+            "line_end": 107,
+            "sha256": "e4c4b4f082569d3f719a4aab9ad2697e11bc3ca9f97e15f3684ee0ee03060e80"
+          }
+        ]
       },
       {
         "block_id": "B-17-030",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "入力順序の保持と制限環境での逐次フォールバックを本文と実体の既存コメントが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "implementation_decision",
+        "source_evidence": [
+          {
+            "file": "chapters/17_performance.md",
+            "line_start": 596,
+            "line_end": 596,
+            "sha256": "f3dbef4eae555705eca2cc053048be537cc90c14b5122f1493a6cae2a3dc7b0d"
+          },
+          {
+            "file": "chapters/17_performance.md",
+            "line_start": 599,
+            "line_end": 599,
+            "sha256": "aff4fef51b3aad0ed8a8d31c85b68465e28f9750c3859da43c2d844c31b7cf3e"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch17/parallel_gc.py",
+            "scope": "entity",
+            "entity": "gc_content_parallel",
+            "line_start": 73,
+            "line_end": 73,
+            "sha256": "1fbe79cc117b095f17eec0af949ef19146d816b6448e55e1d94ecd91f53ac29e"
+          },
+          {
+            "file": "scripts/ch17/parallel_gc.py",
+            "scope": "entity",
+            "entity": "gc_content_parallel",
+            "line_start": 76,
+            "line_end": 76,
+            "sha256": "09ebc1443a481a720ce510c232a9561cce5153b611145411ad61f8057bdebd89"
+          }
+        ]
       },
       {
         "block_id": "B-17-032",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "最終結果だけをリスト化して中間レコードを保持しない性能意図を本文コメントと完全版のdocstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "performance_intent",
+        "source_evidence": [
+          {
+            "file": "chapters/17_performance.md",
+            "line_start": 737,
+            "line_end": 737,
+            "sha256": "20755103f6b74532bf4b86f742a059041e01cdf866a10712141ec3c2fc29bbdb"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch17/generator_fastq.py",
+            "scope": "entity",
+            "entity": "process_pipeline",
+            "line_start": 126,
+            "line_end": 129,
+            "sha256": "584768d70fc3b605ad48eca7da09c242978f88f5f0e452c1be100d16a08a3974"
+          }
+        ]
       },
       {
         "block_id": "B-17-038",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "not_applicable"
+        "status": "not_applicable",
+        "reason": "本文コードブロック内に同期対象の行コメントがない",
+        "source_evidence_type": "none",
+        "semantic_category": "none",
+        "source_evidence": [],
+        "target_evidence": []
       },
       {
         "block_id": "B-17-039",
-        "status": "pending",
-        "scheduled_batch": 4,
-        "expected_terminal_status": "satisfied_existing"
+        "status": "satisfied_existing",
+        "reason": "FASTQが1リード4行であるデータ前提を本文コメントと§2実体のdocstringが説明する",
+        "source_evidence_type": "line_comment",
+        "semantic_category": "biological_data_assumption",
+        "source_evidence": [
+          {
+            "file": "chapters/17_performance.md",
+            "line_start": 1054,
+            "line_end": 1054,
+            "sha256": "926957bb1d8ae07203b4121b5845b415ee83749f6a0fe1b6e49c3c2c73ef445f"
+          }
+        ],
+        "target_evidence": [
+          {
+            "file": "scripts/ch02/fastq_gzip.py",
+            "scope": "entity",
+            "entity": "count_reads_in_gzip",
+            "line_start": 10,
+            "line_end": 11,
+            "sha256": "5e5b439d10df6a18efef7c770640c0c934530e21f0659b01a8aff7c6376dcaa2"
+          }
+        ]
       },
       {
         "block_id": "B-21-004",

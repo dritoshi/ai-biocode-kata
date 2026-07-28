@@ -55,7 +55,12 @@ def volcano_plot(
     is_down = (df["padj"] < padj_threshold) & (
         df["log2FoldChange"] <= -log2fc_threshold
     )
-    df["category"] = np.select([is_up, is_down], ["up", "down"], default="ns")
+    # np.select()は複数の条件に対応する値を一括で選択する関数である。
+    # 第1引数に条件リスト、第2引数に対応する値リストを渡し、
+    # どの条件にも当てはまらない場合はdefaultの値（"ns" = not significant）が使われる。
+    df["category"] = np.select(
+        [is_up, is_down], ["up", "down"], default="ns"
+    )
 
     colors = {"up": "tab:red", "down": "tab:blue", "ns": "tab:gray"}
     labels = {

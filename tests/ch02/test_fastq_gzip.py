@@ -55,6 +55,13 @@ class TestCountReadsInGzip:
                 f.write(f"@read{i}\nATGC\n+\nIIII\n")
         assert count_reads_in_gzip(p) == 10
 
+    def test_incomplete_record_is_not_counted(self, tmp_path: Path) -> None:
+        """4行未満の末尾断片をリードとして数えない."""
+        p = tmp_path / "incomplete.fastq.gz"
+        with gzip.open(p, "wt") as f:
+            f.write("@read1\nATGC\n+\n")
+        assert count_reads_in_gzip(p) == 0
+
 
 class TestExtractReadIds:
     """extract_read_ids() のテスト."""

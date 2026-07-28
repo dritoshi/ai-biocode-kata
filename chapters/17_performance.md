@@ -274,6 +274,8 @@ def normalize_tpm_slow(
     return tpm
 ```
 
+[実行可能な完全版](../scripts/ch17/profiling_demo.py)と[直接テスト](../tests/ch17/test_profiling_demo.py)では、列合計、空入力、遺伝子長0、ベクトル化版との一致を確認している。
+
 この関数を `cProfile` で計測する。`cProfile.run()` の第1引数に実行したい式を文字列で渡す。結果は `pstats` モジュールで整形・解析する:
 
 ```python
@@ -536,6 +538,8 @@ def normalize_tpm_fast(
     return rpk / scaling_factors
 ```
 
+[実行可能な完全版](../scripts/ch17/profiling_demo.py)と[直接テスト](../tests/ch17/test_profiling_demo.py)では、forループ版との一致、戻り値の形状、遺伝子長0の挙動を確認している。
+
 `timeit` で比較すると、5000遺伝子 × 10サンプルの場合、ベクトル化版はforループ版の数十〜数百倍速い。これはPythonのforループのオーバーヘッドを排除し、NumPyの内部C実装で計算を行うためである。ベクトル化の詳しい原理については[§12-1](./12_data_processing.md#12-1-numpyによるベクトル化演算)を参照されたい。
 
 ### 並列処理: multiprocessingとconcurrent.futures
@@ -595,6 +599,8 @@ def gc_content_parallel(
         # 制限付き環境では process pool を作れないことがある。
         return [gc_content_single(seq) for seq in sequences]
 ```
+
+[実行可能な完全版](../scripts/ch17/parallel_gc.py)と[直接テスト](../tests/ch17/test_parallel_gc.py)では、並列・逐次結果の一致、入力順序、空入力、プロセス生成失敗時のフォールバックを確認している。
 
 `executor.map()` は組み込みの `map()` と同じインターフェースで、各要素を並列に処理する。結果は入力順序が保持されるため、安心して使える。
 
@@ -703,29 +709,36 @@ def read_fastq_records(path: Path) -> Generator[SeqRecord, None, None]:
     yield from SeqIO.parse(path, "fastq")
 
 
-def filter_by_length(records, min_length: int):
+def filter_by_length(
+    records: Generator[SeqRecord, None, None], min_length: int
+) -> Generator[SeqRecord, None, None]:
     """配列長でフィルタリングするジェネレータ."""
     for record in records:
         if len(record.seq) >= min_length:
             yield record
 
 
-def filter_by_quality(records, min_avg_quality: float):
+def filter_by_quality(
+    records: Generator[SeqRecord, None, None], min_avg_quality: float
+) -> Generator[SeqRecord, None, None]:
     """平均品質スコアでフィルタリングするジェネレータ."""
     for record in records:
         qualities = record.letter_annotations["phred_quality"]
-        if sum(qualities) / len(qualities) >= min_avg_quality:
+        if qualities and sum(qualities) / len(qualities) >= min_avg_quality:
             yield record
 
 
 # パイプライン: read → 長さフィルタ → 品質フィルタ
-records = read_fastq_records(Path("reads.fastq"))
+# 呼び出し元から受け取った path: Path を使う
+records = read_fastq_records(path)
 long_enough = filter_by_length(records, min_length=50)
 high_quality = filter_by_quality(long_enough, min_avg_quality=20)
 
 # 最終結果のみリスト化（通過したレコードだけがメモリに載る）
 result = list(high_quality)
 ```
+
+[実行可能な完全版](../scripts/ch17/generator_fastq.py)と[直接テスト](../tests/ch17/test_generator_fastq.py)では、正常・途中切れFASTQ、空品質値、長さ・品質の境界、遅延評価を確認している。呼出例の固定パス不在は[方針テスト](../tests/review/test_e1_policy_examples.py)でも検証する。
 
 この連結では、各レコードが3つのジェネレータを順に通過する。途中のジェネレータはレコードを保持せず、条件を満たすものだけを次に渡す。`memray` で計測すると、ファイルサイズが増えてもメモリ使用量が一定であることが確認できる。
 
@@ -975,6 +988,8 @@ def save_as_parquet(df: pd.DataFrame, path: Path) -> None:
     df.to_parquet(path, index=True)
 ```
 
+[実行可能な完全版](../scripts/ch17/file_format_bench.py)と[直接テスト](../tests/ch17/test_file_format_bench.py)では、CSV・Parquetの再読込、索引、列型、欠損値を確認している。
+
 Parquetは「中間データの保存」に特に適している。解析パイプラインの途中結果をParquetで保存しておけば、次のステップでの読み込みが高速になり、型情報も失われない。最終的に人間が確認する出力のみCSVやTSVで書き出す、という使い分けが実用的である[7](https://parquet.apache.org/)。
 
 #### BAM vs CRAM
@@ -1016,11 +1031,21 @@ import gzip
 from pathlib import Path
 
 
-def count_reads_gzip(file_path: Path) -> int:
-    """gzip圧縮FASTQのリード数をカウントする.
+def count_reads_in_gzip(file_path: Path) -> int:
+    """gzip圧縮されたFASTQファイルのリード数をカウントする.
 
-    gzip.open() で圧縮ファイルを直接開く。
-    "rt" モードはテキストモードで読み込むことを意味する。
+    FASTQは1リードあたり4行で構成されるため、総行数を4で割る。
+    シェルの ``zcat file.fastq.gz | awk 'NR%4==1' | wc -l`` に相当する。
+
+    Parameters
+    ----------
+    file_path : Path
+        .fastq.gz ファイルのパス
+
+    Returns
+    -------
+    int
+        リード数
     """
     line_count = 0
     with gzip.open(file_path, "rt") as f:
@@ -1029,6 +1054,8 @@ def count_reads_gzip(file_path: Path) -> int:
     # FASTQは1リードあたり4行
     return line_count // 4
 ```
+
+[§2の実装を再利用する完全版](../scripts/ch02/fastq_gzip.py)と[直接テスト](../tests/ch02/test_fastq_gzip.py)では、正常・空・4行未満・複数レコードのgzip FASTQを確認している。
 
 pandasも圧縮ファイルを直接読み込める:
 

@@ -36,6 +36,23 @@ class TestSaveAsCsv:
         loaded = pd.read_csv(csv_path, index_col=0)
         pd.testing.assert_frame_equal(loaded, sample_df, rtol=1e-10)
 
+    def test_roundtrip_preserves_index_and_inferred_types(
+        self, tmp_path: Path
+    ) -> None:
+        """索引と代表的な列型をCSV再読込後に復元できる."""
+        df = pd.DataFrame(
+            {
+                "count": [1, 2],
+                "score": [0.5, np.nan],
+                "group": ["control", "treated"],
+            },
+            index=pd.Index(["gene1", "gene2"], name="gene"),
+        )
+        path = tmp_path / "mixed.csv"
+        save_as_csv(df, path)
+        loaded = pd.read_csv(path, index_col=0)
+        pd.testing.assert_frame_equal(loaded, df)
+
 
 class TestSaveAsParquet:
     """save_as_parquet のテスト."""
@@ -46,6 +63,23 @@ class TestSaveAsParquet:
         save_as_parquet(sample_df, parquet_path)
         loaded = pd.read_parquet(parquet_path)
         pd.testing.assert_frame_equal(loaded, sample_df)
+
+    def test_roundtrip_preserves_index_types_and_missing_values(
+        self, tmp_path: Path
+    ) -> None:
+        """索引・列型・欠損値をParquet往復で保持する."""
+        df = pd.DataFrame(
+            {
+                "count": [1, 2],
+                "score": [0.5, np.nan],
+                "group": ["control", "treated"],
+            },
+            index=pd.Index(["gene1", "gene2"], name="gene"),
+        ).astype({"count": "int64", "score": "float64", "group": "string"})
+        path = tmp_path / "mixed.parquet"
+        save_as_parquet(df, path)
+        loaded = pd.read_parquet(path)
+        pd.testing.assert_frame_equal(loaded, df)
 
 
 class TestBenchmarkRead:

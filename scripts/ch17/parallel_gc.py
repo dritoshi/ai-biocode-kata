@@ -66,7 +66,7 @@ def gc_content_parallel(
         フォールバックする。
     """
     if not sequences or n_workers <= 1:
-        return gc_content_sequential(sequences)
+        return [gc_content_single(seq) for seq in sequences]
 
     try:
         with ProcessPoolExecutor(max_workers=n_workers) as executor:
@@ -74,4 +74,4 @@ def gc_content_parallel(
             return list(executor.map(gc_content_single, sequences))
     except (NotImplementedError, OSError, PermissionError):
         # 制限付き環境では named semaphore や process pool が使えないことがある。
-        return gc_content_sequential(sequences)
+        return [gc_content_single(seq) for seq in sequences]

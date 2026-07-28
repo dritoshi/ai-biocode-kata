@@ -45,6 +45,14 @@ class TestNormalizeTpmSlow:
         # 1:3 の比率が保たれる
         np.testing.assert_allclose(result[0, 0] / result[1, 0], 1 / 3, rtol=1e-6)
 
+    def test_empty_gene_axis_preserves_shape(self) -> None:
+        """遺伝子が0件でもサンプル軸を保った空行列を返す."""
+        counts: np.ndarray = np.empty((0, 2), dtype=np.float64)
+        gene_lengths: np.ndarray = np.empty(0, dtype=np.float64)
+        result = normalize_tpm_slow(counts, gene_lengths)
+        assert result.shape == (0, 2)
+        assert result.dtype == np.float64
+
 
 class TestLineProfilerIntegration:
     """line_profiler用デコレータの切り替えを検証する."""
@@ -118,6 +126,22 @@ class TestNormalizeTpmFast:
         slow = normalize_tpm_slow(counts, gene_lengths)
         fast = normalize_tpm_fast(counts, gene_lengths)
         np.testing.assert_allclose(fast, slow, rtol=1e-10)
+
+    def test_preserves_shape(self) -> None:
+        """ベクトル化後も遺伝子×サンプルの形状を保つ."""
+        counts: np.ndarray = np.ones((3, 2), dtype=np.float64)
+        gene_lengths = np.array([500, 1000, 2000], dtype=np.float64)
+        result = normalize_tpm_fast(counts, gene_lengths)
+        assert result.shape == counts.shape
+
+    def test_zero_gene_length_matches_slow_version(self) -> None:
+        """長さ0を含む入力でもslow版と同じ非有限値を返す."""
+        counts = np.array([[10.0], [20.0]])
+        gene_lengths = np.array([0.0, 1000.0])
+        with np.errstate(divide="ignore", invalid="ignore"):
+            slow = normalize_tpm_slow(counts, gene_lengths)
+            fast = normalize_tpm_fast(counts, gene_lengths)
+        np.testing.assert_allclose(fast, slow, equal_nan=True)
 
 
 class TestProfilePipeline:
