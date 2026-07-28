@@ -24,8 +24,28 @@ class TestFindAllOrfs:
         # ATG + 34 codons + TAA = 108 bp
         seq = "ATG" + "GCT" * 34 + "TAA"
         orfs = find_all_orfs(seq, min_length=100)
-        assert len(orfs) >= 1
-        assert orfs[0].protein.startswith("M")
+        assert orfs == [
+            ORF(
+                start=0,
+                end=108,
+                frame=1,
+                protein="M" + "A" * 34,
+            )
+        ]
+
+    def test_reverse_strand_coordinates(self) -> None:
+        """逆鎖ORFの座標を元配列上へ変換する."""
+        reverse_orf = "ATG" + "GCT" * 5 + "TAA"
+        sequence = reverse_complement(reverse_orf)
+
+        assert find_all_orfs(sequence, min_length=len(reverse_orf)) == [
+            ORF(
+                start=0,
+                end=len(reverse_orf),
+                frame=-1,
+                protein="M" + "A" * 5,
+            )
+        ]
 
     def test_short_orf_filtered(self) -> None:
         """min_length未満のORFは除外される."""

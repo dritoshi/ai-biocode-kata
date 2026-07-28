@@ -167,29 +167,29 @@
   },
   "relation_overrides": {
     "B-00-001": {
-      "block_sha256": "67dc4d9d34033e217d667ee7170a0a75df039a0bdd9c8dccdb4db7df9671796b",
+      "block_sha256": "ebc3086a44afda61de51ebf8d8f9e5e13810cd3d120679b06aaec991702665c4",
       "relations": [
         {
           "target_file": "scripts/ch00/find_orfs.py",
-          "equivalence": "E3",
+          "target_entity": "find_all_orfs",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "ORFとfind_all_orfsは同題材だが入力検証・探索仕様に差がある",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のfind_all_orfs関数を完全に示し、ORF・逆相補鎖・翻訳・フレーム走査の補助定義を省略すると明記",
+          "verification": "順鎖・逆鎖の座標、6フレーム探索、最小長、空入力をpytestで確認",
           "cross_chapter": false
         }
       ]
     },
     "B-00-003": {
-      "block_sha256": "3697e2f23d0c69b936f31677aca3bda3c176583f53ec124b058b0dc6173b82b0",
+      "block_sha256": "cbda6f8c13e38cc4c241cb425a602a74eb49898303b3ecd9894c0cb4815c7916",
       "relations": [
         {
           "target_file": "scripts/ch00/hmm_gene_predict.py",
-          "equivalence": "E3",
+          "target_entity": "viterbi",
+          "equivalence": "E2",
           "kind": "excerpt",
-          "evidence": "viterbiの初期化・バックトレースを本文が省略し、そのままでは同じ動作にならない",
-          "verification": "manual",
-          "target_entity": null,
+          "evidence": "本文は実体のviterbi関数を初期化・再帰・バックトレースまで完全に示し、確率表と放出関数の省略境界を明記",
+          "verification": "空・1コドン・複数コドンと全経路比較による最尤経路復元をpytestで確認",
           "cross_chapter": false
         }
       ]
@@ -1849,16 +1849,6 @@
       "reason": "省略した準備・検証・統計項目の境界を本文が明示"
     },
     {
-      "block_id": "B-00-003",
-      "expected": "E3",
-      "reason": "初期化・バックトレースを省略し、そのままでは同じ動作にならない"
-    },
-    {
-      "block_id": "B-00-001",
-      "expected": "E3",
-      "reason": "逆鎖処理と終止コドン探索の引数を省略し、そのままでは同じ動作にならない"
-    },
-    {
       "block_id": "B-13-006",
       "expected": "EN",
       "reason": "本文がPlotly例をスクリプト集へ含めないと明記"
@@ -1871,8 +1861,8 @@
   ],
   "substitution_tests": {
     "B-00-001::scripts/ch00/find_orfs.py": {
-      "status": "failed",
-      "reason": "置換定義: ORF, find_all_orfs",
+      "status": "passed",
+      "reason": "置換定義: find_all_orfs",
       "block_id": "B-00-001",
       "target_file": "scripts/ch00/find_orfs.py",
       "test_files": [
@@ -1880,40 +1870,38 @@
         "tests/ch00/test_hmm_gene_predict.py",
         "tests/ch00/test_plot_orfs.py"
       ],
-      "returncode": 1,
-      "passed": 17,
-      "failed": 11,
+      "returncode": 0,
+      "passed": 30,
+      "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "11 failed, 17 passed in 0.76s",
-      "failure_cause": "本文は逆鎖処理を省略し、_find_stopの呼出しシグネチャも実体と異なる",
-      "block_sha256": "67dc4d9d34033e217d667ee7170a0a75df039a0bdd9c8dccdb4db7df9671796b",
+      "summary": "30 passed in 15.46s",
+      "block_sha256": "ebc3086a44afda61de51ebf8d8f9e5e13810cd3d120679b06aaec991702665c4",
       "target_sha256": "a655f926e1bb927daa22bb5e169207dda027b70756febbf88bb1cfd08412932d",
       "test_file_sha256": {
-        "tests/ch00/test_find_orfs.py": "d41de3a32887246254c41f88264d3e96dcbe60a5489a446d4bcda8c44db29449",
-        "tests/ch00/test_hmm_gene_predict.py": "e1ed9f69dc146df59dc5e7a99f573c2aa83fc5d4984ce43172fc7664edb9cfe5",
+        "tests/ch00/test_find_orfs.py": "57ad25d2077498a4e52431769f68631c28b0b57edfc24856f1d6baed6cfb0677",
+        "tests/ch00/test_hmm_gene_predict.py": "cacd308a99e9e064525f988e149df3d8d7becb7873114b347cda936826965fd0",
         "tests/ch00/test_plot_orfs.py": "3a8068ed85c19d997e051ddac91846a5ec98b051fd8b4a9571314cd4c42ecac8"
       }
     },
     "B-00-003::scripts/ch00/hmm_gene_predict.py": {
-      "status": "failed",
+      "status": "passed",
       "reason": "置換定義: viterbi",
       "block_id": "B-00-003",
       "target_file": "scripts/ch00/hmm_gene_predict.py",
       "test_files": [
         "tests/ch00/test_hmm_gene_predict.py"
       ],
-      "returncode": 1,
-      "passed": 1,
-      "failed": 8,
+      "returncode": 0,
+      "passed": 10,
+      "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "summary": "8 failed, 1 passed in 0.11s",
-      "failure_cause": "本文は初期化・バックトレース等を省略し、log_emitとvが未定義",
-      "block_sha256": "3697e2f23d0c69b936f31677aca3bda3c176583f53ec124b058b0dc6173b82b0",
+      "summary": "10 passed in 0.27s",
+      "block_sha256": "cbda6f8c13e38cc4c241cb425a602a74eb49898303b3ecd9894c0cb4815c7916",
       "target_sha256": "d35770fb0468acb82223f77aaa0c328a9ec2fb93c28d4f1abf39dd11355741dd",
       "test_file_sha256": {
-        "tests/ch00/test_hmm_gene_predict.py": "e1ed9f69dc146df59dc5e7a99f573c2aa83fc5d4984ce43172fc7664edb9cfe5"
+        "tests/ch00/test_hmm_gene_predict.py": "cacd308a99e9e064525f988e149df3d8d7becb7873114b347cda936826965fd0"
       }
     },
     "B-08-002::scripts/ch08/reverse_complement.py": {
