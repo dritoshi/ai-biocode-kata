@@ -1,5 +1,7 @@
 """pandasテーブル操作のテスト."""
 
+from pathlib import Path
+
 import pandas as pd
 import pytest
 
@@ -80,6 +82,21 @@ class TestLoadDegResults:
         df = load_deg_results(csv_path)
         assert pd.isna(df["padj"].iloc[0])
         assert pd.isna(df["pvalue"].iloc[1])
+        assert pd.api.types.is_string_dtype(df["gene"].dtype)
+        assert pd.api.types.is_float_dtype(df["pvalue"].dtype)
+        assert pd.api.types.is_float_dtype(df["padj"].dtype)
+
+    def test_missing_required_column(self, tmp_path: Path) -> None:
+        """必須列が欠けたDEG結果を明示的に拒否する."""
+        csv_path = tmp_path / "missing_padj.csv"
+        csv_path.write_text(
+            "gene,baseMean,log2FoldChange,pvalue\n"
+            "BRCA1,1500,2.5,1e-10\n",
+            encoding="utf-8",
+        )
+
+        with pytest.raises(ValueError, match="padj"):
+            load_deg_results(csv_path)
 
 
 class TestFilterSignificantGenes:
@@ -111,6 +128,18 @@ class TestFilterSignificantGenes:
         )
         assert len(result) == 0
 
+    def test_threshold_boundaries_and_na(self) -> None:
+        """p値・効果量の包含境界とNA除外を確認する."""
+        df = pd.DataFrame(
+            {
+                "gene": ["padj_equal", "fc_positive", "fc_negative", "na"],
+                "padj": [0.05, 0.049, 0.049, pd.NA],
+                "log2FoldChange": [2.0, 1.0, -1.0, 2.0],
+            }
+        )
+        result = filter_significant_genes(df)
+        assert result["gene"].tolist() == ["fc_positive", "fc_negative"]
+
 
 class TestMergeWithMetadata:
     """merge_with_metadata のテスト."""
@@ -136,6 +165,20 @@ class TestMergeWithMetadata:
         egfr_row = result[result["gene"] == "EGFR"]
         assert pd.isna(egfr_row["category"].iloc[0])
 
+    def test_duplicate_metadata_keys_expand_matching_rows(self) -> None:
+        """メタデータ側の重複キーが一致行を複製することを確認する."""
+        deg = pd.DataFrame({"gene": ["BRCA1", "TP53"], "value": [1, 2]})
+        metadata = pd.DataFrame(
+            {
+                "gene": ["BRCA1", "BRCA1"],
+                "category": ["a", "b"],
+            }
+        )
+        result = merge_with_metadata(deg, metadata)
+        assert len(result) == 3
+        assert (result["gene"] == "BRCA1").sum() == 2
+        assert pd.isna(result.loc[result["gene"] == "TP53", "category"]).all()
+
 
 class TestSummarizeByCategory:
     """summarize_by_category のテスト."""
@@ -149,3 +192,17 @@ class TestSummarizeByCategory:
         assert "median" in result.columns
         # 3カテゴリ: housekeeping, oncogene, tumor_suppressor
         assert len(result) == 3
+
+    def test_single_group_and_missing_category(self) -> None:
+        """単一カテゴリを集計し、欠損カテゴリは既定どおり除外する."""
+        df = pd.DataFrame(
+            {
+                "category": ["a", "a", pd.NA],
+                "value": [1.0, 3.0, 100.0],
+            }
+        )
+        result = summarize_by_category(df, "category", "value")
+        assert result["category"].tolist() == ["a"]
+        assert result["count"].tolist() == [2]
+        assert result["mean"].iloc[0] == pytest.approx(2.0)
+        assert result["median"].iloc[0] == pytest.approx(2.0)

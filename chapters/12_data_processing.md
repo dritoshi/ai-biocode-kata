@@ -21,6 +21,7 @@ Pythonのforループは柔軟だが、大量のデータを処理するには�
 ```python
 # 1塩基ずつ数える — 最も遅い
 def gc_contents_slow(sequences: list[str]) -> list[float]:
+    """1塩基ずつのネストしたPythonループ（最も遅い）."""
     results = []
     for seq in sequences:
         gc = 0
@@ -30,6 +31,8 @@ def gc_contents_slow(sequences: list[str]) -> list[float]:
         results.append(gc / len(seq))
     return results
 ```
+
+この比較用実装は[ベンチマークの完全版](../scripts/ch12/plot_vectorize_bench.py)にも同じ公開名で配置し、値・空入力・計測呼び出し・保存ログを[直接テスト](../tests/ch12/test_plot_vectorize_bench.py)で確認している。
 
 配列数が数万〜数十万になると、この二重ループ（配列 × 塩基）はインタプリタのオーバーヘッドが積み重なり、実行時間の大きなボトルネックになる。
 
@@ -63,12 +66,15 @@ import numpy as np
 
 # 一見ベクトル化に見えるが遅い — 配列ごとのPythonループが残っている
 def gc_content_per_seq(sequences: list[str]) -> np.ndarray:
-    results = np.empty(len(sequences), dtype=np.float64)
+    """配列ごとに np.frombuffer するループ版（ベクトル化に見えるが遅い）."""
+    results: np.ndarray = np.empty(len(sequences), dtype=np.float64)
     for i, seq in enumerate(sequences):        # このループが残っている
         arr = np.frombuffer(seq.upper().encode("ascii"), dtype=np.uint8)
         results[i] = ((arr == ord("G")) | (arr == ord("C"))).mean()
     return results
 ```
+
+この比較用実装も[ベンチマークの完全版](../scripts/ch12/plot_vectorize_bench.py)と同じ定義であり、値・空入力・形状・`float64`を[直接テスト](../tests/ch12/test_plot_vectorize_bench.py)で固定している。
 
 この版は、配列1つごとに `.encode()` / `np.frombuffer()` / 比較 / `.mean()` の固定コストを払う。150塩基のような短い配列ではこの固定コストが支配的になり、**先ほどの `str.count` 版よりむしろ遅い**（本節冒頭の図で計測値を示した）。NumPyの関数を呼んでいても、Pythonループが1配列ごとに回っている限り「ベクトル化」にはなっていない。
 
@@ -78,7 +84,7 @@ def gc_content_per_seq(sequences: list[str]) -> np.ndarray:
 def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
     """全配列を1本のバッファに連結し、1回のベクトル演算でGC含量を求める."""
     n = len(sequences)
-    results = np.zeros(n, dtype=np.float64)
+    results: np.ndarray = np.zeros(n, dtype=np.float64)
     lengths = np.fromiter((len(s) for s in sequences), dtype=np.int64, count=n)
     if n == 0 or lengths.sum() == 0:
         return results
@@ -92,6 +98,8 @@ def gc_content_vectorized(sequences: list[str]) -> np.ndarray:
     results[nonempty] = counts / lengths[nonempty]
     return results
 ```
+
+引数・戻り値・局所配列の型を含む[完全実装](../scripts/ch12/numpy_vectorize.py)は、不等長、空入力、小文字、不明塩基N、形状、dtypeを[直接テスト](../tests/ch12/test_numpy_vectorize.py)で確認している。
 
 GC判定を全配列に対して一度だけ行い、`np.add.reduceat()` で配列ごとの合計に区切っている。配列ごとのPythonループが消えるため、数万配列でも `str.count` 版と同等かそれ以上に速い。なお、配列長がそろっている場合（同じ長さのリードなど）は、連結せずに `(配列数, 長さ)` の2次元配列へ `reshape` し、`axis=1` で集計するほうが単純でさらに速い。
 
@@ -120,6 +128,8 @@ def normalize_cpm(counts: np.ndarray) -> np.ndarray:
     return (counts / col_sums) * 1_000_000  # ブロードキャスティング
 ```
 
+列方向の合計、ゼロ列、戻り値の形状とdtypeは[完全実装](../scripts/ch12/numpy_vectorize.py)と[直接テスト](../tests/ch12/test_numpy_vectorize.py)にまとめている。
+
 `counts` が `(20000, 6)` の行列（2万遺伝子 × 6サンプル）のとき、`col_sums` は `(6,)` の1次元配列である。`counts / col_sums` と書くだけで、NumPyが自動的に `col_sums` を各行に適用する。forループで行ごとに割り算を書く必要はない。
 
 正規化手法の計算方法を知るだけでなく、どの場面でどの手法を選ぶかが重要である。以下に主要な正規化手法の使い分けをまとめる:
@@ -143,6 +153,8 @@ def filter_by_quality(scores: np.ndarray, threshold: int = 20) -> np.ndarray:
     mask = scores >= threshold  # ブーリアンマスク
     return scores[mask]         # マスクによる抽出
 ```
+
+1次元配列に対するマスクの軸と、閾値と一致する値を残す包含境界は[完全実装](../scripts/ch12/numpy_vectorize.py)と[直接テスト](../tests/ch12/test_numpy_vectorize.py)で確認できる。
 
 `scores >= threshold` でブーリアン配列（`True` / `False`）が生成される。1つの真偽値を保持する変数を**ブーリアン変数**と呼び、NumPyではその配列版をそのままマスクとして使える。`scores[mask]` で `True` の位置の要素だけが抽出され、これは `[s for s in scores if s >= threshold]` のリスト内包表記と同じ結果を返すが、大規模データではNumPy版のほうがはるかに高速である。なお、`scores[[0, 3, 5]]` のように整数位置の配列を渡すのがファンシーインデックスで、`scores[mask]` のように真偽値配列を渡すのがマスクによる抽出である。
 
@@ -188,15 +200,28 @@ DEG（差次的発現遺伝子; Differentially Expressed Gene）解析の結果�
 def load_deg_results(path: Path) -> pd.DataFrame:
     """DEG解析結果を読み込む."""
     sep = "\t" if path.suffix in (".tsv", ".txt") else ","
-    return pd.read_csv(
+    df = pd.read_csv(
         path,
         sep=sep,
         na_values=["NA", "na", ""],  # R由来のNAを明示的にNaNへ
         dtype={"gene": str},          # 遺伝子名は文字列として保持
     )
+    # DEG解析で後続処理に必要な5列がそろっていることを確認する
+    required_columns = {
+        "gene",
+        "baseMean",
+        "log2FoldChange",
+        "pvalue",
+        "padj",
+    }
+    missing = required_columns - set(df.columns)
+    if missing:
+        names = ", ".join(sorted(missing))
+        raise ValueError(f"DEG結果に必須列がありません: {names}")
+    return df
 ```
 
-R由来のデータでは `NA` という文字列が欠損値を表すことが多い。`na_values` で明示しないと、文字列 `"NA"` がそのまま残ってしまう。
+R由来のデータでは `NA` という文字列が欠損値を表すことが多い。`na_values` で明示しないと、文字列 `"NA"` がそのまま残ってしまう。[完全実装](../scripts/ch12/pandas_bio_ops.py)と[直接テスト](../tests/ch12/test_pandas_bio_ops.py)では、CSV/TSV、必須列の欠落、NA変換、遺伝子名と数値列のdtypeを確認している。
 
 #### フィルタリング: `.query()` メソッド
 
@@ -214,6 +239,8 @@ def filter_significant_genes(
     ).copy()
 ```
 
+複合マスクのp値・効果量境界とNAの除外は[完全実装](../scripts/ch12/pandas_bio_ops.py)と[直接テスト](../tests/ch12/test_pandas_bio_ops.py)で確認している。
+
 `.query()` は文字列式でフィルタ条件を記述する。`@` プレフィックスでPython変数を参照でき、`abs()` などの関数も使える。ブーリアンインデックス `df[(df["padj"] < 0.05) & (df["log2FoldChange"].abs() >= 1)]` よりも可読性が高い。
 
 #### 結合: `pd.merge()`
@@ -229,6 +256,8 @@ def merge_with_metadata(
     """DEG結果にメタデータを結合する（左結合）."""
     return pd.merge(deg_df, metadata_df, on=on, how="left")
 ```
+
+左側の行保持、未一致キー、重複キーの挙動は[完全実装](../scripts/ch12/pandas_bio_ops.py)と[直接テスト](../tests/ch12/test_pandas_bio_ops.py)で固定している。
 
 `how="left"` を指定すると、DEG結果のすべての行が保持され、メタデータにマッチしない遺伝子は `NaN` になる。`how="inner"`（デフォルト）にすると、マッチしない行が消えてしまうため注意が必要である。
 
@@ -249,6 +278,8 @@ def summarize_by_category(
         .reset_index()
     )
 ```
+
+複数群・単一群と欠損カテゴリの扱いは[完全実装](../scripts/ch12/pandas_bio_ops.py)と[直接テスト](../tests/ch12/test_pandas_bio_ops.py)に記録している。
 
 たとえば、遺伝子カテゴリ（がん抑制遺伝子、がん遺伝子、ハウスキーピング遺伝子）ごとにlog2FoldChangeの分布を要約できる。
 
@@ -425,6 +456,8 @@ def compare_expression(
     return float(result.statistic), float(result.pvalue)
 ```
 
+Welch検定の入力と戻り値に関する完全な契約は[実行可能な実装](../scripts/ch12/scipy_stats_bio.py)にあり、正常入力、短い群、定数群、NaNを[直接テスト](../tests/ch12/test_scipy_stats_bio.py)で確認している。
+
 `equal_var=False` でWelchのt検定（等分散を仮定しない）になる。ノンパラメトリック検定が必要なら `scipy.stats.mannwhitneyu()` を使う。ポイントは、どの関数名を指示に含めるべきかを知っていることである。
 
 ### 多重検定補正 — 車輪の再発明の典型例
@@ -448,10 +481,12 @@ def correct_pvalues(pvalues: np.ndarray) -> np.ndarray:
     adjusted = np.minimum.accumulate(adjusted[::-1])[::-1]
     adjusted = np.clip(adjusted, 0.0, 1.0)
 
-    result = np.empty(n, dtype=np.float64)
+    result: np.ndarray = np.empty(n, dtype=np.float64)
     result[sorted_indices] = adjusted
     return result
 ```
+
+手動実装の局所配列型を含む[完全版](../scripts/ch12/scipy_stats_bio.py)は、未整列、同値、0・1、空入力を[直接テスト](../tests/ch12/test_scipy_stats_bio.py)で検証している。
 
 このコード自体は正しく動くが、SciPyには同じ処理を行うライブラリ関数がある。`scipy.stats.false_discovery_control()` を使えば2行で済む:
 
@@ -462,6 +497,8 @@ def correct_pvalues_scipy(pvalues: np.ndarray) -> np.ndarray:
         return np.array([], dtype=np.float64)
     return stats.false_discovery_control(pvalues, method="bh")
 ```
+
+ライブラリ版と手動版の一致、0・1、同値、空入力は[完全実装](../scripts/ch12/scipy_stats_bio.py)と[直接テスト](../tests/ch12/test_scipy_stats_bio.py)に記録している。
 
 なぜ手動実装を避けるべきか。第一に、エッジケース（NaN、同値p値、極端に小さな値）の処理が複雑で、自前実装ではバグが入りやすい。第二に、ライブラリ関数は広範なテストを経ており、浮動小数点精度の問題（[§3-2](./03_cs_basics.md#3-2-数値表現と浮動小数点)参照）にも対処されている。
 
@@ -484,6 +521,8 @@ def distance_matrix_naive(matrix: np.ndarray) -> np.ndarray:
     return dist
 ```
 
+このナイーブ版を比較基準として残す理由と完全な入出力契約は[実行可能な実装](../scripts/ch12/scipy_stats_bio.py)にあり、SciPy版との一致、対称性、対角0、1サンプル、空入力を[直接テスト](../tests/ch12/test_scipy_stats_bio.py)で確認している。
+
 SciPyの `pdist()` と `squareform()` を使えば、同じ計算をはるかに簡潔かつ高速に書ける:
 
 ```python
@@ -494,6 +533,8 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
     distances = pdist(matrix.T, metric="correlation")
     return squareform(distances)
 ```
+
+列をサンプルとして相関距離を計算する意味と戻り値の形状は[完全実装](../scripts/ch12/scipy_stats_bio.py)と[直接テスト](../tests/ch12/test_scipy_stats_bio.py)にまとめている。
 
 `pdist()` は condensed distance matrix（上三角行列を1次元に圧縮した形式）を返し、`squareform()` がそれを正方行列に変換する。AIが二重forループで距離を計算するコードを生成したら、「`pdist()` がある」と指示できることが重要である。この距離行列は、[§13 可視化の実践](./13_visualization.md)で学ぶヒートマップや階層クラスタリングの入力として使う。
 

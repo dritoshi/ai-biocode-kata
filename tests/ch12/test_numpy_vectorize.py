@@ -42,6 +42,13 @@ class TestGcContentVectorized:
         result = gc_content_vectorized([seq])
         assert result[0] == pytest.approx(0.5)
 
+    def test_mixed_lengths_n_shape_and_dtype(self) -> None:
+        """不等長・空文字列・N・小文字を含む入力の契約を確認する."""
+        result = gc_content_vectorized(["G", "ATNGC", "", "cc"])
+        np.testing.assert_allclose(result, [1.0, 2 / 5, 0.0, 1.0])
+        assert result.shape == (4,)
+        assert result.dtype == np.float64
+
 
 class TestNormalizeCpm:
     """normalize_cpm のテスト."""
@@ -78,6 +85,13 @@ class TestNormalizeCpm:
         result = normalize_cpm(counts)
         assert result[0, 0] == pytest.approx(1_000_000)
 
+    def test_preserves_shape_and_returns_float64(self) -> None:
+        """整数入力でも形状を保ったfloat64配列を返す."""
+        counts = np.array([[1, 2], [3, 4]], dtype=np.int64)
+        result = normalize_cpm(counts)
+        assert result.shape == counts.shape
+        assert result.dtype == np.float64
+
 
 class TestFilterByQuality:
     """filter_by_quality のテスト."""
@@ -105,3 +119,10 @@ class TestFilterByQuality:
         scores = np.array([19, 20, 21])
         result = filter_by_quality(scores)
         np.testing.assert_array_equal(result, [20, 21])
+
+    def test_empty_array(self) -> None:
+        """空配列には同じdtypeの空配列を返す."""
+        scores = np.array([], dtype=np.int64)
+        result = filter_by_quality(scores)
+        assert result.shape == (0,)
+        assert result.dtype == scores.dtype

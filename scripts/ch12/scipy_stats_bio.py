@@ -67,7 +67,7 @@ def correct_pvalues(pvalues: np.ndarray) -> np.ndarray:
     adjusted = np.clip(adjusted, 0.0, 1.0)
 
     # 5. 元の順序に戻す
-    result = np.empty(n, dtype=np.float64)
+    result: np.ndarray = np.empty(n, dtype=np.float64)
     result[sorted_indices] = adjusted
     return result
 

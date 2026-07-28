@@ -41,6 +41,27 @@ class TestCompareExpression:
         assert isinstance(result, tuple)
         assert len(result) == 2
 
+    @pytest.mark.filterwarnings(
+        "ignore:Precision loss occurred:RuntimeWarning"
+    )
+    @pytest.mark.parametrize(
+        ("group1", "group2"),
+        [
+            (np.array([1.0]), np.array([2.0])),
+            (np.ones(4), np.ones(4)),
+            (np.array([1.0, np.nan, 3.0]), np.array([2.0, 3.0, 4.0])),
+        ],
+    )
+    def test_degenerate_inputs_return_nan(
+        self,
+        group1: np.ndarray,
+        group2: np.ndarray,
+    ) -> None:
+        """短い群・定数群・NaN入力ではSciPyのNaNを伝える."""
+        t_stat, p_value = compare_expression(group1, group2)
+        assert np.isnan(t_stat)
+        assert np.isnan(p_value)
+
 
 class TestCorrectPvalues:
     """correct_pvalues のテスト."""
@@ -88,6 +109,15 @@ class TestCorrectPvalues:
         adjusted = correct_pvalues(pvalues)
         expected = np.array([0.025, 0.025, 0.05, 0.05, 0.5])
         np.testing.assert_allclose(adjusted, expected)
+
+    def test_unsorted_equal_and_extreme_values(self) -> None:
+        """未整列・同値・0・1を含む入力をSciPy版と照合する."""
+        pvalues = np.array([1.0, 0.04, 0.0, 0.04, 0.01])
+        adjusted = correct_pvalues(pvalues)
+        expected = correct_pvalues_scipy(pvalues)
+        np.testing.assert_allclose(adjusted, expected)
+        assert adjusted[2] == 0.0
+        assert adjusted[0] == 1.0
 
 
 class TestExpressionDistanceMatrix:
@@ -142,6 +172,12 @@ class TestCorrectPvaluesScipy:
         result = correct_pvalues_scipy(np.array([0.03]))
         assert result[0] == pytest.approx(0.03)
 
+    def test_zero_one_and_equal_values(self) -> None:
+        """境界値0・1と同値p値を処理できる."""
+        pvalues = np.array([0.0, 0.2, 0.2, 1.0])
+        result = correct_pvalues_scipy(pvalues)
+        np.testing.assert_allclose(result, correct_pvalues(pvalues))
+
 
 class TestDistanceMatrixNaive:
     """distance_matrix_naive のテスト."""
@@ -167,3 +203,21 @@ class TestDistanceMatrixNaive:
         matrix = rng.random((50, 3))
         dist = distance_matrix_naive(matrix)
         np.testing.assert_allclose(np.diag(dist), 0.0, atol=1e-10)
+
+    def test_single_sample(self) -> None:
+        """1サンプルでは1×1のゼロ行列を返す."""
+        matrix = np.array([[1.0], [2.0], [3.0]])
+        result = distance_matrix_naive(matrix)
+        np.testing.assert_array_equal(result, np.zeros((1, 1)))
+
+    def test_empty_matrix(self) -> None:
+        """サンプルのない行列では0×0行列を返す."""
+        result = distance_matrix_naive(np.empty((0, 0)))
+        assert result.shape == (0, 0)
+
+
+def test_expression_distance_matrix_single_sample() -> None:
+    """SciPy版も1サンプルでは1×1のゼロ行列を返す."""
+    matrix = np.array([[1.0], [2.0], [3.0]])
+    result = expression_distance_matrix(matrix)
+    np.testing.assert_array_equal(result, np.zeros((1, 1)))
