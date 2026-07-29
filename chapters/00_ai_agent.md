@@ -526,6 +526,10 @@ DR に投げるプロンプトは、CLI エージェントへの指示とはや�
 
 > 「回答と説明は日本語で、プログラミング初心者の実験系生命科学者を想定してください。開発者コミュニティ内のジャーゴン（その集団だけで通じやすい内輪の専門語）や略語は、必要な場合だけ使い、初出時に意味を説明してください。定着した日本語訳を確認できない技術用語について、新しい訳語を作らないでください。訳語に確信がない場合は原語を残し、意味を平易な日本語で一文説明してください。同じ概念には同じ表記を使い、回答前に不自然な造語、直訳調、表記の不統一がないか用語だけを見直してください。」
 
+Claude Opus 5は以前のOpusより回答や文書が長くなりやすく、作業中の進捗も詳しく説明しやすい。effortを下げるだけでは、利用者に表示される文章の長さを確実には制御できないため、長さと報告頻度は別に指定する[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。たとえば次の一文を言語方針に加える。
+
+> 「進捗報告は作業の節目だけに1〜2文で行い、最終回答は変更点・検証結果・残課題の5項目以内にまとめてください。」
+
 `AGENTS.md`は実行ごとに読み込まれる指示の連鎖に組み込まれ[31](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、`CLAUDE.md`も各セッションのコンテキストへ読み込まれる[33](https://code.claude.com/docs/en/memory)。したがって、繰り返し守らせたい短い言語方針を常設する用途に向いている。個別の文章生成や、すでに得た回答の用語だけを見直す指示は、[付録D](./appendix_d_agent_vocabulary.md#d-5-不自然な用語を減らす指示)に示す。
 
 ただし、この指示は不自然な用語の発生を減らすためのものであり、正しさを保証する仕組みではない。「日本語訳を新造しない」という指定も、各社の公式機能ではなく、一般的なプロンプト設計原則を日本語の技術文書へ適用した本書独自の緩和策である。重要な文章では、回答前の確認を求めたうえで、人間が公式ドキュメントや分野の慣用表記と照合する必要がある。OpenAIも、重要な作業では最終確認を求め、利用・共有前に人間がレビューするよう勧めている[30](https://learn.chatgpt.com/docs/prompting)。
@@ -612,9 +616,22 @@ AIコーディングエージェントは**実装だけでなくレビューに�
 
 テストを書かせるという行為自体がレビューの一形態である。エージェントがテストケースを考える過程で、「この関数はNoneが渡されたときどうなるべきか？」「空のFASTAファイルが入力されたら？」といった、実装者が暗黙に仮定していた条件が明示化される。テスト駆動開発の詳細は[§8 コードの正しさを守るテスト技法](./08_testing.md)で扱う。
 
+Claude Opus 5でコードレビューを行う場合は、最初から「重大な問題だけ」「確実な指摘だけ」と検出範囲を狭めないほうがよい。公式ガイドは、まず候補を幅広く検出させ、その後の別パスで重要度と確度を判定する方法を勧めている[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。たとえば、レビューを次の2段階に分ける。
+
+**第1段階: 候補の検出**
+
+> 「今回の変更にある問題候補を、重要度で除外せず列挙してください。各候補に該当箇所、起こりうる失敗、確認方法を付けてください。」
+
+**第2段階: 人間が確認する順序への絞り込み**
+
+> 「直前の候補を、再現可能性と影響度に基づいて順位付けしてください。根拠が弱い候補は除外せず『要確認』と分けてください。」
+
+この2段階レビューは、同じ実装セッションに漠然と「もう一度確認して」と頼む自己検証とは異なる。検出条件と判定条件を分けることで、人間が指摘の根拠を追跡できるようにする手続きである。
+
 ### レビューのベストプラクティス
 
 - 実装とレビューは**別のセッション**で行うと、コンテキストの偏りが減る
+- 問題候補の**検出**と、重要度・確度による**絞り込み**を別のパスに分ける
 - エージェントのレビュー結果を鵜呑みにしない — **科学的妥当性は人間が判断する**
 - レビューで指摘された問題は、修正後にテストを追加して再発を防ぐ
 
@@ -637,7 +654,7 @@ AIコーディングエージェントは**実装だけでなくレビューに�
 - サブエージェントはメインのコンテキストを消費しないため、大規模な調査に向く
 - 明示的に「use subagents」「サブエージェントで並列に」と指示すると委譲されやすい
 - 各サブエージェントもトークンを消費するため、コスト意識を持つ
-- 近年の上位モデルは、以前の世代と比べてサブエージェントを自発的には生成しにくい傾向がある。並列化したいタスクは「以下の3つを並列のサブエージェントで」のように分割の粒度ごと明示的に指示する
+- Claude Opus 5は以前のOpusよりサブエージェントへ自発的に委譲しやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。小さな修正では「サブエージェントを使わない」、大きな作業では「以下の3つを並列のサブエージェントで」のように、委譲の要否と上限を明示する
 
 ### 具体的な活用場面
 
@@ -686,26 +703,28 @@ AIコーディングエージェントの出力は、3つの軸で調整でき�
 
 モデルの選び方には、両ツールで微妙な違いがある。**Claude Code CLI はモデルの選択と推論の深さを別々のコマンドに分けている**（それぞれ `/model` と `/effort`）**のに対し、Codex CLI は `/model` の一つでモデルと推論の深さをまとめて選ぶ**[2](https://github.com/openai/codex)。同じ「使い分け」でも、読者が操作する道具立てが異なる。
 
-> **モデル世代に依存する記述** — 最終確認: 2026-07-19。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[28](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[27](https://learn.chatgpt.com/docs/models) を参照。
+> **モデル世代に依存する記述** — 最終確認: 2026-07-29。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[28](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[27](https://learn.chatgpt.com/docs/models) を参照。
 
 | 役割 | Claude Code CLI | Codex CLI |
 |-----|-------------|-----------|
-| 最上位 | Fable 5（ただし後述する制約がある） | GPT-5.6 Sol |
-| 標準 | Opus 4.8 / Sonnet 5 | GPT-5.6 Terra |
+| 最上位・高精度 | Fable 5 / Opus 5（ただし後述する制約がある） | GPT-5.6 Sol |
+| 標準 | Sonnet 5 | GPT-5.6 Terra |
 | 軽量 | Haiku 4.5 | GPT-5.6 Luna |
 | 選び方 | `/model` でモデル、`/effort` で深さ | `/model`（モデルと深さをまとめて） |
 
 Codex CLI の GPT-5.6 は、Sol（最上位）・Terra（標準）・Luna（軽量）という3つのモデルに分かれている[27](https://learn.chatgpt.com/docs/models)。天体の名前が能力とコストの順に対応していると覚えるとよい。
 
-起動時にどのモデルが選ばれるかは契約プランによって異なる。Claude Code CLI では Max 系の契約が Opus 4.8、Pro 系が Sonnet 5 で起動する[28](https://code.claude.com/docs/en/model-config)。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
+Claude側ではFable 5が総合的な最上位であり、Opus 5は複雑なコーディング、長時間のエージェント作業、科学・数学のような深い推論を要する作業に位置付けられる[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。Opus 5のモデルIDは `claude-opus-5`、コンテキストウィンドウは1Mトークン、最大出力は128Kトークンである。API料金は入力100万トークンあたり5ドル、出力100万トークンあたり25ドルで、Opus 4.8から据え置かれた[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。
+
+起動時にどのモデルが選ばれるかは契約プランによって異なる。Claude Code CLIではMax、Team Premium、Enterprise従量課金、Anthropic APIがOpus 5、Pro、Team Standard、EnterpriseサブスクリプションがSonnet 5で起動する[28](https://code.claude.com/docs/en/model-config)。Fable 5はいずれのプランでも既定ではなく、明示的に選択する。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
 
 ### 推論の深さ — 2つ目の調整軸
 
 モデル選択とは**独立して**、エージェントにどれだけ働かせるかを調整できる。Claude Code CLI ではこれを **effort**[25](https://platform.claude.com/docs/en/build-with-claude/effort)、Codex CLI では **Reasoning Effort** と呼ぶ。
 
-この軸を「考える時間の長さ」とだけ理解すると使いこなせない。effort が実際に変えるのは思考量だけではなく、**エージェントの仕事の進め方そのもの**である。低い effort では複数の操作を1回のツール呼び出しにまとめ、呼び出し回数を減らし、前置きなしに行動し、完了報告も簡潔になる。高い effort ではツール呼び出しが増え、着手前に計画を説明し、変更点を詳しく要約する[25](https://platform.claude.com/docs/en/build-with-claude/effort)。「深く考えさせる」というより「丁寧に仕事をさせる」つまみだと捉えるほうが実態に近い。
+この軸を「考える時間の長さ」とだけ理解すると使いこなせない。effortが実際に変えるのは思考量だけではなく、テキスト応答、ツール呼び出し、エージェントの仕事の進め方を含む**総体的なトークンの使い方**である[25](https://platform.claude.com/docs/en/build-with-claude/effort)。ただしClaude Opus 5では、effortを下げても利用者に表示される回答が必ず短くなるわけではない。回答の長さは「結論を5項目以内」「説明は300字以内」のように、プロンプトで別に指定する[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。
 
-もう一つの仕組みが **Adaptive thinking**[10](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) である。これはモデル自身がタスクの複雑さに応じて思考量を自動決定するもので、対応状況は世代によって異なる。手動でトークン予算を指定する旧来の方式を受け付けないモデルがあり、最新世代には**思考そのものを止められないモデル**もある。
+もう一つの仕組みが **Adaptive thinking**[10](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) である。これはモデル自身がタスクの複雑さに応じて思考量を自動決定するもので、対応状況は世代によって異なる。Claude Opus 5ではthinkingが既定で有効であり、Claude Code CLIでは常にAdaptive reasoningを使う[28](https://code.claude.com/docs/en/model-config)。
 
 ここで初心者がつまずきやすい点を2つ挙げる。
 
@@ -713,9 +732,9 @@ Codex CLI の GPT-5.6 は、Sol（最上位）・Terra（標準）・Luna（軽�
 
 第二に、**すべてのモデルが effort に対応しているわけではない**。軽量モデルは非対応のことがあり、Claude Code CLI では指定してもエラーにならず、そのモデルが対応する最上位のレベルに黙って丸められる[28](https://code.claude.com/docs/en/model-config)。設定したつもりで効いていない、という状態が起こりうる。
 
-> **モデル世代に依存する記述** — 最終確認: 2026-07-19。段階の名前・数・既定値はいずれも世代交代で変わる。
+> **モデル世代に依存する記述** — 最終確認: 2026-07-29。段階の名前・数・既定値はいずれも世代交代で変わる。
 
-Claude Code CLI の effort は `low` / `medium` / `high` / `xhigh` / `max` の5段階で、既定は `high` である。`/effort` という専用コマンドで変更する。Haiku 4.5 は effort に対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLI は Low / Medium / High / Extra high / Max / Ultra の6段階で、既定は Medium。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
+Claude Code CLIのeffortは `low` / `medium` / `high` / `xhigh` / `max` の5段階で、Opus 5の既定は `high` である。まず `high` から始め、難しいコーディングやエージェント作業では `xhigh`、制約なしで能力を引き出す必要がある場合だけ `max` を使う。`low` と `medium` でも十分な品質が得られることがあるため、代表タスクで評価して下げる[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。変更には `/effort` を使う。Haiku 4.5はeffortに対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLIはLow / Medium / High / Extra high / Max / Ultraの6段階で、既定はMedium。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
@@ -750,9 +769,16 @@ Claude Code CLI には、そのターンだけ推論を深くする `ultrathink`
 
 3つ目の調整軸は、本書の読者にとって避けて通れない事情である。**最上位のモデルが、バイオインフォマティクスの作業を引き受けてくれるとは限らない。**
 
-> **モデル世代に依存する記述** — 最終確認: 2026-07-19。以下は現行世代の挙動であり、対象となるモデルも分類の範囲も変わりうる。
+> **モデル世代に依存する記述** — 最終確認: 2026-07-29。以下は現行世代の挙動であり、対象となるモデルも分類の範囲も変わりうる。
 
-Claude Code CLI の最上位クラスである Fable 5 は、サイバーセキュリティと生物学の内容に対する安全性分類器とともに動作する。分類器が反応すると、Claude Code はそのリクエストを自動的に Opus 4.8 で実行し直し、切り替えたことを画面に表示する[28](https://code.claude.com/docs/en/model-config)。公式ドキュメントは、**生物学に隣接したコードベースでは頻繁に、多くの場合は最初のリクエストから切り替えが起き、本格的な生物学の作業ではほぼすべてのリクエストが再ルーティングされると予想せよ**と明記している[28](https://code.claude.com/docs/en/model-config)。
+Claude Code CLIのFable 5とOpus 5は、サイバーセキュリティと生物学の内容に対する安全性分類器とともに動作する。分類器が反応したときの処理は、モデルとカテゴリによって異なる[28](https://code.claude.com/docs/en/model-config)。
+
+| 使用中のモデル | 生物学カテゴリ | サイバーセキュリティカテゴリ |
+|---|---|---|
+| Fable 5 | Opus 5で再実行 | Opus 4.8で再実行 |
+| Opus 5 | フォールバックせず拒否 | Opus 4.8で再実行 |
+
+公式ドキュメントは、**生物学に隣接したコードベースでは頻繁に、多くの場合は最初のリクエストから切り替えや拒否が起きる**と明記している[28](https://code.claude.com/docs/en/model-config)。Fable 5で本格的な生物学の作業を始めると、最初に分類されたリクエストでOpus 5へ移り、その後Opus 5側で再び生物学カテゴリに分類されると拒否で終了する。最初からOpus 5を選んだ場合は、最初に分類されたリクエストから拒否が起こりうる。
 
 なぜ「最初のリクエストから」なのか。セッションの最初のリクエストには、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の内容や `git status` といったワークスペースの情報が同梱される。つまり**特別なことを何も尋ねていなくても、リポジトリに生物学の材料が含まれているだけで分類器が反応しうる**[28](https://code.claude.com/docs/en/model-config)。本書の読者がまさに置かれる状況である。
 
@@ -761,10 +787,10 @@ Claude Code CLI の最上位クラスである Fable 5 は、サイバーセキ�
 そのうえで、知っておくべき挙動が3つある。
 
 - 原因の切り分けには `claude --safe-mode` を使う。`CLAUDE.md`・スキル・MCP サーバ・フックを無効にして起動できる。ただし `git status` とディレクトリ名は無効化の対象外なので、これらが原因の場合は切り分けきれない[28](https://code.claude.com/docs/en/model-config)
-- 自動で切り替えず毎回確認させたい場合は、`/config` で該当の設定をオフにする[28](https://code.claude.com/docs/en/model-config)
-- **非対話モードや SDK 経由では、確認を表示できないため拒否でターンが終わる**[28](https://code.claude.com/docs/en/model-config)。`claude -p` を CI に組み込む場合はここに注意する
+- Fable 5からフォールバックできるカテゴリでは、`/config` で自動切り替えをオフにし、切り替え前に確認させることもできる[28](https://code.claude.com/docs/en/model-config)
+- **Opus 5の生物学カテゴリには切り替え先がないため、そのまま拒否でターンが終わる**[28](https://code.claude.com/docs/en/model-config)。`claude -p` をCIに組み込む場合も、この終了を想定しておく
 
-結論として、**本書が扱う作業では、実質的な最上位モデルは Opus 4.8 である**。Fable 5 を指定しても自動的に戻されるため、はじめから Opus 4.8 を選んでおくほうが素直である。「最高性能のモデルを選べばよい」という単純な指針が、扱う分野によっては成り立たない。これが3つ目の軸を立てる理由である。
+結論として、**本書が扱う作業で通常利用できる高精度モデルはOpus 5だが、すべての生物学タスクを引き受けるわけではない**。Fable 5を指定しても生物学カテゴリではOpus 5へ移り、Opus 5側で分類されれば拒否される。「最高性能のモデルを選べばよい」という単純な指針が、扱う分野によっては成り立たない。これが3つ目の軸を立てる理由である。
 
 ### 最上位の設定は「深さ」ではなく「委譲」である
 
@@ -780,15 +806,15 @@ Claude Code CLI の最上位クラスである Fable 5 は、サイバーセキ�
 
 ### 新しいモデルが出たときの作法
 
-モデルは数か月おきに世代交代する。そのたびに設定を見直すことになるが、ここには**直感と逆の作法**がある。
+モデルは数か月おきに世代交代する。そのたびに、旧モデルの設定をそのまま持ち込まず、代表的なタスクで品質・時間・コストを測り直す必要がある。新しいモデルほど深くすればよい、あるいは必ず一段下げればよい、という共通の正解はない。
 
-新しいモデルが出たら、まず**推論の深さを一段下げて試す**。両社の公式移行ガイドが、揃ってこれを勧めている。Anthropic は最新世代について「低い effort の設定でも十分に機能し、旧世代の高い effort を上回ることが多い」と述べ[25](https://platform.claude.com/docs/en/build-with-claude/effort)、OpenAI は「現在の設定を基準として保ち、そこから一段下げたものと代表的なタスクで比較せよ。より少ないトークンで同等以上の品質を保てることが多い」と指示している[29](https://developers.openai.com/api/docs/guides/latest-model)。
+Claude Opus 5では、まず公式の既定である `high` から始め、難しい作業では `xhigh`、能力を制約せず評価する必要がある場合だけ `max` を試す。`low` と `medium` も有力な選択肢なので、同じタスクでeffortを変える評価を新しく行う[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。Claude Code CLIでは以前に明示したeffortがOpus 5へ引き継がれるため、旧モデルの設定を意図せず使い続けていないか `/effort` で確認する[28](https://code.claude.com/docs/en/model-config)。一方、OpenAIは現在の設定と一段低い設定を代表タスクで比較するよう勧めている[29](https://developers.openai.com/api/docs/guides/latest-model)。推奨の違いから分かるように、モデルを替えたら**そのモデル向けに評価をやり直す**ことが共通原則である。
 
-「新しくて強いモデルなのだから、より深く考えさせよう」と考えたくなるが、実際には逆である。世代が上がるとトークン効率も上がるため、**同じ結果をより少ない手数で出せるようになる**。深さを据え置いたまま乗り換えると、必要以上のコストと待ち時間を払うことになりやすい。
+もう一つの作法が、**旧世代向けに書いた曖昧な補助指示を外して試す**ことである。Claude Opus 5は既定で自己修正や検証を行うため、「念のためダブルチェックして」「別のサブエージェントでも同じ確認をして」のような一般的な指示を重ねると、検証の重複とコスト増を招きやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。一方、具体的なテストコマンド、受け入れ条件、独立したレビュー、人間による確認は品質保証の手続きなので削らない。
 
-もう一つの作法が、**旧世代向けに書いた指示を外して試す**ことである。「ダブルチェックしてから返して」「必要なら中間ステータスを報告して」といったお願いは、それが必要だった世代のために書かれたものである。新しい世代では既定の振る舞いに取り込まれていることが多く、残しておくとかえって冗長な出力を招く。いったん外して挙動を確認するのが公式の移行指針である[26](https://platform.claude.com/docs/en/about-claude/models/migration-guide)。
+逆に、Claude Opus 5で明示したほうがよいのは**作業の境界**である。以前のOpusより依頼範囲を広げたり、サブエージェントへ委譲したり、進捗を詳しく説明したりしやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。対象ファイル、変更してよい範囲、完了条件、文章量、進捗報告の頻度、委譲の上限を必要に応じて指定する。
 
-この2つは、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の見直しにもそのまま当てはまる。設定ファイルは書き足すばかりになりがちだが、モデルが変わったら**削れる指示がないかを確認する**時期でもある。
+これらは、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の見直しにもそのまま当てはまる。設定ファイルは書き足すばかりになりがちだが、モデルが変わったら**削る指示と具体化する境界の両方を確認する**時期でもある[26](https://platform.claude.com/docs/en/about-claude/models/migration-guide)。
 
 ### コスト意識
 
@@ -819,6 +845,8 @@ Claude Code CLI の最上位クラスである Fable 5 は、サイバーセキ�
 > <a id="column-ch00-06"></a> 🧬 **コラム: バイオインフォマティクスコード生成の壁 — BioCoderベンチマーク**
 >
 > 汎用ベンチマーク(HumanEval等)ではフロンティアモデルが90%を超えるスコアを達成している。しかし、バイオインフォマティクスに特化したBioCoderベンチマーク[17](https://pubmed.ncbi.nlm.nih.gov/38940140/)では、GPT-3.5/4でも正解率は約50%にとどまる（小型モデルは最大でも25%程度である）。0-basedと1-basedの座標系の違い、FASTA/BEDフォーマットの慣習、ドメイン固有のライブラリ依存関係など、汎用ベンチマークでは測れない専門知識が要求されるためである。汎用ベンチマークのスコアだけでモデルを選ぶのではなく、生命科学ドメインのコードでは[§0-4 エージェントにレビューさせる](./00_ai_agent.md#0-4-エージェントにレビューさせる)で学ぶレビューを欠かさないようにしたい。
+>
+> その後のモデルは生命科学タスクでも大きく進歩した。AnthropicのClaude Opus 5システムカードでは、ツールを利用するBioMysteryBenchで、人間が解ける問題群に90.1%、難しい問題群に49.4%と報告されている[36](https://www.anthropic.com/claude-opus-5-system-card)。これはAnthropic自身がAdaptive thinking・`max` effortなどの条件で行った評価であり、コード生成を測るBioCoderとは直接比較できない。それでも、解ける範囲が広がる一方、難しい問題では約半数が解けないという両面を示している。能力の向上を、科学的妥当性を確認しなくてよい理由にしてはならない。
 
 ### エージェントの性能はモデルだけで決まらない
 
@@ -898,7 +926,7 @@ AIが生成したコードは「動く」ことが多いが、それが「良い
 >
 > これらに共通するのは、「AIが安全側・汎用側に倒そうとする」傾向である。研究コードでは多くの場合、シンプルさのほうが価値がある。
 >
-> なお近年の上位モデルでは、これらのアンチパターンに見られる**過剰さ**自体がモデル側でも抑制される傾向にある。一方で低い effort では「頼まれた範囲」のみに厳密に絞り込むため、必要な防御や検証はプロンプトに**明示列挙**する必要がある。「過剰を削る」と「必要なものを書き落とす」は表裏なので、生成されたコードに何が含まれていないかを意識してレビューしたい。
+> 上位モデルでも、この**過剰さ**が自動的に解消されるわけではない。Claude Opus 5のシステムカードは、生物学の作業で長い自己検証ループに入り、検証用の仕組みを作り続けたまま成果物を完成できない例や、作業範囲を適切に絞れず過剰設計する傾向を報告している[36](https://www.anthropic.com/claude-opus-5-system-card)。対象範囲、完了条件、検証に使ってよい時間や手段を具体化し、途中で目的から外れていないか人間が確認する必要がある。一方で低いeffortでは必要な防御や検証を省く可能性もあるため、「過剰を削る」と「必要なものを書き落とす」の両方を意識してレビューしたい。
 
 ---
 
@@ -1096,3 +1124,6 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 - [31](https://learn.chatgpt.com/docs/agent-configuration/agents-md) OpenAI. "Custom instructions with AGENTS.md". https://learn.chatgpt.com/docs/agent-configuration/agents-md (参照日: 2026-07-29)
 - [32](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) Anthropic. "Prompting best practices". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices (参照日: 2026-07-29)
 - [33](https://code.claude.com/docs/en/memory) Anthropic. "How Claude remembers your project". https://code.claude.com/docs/en/memory (参照日: 2026-07-29)
+- [34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5) Anthropic. "What's new in Claude Opus 5". https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5 (参照日: 2026-07-29)
+- [35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5) Anthropic. "Prompting Claude Opus 5". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5 (参照日: 2026-07-29)
+- [36](https://www.anthropic.com/claude-opus-5-system-card) Anthropic. "Claude Opus 5 System Card". 2026. https://www.anthropic.com/claude-opus-5-system-card (参照日: 2026-07-29)

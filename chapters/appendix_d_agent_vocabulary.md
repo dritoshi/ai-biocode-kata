@@ -54,7 +54,7 @@ AIコーディングエージェント（Claude Code、Codex等）は、Python�
 | 安全側に倒す | 「〜のリスクがあるため、〜を推奨します」 |
 | 代替案を必ず出す | 「〜もありますが、〜という選択肢もあります」 |
 
-※ 上記は Claude Opus 4.6 以前で目立つ傾向である。[Claude Opus 4.7](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) 以降は「長文化しやすい」「安全側に倒す」「代替案を必ず出す」が抑制方向に振られ、より直接的で必要な指摘に絞った応答が出やすい。逆に必要な検証や代替提案が省かれる場合もあるため、欲しい挙動は明示的に指示するとよい。
+※ これらの傾向はモデル世代によって変わる。[Claude Opus 5のプロンプトガイド](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)では、以前のOpusより回答や文書が長くなりやすく、作業中の進捗も詳しく説明しやすいとされる。effortだけでは表示される文章の長さを確実に制御できないため、「最終回答は5項目以内」「進捗報告は節目だけ」のように、必要な長さと報告頻度を別に指示するとよい。
 
 ### ChatGPT/Codex特有の傾向
 
