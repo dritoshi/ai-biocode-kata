@@ -296,7 +296,7 @@ GPU使用時は、以下の点に注意する:
 - **CUDAバージョンを合わせる**: `module load cuda/12.0` でGPUドライバに対応するCUDAをロードする。[§15 コンテナによるソフトウェア環境の再現](./15_container.md)で学んだApptainerを使えば、CUDA環境もコンテナ内に固定できる
 - **メモリに余裕を持たせる**: GPU学習ではホストメモリも使用するため、通常の解析より多めに申請する
 
-> **🤖 コラム: GPU学習ジョブのSlurmスクリプト**
+> <a id="column-ch16-01"></a> **🤖 コラム: GPU学習ジョブのSlurmスクリプト**
 >
 > [§15 コンテナによるソフトウェア環境の再現](./15_container.md)で学んだwandbと組み合わせた、深層学習の学習ジョブの実用的な構成例を示す。`--wandb-project` でwandbのプロジェクト名を指定し、学習のパラメータと結果を自動的に追跡する。
 >
@@ -338,7 +338,7 @@ GPU使用時は、以下の点に注意する:
 >
 > GPUジョブのデバッグ時には、まず `srun --pty bash` でインタラクティブにGPUノードに入り、`nvidia-smi` でGPUが見えることを確認してからスクリプトを実行するとよい。
 
-> **🧬 コラム: バイオインフォの典型的なHPCジョブパターン**
+> <a id="column-ch16-02"></a> **🧬 コラム: バイオインフォの典型的なHPCジョブパターン**
 >
 > バイオインフォマティクスの主要な解析タイプごとに、HPCリソースのボトルネックが異なる。以下の表を目安としてリソースを申請するとよい。実際の値はデータサイズやツールのバージョンによって変動するため、まず小規模に試して `sacct` で実測値を確認する。
 >
@@ -366,7 +366,7 @@ Slurmジョブスクリプトの作成や管理をエージェントに依頼す
 
 HPCを利用するには、ローカルPCからクラスタへのSSH接続と、解析データの転送が必要になる。SSH接続の基礎は[§2 ターミナルとシェルの基本操作](./02_terminal.md)を参照してほしい。ここでは、HPC利用に特化した実践的なテクニックを扱う。
 
-> 🧬 **コラム: 所属機関の外からサーバに接続する — VPN・多要素認証**
+> <a id="column-ch16-03"></a> 🧬 **コラム: 所属機関の外からサーバに接続する — VPN・多要素認証**
 >
 > **VPN**（Virtual Private Network）
 >
@@ -574,7 +574,7 @@ python analysis.py --input input_data/ --output output/
 cp -r output/ /scratch/$USER/results/
 ```
 
-> **🧬 コラム: スクラッチの事故事例**
+> <a id="column-ch16-04"></a> **🧬 コラム: スクラッチの事故事例**
 >
 > ある研究室の大学院生が、全ゲノムシーケンシングの生データ（FASTQ、合計2 TB）をスクラッチ領域にのみ保存していた。クラスタの90日パージポリシーを把握しておらず、論文執筆に集中している間にデータが自動削除された。シーケンシングの再実行にはサンプルの再調製からやり直す必要があり、半年の遅延が生じた。
 >
@@ -694,7 +694,7 @@ HPCのプロジェクトデータは、自分だけでなく後任の学生や�
 
 > 「新しいプロジェクト用のディレクトリ構成とREADMEテンプレートを作成してください。RNA-seqの解析で、6サンプル、ペアエンドです」
 
-> 🧬 **コラム: クラウドコンピューティングの基礎用語 — HPCの先にあるもの**
+> <a id="column-ch16-05"></a> 🧬 **コラム: クラウドコンピューティングの基礎用語 — HPCの先にあるもの**
 >
 > 本章ではHPCクラスタを前提に解説したが、バイオインフォマティクスの大規模解析はクラウドでも行われるようになっている。Nextflowの`executor`にAWS Batchを指定すれば、[§14](./14_workflow.md)で学んだパイプラインをそのままクラウドで実行できる。エージェントはクラウドの用語を当然のように使うため、最低限の概念を押さえておこう。
 >
@@ -807,7 +807,7 @@ python simple_filter.py input.vcf > output.vcf
 
 ### クラウドコンピューティングの基礎
 
-- **AWS. "AWS Cloud Practitioner Essentials".** https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/ — S3、EC2、リージョンなど、本章のクラウドコラムで紹介した概念を体系的に学べるAWS公式の無料トレーニング。
+- **AWS. "AWS Cloud Practitioner Essentials".** https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/ — S3、EC2、リージョンなど、[本章のクラウドコラム](./16_hpc.md#column-ch16-05)で紹介した概念を体系的に学べるAWS公式の無料トレーニング。
 - **Google Cloud. "Google Cloud Skills Boost".** https://www.cloudskillsboost.google/ — GCPのハンズオン学習。無料ラボでGCSやCompute Engineを実際に操作できる。
 
 ---

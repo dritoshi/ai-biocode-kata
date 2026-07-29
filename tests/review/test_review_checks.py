@@ -70,6 +70,19 @@ def test_checks_artifact_link_existence(
     assert issue["type"] == "broken_artifact_link"
 
 
+def test_extracts_explicit_html_anchor(tmp_path: Path) -> None:
+    """コラム用の明示的なHTMLアンカーをリンク先として認識する."""
+    chapter = tmp_path / "chapter.md"
+    chapter.write_text(
+        '> <a id="column-ch00-01"></a> **コラム: テスト**\n',
+        encoding="utf-8",
+    )
+
+    anchors = check_xref.extract_headings(chapter)
+
+    assert anchors["column-ch00-01"] == 1
+
+
 def test_structure_baseline_ignores_line_number_changes() -> None:
     """既知問題は行番号が移動しても新規問題として扱わない."""
     baseline = [

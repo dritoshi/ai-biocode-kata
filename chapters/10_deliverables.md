@@ -153,7 +153,7 @@ pyproject.tomlで依存関係を管理する。
 
 Conda パッケージ化では、**安定した取得URLとハッシュ、ライセンス、テスト**が重要である。PyPI公開はレシピ作成を楽にするが必須ではなく、GitHub Releases のソースアーカイブから recipe を作ることも多い。
 
-> **🧬 コラム: Biocondaへのパッケージ公開**
+> <a id="column-ch10-01"></a> **🧬 コラム: Biocondaへのパッケージ公開**
 >
 > Bioconda はバイオインフォマティクスソフトウェアの最大のパッケージリポジトリであり、8,000以上のパッケージが登録されている[11](https://bioconda.github.io/)。公開の手順は以下のとおりである:
 >
@@ -359,7 +359,7 @@ AIエージェントに「Streamlitアプリを作って」と指示すれば、
 | **GitHub Pages**[8](https://docs.github.com/en/pages) | 静的サイト（HTML/CSS/JS） | 無料（公開リポジトリ） | GitHubリポジトリから直接公開。[§18](./18_documentation.md)で学ぶMkDocsドキュメントの公開先に最適 |
 | **Streamlit Community Cloud**[9](https://streamlit.io/cloud) | Streamlitアプリ | 無料枠あり | GitHubリポジトリを連携するだけで自動デプロイ。`requirements.txt`を読んで環境構築も自動 |
 | **Hugging Face Spaces**[10](https://huggingface.co/spaces) | Gradio/Streamlitアプリ | 無料枠あり | 機械学習モデルのデモに最適。Gradioアプリはそのまま動く |
-| **S3静的ホスティング** | 静的サイト | 低コスト | [§16](./16_hpc.md)のクラウドコラムで紹介したオブジェクトストレージを使う方法。独自ドメインの設定も可能 |
+| **S3静的ホスティング** | 静的サイト | 低コスト | [§16](./16_hpc.md#column-ch16-05)のクラウドコラムで紹介したオブジェクトストレージを使う方法。独自ドメインの設定も可能 |
 
 **GitHub Pages**は最も手軽で、MkDocsで生成したドキュメントサイトを`mkdocs gh-deploy`の1コマンドで公開できる。Streamlitアプリのような動的なサーバ処理が必要なものはGitHub Pagesでは動かないが、**Streamlit Community Cloud**ならGitHubリポジトリのURLを入力するだけでデプロイが完了する。なお、GitHub Pages を無料で使えるのは公開リポジトリの場合で、プライベートリポジトリから公開するには GitHub Pro / Team / Enterprise などの有料プランが必要になる[8](https://docs.github.com/en/pages)。
 
@@ -503,7 +503,7 @@ src layoutの利点は、**未インストールのパッケージが誤って�
 | `pyproject.toml` | プロジェクトのメタデータ、依存関係、ビルド設定の一元管理（[§6](./06_dev_environment.md)参照） |
 | `LICENSE` | ライセンスファイル。オープンソースで公開するなら必須（[§7](./07_git.md)参照） |
 
-> **🤖 コラム: 機械学習プロジェクトのディレクトリ構成**
+> <a id="column-ch10-02"></a> **🤖 コラム: 機械学習プロジェクトのディレクトリ構成**
 >
 > 機械学習プロジェクトでは、上記の標準構成に加えて以下のディレクトリが追加されることが多い:
 >

@@ -24,6 +24,8 @@ build/
 ├── eisvogel-custom.tex        # epigraphパッケージ設定、raggedbottom、tightlist
 ├── emoji-filter.lua           # 絵文字→テキスト変換フィルター（PDF専用）
 ├── epigraph.lua               # エピグラフ（章頭引用句）変換フィルター（PDF/EPUB両対応）
+├── column-anchor.lua           # コラム用HTMLアンカーをPDF内部リンク先へ変換
+├── flushright.lua              # 右寄せ指定をLaTeX環境へ変換
 ├── fix-crossref.lua           # 章間リンクを内部リンクに変換（統合PDF/EPUB用、形式別マッピング）
 ├── fix-repository-links.lua   # コード資産への相対リンクをGitHub恒久リンクへ変換（EPUB用）
 ├── custom.css                 # Vivliostyle用CSSカスタマイズ
@@ -48,7 +50,7 @@ bash build/build_pdf.sh
 Markdown → pandoc (Lua filters) → .tex → sed (figure[H]) → lualatex (2-pass) → PDF
 ```
 
-1. **pandoc**: Markdownを`.tex`に変換。Eisvogelテンプレート + 3つのLuaフィルターを適用
+1. **pandoc**: Markdownを`.tex`に変換。EisvogelテンプレートとLuaフィルターを適用
 2. **sed**: `\begin{figure}` → `\begin{figure}[H]` に置換（図のフロート配置を抑制し空白を防止）
 3. **lualatex**: `.tex`をPDFにコンパイル。2回実行で目次・相互参照を解決
 
@@ -58,6 +60,8 @@ Markdown → pandoc (Lua filters) → .tex → sed (figure[H]) → lualatex (2-p
 |---------|---------|------|
 | `emoji-filter.lua` | 全PDF | 🧬→[BIO]、🤖→[ML]等の絵文字をテキストに置換 |
 | `epigraph.lua` | 全PDF | 出典行（`— `）付きblockquoteをLaTeX `\epigraph{}{}`に変換。コラム（太字・絵文字で始まるblockquote）は除外 |
+| `column-anchor.lua` | 全PDF | `<a id="column-chNN-NN"></a>`をLaTeXの`\hypertarget{}{}`と内部参照用`\label{}`へ変換 |
+| `flushright.lua` | 全PDF | 右寄せ指定をLaTeXの`flushright`環境へ変換 |
 | `fix-crossref.lua` | 統合PDFのみ | `./filename.md#section` → `#section` に変換し、PDF内部リンクとして機能させる |
 
 ### Eisvogelテンプレートのカスタマイズ

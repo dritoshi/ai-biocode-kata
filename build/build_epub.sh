@@ -39,6 +39,7 @@ CHAPTER_ORDER=(
   appendix_b_cli_reference.md
   appendix_c_checklist.md
   appendix_d_agent_vocabulary.md
+  appendix_e_column_index.md
   glossary.md
   author.md
 )

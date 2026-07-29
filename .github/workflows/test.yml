@@ -28,6 +28,12 @@ jobs:
       - name: Set up Python
         run: uv python install 3.12
 
+      # EPUB/PDF向けのリンク変換テストでpandocを使用する
+      - name: Install pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes pandoc
+
       # uv.lock に固定されたバージョンどおりに依存を同期する（再現性）
       - name: Sync dependencies
         run: uv sync
@@ -35,6 +41,10 @@ jobs:
       # コード品質チェック（リント）
       - name: Lint
         run: uv run ruff check scripts/ tests/
+
+      # 章間リンクと明示的なHTMLアンカーの対応を検査する
+      - name: Check manuscript cross-references
+        run: uv run python scripts/review/check_xref.py --output "$RUNNER_TEMP/xref_check.json"
 
       # サンプルコードのテストを実行する
       - name: Run tests
