@@ -5,6 +5,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-07-29
+
 v0.4.0以降に行った全章の事実確認、本文とコードサンプルの同期、AIコーディングエージェントの現行世代対応、PDF/EPUBの参照改善を含む改訂。
 
 ### Added
@@ -15,6 +17,7 @@ v0.4.0以降に行った全章の事実確認、本文とコードサンプル�
 - 付録E「コラム索引」と、本文からコラムを参照するための安定したHTMLアンカーを追加
 - AIエージェントが生成する不自然な訳語やジャーゴンを減らす指示例を§0と付録Dに追加
 - READMEにライセンスとPython対応バージョンのバッジを追加
+- README冒頭に最終改訂日、対応モデル、更新履歴とモデル対応表への導線を追加
 
 ### Changed
 
@@ -110,7 +113,8 @@ v0.4.0以降に行った全章の事実確認、本文とコードサンプル�
 
 旧構成での初期スナップショット。カリキュラム分析ファイルを `docs/` に整理し、残タスクを `TODO.md` に集約。
 
-[Unreleased]: https://github.com/dritoshi/ai-biocode-kata/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/dritoshi/ai-biocode-kata/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/dritoshi/ai-biocode-kata/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/dritoshi/ai-biocode-kata/compare/v0.3-alpha-release...v0.4.0
 [0.3.0-alpha]: https://github.com/dritoshi/ai-biocode-kata/compare/v0.2-new-titles...v0.3-alpha-release
 [0.2.0]: https://github.com/dritoshi/ai-biocode-kata/compare/v0.1-old-structure...v0.2-new-titles

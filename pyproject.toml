@@ -1,6 +1,6 @@
 [project]
 name = "ai-biocode-kata"
-version = "0.4.0"
+version = "0.5.0"
 description = "書籍『AIエージェントを使いこなす はじめてのバイオインフォマティクス開発作法』のコードサンプルとテスト"
 readme = "README.md"
 requires-python = ">=3.10"
