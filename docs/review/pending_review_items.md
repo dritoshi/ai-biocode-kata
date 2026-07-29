@@ -1,14 +1,18 @@
 # 未達成レビューと未完了修正
 
-2026-03-26 時点で本文レビュー、URL 到達性チェック、統合後に残っていた manual issue の修正は完了した。現時点で未完了のレビュー・修正はない。
+2026-03-26 時点で本文レビュー、URL 到達性チェック、統合後に残っていた manual issue の修正は完了した。2026-07-29から、追加の品質改善としてjargon・不自然な翻訳語の章横断レビューを進める。
 
-## 未達成レビュー
+## 進行中のレビュー
 
-- なし。2026-07-29の原稿URL監査では440 URLを再検査し、`error = 0`, `timeout = 0` となった。`anti-bot` と `connection_error` は一次情報・過去の手動確認・別経路の取得結果で有効性を確認した。著者researchmapページ1件は[任意のブラウザ確認](./2026-07-29_url_browser_handoff.md)へ引き継いだが、原稿修正の必須残件ではない。詳細は[監査記録](./2026-07-29_url_audit.md)を参照。
+- [jargon・不自然な翻訳語の整理計画](./2026-07-29_jargon_translation_plan.md)
+
+## 完了済みレビュー
+
+- 2026-07-29の原稿URL監査では440 URLを再検査し、`error = 0`, `timeout = 0` となった。`anti-bot` と `connection_error` は一次情報・過去の手動確認・別経路の取得結果で有効性を確認した。著者researchmapページ1件は[任意のブラウザ確認](./2026-07-29_url_browser_handoff.md)へ引き継いだが、原稿修正の必須残件ではない。詳細は[監査記録](./2026-07-29_url_audit.md)を参照。
 
 ## 未完了修正
 
-- なし。`MANUAL-0006` 〜 `MANUAL-0009` は次の対応で解消した。
+- jargonレビューのfindingは計画承認後に作成する。それ以外の未完了修正はない。`MANUAL-0006` 〜 `MANUAL-0009` は次の対応で解消した。
 - [error_handling.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch10/error_handling.py) の FASTA 事前検証を追加し、`BiopythonDeprecationWarning` を解消した
 - [test_mylib_core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch05/test_mylib_core.py) を追加し、[core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/core.py) の個別テストを整備した
 - [test_mylib_utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch05/test_mylib_utils.py) を追加し、[utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/utils.py) の個別テストを整備した
