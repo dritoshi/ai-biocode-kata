@@ -21,13 +21,13 @@
 * 2026-03-26 に URL レビュー方針を更新し、原稿に出てこない URL は `unused_in_manuscript` として除外し、PubMed に変換できない DOI 系 `anti-bot` は `manual_review_required` として手動確認へ回すことにした
 * 同日、手動確認リストは URL だけでなく、引用されているコンテキストと対応づけて出力する方針を追加した
 * 2026-03-26 に `MANUAL-0006` 〜 `MANUAL-0009` を解消した。`validate_fasta()` の warning を除去し、`mylib.core`, `mylib.utils`, `cli_argparse` の個別テストを追加した
-* 2026-07-29 に、AIエージェントの不自然な用語生成を抑える指示設計の整理を開始した
+* 2026-07-29 に、AIエージェントの不自然な用語生成を抑える指示設計を実装した。差分レビュー2回目でfinding 0件、構造・相互参照・CI相当の検証・EPUBCheckが成功した
 
 ## 本ディレクトリのコンテンツ
 
 本ディレクトリには、未達成レビューと未完了修正に直接関わる現行正本だけを残す。
 
-- [AIエージェントの不自然な用語生成を抑える指示設計計画](./2026-07-29_agent_language_prompt_plan.md)
+- [AIエージェントの不自然な用語生成を抑える指示設計の実装記録](./2026-07-29_agent_language_prompt_plan.md)
 - [未達成レビューと未完了修正](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_review_items.md)
 - [URL 到達性レビュー実行メモ](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_url_review.md)
 - [参照台帳](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/reference_registry.csv)
@@ -39,4 +39,4 @@
 - `docs/review/url_check_browser.json`
   - 任意生成物。ブラウザ再確認結果を保存する
 
-将来URLレビューを再開する場合は、この `docs/review/` に対して各チェック用スクリプトを再実行して成果物を再生成する。URLレビューの運用ポリシーは `pending_url_review.md` を正本とし、原稿にない URL は除外し、PubMed に変換できない DOI 系 `anti-bot` は手動確認へ回す。現時点ではURL到達性レビューとしての手動確認待ちはない。進行中の本文レビューは、上記のAIエージェントの不自然な用語生成を抑える指示設計計画で管理する。
+将来URLレビューを再開する場合は、この `docs/review/` に対して各チェック用スクリプトを再実行して成果物を再生成する。URLレビューの運用ポリシーは `pending_url_review.md` を正本とし、原稿にない URL は除外し、PubMed に変換できない DOI 系 `anti-bot` は手動確認へ回す。現時点ではURL到達性レビューとしての手動確認待ちはなく、進行中の本文レビューもない。AIエージェントの不自然な用語生成を抑える指示設計は、上記の実装記録で完了状態を管理する。
