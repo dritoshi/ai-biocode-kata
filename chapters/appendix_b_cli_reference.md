@@ -36,13 +36,14 @@
 
 | | Claude Code | Codex CLI |
 |--|-------------|-----------|
-| 最高精度 | Fable 5（バイオ用途では Opus 4.8 に自動再ルーティング） | GPT-5.6 Sol |
-| バランス | Opus 4.8 / Sonnet 5 | GPT-5.6 Terra |
+| 最高精度 | Fable 5 / Opus 5（バイオ用途では Fable 5 から Opus 5 へ自動再ルーティング）[3](https://code.claude.com/docs/en/model-config) | GPT-5.6 Sol |
+| バランス | Sonnet 5 | GPT-5.6 Terra |
 | 高速・低コスト | Haiku 4.5 | GPT-5.6 Luna |
+| 生物学カテゴリ | Fable 5はOpus 5で再実行。Opus 5はフォールバックせず拒否[3](https://code.claude.com/docs/en/model-config) | — |
 | モデル切替 | `/model` | `/model` |
-| 推論モード | Adaptive thinking（`Alt+T` / `Option+T` でトグル） | Reasoning Effort（Low〜Ultra） |
-| 推論強度（effort） | `low` / `medium` / `high` / `xhigh` / `max`（既定 `high`。Haiku 4.5 は非対応） | `-c model_reasoning_effort="high"` |
-| Adaptive 対応 | 世代により異なる（最新世代には思考を止められないものもある） | — |
+| 推論モード | Adaptive thinking（Opus 5 は thinking が既定で有効。`Alt+T` / `Option+T` でセッション中に切り替え） | Reasoning Effort（Low〜Ultra） |
+| 推論強度（effort） | `low` / `medium` / `high` / `xhigh` / `max`（Opus 5 の既定は `high`。難しい作業は `xhigh`、`max` は限定的に使用）[4](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5) | `-c model_reasoning_effort="high"` |
+| Adaptive 対応 | Fable 5・Sonnet 5・Opus 4.7 以降は常時 Adaptive reasoning | — |
 | 計画時の推論 | Plan Mode + 高い effort（`opusplan`） | `plan_mode_reasoning_effort` |
 | タスク予算（beta） | `task-budgets-2026-03-13` ヘッダで `task_budget` を指定可能 | — |
 
@@ -73,6 +74,10 @@
 [1] Anthropic. "Claude Code overview". https://code.claude.com/docs (参照日: 2026-03-25)
 
 [2] OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-25)
+
+[3] Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-29)
+
+[4] Anthropic. "What's new in Claude Opus 5". https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5 (参照日: 2026-07-29)
 
 ---
 
