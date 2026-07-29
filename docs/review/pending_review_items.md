@@ -1,10 +1,10 @@
 # 未達成レビューと未完了修正
 
-2026-03-26 時点で本文レビュー、URL 到達性チェック、統合後に残っていた manual issue の修正は完了した。2026-07-29から、追加の品質改善としてjargon・不自然な翻訳語の章横断レビューを進める。
+2026-03-26 時点で本文レビュー、URL 到達性チェック、統合後に残っていた manual issue の修正は完了した。2026-07-29から、追加の品質改善としてAIエージェントの不自然な用語生成を抑える指示設計のレビューを進める。
 
 ## 進行中のレビュー
 
-- [jargon・不自然な翻訳語の整理計画](./2026-07-29_jargon_translation_plan.md)
+- [AIエージェントの不自然な用語生成を抑える指示設計計画](./2026-07-29_agent_language_prompt_plan.md)
 
 ## 完了済みレビュー
 
@@ -12,7 +12,7 @@
 
 ## 未完了修正
 
-- jargonレビューのfindingは計画承認後に作成する。それ以外の未完了修正はない。`MANUAL-0006` 〜 `MANUAL-0009` は次の対応で解消した。
+- AIエージェントの不自然な用語生成を抑える指示設計は計画レビュー中である。それ以外の未完了修正はない。`MANUAL-0006` 〜 `MANUAL-0009` は次の対応で解消した。
 - [error_handling.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch10/error_handling.py) の FASTA 事前検証を追加し、`BiopythonDeprecationWarning` を解消した
 - [test_mylib_core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch05/test_mylib_core.py) を追加し、[core.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/core.py) の個別テストを整備した
 - [test_mylib_utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/tests/ch05/test_mylib_utils.py) を追加し、[utils.py](/Users/itoshi/Projects/writing/ai-biocode-kata/scripts/ch05/mylib/utils.py) の個別テストを整備した
