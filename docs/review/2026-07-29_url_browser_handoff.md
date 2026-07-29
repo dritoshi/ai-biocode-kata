@@ -65,11 +65,15 @@
   - `chapters/07_git.md:333,647`
   - `references/ch07.bib:54`
 
-### 接続タイムアウト
+### 手動修正済み
 
-- `https://www.catb.org/~esr/faqs/smart-questions.html`
+- `https://github.com/selfteaching/How-To-Ask-Questions-The-Smart-Way/blob/master/How-To-Ask-Questions-The-Smart-Way.md`
   - `chapters/21_collaboration.md:866`
   - `references/ch21.bib:80`
+  - 旧URL `https://www.catb.org/~esr/faqs/smart-questions.html` から修正し、ユーザーの手動確認により有効性を確認した
+
+### 接続タイムアウト
+
 - `https://www.catb.org/~esr/writings/taoup/html/`
   - `chapters/01_design.md:200,430,448`
   - `chapters/11_cli.md:389,405,1111,1144`
