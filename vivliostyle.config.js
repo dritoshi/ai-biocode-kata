@@ -9,6 +9,7 @@ module.exports = {
   ],
   entry: [
     'chapters/hajimeni.md',
+    'chapters/notice.md',
     'chapters/00_ai_agent.md',
     'chapters/01_design.md',
     'chapters/02_terminal.md',
@@ -35,6 +36,7 @@ module.exports = {
     'chapters/appendix_b_cli_reference.md',
     'chapters/appendix_c_checklist.md',
     'chapters/appendix_d_agent_vocabulary.md',
+    'chapters/appendix_e_column_index.md',
     'chapters/glossary.md',
     'chapters/author.md',
   ],

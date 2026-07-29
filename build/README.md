@@ -42,7 +42,7 @@ build/
 bash build/build_pdf.sh
 ```
 
-章ごとPDF（29ファイル）と統合PDF（`ai-biocode-kata-full.pdf`）が `build/` に生成される。
+章ごとPDF（31ファイル）と統合PDF（`ai-biocode-kata-full.pdf`）が `build/` に生成される。
 
 ### ビルドパイプライン
 

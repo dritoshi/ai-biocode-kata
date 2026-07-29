@@ -242,6 +242,40 @@ READING_SPEEDS = {
     "上級者": {"body": 500, "code": 250},
 }
 
+CHAPTER_LABELS: dict[str, str] = {
+    "hajimeni.md": "はじめに",
+    "notice.md": "本書の利用について",
+    "00_ai_agent.md": "§0 AIエージェントにコードを書かせる",
+    "01_design.md": "§1 設計原則",
+    "02_terminal.md": "§2 ターミナル操作",
+    "03_cs_basics.md": "§3 計算機科学の基礎",
+    "04_data_formats.md": "§4 データフォーマット",
+    "05_software_components.md": "§5 ソフトウェアの構成要素",
+    "06_dev_environment.md": "§6 Python環境の構築",
+    "07_git.md": "§7 Git入門",
+    "08_testing.md": "§8 テスト技法",
+    "09_debug.md": "§9 デバッグ",
+    "10_deliverables.md": "§10 成果物の設計",
+    "11_cli.md": "§11 CLIツールの設計",
+    "12_data_processing.md": "§12 データ処理の実践",
+    "13_visualization.md": "§13 可視化",
+    "14_workflow.md": "§14 パイプライン自動化",
+    "15_container.md": "§15 コンテナ",
+    "16_hpc.md": "§16 スパコン・HPC",
+    "17_performance.md": "§17 パフォーマンス",
+    "18_documentation.md": "§18 ドキュメント",
+    "19_database_api.md": "§19 データベース・API",
+    "20_security_ethics.md": "§20 セキュリティ・倫理",
+    "21_collaboration.md": "§21 チーム開発",
+    "appendix_a_learning_patterns.md": "付録A 学習パターン集",
+    "appendix_b_cli_reference.md": "付録B CLIリファレンス",
+    "appendix_c_checklist.md": "付録C チェックリスト",
+    "appendix_d_agent_vocabulary.md": "付録D 頻出用語・フレーズ集",
+    "appendix_e_column_index.md": "付録E コラム索引",
+    "glossary.md": "用語集",
+    "author.md": "著者紹介",
+}
+
 
 def estimate_reading_time(body_zenkaku: int, code_zenkaku: int, speed: dict[str, int]) -> float:
     """読了時間を分で返す."""
@@ -268,43 +302,8 @@ def count_chars(
     -------
         (ラベル, raw文字数, 本文文字数, コード文字数, 本文全角換算, コード全角換算) のリスト
     """
-    labels: dict[str, str] = {
-        "hajimeni.md": "はじめに",
-        "00_ai_agent.md": "§0 AIエージェントにコードを書かせる",
-        "01_design.md": "§1 設計原則",
-        "02_terminal.md": "§2 ターミナル操作",
-        "03_cs_basics.md": "§3 計算機科学の基礎",
-        "04_data_formats.md": "§4 データフォーマット",
-        "05_software_components.md": "§5 ソフトウェアの構成要素",
-        "06_dev_environment.md": "§6 Python環境の構築",
-        "07_git.md": "§7 Git入門",
-        "08_testing.md": "§8 テスト技法",
-        "09_debug.md": "§9 デバッグ",
-        "10_deliverables.md": "§10 成果物の設計",
-        "11_cli.md": "§11 CLIツールの設計",
-        "12_data_processing.md": "§12 データ処理の実践",
-        "13_visualization.md": "§13 可視化",
-        "14_workflow.md": "§14 パイプライン自動化",
-        "15_container.md": "§15 コンテナ",
-        "16_hpc.md": "§16 スパコン・HPC",
-        "17_performance.md": "§17 パフォーマンス",
-        "18_documentation.md": "§18 ドキュメント",
-        "19_database_api.md": "§19 データベース・API",
-        "20_security_ethics.md": "§20 セキュリティ・倫理",
-        "21_collaboration.md": "§21 チーム開発",
-        "appendix_a_learning_patterns.md": "付録A 学習パターン集",
-        "appendix_b_cli_reference.md": "付録B CLIリファレンス",
-        "appendix_c_checklist.md": "付録C チェックリスト",
-        "appendix_d_agent_vocabulary.md": "付録D 頻出用語・フレーズ集",
-        "glossary.md": "用語集",
-        "author.md": "著者紹介",
-        "roadmap.md": "ロードマップ",
-    }
-
-    order = list(labels.keys())
-
     results: list[tuple[str, int, int, int, int, int]] = []
-    for filename in order:
+    for filename, label in CHAPTER_LABELS.items():
         filepath = chapters_dir / filename
         if filepath.exists():
             text = filepath.read_text(encoding="utf-8")
@@ -315,7 +314,6 @@ def count_chars(
             code_count = len(code_text)
             body_zenkaku = count_zenkaku(body_text)
             code_zenkaku = count_zenkaku(code_text)
-            label = labels[filename]
             results.append((label, raw_count, body_count, code_count, body_zenkaku, code_zenkaku))
 
     return results
@@ -333,7 +331,7 @@ def main() -> None:
 
     total_raw = total_body = total_code = total_body_z = total_code_z = 0
     honbun_body_z = honbun_code_z = 0
-    excluded = {"ロードマップ", "用語集", "著者紹介"}
+    excluded = {"用語集", "著者紹介"}
 
     for label, raw, body, code, body_z, code_z in results:
         print(f"| {label} | {raw:,} | {body:,} | {code:,} | {body_z:,} | {code_z:,} |")
@@ -388,7 +386,7 @@ def main() -> None:
     print(row)
 
     print()
-    print("本文＋付録（ロードマップ・用語集・著者紹介を除く）:")
+    print("本文＋付録（用語集・著者紹介を除く）:")
     row = "| |"
     for level in READING_SPEEDS:
         row += f" **{format_time(honbun_times[level])}** |"
