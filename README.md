@@ -3,6 +3,8 @@
 -- 情報技術の基礎から環境構築・設計・テスト・公開まで
 
 [![CI](https://github.com/dritoshi/ai-biocode-kata/actions/workflows/test.yml/badge.svg)](https://github.com/dritoshi/ai-biocode-kata/actions/workflows/test.yml)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ja)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/downloads/)
 
 ## 概要
 
