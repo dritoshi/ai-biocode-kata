@@ -321,9 +321,7 @@ channel_priority: strict
 
 > 「`pip freeze` の出力からロックファイル（`requirements-lock.txt`）を生成してください。また、`uv lock` でより厳密なロックファイルを作る方法も示してください」
 
-<a id="column-ch06-01"></a>
-
-> **🧬 コラム: Biocondaでのツールセットアップ**
+> <a id="column-ch06-01"></a> **🧬 コラム: Biocondaでのツールセットアップ**
 >
 > **Bioconda**は、8,000以上のバイオインフォマティクスツールを提供するCondaチャネルである[9](https://doi.org/10.1038/s41592-018-0046-7)。BLAST, Samtools, BWA, STAR, fastp など、日常的に使うツールの大半がBiocondaからインストールできる:
 >
@@ -362,9 +360,7 @@ channel_priority: strict
 > | タンパク質相同性検索 | DIAMOND（高速） / BLAST+（標準） | 大規模データにはDIAMONDが桁違いに速い |
 > | マルチプルアラインメント | MAFFT | `--auto` で自動パラメータ選択。デフォルトで十分な精度 |
 
-<a id="column-ch06-02"></a>
-
-> **🤖 コラム: 機械学習環境の構築**
+> <a id="column-ch06-02"></a> **🤖 コラム: 機械学習環境の構築**
 >
 > バイオインフォマティクスと機械学習の融合領域——シングルセル基盤モデル（scFoundation model）、変異の病原性予測、タンパク質構造予測（AlphaFold等）——では、GPU環境の構築が必要になる。
 >
