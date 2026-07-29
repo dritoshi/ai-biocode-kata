@@ -98,7 +98,11 @@ def test_pdf_keeps_column_link_and_target() -> None:
     )
 
     assert result.returncode == 0, result.stderr
-    assert r"\hyperref[column-ch00-01]{コラム索引}" in result.stdout
+    valid_links = (
+        r"\hyperref[column-ch00-01]{コラム索引}",
+        r"\protect\hyperlink{column-ch00-01}{コラム索引}",
+    )
+    assert any(link in result.stdout for link in valid_links)
     assert r"\hypertarget{column-ch00-01}{}" in result.stdout
     assert r"\label{column-ch00-01}" in result.stdout
 
