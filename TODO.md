@@ -12,14 +12,14 @@
 - [x] gitとgithubの違いについて誤解が生まれないように記載を修正する
 - [x] 本書が前提とする知識を具体的に明記する。それらの知識を学ぶための教科書やドキュメントを記載する
 - [x] git worktreeの仕組みやAIコーディングの関連 → §0-5と§7-1にブランチとの違いを補足追加
-- [ ] jargonを減らせと指示することをどこかに書く
+- [x] jargonを減らせと指示することをどこかに書く
 - [ ] 各コラム直前にHTMLアンカー (`<a id="..."></a>`) を挿入し、GitHubレンダリング版でもコラム単位でリンクできるようにする（レビュアー向け引用・読者ナビゲーション両用）
 
 ## 用語集と付録D
 - [x] Codexがよく言う単語
   - [x] プランを立案中によく言う用語: do定義、explicit context
   - [x] その他頻出用語: scaffold, spike, happy path, guard clause, dry run, idempotent, regression, entrypoint, acceptance criteria
-  - [ ] jargon
+  - [x] jargon
 
 ## 仕上げ
 - [x] タイトルページのサブタイトルを検討する（現在: 「配列解析から機械学習まで、環境構築・テスト・設計・公開のベストプラクティス」）
