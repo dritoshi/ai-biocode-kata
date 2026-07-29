@@ -10,11 +10,10 @@
 
 ## 現在の状態
 
-- 現行の生データは [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json) にある
-- 2026-07-29 の再チェック結果は `ok = 422`, `redirect = 1`, `anti-bot = 13`, `connection_error = 4`, `error = 0`, `timeout = 0` である（440 unique URLs, 1,324 total occurrences）
-- `anti-bot` 13件のうち12件は一次情報または過去の手動確認で有効性を確認済みである
-- `connection_error` 4件は検索サービスで公式ページを取得でき、実行経路固有のタイムアウトと判定した
-- 著者researchmapページ1件だけを任意のブラウザ確認へ引き継いだ。原稿修正の必須残件ではない
+- 現行の生データは [url_check.json](./url_check.json) にある
+- 2026-07-29 の最終チェック結果は `ok = 416`, `redirect = 1`, `anti-bot = 26`, `connection_error = 3`, `error = 0`, `timeout = 0` である（446 unique URLs, 1,370 total occurrences）
+- `anti-bot` 26件と `connection_error` 3件はHTTP到達性の生データであり、それだけで本文の誤りとは判定しない
+- 以前の監査で確立した一次情報・過去の手動確認・別経路による確認方針を継続する。現時点で原稿修正の必須残件はない
 - 詳細は[2026-07-29監査記録](./2026-07-29_url_audit.md)、確認手順は[ブラウザ確認引き継ぎ](./2026-07-29_url_browser_handoff.md)に記録した
 - 2026-03-26以前の手動確認記録は、本メモ後半に履歴として残している
 
@@ -110,14 +109,14 @@ python3 scripts/review/check_urls_browser.py
 
 ## 今回更新したファイル
 
-- [url_check.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check.json)
-- [url_check_browser.json](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/url_check_browser.json)
+- [url_check.json](./url_check.json)
+- `url_check_browser.json`
   - 生成は任意。`anti-bot` をブラウザで再確認した場合に保存する
-- [master_issue_log.csv](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/master_issue_log.csv)
-  - `MANUAL-0001` から `MANUAL-0005` を解消し、残件を B/C のみとした
-- [reference_registry.csv](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/reference_registry.csv)
+- [master_issue_log.csv](./master_issue_log.csv)
+  - 本文に掲載済みの参考URLと BibTeX 台帳の同期候補26件を B として記録した
+- [reference_registry.csv](./reference_registry.csv)
   - 修正後の参照先に再生成した
-- [pending_review_items.md](/Users/itoshi/Projects/writing/ai-biocode-kata/docs/review/pending_review_items.md)
+- [pending_review_items.md](./pending_review_items.md)
   - URL 到達性レビューを未達成項目から外した
 
 ## 手動確認ステータス

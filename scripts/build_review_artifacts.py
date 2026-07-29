@@ -39,6 +39,7 @@ MANUAL_CHAPTER_FIELDS = (
 AUTO_ISSUE_SOURCES = {"auto_scan", "pytest_log"}
 
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*)$")
+EXPLICIT_ANCHOR_RE = re.compile(r"""<a\s+[^>]*\bid=["']([^"']+)["'][^>]*>""")
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(([^)]+)\)")
 RAW_URL_RE = re.compile(r"https?://[^\s<>)]+")
 BACKTICK_PATH_RE = re.compile(r"(?:scripts|tests|figures)/[A-Za-z0-9_./-]+/?")
@@ -154,6 +155,7 @@ def build_anchor_map(paths: list[Path]) -> tuple[dict[Path, set[str]], list[dict
 
     for path in paths:
         anchors: set[str] = set()
+        anchor_counts: Counter[str] = Counter()
         text = path.read_text(encoding="utf-8")
         in_code_fence = False
 
@@ -165,6 +167,8 @@ def build_anchor_map(paths: list[Path]) -> tuple[dict[Path, set[str]], list[dict
             if in_code_fence:
                 continue
 
+            anchors.update(EXPLICIT_ANCHOR_RE.findall(line))
+
             match = HEADING_RE.match(line)
             if not match:
                 continue
@@ -172,14 +176,17 @@ def build_anchor_map(paths: list[Path]) -> tuple[dict[Path, set[str]], list[dict
             level = len(match.group(1))
             title = strip_markdown(match.group(2))
             anchor = slugify_heading(title)
-            anchors.add(anchor)
+            duplicate_index = anchor_counts[anchor]
+            unique_anchor = anchor if duplicate_index == 0 else f"{anchor}-{duplicate_index}"
+            anchor_counts[anchor] += 1
+            anchors.add(unique_anchor)
             section_rows.append(
                 {
                     "chapter_file": path.name,
                     "line": line_number,
                     "heading_level": level,
                     "heading_text": title,
-                    "anchor_slug": anchor,
+                    "anchor_slug": unique_anchor,
                 }
             )
 
@@ -575,7 +582,7 @@ def scan_chapter_reference_bib_coverage(paths: list[Path], existing_issue_count:
 def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -682,6 +689,12 @@ def build_summary(
             "- `master_issue_log.csv` の A 指摘から順に修正する。",
             "- `reference_registry.csv` を使い、外部URLと固有名詞の一次情報確認を進める。",
             "- 生命科学・情報科学・計算機科学・バイオインフォ・実装実務の各観点で `chapter_review_sheet.csv` を埋める。",
+        ]
+    elif set(category_counts) == {"chapter_reference_missing_in_bib"}:
+        next_actions = [
+            "- 26件は本文に掲載済みの参考URLと BibTeX 台帳の同期候補であり、リンク切れや引用欠落ではない。",
+            "- 本文・参考文献の内容改訂とは分離し、`master_issue_log.csv` で後続の書誌正規化候補として管理する。",
+            "- 原稿更新後に再レビューする場合は `build_review_artifacts.py` と URL チェックを再実行する。",
         ]
     else:
         next_actions = [

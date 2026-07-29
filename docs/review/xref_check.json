@@ -1,8 +1,8 @@
 {
   "check": "cross_reference_check",
   "stats": {
-    "total_files_checked": 30,
-    "total_chapter_links": 487,
+    "total_files_checked": 31,
+    "total_chapter_links": 578,
     "total_figure_links": 40,
     "total_artifact_links": 112,
     "broken_file_links": 0,

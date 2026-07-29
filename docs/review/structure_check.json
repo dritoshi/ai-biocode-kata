@@ -1,7 +1,7 @@
 {
   "check": "structure_check",
   "stats": {
-    "total_files_checked": 30,
+    "total_files_checked": 31,
     "chapter_files_checked": 22,
     "missing_sections": 0,
     "section_order_violations": 0,
