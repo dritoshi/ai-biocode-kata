@@ -20,6 +20,36 @@ local function find_source_break(inlines)
   return nil
 end
 
+-- コラム用HTMLアンカーと、その直後の空白を読み飛ばす
+local function first_content_inline(inlines)
+  local in_column_anchor = false
+  for _, el in ipairs(inlines) do
+    local is_column_anchor_start = (
+      el.t == "RawInline"
+      and el.format == "html"
+      and (
+        el.text:match('^<a%s+id="column%-ch%d%d%-%d%d"%s*>$')
+        or el.text:match('^<a%s+id="column%-ch%d%d%-%d%d"%s*></a>$')
+      )
+    )
+    local is_column_anchor_end = (
+      in_column_anchor
+      and el.t == "RawInline"
+      and el.format == "html"
+      and el.text:match("^</a>$")
+    )
+
+    if is_column_anchor_start then
+      in_column_anchor = not el.text:match("</a>$")
+    elseif is_column_anchor_end then
+      in_column_anchor = false
+    elseif el.t ~= "Space" then
+      return el
+    end
+  end
+  return nil
+end
+
 -- コラム（太字見出し・絵文字コラム）を除外する
 local function is_column(el)
   if #el.content == 0 then return false end
@@ -27,10 +57,21 @@ local function is_column(el)
   if first.t ~= "Para" then return false end
   if #first.content == 0 then return false end
 
-  local fc = first.content[1]
+  local fc = first_content_inline(first.content)
+  if not fc then return false end
+
   -- 🧬 🤖 📦 で始まるコラム
   if fc.t == "Str" and (fc.text:match("^🧬") or fc.text:match("^🤖") or fc.text:match("^📦")) then
     return true
+  end
+  -- emoji-filter.lua 適用後の 🧬 🤖 📦
+  if fc.t == "RawInline" and fc.format == "latex" then
+    if fc.text == "\\textbf{[BIO]}"
+      or fc.text == "\\textbf{[ML]}"
+      or fc.text == "\\textbf{[PKG]}"
+    then
+      return true
+    end
   end
   -- **太字** で始まるコラム（前提知識ボックス等）
   if fc.t == "Strong" then
