@@ -25,6 +25,7 @@ build/
 ├── emoji-filter.lua           # 絵文字→テキスト変換フィルター（PDF専用）
 ├── epigraph.lua               # エピグラフ（章頭引用句）変換フィルター（PDF/EPUB両対応）
 ├── fix-crossref.lua           # 章間リンクを内部リンクに変換（統合PDF/EPUB用、形式別マッピング）
+├── fix-repository-links.lua   # コード資産への相対リンクをGitHub恒久リンクへ変換（EPUB用）
 ├── custom.css                 # Vivliostyle用CSSカスタマイズ
 ├── epub.css                   # EPUB用CSSスタイル（KDP互換）
 ├── BUILD_REPORT.md            # ビルド履歴・問題解決ログ
@@ -100,7 +101,7 @@ Markdown → pandoc -t epub3 (Lua filters) → EPUB3 → epubcheck
 ```
 
 1. **pandoc**: Markdown を EPUB3 に変換。`gfm_auto_identifiers` 拡張で GitHub 互換のヘッダー ID を生成
-2. **Lua filters**: `epigraph.lua`（章頭引用句の HTML 変換）と `fix-crossref.lua`（章間リンク解決）を適用。`emoji-filter.lua` は EPUB では使用しない（Unicode 絵文字をリーダーがネイティブ表示）
+2. **Lua filters**: `epigraph.lua`（章頭引用句の HTML 変換）、`fix-crossref.lua`（章間リンク解決）、`fix-repository-links.lua`（コード資産へのリンクをビルド元コミットのGitHub恒久リンクへ変換）を適用。`emoji-filter.lua` は EPUB では使用しない（Unicode 絵文字をリーダーがネイティブ表示）
 3. **epubcheck**: 生成された EPUB を W3C EPUB3 仕様に対する準拠チェック
 
 ### EPUB 特有の設定
@@ -116,6 +117,21 @@ Markdown → pandoc -t epub3 (Lua filters) → EPUB3 → epubcheck
 | 言語 | ja |
 | 出版社 | 二階堂 愛（自費出版想定） |
 | ライセンス | CC BY-NC-ND 4.0 |
+
+### コード資産へのリンク
+
+本文の `../scripts/`・`../tests/` への相対リンクは、そのままではEPUB内の
+存在しないファイルを参照する。`fix-repository-links.lua` はEPUB生成時に限り、
+これらをGitHubの公開URLへ変換する。既存の `blob/main`・`tree/main` のコード
+資産リンクも同じ対象にする。ファイルには `blob`、末尾が `/` のディレクトリには
+`tree` を使い、参照先はビルド元の40桁コミットSHAへ固定する。これにより、
+リポジトリの `main` が更新された後も書籍と同じ版を参照できる。
+
+参照先には常にビルド中の `HEAD` を使う。過去の版を生成する場合は、そのタグまたは
+コミットをチェックアウトしてからビルドする。原稿と異なる版のコードへ誤って固定
+しないよう、参照先だけを上書きする設定は設けていない。また、`chapters/`・
+`scripts/`・`tests/` に未コミット変更がある場合は、作業ツリーと固定先の版が
+食い違うためビルドを中止する。
 
 ### KDP アップロード時の注意
 

@@ -58,6 +58,28 @@ done
 OUTPUT_EPUB="$BUILD_DIR/ai-biocode-kata.epub"
 COVER_IMAGE="$FIGURES_DIR/cover.jpeg"
 EPUB_CSS="$BUILD_DIR/epub.css"
+REPOSITORY_URL="https://github.com/dritoshi/ai-biocode-kata"
+
+if [[ -n "$(
+  git -C "$PROJECT_DIR" status --porcelain --untracked-files=all \
+    -- chapters scripts tests
+)" ]]; then
+  echo "✗ chapters/・scripts/・tests/ に未コミット変更があります"
+  echo "  EPUB本文とコミット固定リンクの版を一致させるため、先にコミットしてください"
+  git -C "$PROJECT_DIR" status --short --untracked-files=all \
+    -- chapters scripts tests
+  exit 1
+fi
+
+if ! SOURCE_COMMIT="$(
+  git -C "$PROJECT_DIR" rev-parse --verify "HEAD^{commit}" 2>/dev/null
+)"; then
+  echo "✗ EPUB の参照元となるHEADコミットを解決できません"
+  exit 1
+fi
+
+export EPUB_REPOSITORY_URL="$REPOSITORY_URL"
+export EPUB_SOURCE_COMMIT="$SOURCE_COMMIT"
 
 if [[ ! -f "$COVER_IMAGE" ]]; then
   echo "✗ カバー画像が見つかりません: $COVER_IMAGE"
@@ -73,6 +95,7 @@ echo "=== EPUB 生成 ==="
 echo "  入力章数: ${#INPUT_FILES[@]}"
 echo "  カバー画像: $COVER_IMAGE"
 echo "  CSS: $EPUB_CSS"
+echo "  コード参照元: $REPOSITORY_URL@$SOURCE_COMMIT"
 echo "  出力: $OUTPUT_EPUB"
 echo ""
 
@@ -83,6 +106,7 @@ pandoc "${INPUT_FILES[@]}" \
   -o "$OUTPUT_EPUB" \
   --lua-filter="$BUILD_DIR/epigraph.lua" \
   --lua-filter="$BUILD_DIR/fix-crossref.lua" \
+  --lua-filter="$BUILD_DIR/fix-repository-links.lua" \
   --epub-cover-image="$COVER_IMAGE" \
   --css="$EPUB_CSS" \
   --mathml \
