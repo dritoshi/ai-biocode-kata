@@ -368,6 +368,8 @@ Dockerfileの構築は、一発で成功することは稀である。特にバ�
 
 エージェントのdockerコマンド実行を許可しておくと、「Dockerfileの修正 → ビルド → エラー確認 → 再修正」のサイクルがエージェント内で完結し、効率的である。ただし、ボリュームマウントの設定が意図通りか（特に`:ro`の有無）は必ず自分で確認する。
 
+<a id="column-ch15-01"></a>
+
 > 🧬 **コラム: BioContainersとbioconda**
 >
 > BioContainers[3](https://pubmed.ncbi.nlm.nih.gov/28379341/)は、bioconda[4](https://doi.org/10.1038/s41592-018-0046-7)パッケージに対応するDockerイメージを自動生成するプロジェクトである。biocondaに登録された8,000以上のパッケージ[16](https://bioconda.github.io/)について、ツール単体のDockerイメージ・Apptainerイメージが提供されている。
@@ -519,6 +521,8 @@ docker run --gpus all myimage:v1.0 python train.py
 # Apptainer
 apptainer run --nv myimage.sif python train.py
 ```
+
+<a id="column-ch15-02"></a>
 
 > 🤖 **コラム: GPUコンテナとCUDAバージョンの罠**
 >
@@ -971,6 +975,8 @@ print(f"最良パラメータ: {best.params}")  # {"n_neighbors": 15, ...}
 | 4 | DVCでデータ版管理 | データセット自体のバージョンを管理する必要が出てきたとき |
 
 段階1から始めて、プロジェクトの成長に合わせてツールを追加していく。すべてのツールを最初から導入する必要はない。
+
+<a id="column-ch15-03"></a>
 
 > 🧬 **コラム: 配列解析パイプラインの実験管理**
 >

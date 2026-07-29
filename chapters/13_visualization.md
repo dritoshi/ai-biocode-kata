@@ -480,6 +480,8 @@ def apply_project_style() -> None:
 
 ---
 
+<a id="column-ch13-01"></a>
+
 > ### 🧬 コラム: バイオインフォの専門可視化ツール
 >
 > Matplotlib/Seabornは汎用的な可視化ライブラリだが、バイオインフォマティクスには専門的な可視化が必要な場面がある。以下のツールはPythonスクリプトからは生成しにくい、または専用ツールのほうがはるかに効率的な可視化に使われる。
@@ -504,6 +506,8 @@ def apply_project_style() -> None:
 > - **deepTools** — BAM/BigWigのシグナルヒートマップ。ChIP-seqの定番
 
 ---
+
+<a id="column-ch13-02"></a>
 
 > ### 🧬 コラム: ゲノムトラックの作成とブラウザでの可視化
 >
@@ -605,6 +609,8 @@ def apply_project_style() -> None:
 > > 「pyGenomeTracksのINI設定ファイルを作成して。coverage.bw（カバレッジ、青）、peaks.bed（ピーク、赤）、genes.gtf（遺伝子アノテーション）の3トラックを含めること。出力はPDF形式」
 
 ---
+
+<a id="column-ch13-03"></a>
 
 > ### 🤖 コラム: 機械学習の可視化ツール
 >

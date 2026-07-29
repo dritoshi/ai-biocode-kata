@@ -130,6 +130,8 @@ sequenceDiagram
     User->>Agent: データの入手方法セクションを追加して
 ```
 
+<a id="column-ch18-01"></a>
+
 > **🧬 コラム: 解析パイプラインをMermaidで図示する**
 >
 > RNA-seqの典型的な前処理パイプラインをMermaidで表現すると、各ステップの依存関係と使用ツールが一目でわかる。
@@ -438,6 +440,8 @@ is_valid, issues = check_numpy_style(docstring)
 print(f"NumPy style準拠: {is_valid}")  # NumPy style準拠: True
 ```
 
+<a id="column-ch18-02"></a>
+
 > **🤖 コラム: MLプロジェクトのModel Card**
 >
 > 機械学習モデルを公開する際は、READMEに加えて**Model Card**の作成が推奨されている。Model Cardは、Mitchell et al. (2019)[9](https://doi.org/10.1145/3287560.3287596)が提唱したフレームワークで、モデルの以下の情報を体系的に記録する。
@@ -570,6 +574,8 @@ qc.plot(x="Sample", y="total_sequences", kind="bar")
 ```
 
 ANALYSIS_LOG.mdは技術的には何も特別なことをしていないが、「パラメータを変更した理由」を強制的に記録する習慣として効果的である。
+
+<a id="column-ch18-03"></a>
 
 > **🧬 コラム: MIAME/MINSEQE — 実験の最小記録要件**
 >
