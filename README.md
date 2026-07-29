@@ -207,7 +207,7 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 - [付録A. AIコーディングエージェントとの効果的な学習パターン](chapters/appendix_a_learning_patterns.md) — A-1〜A-3
 - [付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表](chapters/appendix_b_cli_reference.md)
 - [付録C. 論文投稿前チェックリスト](chapters/appendix_c_checklist.md)
-- [付録D. AIコーディングエージェント頻出用語・フレーズ集](chapters/appendix_d_agent_vocabulary.md) — D-1〜D-4
+- [付録D. AIコーディングエージェント頻出用語・フレーズ集](chapters/appendix_d_agent_vocabulary.md) — D-1〜D-5
 - [用語集](chapters/glossary.md)
 - [著者紹介](chapters/author.md)
 

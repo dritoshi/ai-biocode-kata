@@ -514,11 +514,21 @@ DR に投げるプロンプトは、CLI エージェントへの指示とはや�
 ### 設定ファイルのコツ
 
 - エージェントが自動で読み取れる情報（コードから推測可能なこと）は書かない — 簡潔に保つ
-- 「やってほしいこと」より **やってはいけないこと** の方が効果的である
+- 禁止事項は、望ましい代替動作と組にして具体的に書く — 「不自然な訳語を使わない」だけでなく「訳語が不明なら原語を残して説明する」と示す
 - バイオインフォ特有の規約（座標系、使用ライブラリ）は明示する
 - ビルド・テスト・リントのコマンドは必ず書く（エージェントが自分でテストを実行して検証できるようになる）
 
 設定ファイルは[§7 Git入門 — コードのバージョン管理](./07_git.md)で学ぶGitリポジトリにコミットしておくことで、チームメンバーや将来の自分が同じ規約でエージェントを使える。また、テストコマンドを明記しておくことで、[§8 コードの正しさを守るテスト技法](./08_testing.md)で学ぶテスト駆動開発のワークフローとも連携する。
+
+### 回答の言葉遣いを指定する
+
+設定ファイルには、コードの規約だけでなく、回答や説明で使う言葉の方針も書ける。OpenAIは、結果を左右する場合は対象読者を明示し、初心者向けの説明では導入する専門語を定義する例を示している[30](https://learn.chatgpt.com/docs/prompting)。Anthropicも、避けることだけを列挙するのではなく、代わりに何をするかを指示するよう勧めている[32](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)。次の言語方針は、`CLAUDE.md`と`AGENTS.md`のどちらにも使える。
+
+> 「回答と説明は日本語で、プログラミング初心者の実験系生命科学者を想定してください。開発者コミュニティ内のジャーゴン（その集団だけで通じやすい内輪の専門語）や略語は、必要な場合だけ使い、初出時に意味を説明してください。定着した日本語訳を確認できない技術用語について、新しい訳語を作らないでください。訳語に確信がない場合は原語を残し、意味を平易な日本語で一文説明してください。同じ概念には同じ表記を使い、回答前に不自然な造語、直訳調、表記の不統一がないか用語だけを見直してください。」
+
+`AGENTS.md`は実行ごとに読み込まれる指示の連鎖に組み込まれ[31](https://learn.chatgpt.com/docs/agent-configuration/agents-md)、`CLAUDE.md`も各セッションのコンテキストへ読み込まれる[33](https://code.claude.com/docs/en/memory)。したがって、繰り返し守らせたい短い言語方針を常設する用途に向いている。個別の文章生成や、すでに得た回答の用語だけを見直す指示は、[付録D](./appendix_d_agent_vocabulary.md#d-5-不自然な用語を減らす指示)に示す。
+
+ただし、この指示は不自然な用語の発生を減らすためのものであり、正しさを保証する仕組みではない。「日本語訳を新造しない」という指定も、各社の公式機能ではなく、一般的なプロンプト設計原則を日本語の技術文書へ適用した本書独自の緩和策である。重要な文章では、回答前の確認を求めたうえで、人間が公式ドキュメントや分野の慣用表記と照合する必要がある。OpenAIも、重要な作業では最終確認を求め、利用・共有前に人間がレビューするよう勧めている[30](https://learn.chatgpt.com/docs/prompting)。
 
 > 🤖 **コラム: ハーネスエンジニアリング — エージェントの力を導く馬具**
 >
@@ -1082,3 +1092,7 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 - [27](https://learn.chatgpt.com/docs/models) OpenAI. "Models — Codex". https://learn.chatgpt.com/docs/models (参照日: 2026-07-19)
 - [28](https://code.claude.com/docs/en/model-config) Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-19)
 - [29](https://developers.openai.com/api/docs/guides/latest-model) OpenAI. "Migrate to the latest model". https://developers.openai.com/api/docs/guides/latest-model (参照日: 2026-07-19)
+- [30](https://learn.chatgpt.com/docs/prompting) OpenAI. "Prompting". https://learn.chatgpt.com/docs/prompting (参照日: 2026-07-29)
+- [31](https://learn.chatgpt.com/docs/agent-configuration/agents-md) OpenAI. "Custom instructions with AGENTS.md". https://learn.chatgpt.com/docs/agent-configuration/agents-md (参照日: 2026-07-29)
+- [32](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) Anthropic. "Prompting best practices". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices (参照日: 2026-07-29)
+- [33](https://code.claude.com/docs/en/memory) Anthropic. "How Claude remembers your project". https://code.claude.com/docs/en/memory (参照日: 2026-07-29)
