@@ -8,6 +8,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 COLUMN_FILTER = PROJECT_ROOT / "build" / "column-anchor.lua"
 EMOJI_FILTER = PROJECT_ROOT / "build" / "emoji-filter.lua"
 EPIGRAPH_FILTER = PROJECT_ROOT / "build" / "epigraph.lua"
+CROSSREF_FILTER = PROJECT_ROOT / "build" / "fix-crossref.lua"
 
 
 def _pandoc() -> str:
@@ -41,6 +42,7 @@ def test_converts_column_anchor_to_latex_target() -> None:
 
     assert result.returncode == 0, result.stderr
     assert r"\hypertarget{column-ch00-01}{}" in result.stdout
+    assert r"\label{column-ch00-01}" in result.stdout
     assert "コラム" in result.stdout
 
 
@@ -82,3 +84,36 @@ def test_inline_anchor_does_not_create_empty_html_paragraph() -> None:
     assert result.returncode == 0, result.stderr
     assert '<p><a id="column-ch00-01"></a></p>' not in result.stdout
     assert '<p><a id="column-ch00-01"></a> <strong>' in result.stdout
+
+
+def test_pdf_keeps_column_link_and_target() -> None:
+    markdown = (
+        "[コラム索引](./00_ai_agent.md#column-ch00-01)\n\n"
+        '> <a id="column-ch00-01"></a> **コラム: テスト**\n'
+    )
+    result = _convert(
+        markdown,
+        "latex",
+        (COLUMN_FILTER, CROSSREF_FILTER),
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert r"\hyperref[column-ch00-01]{コラム索引}" in result.stdout
+    assert r"\hypertarget{column-ch00-01}{}" in result.stdout
+    assert r"\label{column-ch00-01}" in result.stdout
+
+
+def test_epub_html_keeps_column_link_and_target() -> None:
+    markdown = (
+        "[コラム索引](./00_ai_agent.md#column-ch00-01)\n\n"
+        '> <a id="column-ch00-01"></a> **コラム: テスト**\n'
+    )
+    result = _convert(
+        markdown,
+        "html5",
+        (CROSSREF_FILTER,),
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert 'href="#column-ch00-01"' in result.stdout
+    assert 'id="column-ch00-01"' in result.stdout

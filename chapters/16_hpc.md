@@ -807,7 +807,7 @@ python simple_filter.py input.vcf > output.vcf
 
 ### クラウドコンピューティングの基礎
 
-- **AWS. "AWS Cloud Practitioner Essentials".** https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/ — S3、EC2、リージョンなど、本章のクラウドコラムで紹介した概念を体系的に学べるAWS公式の無料トレーニング。
+- **AWS. "AWS Cloud Practitioner Essentials".** https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/ — S3、EC2、リージョンなど、[本章のクラウドコラム](./16_hpc.md#column-ch16-05)で紹介した概念を体系的に学べるAWS公式の無料トレーニング。
 - **Google Cloud. "Google Cloud Skills Boost".** https://www.cloudskillsboost.google/ — GCPのハンズオン学習。無料ラボでGCSやCompute Engineを実際に操作できる。
 
 ---

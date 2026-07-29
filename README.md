@@ -208,6 +208,7 @@ AIコーディングエージェント（Claude Code CLI / Codex CLI）との協
 - [付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表](chapters/appendix_b_cli_reference.md)
 - [付録C. 論文投稿前チェックリスト](chapters/appendix_c_checklist.md)
 - [付録D. AIコーディングエージェント頻出用語・フレーズ集](chapters/appendix_d_agent_vocabulary.md) — D-1〜D-5
+- [付録E. コラム索引](chapters/appendix_e_column_index.md)
 - [用語集](chapters/glossary.md)
 - [著者紹介](chapters/author.md)
 

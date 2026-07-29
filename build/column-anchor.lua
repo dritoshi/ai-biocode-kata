@@ -3,6 +3,7 @@
 --
 -- MarkdownとEPUBでは <a id="column-chNN-NN"></a> をそのまま使う。
 -- LaTeX出力ではraw HTMLが破棄されるため、\hypertarget{}{}へ置換する。
+-- pandocが内部リンクに使う\hyperrefからも参照できるよう、同じIDの\labelも付ける。
 
 local function column_anchor_id(text)
   return text:match('^<a%s+id="(column%-ch%d%d%-%d%d)"%s*>$')
@@ -19,5 +20,7 @@ function RawInline(el)
     return nil
   end
 
-  return pandoc.RawInline("latex", "\\hypertarget{" .. identifier .. "}{}")
+  local target = "\\hypertarget{" .. identifier .. "}{}"
+  local label = "\\phantomsection\\label{" .. identifier .. "}"
+  return pandoc.RawInline("latex", target .. label)
 end

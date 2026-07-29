@@ -115,7 +115,7 @@ RDFの強みは、異なるデータベース間のデータをURIで結び付�
 
 ただし、生命科学における「オントロジー」は、W3CのRDF/OWL技術よりも広い意味で使われる。ある分野の概念とその関係を体系的に定義した語彙体系を指し、必ずしもRDF/OWL形式で記述されているとは限らない。
 
-代表的な生命科学オントロジーであるGene Ontology（GO）は、1998年にOBO（Open Biomedical Ontologies）形式で作成された[4]（詳細はコラム参照）。OBOはテキストベースの独自形式であり、W3CのRDF/OWLとは独立に発展したものである。現在、GOはOBO形式（主要な管理・キュレーション用フォーマット）とOWL形式（セマンティックWebとの相互運用用）の両方で公開されている。エンリッチメント解析でよく使われるgoatoolsやclusterProfilerは、OBO形式のGOデータを直接扱う。
+代表的な生命科学オントロジーであるGene Ontology（GO）は、1998年にOBO（Open Biomedical Ontologies）形式で作成された[4]（詳細は[コラム](./19_database_api.md#column-ch19-01)参照）。OBOはテキストベースの独自形式であり、W3CのRDF/OWLとは独立に発展したものである。現在、GOはOBO形式（主要な管理・キュレーション用フォーマット）とOWL形式（セマンティックWebとの相互運用用）の両方で公開されている。エンリッチメント解析でよく使われるgoatoolsやclusterProfilerは、OBO形式のGOデータを直接扱う。
 
 オントロジーの用語にはそれぞれ一意のID（例: GO:0006915 = apoptotic process）が割り振られており、このIDを使うことで言語や文脈に依存しない正確な概念の指定が可能になる。
 
@@ -642,7 +642,7 @@ aws s3 cp s3://sra-pub-run-odp/sra/SRR1234567/ . \
 gcloud storage cp -r gs://sra-pub-run-1/SRR1234567 . --billing-project=<自分のGCPプロジェクトID>
 ```
 
-`--no-sign-request`（AWS）はAWSアカウントなしでパブリックバケットにアクセスするためのオプションである。一方、NCBIのGCSバケットは requester-pays のため、課金先となる自分のGCPプロジェクトの指定と認証が必要である（`gsutil` は2027年3月以降 gcloud CLI に同梱されないため `gcloud storage` を使う）。クラウドストレージの基礎用語（バケット、リージョン、オブジェクトストレージ等）については[§16 スパコン・クラスタでの大規模計算](./16_hpc.md)のクラウドコラムを参照。
+`--no-sign-request`（AWS）はAWSアカウントなしでパブリックバケットにアクセスするためのオプションである。一方、NCBIのGCSバケットは requester-pays のため、課金先となる自分のGCPプロジェクトの指定と認証が必要である（`gsutil` は2027年3月以降 gcloud CLI に同梱されないため `gcloud storage` を使う）。クラウドストレージの基礎用語（バケット、リージョン、オブジェクトストレージ等）については[§16 スパコン・クラスタでの大規模計算](./16_hpc.md#column-ch16-05)のクラウドコラムを参照。
 
 EBIも同様にS3互換のストレージでENA（European Nucleotide Archive）のデータを公開している。どの取得方法を使うかは、ローカル環境ではSRA Toolkit、HPCではAspera、クラウドではS3/GCSが一般的な使い分けである。
 

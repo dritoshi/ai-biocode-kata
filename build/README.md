@@ -60,7 +60,7 @@ Markdown → pandoc (Lua filters) → .tex → sed (figure[H]) → lualatex (2-p
 |---------|---------|------|
 | `emoji-filter.lua` | 全PDF | 🧬→[BIO]、🤖→[ML]等の絵文字をテキストに置換 |
 | `epigraph.lua` | 全PDF | 出典行（`— `）付きblockquoteをLaTeX `\epigraph{}{}`に変換。コラム（太字・絵文字で始まるblockquote）は除外 |
-| `column-anchor.lua` | 全PDF | `<a id="column-chNN-NN"></a>`をLaTeXの`\hypertarget{}{}`へ変換 |
+| `column-anchor.lua` | 全PDF | `<a id="column-chNN-NN"></a>`をLaTeXの`\hypertarget{}{}`と内部参照用`\label{}`へ変換 |
 | `flushright.lua` | 全PDF | 右寄せ指定をLaTeXの`flushright`環境へ変換 |
 | `fix-crossref.lua` | 統合PDFのみ | `./filename.md#section` → `#section` に変換し、PDF内部リンクとして機能させる |
 

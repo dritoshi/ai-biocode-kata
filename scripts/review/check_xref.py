@@ -76,7 +76,7 @@ def is_inside_spans(index: int, spans: list[tuple[int, int]]) -> bool:
 
 
 def extract_headings(filepath: Path) -> dict[str, int]:
-    """Markdownファイルから見出しを抽出し、GitHub形式のアンカーを生成する。
+    """Markdownファイルから見出しと明示的なHTMLアンカーを抽出する。
 
     コードブロック内の見出しは無視する。
     重複する見出しにはGitHub形式で -1, -2, ... のサフィックスを付与する。
@@ -103,6 +103,12 @@ def extract_headings(filepath: Path) -> dict[str, int]:
 
         if in_code_block:
             continue
+
+        for explicit_anchor in re.finditer(
+            r"""<a\s+[^>]*\bid=["']([^"']+)["'][^>]*>""",
+            line,
+        ):
+            anchors[explicit_anchor.group(1)] = line_no
 
         # 見出しの検出
         match = re.match(r'^(#{1,6})\s+(.+)$', line)

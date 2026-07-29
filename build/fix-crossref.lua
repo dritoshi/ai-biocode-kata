@@ -42,6 +42,7 @@ FILE_TO_CHAPTER_ID_LATEX = {
   ["appendix_b_cli_reference.md"] = "付録b.-claude-code-cli-codex-cli-クイックリファレンス対照表",
   ["appendix_c_checklist.md"] = "付録c.-論文投稿前チェックリスト",
   ["appendix_d_agent_vocabulary.md"] = "付録d.-aiコーディングエージェント頻出用語フレーズ集",
+  ["appendix_e_column_index.md"] = "付録e.-コラム索引",
   ["glossary.md"] = "用語集",
   ["author.md"] = "著者紹介",
 }
@@ -79,6 +80,7 @@ FILE_TO_CHAPTER_ID_HTML = {
   ["appendix_b_cli_reference.md"] = "付録b-claude-code-cli--codex-cli-クイックリファレンス対照表",
   ["appendix_c_checklist.md"] = "付録c-論文投稿前チェックリスト",
   ["appendix_d_agent_vocabulary.md"] = "付録d-aiコーディングエージェント頻出用語フレーズ集",
+  ["appendix_e_column_index.md"] = "付録e-コラム索引",
   ["glossary.md"] = "用語集",
   ["author.md"] = "著者紹介",
 }
