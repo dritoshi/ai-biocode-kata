@@ -150,6 +150,6 @@
 | 絵文字（🧬🤖📦） | Luaフィルターでテキスト置換済み | Noto Color Emojiフォールバックは未対応 |
 | 図画像 | 統合PDF・章ごとPDFとも表示される | `--resource-path=chapters`で解決済み |
 | 章間リンク | 統合PDFで機能する | `fix-crossref.lua`で解決済み |
-| 表紙 | 独立PDF（cover.tex）で生成 | 背景画像+タイトル+副題+著者。本文PDFとの結合は今後対応 |
+| 表紙 | 独立PDF（cover.tex）で生成 | `pdfpages` の `\includepdf` で統合PDFへ取り込み済み |
 | 裏表紙 | 本文PDFの最終ページに挿入 | back-cover.texで全面画像配置 |
 | drawio図のフォントサイズ | A4想定で小さい | B5向け再エクスポートが必要 |

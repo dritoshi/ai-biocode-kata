@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+import scripts.build_review_artifacts as build_review_artifacts
 from scripts.review import check_xref
 from scripts.review.check_structure import (
     find_new_issues,
@@ -81,6 +82,28 @@ def test_extracts_explicit_html_anchor(tmp_path: Path) -> None:
     anchors = check_xref.extract_headings(chapter)
 
     assert anchors["column-ch00-01"] == 1
+
+
+def test_review_artifacts_recognize_explicit_and_duplicate_anchors(
+    tmp_path: Path,
+) -> None:
+    """レビュー台帳もGitHub互換のアンカーを認識する."""
+    chapter = tmp_path / "chapter.md"
+    chapter.write_text(
+        '# 見出し\n'
+        '# 見出し\n'
+        '> <a id="column-ch00-01"></a> **コラム: テスト**\n',
+        encoding="utf-8",
+    )
+
+    anchors_by_path, section_rows = build_review_artifacts.build_anchor_map([chapter])
+
+    assert anchors_by_path[chapter.resolve()] == {
+        "見出し",
+        "見出し-1",
+        "column-ch00-01",
+    }
+    assert [row["anchor_slug"] for row in section_rows] == ["見出し", "見出し-1"]
 
 
 def test_structure_baseline_ignores_line_number_changes() -> None:

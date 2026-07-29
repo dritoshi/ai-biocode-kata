@@ -1,8 +1,8 @@
 {
   "schema_version": 4,
-  "generated_at": "2026-07-29T02:55:53+09:00",
+  "generated_at": "2026-07-29T17:25:29+09:00",
   "method": "docs/review/2026-07-28_e1_remediation_plan.md",
-  "source_commit": "e24842c3ce369eda4264ba539874c681d6faaabf",
+  "source_commit": "b2056f9939882df07b5daa43b581f8422e343ac4",
   "source_snapshot_files": [
     "chapters/00_ai_agent.md",
     "chapters/01_design.md",
@@ -345,17 +345,21 @@
     "tests/ch21/test_review_helper.py",
     "tests/review/__init__.py",
     "tests/review/fixtures/e1_expected_relations.json",
+    "tests/review/test_book_input_order.py",
     "tests/review/test_check_code_sync.py",
     "tests/review/test_code_correspondence.py",
+    "tests/review/test_column_anchors.py",
+    "tests/review/test_column_index.py",
     "tests/review/test_correspondence_provenance.py",
     "tests/review/test_create_e1_pr.py",
     "tests/review/test_e1_merged_state.py",
     "tests/review/test_e1_policy_examples.py",
     "tests/review/test_e1_transition.py",
+    "tests/review/test_epub_repository_links.py",
     "tests/review/test_mypy_examples.py",
     "tests/review/test_review_checks.py"
   ],
-  "source_snapshot_sha256": "25dbc58b04c4d7a90e0467f50d2a84956c30533e0ba112be3ed962464be0ab8a",
+  "source_snapshot_sha256": "2501bc63cc3408c72298641c8ea36b86baec75f39b7f9a592f967a1eda310cc4",
   "remediation_scope": {
     "baseline_commit": "27adae7b658754626d097a233540edbc75af39c5",
     "baseline_e1_ids": [
@@ -1414,10 +1418,10 @@
       "passed_with_skip": 26
     },
     "test_run": {
-      "files": 104,
+      "files": 108,
       "chapter_test_files": 95,
-      "review_test_files": 9,
-      "passed": 1027,
+      "review_test_files": 13,
+      "passed": 1044,
       "failed": 0,
       "skipped": 10,
       "errors": 0
@@ -1790,8 +1794,8 @@
       "id": "B-00-009",
       "chapter": "ch00",
       "path": "chapters/00_ai_agent.md",
-      "line_start": 576,
-      "line_end": 583,
+      "line_start": 590,
+      "line_end": 597,
       "lang": "none",
       "heading": "実装後のセルフレビュー",
       "heading_path": [
@@ -1820,8 +1824,8 @@
       "id": "B-00-010",
       "chapter": "ch00",
       "path": "chapters/00_ai_agent.md",
-      "line_start": 587,
-      "line_end": 591,
+      "line_start": 601,
+      "line_end": 605,
       "lang": "none",
       "heading": "「別人格」レビュー",
       "heading_path": [
@@ -1850,8 +1854,8 @@
       "id": "B-00-011",
       "chapter": "ch00",
       "path": "chapters/00_ai_agent.md",
-      "line_start": 597,
-      "line_end": 601,
+      "line_start": 611,
+      "line_end": 615,
       "lang": "none",
       "heading": "テスト生成によるレビュー",
       "heading_path": [
@@ -4732,12 +4736,11 @@
       "line_start": 287,
       "line_end": 292,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "9315feb16db54d0178fc087517b1a7732b14e5842e60bacf2bbf5650596c8230",
       "nonempty_lines": 4,
@@ -4763,12 +4766,11 @@
       "line_start": 302,
       "line_end": 308,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "e263776d2c2ccf8d4ba705707d9f9e7db5746d28cb9168fb762ce4dfb4de35b6",
       "nonempty_lines": 5,
@@ -4794,12 +4796,11 @@
       "line_start": 312,
       "line_end": 318,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "3381168476c1561e5e899acf3480c110e0121762ca620ebcaba7081f3a735653",
       "nonempty_lines": 5,
@@ -4850,12 +4851,11 @@
       "line_start": 326,
       "line_end": 338,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "c149864ad983e550b435cfaf81e3169387b795a7269a3affaade1bf373e39017",
       "nonempty_lines": 8,
@@ -4906,12 +4906,11 @@
       "line_start": 352,
       "line_end": 359,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "0f07fd2aa1d927b68b239a2c9821bb91505163f9841ad598c201a0ddb80aaff5",
       "nonempty_lines": 6,
@@ -4937,12 +4936,11 @@
       "line_start": 363,
       "line_end": 366,
       "lang": "bash",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "429f1d79a4bae79bdcf116dc1b4f21bfb8a1018018d275d2c49063db31123d56",
       "nonempty_lines": 2,
@@ -4968,12 +4966,11 @@
       "line_start": 370,
       "line_end": 377,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "bb432adcca4685adbc6435d98bb193abc8bce35e07eed77c7599cfdb6f3ea4bf",
       "nonempty_lines": 5,
@@ -4999,12 +4996,11 @@
       "line_start": 394,
       "line_end": 401,
       "lang": "python",
-      "heading": "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字",
+      "heading": "Markdown — ドキュメント記述",
       "heading_path": [
         "§4 データフォーマットの選び方",
         "4-2. 汎用フォーマット",
-        "Markdown — ドキュメント記述",
-        "🧬 コラム: 日本語環境の罠 — Shift_JIS, BOM, NFD, マルチバイト文字"
+        "Markdown — ドキュメント記述"
       ],
       "sha256": "72ee1958e49548657a220c8fd56b666b64edf2668a6f5a98d1900bf1db75ab4a",
       "nonempty_lines": 5,
@@ -13644,11 +13640,12 @@
       "line_start": 387,
       "line_end": 407,
       "lang": "python",
-      "heading": "🧬 コラム: バイオインフォマティクスのPythonライブラリ",
+      "heading": "エージェントへの指示例",
       "heading_path": [
         "§12 データ処理の実践 — NumPy・pandas・Polars",
         "12-2. pandasとPolarsによるテーブルデータ処理",
-        "🧬 コラム: バイオインフォマティクスのPythonライブラリ"
+        "Polars: 大規模データの高速処理",
+        "エージェントへの指示例"
       ],
       "sha256": "a453fb46e2e6e766f3d00413914a3c8e6683de4ebc6be61183f677699f58cfb5",
       "nonempty_lines": 16,
@@ -14477,7 +14474,7 @@
       "heading_path": [
         "§13 可視化の実践 — Matplotlib・Seaborn・Plotly",
         "13-2. 可視化の原則",
-        "🧬 コラム: ゲノムトラックの作成とブラウザでの可視化",
+        "再現可能なプロットスクリプト化",
         "トラックファイルの種類と作成"
       ],
       "sha256": "efdd254cd2f0d8f58d149d7ffb84a99dcaecac77f0dc27226b894166328fccbe",
@@ -14508,7 +14505,7 @@
       "heading_path": [
         "§13 可視化の実践 — Matplotlib・Seaborn・Plotly",
         "13-2. 可視化の原則",
-        "🧬 コラム: ゲノムトラックの作成とブラウザでの可視化",
+        "再現可能なプロットスクリプト化",
         "論文用トラック図の作成"
       ],
       "sha256": "40f8849c09f7aef1fa34bfa9ce461911811449fb7e9a287183f2617050901139",
@@ -14556,7 +14553,7 @@
       "heading_path": [
         "§13 可視化の実践 — Matplotlib・Seaborn・Plotly",
         "13-2. 可視化の原則",
-        "🧬 コラム: ゲノムトラックの作成とブラウザでの可視化",
+        "再現可能なプロットスクリプト化",
         "論文用トラック図の作成"
       ],
       "sha256": "52328cc9606f1880135de80cc9543eb90ce530915bfb67f168e3ba7b7455cc16",
@@ -17929,11 +17926,12 @@
       "line_start": 159,
       "line_end": 163,
       "lang": "bash",
-      "heading": "コラム: macOSでの環境確認 — BSDとLinuxの違い",
+      "heading": "リアルタイムモニタリング",
       "heading_path": [
         "§17 コードのパフォーマンス改善 — プロファイリングと高速化",
         "17-1. プロファイリング",
-        "コラム: macOSでの環境確認 — BSDとLinuxの違い"
+        "実行環境の把握",
+        "リアルタイムモニタリング"
       ],
       "sha256": "a494482e5407a73f92e0c73655f8e03738d57b2d5ccf0109414d15636868da6d",
       "nonempty_lines": 3,
@@ -17963,7 +17961,7 @@
       "heading_path": [
         "§17 コードのパフォーマンス改善 — プロファイリングと高速化",
         "17-1. プロファイリング",
-        "コラム: macOSでの環境確認 — BSDとLinuxの違い",
+        "実行環境の把握",
         "Pythonから実行環境を取得する"
       ],
       "sha256": "bb5ff3b2ccc69117f687ff293760f6e41a87e09f0159f639d9bec28bb1cf75c6",
@@ -17994,7 +17992,7 @@
       "heading_path": [
         "§17 コードのパフォーマンス改善 — プロファイリングと高速化",
         "17-1. プロファイリング",
-        "コラム: macOSでの環境確認 — BSDとLinuxの違い",
+        "実行環境の把握",
         "Pythonから実行環境を取得する"
       ],
       "sha256": "ec419c94789d949202ee9689912c7d2ad93e265a3cc89e5e75239efb9601f35a",
@@ -18449,11 +18447,11 @@
       "line_start": 433,
       "line_end": 439,
       "lang": "bash",
-      "heading": "🤖 コラム: GPU利用率モニタリング",
+      "heading": "memrayによるメモリプロファイリング",
       "heading_path": [
         "§17 コードのパフォーマンス改善 — プロファイリングと高速化",
         "17-1. プロファイリング",
-        "🤖 コラム: GPU利用率モニタリング"
+        "memrayによるメモリプロファイリング"
       ],
       "sha256": "f5de7c6594f8da894b097f16442ba80b5ff4d4b63d916e0156fb57ce42000c8d",
       "nonempty_lines": 4,
@@ -18479,11 +18477,11 @@
       "line_start": 443,
       "line_end": 446,
       "lang": "bash",
-      "heading": "🤖 コラム: GPU利用率モニタリング",
+      "heading": "memrayによるメモリプロファイリング",
       "heading_path": [
         "§17 コードのパフォーマンス改善 — プロファイリングと高速化",
         "17-1. プロファイリング",
-        "🤖 コラム: GPU利用率モニタリング"
+        "memrayによるメモリプロファイリング"
       ],
       "sha256": "13d082f8014539c86e54fffd7d24e82506e6e21a331df87fc2ff0d7a35cb4771",
       "nonempty_lines": 2,
@@ -18509,11 +18507,11 @@
       "line_start": 450,
       "line_end": 456,
       "lang": "python",
-      "heading": "🤖 コラム: GPU利用率モニタリング",
+      "heading": "memrayによるメモリプロファイリング",
       "heading_path": [
         "§17 コードのパフォーマンス改善 — プロファイリングと高速化",
         "17-1. プロファイリング",
-        "🤖 コラム: GPU利用率モニタリング"
+        "memrayによるメモリプロファイリング"
       ],
       "sha256": "c1bacdccefe9e24520f7590a04c27a9f968eb5d141fe489e9e8f0c7f66db3545",
       "nonempty_lines": 4,
@@ -21479,8 +21477,8 @@
       "id": "B-20-009",
       "chapter": "ch20",
       "path": "chapters/20_security_ethics.md",
-      "line_start": 572,
-      "line_end": 605,
+      "line_start": 575,
+      "line_end": 608,
       "lang": "python",
       "heading": "実務上の対策",
       "heading_path": [
@@ -21510,8 +21508,8 @@
               "id": "B-20-009-E01",
               "name": "generalize_age",
               "kind": "FunctionDef",
-              "line_start": 575,
-              "line_end": 604
+              "line_start": 578,
+              "line_end": 607
             }
           ],
           "target_file_id": "S-20-169",
@@ -21559,8 +21557,8 @@
       "id": "B-20-010",
       "chapter": "ch20",
       "path": "chapters/20_security_ethics.md",
-      "line_start": 611,
-      "line_end": 637,
+      "line_start": 614,
+      "line_end": 640,
       "lang": "python",
       "heading": "実務上の対策",
       "heading_path": [
@@ -21615,8 +21613,8 @@
       "id": "B-20-011",
       "chapter": "ch20",
       "path": "chapters/20_security_ethics.md",
-      "line_start": 747,
-      "line_end": 751,
+      "line_start": 750,
+      "line_end": 754,
       "lang": "python",
       "heading": "演習 20-1: シークレット漏洩のチェック **[レビュー]**",
       "heading_path": [
@@ -21645,8 +21643,8 @@
       "id": "B-20-012",
       "chapter": "ch20",
       "path": "chapters/20_security_ethics.md",
-      "line_start": 753,
-      "line_end": 757,
+      "line_start": 756,
+      "line_end": 760,
       "lang": "none",
       "heading": "演習 20-1: シークレット漏洩のチェック **[レビュー]**",
       "heading_path": [
@@ -27354,7 +27352,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.32,
+        "duration_seconds": 0.303,
         "summary": "12 passed in 0.07s"
       }
     },
@@ -27373,7 +27371,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.494,
+        "duration_seconds": 0.452,
         "summary": "10 passed in 0.27s"
       }
     },
@@ -27392,8 +27390,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.07,
-        "summary": "8 passed in 0.75s"
+        "duration_seconds": 16.409,
+        "summary": "8 passed in 16.10s"
       }
     },
     {
@@ -27422,7 +27420,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.272,
+        "duration_seconds": 0.26,
         "summary": "12 passed in 0.01s"
       }
     },
@@ -27441,8 +27439,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.377,
-        "summary": "13 passed in 0.14s"
+        "duration_seconds": 0.455,
+        "summary": "13 passed in 0.21s"
       }
     },
     {
@@ -27471,8 +27469,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.201,
-        "summary": "12 passed in 0.01s"
+        "duration_seconds": 0.216,
+        "summary": "12 passed in 0.02s"
       }
     },
     {
@@ -27490,7 +27488,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.217,
+        "duration_seconds": 0.238,
         "summary": "12 passed in 0.02s"
       }
     },
@@ -27509,7 +27507,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.203,
+        "duration_seconds": 0.234,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -27528,8 +27526,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.33,
-        "summary": "7 passed in 0.99s"
+        "duration_seconds": 1.477,
+        "summary": "7 passed in 1.24s"
       }
     },
     {
@@ -27547,8 +27545,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.247,
-        "summary": "1 passed in 0.02s"
+        "duration_seconds": 0.232,
+        "summary": "1 passed in 0.03s"
       }
     },
     {
@@ -27566,7 +27564,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.221,
+        "duration_seconds": 0.222,
         "summary": "18 passed in 0.02s"
       }
     },
@@ -27596,7 +27594,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.248,
+        "duration_seconds": 0.207,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -27615,7 +27613,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.23,
+        "duration_seconds": 0.204,
         "summary": "17 passed in 0.01s"
       }
     },
@@ -27634,8 +27632,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.288,
-        "summary": "15 passed in 0.09s"
+        "duration_seconds": 0.37,
+        "summary": "15 passed in 0.15s"
       }
     },
     {
@@ -27664,8 +27662,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
-        "summary": "2 passed in 0.02s"
+        "duration_seconds": 0.263,
+        "summary": "2 passed in 0.05s"
       }
     },
     {
@@ -27683,8 +27681,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.636,
-        "summary": "7 passed in 0.07s"
+        "duration_seconds": 0.22,
+        "summary": "7 passed in 0.01s"
       }
     },
     {
@@ -27702,7 +27700,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.27,
+        "duration_seconds": 0.222,
         "summary": "8 passed in 0.02s"
       }
     },
@@ -27721,7 +27719,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.233,
+        "duration_seconds": 0.292,
         "summary": "13 passed in 0.01s"
       }
     },
@@ -27740,8 +27738,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.922,
-        "summary": "8 passed in 0.58s"
+        "duration_seconds": 1.29,
+        "summary": "8 passed in 0.91s"
       }
     },
     {
@@ -27759,8 +27757,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
-        "summary": "6 passed in 0.01s"
+        "duration_seconds": 0.222,
+        "summary": "6 passed in 0.02s"
       }
     },
     {
@@ -27789,8 +27787,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.269,
-        "summary": "21 passed in 0.05s"
+        "duration_seconds": 0.409,
+        "summary": "21 passed in 0.18s"
       }
     },
     {
@@ -27808,7 +27806,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.229,
+        "duration_seconds": 0.228,
         "summary": "10 passed in 0.01s"
       }
     },
@@ -27827,7 +27825,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.234,
+        "duration_seconds": 0.214,
         "summary": "6 passed in 0.01s"
       }
     },
@@ -27857,7 +27855,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.211,
+        "duration_seconds": 0.22,
         "summary": "11 passed in 0.02s"
       }
     },
@@ -27876,7 +27874,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.249,
+        "duration_seconds": 0.23,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -27895,7 +27893,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.239,
+        "duration_seconds": 0.216,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -27914,8 +27912,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.502,
-        "summary": "6 passed in 0.30s"
+        "duration_seconds": 0.679,
+        "summary": "6 passed in 0.47s"
       }
     },
     {
@@ -27968,7 +27966,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.271,
+        "duration_seconds": 0.236,
         "summary": "7 passed in 0.03s"
       }
     },
@@ -27987,7 +27985,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.219,
+        "duration_seconds": 0.239,
         "summary": "4 passed in 0.02s"
       }
     },
@@ -28008,7 +28006,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.198,
+        "duration_seconds": 0.216,
         "summary": "2 passed in 0.01s"
       }
     },
@@ -28031,8 +28029,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.241,
-        "summary": "8 passed in 0.01s"
+        "duration_seconds": 0.488,
+        "summary": "8 passed in 0.02s"
       }
     },
     {
@@ -28054,8 +28052,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.367,
-        "summary": "12 passed in 0.12s"
+        "duration_seconds": 0.415,
+        "summary": "12 passed in 0.14s"
       }
     },
     {
@@ -28073,8 +28071,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.343,
-        "summary": "2 passed in 0.11s"
+        "duration_seconds": 0.349,
+        "summary": "2 passed in 0.10s"
       }
     },
     {
@@ -28103,7 +28101,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.207,
+        "duration_seconds": 0.228,
         "summary": "15 passed in 0.01s"
       }
     },
@@ -28122,7 +28120,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.198,
+        "duration_seconds": 0.213,
         "summary": "9 passed in 0.01s"
       }
     },
@@ -28141,7 +28139,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
+        "duration_seconds": 0.226,
         "summary": "5 passed in 0.01s"
       }
     },
@@ -28160,7 +28158,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.23,
+        "duration_seconds": 0.242,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -28179,8 +28177,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.647,
-        "summary": "11 passed in 0.35s"
+        "duration_seconds": 0.756,
+        "summary": "11 passed in 0.40s"
       }
     },
     {
@@ -28198,8 +28196,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.201,
-        "summary": "12 passed in 0.02s"
+        "duration_seconds": 0.215,
+        "summary": "12 passed in 0.01s"
       }
     },
     {
@@ -28217,8 +28215,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.605,
-        "summary": "11 passed in 0.31s"
+        "duration_seconds": 0.663,
+        "summary": "11 passed in 0.35s"
       }
     },
     {
@@ -28247,7 +28245,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.222,
+        "duration_seconds": 0.225,
         "summary": "6 passed in 0.02s"
       }
     },
@@ -28266,8 +28264,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.342,
-        "summary": "15 passed in 0.11s"
+        "duration_seconds": 0.611,
+        "summary": "15 passed in 0.20s"
       }
     },
     {
@@ -28285,7 +28283,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.212,
+        "duration_seconds": 0.245,
         "summary": "3 passed in 0.01s"
       }
     },
@@ -28304,7 +28302,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.235,
+        "duration_seconds": 0.249,
         "summary": "3 passed in 0.03s"
       }
     },
@@ -28334,8 +28332,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.376,
-        "summary": "7 passed in 0.13s"
+        "duration_seconds": 0.361,
+        "summary": "7 passed in 0.12s"
       }
     },
     {
@@ -28353,7 +28351,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.354,
+        "duration_seconds": 0.393,
         "summary": "10 passed in 0.12s"
       }
     },
@@ -28372,7 +28370,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.454,
+        "duration_seconds": 0.44,
         "summary": "4 passed in 0.19s"
       }
     },
@@ -28391,7 +28389,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.211,
+        "duration_seconds": 0.236,
         "summary": "7 passed in 0.02s"
       }
     },
@@ -28410,7 +28408,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.254,
+        "duration_seconds": 0.259,
         "summary": "11 passed in 0.03s"
       }
     },
@@ -28429,8 +28427,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.655,
-        "summary": "15 passed in 0.16s"
+        "duration_seconds": 0.942,
+        "summary": "15 passed in 0.20s"
       }
     },
     {
@@ -28448,8 +28446,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.446,
-        "summary": "3 passed in 0.15s"
+        "duration_seconds": 0.728,
+        "summary": "3 passed in 0.36s"
       }
     },
     {
@@ -28478,8 +28476,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.271,
-        "summary": "16 passed in 0.06s"
+        "duration_seconds": 0.417,
+        "summary": "16 passed in 0.07s"
       }
     },
     {
@@ -28497,8 +28495,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.724,
-        "summary": "13 passed in 0.39s"
+        "duration_seconds": 1.852,
+        "summary": "13 passed in 0.42s"
       }
     },
     {
@@ -28516,8 +28514,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.704,
-        "summary": "6 passed in 0.35s"
+        "duration_seconds": 20.987,
+        "summary": "6 passed in 20.41s"
       }
     },
     {
@@ -28535,8 +28533,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.385,
-        "summary": "10 passed in 0.15s"
+        "duration_seconds": 0.615,
+        "summary": "10 passed in 0.26s"
       }
     },
     {
@@ -28554,8 +28552,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.089,
-        "summary": "27 passed in 0.80s"
+        "duration_seconds": 1.847,
+        "summary": "27 passed in 1.50s"
       }
     },
     {
@@ -28584,8 +28582,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 2.17,
-        "summary": "12 passed in 1.67s"
+        "duration_seconds": 19.19,
+        "summary": "12 passed in 18.62s"
       }
     },
     {
@@ -28603,8 +28601,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.766,
-        "summary": "7 passed in 0.43s"
+        "duration_seconds": 17.506,
+        "summary": "7 passed in 17.10s"
       }
     },
     {
@@ -28622,8 +28620,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.543,
-        "summary": "1 passed in 0.25s"
+        "duration_seconds": 15.246,
+        "summary": "1 passed in 14.89s"
       }
     },
     {
@@ -28641,8 +28639,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 1.823,
-        "summary": "5 passed in 1.33s"
+        "duration_seconds": 16.687,
+        "summary": "5 passed in 16.11s"
       }
     },
     {
@@ -28660,7 +28658,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.218,
+        "duration_seconds": 0.252,
         "summary": "1 passed in 0.01s"
       }
     },
@@ -28690,8 +28688,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.256,
-        "summary": "3 passed in 0.06s"
+        "duration_seconds": 0.339,
+        "summary": "3 passed in 0.14s"
       }
     },
     {
@@ -28709,7 +28707,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.21,
         "summary": "14 passed in 0.01s"
       }
     },
@@ -28728,8 +28726,8 @@
         "failed": 0,
         "skipped": 4,
         "errors": 0,
-        "duration_seconds": 0.459,
-        "summary": "6 passed, 4 skipped in 0.26s"
+        "duration_seconds": 0.679,
+        "summary": "6 passed, 4 skipped in 0.45s"
       }
     },
     {
@@ -28758,7 +28756,7 @@
         "failed": 0,
         "skipped": 5,
         "errors": 0,
-        "duration_seconds": 0.307,
+        "duration_seconds": 0.327,
         "summary": "8 passed, 5 skipped in 0.08s"
       }
     },
@@ -28777,8 +28775,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.411,
-        "summary": "17 passed in 0.19s"
+        "duration_seconds": 0.376,
+        "summary": "17 passed in 0.17s"
       }
     },
     {
@@ -28796,7 +28794,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.233,
+        "duration_seconds": 0.215,
         "summary": "22 passed in 0.02s"
       }
     },
@@ -28826,7 +28824,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.239,
+        "duration_seconds": 0.243,
         "summary": "2 passed in 0.04s"
       }
     },
@@ -28845,7 +28843,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.229,
+        "duration_seconds": 0.235,
         "summary": "31 passed in 0.02s"
       }
     },
@@ -28875,8 +28873,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.654,
-        "summary": "5 passed in 0.33s"
+        "duration_seconds": 0.697,
+        "summary": "5 passed in 0.37s"
       }
     },
     {
@@ -28894,8 +28892,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.727,
-        "summary": "8 passed in 0.41s"
+        "duration_seconds": 0.862,
+        "summary": "8 passed in 0.56s"
       }
     },
     {
@@ -28913,8 +28911,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.387,
-        "summary": "15 passed in 0.14s"
+        "duration_seconds": 0.381,
+        "summary": "15 passed in 0.15s"
       }
     },
     {
@@ -28932,7 +28930,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.27,
+        "duration_seconds": 0.304,
         "summary": "1 passed in 0.06s"
       }
     },
@@ -28951,8 +28949,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.583,
-        "summary": "11 passed in 0.38s"
+        "duration_seconds": 0.218,
+        "summary": "11 passed in 0.03s"
       }
     },
     {
@@ -28970,8 +28968,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.28,
-        "summary": "12 passed in 0.07s"
+        "duration_seconds": 0.301,
+        "summary": "12 passed in 0.08s"
       }
     },
     {
@@ -28989,7 +28987,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.361,
+        "duration_seconds": 0.371,
         "summary": "2 passed in 0.11s"
       }
     },
@@ -29019,7 +29017,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.216,
+        "duration_seconds": 0.215,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -29038,7 +29036,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.208,
+        "duration_seconds": 0.213,
         "summary": "19 passed in 0.01s"
       }
     },
@@ -29057,7 +29055,7 @@
         "failed": 0,
         "skipped": 1,
         "errors": 0,
-        "duration_seconds": 0.238,
+        "duration_seconds": 0.252,
         "summary": "3 passed, 1 skipped in 0.02s"
       }
     },
@@ -29076,7 +29074,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.193,
+        "duration_seconds": 0.25,
         "summary": "18 passed in 0.01s"
       }
     },
@@ -29106,8 +29104,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.212,
-        "summary": "13 passed in 0.02s"
+        "duration_seconds": 0.231,
+        "summary": "13 passed in 0.03s"
       }
     },
     {
@@ -29125,7 +29123,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.354,
+        "duration_seconds": 0.356,
         "summary": "9 passed in 0.11s"
       }
     },
@@ -29144,7 +29142,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.205,
+        "duration_seconds": 0.231,
         "summary": "13 passed in 0.02s"
       }
     },
@@ -29182,8 +29180,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.33,
-        "summary": "9 passed in 0.08s"
+        "duration_seconds": 0.318,
+        "summary": "9 passed in 0.09s"
       }
     },
     {
@@ -29212,7 +29210,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.225,
+        "duration_seconds": 0.217,
         "summary": "26 passed in 0.02s"
       }
     },
@@ -29231,7 +29229,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.193,
+        "duration_seconds": 0.212,
         "summary": "1 passed in 0.01s"
       }
     },
@@ -29280,7 +29278,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.209,
+        "duration_seconds": 0.225,
         "summary": "11 passed in 0.01s"
       }
     },
@@ -29299,7 +29297,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.214,
+        "duration_seconds": 0.226,
         "summary": "1 passed in 0.02s"
       }
     },
@@ -29318,8 +29316,8 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.217,
-        "summary": "10 passed in 0.01s"
+        "duration_seconds": 0.213,
+        "summary": "10 passed in 0.02s"
       }
     },
     {
@@ -29337,7 +29335,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.266,
+        "duration_seconds": 0.24,
         "summary": "6 passed in 0.03s"
       }
     },
@@ -29356,7 +29354,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.204,
+        "duration_seconds": 0.207,
         "summary": "9 passed in 0.01s"
       }
     },
@@ -29375,7 +29373,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.274,
+        "duration_seconds": 0.278,
         "summary": "16 passed in 0.06s"
       }
     },
@@ -29394,7 +29392,7 @@
         "failed": 0,
         "skipped": 0,
         "errors": 0,
-        "duration_seconds": 0.2,
+        "duration_seconds": 0.218,
         "summary": "9 passed in 0.01s"
       }
     }
@@ -29406,7 +29404,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.32,
+      "duration_seconds": 0.303,
       "summary": "12 passed in 0.07s"
     },
     "tests/ch00/test_hmm_gene_predict.py": {
@@ -29415,7 +29413,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.494,
+      "duration_seconds": 0.452,
       "summary": "10 passed in 0.27s"
     },
     "tests/ch00/test_plot_orfs.py": {
@@ -29424,8 +29422,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.07,
-      "summary": "8 passed in 0.75s"
+      "duration_seconds": 16.409,
+      "summary": "8 passed in 16.10s"
     },
     "tests/ch01/test_gc_content.py": {
       "returncode": 0,
@@ -29433,7 +29431,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.272,
+      "duration_seconds": 0.26,
       "summary": "12 passed in 0.01s"
     },
     "tests/ch01/test_seq_filter.py": {
@@ -29442,8 +29440,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.377,
-      "summary": "13 passed in 0.14s"
+      "duration_seconds": 0.455,
+      "summary": "13 passed in 0.21s"
     },
     "tests/ch02/test_env_check.py": {
       "returncode": 0,
@@ -29451,8 +29449,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.201,
-      "summary": "12 passed in 0.01s"
+      "duration_seconds": 0.216,
+      "summary": "12 passed in 0.02s"
     },
     "tests/ch02/test_fastq_gzip.py": {
       "returncode": 0,
@@ -29460,7 +29458,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.217,
+      "duration_seconds": 0.238,
       "summary": "12 passed in 0.02s"
     },
     "tests/ch02/test_regex_basics.py": {
@@ -29469,7 +29467,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.203,
+      "duration_seconds": 0.234,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch02/test_shell_scripts.py": {
@@ -29478,8 +29476,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.33,
-      "summary": "7 passed in 0.99s"
+      "duration_seconds": 1.477,
+      "summary": "7 passed in 1.24s"
     },
     "tests/ch02/test_ssh_config.py": {
       "returncode": 0,
@@ -29487,8 +29485,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.247,
-      "summary": "1 passed in 0.02s"
+      "duration_seconds": 0.232,
+      "summary": "1 passed in 0.03s"
     },
     "tests/ch02/test_text_processing.py": {
       "returncode": 0,
@@ -29496,7 +29494,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.221,
+      "duration_seconds": 0.222,
       "summary": "18 passed in 0.02s"
     },
     "tests/ch03/test_data_structure_bench.py": {
@@ -29505,7 +29503,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.248,
+      "duration_seconds": 0.207,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch03/test_float_pitfalls.py": {
@@ -29514,7 +29512,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.23,
+      "duration_seconds": 0.204,
       "summary": "17 passed in 0.01s"
     },
     "tests/ch03/test_random_reproducibility.py": {
@@ -29523,8 +29521,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.288,
-      "summary": "15 passed in 0.09s"
+      "duration_seconds": 0.37,
+      "summary": "15 passed in 0.15s"
     },
     "tests/ch04/test_config_examples.py": {
       "returncode": 0,
@@ -29532,8 +29530,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.214,
-      "summary": "2 passed in 0.02s"
+      "duration_seconds": 0.263,
+      "summary": "2 passed in 0.05s"
     },
     "tests/ch04/test_coordinate_convert.py": {
       "returncode": 0,
@@ -29541,8 +29539,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.636,
-      "summary": "7 passed in 0.07s"
+      "duration_seconds": 0.22,
+      "summary": "7 passed in 0.01s"
     },
     "tests/ch04/test_encoding_traps.py": {
       "returncode": 0,
@@ -29550,7 +29548,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.27,
+      "duration_seconds": 0.222,
       "summary": "8 passed in 0.02s"
     },
     "tests/ch04/test_messy_to_tidy.py": {
@@ -29559,7 +29557,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.233,
+      "duration_seconds": 0.292,
       "summary": "13 passed in 0.01s"
     },
     "tests/ch04/test_tidy_data_demo.py": {
@@ -29568,199 +29566,10 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.922,
-      "summary": "8 passed in 0.58s"
+      "duration_seconds": 1.29,
+      "summary": "8 passed in 0.91s"
     },
     "tests/ch04/test_tsv_csv_handling.py": {
-      "returncode": 0,
-      "passed": 6,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.204,
-      "summary": "6 passed in 0.01s"
-    },
-    "tests/ch05/test_module_demo.py": {
-      "returncode": 0,
-      "passed": 21,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.269,
-      "summary": "21 passed in 0.05s"
-    },
-    "tests/ch05/test_mylib_core.py": {
-      "returncode": 0,
-      "passed": 10,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.229,
-      "summary": "10 passed in 0.01s"
-    },
-    "tests/ch05/test_mylib_utils.py": {
-      "returncode": 0,
-      "passed": 6,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.234,
-      "summary": "6 passed in 0.01s"
-    },
-    "tests/ch06/test_check_environment.py": {
-      "returncode": 0,
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.211,
-      "summary": "11 passed in 0.02s"
-    },
-    "tests/ch06/test_dependency_examples.py": {
-      "returncode": 0,
-      "passed": 4,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.249,
-      "summary": "4 passed in 0.02s"
-    },
-    "tests/ch07/test_ci_minimal.py": {
-      "returncode": 0,
-      "passed": 4,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.239,
-      "summary": "4 passed in 0.02s"
-    },
-    "tests/ch07/test_citation_cff.py": {
-      "returncode": 0,
-      "passed": 6,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.502,
-      "summary": "6 passed in 0.30s"
-    },
-    "tests/ch08/test_ci_workflows.py": {
-      "returncode": 0,
-      "passed": 7,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.271,
-      "summary": "7 passed in 0.03s"
-    },
-    "tests/ch08/test_config_examples.py": {
-      "returncode": 0,
-      "passed": 4,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.219,
-      "summary": "4 passed in 0.02s"
-    },
-    "tests/ch08/test_gc_fixture.py": {
-      "returncode": 0,
-      "passed": 2,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.198,
-      "summary": "2 passed in 0.01s"
-    },
-    "tests/ch08/test_reverse_complement.py": {
-      "returncode": 0,
-      "passed": 8,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.241,
-      "summary": "8 passed in 0.01s"
-    },
-    "tests/ch08/test_seq_stats.py": {
-      "returncode": 0,
-      "passed": 12,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.367,
-      "summary": "12 passed in 0.12s"
-    },
-    "tests/ch08/test_shared_fixtures.py": {
-      "returncode": 0,
-      "passed": 2,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.343,
-      "summary": "2 passed in 0.11s"
-    },
-    "tests/ch09/test_coordinate_bugs.py": {
-      "returncode": 0,
-      "passed": 15,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.207,
-      "summary": "15 passed in 0.01s"
-    },
-    "tests/ch09/test_debug_print_demo.py": {
-      "returncode": 0,
-      "passed": 9,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.198,
-      "summary": "9 passed in 0.01s"
-    },
-    "tests/ch09/test_path_bugs.py": {
-      "returncode": 0,
-      "passed": 5,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.214,
-      "summary": "5 passed in 0.01s"
-    },
-    "tests/ch09/test_pdb_demo.py": {
-      "returncode": 0,
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.23,
-      "summary": "11 passed in 0.01s"
-    },
-    "tests/ch09/test_python_pitfalls.py": {
-      "returncode": 0,
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.647,
-      "summary": "11 passed in 0.35s"
-    },
-    "tests/ch09/test_traceback_demo.py": {
-      "returncode": 0,
-      "passed": 12,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.201,
-      "summary": "12 passed in 0.02s"
-    },
-    "tests/ch09/test_type_bugs.py": {
-      "returncode": 0,
-      "passed": 11,
-      "failed": 0,
-      "skipped": 0,
-      "errors": 0,
-      "duration_seconds": 0.605,
-      "summary": "11 passed in 0.31s"
-    },
-    "tests/ch10/test_config_example.py": {
       "returncode": 0,
       "passed": 6,
       "failed": 0,
@@ -29769,14 +29578,203 @@
       "duration_seconds": 0.222,
       "summary": "6 passed in 0.02s"
     },
+    "tests/ch05/test_module_demo.py": {
+      "returncode": 0,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.409,
+      "summary": "21 passed in 0.18s"
+    },
+    "tests/ch05/test_mylib_core.py": {
+      "returncode": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.228,
+      "summary": "10 passed in 0.01s"
+    },
+    "tests/ch05/test_mylib_utils.py": {
+      "returncode": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.214,
+      "summary": "6 passed in 0.01s"
+    },
+    "tests/ch06/test_check_environment.py": {
+      "returncode": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.22,
+      "summary": "11 passed in 0.02s"
+    },
+    "tests/ch06/test_dependency_examples.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.23,
+      "summary": "4 passed in 0.02s"
+    },
+    "tests/ch07/test_ci_minimal.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.216,
+      "summary": "4 passed in 0.02s"
+    },
+    "tests/ch07/test_citation_cff.py": {
+      "returncode": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.679,
+      "summary": "6 passed in 0.47s"
+    },
+    "tests/ch08/test_ci_workflows.py": {
+      "returncode": 0,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.236,
+      "summary": "7 passed in 0.03s"
+    },
+    "tests/ch08/test_config_examples.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.239,
+      "summary": "4 passed in 0.02s"
+    },
+    "tests/ch08/test_gc_fixture.py": {
+      "returncode": 0,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.216,
+      "summary": "2 passed in 0.01s"
+    },
+    "tests/ch08/test_reverse_complement.py": {
+      "returncode": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.488,
+      "summary": "8 passed in 0.02s"
+    },
+    "tests/ch08/test_seq_stats.py": {
+      "returncode": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.415,
+      "summary": "12 passed in 0.14s"
+    },
+    "tests/ch08/test_shared_fixtures.py": {
+      "returncode": 0,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.349,
+      "summary": "2 passed in 0.10s"
+    },
+    "tests/ch09/test_coordinate_bugs.py": {
+      "returncode": 0,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.228,
+      "summary": "15 passed in 0.01s"
+    },
+    "tests/ch09/test_debug_print_demo.py": {
+      "returncode": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.213,
+      "summary": "9 passed in 0.01s"
+    },
+    "tests/ch09/test_path_bugs.py": {
+      "returncode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.226,
+      "summary": "5 passed in 0.01s"
+    },
+    "tests/ch09/test_pdb_demo.py": {
+      "returncode": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.242,
+      "summary": "11 passed in 0.01s"
+    },
+    "tests/ch09/test_python_pitfalls.py": {
+      "returncode": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.756,
+      "summary": "11 passed in 0.40s"
+    },
+    "tests/ch09/test_traceback_demo.py": {
+      "returncode": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.215,
+      "summary": "12 passed in 0.01s"
+    },
+    "tests/ch09/test_type_bugs.py": {
+      "returncode": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.663,
+      "summary": "11 passed in 0.35s"
+    },
+    "tests/ch10/test_config_example.py": {
+      "returncode": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.225,
+      "summary": "6 passed in 0.02s"
+    },
     "tests/ch10/test_error_handling.py": {
       "returncode": 0,
       "passed": 15,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.342,
-      "summary": "15 passed in 0.11s"
+      "duration_seconds": 0.611,
+      "summary": "15 passed in 0.20s"
     },
     "tests/ch10/test_fail_fast_pipeline.py": {
       "returncode": 0,
@@ -29784,7 +29782,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.212,
+      "duration_seconds": 0.245,
       "summary": "3 passed in 0.01s"
     },
     "tests/ch10/test_package_example.py": {
@@ -29793,7 +29791,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.235,
+      "duration_seconds": 0.249,
       "summary": "3 passed in 0.03s"
     },
     "tests/ch11/test_cli_argparse.py": {
@@ -29802,8 +29800,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.376,
-      "summary": "7 passed in 0.13s"
+      "duration_seconds": 0.361,
+      "summary": "7 passed in 0.12s"
     },
     "tests/ch11/test_cli_click.py": {
       "returncode": 0,
@@ -29811,7 +29809,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.354,
+      "duration_seconds": 0.393,
       "summary": "10 passed in 0.12s"
     },
     "tests/ch11/test_cli_typer.py": {
@@ -29820,7 +29818,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.454,
+      "duration_seconds": 0.44,
       "summary": "4 passed in 0.19s"
     },
     "tests/ch11/test_config_layering.py": {
@@ -29829,7 +29827,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.211,
+      "duration_seconds": 0.236,
       "summary": "7 passed in 0.02s"
     },
     "tests/ch11/test_logging_setup.py": {
@@ -29838,7 +29836,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.254,
+      "duration_seconds": 0.259,
       "summary": "11 passed in 0.03s"
     },
     "tests/ch11/test_seqtool.py": {
@@ -29847,8 +29845,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.655,
-      "summary": "15 passed in 0.16s"
+      "duration_seconds": 0.942,
+      "summary": "15 passed in 0.20s"
     },
     "tests/ch11/test_seqtool_streams.py": {
       "returncode": 0,
@@ -29856,8 +29854,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.446,
-      "summary": "3 passed in 0.15s"
+      "duration_seconds": 0.728,
+      "summary": "3 passed in 0.36s"
     },
     "tests/ch12/test_numpy_vectorize.py": {
       "returncode": 0,
@@ -29865,8 +29863,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.271,
-      "summary": "16 passed in 0.06s"
+      "duration_seconds": 0.417,
+      "summary": "16 passed in 0.07s"
     },
     "tests/ch12/test_pandas_bio_ops.py": {
       "returncode": 0,
@@ -29874,8 +29872,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.724,
-      "summary": "13 passed in 0.39s"
+      "duration_seconds": 1.852,
+      "summary": "13 passed in 0.42s"
     },
     "tests/ch12/test_plot_vectorize_bench.py": {
       "returncode": 0,
@@ -29883,8 +29881,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.704,
-      "summary": "6 passed in 0.35s"
+      "duration_seconds": 20.987,
+      "summary": "6 passed in 20.41s"
     },
     "tests/ch12/test_polars_bio_ops.py": {
       "returncode": 0,
@@ -29892,8 +29890,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.385,
-      "summary": "10 passed in 0.15s"
+      "duration_seconds": 0.615,
+      "summary": "10 passed in 0.26s"
     },
     "tests/ch12/test_scipy_stats_bio.py": {
       "returncode": 0,
@@ -29901,8 +29899,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.089,
-      "summary": "27 passed in 0.80s"
+      "duration_seconds": 1.847,
+      "summary": "27 passed in 1.50s"
     },
     "tests/ch13/test_bio_plots.py": {
       "returncode": 0,
@@ -29910,8 +29908,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 2.17,
-      "summary": "12 passed in 1.67s"
+      "duration_seconds": 19.19,
+      "summary": "12 passed in 18.62s"
     },
     "tests/ch13/test_matplotlib_bindist.py": {
       "returncode": 0,
@@ -29919,8 +29917,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.766,
-      "summary": "7 passed in 0.43s"
+      "duration_seconds": 17.506,
+      "summary": "7 passed in 17.10s"
     },
     "tests/ch13/test_plot_config.py": {
       "returncode": 0,
@@ -29928,8 +29926,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.543,
-      "summary": "1 passed in 0.25s"
+      "duration_seconds": 15.246,
+      "summary": "1 passed in 14.89s"
     },
     "tests/ch13/test_seaborn_biodist.py": {
       "returncode": 0,
@@ -29937,8 +29935,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 1.823,
-      "summary": "5 passed in 1.33s"
+      "duration_seconds": 16.687,
+      "summary": "5 passed in 16.11s"
     },
     "tests/ch13/test_tracks_config.py": {
       "returncode": 0,
@@ -29946,7 +29944,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.218,
+      "duration_seconds": 0.252,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch14/test_config_workflow_assets.py": {
@@ -29955,8 +29953,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.256,
-      "summary": "3 passed in 0.06s"
+      "duration_seconds": 0.339,
+      "summary": "3 passed in 0.14s"
     },
     "tests/ch14/test_validate_workflow.py": {
       "returncode": 0,
@@ -29964,7 +29962,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.21,
       "summary": "14 passed in 0.01s"
     },
     "tests/ch14/test_workflow_assets.py": {
@@ -29973,8 +29971,8 @@
       "failed": 0,
       "skipped": 4,
       "errors": 0,
-      "duration_seconds": 0.459,
-      "summary": "6 passed, 4 skipped in 0.26s"
+      "duration_seconds": 0.679,
+      "summary": "6 passed, 4 skipped in 0.45s"
     },
     "tests/ch15/test_container_examples.py": {
       "returncode": 0,
@@ -29982,7 +29980,7 @@
       "failed": 0,
       "skipped": 5,
       "errors": 0,
-      "duration_seconds": 0.307,
+      "duration_seconds": 0.327,
       "summary": "8 passed, 5 skipped in 0.08s"
     },
     "tests/ch15/test_experiment_logger.py": {
@@ -29991,8 +29989,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.411,
-      "summary": "17 passed in 0.19s"
+      "duration_seconds": 0.376,
+      "summary": "17 passed in 0.17s"
     },
     "tests/ch15/test_validate_dockerfile.py": {
       "returncode": 0,
@@ -30000,7 +29998,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.233,
+      "duration_seconds": 0.215,
       "summary": "22 passed in 0.02s"
     },
     "tests/ch16/test_ssh_config.py": {
@@ -30009,7 +30007,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.239,
+      "duration_seconds": 0.243,
       "summary": "2 passed in 0.04s"
     },
     "tests/ch16/test_validate_slurm.py": {
@@ -30018,7 +30016,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.229,
+      "duration_seconds": 0.235,
       "summary": "31 passed in 0.02s"
     },
     "tests/ch17/test_chunk_processing.py": {
@@ -30027,8 +30025,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.654,
-      "summary": "5 passed in 0.33s"
+      "duration_seconds": 0.697,
+      "summary": "5 passed in 0.37s"
     },
     "tests/ch17/test_file_format_bench.py": {
       "returncode": 0,
@@ -30036,8 +30034,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.727,
-      "summary": "8 passed in 0.41s"
+      "duration_seconds": 0.862,
+      "summary": "8 passed in 0.56s"
     },
     "tests/ch17/test_generator_fastq.py": {
       "returncode": 0,
@@ -30045,8 +30043,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.387,
-      "summary": "15 passed in 0.14s"
+      "duration_seconds": 0.381,
+      "summary": "15 passed in 0.15s"
     },
     "tests/ch17/test_memory_target.py": {
       "returncode": 0,
@@ -30054,7 +30052,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.27,
+      "duration_seconds": 0.304,
       "summary": "1 passed in 0.06s"
     },
     "tests/ch17/test_parallel_gc.py": {
@@ -30063,8 +30061,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.583,
-      "summary": "11 passed in 0.38s"
+      "duration_seconds": 0.218,
+      "summary": "11 passed in 0.03s"
     },
     "tests/ch17/test_profiling_demo.py": {
       "returncode": 0,
@@ -30072,8 +30070,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.28,
-      "summary": "12 passed in 0.07s"
+      "duration_seconds": 0.301,
+      "summary": "12 passed in 0.08s"
     },
     "tests/ch17/test_streaming_fasta.py": {
       "returncode": 0,
@@ -30081,7 +30079,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.361,
+      "duration_seconds": 0.371,
       "summary": "2 passed in 0.11s"
     },
     "tests/ch18/test_docstring_checker.py": {
@@ -30090,7 +30088,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.216,
+      "duration_seconds": 0.215,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch18/test_mermaid_helper.py": {
@@ -30099,7 +30097,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.208,
+      "duration_seconds": 0.213,
       "summary": "19 passed in 0.01s"
     },
     "tests/ch18/test_mkdocs_example.py": {
@@ -30108,7 +30106,7 @@
       "failed": 0,
       "skipped": 1,
       "errors": 0,
-      "duration_seconds": 0.238,
+      "duration_seconds": 0.252,
       "summary": "3 passed, 1 skipped in 0.02s"
     },
     "tests/ch18/test_validate_readme.py": {
@@ -30117,7 +30115,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.193,
+      "duration_seconds": 0.25,
       "summary": "18 passed in 0.01s"
     },
     "tests/ch19/test_checksum_verify.py": {
@@ -30126,8 +30124,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.212,
-      "summary": "13 passed in 0.02s"
+      "duration_seconds": 0.231,
+      "summary": "13 passed in 0.03s"
     },
     "tests/ch19/test_entrez_fetch.py": {
       "returncode": 0,
@@ -30135,7 +30133,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.354,
+      "duration_seconds": 0.356,
       "summary": "9 passed in 0.11s"
     },
     "tests/ch19/test_local_db.py": {
@@ -30144,7 +30142,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.205,
+      "duration_seconds": 0.231,
       "summary": "13 passed in 0.02s"
     },
     "tests/ch19/test_parse_flatfile.py": {
@@ -30162,8 +30160,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.33,
-      "summary": "9 passed in 0.08s"
+      "duration_seconds": 0.318,
+      "summary": "9 passed in 0.09s"
     },
     "tests/ch20/test_anonymize_metadata.py": {
       "returncode": 0,
@@ -30171,7 +30169,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.225,
+      "duration_seconds": 0.217,
       "summary": "26 passed in 0.02s"
     },
     "tests/ch20/test_env_example.py": {
@@ -30180,7 +30178,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.193,
+      "duration_seconds": 0.212,
       "summary": "1 passed in 0.01s"
     },
     "tests/ch20/test_secret_scanner.py": {
@@ -30198,7 +30196,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.209,
+      "duration_seconds": 0.225,
       "summary": "11 passed in 0.01s"
     },
     "tests/ch21/test_bioconda_recipe.py": {
@@ -30207,7 +30205,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.214,
+      "duration_seconds": 0.226,
       "summary": "1 passed in 0.02s"
     },
     "tests/ch21/test_check_urls_browser.py": {
@@ -30216,8 +30214,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.217,
-      "summary": "10 passed in 0.01s"
+      "duration_seconds": 0.213,
+      "summary": "10 passed in 0.02s"
     },
     "tests/ch21/test_format_question.py": {
       "returncode": 0,
@@ -30225,7 +30223,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.266,
+      "duration_seconds": 0.24,
       "summary": "6 passed in 0.03s"
     },
     "tests/ch21/test_progress_report.py": {
@@ -30234,7 +30232,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.204,
+      "duration_seconds": 0.207,
       "summary": "9 passed in 0.01s"
     },
     "tests/ch21/test_reference_url_preference.py": {
@@ -30243,7 +30241,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.274,
+      "duration_seconds": 0.278,
       "summary": "16 passed in 0.06s"
     },
     "tests/ch21/test_review_helper.py": {
@@ -30252,8 +30250,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.2,
+      "duration_seconds": 0.218,
       "summary": "9 passed in 0.01s"
+    },
+    "tests/review/test_book_input_order.py": {
+      "returncode": 0,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 1.343,
+      "summary": "3 passed in 1.13s"
     },
     "tests/review/test_check_code_sync.py": {
       "returncode": 0,
@@ -30261,7 +30268,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.233,
+      "duration_seconds": 0.244,
       "summary": "45 passed in 0.04s"
     },
     "tests/review/test_code_correspondence.py": {
@@ -30270,8 +30277,26 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.969,
-      "summary": "18 passed in 0.76s"
+      "duration_seconds": 1.062,
+      "summary": "18 passed in 0.86s"
+    },
+    "tests/review/test_column_anchors.py": {
+      "returncode": 0,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.663,
+      "summary": "6 passed in 0.44s"
+    },
+    "tests/review/test_column_index.py": {
+      "returncode": 0,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.224,
+      "summary": "2 passed in 0.03s"
     },
     "tests/review/test_correspondence_provenance.py": {
       "returncode": 0,
@@ -30279,8 +30304,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.918,
-      "summary": "5 passed in 0.70s"
+      "duration_seconds": 0.942,
+      "summary": "5 passed in 0.73s"
     },
     "tests/review/test_create_e1_pr.py": {
       "returncode": 0,
@@ -30288,7 +30313,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.201,
+      "duration_seconds": 0.225,
       "summary": "5 passed in 0.01s"
     },
     "tests/review/test_e1_merged_state.py": {
@@ -30297,8 +30322,8 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.387,
-      "summary": "1 passed in 0.17s"
+      "duration_seconds": 0.454,
+      "summary": "1 passed in 0.20s"
     },
     "tests/review/test_e1_policy_examples.py": {
       "returncode": 0,
@@ -30306,7 +30331,7 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.238,
+      "duration_seconds": 0.247,
       "summary": "1 passed in 0.04s"
     },
     "tests/review/test_e1_transition.py": {
@@ -30315,8 +30340,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.405,
-      "summary": "8 passed in 0.17s"
+      "duration_seconds": 0.387,
+      "summary": "8 passed in 0.16s"
+    },
+    "tests/review/test_epub_repository_links.py": {
+      "returncode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "duration_seconds": 0.417,
+      "summary": "4 passed in 0.19s"
     },
     "tests/review/test_mypy_examples.py": {
       "returncode": 0,
@@ -30324,17 +30358,17 @@
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.938,
-      "summary": "1 passed in 0.73s"
+      "duration_seconds": 1.057,
+      "summary": "1 passed in 0.83s"
     },
     "tests/review/test_review_checks.py": {
       "returncode": 0,
-      "passed": 13,
+      "passed": 15,
       "failed": 0,
       "skipped": 0,
       "errors": 0,
-      "duration_seconds": 0.224,
-      "summary": "13 passed in 0.02s"
+      "duration_seconds": 0.241,
+      "summary": "15 passed in 0.03s"
     }
   },
   "classification_review": {
