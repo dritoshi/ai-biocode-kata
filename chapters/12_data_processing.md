@@ -587,6 +587,8 @@ def expression_distance_matrix(matrix: np.ndarray) -> np.ndarray:
 > | **wandb** | 実験追跡 | 学習曲線、ハイパーパラメータ、モデルチェックポイント |
 > | **optuna** | ハイパーパラメータ最適化 | ベイズ最適化ベースの自動チューニング |
 >
+> JAXの`jit()`、`vmap()`、`grad()`などの変換は、出力が入力だけで決まり、外部状態の変更などの副作用を持たない純粋関数を前提とする[9](https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html#pure-functions)。これは[§1-1 設計原則とプログラミングパラダイム](./01_design.md#設計原則とプログラミングパラダイム)で紹介した関数型の考え方が、数値計算ライブラリの利用条件として現れる例である。一方、NumPyのベクトル化やpandasのメソッドチェーンを使うだけで、プログラム全体が関数型になるわけではない。
+>
 > 配列解析からMLに踏み出す典型的な3ステップ:
 >
 > 1. **scikit-learn**で特徴量ベースの古典的MLを試す（まずベースラインを作る）
@@ -722,3 +724,5 @@ SciPyのライブラリ関数を使うよう修正させるための指示文を
 [7] Cock, P. J. A. et al. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. [https://pubmed.ncbi.nlm.nih.gov/19304878/](https://pubmed.ncbi.nlm.nih.gov/19304878/)
 
 [8] Wolf, F. A. et al. "SCANPY: large-scale single-cell gene expression data analysis". *Genome Biology*, 19(1), 15, 2018. [https://doi.org/10.1186/s13059-017-1382-0](https://doi.org/10.1186/s13059-017-1382-0)
+
+[9] JAX Authors. "JAX — The Sharp Bits: Pure Functions". [https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html#pure-functions](https://docs.jax.dev/en/latest/notebooks/Common_Gotchas_in_JAX.html#pure-functions) (参照日: 2026-08-15)

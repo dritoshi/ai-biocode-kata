@@ -26,6 +26,8 @@
 
 RDBへの問い合わせ言語が**SQL**（Structured Query Language）である。バイオインフォマティクスの文脈では、たとえばサンプルメタデータと発現量データを別テーブルに格納し、サンプルIDで結合（JOIN）して条件別に集計するといった用途で使う。
 
+SQLは、「どの順序で行を走査するか」ではなく「どのデータを得たいか」を記述し、索引の利用や処理順序をデータベース管理システムへ委ねる宣言型の問い合わせ言語である[21](https://docs.python.org/3/howto/functional.html)。[§1-1 設計原則とプログラミングパラダイム](./01_design.md#設計原則とプログラミングパラダイム)で紹介した宣言型の、身近な具体例といえる。
+
 ```sql
 -- サンプルテーブルと発現量テーブルをJOINして条件別に平均発現量を集計
 SELECT s.condition, AVG(e.expression) AS mean_expr
@@ -122,6 +124,8 @@ RDFの強みは、異なるデータベース間のデータをURIで結び付�
 #### SPARQL
 
 **SPARQL**（SPARQL Protocol and RDF Query Language）は、セマンティックWeb技術スタックの問い合わせ層に位置する、RDFデータへのクエリ言語である。SQLに似た構文を持つが、テーブルの行ではなくトリプルパターンに対してマッチングを行う点が異なる。
+
+SPARQLもSQLと同様に、取得したいトリプルのパターンを記述し、その探索手順を実行系へ委ねる宣言型の問い合わせ言語である。
 
 ```sparql
 PREFIX up: <http://purl.uniprot.org/core/>
@@ -1020,3 +1024,5 @@ def fetch_sequences(gene_list):
 [19] Longevity Genie. "gget-MCP". https://github.com/longevity-genie/gget-mcp (参照日: 2026-03-23)
 
 [20] Huang, K. et al. "Autonomous biomedical research with an artificial intelligence agent". *Science*, 2026. https://doi.org/10.1126/science.adz4351
+
+[21] Python Software Foundation. "Functional Programming HOWTO". [https://docs.python.org/3/howto/functional.html](https://docs.python.org/3/howto/functional.html) (参照日: 2026-08-15)
