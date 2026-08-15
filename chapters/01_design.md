@@ -211,7 +211,7 @@ SRPは、関心の分離を関数やクラスの変更理由に適用した原�
 
 上記の `parse_fasta_string()` は「FASTA形式のパース方法が変わったとき」だけに変更される。`filter_by_length()` は「フィルタリングの条件が変わったとき」だけに変更される。それぞれの変更理由が1つに絞られているので、SRPを満たしている。
 
-SRPはオブジェクト指向設計の5原則**SOLID**の最初の文字（S）にあたる。残りの4原則（Open/Closed、Liskov Substitution、Interface Segregation、Dependency Inversion）は、よいAPIやインターフェースを設計するための指針であり、[§5 ソフトウェアの構成要素 — importからpipまで](./05_software_components.md#5-4-apiとインターフェース)で概要を学ぶ。初心者はまずSRPと関心の分離を確実に身につけることを優先してほしい。
+SRPは、オブジェクト指向設計の5原則である**SOLID**の最初の文字（S）にあたる。本章では、関数やクラスにも適用しやすく、関心の分離と直接結び付くSRPだけを扱う。抽象、継承、インターフェースの理解を必要とする残りの4原則は、これらの構成要素を学んだ後、[§5-4 APIとインターフェース](./05_software_components.md#5-4-apiとインターフェース)で説明する。
 
 ### 最小驚き原則（Principle of Least Astonishment; POLA）
 
