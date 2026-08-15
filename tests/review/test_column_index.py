@@ -53,7 +53,7 @@ def test_column_index_covers_every_column_once() -> None:
     indexed, link_count = indexed_columns()
     source = source_columns()
 
-    assert len(source) == 69
+    assert len(source) == 70
     assert link_count == len(indexed), "索引に同じコラムへのリンクが重複している"
     assert indexed.keys() == source.keys()
 

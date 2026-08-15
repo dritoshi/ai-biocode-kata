@@ -441,7 +441,7 @@ URLの構造、HTTPメソッド、パラメータ、レスポンス形式が、W
 
 ### よいAPI設計の原則 — SOLID
 
-[§1 設計原則 — 良いコードとは何か](./01_design.md#単一責任原則single-responsibility-principle-srp)ではSOLIDの最初の文字であるSRP（単一責任原則）を学んだ。SOLIDとは、Robert C. Martinが提唱した5つの設計原則の頭文字であり [5](https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445)、よいAPIやソフトウェア構造を設計するための指針である。ここでは残りの4原則の概要を紹介する。
+[§1 設計原則 — 良いコードとは何か](./01_design.md#単一責任原則single-responsibility-principle-srp)ではSOLIDの最初の文字であるSRP（単一責任原則）を学んだ。SOLIDとは、Robert C. Martinが整理したオブジェクト指向設計の5原則の頭文字であり [5](https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445)、よいAPIやソフトウェア構造を設計するための指針である。[§1-1 設計原則とプログラミングパラダイム](./01_design.md#設計原則とプログラミングパラダイム)で見たとおり、個々の原則には関数やモジュールにも応用できるものがあるが、ここではクラスとインターフェースを中心に残りの4原則の概要を紹介する。
 
 **S — 単一責任原則**（Single Responsibility Principle; SRP）: [§1 設計原則 — 良いコードとは何か](./01_design.md#単一責任原則single-responsibility-principle-srp)で学んだとおり、関数やクラスの変更理由は1つだけであるべきである。
 
@@ -485,19 +485,30 @@ class SequenceAligner:
     def align(self, seqs: list[str]) -> str: ...
 ```
 
-**D — 依存性逆転原則**（Dependency Inversion Principle）: 具体的な実装ではなく、抽象に依存するべきである。たとえば、入力ファイルのパスをハードコーディングする代わりに、引数として外部から受け取る設計がこの原則に沿っている:
+**D — 依存性逆転原則**（Dependency Inversion Principle）: 上位の処理は、ファイルやデータベースなどの具体的な実装ではなく、抽象的なインターフェースに依存するべきである。ファイルパスを引数として外部から受け取るだけなら、[§1-1 実行条件への応用](./01_design.md#実行条件への応用--設定を外から与える)で学んだ設定とコードの分離であり、それだけでは依存性逆転とはいえない。
+
+次の抜粋では、平均配列長を計算する上位の関数が、FASTAファイルの読み方ではなく「配列を返す `load()` メソッドを持つ」という抽象に依存している。`Protocol`は、オブジェクトに必要なメソッドを型として表す仕組みである[7](https://docs.python.org/3/library/typing.html#typing.Protocol)。
 
 ```python
-# 悪い例: 具体的なパスに依存
-def analyze() -> float:
-    with open("/data/sequences.fasta") as f:  # パスがハードコーディング
+from typing import Protocol
+
+
+class SequenceSource(Protocol):
+    """配列を供給するオブジェクトのインターフェース。"""
+
+    def load(self) -> list[str]:
         ...
 
-# 良い例: 抽象（引数）に依存
-def analyze(filepath: Path) -> float:
-    with open(filepath) as f:  # パスは外部から注入
-        ...
+
+def mean_sequence_length(source: SequenceSource) -> float:
+    """供給元の実装を知らずに平均配列長を計算する。"""
+    sequences = source.load()
+    if not sequences:
+        return 0.0
+    return sum(len(sequence) for sequence in sequences) / len(sequences)
 ```
+
+この関数には、Bio.SeqIOを使うFASTA実装だけでなく、メモリ上のテストデータやデータベースから配列を返す実装も渡せる。上位の計算処理を変更せずに供給元を差し替えられることが依存性逆転の要点である。[完全な実装](../scripts/ch05/dependency_inversion.py)ではFASTA実装を含め、[テスト](../tests/ch05/test_dependency_inversion.py)ではファイルを使わない供給元との交換可能性も確認している。
 
 これら5原則のすべてを一度に実践する必要はない。初心者はまず**SRP**と**開放閉鎖原則**を意識することから始めるとよい。コードが複雑になってきたら、残りの原則を思い出してリファクタリングの指針にする。
 
@@ -509,7 +520,7 @@ API設計の原則は、エージェントへの指示に直接使える。原�
 
 > 「新しいファイルフォーマットを追加したい。既存の `parse()` 関数を修正せずに拡張できるように、開放閉鎖原則に従った設計に変更してほしい」
 
-> 「この関数はファイルパスがハードコーディングされている。依存性逆転原則に従って、パスを引数として外部から受け取るように修正してほしい」
+> 「この解析関数がFASTAファイルの読み込み実装へ直接依存している。依存性逆転原則に従い、配列を返す抽象的なインターフェースへ依存させ、FASTA実装とテスト用のメモリ実装を差し替えられるようにしてほしい」
 
 ---
 
@@ -684,3 +695,5 @@ def process(data, mode, output_format, verbose, log_file, overwrite):
 [5] Martin, R. C. *Agile Software Development, Principles, Patterns, and Practices*. Prentice Hall, 2002. [https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445](https://www.informit.com/store/agile-software-development-principles-patterns-and-9780135974445)
 
 [6] Python Packaging Authority. "Python Packaging User Guide". [https://packaging.python.org/](https://packaging.python.org/) (参照日: 2026-03-20)
+
+[7] Python Software Foundation. "typing.Protocol". *Python 3 Documentation*. [https://docs.python.org/3/library/typing.html#typing.Protocol](https://docs.python.org/3/library/typing.html#typing.Protocol) (参照日: 2026-08-15)
