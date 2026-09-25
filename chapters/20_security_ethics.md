@@ -413,11 +413,11 @@ AI コーディングエージェントのプライバシー設定は、**サイ
 | 契約の種類 | 入力データの学習利用（既定） | 保持の目安 | ゼロデータ保持（ZDR） |
 |---|---|---|---|
 | **個人・Consumer プラン**（Claude Free / Pro / Max〈Claude Code 含む〉、ChatGPT Plus / Pro / Free、GitHub Copilot 個人、Gemini 個人 Google アカウント） | **既定で学習利用**。2025〜2026 年に主要各社がこの opt-out 方式へ移行した[27](https://www.anthropic.com/legal/privacy) | opt-out しなければ長期（例: Claude 最長5年、Gemini 最長3年）。opt-out で短縮（例: Claude 30日） | 個人プランには原則なし。各サービスの設定で opt-out する（後述の実務手順を参照） |
-| **商用・組織プラン**（Anthropic API・Claude Team / Enterprise、ChatGPT Business / Enterprise、Copilot Business / Enterprise、Google Workspace / Vertex AI） | **学習非対象が既定**[28](https://www.anthropic.com/legal/commercial-terms) | 契約に準拠（例: Claude 商用は標準30日） | Enterprise 等で別途審査（例: Claude for Enterprise）。Fable 5はZDR非対応[41](https://code.claude.com/docs/en/model-config) |
+| **商用・組織プラン**（Anthropic API・Claude Team / Enterprise、ChatGPT Business / Enterprise、Copilot Business / Enterprise、Google Workspace / Vertex AI） | **学習非対象が既定**[28](https://www.anthropic.com/legal/commercial-terms) | 契約に準拠（例: Claude 商用は標準30日） | Enterprise 等で別途審査（例: Claude for Enterprise）。Fable 5.1とFable 5は既定でデータ保持が必要なモデルで、ZDR組織では使えない場合がある[42](https://code.claude.com/docs/en/zero-data-retention) |
 
-**表の読み方に関する注意**: かつては個人プランでも「学習非利用が既定」の時期があったが、2025〜2026 年に主要各社が相次いで、**個人・Consumer プランの既定を学習利用へと変更**した（いずれも opt-out 方式）。したがって「個人アカウントだから安全」という前提はもはや成り立たない。未発表データ・制限付きデータを扱う場合は、商用・Enterprise 契約＋ZDR か、ローカル LLM を用いるのが原則である。個人プランを使うなら、送信前に必ず opt-out の状態と各社の現行ポリシー（本節末尾の公式リンク）を確認すること。なお学習非対象や opt-out であっても、不正利用検知（abuse monitoring）や Trust & Safety レビューのための一定期間の保持は通常行われ、サーバ側に一切コピーを残さないためには ZDR 契約が別途必要である。機密運用でZDRを使う際は、Fable 5が利用できず、モデル選択画面では非表示または無効になる点にも注意する。既定モデルにFable 5が指定されていても、ZDR組織では利用可能な契約プランの既定モデルへ解決される[41](https://code.claude.com/docs/en/model-config)。
+**表の読み方に関する注意**: かつては個人プランでも「学習非利用が既定」の時期があったが、2025〜2026 年に主要各社が相次いで、**個人・Consumer プランの既定を学習利用へと変更**した（いずれも opt-out 方式）。したがって「個人アカウントだから安全」という前提はもはや成り立たない。未発表データ・制限付きデータを扱う場合は、商用・Enterprise 契約＋ZDR か、ローカル LLM を用いるのが原則である。個人プランを使うなら、送信前に必ず opt-out の状態と各社の現行ポリシー（本節末尾の公式リンク）を確認すること。なお学習非対象や opt-out であっても、不正利用検知（abuse monitoring）や Trust & Safety レビューのための一定期間の保持は通常行われ、サーバ側に一切コピーを残さないためには ZDR 契約が別途必要である。機密運用でZDRを使う際は、Fable 5.1やFable 5を使えない場合がある点にも注意する。使えない組織ではモデル選択画面で非表示または無効になり、サーバ側でも要求が拒否される。Fableモデルは既定のモデルではなく、Fableを優先して選ぶ `best` エイリアスも、Fableを使えない組織ではOpusへ解決される[42](https://code.claude.com/docs/en/zero-data-retention)。
 
-データ保持とは別に、Claude Code CLIのFable 5とOpus 5には生物学カテゴリの安全性分類がある。Fable 5で分類されたリクエストはOpus 5で再実行されるが、Opus 5で分類された生物学リクエストにはフォールバック先がなく、拒否で終了する[41](https://code.claude.com/docs/en/model-config)。リポジトリ内の `CLAUDE.md` やファイル名などのワークスペース情報だけで最初のリクエストから反応する場合もある。これは想定された安全性ルーティングであり、アカウントの異常ではない。自動ワークフローでは拒否を失敗として検出し、モデルを迂回して同じ要求を繰り返すのではなく、入力範囲と作業目的を人間が確認する。詳しいモデル間の切り替えは[§0-7 ドメインによる制約](./00_ai_agent.md#ドメインによる制約--最上位モデルが使えないことがある)を参照する。
+データ保持とは別に、Claude Code CLIのFableモデル、Opus 5.5、Opus 5には生物学カテゴリの安全性分類がある。既定のOpus 5.5やFableモデルで分類されたリクエストはOpus 5で再実行されるが、Opus 5で分類された生物学リクエストにはフォールバック先がなく、拒否で終了する[41](https://code.claude.com/docs/en/model-config)。リポジトリ内の `CLAUDE.md` やファイル名などのワークスペース情報だけで最初のリクエストから反応する場合もある。これは想定された安全性ルーティングであり、アカウントの異常ではない。自動ワークフローでは拒否を失敗として検出し、モデルを迂回して同じ要求を繰り返すのではなく、入力範囲と作業目的を人間が確認する。詳しいモデル間の切り替えは[§0-7 ドメインによる制約](./00_ai_agent.md#ドメインによる制約--最上位モデルが使えないことがある)を参照する。
 
 ##### プロバイダ公式ドキュメント（2026年7月現在）
 
@@ -428,6 +428,7 @@ AI コーディングエージェントのプライバシー設定は、**サイ
   - Commercial Terms of Service（API・商用利用の既定挙動）[28](https://www.anthropic.com/legal/commercial-terms)
   - Data usage（Claude Code 単位での学習の既定・保持期間・ZDR）: https://code.claude.com/docs/en/data-usage
   - Model configuration（ZDRでのモデル可用性・生物学カテゴリのルーティング）[41](https://code.claude.com/docs/en/model-config)
+  - Zero data retention（ZDRの対象範囲とFableモデルの可用性）[42](https://code.claude.com/docs/en/zero-data-retention)
 - **OpenAI**（ChatGPT / Codex CLI / API）:
   - Enterprise Privacy（API・Enterprise での学習利用と保持）[29](https://openai.com/enterprise-privacy/)
   - How your data is used to improve model performance（Consumer プランの opt-out 手順）[30](https://help.openai.com/en/articles/5722486)
@@ -896,4 +897,6 @@ __pycache__/
 
 [40] Trendall, S. "UK Biobank commissions £200k security review after major 'data incident'". *PublicTechnology*, 2026. https://www.publictechnology.net/2026/07/13/health-and-social-care/uk-biobank-commissions-200k-security-review-after-major-data-incident/ (参照日: 2026-07-25)
 
-[41] Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-29)
+[41] Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-09-25)
+
+[42] Anthropic. "Zero data retention". https://code.claude.com/docs/en/zero-data-retention (参照日: 2026-09-25)

@@ -703,20 +703,20 @@ AIコーディングエージェントの出力は、3つの軸で調整でき�
 
 モデルの選び方には、両ツールで微妙な違いがある。**Claude Code CLI はモデルの選択と推論の深さを別々のコマンドに分けている**（それぞれ `/model` と `/effort`）**のに対し、Codex CLI は `/model` の一つでモデルと推論の深さをまとめて選ぶ**[2](https://github.com/openai/codex)。同じ「使い分け」でも、読者が操作する道具立てが異なる。
 
-> **モデル世代に依存する記述** — 最終確認: 2026-07-29。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[28](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[27](https://learn.chatgpt.com/docs/models) を参照。
+> **モデル世代に依存する記述** — 最終確認: 2026-09-25。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[28](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[27](https://learn.chatgpt.com/docs/models) を参照。
 
 | 役割 | Claude Code CLI | Codex CLI |
 |-----|-------------|-----------|
-| 最上位・高精度 | Fable 5 / Opus 5（ただし後述する制約がある） | GPT-5.6 Sol |
-| 標準 | Sonnet 5 | GPT-5.6 Terra |
-| 軽量 | Haiku 4.5 | GPT-5.6 Luna |
+| 最上位・高精度 | Fable 5.1 / Opus 5.5（ただし後述する制約がある） | GPT-6 Astra |
+| 標準 | Sonnet 5 | GPT-6 Sol |
+| 軽量 | Haiku 4.5 | GPT-6 Luna |
 | 選び方 | `/model` でモデル、`/effort` で深さ | `/model`（モデルと深さをまとめて） |
 
-Codex CLI の GPT-5.6 は、Sol（最上位）・Terra（標準）・Luna（軽量）という3つのモデルに分かれている[27](https://learn.chatgpt.com/docs/models)。天体の名前が能力とコストの順に対応していると覚えるとよい。
+Codex CLI の GPT-6 世代は、Astra（最上位）・Sol（標準）・Luna（軽量）という3つのモデルに分かれている[2](https://github.com/openai/codex)。天体の名前が能力とコストの順に対応していると覚えるとよい。GPT-5.6にあったTerraに当たるモデルはなく、Codex CLIではGPT-5.6のSolとTerraの移行先がいずれもGPT-6 Solになっている[2](https://github.com/openai/codex)。
 
-Claude側ではFable 5が総合的な最上位であり、Opus 5は複雑なコーディング、長時間のエージェント作業、科学・数学のような深い推論を要する作業に位置付けられる[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。Opus 5のモデルIDは `claude-opus-5`、コンテキストウィンドウは1Mトークン、最大出力は128Kトークンである。API料金は入力100万トークンあたり5ドル、出力100万トークンあたり25ドルで、Opus 4.8から据え置かれた[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。
+Claude側では、Fable 5.1とOpus 5.5が上位を担う。Fable 5.1は難しい推論と長時間のエージェント作業向け、Opus 5.5は長時間のエージェント型コーディングと知的作業向けと位置付けられている。公式は、どのモデルを使うか迷ったらまずOpus 5.5から始め、effortを上げたOpus 5.5でも評価の水準に届かない場合にFable 5.1を使うよう勧めている[5](https://platform.claude.com/docs/en/about-claude/models/overview)。Opus 5.5のモデルIDは `claude-opus-5-5`、コンテキストウィンドウは1Mトークン、最大出力は128Kトークンである[5](https://platform.claude.com/docs/en/about-claude/models/overview)。API料金は入力100万トークンあたり4ドル、出力100万トークンあたり20ドルで、Opus 5の5ドル・25ドルより下がった[34](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)。
 
-起動時にどのモデルが選ばれるかは契約プランによって異なる。Claude Code CLIではMax、Team Premium、Enterprise従量課金、Anthropic APIがOpus 5、Pro、Team Standard、EnterpriseサブスクリプションがSonnet 5で起動する[28](https://code.claude.com/docs/en/model-config)。Fable 5はいずれのプランでも既定ではなく、明示的に選択する。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
+起動時にどのモデルが選ばれるかは、契約や接続先によって異なる。Claude Code CLIでは、Pro、Max、Team、Enterprise、Anthropic APIのいずれもOpus 5.5で起動し、Amazon BedrockやGoogle Cloud経由でも同じである。ただしMicrosoft Foundry経由ではSonnet 4.5が既定であり、組織の管理者が既定モデルを指定している場合はそれが優先される[28](https://code.claude.com/docs/en/model-config)。Opus 5.5を使うにはClaude Code v2.1.280以降が必要で、それより古いバージョンでは既定のモデルも異なる[28](https://code.claude.com/docs/en/model-config)。Fable 5.1とFable 5はいずれのプランでも既定ではなく、明示的に選択する。「同じ本を読んでいるのに手元の既定が違う」ということが起こるので、最初に `/model` で現在の選択を確認しておくとよい。
 
 ### 推論の深さ — 2つ目の調整軸
 
@@ -724,7 +724,7 @@ Claude側ではFable 5が総合的な最上位であり、Opus 5は複雑なコ�
 
 この軸を「考える時間の長さ」とだけ理解すると使いこなせない。effortが実際に変えるのは思考量だけではなく、テキスト応答、ツール呼び出し、エージェントの仕事の進め方を含む**総体的なトークンの使い方**である[25](https://platform.claude.com/docs/en/build-with-claude/effort)。ただしClaude Opus 5では、effortを下げても利用者に表示される回答が必ず短くなるわけではない。回答の長さは「結論を5項目以内」「説明は300字以内」のように、プロンプトで別に指定する[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。
 
-もう一つの仕組みが **Adaptive thinking**[10](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) である。これはモデル自身がタスクの複雑さに応じて思考量を自動決定するもので、対応状況は世代によって異なる。Claude Opus 5ではthinkingが既定で有効であり、Claude Code CLIでは常にAdaptive reasoningを使う[28](https://code.claude.com/docs/en/model-config)。
+もう一つの仕組みが **Adaptive thinking**[10](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking) である。これはモデル自身がタスクの複雑さに応じて思考量を自動決定するもので、対応状況は世代によって異なる。Claude Opus 5ではthinkingが既定で有効であり、Opus 5.5とFableモデルではthinkingそのものを無効にできない。Claude Code CLIでは、これらのモデルは常にAdaptive reasoningを使う[28](https://code.claude.com/docs/en/model-config)。
 
 ここで初心者がつまずきやすい点を2つ挙げる。
 
@@ -732,16 +732,16 @@ Claude側ではFable 5が総合的な最上位であり、Opus 5は複雑なコ�
 
 第二に、**すべてのモデルが effort に対応しているわけではない**。軽量モデルは非対応のことがあり、Claude Code CLI では指定してもエラーにならず、そのモデルが対応する最上位のレベルに黙って丸められる[28](https://code.claude.com/docs/en/model-config)。設定したつもりで効いていない、という状態が起こりうる。
 
-> **モデル世代に依存する記述** — 最終確認: 2026-07-29。段階の名前・数・既定値はいずれも世代交代で変わる。
+> **モデル世代に依存する記述** — 最終確認: 2026-09-25。段階の名前・数・既定値はいずれも世代交代で変わる。
 
-Claude Code CLIのeffortは `low` / `medium` / `high` / `xhigh` / `max` の5段階で、Opus 5の既定は `high` である。まず `high` から始め、難しいコーディングやエージェント作業では `xhigh`、制約なしで能力を引き出す必要がある場合だけ `max` を使う。`low` と `medium` でも十分な品質が得られることがあるため、代表タスクで評価して下げる[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。変更には `/effort` を使う。Haiku 4.5はeffortに対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLIはLow / Medium / High / Extra high / Max / Ultraの6段階で、既定はMedium。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
+Claude Code CLIのeffortは `low` / `medium` / `high` / `xhigh` / `max` の5段階である。既定はモデルによって異なり、Opus 5.5は `medium`、Opus 5・Fable 5.1・Sonnet 5などは `high` である[28](https://code.claude.com/docs/en/model-config)。Opus 5.5では既定の `medium` から始め、`xhigh` と `max` は品質の向上を確かめられた作業に限って使う[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。変更には `/effort` を使う。Haiku 4.5はeffortに対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLIはLow / Medium / High / Extra high / Max / Ultraの6段階（GPT-6 LunaはUltraを除く5段階）で、既定はGPT-6 AstraがLow、GPT-6 SolとGPT-6 LunaがMediumである。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
-| 深さの段階 | `low`〜`max`（5段階）[28](https://code.claude.com/docs/en/model-config) | Low〜Ultra（6段階）[2](https://github.com/openai/codex) |
-| 既定 | `high` | Medium |
+| 深さの段階 | `low`〜`max`（5段階）[28](https://code.claude.com/docs/en/model-config) | Low〜Ultra（6段階。GPT-6 LunaはMaxまで）[2](https://github.com/openai/codex) |
+| 既定 | Opus 5.5は `medium`、Opus 5などは `high` | GPT-6 AstraはLow、GPT-6 SolとLunaはMedium |
 | 変更方法 | `/effort`（モデル選択の `/model` とは別コマンド） | `/model`（モデルと推論強度をまとめて選ぶ） |
-| 思考の切り替え | `Alt+T`（macOS: `Option+T`）でトグル | — |
+| 思考の切り替え | `Alt+T`（macOS: `Option+T`）でトグル。Opus 5.5とFableモデルでは無効化できない | — |
 | 設定の永続化 | `~/.claude/settings.json` | `~/.codex/config.toml` の `model_reasoning_effort` |
 | 計画時だけ変える | モデルを切り替える `opusplan` エイリアス | `plan_mode_reasoning_effort` |
 
@@ -769,16 +769,16 @@ Claude Code CLI には、そのターンだけ推論を深くする `ultrathink`
 
 3つ目の調整軸は、本書の読者にとって避けて通れない事情である。**最上位のモデルが、バイオインフォマティクスの作業を引き受けてくれるとは限らない。**
 
-> **モデル世代に依存する記述** — 最終確認: 2026-07-29。以下は現行世代の挙動であり、対象となるモデルも分類の範囲も変わりうる。
+> **モデル世代に依存する記述** — 最終確認: 2026-09-25。以下は現行世代の挙動であり、対象となるモデルも分類の範囲も変わりうる。
 
-Claude Code CLIのFable 5とOpus 5は、サイバーセキュリティと生物学の内容に対する安全性分類器とともに動作する。分類器が反応したときの処理は、モデルとカテゴリによって異なる[28](https://code.claude.com/docs/en/model-config)。
+Claude Code CLIのFableモデル（Fable 5.1・Fable 5）、Opus 5.5、Opus 5は、サイバーセキュリティと生物学の内容に対する安全性分類器とともに動作する。既定のOpus 5.5が備える生物学の安全対策は、Fable 5.1と同じものである[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。分類器が反応したときの処理は、モデルとカテゴリによって異なる[28](https://code.claude.com/docs/en/model-config)。
 
 | 使用中のモデル | 生物学カテゴリ | サイバーセキュリティカテゴリ |
 |---|---|---|
-| Fable 5 | Opus 5で再実行 | Opus 4.8で再実行 |
+| Fable 5.1 / Fable 5 / Opus 5.5 | Opus 5で再実行 | Opus 4.8で再実行 |
 | Opus 5 | フォールバックせず拒否 | Opus 4.8で再実行 |
 
-公式ドキュメントは、**生物学に隣接したコードベースでは頻繁に、多くの場合は最初のリクエストから切り替えや拒否が起きる**と明記している[28](https://code.claude.com/docs/en/model-config)。Fable 5で本格的な生物学の作業を始めると、最初に分類されたリクエストでOpus 5へ移り、その後Opus 5側で再び生物学カテゴリに分類されると拒否で終了する。最初からOpus 5を選んだ場合は、最初に分類されたリクエストから拒否が起こりうる。
+公式ドキュメントは、**生物学に隣接したコードベースでは頻繁に、多くの場合は最初のリクエストから切り替えや拒否が起きる**と明記している[28](https://code.claude.com/docs/en/model-config)。既定のOpus 5.5やFableモデルで本格的な生物学の作業を始めると、最初に分類されたリクエストでセッションがOpus 5へ移り、以後はOpus 5のまま続く。その後Opus 5側で再び生物学カテゴリに分類されると拒否で終了する。元のモデルに戻すには `/model` を使う[28](https://code.claude.com/docs/en/model-config)。最初からOpus 5を選んだ場合は、最初に分類されたリクエストから拒否が起こりうる。
 
 なぜ「最初のリクエストから」なのか。セッションの最初のリクエストには、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の内容や `git status` といったワークスペースの情報が同梱される。つまり**特別なことを何も尋ねていなくても、リポジトリに生物学の材料が含まれているだけで分類器が反応しうる**[28](https://code.claude.com/docs/en/model-config)。本書の読者がまさに置かれる状況である。
 
@@ -787,16 +787,18 @@ Claude Code CLIのFable 5とOpus 5は、サイバーセキュリティと生物�
 そのうえで、知っておくべき挙動が3つある。
 
 - 原因の切り分けには `claude --safe-mode` を使う。`CLAUDE.md`・スキル・MCP サーバ・フックを無効にして起動できる。ただし `git status` とディレクトリ名は無効化の対象外なので、これらが原因の場合は切り分けきれない[28](https://code.claude.com/docs/en/model-config)
-- Fable 5からフォールバックできるカテゴリでは、`/config` で自動切り替えをオフにし、切り替え前に確認させることもできる[28](https://code.claude.com/docs/en/model-config)
+- フォールバック先があるカテゴリでは、`/config` で自動切り替えをオフにし、切り替え前に確認させることもできる[28](https://code.claude.com/docs/en/model-config)
 - **Opus 5の生物学カテゴリには切り替え先がないため、そのまま拒否でターンが終わる**[28](https://code.claude.com/docs/en/model-config)。`claude -p` をCIに組み込む場合も、この終了を想定しておく
 
-結論として、**本書が扱う作業で通常利用できる高精度モデルはOpus 5だが、すべての生物学タスクを引き受けるわけではない**。Fable 5を指定しても生物学カテゴリではOpus 5へ移り、Opus 5側で分類されれば拒否される。「最高性能のモデルを選べばよい」という単純な指針が、扱う分野によっては成り立たない。これが3つ目の軸を立てる理由である。
+所属する組織として生命科学の研究開発に取り組んでいる場合は、生物学の作業向けに安全対策を調整したモデルを使えるLife Sciences Verification Program（LSVP）という制度もある。研究実績、セキュリティ基準、倫理面の監督体制の審査を通った組織が対象で、Claude Codeからも利用できる。2026年9月時点では大学などの研究室を含むチームや機関向けのベータ版であり、個人のProやMaxへの拡大は今後の予定とされている。サイバーセキュリティなど他の安全対策はそのまま維持される[38](https://www.anthropic.com/news/life-sciences-verification-program)。
+
+結論として、**本書が扱う作業のうち生物学カテゴリに分類されたものの受け皿となる高精度モデルは、既定のOpus 5.5ではなくOpus 5であり、そのOpus 5もすべての生物学タスクを引き受けるわけではない**。Fable 5.1や既定のOpus 5.5を使っていても、生物学カテゴリではOpus 5へ移り、Opus 5側で分類されれば拒否される。「最高性能のモデルを選べばよい」という単純な指針が、扱う分野によっては成り立たない。これが3つ目の軸を立てる理由である。
 
 ### 最上位の設定は「深さ」ではなく「委譲」である
 
 推論の深さを最大まで上げた先に、もう一段別の設定がある。Claude Code CLI の `ultracode` と Codex CLI の Ultra である。名前も置き場所も effort の一段階のように見えるが、**実体は別物である**。
 
-`ultracode` は API の effort レベルではない。最も深い effort を指定したうえで、Claude Code が複数エージェントによるワークフローを起動してよいという常時許可を与える設定である[25](https://platform.claude.com/docs/en/build-with-claude/effort)。Codex CLI の Ultra も同様に「単一エージェントの実行を超えるもの」と説明され、サブエージェントを使って作業を分担させる[27](https://learn.chatgpt.com/docs/models)。つまりこれらは推論を深くするつまみではなく、**仕事の進め方を並列に変えるスイッチ**である。
+`ultracode` は API の effort レベルではなく、Claude Code の設定である。モデルには `xhigh` を送ったうえで、実質的なタスクごとに複数エージェントによる動的なワークフローを組ませる[28](https://code.claude.com/docs/en/model-config)。Codex CLI の Ultra も同様に「単一エージェントの実行を超えるもの」と説明され、サブエージェントを使って作業を分担させる[27](https://learn.chatgpt.com/docs/models)。つまりこれらは推論を深くするつまみではなく、**仕事の進め方を並列に変えるスイッチ**である。
 
 両社とも、**ほとんどのタスクにこれらは不要**だと明言している[27](https://learn.chatgpt.com/docs/models)。使いどころは「作業を意味のある単位に分割できるとき」に限られる。
 
@@ -808,11 +810,11 @@ Claude Code CLIのFable 5とOpus 5は、サイバーセキュリティと生物�
 
 モデルは数か月おきに世代交代する。そのたびに、旧モデルの設定をそのまま持ち込まず、代表的なタスクで品質・時間・コストを測り直す必要がある。新しいモデルほど深くすればよい、あるいは必ず一段下げればよい、という共通の正解はない。
 
-Claude Opus 5では、まず公式の既定である `high` から始め、難しい作業では `xhigh`、能力を制約せず評価する必要がある場合だけ `max` を試す。`low` と `medium` も有力な選択肢なので、同じタスクでeffortを変える評価を新しく行う[34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5)。Claude Code CLIでは以前に明示したeffortがOpus 5へ引き継がれるため、旧モデルの設定を意図せず使い続けていないか `/effort` で確認する[28](https://code.claude.com/docs/en/model-config)。一方、OpenAIは現在の設定と一段低い設定を代表タスクで比較するよう勧めている[29](https://developers.openai.com/api/docs/guides/latest-model)。推奨の違いから分かるように、モデルを替えたら**そのモデル向けに評価をやり直す**ことが共通原則である。
+Claude Opus 5.5では、effortの既定が `medium` に変わった。Opus 5までの既定は `high` だったため、effortを指定しない要求はOpus 5のときより一段低い設定で動く。また、同じ段階ならOpus 5.5はOpus 5より1ターンあたりに多く考えやすい[34](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)。そこで公式ガイドは、Opus 5で使っていた設定を持ち越さず、複数の段階を代表タスクで比べるよう勧めている[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。Claude Code CLIはeffortをモデルごとに保存するようになり、個人設定に以前から残っている共通のeffort設定はOpus 5.5には適用されない。旧モデルで選んだ段階が引き継がれていると思い込まず、`/effort` で現在の段階を確認する[28](https://code.claude.com/docs/en/model-config)。一方、OpenAIは現在の設定と一段低い設定を代表タスクで比較するよう勧めている[29](https://developers.openai.com/api/docs/guides/latest-model)。推奨の違いから分かるように、モデルを替えたら**そのモデル向けに評価をやり直す**ことが共通原則である。
 
 もう一つの作法が、**旧世代向けに書いた曖昧な補助指示を外して試す**ことである。Claude Opus 5は既定で自己修正や検証を行うため、「念のためダブルチェックして」「別のサブエージェントでも同じ確認をして」のような一般的な指示を重ねると、検証の重複とコスト増を招きやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。一方、具体的なテストコマンド、受け入れ条件、独立したレビュー、人間による確認は品質保証の手続きなので削らない。
 
-逆に、Claude Opus 5で明示したほうがよいのは**作業の境界**である。以前のOpusより依頼範囲を広げたり、サブエージェントへ委譲したり、進捗を詳しく説明したりしやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。対象ファイル、変更してよい範囲、完了条件、文章量、進捗報告の頻度、委譲の上限を必要に応じて指定する。
+逆に、Claude Opus 5で明示したほうがよいのは**作業の境界**である。以前のOpusより依頼範囲を広げたり、サブエージェントへ委譲したり、進捗を詳しく説明したりしやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。対象ファイル、変更してよい範囲、完了条件、文章量、進捗報告の頻度、委譲の上限を必要に応じて指定する。なお、Opus 5.5の公式ガイドは、Opus 5向けに書いたプロンプトは変更しなくても十分に機能し、Opus 5向けの指針は出発点として引き続き妥当だとしている[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。
 
 これらは、[§0-3 プロジェクト設定ファイル](#0-3-プロジェクト設定ファイルclaudemd--agentsmd)で作った `CLAUDE.md` の見直しにもそのまま当てはまる。設定ファイルは書き足すばかりになりがちだが、モデルが変わったら**削る指示と具体化する境界の両方を確認する**時期でもある[26](https://platform.claude.com/docs/en/about-claude/models/migration-guide)。
 
@@ -1092,10 +1094,10 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 ## 参考文献
 
 - [1](https://code.claude.com/docs) Anthropic. "Claude Code documentation". https://code.claude.com/docs (参照日: 2026-07-19)
-- [2](https://github.com/openai/codex) OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-17)
+- [2](https://github.com/openai/codex) OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-09-25)
 - [3](https://www.anthropic.com/engineering/claude-code-best-practices) Anthropic Engineering. "Claude Code: Best practices for agentic coding". https://www.anthropic.com/engineering/claude-code-best-practices (参照日: 2026-03-17)
 - [4](https://doi.org/10.1162/tacl_a_00638) Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. "Lost in the Middle: How Language Models Use Long Contexts". *Transactions of the Association for Computational Linguistics*, 12, 157–173, 2024. https://doi.org/10.1162/tacl_a_00638
-- [5](https://platform.claude.com/docs/en/about-claude/models/overview) Anthropic. "Models overview". https://platform.claude.com/docs/en/about-claude/models/overview (参照日: 2026-07-23)
+- [5](https://platform.claude.com/docs/en/about-claude/models/overview) Anthropic. "Models overview". https://platform.claude.com/docs/en/about-claude/models/overview (参照日: 2026-09-25)
 - [6](https://pubmed.ncbi.nlm.nih.gov/19304878/) Cock, P. J. A., Antao, T., Chang, J. T., Chapman, B. A., Cox, C. J., Dalke, A., Friedberg, I., Hamelryck, T., Kauff, F., Wilczynski, B., de Hoon, M. J. L. "Biopython: freely available Python tools for computational molecular biology and bioinformatics". *Bioinformatics*, 25(11), 1422–1423, 2009. https://pubmed.ncbi.nlm.nih.gov/19304878/
 - [7](https://pubmed.ncbi.nlm.nih.gov/21949271/) Dale, R. K., Pedersen, B. S., Quinlan, A. R. "Pybedtools: a flexible Python library for manipulating genomic datasets and annotations". *Bioinformatics*, 27(24), 3423–3424, 2011. https://pubmed.ncbi.nlm.nih.gov/21949271/
 - [8](https://doi.org/10.1109/ICSE.2013.6606617) Bacchelli, A., Bird, C. "Expectations, Outcomes, and Challenges of Modern Code Review". *Proceedings of the 35th International Conference on Software Engineering (ICSE '13)*, 712–721, 2013. https://doi.org/10.1109/ICSE.2013.6606617
@@ -1118,12 +1120,14 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 - [25](https://platform.claude.com/docs/en/build-with-claude/effort) Anthropic. "Effort". https://platform.claude.com/docs/en/build-with-claude/effort (参照日: 2026-04-25)
 - [26](https://platform.claude.com/docs/en/about-claude/models/migration-guide) Anthropic. "Migration guide". https://platform.claude.com/docs/en/about-claude/models/migration-guide (参照日: 2026-04-25)
 - [27](https://learn.chatgpt.com/docs/models) OpenAI. "Models — Codex". https://learn.chatgpt.com/docs/models (参照日: 2026-07-19)
-- [28](https://code.claude.com/docs/en/model-config) Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-19)
+- [28](https://code.claude.com/docs/en/model-config) Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-09-25)
 - [29](https://developers.openai.com/api/docs/guides/latest-model) OpenAI. "Migrate to the latest model". https://developers.openai.com/api/docs/guides/latest-model (参照日: 2026-07-19)
 - [30](https://learn.chatgpt.com/docs/prompting) OpenAI. "Prompting". https://learn.chatgpt.com/docs/prompting (参照日: 2026-07-29)
 - [31](https://learn.chatgpt.com/docs/agent-configuration/agents-md) OpenAI. "Custom instructions with AGENTS.md". https://learn.chatgpt.com/docs/agent-configuration/agents-md (参照日: 2026-07-29)
 - [32](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) Anthropic. "Prompting best practices". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices (参照日: 2026-07-29)
 - [33](https://code.claude.com/docs/en/memory) Anthropic. "How Claude remembers your project". https://code.claude.com/docs/en/memory (参照日: 2026-07-29)
-- [34](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5) Anthropic. "What's new in Claude Opus 5". https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5 (参照日: 2026-07-29)
+- [34](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5) Anthropic. "What's new in Claude Opus 5.5". https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5 (参照日: 2026-09-25)
 - [35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5) Anthropic. "Prompting Claude Opus 5". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5 (参照日: 2026-07-29)
 - [36](https://www.anthropic.com/claude-opus-5-system-card) Anthropic. "Claude Opus 5 System Card". 2026. https://www.anthropic.com/claude-opus-5-system-card (参照日: 2026-07-29)
+- [37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5) Anthropic. "Prompting Claude Opus 5.5". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5 (参照日: 2026-09-25)
+- [38](https://www.anthropic.com/news/life-sciences-verification-program) Anthropic. "Introducing the Life Sciences Verification Program". 2026. https://www.anthropic.com/news/life-sciences-verification-program (参照日: 2026-09-25)
