@@ -9,8 +9,8 @@
 
 > [!IMPORTANT]
 > **最新版:** v0.5.0（2026年7月29日）<br>
-> **情報基準:** 2026年7月<br>
-> **対応モデル:** Claude Code CLI — Fable 5 / Opus 5 / Sonnet 5、Codex CLI — GPT-5.6 Sol / Terra / Luna<br>
+> **情報基準:** 原則2026年7月（モデル・CLI仕様は2026年9月25日更新）<br>
+> **対応モデル:** Claude Code CLI — Fable 5.1 / Opus 5.5 / Sonnet 5、Codex CLI — GPT-6 Astra / Sol / Luna<br>
 > 📋 [今回の変更内容と更新履歴](CHANGELOG.md)｜🤖 [モデル対応表](chapters/appendix_b_cli_reference.md)
 
 ## 概要

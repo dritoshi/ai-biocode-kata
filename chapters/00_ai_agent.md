@@ -46,13 +46,13 @@ AIコーディングエージェントの利用を始めるには、ツールの
 
 | | Claude Code CLI | Codex CLI |
 |--|----------------|-----------|
-| インストール | `curl -fsSL https://claude.ai/install.sh \| bash` | `brew install --cask codex` または `npm install -g @openai/codex` |
-| macOS 別方法 | `brew install --cask claude-code` | [GitHub Releases](https://github.com/openai/codex/releases/latest) からバイナリ取得 |
-| 前提 | とくになし（スタンドアロン） | Homebrew または Node.js |
+| インストール | `curl -fsSL https://claude.ai/install.sh \| bash` | `curl -fsSL https://chatgpt.com/codex/install.sh \| sh` |
+| 別方法 | `brew install --cask claude-code` | `brew install --cask codex` または `npm install -g @openai/codex` |
+| 前提 | とくになし（スタンドアロン） | とくになし（スタンドアロン。別方法はHomebrewまたはNode.js） |
 | 認証 | Claude アカウントでのサインイン または Anthropic APIキー | ChatGPT アカウントでのサインイン または OpenAI APIキー |
 | 起動 | `claude` | `codex` |
 
-Windows やその他の OS での導入手順は、各ツールの公式ドキュメント（[Claude Code](https://code.claude.com/docs/en/getting-started)・[Codex CLI](https://github.com/openai/codex)）を参照すること。
+Windows やその他の OS での導入手順は、各ツールの公式ドキュメント（[Claude Code](https://code.claude.com/docs/en/getting-started)・[Codex CLI](https://developers.openai.com/codex/cli)）を参照すること[2](https://developers.openai.com/codex/cli)。
 
 インストールが完了したら、ターミナルで起動コマンドを入力するだけでエージェントとの対話が始まる。初回起動時にサインインまたはAPIキーの設定を求められるので、あらかじめ利用方法を決めておくこと。サービスによっては多要素認証（MFA）が求められる場合がある（[§16-3 コラム: VPN・多要素認証](./16_hpc.md#column-ch16-03)を参照）。
 
@@ -64,15 +64,15 @@ Claude Code は操作モードを前面に出すのに対し、Codex CLI は `--
 
 | 目的 | Claude Code CLI | Codex CLI |
 |------|-----------------|-----------|
-| 調査と計画に限定 | **Plan Mode** (`Shift+Tab` or `/plan`) | `-s read-only` |
-| 人が確認しながら編集 | **Normal Mode** | `-s workspace-write -a untrusted` または `-a on-request` |
-| サンドボックス内で自動実行 | **Auto-Accept Mode** (`Shift+Tab`) | `--full-auto`（`-a on-request --sandbox workspace-write` の別名） |
+| 調査と計画に限定 | **Plan Mode** (`Shift+Tab` or `/plan`) | `-s read-only -a on-request` |
+| 標準の安全設定 | **Normal Mode**（編集前に確認） | **Auto preset** (`-s workspace-write -a on-request`) |
+| 承認質問なしでサンドボックス内を実行 | **Auto-Accept Mode** (`Shift+Tab`) | `-s workspace-write -a never` |
 
 ![承認モードの動作画面: エージェントが提案する変更を確認し、許可・拒否を選択する](../figures/ch00_approval_mode.png)
 
-Codex CLI の `-s read-only` はサンドボックス設定、`-a ...` は承認ポリシーである。`--full-auto` はサンドボックス内での自動実行を意味し、無制限実行ではない。
+Codex CLI の `-s read-only` はサンドボックス設定、`-a ...` は承認ポリシーである。以前の `untrusted` 承認ポリシーは廃止された。また、非対話実行の `codex exec --full-auto` は互換性のために残された非推奨フラグである[39](https://developers.openai.com/codex/agent-approvals-security)。Auto presetではワークスペース内の編集とコマンドは自動実行され、ワークスペース外の編集やネットワークアクセスで承認を求める。`-a never` を指定してもサンドボックス自体は維持される。
 
-**初心者は、人が確認しながら編集する設定を基本にすること。** エージェントが提案する変更を一つ一つ確認しながら進めることで、何が行われているかを理解でき、意図しない変更を防げる。全自動に近い設定は、テストが十分に整備され、エージェントの動作に信頼が置けるようになってから使えばよい。
+**初心者は、まず読み取り専用で計画を確認し、編集前後にGitのチェックポイントを作ること。** Claude CodeのNormal Modeは編集前に確認するが、Codex CLIのAuto presetはワークスペース内の編集を逐次確認せずに実行する。したがって、設定名だけを対応させず、実行前の計画と実行後の差分を人間が確認する必要がある[2](https://developers.openai.com/codex/cli)。承認質問なしの設定は、テストとバージョン管理が十分に整ってから使えばよい。
 
 「読み取り専用」モードは、次の[§0-2](#0-2-plan--execute--review-ワークフロー)で説明するPlan→Execute→Reviewワークフローの起点として極めて重要な役割を果たす。
 
@@ -477,7 +477,7 @@ DR に投げるプロンプトは、CLI エージェントへの指示とはや�
 
 ## 0-3. プロジェクト設定ファイル（CLAUDE.md / AGENTS.md）
 
-プロジェクトのルートに設定ファイルを置くことで、エージェントの振る舞いをカスタマイズできる[1](https://code.claude.com/docs) [2](https://github.com/openai/codex)。この設定ファイルは、エージェントがセッション開始時に自動的に読み込む「プロジェクトの取扱説明書」のようなものである。
+プロジェクトのルートに設定ファイルを置くことで、エージェントの振る舞いをカスタマイズできる[1](https://code.claude.com/docs) [31](https://learn.chatgpt.com/docs/agent-configuration/agents-md)。この設定ファイルは、エージェントがセッション開始時に自動的に読み込む「プロジェクトの取扱説明書」のようなものである。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
@@ -567,7 +567,7 @@ Claude Opus 5は以前のOpusより回答や文書が長くなりやすく、作
 | カスタムコマンド／スキル | `.claude/skills/<name>/SKILL.md`（旧 `.claude/commands/*.md` も後方互換で動作） | `.agents/skills/<name>/SKILL.md`（`$skill-name` で呼び出し） |
 | 階層構造 | ディレクトリごとに `CLAUDE.md` を配置 | ディレクトリごとに `AGENTS.md` を配置 |
 
-Codex CLI の hooks は当初 `under development` の扱いだったが、その後正式機能となり、ツール実行の前後などに対応する9種のライフサイクルイベントを備える[2](https://github.com/openai/codex)。両ツールとも、編集後の lint やテストの自動実行をフックで設定できる。
+Codex CLI の hooks は正式機能であり、セッションの開始・終了、ツール実行の前後、コンテキスト圧縮の前後、サブエージェントの開始・停止など、複数のライフサイクルイベントに対応する[40](https://developers.openai.com/codex/hooks)。両ツールとも、編集後の lint やテストの自動実行をフックで設定できる。
 
 **今はこれらの名前と概念だけ知っておけばよい。** 本書を読み進めるうちに、これらの機能を使うべき場面が自然に出てくる。各機能の詳しい使い方は、上の表の「本書での詳細」列に示した章で、前提知識が揃った段階で解説する。
 
@@ -701,7 +701,7 @@ AIコーディングエージェントの出力は、3つの軸で調整でき�
 
 どちらのツールも、能力とコストの異なる複数のモデルを切り替えて使う。骨格は「最上位・バランス・軽量」の3階層である。ただし**階層の数も、それぞれに割り当てられるモデルも、世代交代で変わる**。実際、本書が2026年4月に想定していた構成は、3か月後には両ツールとも入れ替わっていた。Claude Code CLI では従来の最上位のさらに上に新しいクラスが加わり、Codex CLI ではモデル名が一新された。
 
-モデルの選び方には、両ツールで微妙な違いがある。**Claude Code CLI はモデルの選択と推論の深さを別々のコマンドに分けている**（それぞれ `/model` と `/effort`）**のに対し、Codex CLI は `/model` の一つでモデルと推論の深さをまとめて選ぶ**[2](https://github.com/openai/codex)。同じ「使い分け」でも、読者が操作する道具立てが異なる。
+モデルの選び方には、両ツールで微妙な違いがある。**Claude Code CLI はモデルの選択と推論の深さを別々のコマンドに分けている**（それぞれ `/model` と `/effort`）**のに対し、Codex CLI は `/model` の一つでモデルと推論の深さをまとめて選ぶ**[27](https://learn.chatgpt.com/docs/models)。同じ「使い分け」でも、読者が操作する道具立てが異なる。
 
 > **モデル世代に依存する記述** — 最終確認: 2026-09-25。以下の具体値は世代交代で変わる。一次情報は Claude Code のモデル設定[28](https://code.claude.com/docs/en/model-config) と Codex のモデル一覧[27](https://learn.chatgpt.com/docs/models) を参照。
 
@@ -712,7 +712,7 @@ AIコーディングエージェントの出力は、3つの軸で調整でき�
 | 軽量 | Haiku 4.5 | GPT-6 Luna |
 | 選び方 | `/model` でモデル、`/effort` で深さ | `/model`（モデルと深さをまとめて） |
 
-Codex CLI の GPT-6 世代は、Astra（最上位）・Sol（標準）・Luna（軽量）という3つのモデルに分かれている[2](https://github.com/openai/codex)。天体の名前が能力とコストの順に対応していると覚えるとよい。GPT-5.6にあったTerraに当たるモデルはなく、Codex CLIではGPT-5.6のSolとTerraの移行先がいずれもGPT-6 Solになっている[2](https://github.com/openai/codex)。
+Codex CLI の GPT-6 世代は、Astra（最上位）・Sol（標準）・Luna（軽量）という3つのモデルに分かれている[27](https://learn.chatgpt.com/docs/models)。Astraは複数の手順とツールをまたぐ最難関の作業、Solは日常的な作業と複雑なコーディング、Lunaは明確で反復可能な作業に向く。提供状況は段階的な展開、サインイン方法、クライアント、契約プランによって異なり、移行期間中はGPT-5.6世代が表示される場合もある。
 
 Claude側では、Fable 5.1とOpus 5.5が上位を担う。Fable 5.1は難しい推論と長時間のエージェント作業向け、Opus 5.5は長時間のエージェント型コーディングと知的作業向けと位置付けられている。公式は、どのモデルを使うか迷ったらまずOpus 5.5から始め、effortを上げたOpus 5.5でも評価の水準に届かない場合にFable 5.1を使うよう勧めている[5](https://platform.claude.com/docs/en/about-claude/models/overview)。Opus 5.5のモデルIDは `claude-opus-5-5`、コンテキストウィンドウは1Mトークン、最大出力は128Kトークンである[5](https://platform.claude.com/docs/en/about-claude/models/overview)。API料金は入力100万トークンあたり4ドル、出力100万トークンあたり20ドルで、Opus 5の5ドル・25ドルより下がった[34](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)。
 
@@ -734,16 +734,16 @@ Claude側では、Fable 5.1とOpus 5.5が上位を担う。Fable 5.1は難しい
 
 > **モデル世代に依存する記述** — 最終確認: 2026-09-25。段階の名前・数・既定値はいずれも世代交代で変わる。
 
-Claude Code CLIのeffortは `low` / `medium` / `high` / `xhigh` / `max` の5段階である。既定はモデルによって異なり、Opus 5.5は `medium`、Opus 5・Fable 5.1・Sonnet 5などは `high` である[28](https://code.claude.com/docs/en/model-config)。Opus 5.5では既定の `medium` から始め、`xhigh` と `max` は品質の向上を確かめられた作業に限って使う[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。変更には `/effort` を使う。Haiku 4.5はeffortに対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLIはLow / Medium / High / Extra high / Max / Ultraの6段階（GPT-6 LunaはUltraを除く5段階）で、既定はGPT-6 AstraがLow、GPT-6 SolとGPT-6 LunaがMediumである。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[2](https://github.com/openai/codex)。
+Claude Code CLIのeffortは `low` / `medium` / `high` / `xhigh` / `max` の5段階である。既定はモデルによって異なり、Opus 5.5は `medium`、Opus 5・Fable 5.1・Sonnet 5などは `high` である[28](https://code.claude.com/docs/en/model-config)。Opus 5.5では既定の `medium` から始め、`xhigh` と `max` は品質の向上を確かめられた作業に限って使う[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。変更には `/effort` を使う。Haiku 4.5はeffortに対応していない[28](https://code.claude.com/docs/en/model-config)。Codex CLIはLow / Medium / High / Extra high / Max / Ultraの6段階（GPT-6 LunaはUltraを除く5段階）で、推奨開始値はGPT-6 AstraがLow、GPT-6 SolがMedium、GPT-6 LunaがHighである。こちらは専用コマンドではなく、モデルを選ぶ `/model` の中で推論強度もあわせて指定する[27](https://learn.chatgpt.com/docs/models)。
 
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
-| 深さの段階 | `low`〜`max`（5段階）[28](https://code.claude.com/docs/en/model-config) | Low〜Ultra（6段階。GPT-6 LunaはMaxまで）[2](https://github.com/openai/codex) |
-| 既定 | Opus 5.5は `medium`、Opus 5などは `high` | GPT-6 AstraはLow、GPT-6 SolとLunaはMedium |
+| 深さの段階 | `low`〜`max`（5段階）[28](https://code.claude.com/docs/en/model-config) | Low〜Ultra（6段階。GPT-6 LunaはMaxまで）[27](https://learn.chatgpt.com/docs/models) |
+| 推奨開始値 | Opus 5.5は `medium`、Opus 5などは `high` | GPT-6 AstraはLow、GPT-6 SolはMedium、GPT-6 LunaはHigh |
 | 変更方法 | `/effort`（モデル選択の `/model` とは別コマンド） | `/model`（モデルと推論強度をまとめて選ぶ） |
 | 思考の切り替え | `Alt+T`（macOS: `Option+T`）でトグル。Opus 5.5とFableモデルでは無効化できない | — |
-| 設定の永続化 | `~/.claude/settings.json` | `~/.codex/config.toml` の `model_reasoning_effort` |
-| 計画時だけ変える | モデルを切り替える `opusplan` エイリアス | `plan_mode_reasoning_effort` |
+| 設定の永続化 | `~/.claude/settings.json` | `~/.codex/config.toml` の `model_reasoning_effort` [41](https://developers.openai.com/codex/config-reference) |
+| 計画時だけ変える | モデルを切り替える `opusplan` エイリアス | `plan_mode_reasoning_effort` [41](https://developers.openai.com/codex/config-reference) |
 
 Claude Code CLI には、そのターンだけ推論を深くする `ultrathink` というキーワードがある。プロンプトのどこかに書けば、セッションの effort 設定を変えずに済む。注意したいのは、**`think hard` や `think more` はキーワードとして認識されず、ただの文章として渡される**点である[28](https://code.claude.com/docs/en/model-config)。よく見かける言い回しだが、効果はない。
 
@@ -802,17 +802,19 @@ Claude Code CLIのFableモデル（Fable 5.1・Fable 5）、Opus 5.5、Opus 5は
 
 両社とも、**ほとんどのタスクにこれらは不要**だと明言している[27](https://learn.chatgpt.com/docs/models)。使いどころは「作業を意味のある単位に分割できるとき」に限られる。
 
-ここで[§0-5 サブエージェントとタスク委譲](#0-5-サブエージェントとタスク委譲)の内容とつながる。**この最上位設定を選んでいない限り、並列の委譲は明示的に指示する必要がある**[27](https://learn.chatgpt.com/docs/models)。「以下の3つを並列のサブエージェントで調べて」のように、分割の粒度まで指定するのはこのためである。
+ここで[§0-5 サブエージェントとタスク委譲](#0-5-サブエージェントとタスク委譲)の内容とつながる。Ultraはサブエージェントへの委譲を自動化する設定である。Ultra以外でも並列の委譲を期待するなら、「以下の3つを並列のサブエージェントで調べて」のように、いつ、どの程度、どの単位で分割するかを明示する。GPT-6の公式ガイドも、用途に応じて委譲の条件と量を指定するよう勧めている[29](https://developers.openai.com/api/docs/guides/latest-model)。
 
-もう一点、安全性に関わる注意がある。多数のエージェントを並列に走らせる設定と、承認なしで実行を許す権限モードの組み合わせは、影響範囲が一気に広がる。実際 Codex CLI では、この2つを同時に有効にしようとすると専用の警告が表示されるようになった[27](https://learn.chatgpt.com/docs/models)。権限の考え方は[§0-10 セキュリティと権限管理](#0-10-セキュリティと権限管理)で扱うが、**並列度を上げるときは権限を締める**、と覚えておきたい。
+もう一点、安全性に関わる注意がある。Ultraを選んでも、ワークスペースの権限や利用できるモデルへのアクセスが自動的に広がるわけではない[27](https://learn.chatgpt.com/docs/models)。一方、多数のエージェントと承認質問なしの権限設定を組み合わせれば、短時間に実行される操作は増える。権限の考え方は[§0-10 セキュリティと権限管理](#0-10-セキュリティと権限管理)で扱うが、**並列度を上げるときは権限を締める**、と覚えておきたい。
 
 ### 新しいモデルが出たときの作法
 
 モデルは数か月おきに世代交代する。そのたびに、旧モデルの設定をそのまま持ち込まず、代表的なタスクで品質・時間・コストを測り直す必要がある。新しいモデルほど深くすればよい、あるいは必ず一段下げればよい、という共通の正解はない。
 
-Claude Opus 5.5では、effortの既定が `medium` に変わった。Opus 5までの既定は `high` だったため、effortを指定しない要求はOpus 5のときより一段低い設定で動く。また、同じ段階ならOpus 5.5はOpus 5より1ターンあたりに多く考えやすい[34](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)。そこで公式ガイドは、Opus 5で使っていた設定を持ち越さず、複数の段階を代表タスクで比べるよう勧めている[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。Claude Code CLIはeffortをモデルごとに保存するようになり、個人設定に以前から残っている共通のeffort設定はOpus 5.5には適用されない。旧モデルで選んだ段階が引き継がれていると思い込まず、`/effort` で現在の段階を確認する[28](https://code.claude.com/docs/en/model-config)。一方、OpenAIは現在の設定と一段低い設定を代表タスクで比較するよう勧めている[29](https://developers.openai.com/api/docs/guides/latest-model)。推奨の違いから分かるように、モデルを替えたら**そのモデル向けに評価をやり直す**ことが共通原則である。
+Claude Opus 5.5では、effortの既定が `medium` に変わった。Opus 5までの既定は `high` だったため、effortを指定しない要求はOpus 5のときより一段低い設定で動く。また、同じ段階ならOpus 5.5はOpus 5より1ターンあたりに多く考えやすい[34](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5)。そこで公式ガイドは、Opus 5で使っていた設定を持ち越さず、複数の段階を代表タスクで比べるよう勧めている[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。Claude Code CLIはeffortをモデルごとに保存するようになり、個人設定に以前から残っている共通のeffort設定はOpus 5.5には適用されない。旧モデルで選んだ段階が引き継がれていると思い込まず、`/effort` で現在の段階を確認する[28](https://code.claude.com/docs/en/model-config)。Codex CLIではAstraはLow、SolはMedium、LunaはHighから始め、より深い計画・分析・確認が必要なときに上げる。世代間で段階は厳密に対応しないため、使い慣れた課題を一段低い設定でも試して結果を比較する[27](https://learn.chatgpt.com/docs/models)。推奨の違いから分かるように、モデルを替えたら**そのモデル向けに評価をやり直す**ことが共通原則である。
 
 もう一つの作法が、**旧世代向けに書いた曖昧な補助指示を外して試す**ことである。Claude Opus 5は既定で自己修正や検証を行うため、「念のためダブルチェックして」「別のサブエージェントでも同じ確認をして」のような一般的な指示を重ねると、検証の重複とコスト増を招きやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。一方、具体的なテストコマンド、受け入れ条件、独立したレビュー、人間による確認は品質保証の手続きなので削らない。
+
+GPT-6でも、公式ガイドは設定ファイルとプロンプトの再点検を求めている。GPT-6 Astraは以前より指示追従が強く、`AGENTS.md`やスキル内の曖昧な指示・競合する指示にも影響されやすい。そのため、常設指示を監査し、必要な文章の長さと構造、サブエージェントを使う条件、変更に見合うテスト範囲を具体的に指定する[29](https://developers.openai.com/api/docs/guides/latest-model)。新モデルへの移行はモデル名の置換だけでなく、古い補助指示を減らし、残す指示の役割を明確にする作業でもある。
 
 逆に、Claude Opus 5で明示したほうがよいのは**作業の境界**である。以前のOpusより依頼範囲を広げたり、サブエージェントへ委譲したり、進捗を詳しく説明したりしやすい[35](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)。対象ファイル、変更してよい範囲、完了条件、文章量、進捗報告の頻度、委譲の上限を必要に応じて指定する。なお、Opus 5.5の公式ガイドは、Opus 5向けに書いたプロンプトは変更しなくても十分に機能し、Opus 5向けの指針は出発点として引き続き妥当だとしている[37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5)。
 
@@ -964,7 +966,7 @@ AIコーディングエージェントはローカル環境でファイルの読
 | | Claude Code CLI | Codex CLI |
 |--|-------------|-----------|
 | 権限ホワイトリスト | `/permissions`（例: `Bash(pytest *)`, `Edit(src/**)`） | `approval_policy` と `sandbox_mode` の組み合わせ |
-| サンドボックス内での自動実行 | Auto-Accept Mode | `--full-auto` |
+| サンドボックス内で承認質問なしに実行 | Auto-Accept Mode | `--sandbox workspace-write --ask-for-approval never` |
 | 危険な完全無保護 | — | `--dangerously-bypass-approvals-and-sandbox` |
 
 #### 守るべき原則
@@ -1079,6 +1081,8 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 ### AIエージェントの公式ドキュメント
 
 - **Anthropic. "Claude Code Documentation".** https://code.claude.com/docs — 本章の参考文献 [1] で引用した公式ドキュメント。Plan→Code→Reviewワークフローの発展的な使い方（カスタムスラッシュコマンド、Hooks、MCPサーバー連携等）が網羅されている。ツールの進化が速いため、最新機能は常にここを参照するのが最善である。
+- **OpenAI. "Codex CLI".** https://developers.openai.com/codex/cli — 本章の参考文献 [2] で引用した公式ドキュメント。インストール、対話セッション、非対話実行、画像入力など、CLIを使い始めるための入口をまとめている。
+- **OpenAI. "Model guidance".** https://developers.openai.com/api/docs/guides/latest-model — 本章の参考文献 [29] で引用したGPT-6の公式ガイド。モデル選択、推論強度、プロンプト設計、サブエージェントへの委譲、テスト範囲の指定を確認できる。
 - **Anthropic. "Building effective agents".** https://www.anthropic.com/research/building-effective-agents — エージェントのアーキテクチャパターン（tool use、chain-of-thought、ループ型エージェント等）を体系的に解説した記事。本章で紹介したPlan-Execute-Reviewワークフローの理論的背景を理解できる。
 
 ### コンピュータサイエンスの基礎スキル
@@ -1094,7 +1098,7 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 ## 参考文献
 
 - [1](https://code.claude.com/docs) Anthropic. "Claude Code documentation". https://code.claude.com/docs (参照日: 2026-07-19)
-- [2](https://github.com/openai/codex) OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-09-25)
+- [2](https://developers.openai.com/codex/cli) OpenAI. "Codex CLI". https://developers.openai.com/codex/cli (参照日: 2026-09-25)
 - [3](https://www.anthropic.com/engineering/claude-code-best-practices) Anthropic Engineering. "Claude Code: Best practices for agentic coding". https://www.anthropic.com/engineering/claude-code-best-practices (参照日: 2026-03-17)
 - [4](https://doi.org/10.1162/tacl_a_00638) Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. "Lost in the Middle: How Language Models Use Long Contexts". *Transactions of the Association for Computational Linguistics*, 12, 157–173, 2024. https://doi.org/10.1162/tacl_a_00638
 - [5](https://platform.claude.com/docs/en/about-claude/models/overview) Anthropic. "Models overview". https://platform.claude.com/docs/en/about-claude/models/overview (参照日: 2026-09-25)
@@ -1119,9 +1123,9 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 - [24](https://x.com/OpenAI/status/2021299935678026168) OpenAI. "Deep research in ChatGPT is now powered by GPT-5.2". X (formerly Twitter), 2026-02-10. https://x.com/OpenAI/status/2021299935678026168 (参照日: 2026-04-10)
 - [25](https://platform.claude.com/docs/en/build-with-claude/effort) Anthropic. "Effort". https://platform.claude.com/docs/en/build-with-claude/effort (参照日: 2026-04-25)
 - [26](https://platform.claude.com/docs/en/about-claude/models/migration-guide) Anthropic. "Migration guide". https://platform.claude.com/docs/en/about-claude/models/migration-guide (参照日: 2026-04-25)
-- [27](https://learn.chatgpt.com/docs/models) OpenAI. "Models — Codex". https://learn.chatgpt.com/docs/models (参照日: 2026-07-19)
+- [27](https://learn.chatgpt.com/docs/models) OpenAI. "Models — Codex". https://learn.chatgpt.com/docs/models (参照日: 2026-09-25)
 - [28](https://code.claude.com/docs/en/model-config) Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-09-25)
-- [29](https://developers.openai.com/api/docs/guides/latest-model) OpenAI. "Migrate to the latest model". https://developers.openai.com/api/docs/guides/latest-model (参照日: 2026-07-19)
+- [29](https://developers.openai.com/api/docs/guides/latest-model) OpenAI. "Model guidance". https://developers.openai.com/api/docs/guides/latest-model (参照日: 2026-09-25)
 - [30](https://learn.chatgpt.com/docs/prompting) OpenAI. "Prompting". https://learn.chatgpt.com/docs/prompting (参照日: 2026-07-29)
 - [31](https://learn.chatgpt.com/docs/agent-configuration/agents-md) OpenAI. "Custom instructions with AGENTS.md". https://learn.chatgpt.com/docs/agent-configuration/agents-md (参照日: 2026-07-29)
 - [32](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) Anthropic. "Prompting best practices". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices (参照日: 2026-07-29)
@@ -1131,3 +1135,6 @@ CLI エージェントが入力をモデルの学習に使うか、どの程度�
 - [36](https://www.anthropic.com/claude-opus-5-system-card) Anthropic. "Claude Opus 5 System Card". 2026. https://www.anthropic.com/claude-opus-5-system-card (参照日: 2026-07-29)
 - [37](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5) Anthropic. "Prompting Claude Opus 5.5". https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5 (参照日: 2026-09-25)
 - [38](https://www.anthropic.com/news/life-sciences-verification-program) Anthropic. "Introducing the Life Sciences Verification Program". 2026. https://www.anthropic.com/news/life-sciences-verification-program (参照日: 2026-09-25)
+- [39](https://developers.openai.com/codex/agent-approvals-security) OpenAI. "Agent approvals & security". https://developers.openai.com/codex/agent-approvals-security (参照日: 2026-09-25)
+- [40](https://developers.openai.com/codex/hooks) OpenAI. "Hooks". https://developers.openai.com/codex/hooks (参照日: 2026-09-25)
+- [41](https://developers.openai.com/codex/config-reference) OpenAI. "Configuration Reference". https://developers.openai.com/codex/config-reference (参照日: 2026-09-25)
