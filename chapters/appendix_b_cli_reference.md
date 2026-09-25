@@ -1,6 +1,6 @@
 # 付録B. Claude Code CLI / Codex CLI クイックリファレンス対照表
 
-> **本付録の記述は 2026年7月時点の各ツールの仕様に基づく。**
+> **本付録の記述は 2026年7月時点の各ツールの仕様に基づく。**「[モデルと推論](#モデルと推論)」の表のみ2026年9月時点に更新した。
 > AIコーディングエージェントのCLIツールは頻繁にアップデートされるため、最新の仕様は各ツールの公式ドキュメントを参照されたい。
 
 概念で理解し、ツール固有の操作は以下を参照する。
@@ -36,14 +36,14 @@
 
 | | Claude Code | Codex CLI |
 |--|-------------|-----------|
-| 最高精度 | Fable 5 / Opus 5（バイオ用途では Fable 5 から Opus 5 へ自動再ルーティング）[3](https://code.claude.com/docs/en/model-config) | GPT-5.6 Sol |
-| バランス | Sonnet 5 | GPT-5.6 Terra |
-| 高速・低コスト | Haiku 4.5 | GPT-5.6 Luna |
-| 生物学カテゴリ | Fable 5はOpus 5で再実行。Opus 5はフォールバックせず拒否[3](https://code.claude.com/docs/en/model-config) | — |
+| 最高精度 | Fable 5.1 / Opus 5.5（バイオ用途では Opus 5 へ自動再ルーティング）[3](https://code.claude.com/docs/en/model-config) | GPT-6 Astra |
+| バランス | Sonnet 5 | GPT-6 Sol |
+| 高速・低コスト | Haiku 4.5 | GPT-6 Luna |
+| 生物学カテゴリ | Fable 5.1・Fable 5・Opus 5.5はOpus 5で再実行。Opus 5はフォールバックせず拒否[3](https://code.claude.com/docs/en/model-config) | — |
 | モデル切替 | `/model` | `/model` |
-| 推論モード | Adaptive thinking（Opus 5 は thinking が既定で有効。`Alt+T` / `Option+T` でセッション中に切り替え） | Reasoning Effort（Low〜Ultra） |
-| 推論強度（effort） | `low` / `medium` / `high` / `xhigh` / `max`（Opus 5 の既定は `high`。難しい作業は `xhigh`、`max` は限定的に使用）[4](https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5) | `-c model_reasoning_effort="high"` |
-| Adaptive 対応 | Fable 5・Sonnet 5・Opus 4.7 以降は常時 Adaptive reasoning | — |
+| 推論モード | Adaptive thinking（Opus 5.5 と Fable モデルは thinking を無効化できない。Opus 5 は既定で有効で、`Alt+T` / `Option+T` でセッション中に切り替え）[3](https://code.claude.com/docs/en/model-config) | Reasoning Effort（Low〜Ultra） |
+| 推論強度（effort） | `low` / `medium` / `high` / `xhigh` / `max`（既定は Opus 5.5 が `medium`、Opus 5 などが `high`。モデルを替えたら段階を評価し直す）[4](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5) | `-c model_reasoning_effort="high"` |
+| Adaptive 対応 | Fable 5.1・Fable 5・Sonnet 5・Opus 4.7 以降は常時 Adaptive reasoning | — |
 | 計画時の推論 | Plan Mode + 高い effort（`opusplan`） | `plan_mode_reasoning_effort` |
 | タスク予算（beta） | `task-budgets-2026-03-13` ヘッダで `task_budget` を指定可能 | — |
 
@@ -73,11 +73,11 @@
 
 [1] Anthropic. "Claude Code overview". https://code.claude.com/docs (参照日: 2026-03-25)
 
-[2] OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-03-25)
+[2] OpenAI. "Codex CLI". https://github.com/openai/codex (参照日: 2026-09-25)
 
-[3] Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-07-29)
+[3] Anthropic. "Model configuration". https://code.claude.com/docs/en/model-config (参照日: 2026-09-25)
 
-[4] Anthropic. "What's new in Claude Opus 5". https://platform.claude.com/docs/en/about-claude/models/whats-new-opus-5 (参照日: 2026-07-29)
+[4] Anthropic. "What's new in Claude Opus 5.5". https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5 (参照日: 2026-09-25)
 
 ---
 
